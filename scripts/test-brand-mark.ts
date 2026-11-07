@@ -12,6 +12,7 @@
  */
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -122,26 +123,38 @@ test("AscentMark never renders an unbounded size", () => {
   assert(tooSmall.length === 0, `mark rendered below legibility floor: ${tooSmall.join(", ")}`);
 });
 
-test("the webmanifest declares every colourway, with maskable variants", () => {
-  const manifestPath = path.join(ROOT, "public/assets/brand/favicon/site.webmanifest");
-  assert(existsSync(manifestPath), "site.webmanifest is missing");
-  const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+test("the colourway icon set is declared in its own manifest, original untouched", () => {
+  // The owner's site.webmanifest is an ORIGINAL FILE and is not edited. The
+  // expanded colourway/maskable set therefore lives in a separate manifest.
+  const extraPath = path.join(ROOT, "public/assets/brand/favicon/icons-colourways.webmanifest");
+  assert(existsSync(extraPath), "icons-colourways.webmanifest is missing");
+
+  const extra = JSON.parse(readFileSync(extraPath, "utf8")) as {
     icons: { src: string; sizes: string; purpose?: string }[];
   };
 
-  const purposes = new Set(manifest.icons.map((icon) => icon.purpose ?? "any"));
+  const purposes = new Set(extra.icons.map((icon) => icon.purpose ?? "any"));
   assert(purposes.has("any"), "no 'any' purpose icons declared");
   assert(purposes.has("maskable"), "no maskable icons — Android will crop the arch off");
 
-  // Both required install sizes must be present, or the install prompt degrades.
-  const sizes = new Set(manifest.icons.map((icon) => icon.sizes));
+  const sizes = new Set(extra.icons.map((icon) => icon.sizes));
   assert(sizes.has("192x192"), "no 192x192 icon");
   assert(sizes.has("512x512"), "no 512x512 icon");
 
-  const missing = manifest.icons
+  const missing = extra.icons
     .map((icon) => icon.src)
     .filter((src) => !existsSync(path.join(ROOT, "public", src.replace(/^\//, ""))));
   assert(missing.length === 0, `manifest points at missing files: ${missing.join(", ")}`);
+
+  // And the original must still be byte-identical (also covered by the baseline).
+  const original = readFileSync(
+    path.join(ROOT, "public/assets/brand/favicon/site.webmanifest"),
+    "utf8"
+  );
+  assert(
+    original.includes("favicon-192.png") && !original.includes("maskable"),
+    "the owner's original site.webmanifest was edited — add a new manifest instead"
+  );
 });
 
 test("a root /favicon.ico exists so the default browser request does not 404", () => {
@@ -185,6 +198,63 @@ test("every icon URL in index.html resolves to a real file in public/", () => {
 
   const missing = refs.filter((href) => !existsSync(path.join(ROOT, "public", href.replace(/^\//, ""))));
   assert(missing.length === 0, `icon referenced but not in public/: ${missing.join(", ")}`);
+});
+
+test("the owner's original brand assets are byte-for-byte unchanged", () => {
+  // OWNER RULE: URAL icons are never modified — not resized, reformatted or
+  // recoloured in place. New sizes and colourways are ADDED as new files. This
+  // caught a real breach: favicon-16.png had been regenerated in place.
+  const manifestPath = path.join(ROOT, "scripts/brand-asset-baseline.json");
+  assert(existsSync(manifestPath), "brand-asset-baseline.json is missing");
+
+  const baseline = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+    files: Record<string, string>;
+  };
+
+  const changed: string[] = [];
+  const missing: string[] = [];
+  for (const [file, expected] of Object.entries(baseline.files)) {
+    const full = path.join(ROOT, file);
+    if (!existsSync(full)) {
+      missing.push(file);
+      continue;
+    }
+    const actual = createHash("sha256").update(readFileSync(full)).digest("hex");
+    if (actual !== expected) changed.push(file);
+  }
+
+  assert(
+    changed.length === 0,
+    `original brand assets were modified: ${changed.join(", ")} — ` +
+      `restore them and add a new file instead of overwriting`
+  );
+  assert(missing.length === 0, `original brand assets were deleted: ${missing.join(", ")}`);
+});
+
+test("the icon generator never writes over an existing brand asset", () => {
+  const source = readFileSync(path.join(ROOT, "scripts/generate-brand-icons.ts"), "utf8");
+
+  // Every job must be for a NEW file, or an explicitly listed regeneration of a
+  // generated (not owner) asset. The owner's set is the baseline manifest.
+  const baseline = JSON.parse(
+    readFileSync(path.join(ROOT, "scripts/brand-asset-baseline.json"), "utf8")
+  ) as { files: Record<string, string> };
+  const ownerFiles = new Set(Object.keys(baseline.files));
+
+  const jobs = [...source.matchAll(/out:\s*"([^"]+)"/g)].map((m) => m[1]);
+  assert(jobs.length > 0, "no generation jobs found — did the script change shape?");
+
+  const collisions = jobs.filter((out) => {
+    const resolved = path
+      .resolve(ROOT, "public/assets/brand/favicon", out)
+      .replace(ROOT + "/", "");
+    return ownerFiles.has(resolved);
+  });
+
+  assert(
+    collisions.length === 0,
+    `generator would overwrite owner assets: ${collisions.join(", ")}`
+  );
 });
 
 // ---------------------------------------------------------------------------

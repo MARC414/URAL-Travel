@@ -59,7 +59,6 @@ const IVORY = "#FBF9F4";
 const jobs: Job[] = [
   // --- Tab / browser: navy field, matches what the user already likes ---
   // favicon-16 is regenerated because the shipped copy has no arch.
-  { out: "favicon-16.png", src: "navyField", size: 16 },
 
   // --- Installable app icons (any purpose) ---
   { out: "app-navy-192.png", src: "navyField", size: 192 },
