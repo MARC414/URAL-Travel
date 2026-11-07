@@ -122,6 +122,71 @@ test("AscentMark never renders an unbounded size", () => {
   assert(tooSmall.length === 0, `mark rendered below legibility floor: ${tooSmall.join(", ")}`);
 });
 
+test("the webmanifest declares every colourway, with maskable variants", () => {
+  const manifestPath = path.join(ROOT, "public/assets/brand/favicon/site.webmanifest");
+  assert(existsSync(manifestPath), "site.webmanifest is missing");
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+    icons: { src: string; sizes: string; purpose?: string }[];
+  };
+
+  const purposes = new Set(manifest.icons.map((icon) => icon.purpose ?? "any"));
+  assert(purposes.has("any"), "no 'any' purpose icons declared");
+  assert(purposes.has("maskable"), "no maskable icons — Android will crop the arch off");
+
+  // Both required install sizes must be present, or the install prompt degrades.
+  const sizes = new Set(manifest.icons.map((icon) => icon.sizes));
+  assert(sizes.has("192x192"), "no 192x192 icon");
+  assert(sizes.has("512x512"), "no 512x512 icon");
+
+  const missing = manifest.icons
+    .map((icon) => icon.src)
+    .filter((src) => !existsSync(path.join(ROOT, "public", src.replace(/^\//, ""))));
+  assert(missing.length === 0, `manifest points at missing files: ${missing.join(", ")}`);
+});
+
+test("a root /favicon.ico exists so the default browser request does not 404", () => {
+  const ico = path.join(ROOT, "public/favicon.ico");
+  assert(existsSync(ico), "public/favicon.ico is missing — browsers request it by default");
+  const head = readFileSync(ico).subarray(0, 6);
+  assert(head.readUInt16LE(0) === 0, "favicon.ico has a bad reserved field");
+  assert(head.readUInt16LE(2) === 1, "favicon.ico is not an icon container (type != 1)");
+  assert(head.readUInt16LE(4) >= 1, "favicon.ico declares no images");
+});
+
+test("index.html points at the root icons it actually ships", () => {
+  const html = readFileSync(path.join(ROOT, "index.html"), "utf8");
+  assert(
+    /<link rel="shortcut icon" href="\/favicon\.ico"/.test(html),
+    "index.html does not reference the root /favicon.ico"
+  );
+  assert(
+    /<link rel="apple-touch-icon"[^>]*href="\/apple-touch-icon\.png"/.test(html),
+    "index.html does not reference the root /apple-touch-icon.png"
+  );
+  // Exactly one theme-color; a second one silently overrides in some browsers.
+  const themeColors = html.match(/<meta name="theme-color"/g) ?? [];
+  assert(themeColors.length === 1, `expected exactly 1 theme-color meta, found ${themeColors.length}`);
+});
+
+test("every icon URL in index.html resolves to a real file in public/", () => {
+  const html = readFileSync(path.join(ROOT, "index.html"), "utf8");
+
+  // Only root-relative, unhashed references. A file placed outside public/ gets
+  // rewritten to /assets/name-HASH.png by Vite, which looks fine in source and
+  // 404s in production — that bug shipped once already, so pin it here.
+  const refs = [...html.matchAll(/(?:rel="(?:icon|shortcut icon|apple-touch-icon|manifest)"[^>]*href=")([^"]+)"/g)]
+    .map((match) => match[1])
+    .filter((href) => href.startsWith("/"));
+
+  assert(refs.length >= 4, `expected several icon references, found ${refs.length}`);
+
+  const hashed = refs.filter((href) => /\/[^/]+-[A-Za-z0-9_-]{8}\.[a-z]+$/.test(href));
+  assert(hashed.length === 0, `icon URL looks build-hashed (file may live outside public/): ${hashed.join(", ")}`);
+
+  const missing = refs.filter((href) => !existsSync(path.join(ROOT, "public", href.replace(/^\//, ""))));
+  assert(missing.length === 0, `icon referenced but not in public/: ${missing.join(", ")}`);
+});
+
 // ---------------------------------------------------------------------------
 
 if (failures.length > 0) {
