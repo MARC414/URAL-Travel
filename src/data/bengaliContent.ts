@@ -4671,6 +4671,7 @@ export interface BengaliSeoCopy {
 
 /** Place names get a Bengali form; airport codes stay Latin (that is how they are booked). */
 const BN_PLACES: Record<string, string> = {
+  Dhaka: "ঢাকা",
   Kathmandu: "কাঠমান্ডু",
   Bangkok: "ব্যাংকক",
   "Kuala Lumpur": "কুয়ালালামপুর",
@@ -4762,7 +4763,7 @@ const BENGALI_ROUTE_SEO: Record<string, BengaliSeoCopy> = {};
 for (const flight of getLocalizedFlights("bn")) {
   const bn = BENGALI_FLIGHTS_OVERRIDES[flight.id];
   if (!bn) continue;
-  const h1 = `ঢাকা → ${bnPlace(bn.to || flight.to)} বিমান ভাড়া, সময় ও ভিসা গাইড (২০২৬)`;
+  const h1 = `${bnPlace(bn.from || flight.from)} → ${bnPlace(bn.to || flight.to)} বিমান ভাড়া, সময় ও ভিসা গাইড (২০২৬)`;
   BENGALI_ROUTE_SEO[`/flights/${flight.id}`] = {
     title: bnTitle(`${bnPlace(bn.to || flight.to)} ফ্লাইট গাইড: ভাড়া, সময় ও ভিসা`),
     description: bnClamp(bn.quickAnswer || flight.quickAnswer, 160),

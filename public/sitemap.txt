@@ -46,6 +46,7 @@ https://uraltravel.co.uk/costs/dubai-costs
 https://uraltravel.co.uk/costs/singapore-costs
 https://uraltravel.co.uk/costs/maldives-costs
 https://uraltravel.co.uk/experiences
+https://uraltravel.co.uk/attractions
 https://uraltravel.co.uk/attractions/london:992434
 https://uraltravel.co.uk/attractions/london:975910
 https://uraltravel.co.uk/attractions/london:974054
@@ -173,6 +174,7 @@ https://uraltravel.co.uk/bn/costs/dubai-costs
 https://uraltravel.co.uk/bn/costs/singapore-costs
 https://uraltravel.co.uk/bn/costs/maldives-costs
 https://uraltravel.co.uk/bn/experiences
+https://uraltravel.co.uk/bn/attractions
 https://uraltravel.co.uk/bn/attractions/london:992434
 https://uraltravel.co.uk/bn/attractions/london:975910
 https://uraltravel.co.uk/bn/attractions/london:974054

@@ -19,7 +19,9 @@
 /tools/visa-checker   /tools   301
 /bn/tools/visa-checker   /bn/tools   301
 /hajj           /umrah        301
-/attractions    /experiences  301
+# 2026-11-11 (Batch 3 L07): /attractions is prerendered as the static
+# attraction-guide hub again, so the old /attractions -> /experiences 301 is
+# retired — the alias is a real page now.
 /indexing       /sitemap      301
 /destinations/uae-guide  /destinations/dubai-guide  301
 /bn/destinations/uae-guide  /bn/destinations/dubai-guide  301

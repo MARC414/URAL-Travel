@@ -433,6 +433,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/experiences" />
   </url>
   <url>
+    <loc>https://uraltravel.co.uk/attractions</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/attractions" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/attractions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/attractions" />
+  </url>
+  <url>
     <loc>https://uraltravel.co.uk/attractions/london:992434</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -1574,6 +1583,15 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/experiences" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/experiences" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/experiences" />
+  </url>
+  <url>
+    <loc>https://uraltravel.co.uk/bn/attractions</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/attractions" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/attractions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/attractions" />
   </url>
   <url>
     <loc>https://uraltravel.co.uk/bn/attractions/london:992434</loc>
