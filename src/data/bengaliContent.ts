@@ -466,6 +466,7 @@ Umrah ও Rawdah permit কোথায় বুক করব?
       { text: "DIY Umrah Intelligence Portal ও BDT Calculator", path: "/umrah" },
       { text: "রমজান ওমরাহের তারিখ ও ইতিকাফ নিবন্ধন গাইড", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
       { text: "তাওয়াফ ও সাঈ: সাত প্রদক্ষিণ, সঠিক গণনা", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
+      { text: "হজের আমল দিনে দিনে: আরাফাহ, মিনা ও জামারাত (২০২৬)", path: "/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -725,6 +726,7 @@ Endorsement ও activation আলাদা বিষয়। ব্যাংক
       { text: "মাত্র ৭৫,০০০ টাকায় মালদ্বীপ ভ্রমণ (Maafushi গাইড)", path: "/blog/maldives-budget-trip-bangladesh-maafushi" },
       { text: "Sri Lanka + Maldives ৭ দিনের কম্বো ট্যুর ও BDT খরচ", path: "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost" },
       { text: "কাঠমান্ডু ও পোখারা ৫ দিনের নেপাল ট্যুর প্ল্যান", path: "/blog/nepal-pokhara-itinerary-bangladesh" },
+      { text: "মালয়েশিয়া ইসলামিক হেরিটেজ ও হালাল ফ্যামিলি ট্যুর (2026): পুত্রজায়া পিঙ্ক মসজিদ, ইসলামিক আর্টস মিউজিয়াম ও KLCC", path: "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -980,6 +982,7 @@ Bangkok-এ Pratunam, Sukhumvit ও Khao San Road-কে শপিং, যাত
       { text: "Nepal ৫ দিনের বিস্তারিত খরচ", path: "/costs/nepal-costs" },
       { text: "নেপাল বনাম থাইল্যান্ড: প্রথম বিদেশ ভ্রমণে কোনটি", path: "/blog/nepal-vs-thailand-first-trip" },
       { text: "নতুন পাসপোর্টে প্রথম বিদেশ ভ্রমণের ধাপ", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
+      { text: "কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট (২০২৬): সরাসরি রুট এখনো নেই — ঢাকা সংযোগ, ভাড়া ও ভিসা গাইড", path: "/blog/kathmandu-to-coxs-bazar-flights-route-status-booking" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -1428,6 +1431,8 @@ Saudia-র প্রকাশিত শর্তে confirmed onward ticket ও 
       { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "টিকিট কাটার জন্য Dual-Currency Card Endorsement গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "DIY Umrah পোর্টাল ও BDT ক্যালকুলেটর", path: "/umrah" },
+      { text: "একই ট্রিপে Umrah + Dubai ভ্রমণ গাইড (2026): ঢাকা থেকে ১০ দিনে মক্কা, মদিনা ও দুবাই ঘোরার মাল্টি-সিটি বাজেট", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
+      { text: "ইউরোপ, লন্ডন ও আমেরিকা ভ্রমণে বাংলাদেশিদের গাইড (2026): স্কিপ-দ্য-লাইন পাস ও ১ বছরের সৌদি ই-ভিসা সুবিধা", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -3008,6 +3013,7 @@ RFCD card কি POS বা ATM limit-ও সরিয়ে দেয়?
       { text: "Bangkok-এ Halal খাবারের সেরা জায়গা (Pratunam ও Sukhumvit)", path: "/blog/halal-food-guide-bangkok-bangladesh" },
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Thailand ৫ দিনের বিস্তারিত BDT বাজেট", path: "/costs/thailand-costs" },
+      { text: "বাংলাদেশ থেকে Bumrungrad ও Bangkok Hospital মেডিকেল চেকআপ গাইড (2026): অ্যাপয়েন্টমেন্ট, BDT খরচ ও হালাল হোটেল", path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -3112,6 +3118,7 @@ RFCD card কি POS বা ATM limit-ও সরিয়ে দেয়?
       { text: "Malaysia e-Visa ও ফ্রি MDAC কার্ড গাইড", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
       { text: "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)", path: "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide" },
       { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
+      { text: "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া দেশের তালিকা", path: "/visa-free-countries" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -3392,13 +3399,22 @@ eSIM-এর মেয়াদ কখন থেকে শুরু হয়?
 
 ৩. পাসপোর্ট রিনিউ (RENEWAL) করতে কি পুলিশ ভেরিফিকেশন লাগে?
 - **তথ্য অপরিবর্তিত থাকলে পুলিশ ভেরিফিকেশন লাগে না!** আপনার যদি আগের কোনো **MRP বা e-Passport** থাকে এবং আপনি নাম, পিতা-মাতার নাম, জন্ম তারিখ ও স্থায়ী ঠিকানা অপরিবর্তিত রেখে রিনিউ (Re-issue) আবেদন করেন, তবে নতুন করে পুলিশ ভেরিফিকেশন ছাড়াই দ্রুত পাসপোর্ট প্রিন্ট হয়ে আসে।
-- **গুরুত্বপূর্ণ টিপস:** নতুন ই-পাসপোর্ট হাতে পাওয়ার সময় পুরনো পাসপোর্টটি *"Cancelled without Prejudice"* সিলসহ ফেরত নিন এবং বিদেশ ভ্রমণের সময় পুরনো ও নতুন পাসপোর্ট একসাথে পিন করে সাথে রাখুন!`,
+- **গুরুত্বপূর্ণ টিপস:** নতুন ই-পাসপোর্ট হাতে পাওয়ার সময় পুরনো পাসপোর্টটি *"Cancelled without Prejudice"* সিলসহ ফেরত নিন এবং বিদেশ ভ্রমণের সময় পুরনো ও নতুন পাসপোর্ট একসাথে পিন করে সাথে রাখুন!
+
+৪. সচরাচর জিজ্ঞাসা
+২০২৬ সালে ৪৮ বা ৬৪ পৃষ্ঠার ই-পাসপোর্টের পাসপোর্ট ফি কত?
+epassport.gov.bd-এর ২০২৬ সালের সরকারি ফি তালিকা অনুযায়ী ৪৮ পৃষ্ঠার ই-পাসপোর্টের ৫ বছর মেয়াদে নিয়মমতো ডেলিভারিতে BDT 4,025, এক্সপ্রেস BDT 6,325 ও সুপার এক্সপ্রেস BDT 8,625, আর ৬৪ পৃষ্ঠার ৫ বছর মেয়াদে BDT 6,325 — প্রতিটি অঙ্কে ১৫% সরকারি ভ্যাট ধরা, এবং ফি পরিশোধ হয় অনলাইনে A-Challan (Sonali Bank, bKash, Nagad বা Visa/Mastercard) অথবা নির্ধারিত ব্যাংক শাখায়।
+MRP বা মেয়াদোত্তীর্ণ ই-পাসপোর্ট রিনিউ করতে কী কী লাগে?
+রিনিউয়ের জন্য আবেদন করুন কেবল সরকারি পোর্টাল epassport.gov.bd-এ: নাম, পিতা-মাতার নাম ও জন্ম তারিখ Smart NID বা জন্ম নিবন্ধনের (BRC) সাথে হুবহু মিল রেখে লিখুন, নিজ জেলার আঞ্চলিক পাসপোর্ট অফিসে (RPO) বায়োমেট্রিক ও ছবি দিন, আসল পুরনো পাসপোর্ট সাথে নিন এবং A-Challan-এর মাধ্যমে ফি পরিশোধ করুন — নাম, পিতা-মাতার নাম, জন্ম তারিখ ও স্থায়ী ঠিকানা অপরিবর্তিত থাকলে পুলিশ ভেরিফিকেশন লাগে না।
+বাংলাদেশে পাসপোর্ট রিনিউ করার প্রক্রিয়া কীভাবে কাজ করে?
+epassport.gov.bd-এ আবেদন করুন, নির্ধারিত আঞ্চলিক পাসপোর্ট অফিসে (RPO) বায়োমেট্রিক সম্পন্ন করুন, A-Challan-এর মাধ্যমে ফি পরিশোধ করুন এবং ডেলিভারি ট্র্যাক করুন — নিয়মমতো ডেলিভারি ১৫–২১ কর্মদিবস, এক্সপ্রেস ৭–১০ কর্মদিবস ও সুপার এক্সপ্রেস আগারগাঁও থেকে ২ কর্মদিবস; পুরনো পাসপোর্টে "Cancelled without Prejudice" সিল করিয়ে নতুন ও পুরনো পাসপোর্ট একসাথে রাখুন।`,
     internalLinks: [
       { text: "ঢাকা বিমানবন্দরের প্রি-ডিপার্চার চেকলিস্ট", path: "/pre-departure" },
       { text: "নতুন পাসপোর্টে (Fresh Passport) ৩ ধাপে Travel History তৈরির গাইড", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
       { text: "নতুন পাসপোর্টে $18,000 ডলার এনডোর্সমেন্ট করার নিয়ম", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "NID ও ই-পাসপোর্ট দিয়ে সরকারি Hajj রেজিস্ট্রেশন (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
+      { text: "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া দেশের তালিকা", path: "/visa-free-countries" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -3679,6 +3695,7 @@ URAL বা যেকোনো এয়ারলাইন্স এজেন্স
       { text: "RFCD অ্যাকাউন্ট বনাম BDT ৩০০ ট্রাভেল কোটা গাইড", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "গ্লোবাল ফ্লাইট সার্চ ও ভাড়া বেঞ্চমার্ক", path: "/flights" },
       { text: "ফ্লাইট ডিলে ক্ষতিপূরণ চেকার (€600)", path: "/tools/flight-delay-claim" },
+      { text: "শেফশাওয়েন, মরক্কো ট্রাভেল গাইড (২০২৬): নীল শহরের মেদিনা, ফোয়ারা ও রিফ পাহাড় — ঢাকা থেকে BDT বাজেটসহ", path: "/blog/chefchaouen-morocco-travel-guide-bangladesh" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -3772,6 +3789,7 @@ URAL বা যেকোনো এয়ারলাইন্স এজেন্স
       { text: "ফ্লাইট বিলম্ব, বাতিল ও ব্যাগেজ হারানোর ক্ষতিপূরণ গাইড", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
       { text: "সেরা ট্রাভেল eSIM ও সেনজেন ট্রাভেল ইন্স্যুরেন্স গাইড", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
       { text: "ওয়েবসাইট ছাড়াই ভ্রমণের অভিজ্ঞতাকে আয়ের পথে পরিণত করুন", path: "/blog/turn-travel-experience-into-income-without-a-website" },
+      { text: "ট্রাভেল অ্যাফিলিয়েট মার্কেটিংয়ে কি সত্যিই আয় করা যায়? জানতে Ural Travel তৈরি করছি", path: "/blog/can-you-make-money-travel-affiliate-marketing-ural-experiment" },
     ],
     content: `ট্রাভেল ব্লগিং টুল সার্চ করলে এমন পঞ্চাশটির তালিকা পাবেন যেখানে প্রতিটি দ্বিতীয় এন্ট্রি পেইড প্লেসমেন্ট। এই পেজটি ঠিক উল্টো: URAL Travel-এ আমরা ২০২৬ সালে সত্যিই যে ট্রাভেল ক্রিয়েটর রিসোর্সগুলো ব্যবহার করি, বাংলাদেশ থেকে কন্টেন্ট তৈরি করা ক্রিয়েটরদের জন্য বাছাই করে তার সংক্ষিপ্ত, সৎ তালিকা। কোনো পেইড র‍্যাংকিং নেই, কোনো এমন টুল নেই যা আমরা কখনো খুলিনি — প্রতিটি কেন তালিকায় আছে তার স্পষ্ট ব্যাখ্যাসহ।
 

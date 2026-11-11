@@ -88,6 +88,11 @@ export function CostPlanningGuide({ cost, isBn }: { cost: TripCostData; isBn: bo
         <a className={linkClass} href={`${prefix}/visa/${stem}-visa`}>{isBn ? "ভিসা ও entry checklist" : "Visa & entry checklist"}</a>
         <a className={linkClass} href={`${prefix}/destinations/${stem}-guide`}>{isBn ? "ভ্রমণের itinerary" : "Travel itinerary"}</a>
         <a className={linkClass} href={`${prefix}/hotels/${HOTEL_IDS[stem]}-hotels`}>{isBn ? "হোটেল এলাকা ও booking check" : "Hotel areas & booking checks"}</a>
+        {isBn && stem === "thailand" && (
+          <a className={linkClass} href={`${prefix}/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide`}>
+            {"অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)"}
+          </a>
+        )}
       </div>
       <p className="text-sm leading-relaxed text-slate-700">{isBn ? "বাংলাদেশ থেকে পরিকল্পনায়: " : "When planning from Bangladesh: "}<a className={linkClass} href={`${prefix}/blog/dual-currency-card-endorsement-bangladesh`}>{isBn ? "কার্ড endorsement-এর ধাপ" : "card endorsement steps"}</a></p>
     </section>

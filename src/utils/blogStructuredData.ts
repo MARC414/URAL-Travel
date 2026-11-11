@@ -100,6 +100,10 @@ const BLOG_FAQ_CONFIGS: Record<
     en: /^\s*3\.\s*Frequently Asked Questions\s*$/i,
     bn: /^\s*৩\.\s*সচরাচর জিজ্ঞাসা\s*$/,
   },
+  "bangladesh-epassport-application-renewal-64-districts-fee-guide": {
+    en: /^\s*4\.\s*Frequently Asked Questions\s*$/i,
+    bn: /^\s*৪\.\s+সচরাচর জিজ্ঞাসা\s*$/,
+  },
 };
 
 function isNumberedHeading(line: string): boolean {

@@ -216,7 +216,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/costs/nepal-costs": {
     title: "Nepal Trip Budget: Quotes, Hotels & Transport | URAL",
     description:
-      "Estimate a Nepal trip budget from Bangladesh in BDT. Review flight, lodging, transport and daily-spend categories before building your itinerary.",
+      "A 5-day Nepal trip from Bangladesh costs BDT 40,000–54,000 per person (June 2026): flights, hotels, transport and daily spend before you build your itinerary.",
   },
   "/costs/thailand-costs": {
     title: "Thailand Trip Budget: Quotes & Cost Planning | URAL",
@@ -329,7 +329,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Compare family-trip ideas from Dhaka by destination, entry requirements and broad budget considerations before choosing where to go.",
   },
   "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide": {
-    title: "Bangladesh e-Passport Renewal: Process & Fees | URAL",
+    title: "Bangladesh e-Passport Fees 2026: 48 vs 64 Pages, Renewal & RPO List | URAL",
     description:
       "Review Bangladesh e-passport application and renewal steps, required documents and official guidance before booking international travel.",
   },

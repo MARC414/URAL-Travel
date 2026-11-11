@@ -439,4 +439,13 @@ export const VISA_FREE_FAQS: VisaFreeFaq[] = [
     answerBn:
       "প্রায়ই, আর খুব একটা আগাম জানানো ছাড়াই। বাংলাদেশের সূচক অবস্থান ২০২৬ সালের জানুয়ারিতে ৯৫ থেকে জুলাই নাগাদ ৯৭-এ নেমেছে, আর শ্রীলংকা ২০২৫ সালের অক্টোবরে ভিসা অন অ্যারাইভাল বাদ দিয়ে বাধ্যতামূলক অনলাইন ETA চালু করেছে। কোনো অফেরতযোগ্য কিছু বুক করার আগে গন্তব্য দেশের নিজস্ব ইমিগ্রেশন কর্তৃপক্ষ বা ঢাকার দূতাবাস থেকে সর্বশেষ নিয়ম যাচাই করে নিন।",
   },
+  {
+    question: "Which countries can I visit visa-free with a Bangladeshi passport in 2026?",
+    answer:
+      "Nepal and the Maldives are the practical answer: both grant Bangladeshi passport holders a free 30-day visa on arrival — Nepal under the SAARC gratis scheme on the first entry of each calendar year, the Maldives with the online IMUGA declaration filed before departure. Sri Lanka is the third direct option from Dhaka but it is not visa-free: an ETA must be approved online before you fly, at the reduced SAARC rate of USD 20. The wider figure of about 35 destinations also counts e-Visas and Caribbean or Pacific island states that can only be reached by transiting a country whose visa a Bangladeshi passport holder needs. Confirm the current rule with the destination's immigration authority or its embassy in Dhaka before booking anything non-refundable.",
+    questionBn:
+      "বাংলাদেশের পাসপোর্ট দিয়ে ভিসা ছাড়া কোন কোন দেশে যাওয়া যায় ২০২৬?",
+    answerBn:
+      "বেশিরভাগ ভ্রমণার্থীর জন্য বাস্তব উত্তর নেপাল ও মালদ্বীপ: দুটোতেই বাংলাদেশি পাসপোর্টধারীরা ৩০ দিনের ফ্রি ভিসা অন অ্যারাইভাল পান — নেপালে ক্যালেন্ডার বছরের প্রথম এন্ট্রিতে SAARC গ্র্যাটিস প্রকল্পে, মালদ্বীপে উড়ার আগে অনলাইন IMUGA ডিক্লারেশন জমা দিয়ে। ঢাকা থেকে তৃতীয় সরাসরি বিকল্প শ্রীলংকা, কিন্তু সেটি ভিসা-মুক্ত নয়: উড়ার আগে অনলাইনে ETA অনুমোদিত হতে হয়, কম SAARC রেটে USD 20। প্রায় ৩৫টি গন্তব্যের বড় হিসাবে যা ধরা হয় তাতে ই-ভিসা এবং এমন ক্যারিবিয়ান বা প্রশান্ত মহাসাগরের দ্বীপ অন্তর্ভুক্ত, যেখানে পৌঁছাতে এমন দেশ দিয়ে ট্রানজিট করতে হয় যার ভিসা বাংলাদেশি পাসপোর্টধারীর লাগে। কোনো অফেরতযোগ্য কিছু বুক করার আগে গন্তব্য দেশের ইমিগ্রেশন কর্তৃপক্ষ বা ঢাকার দূতাবাস থেকে সর্বশেষ নিয়ম নিশ্চিত করে নিন।",
+  },
 ];
