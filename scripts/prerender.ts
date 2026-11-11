@@ -782,7 +782,7 @@ function getTripCrossLinks(country: string, currentPath: string): InternalLinkIt
   const cost = TRIP_COSTS_DATA.find((item) => item.country === country);
 
   if (flight) {
-    links.push({ href: `/flights/${flight.id}`, text: `Flights from Dhaka to ${flight.to.split(" (")[0]}` });
+    links.push({ href: `/flights/${flight.id}`, text: `Flights from ${flight.from.split(" (")[0]} to ${flight.to.split(" (")[0]}` });
   }
   if (hotel) {
     links.push({ href: `/hotels/${hotel.id}`, text: `Hotel neighborhoods in ${hotel.city}` });
@@ -972,12 +972,21 @@ function addInternalLinkSections(
       !route.routePath.startsWith("/blog/") &&
       !categoryHubPaths.has(route.routePath)
     ) {
-      const parentHubPath = CATEGORY_HUB_LINKS.map((link) => link.href).find((hubPath) =>
-        route.routePath.startsWith(`${hubPath}/`)
-      );
-      const sitewideHubLinks = CATEGORY_HUB_LINKS.filter(
-        (link) => link.href !== parentHubPath && link.href !== route.routePath
-      );
+      const parentHubPath =
+        CATEGORY_HUB_LINKS.map((link) => link.href).find((hubPath) =>
+          route.routePath.startsWith(`${hubPath}/`)
+        ) ?? (route.routePath.startsWith("/tools/") ? "/tools" : undefined);
+      const ownHubLink = !parentHubPath
+        ? undefined
+        : parentHubPath === "/tools"
+          ? { href: "/tools", text: stripBrandSuffix(getSeoCopy("/tools", "", "").title) }
+          : CATEGORY_HUB_LINKS.find((link) => link.href === parentHubPath);
+      const sitewideHubLinks = [
+        ...(ownHubLink ? [ownHubLink] : []),
+        ...CATEGORY_HUB_LINKS.filter(
+          (link) => link.href !== parentHubPath && link.href !== route.routePath
+        ),
+      ];
       const sitewideHubSection = renderLinkSection(
         "planning-hub-links",
         "More trip-planning hubs",
@@ -1064,6 +1073,34 @@ function addBengaliLinkSections(
     if (englishPath === "/") {
       sections.push(
         bnDirectory("সব বাংলা ট্রাভেল গাইড", BLOG_SLUGS.map((slug) => `/blog/${slug}`))
+      );
+    }
+
+    // 3. Own section-hub backlink for child pages. The English shell prepends it
+    //    inside the shared planning-hub-links builder; without a Bengali twin
+    //    every /bn child page is a dead end for its own section (OWN-HUB audit).
+    const ownHubEn = CATEGORY_HUB_LINKS.map((link) => link.href).find((hubPath) =>
+      englishPath.startsWith(`${hubPath}/`)
+    ) ?? (englishPath.startsWith("/tools/") ? "/tools" : undefined);
+    if (ownHubEn) {
+      const ownHubLabel = stripBrandSuffix(getBengaliSeoCopy(ownHubEn)?.title ?? "");
+      if (ownHubLabel) {
+        sections.push(
+          bnLinkList("প্ল্যানিং ও বুকিং", [{ label: ownHubLabel, path: ownHubEn }])
+        );
+      }
+    }
+
+    // 4. Full Bengali site directory on /bn/sitemap — the same page-level
+    //    generator the English /sitemap uses, so every /bn page gets a
+    //    directory inbound (DIRECTORY audit). Titles are read before
+    //    applySharedSeoCopy, exactly like the English generator does.
+    if (route.routePath === "/bn/sitemap") {
+      const bnDirectoryLinks = bnRoutes
+        .filter((entry) => entry.routePath !== "/bn/sitemap")
+        .map((entry) => ({ href: entry.routePath, text: entry.title }));
+      sections.push(
+        renderLinkSection("complete-page-directory", "সব বাংলা ট্রাভেল গাইড", bnDirectoryLinks)
       );
     }
 
@@ -1737,11 +1774,15 @@ function buildAllRoutes(): PrerenderRoute[] {
     const title =
       r.id === "dhaka-kathmandu"
         ? "Dhaka to Kathmandu Flight Guide 2026: Price, Time & Visa | URAL"
-        : `Flights from Dhaka to ${r.to.split(" (")[0]} (${r.country}) 2026 | URAL`;
+        : r.id === "ktm-dhaka"
+          ? "Kathmandu to Dhaka Flights: Price & Route Guide | URAL"
+          : `Flights from Dhaka to ${r.to.split(" (")[0]} (${r.country}) 2026 | URAL`;
     const description =
       r.id === "dhaka-kathmandu"
         ? "Direct Dhaka to Kathmandu flights take 1h30m on Biman Bangladesh or Himalaya Airlines. Compare live fares for your dates; Bangladeshis get a free visa on arrival."
-        : `Compare flights from Dhaka to ${r.to.split(" (")[0]}. Check flight duration, direct airlines and live fares for your own travel dates.`;
+        : r.id === "ktm-dhaka"
+          ? "Direct Kathmandu to Dhaka (DAC) flights take 1h 30m on Biman Bangladesh Airlines and Himalaya Airlines; compare live fares for your own dates."
+          : `Compare flights from Dhaka to ${r.to.split(" (")[0]}. Check flight duration, direct airlines and live fares for your own travel dates.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (r.schemaMarkup?.code) {
       try {
@@ -1774,7 +1815,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <p>${escapeHtml(r.quickAnswer || description)}</p>
           <p><strong>Fares:</strong> compare live totals for your dates | <strong>Journey duration:</strong> ${escapeHtml(r.duration)} | <strong>Airlines listed:</strong> ${escapeHtml(r.airlines.join(", "))}</p>
           <section>
-            <h2>Dhaka to ${escapeHtml(r.to.split(" (")[0])} route facts</h2>
+            <h2>${escapeHtml(r.from.split(" (")[0])} to ${escapeHtml(r.to.split(" (")[0])} route facts</h2>
             <ul>${r.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
           </section>
           <section>
@@ -2330,6 +2371,51 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
+  // 8a. Attractions Hub (/attractions) — static directory over the editorial
+  // attraction pages. /attractions used to ship only as an edge 301 to
+  // /experiences, so no static hub existed for the detail pages to point at
+  // (audit HUB-CHILD / OWN-HUB). Owner approved prerendering the hub
+  // (Batch 3 L07 option a, 2026-11-11); city pages stay client-only.
+  const attractionsHubTitle = "European Attractions & Skip-the-Line Passes (Tiqets) | URAL";
+  const attractionsHubDesc = "Skip the line in Paris, London, Rome, Milan, Venice, and New York with official Tiqets passes. Louvre, Eiffel Tower, Colosseum, Duomo, and 59 curated attractions across 9 European cities for Bangladeshi travelers.";
+  routes.push({
+    routePath: "/attractions",
+    canonicalUrl: `${BASE_URL}/attractions`,
+    title: attractionsHubTitle,
+    description: attractionsHubDesc,
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "European Attractions", url: `${BASE_URL}/attractions` },
+    ],
+    extraGraphNodes: [
+      collectionPageSchema({
+        url: `${BASE_URL}/attractions`,
+        name: attractionsHubTitle,
+        description: attractionsHubDesc,
+        items: TIQETS_TOP_ATTRACTIONS.map((a) => {
+          const stack = TIQETS_CITY_STACKS.find((c) => c.cityId === a.cityId);
+          return {
+            name: `${a.title} — ${stack?.cityName ?? ""}`,
+            url: `${BASE_URL}/attractions/${a.cityId}:${a.productId}`,
+          };
+        }),
+      }),
+    ],
+    bodyHtml: `<article>
+      <h1>European Attractions &amp; Skip-the-Line Passes (Tiqets)</h1>
+      <p>${escapeHtml(attractionsHubDesc)}</p>
+      <section aria-labelledby="attraction-guide-directory"><h2 id="attraction-guide-directory">Attraction guide directory</h2><ul>
+        ${TIQETS_TOP_ATTRACTIONS.map((a) => {
+          const stack = TIQETS_CITY_STACKS.find((c) => c.cityId === a.cityId);
+          return `<li><a href="/attractions/${a.cityId}:${a.productId}">${escapeHtml(a.title)}${stack ? ` — ${escapeHtml(stack.cityName)}` : ""}</a></li>`;
+        }).join("\n")}
+      </ul></section>
+      <p>Looking for activity and pass options beyond this directory? <a href="/experiences">Browse the attraction &amp; activity passes hub</a>.</p>
+    </article>`,
+    lastmod: CONTENT_DATA_LASTMOD,
+  });
+
   // 8c. Attraction detail pages (/attractions/:cityId:attractionId) — one
   // static, indexable URL per attraction (the old /attractions?city= query
   // URLs now 301 here at the edge). These are client-rendered SPA routes but
@@ -2360,7 +2446,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           inLanguage: "en-BD",
         }),
       ],
-      bodyHtml: `\n      <article>\n        <h1>${escapeHtml(attraction.title)}</h1>\n        <p>${escapeHtml(attraction.title)} in ${escapeHtml(cityStack.cityName)} — book skip-the-line tickets via Tiqets.</p>\n      </article>\n    `,
+      bodyHtml: `\n      <article>\n        <h1>${escapeHtml(attraction.title)}</h1>\n        <p>${escapeHtml(attraction.title)} in ${escapeHtml(cityStack.cityName)} — book skip-the-line tickets via Tiqets.</p>\n        <p>Browse the <a href="/attractions">complete European attractions directory</a> for every attraction guide URAL publishes.</p>\n      </article>\n    `,
       lastmod: CONTENT_DATA_LASTMOD,
     });
   }
@@ -3846,14 +3932,26 @@ function buildBengaliBody(
 
   // Attraction hub (/attractions) and detail pages (/attractions/:cityId:attractionId).
   if (englishPath === "/attractions" || englishPath.startsWith("/attractions/")) {
-    const cityLinks = TIQETS_CITY_STACKS.map(
-      (c) => ({ label: c.cityNameBn || c.cityName, path: `/attractions/${c.cityId}` })
-    );
+    // City pages are client-only (not prerendered, not in the sitemap), so the
+    // old "view by city" links targeted routes that do not exist statically
+    // (audit BROKEN — Batch 3 L07). The indexable set is this hub plus the
+    // editorial detail pages; link those instead.
+    const productLinks = TIQETS_TOP_ATTRACTIONS.map((a) => {
+      const stack = TIQETS_CITY_STACKS.find((c) => c.cityId === a.cityId);
+      return {
+        label: `${a.titleBn || a.title} — ${stack?.cityNameBn || stack?.cityName || ""}`,
+        path: `/attractions/${a.cityId}:${a.productId}`,
+      };
+    });
     parts.push(
       bnSection(
         "৯টি ইউরোপীয় শহরের আকর্ষণ",
         `<p>লন্ডন, প্যারিস, রোম, মিলান, ভেনিস, আমস্টারডাম, ফ্লোরেন্স, লিসবন ও নিউ ইয়র্কের ৫৯টি কিউরেটেড আকর্ষণের টিকিট ও পাস Tiqets-এ উপলব্ধ। স্কিপ-দ্য-লাইন প্রবেশ, সময়াক্রান্ত স্লট ও মুছে ফলাও ভাউচারের সুবিধা পান।</p>` +
-          bnLinkList("শহর অনুযায়ী দেখুন", cityLinks)
+          (englishPath === "/attractions"
+            ? bnLinkList("সব আকর্ষণ ও পাস", productLinks)
+            : bnLinkList("সব আকর্ষণ ও পাস", [
+                { label: getBengaliRouteSeo("/attractions")?.h1 || "", path: "/attractions" },
+              ]))
       )
     );
     if (englishPath.startsWith("/attractions/") && englishPath.split("/").length === 4) {

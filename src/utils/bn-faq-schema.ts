@@ -5,6 +5,7 @@ interface RouteFaqEntry {
   id: string;
   faqs: FAQItem[];
   to?: string;
+  from?: string;
   city?: string;
   country?: string;
 }
@@ -221,7 +222,7 @@ export function getBnFaqSchemaForPage(
         const route = routeItems?.find((r) => r.id === parameterId) || routeItems?.[0];
         if (!route) return null;
         faqs = route.faqs;
-        pageName = `Dhaka to ${route.to ?? "Destination"} Flight Guide FAQs`;
+        pageName = `${route.from?.split(" (")[0] ?? "Dhaka"} to ${route.to ?? "Destination"} Flight Guide FAQs`;
       }
       break;
     }

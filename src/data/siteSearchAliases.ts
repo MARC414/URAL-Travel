@@ -20,13 +20,15 @@ export const SITE_SEARCH_ALIASES: Readonly<Record<string, { en: string[]; bn: st
     en: [
       "dhaka to kathmandu flight",
       "dhaka to kathmandu flights",
-      "kathmandu to dhaka flight",
       "dhaka to kathmundu flight",
       "dhaka to ktm flight",
       "dac to ktm",
-      "ktm to dac",
     ],
-    bn: ["ঢাকা থেকে কাঠমান্ডু ফ্লাইট", "কাঠমান্ডু থেকে ঢাকা ফ্লাইট"],
+    bn: ["ঢাকা থেকে কাঠমান্ডু ফ্লাইট"],
+  },
+  "/flights/ktm-dhaka": {
+    en: ["kathmandu to dhaka flight", "ktm to dac"],
+    bn: ["কাঠমান্ডু থেকে ঢাকা ফ্লাইট"],
   },
   "/flights/dhaka-dubai": {
     en: [

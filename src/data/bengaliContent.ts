@@ -4671,6 +4671,7 @@ export interface BengaliSeoCopy {
 
 /** Place names get a Bengali form; airport codes stay Latin (that is how they are booked). */
 const BN_PLACES: Record<string, string> = {
+  Dhaka: "ঢাকা",
   Kathmandu: "কাঠমান্ডু",
   Bangkok: "ব্যাংকক",
   "Kuala Lumpur": "কুয়ালালামপুর",
@@ -4762,7 +4763,7 @@ const BENGALI_ROUTE_SEO: Record<string, BengaliSeoCopy> = {};
 for (const flight of getLocalizedFlights("bn")) {
   const bn = BENGALI_FLIGHTS_OVERRIDES[flight.id];
   if (!bn) continue;
-  const h1 = `ঢাকা → ${bnPlace(bn.to || flight.to)} বিমান ভাড়া, সময় ও ভিসা গাইড (২০২৬)`;
+  const h1 = `${bnPlace(bn.from || flight.from)} → ${bnPlace(bn.to || flight.to)} বিমান ভাড়া, সময় ও ভিসা গাইড (২০২৬)`;
   BENGALI_ROUTE_SEO[`/flights/${flight.id}`] = {
     title: bnTitle(`${bnPlace(bn.to || flight.to)} ফ্লাইট গাইড: ভাড়া, সময় ও ভিসা`),
     description: bnClamp(bn.quickAnswer || flight.quickAnswer, 160),
@@ -4832,8 +4833,8 @@ for (const destination of getLocalizedDestinations("bn")) {
 
 // Attractions hub — hand-written Bengali SERP copy for /attractions landing page.
 BENGALI_ROUTE_SEO["/attractions"] = {
-  title: "ইউরোপের আকর্ষণ ও স্কিপ-দ্য-লাইন টিকিট (Tiqets) | URAL",
-  description: "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস ও নিউ ইয়র্কে লাইনে না দাঁড়িয়ে টিকিট পান Tiqets পাসের মাধ্যমে। লুভর, আইফেল টাওয়ার, কলোজিয়াম, ডুয়োমো ও আরও ৫৯টি আকর্ষণ ৯টি ইউরোপিয়ন শহরে।",
+  title: "ইউরোপের আকর্ষণ এবং টিকিট পাস (Tiqets) | URAL",
+  description: "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস এবং নিউ ইয়র্কে লাইনে না দাঁড়িয়ে টিকিট পান Tiqets পাসের মাধ্যমে। লুভর, আইফেল টাওয়ার, কলোজিয়াম, ডুয়োমো ও আরও ৫৯টি আকর্ষণ ৯টি ইউরোপিয়ন শহরে।",
   h1: "ইউরোপের আকর্ষণ ও টিকিট পাস (Tiqets)",
 };
 

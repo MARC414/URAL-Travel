@@ -83,6 +83,16 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Compare Dhaka to Malé (MLE) direct and Colombo-transit flights, journey times and operating airlines, then check live fares for your dates.",
   },
+  "/flights/ktm-dhaka": {
+    title: "Kathmandu to Dhaka Flights: Price & Route Guide | URAL",
+    description:
+      "Direct Kathmandu to Dhaka (DAC) flights take 1h 30m on Biman Bangladesh Airlines and Himalaya Airlines; compare live fares for your own dates.",
+  },
+  "/flights/dhaka-los-angeles": {
+    title: "Dhaka to Los Angeles Flights: Route & Fares | URAL",
+    description:
+      "Compare flights from Dhaka to Los Angeles. Check flight duration, direct airlines and live fares for your own travel dates.",
+  },
   "/hotels": {
     title: "Hotel Area Guides for Bangladesh Travelers | URAL",
     description:
@@ -628,6 +638,12 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "ঢাকা টু মালে (MLE) সরাসরি ও কলম্বো-ট্রানজিট ফ্লাইট, যাত্রার সময় ও পরিচালনাকারী এয়ারলাইন তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
   },
+  "/flights/ktm-dhaka": {
+    title: "কাঠমান্ডু টু ঢাকা ফ্লাইট: ভাড়া ও রুট গাইড | URAL",
+    description:
+      "কাঠমান্ডু (KTM) থেকে ঢাকা (DAC) সরাসরি ফ্লাইটে মাত্র ১ ঘণ্টা ২৫ মিনিট সময় লাগে। Biman Bangladesh Airlines এবং Himalaya Airlines এই রুটে নিয়মিত সরাসরি ফ্লাইট পরিচালনা করে।",
+  },
+
   "/flights/dhaka-singapore": {
     title: "ঢাকা টু সিঙ্গাপুর ফ্লাইট: এয়ারলাইন ও টাকায় ভাড়া | URAL",
     description:
