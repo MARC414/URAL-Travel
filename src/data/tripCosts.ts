@@ -4,6 +4,7 @@ type Pair = { en: string; bn: string };
 type GuideConfig = {
   id: string; country: string; countryBn: string; days: number; currency: string; currencyName: string;
   answer: Pair; hotel: Pair; transport: Pair; tickets: Pair; season: Pair; tips: Pair[];
+  faq1QuestionBn?: string;
   references: TripCostData["references"];
 };
 const text = (en: string, bn: string): Pair => ({ en, bn });
@@ -13,7 +14,8 @@ const source = (name: string, nameBn: string, url: string) => ({ name, nameBn, u
 const guides: GuideConfig[] = [
   {
     id: "nepal-costs", country: "Nepal", countryBn: "নেপাল", days: 5, currency: "NPR", currencyName: "Nepali rupee",
-    answer: text("Build your Nepal budget from return-flight quotes, each hotel stay, Kathmandu–Pokhara transport and the places you plan to visit. Keep room-nights separate from daily spending. Use quotes for your dates and passport category, then total them in the Trip Cost Estimator.", "নেপালের বাজেটে রাউন্ডট্রিপ ফ্লাইট, প্রতিটি শহরে হোটেল, কাঠমান্ডু–পোখারা যাতায়াত ও ঘুরতে যাওয়ার জায়গাগুলোর খরচ রাখুন। রুম-রাত ও দৈনিক খরচ আলাদা করুন। নিজের তারিখ ও পাসপোর্টের জন্য কোটেশন নিয়ে ট্রিপ কস্ট এস্টিমেটরে যোগ করুন।"),
+    answer: text("Build your Nepal budget from return-flight quotes, each hotel stay, Kathmandu–Pokhara transport and the places you plan to visit. Keep room-nights separate from daily spending. Use quotes for your dates and passport category, then total them in the Trip Cost Estimator.", "নেপাল ভ্রমণ খরচ: ৫ দিনের জনপ্রতি ৪০,০০০–৫৪,০০০ টাকা (জুন ২০২৬ হিসাবে): রাউন্ডট্রিপ ফ্লাইট, হোটেল, কাঠমান্ডু–পোখারা যাতায়াত ও দৈনিক খরচ। নিজের তারিখ ও পাসপোর্টের জন্য কোটেশন নিয়ে ট্রিপ কস্ট এস্টিমেটরে যোগ করুন।"),
+    faq1QuestionBn: "নেপাল ভ্রমণ খরচ কীভাবে হিসাব করব?",
     hotel: text("Quote Kathmandu and Pokhara separately, with all rooms, occupied nights, breakfast and taxes.", "কাঠমান্ডু ও পোখারার হোটেল আলাদা করে কোট নিন; সব রুম, রাত, breakfast ও কর মিলিয়ে দেখুন।"),
     transport: text("Compare the operator’s bus, car or flight quote for your route. Include station/airport transfers and luggage.", "নিজের রুটে operator-এর bus, car বা flight quote তুলনা করুন। স্টেশন/বিমানবন্দর ট্রান্সফার ও ব্যাগেজ রাখুন।"),
     tickets: text("Ask each heritage site or permit office which passport and age category applies. Keep guides and trekking permits separate.", "প্রতিটি heritage site বা permit office-এ পাসপোর্ট ও বয়সভিত্তিক category জেনে নিন। Guide ও trekking permit আলাদা রাখুন।"),
@@ -97,7 +99,7 @@ function guide(config: GuideConfig, lang: "en" | "bn"): TripCostData {
       { label: bn ? "শিশু ও ইনফ্যান্ট" : "Children and infants", value: bn ? "আলাদা quote ও eligibility check" : "Separate quotes and eligibility checks" },
     ],
     faqs: [
-      { question: bn ? `${questionCountry} ভ্রমণের বাজেট কীভাবে হিসাব করব?` : `How do I calculate a ${questionCountry} trip budget?`, answer: config.answer[lang] },
+      { question: bn && config.faq1QuestionBn ? config.faq1QuestionBn : bn ? `${questionCountry} ভ্রমণের বাজেট কীভাবে হিসাব করব?` : `How do I calculate a ${questionCountry} trip budget?`, answer: config.answer[lang] },
       { question: bn ? "প্রতিটি কোটেশনের সঙ্গে কী রাখব?" : "What should I keep with each quote?", answer: bn ? "Supplier-এর নাম, quote date/expiry, travel date, যাত্রীর বয়স, room/night, currency, কর, baggage ও cancellation terms রাখুন। নিজের বরাদ্দকে supplier quote থেকে আলাদা চিহ্নিত করুন।" : "Keep the supplier name, quote date/expiry, travel dates, ages, rooms/nights, currency, taxes, baggage and cancellation terms. Identify personal allowances separately from supplier quotes." },
       { question: bn ? "শিশুদের কি প্রাপ্তবয়স্কের সমান খরচ ধরব?" : "Should children be priced as adults?", answer: bn ? "Airline, hotel ও attraction-এর age/occupancy rule অনুযায়ী quote নিন। Estimator-এ শিশুর airfare ও attraction ticket আলাদা; পুরো দলের airfare quote থাকলে সবাই অন্তর্ভুক্ত আছে নিশ্চিত করুন।" : "Use the airline, hotel and attraction’s age/occupancy rules. The estimator separates child airfare and admission quotes; if using a whole-party flight total, confirm that everyone is included." },
     ],

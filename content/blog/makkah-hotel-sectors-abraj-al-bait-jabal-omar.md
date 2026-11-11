@@ -50,6 +50,8 @@ internalLinksEn:
     path: /hotels
   - text: "The DIY Umrah planning hub and budget calculator"
     path: /umrah
+  - text: "Hajj and Umrah Accommodation: How to Choose Where You Sleep"
+    path: /blog/hajj-umrah-accommodation-guide-makkah-madinah
 internalLinksBn:
   - text: "নুসুক হোটেল BRN ও রওদা পারমিট: গেট আসলে কীসে খোলে"
     path: /blog/nusuk-hotel-brn-rawdah-gate-guide
@@ -63,6 +65,8 @@ internalLinksBn:
     path: /hotels
   - text: "DIY ওমরাহ প্ল্যানিং হাব ও বাজেট ক্যালকুলেটর"
     path: /umrah
+  - text: "হজ্জ ও ওমরাহর আবাসন: কোথায় ঘুমাবেন তা কীভাবে ঠিক করবেন"
+    path: /blog/hajj-umrah-accommodation-guide-makkah-madinah
 affiliateCtaProvider: klookHotels
 affiliateCtaHeadline: "Compare the towers, the podium blocks and the shuttle zones side by side"
 affiliateCtaBody: "Sector decides your prayer routine more than star rating does. Shortlist two properties per tier, then check live availability for your dates so the price difference is the only variable left."

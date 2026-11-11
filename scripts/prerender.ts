@@ -650,6 +650,14 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
       href: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
       text: "Entering Ihram at Dhaka airport or at the Miqat",
     },
+    {
+      href: "/blog/hajj-umrah-accommodation-guide-makkah-madinah",
+      text: "Hajj and Umrah Accommodation: How to Choose Where You Sleep",
+    },
+    {
+      href: "/blog/makkah-hotel-sectors-abraj-al-bait-jabal-omar",
+      text: "Makkah Hotel Sectors: Abraj Al-Bait, Jabal Omar or a Shuttle Zone",
+    },
   ],
   "/banking": [
     {
@@ -682,6 +690,10 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
     { href: "/destinations/singapore-guide", text: "Explore the Singapore destination guide" },
   ],
   "/tools": [
+    { href: "/tools/budget-calculator", text: "Trip Cost Estimator: Quotes, Travellers & Hotel Nights" },
+    { href: "/tools/currency-converter", text: "Currency Converter: Dated BDT Reference Rates" },
+    { href: "/tools/flight-delay-claim", text: "Flight Disruption Claim Check & Passenger-Rights Guide" },
+    { href: "/tools/packing-checklist", text: "Smart Packing Checklist for Flights from Dhaka" },
     { href: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp", text: "Flight delay, cancellation and baggage claim guide" },
     { href: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide", text: "Travel eSIM and insurance guide for Bangladeshi travelers" },
     { href: "/blog/dual-currency-card-endorsement-bangladesh", text: "Dual-currency card endorsement and travel quota guide" },
@@ -733,6 +745,19 @@ const COUNTRY_TOPIC_ALIASES: Record<string, string[]> = {
   UAE: ["uae", "dubai", "abu dhabi"],
   Singapore: ["singapore", "sentosa", "little india"],
   Maldives: ["maldives", "male", "maafushi", "hulhumale"],
+};
+
+/**
+ * Country pages whose "Related" section must keep a specific post visible:
+ * equal topic scores lose to the oldest index, which pushed the near-page-2
+ * Thailand e-Visa guide out of the top three on all four Thailand money pages.
+ * Pinned slugs render first, then the ranked three (deduped).
+ */
+const ROUTE_RELATED_BLOG_SLUGS: Record<string, string[]> = {
+  "/visa/thailand-visa": ["thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide"],
+  "/costs/thailand-costs": ["thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide"],
+  "/flights/dhaka-bangkok": ["thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide"],
+  "/hotels/bangkok-hotels": ["thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide"],
 };
 
 function findCountryForRoute(routePath: string): string | undefined {
@@ -884,15 +909,24 @@ function addInternalLinkSections(
         const destinationId = route.routePath.startsWith("/destinations/")
           ? route.routePath.split("/")[2]
           : undefined;
+        const routePinnedSlugs = ROUTE_RELATED_BLOG_SLUGS[route.routePath];
+        const relatedSlugs = routePinnedSlugs
+          ? routePinnedSlugs
+              .concat(getRelatedBlogsForRoute(country, route.routePath).map((post) => post.slug))
+              .filter((slug, index, all) => all.indexOf(slug) === index)
+          : getRelatedBlogsForRoute(country, route.routePath).map((post) => post.slug);
         const relatedSection = destinationId && DESTINATION_RELATED_BLOG_SLUGS[destinationId]
           ? renderDestinationRelatedBlogSection(destinationId, "en")
           : renderLinkSection(
               "related-destination-guides",
               `Related ${country} travel guides`,
-              getRelatedBlogsForRoute(country, route.routePath).map((post) => ({
-                href: `/blog/${post.slug}`,
-                text: post.title,
-              }))
+              relatedSlugs
+                .map((slug) => BLOG_DATA.find((post) => post.slug === slug))
+                .filter((post): post is BlogEntry => post !== undefined)
+                .map((post) => ({
+                  href: `/blog/${post.slug}`,
+                  text: post.title,
+                }))
             );
         const partnerSection = destinationId
           ? renderDestinationPartnerSection(destinationId, "en")
@@ -1252,6 +1286,7 @@ function renderFlightsHubBody(title: string, description: string, faqSchema: Ret
       <h3>Nonstop routes covered by URAL guides</h3>
       <ul>
         <li><a href="/flights/dhaka-kathmandu">Dhaka to Kathmandu</a> — Biman Bangladesh Airlines, Himalaya Airlines (~1h 30m)</li>
+          <li><a href="/flights/ktm-dhaka">Kathmandu to Dhaka</a> — Biman Bangladesh Airlines, Himalaya Airlines (~1h 30m)</li>
         <li><a href="/flights/dhaka-bangkok">Dhaka to Bangkok</a> — Biman Bangladesh Airlines, Thai Airways, US-Bangla Airlines, Thai Lion Air (~2h 30m)</li>
         <li><a href="/flights/dhaka-kuala-lumpur">Dhaka to Kuala Lumpur</a> — Malaysia Airlines, Biman Bangladesh Airlines, AirAsia, US-Bangla Airlines, Batik Air (~3h 50m)</li>
         <li><a href="/flights/dhaka-singapore">Dhaka to Singapore</a> — Singapore Airlines, Biman Bangladesh Airlines, US-Bangla Airlines (~4h 15m)</li>
@@ -1444,6 +1479,9 @@ function renderBankingHubSections(locale: "en" | "bn"): string {
     const watch = escapeHtml(isBn ? method.watchBn : method.watch);
     // A payment method no longer links to a deleted article, so these are optional.
     const label = escapeHtml((isBn ? method.nodeLabelBn : method.nodeLabel) ?? "");
+    const nodeLink = method.nodeSlug
+      ? `<p><a href="${href(`/blog/${method.nodeSlug}`)}">${label}</a></p>`
+      : "";
     return `<h3>${title}</h3><p><strong>${copy(
       "Best for:",
       "কাদের জন্য:"
@@ -1453,9 +1491,7 @@ function renderBankingHubSections(locale: "en" | "bn"): string {
     )}</strong> ${rule}</p><p><strong>${copy(
       "Where it snags:",
       "যেখানে আটকায়:"
-    )}</strong> ${watch}</p><p><a href="${href(
-      `/blog/${method.nodeSlug}`
-    )}">${label}</a></p>`;
+    )}</strong> ${watch}</p>${nodeLink}`;
   }).join("\n");
 
   const steps = `<ol>${BANKING_ENDORSEMENT_STEPS.steps
@@ -3035,6 +3071,9 @@ function bnCountryCrossLinks(
   if (hotel) push(`/hotels/${hotel.id}`, "হোটেল এলাকা, হালাল খাবার ও রুম ভাড়া");
   if (visa) push(`/visa/${visa.id}`, "ভিসার নিয়ম, ডকুমেন্ট চেকলিস্ট ও ফি");
   if (cost) push(`/costs/${cost.id}`, "৫ দিনের সম্পূর্ণ BDT খরচের হিসাব");
+  if (country === "Thailand") {
+    push("/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide", "অনলাইনে Thailand e-Visa করার নিয়ম (thaievisa.go.th গাইড)");
+  }
   return links;
 }
 
@@ -3557,6 +3596,8 @@ function buildBengaliBody(
         { label: "বাংলাদেশ থেকে হজ নিবন্ধন ও প্যাকেজ গাইড", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
         { label: "তাওয়াফ ও সাঈ: এক চক্কর কোথায় শুরু, কোথায় শেষ", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
         { label: "ঢাকা বিমানবন্দরে না মিকাতে ইহরাম", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
+        { label: "হজ্জ ও ওমরাহর আবাসন: কোথায় ঘুমাবেন তা কীভাবে ঠিক করবেন", path: "/blog/hajj-umrah-accommodation-guide-makkah-madinah" },
+        { label: "মক্কার হোটেল সেক্টর: আবরাজ আল-বাইত, জাবাল ওমর নাকি শাটল জোন", path: "/blog/makkah-hotel-sectors-abraj-al-bait-jabal-omar" },
       ])
     );
     return `<article>${parts.join("")}</article>`;

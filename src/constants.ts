@@ -1958,7 +1958,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Kathmandu Flights from Dhaka", path: "/flights/dhaka-kathmandu" },
       { text: "Nepal Visa on Arrival Guide", path: "/visa/nepal-visa" },
       { text: "Where to Stay in Kathmandu & Pokhara", path: "/hotels/kathmandu-hotels" },
-      { text: "Nepal 5-Day Trip Cost Calculator in BDT", path: "/costs/nepal-costs" }
+      { text: "Nepal 5-Day Trip Cost Calculator in BDT", path: "/costs/nepal-costs" },
+      { text: "Kathmandu to Cox's Bazar Flights (2026): No Direct Route Yet — Dhaka Connection, Fares & Visa Guide", path: "/blog/kathmandu-to-coxs-bazar-flights-route-status-booking" },
     ],
     affiliateCTA: { provider: "aviasales", headline: "Check Dhaka to Kathmandu Flight Fares", body: "Check live availability and book cheap roundtrip flights to Nepal today." }
   },
@@ -2068,7 +2069,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Nepal On-Arrival Visa & Online Checklist", path: "/visa/nepal-visa" },
       { text: "Thailand e-Visa & Embassy Requirements", path: "/visa/thailand-visa" },
       { text: "Malaysia eVisa & MDAC Arrival Card Checklist", path: "/visa/malaysia-visa" },
-      { text: "Maldives On-Arrival Visa & IMUGA Checklist", path: "/visa/maldives-visa" }
+      { text: "Maldives On-Arrival Visa & IMUGA Checklist", path: "/visa/maldives-visa" },
+      { text: "Malaysia Islamic Heritage & Halal Family Trail (2026): Putrajaya Pink Mosque, Islamic Arts Museum & KLCC Guide", path: "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide" },
     ],
     affiliateCTA: { provider: "klook", headline: "Compare family attractions and activity options", body: "Browse listings for Safari World Bangkok, Genting SkyWorlds, Gardens by the Bay, and Dubai desert safaris; check the selected dates, inclusions, total, ticket instructions, and cancellation terms." }
   },
@@ -2115,6 +2117,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
       { text: "Ramadan Umrah booking dates & I'tikaf registration", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
       { text: "Tawaf and Sa'i: Seven Circuits, Counted Correctly", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
+      { text: "Hajj Rites Day by Day: Arafah, Mina, Jamarat (2026)", path: "/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" },
     ],
     references: [
       {
@@ -2518,7 +2521,9 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Nusuk App, Saudi Visa Bio & Rawdah Permit Guide", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Makkah & Madinah Hotel Zones & Haramain Train Guide", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Dual-Currency Card Endorsement Guide for Online Flight Booking", path: "/blog/dual-currency-card-endorsement-bangladesh" },
-      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" }
+      { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
+      { text: "Umrah + Dubai 10-Day Combo Trip from Dhaka (2026): How to Combine Makkah, Madinah & UAE on One Multi-City Ticket", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
+      { text: "Europe, UK & USA Sightseeing for Bangladeshi Travelers (2026): Skip-the-Line Passes + Instant Saudi Stopover Umrah", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
     ],
     affiliateCTA: {
       provider: "airalo",
@@ -3277,7 +3282,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Thailand 5-Day Trip Budget in BDT", path: "/costs/thailand-costs" },
       { text: "Dhaka to Bangkok Flight Schedule & Fares", path: "/flights/dhaka-bangkok" },
-      { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" }
+      { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" },
+      { text: "Bumrungrad & Bangkok Hospital Medical Checkup Guide from Bangladesh (2026): Appointment Booking, BDT Costs & Halal Stays", path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
     ],
     affiliateCTA: { provider: "klook", headline: "Compare Bangkok family activities and ticket options", body: "Browse relevant Bangkok activity listings and check the total, selected date, inclusions, pickup details where offered, and cancellation terms before booking." }
   },
@@ -3329,7 +3335,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka to Maldives Flight Schedule & Fares", path: "/flights/dhaka-maldives" },
       { text: "Where to Stay in Maldives: Local Island Stays", path: "/hotels/maldives-hotels" },
       { text: "Maldives 5-Day Trip Cost Calculator in BDT", path: "/costs/maldives-costs" },
-      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" }
+      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
+      { text: "Visa-Free Countries for a Bangladeshi Passport", path: "/visa-free-countries" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Start Step 1: Check Dhaka to Kathmandu, Malé & Kuala Lumpur Fares", body: "Compare live roundtrip airfares from Dhaka and begin building your international travel history." }
   },
@@ -3488,6 +3495,7 @@ export const BLOG_DATA: BlogPost[] = [
     summary: "Every international journey—whether for obligatory Hajj, DIY Umrah, medical treatment in Bangkok, or a family holiday to Malaysia—starts with a valid Bangladeshi e-Passport with at least 6 months remaining validity. Verified against the Department of Immigration & Passports (DIP - epassport.gov.bd), this complete 2026 guide covers online application across all 72 Regional Passport Offices (RPOs) in 64 districts, exact 15% VAT-inclusive BDT fee tables for 48-page vs. 64-page passports (5-year and 10-year validity), how MRP-to-e-Passport renewals bypass new police verification, and fixing NID-to-Passport name/age mismatches.",
     category: "Visa & Immigration",
     date: "September 27, 2026",
+    updatedAt: "2026-11-11",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "8 min read",
     internalLinks: [
@@ -3495,7 +3503,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "How to Get $18,000 Dollar Endorsement on Your New e-Passport", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Official Hajj Registration with NID & e-Passport (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
-      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" }
+      { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
+      { text: "Visa-Free Countries for a Bangladeshi Passport", path: "/visa-free-countries" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Got Your New e-Passport? Check First-Trip Flight Fares from Dhaka", body: "Compare live roundtrip fares to Nepal, Maldives, Malaysia, Thailand, and Saudi Arabia." }
   },
@@ -3711,7 +3720,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dual-Currency Card Endorsement Guide", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "RFCD Account vs. BDT 300 Travel Quota Guide", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
-      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools/flight-delay-claim" }
+      { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools/flight-delay-claim" },
+      { text: "Chefchaouen, Morocco Travel Guide from Dhaka: Exploring Morocco's Blue City (2026)", path: "/blog/chefchaouen-morocco-travel-guide-bangladesh" },
     ],
     affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Havana?", body: "Search multi-city routings from Dhaka via Istanbul or European gateways and watch how fares move before you lock your travel dates." }
   },
@@ -3754,6 +3764,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Flight Delay, Cancellation & Lost Baggage Compensation Guide", path: "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" },
       { text: "Best Travel eSIM and Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
       { text: "Turn Your Travel Experience Into Income — Without Building a Website", path: "/blog/turn-travel-experience-into-income-without-a-website" },
+      { text: "Can You Really Make Money With Travel Affiliate Marketing? I'm Building Ural Travel to Find Out", path: "/blog/can-you-make-money-travel-affiliate-marketing-ural-experiment" },
     ],
   },
   {
