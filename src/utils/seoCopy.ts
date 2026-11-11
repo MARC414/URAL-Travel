@@ -299,7 +299,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
       "Learn how foreign-currency endorsement works for Bangladeshi travelers, what to ask your bank and how to prepare a card for overseas payments.",
   },
   "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": {
-    title: "Thailand Visa from Bangladesh: Documents & Process | URAL",
+    title: "Thailand e-Visa from Bangladesh: Documents & Bank Balance Guide | URAL",
     description:
       "Review Thailand visa planning from Bangladesh, including document preparation, financial evidence and application steps. Confirm current rules.",
   },

@@ -126,9 +126,11 @@ import {
   getLocalizedBlogs,
   getLocalizedCosts,
   getLocalizedDestinations,
+  getLocalizedFlightFaqs,
   getLocalizedFlights,
   getLocalizedHajjFaqs,
   getLocalizedHotels,
+  getLocalizedVisaFaqs,
   getLocalizedVisas,
 } from "../src/data/bengaliContent";
 import {
@@ -3290,6 +3292,10 @@ function buildBengaliBody(
             bnCountryCrossLinks(route.country, englishPath)
           )
         );
+        const localizedRouteFaqs = getLocalizedFlightFaqs(route.id);
+        if (localizedRouteFaqs?.length) {
+          parts.push(bnFaqList("এই রুট সম্পর্কে সাধারণ প্রশ্ন", localizedRouteFaqs));
+        }
       }
       const guidance = bnGuidanceFor(group);
       if (guidance.length) {
@@ -3453,6 +3459,10 @@ function buildBengaliBody(
             bnCountryCrossLinks(visa.country, englishPath)
           )
         );
+      }
+      const localizedVisaFaqs = getLocalizedVisaFaqs(id);
+      if (localizedVisaFaqs?.length) {
+        parts.push(bnFaqList("ভিসা সম্পর্কে সাধারণ প্রশ্ন", localizedVisaFaqs));
       }
       const guidance = bnGuidanceFor(group);
       if (guidance.length) {
@@ -4268,10 +4278,10 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
     ) {
       // English FAQ and TouristTrip nodes must never be copied onto a Bengali
       // detail page. FAQs and destination-trip data are rebuilt from localized
-      // Bengali content; the
-      // flights/hotels/visa/costs overrides still carry English faqs and their
-      // Bengali bodies therefore render no FAQ section at all, while the
-      // destination guides have their own Bengali answers.
+      // Bengali content: destination guides, plus the visa guides and flight
+      // routes whose overrides now ship Bengali faqs (their bodies render an
+      // FAQ section from those). Hotels/costs overrides still carry English
+      // faqs only, so those bodies render no FAQ section at all.
       for (const node of en.extraGraphNodes) {
         if (node["@type"] !== "FAQPage" && node["@type"] !== "TouristTrip") {
           extraGraphNodes.push(node);
@@ -4306,6 +4316,34 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
         bnFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
         bnFaq["inLanguage"] = "bn-BD";
         extraGraphNodes.push(bnFaq);
+        }
+      } else if (segments[0] === "visa") {
+        const localizedVisaFaqs = getLocalizedVisaFaqs(segments[1]);
+        if (localizedVisaFaqs?.length) {
+          const bnVisaGuideFaq = stripContext(
+            generateFAQSchema(localizedVisaFaqs, {
+              url: canonicalUrl,
+              name: copy.title,
+            })
+          );
+          bnVisaGuideFaq["@id"] = `${canonicalUrl}#faq`;
+          bnVisaGuideFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+          bnVisaGuideFaq["inLanguage"] = "bn-BD";
+          extraGraphNodes.push(bnVisaGuideFaq);
+        }
+      } else if (segments[0] === "flights") {
+        const localizedRouteFaqs = getLocalizedFlightFaqs(segments[1]);
+        if (localizedRouteFaqs?.length) {
+          const bnRouteGuideFaq = stripContext(
+            generateFAQSchema(localizedRouteFaqs, {
+              url: canonicalUrl,
+              name: copy.title,
+            })
+          );
+          bnRouteGuideFaq["@id"] = `${canonicalUrl}#faq`;
+          bnRouteGuideFaq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+          bnRouteGuideFaq["inLanguage"] = "bn-BD";
+          extraGraphNodes.push(bnRouteGuideFaq);
         }
       }
     } else if (
