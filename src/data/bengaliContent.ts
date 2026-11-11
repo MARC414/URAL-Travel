@@ -4833,8 +4833,8 @@ for (const destination of getLocalizedDestinations("bn")) {
 
 // Attractions hub — hand-written Bengali SERP copy for /attractions landing page.
 BENGALI_ROUTE_SEO["/attractions"] = {
-  title: "ইউরোপের আকর্ষণ ও স্কিপ-দ্য-লাইন টিকিট (Tiqets) | URAL",
-  description: "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস ও নিউ ইয়র্কে লাইনে না দাঁড়িয়ে টিকিট পান Tiqets পাসের মাধ্যমে। লুভর, আইফেল টাওয়ার, কলোজিয়াম, ডুয়োমো ও আরও ৫৯টি আকর্ষণ ৯টি ইউরোপিয়ন শহরে।",
+  title: "ইউরোপের আকর্ষণ এবং টিকিট পাস (Tiqets) | URAL",
+  description: "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস এবং নিউ ইয়র্কে লাইনে না দাঁড়িয়ে টিকিট পান Tiqets পাসের মাধ্যমে। লুভর, আইফেল টাওয়ার, কলোজিয়াম, ডুয়োমো ও আরও ৫৯টি আকর্ষণ ৯টি ইউরোপিয়ন শহরে।",
   h1: "ইউরোপের আকর্ষণ ও টিকিট পাস (Tiqets)",
 };
 

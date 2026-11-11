@@ -1815,7 +1815,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <p>${escapeHtml(r.quickAnswer || description)}</p>
           <p><strong>Fares:</strong> compare live totals for your dates | <strong>Journey duration:</strong> ${escapeHtml(r.duration)} | <strong>Airlines listed:</strong> ${escapeHtml(r.airlines.join(", "))}</p>
           <section>
-            <h2>Dhaka to ${escapeHtml(r.to.split(" (")[0])} route facts</h2>
+            <h2>${escapeHtml(r.from.split(" (")[0])} to ${escapeHtml(r.to.split(" (")[0])} route facts</h2>
             <ul>${r.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
           </section>
           <section>
