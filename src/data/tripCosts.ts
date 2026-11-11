@@ -90,7 +90,7 @@ function guide(config: GuideConfig, lang: "en" | "bn"): TripCostData {
   return {
     id: config.id, country: config.country, countryBn: config.countryBn, durationDays: config.days,
     currencyCode: `${config.currency} (${config.currencyName})`, currencyIso: config.currency, categories,
-    updatedAt: "2026-11-07", seasonalVariation: config.season[lang], moneyHacks: config.tips.map((tip) => tip[lang]),
+    updatedAt: "2026-11-11", seasonalVariation: config.season[lang], moneyHacks: config.tips.map((tip) => tip[lang]),
     quickAnswer: config.answer[lang], references: config.references,
     keyFacts: [
       { label: bn ? "পরিকল্পনার ভিত্তি" : "Planning basis", value: bn ? "নিজের তারিখ, দল ও supplier quote" : "Your dates, party and supplier quotes" },

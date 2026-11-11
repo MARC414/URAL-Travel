@@ -271,7 +271,15 @@ export const FLIGHTS_DATA: FlightRoute[] = [
       {
         question: "Can I get a transit visa on arrival in Dubai if flying Emirates?",
         answer: "Transit visas are possible but require pre-clearance or holding specific resident visas from the US/UK/Schengen. General Bangladeshi tourists must book their e-Tourist visas in advance."
-      }
+      },
+      {
+        question: "What is the current Dhaka to Dubai air ticket price?",
+        answer: "Fares change daily by date, airline, and cabin, so this guide does not publish a fixed price. Compare live fares for your dates across the airlines flying DAC to DXB, and check baggage and change rules before booking so the base fare is not the only cost you compare."
+      },
+      {
+        question: "Which airlines operate the DAC to DXB flight and how long is it?",
+        answer: "Emirates, flydubai, Biman Bangladesh Airlines, and US-Bangla Airlines operate DAC to DXB, with direct flights taking about 4 hours 45 minutes. Schedules change seasonally; confirm the current timetable on the airline’s website before booking."
+      },
     ],
     schemaMarkup: {
       type: "Flight",
@@ -899,7 +907,11 @@ export const VISA_DATA: VisaGuide[] = [
       {
         question: "Is one Thailand visa valid for Bangkok, Phuket, and Chiang Mai?",
         answer: "Yes. A single Thailand Tourist Visa (TR) or e-Visa is valid for entry and travel anywhere within Thailand, including Bangkok, Phuket, Chiang Mai, and Pattaya - no separate visas are needed for different cities."
-      }
+      },
+      {
+        question: "What is the Thai visa fee for Bangladeshi applicants?",
+        answer: "The government e-Visa fee is set by the Thai mission and is paid on the official portal; bank or payment-provider charges and any optional agency service fee are separate. Confirm the current amount in the official portal or Embassy schedule before paying — this page does not publish a fixed figure."
+      },
     ],
     schemaMarkup: {
       type: "GovernmentService + FAQPage",
@@ -988,7 +1000,15 @@ export const VISA_DATA: VisaGuide[] = [
       {
         question: "Does Malaysia require a printed eVisa at immigration?",
         answer: "Yes, you must print the eVAL (Electronic Visa Approval Letter) in color or clear black-and-white on standard white paper. Present this to Malaysian immigration officers at KLIA on arrival."
-      }
+      },
+      {
+        question: "How do I apply for a Malaysia visa for Bangladeshi passport holders?",
+        answer: "Bangladeshi travelers apply online for the eVisa before departure through the official Malaysia immigration portal or an approved agent, then carry the printed approval with the passport. Confirm the current entry route and document list on the official portal before applying."
+      },
+      {
+        question: "What is the Malaysia visa fee for Bangladeshi tourist applicants?",
+        answer: "The fee depends on the entry route and the single or multiple entry option, and the government fee is separate from any agent service charge. Check the current amount in the official portal’s fee schedule before paying, and ask for an itemized quote if you apply through an agent."
+      },
     ],
     schemaMarkup: {
       type: "VisaGuide",
@@ -1068,7 +1088,15 @@ export const VISA_DATA: VisaGuide[] = [
       {
         question: "Is there an age restriction for single tourist visas to Dubai?",
         answer: "Yes, single male travelers under the age of 25-30 may face tighter criteria are required to apply with families or provide proof of active local employment / business ownership in Bangladesh."
-      }
+      },
+      {
+        question: "How do I get a UAE visit visa for Bangladeshi passport holders?",
+        answer: "Bangladeshi tourists need a sponsored e-Visa before travel: apply through an airline, hotel, or licensed travel agent in Bangladesh who files with the UAE immigration portal. Approval and processing time are not guaranteed; apply well before the trip date and carry the printed approval."
+      },
+      {
+        question: "Which documents and sponsor details does a UAE visit visa application need?",
+        answer: "Typical requirements are a passport valid for at least six months, a passport-style photograph, confirmed return flight and accommodation details, and the sponsor’s file reference from the applying agent. Requirements differ by entry route and applicant profile; confirm the current list with your sponsor before submission."
+      },
     ],
     schemaMarkup: {
       type: "VisaGuide",
@@ -1162,7 +1190,15 @@ export const VISA_DATA: VisaGuide[] = [
       {
         question: "Is the SG Arrival Card (SGAC) the same as a Singapore Visa?",
         answer: "No. The SG Arrival Card is a mandatory free health and electronic arrival declaration that ALL travelers must submit online within 3 days before landing at Changi Airport. Bangladeshi citizens must carry BOTH their approved e-Visa printout and the SG Arrival Card confirmation."
-      }
+      },
+      {
+        question: "What Singapore visa documents do I need before applying?",
+        answer: "Prepare the standard checklist first: a passport valid for at least six months, a recent photograph, the completed online form, confirmed return flight and hotel bookings, and bank statements for the last six months. Authorized Visa Agents in Dhaka submit these through the embassy-approved channel; confirm the agent’s itemized document list before paying."
+      },
+      {
+        question: "How much does an authorized agent charge for a Singapore visa?",
+        answer: "The government fee and the Authorized Visa Agent’s service charge are separate, and each agent sets its own total. Processing is published as 5 to 7 working days. Ask for an itemized quote covering both amounts before you pay, and confirm what happens if the application is refused."
+      },
     ],
     schemaMarkup: {
       type: "GovernmentService + FAQPage",
