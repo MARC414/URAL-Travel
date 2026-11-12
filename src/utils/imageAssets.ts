@@ -85,6 +85,7 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "family_room_access_20261108": 800,
   "hotel_cluster_pillar_20261108": 800,
   "uk_umrah_hajj_guide_20261112": 800,
+  "uk_umrah_packages_atol_20261112": 800,
   "nusuk_gate_permit_20261108": 800,
   "ural_hero_bg_1781543111624": 670,
   "visa_changi_immigration_20261101": 670,

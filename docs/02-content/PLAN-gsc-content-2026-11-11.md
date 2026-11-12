@@ -170,6 +170,23 @@ the weekly cap was removed the same day — see Publication Standard G7). G4 in-
 GBP snapshot captured 12 Nov (KAYAK: LHR→JED from £347 return, MAN→JED from £326); the visa-fee
 and package rows record checked "no published figure" states instead of estimates.
 
+### UK cluster calendar (owner-approved 12 November 2026, weekly cap removed)
+
+The owner approved the seven supporting URLs and asked for consecutive daily slots. A slot only
+publishes when its article has passed G1–G6 — a date with no finished article simply passes, no
+placeholder ships.
+
+| Slot | URL intent | Status |
+| --- | --- | --- |
+| 12 Nov | `/blog/umrah-hajj-guide-united-kingdom-2026` (pillar) | **published** (moved forward from 17 Nov) |
+| 13 Nov | `/blog/uk-umrah-packages-atol-operator-checks` — ATOL, operator vetting, quote sanity check | **scheduled** |
+| 14 Nov | UK→Saudi flights: LHR/MAN/BHX, direct vs 1-stop, seasons, baggage | next |
+| 15 Nov | UK passport → Umrah visa, step by step (ETA / e-visa / waiver) | queued |
+| 16 Nov | Hajj 2027 from the UK: registration, quotas, operators, costs | queued |
+| 17 Nov | Ramadan Umrah 2027 from the UK: dates, fares, crowd planning | queued |
+| 18 Nov | Umrah from the UK with elderly parents / family: hotels, access | queued |
+| 19 Nov | Umrah + Madinah / stopover combinations from the UK | queued |
+
 **Options remain:** keep archived · gated candidate (recommended above) · full cadence
 (briefs 1→2→4→5→6, brief 3 last, six gates each, hreflang stays `en-bd`/`bn-bd`, GBP embeds
 `currency=GBP&locale=en-gb`, S2 disclosure verified first).

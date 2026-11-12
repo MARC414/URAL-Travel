@@ -2562,6 +2562,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Umrah + Dubai 10-Day Combo Trip from Dhaka (2026): How to Combine Makkah, Madinah & UAE on One Multi-City Ticket", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
       { text: "Europe, UK & USA Sightseeing for Bangladeshi Travelers (2026): Skip-the-Line Passes + Instant Saudi Stopover Umrah", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
           { text: "UK passport visa routes: ETA, e-visa or waiver for Umrah", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
+      { text: "UK Umrah packages: ATOL cover and operator checks", path: "/blog/uk-umrah-packages-atol-operator-checks" },
     ],
     affiliateCTA: {
       provider: "airalo",
