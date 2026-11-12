@@ -718,14 +718,25 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                 };
 
                 const renderInlineMarkdownLinks = (text: string, keyPrefix: string): React.ReactNode => {
-                  const pattern = /\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g;
+                  // House content links internal routes relatively (`/blog/…`, `/umrah`).
+                  // Those must render as locale-aware in-app anchors — not raw markdown
+                  // text (the old `https://`-only pattern never matched them) and not
+                  // external `target="_blank"` hops. Absolute `https://` URLs stay external.
+                  const pattern = /\[([^\]]+)\]\((https:\/\/[^\s)]+|\/[^\s)]+)\)/g;
                   const nodes: React.ReactNode[] = [];
                   let cursor = 0;
                   let match: RegExpExecArray | null;
                   let index = 0;
                   while ((match = pattern.exec(text)) !== null) {
                     if (match.index > cursor) nodes.push(injectContextualInternalLink(text.slice(cursor, match.index), `${keyPrefix}-before-${index}`));
-                    nodes.push(<a key={`${keyPrefix}-link-${index}`} href={match[2]} target="_blank" rel={match[2].includes("marker=675992") ? "sponsored noopener noreferrer" : "noopener noreferrer"} className="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors">{match[1]}</a>);
+                    const target = match[2];
+                    if (target.startsWith("/")) {
+                      const pathKey = target.split(/[?#]/, 1)[0];
+                      if (pathKey !== currentBlogPath) usedInternalPaths.add(pathKey);
+                      nodes.push(<a key={`${keyPrefix}-link-${index}`} href={getLocalizedRouteHref(target)} onClick={(e) => { e.preventDefault(); navigateTo(target); }} className="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors cursor-pointer">{match[1]}</a>);
+                    } else {
+                      nodes.push(<a key={`${keyPrefix}-link-${index}`} href={target} target="_blank" rel={target.includes("marker=675992") ? "sponsored noopener noreferrer" : "noopener noreferrer"} className="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors">{match[1]}</a>);
+                    }
                     cursor = match.index + match[0].length;
                     index += 1;
                   }

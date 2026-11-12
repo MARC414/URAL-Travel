@@ -245,18 +245,43 @@ function renderInlineEmphasis(escapedText: string): string {
 }
 
 /**
+ * Inline markdown links in an already-HTML-escaped paragraph.
+ *
+ * House content links internal routes relatively (`[text](/blog/…)`). Without
+ * this pass the static HTML ships the raw markdown, so the link is neither
+ * clickable nor crawlable — the no-JS crawler and the first paint both read
+ * literal brackets. Internal paths become locale-aware in-page anchors,
+ * mirroring `renderInlineMarkdownLinks` in BlogPostRouteView.tsx (no
+ * target="_blank"; Bengali pages get /bn/… only when the twin exists).
+ * Absolute https URLs stay external with target="_blank".
+ */
+function renderInlineMarkdownLinksHtml(escapedText: string, bengali = false): string {
+  return escapedText.replace(
+    /\[([^\]]+)\]\((https:\/\/[^\s)]+|\/[^\s)]+)\)/g,
+    (_match, text: string, target: string) => {
+      if (target.startsWith("/")) {
+        const href = bengali && hasBengaliCounterpart(target) ? toBengaliPath(target) : target;
+        return `<a href="${href}" class="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors cursor-pointer">${text}</a>`;
+      }
+      const rel = target.includes("marker=675992") ? "sponsored noopener noreferrer" : "noopener noreferrer";
+      return `<a href="${target}" target="_blank" rel="${rel}" class="text-brand-navy font-semibold underline decoration-[#D4941A] decoration-2 underline-offset-3 hover:text-brand-emerald transition-colors">${text}</a>`;
+    },
+  );
+}
+
+/**
  * Markdown section headings inside a blog body. The React view turns a lone
  * `## …` / `### …` block into a real <h2>/<h3> (BlogPostRouteView.tsx); the
  * prerendered HTML has to emit the same tags, otherwise a no-JS crawler reads
  * the literal "## " prefix and the article has no outline at all.
  */
-function renderMarkdownHeadingHtml(paragraph: string): string {
+function renderMarkdownHeadingHtml(paragraph: string, bengali = false): string {
   if (paragraph.includes("\n")) return "";
   if (/^##\s+/.test(paragraph) && paragraph.length < 200) {
-    return `<h2>${renderInlineEmphasis(escapeHtml(paragraph.replace(/^##\s+/, "")))}</h2>`;
+    return `<h2>${renderInlineMarkdownLinksHtml(renderInlineEmphasis(escapeHtml(paragraph.replace(/^##\s+/, ""))), bengali)}</h2>`;
   }
   if (/^###\s+/.test(paragraph) && paragraph.length < 180) {
-    return `<h3>${renderInlineEmphasis(escapeHtml(paragraph.replace(/^###\s+/, "")))}</h3>`;
+    return `<h3>${renderInlineMarkdownLinksHtml(renderInlineEmphasis(escapeHtml(paragraph.replace(/^###\s+/, ""))), bengali)}</h3>`;
   }
   return "";
 }
@@ -2963,7 +2988,9 @@ function buildAllRoutes(): PrerenderRoute[] {
               // sentence the reader sees, emphasis included. FAQ answers keep the
               // markers stripped because they are mirrored into plain-text JSON-LD.
               return `<p>${linkifyCitations(
-                renderInlineEmphasis(escapeHtml(sanitizeExpiredPromoText(String(para)))),
+                renderInlineMarkdownLinksHtml(
+                  renderInlineEmphasis(escapeHtml(sanitizeExpiredPromoText(String(para)))),
+                ),
                 post.references?.length ?? 0,
                 CITATION_LINK_CLASS
               )}</p>`;
@@ -3117,14 +3144,14 @@ function bnParagraphs(
       }
       const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
       if (faqSection) return renderVisibleFaqHtml(faqSection);
-      const headingHtml = renderMarkdownHeadingHtml(rawParagraph.trim());
+      const headingHtml = renderMarkdownHeadingHtml(rawParagraph.trim(), true);
       if (headingHtml) return headingHtml;
       const paragraph = rawParagraph.replace(/\n/g, " ").trim();
       if (!paragraph) return "";
       return paragraph === "[[figure]]"
         ? figureHtml ?? ""
         : `<p>${linkifyCitations(
-            renderInlineEmphasis(escapeHtml(paragraph)),
+            renderInlineMarkdownLinksHtml(renderInlineEmphasis(escapeHtml(paragraph)), true),
             referenceCount,
             CITATION_LINK_CLASS
           )}</p>`;

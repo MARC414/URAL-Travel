@@ -340,6 +340,18 @@ const unwrapCitationAnchors = (html: string) =>
   html.replace(/<a\b[^>]*href="#source-[0-9]+"[^>]*>([\s\S]*?)<\/a>/gi, "$1");
 
 /**
+ * Unwraps every rendered inline link back to its inner text.
+ *
+ * The prerender and the React view both convert `[text](/path)` source markdown
+ * into real `<a>` anchors. The truncation guard compares the source paragraph
+ * against the served HTML as a string, so an anchor sitting mid-sentence would
+ * break a substring match even though no text is missing. Citation anchors are
+ * unwrapped first (they reconstruct their `[n]` marker); this strips the rest.
+ */
+const unwrapRenderedAnchors = (html: string) =>
+  html.replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, "$1");
+
+/**
  * Extract the inline affiliate loader from an HTML document.
  *
  * Anchored on `function loadDrive` (renamed from `loadEmerald` when the tag was
@@ -4034,12 +4046,23 @@ if (rss) {
     // view renders the same emphasis), while FAQ answers and the Bengali renderer
     // drop the markers. Remove that tag exactly like the marker it replaced, so
     // this stays a truncation check rather than an emphasis-formatting check.
-    const page = normalise(unwrapCitationAnchors(stripInlineEmphasisTags(html)));
+    // Rendered inline links get the same treatment: the anchor tags come off and
+    // the surviving inner text is compared against the source with its own link
+    // markdown stripped to the anchor text (stripEmphasis below).
+    const page = normalise(
+      unwrapRenderedAnchors(unwrapCitationAnchors(stripInlineEmphasisTags(html))),
+    );
     // Section headings are emitted as real <h2>/<h3> tags, so the `## ` / `### `
-    // marker in the source is dropped exactly like `**` is. Anything else would
-    // turn this truncation guard into a markdown-formatting check.
+    // marker in the source is dropped exactly like `**` is. Inline markdown links
+    // are now emitted as real <a> anchors by the prerender (the raw `[text](/path)`
+    // marker would otherwise never match the anchored text), so drop the link
+    // syntax to its anchor text the same way. Anything else would turn this
+    // truncation guard into a markdown-formatting check.
     const stripEmphasis = (value: string) =>
-      value.replace(/\*\*/g, "").replace(/^#{2,3}\s+/, "");
+      value
+        .replace(/\*\*/g, "")
+        .replace(/^#{2,3}\s+/, "")
+        .replace(/\[([^\]]+)\]\((?:https:\/\/[^\s)]+|\/[^\s)]+)\)/g, "$1");
     const paragraphs = body
       .split("\n\n")
       .map((para) => para.trim())
@@ -4074,6 +4097,28 @@ if (rss) {
       ? `every blog paragraph survives into its prerendered HTML (${BLOG_DATA.length} articles, full text)`
       : `${truncatedPrerenders.length} prerendered blog page(s) are missing body text: ` +
           `${truncatedPrerenders.slice(0, 3).join(", ")} — Google would index a truncated article`
+  );
+
+  // A markdown link that survives into the built HTML is a link the renderer
+  // dropped: readers see literal brackets instead of a clickable anchor and
+  // crawlers never see the edge. Both the static prerender and the React view
+  // convert `[text](…)` — this fails the build if either side regresses.
+  const rawMarkdownLinkPages: string[] = [];
+  for (const slug of Object.keys(BLOG_BODY)) {
+    for (const rel of [`blog/${slug}.html`, `bn/blog/${slug}.html`]) {
+      const html = read(path.join(DIST_DIR, rel));
+      if (!html) continue;
+      if (/\[[^\]]{2,100}\]\((?:https:\/\/[^\s)]+|\/[^\s)]+)\)/.test(html)) {
+        rawMarkdownLinkPages.push(rel);
+      }
+    }
+  }
+  check(
+    rawMarkdownLinkPages.length === 0,
+    rawMarkdownLinkPages.length === 0
+      ? `every inline markdown link renders as a real anchor in built HTML (${Object.keys(BLOG_BODY).length} articles × EN/BN)`
+      : `${rawMarkdownLinkPages.length} built page(s) still ship raw markdown link text: ` +
+          `${rawMarkdownLinkPages.slice(0, 3).join(", ")}`
   );
 
   const hajjEnglishPage =
