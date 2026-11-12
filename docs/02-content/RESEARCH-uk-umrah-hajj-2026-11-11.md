@@ -277,3 +277,11 @@ requirements page — `dhaka.thaiembassy.org/en/publicservice/tourist-visa-tr` �
 All fetches performed via the platform's page-fetch/search tools from this workspace on
 11 Nov 2026; no source required authentication. Raw page content is not persisted in the repo —
 the claims above carry URL + checked date so any line can be re-verified live.
+
+## 8. Drafting status (updated 11 Nov 2026)
+
+- **Draft written:** `content/blog/umrah-hajj-guide-united-kingdom-2026.md`, `status: draft`, no `publishDate` (excluded from production builds per `content/blog/README.md`; no URL ships pre-gates).
+- **EN body:** 1,589 words (spec target 1,200–1,600). 7 `##` sections ending with plain-line `7. Frequently Asked Questions` matching `faqHeadingEn` (numbering = content sections after the short answer + 1, house rule). 5 answer-first FAQ Q/A pairs, every claim carrying a source or "checked 11 November 2026". GBP fare table present with 3 "Pending capture" rows and zero invented figures.
+- **BN body (condensed):** the scheduling parser requires a non-empty Bengali body plus `faqHeadingBn` verbatim with even Q/A line pairs for every post — so the draft carries a condensed BN twin (all sections + the 5 FAQ pairs) instead of a bare separator. Full BN twin (spec step 3) still pending: word-for-word parity expansion, `titleBn`/`summaryBn` re-composition review (both newly composed — flag for verification), `seoTitleBn`/`seoDescriptionBn`, `snippet`/`snippetBn`, `internalLinksBn`, `affiliateCtaBn*` trio.
+- **Gates run at drafting (all pass):** `lint` ✅ · `test:scheduling` ✅ · `build` ✅ (draft absent from `dist/`, sitemap carries no UK URLs → G1 holds) · `verify:build` ✅ · `test:visa-claims` ✅ · `test:brand-mark` ✅.
+- **Pending for scheduling (spec §6):** GBP snapshot capture → replace 3 pending table rows; cover image (640/960/1200.webp + social jpg + `imageAssets.ts`); 2 inbound links (`src/constants.ts` EN + `src/data/bengaliContent.ts` BN on the BD pillar); `SEO-KEYWORD-MAP` row; G1–G7 full re-check; ≤1 new URL/week. Q2 stopover stays flagged/omitted; Q3 frequencies remain airline-official only (BA 4×/week since 4 Nov 2024).
