@@ -2,7 +2,7 @@
 
 **Current direction, updated 6 November 2026:** **international travel intelligence, with Bangladesh as the home market and priority.** Display currency follows the reader's origin (BDT for a Dhaka departure, USD otherwise); tools are named by function; no surface addresses a single passport as its only reader. Bangladeshi readers keep every advantage — BDT default, endorsement/NOC/DAC/bKash guidance unchanged. Umrah remains the initial commercial/content learning cycle; Fard Hajj remains a distinct, linked topic. The standing commitments and the **Number rule** ("every published money figure carries a date and a source, or it does not render") are in [PRODUCT.md](PRODUCT.md). Europe/rail, comparison engines, additional languages and a domain change remain **unapproved**.
 
-**Publication rule updated 2 November 2026:** the freeze on new articles is replaced by [Publication Standard v2](docs/growth/11-PUBLICATION-STANDARD-V2.md) — new URLs permitted, gated by seven tests, capped at two per week (one while measurement is broken).
+**Publication rule updated 2 November 2026:** the freeze on new articles is replaced by [Publication Standard v2](docs/growth/11-PUBLICATION-STANDARD-V2.md) — new URLs permitted, gated by seven tests, with the weekly cap removed (owner decision, 12 November 2026).
 
 **Current phase, updated 26 October 2026:** the owner requested a consolidated content-optimization standard and an existing-content social production strategy using corrected historical GSC evidence and early new-domain signals. The resulting guide and proposed programme are linked below. Article rewrites, site repairs and live publication still require the relevant owner task; a draft calendar is not a published campaign.
 

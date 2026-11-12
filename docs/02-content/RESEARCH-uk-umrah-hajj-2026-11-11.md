@@ -320,13 +320,14 @@ the claims above carry URL + checked date so any line can be re-verified live.
     `RESPONSIVE_IMAGE_HEIGHTS` entry = 800, `coverAltEn`/`coverAltBn` set.
   - **BN parity (G5):** BN prose gained the GBP figures and the ETD £125 line; MenACWY + 10 days,
     48 hours, flight details, ATOL and the consulate number were already present.
-  - **Frontmatter scheduled:** `status: scheduled`, `publishDate: "2026-11-17"` (09:00 Dhaka =
+  - **Frontmatter scheduled:** `status: scheduled`, `publishDate: "2026-11-12"` (09:00 Dhaka =
     nightly 03:00 UTC cron, time-based `isPublicationTimeReached` + self-healing sitemap check),
     `updatedAt: 2026-11-12`, `seoTitleBn`/`seoDescriptionBn`, `snippet`/`snippetBn`,
     `affiliateCtaBn*` trio.
   - **G4 in-links, same release (5 edits):** BD pillar `internalLinks` EN (`src/constants.ts`)
     + BN (`src/data/bengaliContent.ts`); `/umrah` hub — prerender `STANDALONE_PAGE_LINKS` EN,
     `bnLinkList` BN, `UmrahLandingPage` "Visa & permits" group. The links target the future URL
-    until the first build ≥ 17 Nov 09:00 Dhaka — merge the release before that moment.
+    until the first build ≥ publish time; publish time moved to 12 Nov 2026 at the owner's
+    request (weekly cap removed the same day), so the links resolve from the first deploy.
   - **SEO-KEYWORD-MAP row** added (G6: fast-moving, owner Farhan Momen, review by 15 Feb 2027;
     baseline at the 2 Dec export). Plan §5/§9 updated.
