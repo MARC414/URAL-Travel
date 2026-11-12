@@ -352,7 +352,7 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
         {/* TOOL 5: AIRHELP FLIGHT DELAY & COMPENSATION */}
         {activeTool === "airhelp" && (
           <div className="animate-fade-in">
-            <AirHelpWidget />
+            <AirHelpWidget lang={isBn ? "bn" : "en"} />
           </div>
         )}
 

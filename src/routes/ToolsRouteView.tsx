@@ -286,7 +286,7 @@ export default function ToolsRouteView({ context }: RouteViewProps) {
 
                   <div className="pl-0 sm:pl-11">
 
-                    <AiraloEsimWidget />
+                    <AiraloEsimWidget lang={lang} />
 
                   </div>
 

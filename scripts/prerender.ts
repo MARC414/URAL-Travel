@@ -7,6 +7,9 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
 import { TripCostEstimator } from "../src/components/TripCostEstimator";
 import { CurrencyConverter } from "../src/components/CurrencyConverter";
+import { VISA_OFFICIAL_SOURCES } from "../src/data/visaOfficialSources";
+import { VisaDirectoryCards } from "../src/components/VisaDirectoryCards";
+import { HotelDirectoryCards } from "../src/components/HotelDirectoryCards";
 import { CostPlanningGuide, CostPlanningHub } from "../src/components/CostPlanningGuide";
 import { BlogArticleHeader } from "../src/components/BlogArticleHeader";
 import { BlogPlanningLinks, BlogPlanningHubs, BlogRelatedArticles } from "../src/components/BlogArticleNavigation";
@@ -142,7 +145,7 @@ import {
   toEnglishBasePath,
 } from "../src/utils/localeRoutes";
 import { BENGALI_SEO_COPY, getBengaliSeoCopy } from "../src/utils/seoCopy";
-import { getBnFaqSchemaForPage, BN_LANDING_FLIGHT_FAQS, BN_SERVICE_CONTACT_FAQS } from "../src/utils/bn-faq-schema";
+import { getBnFaqSchemaForPage, BN_LANDING_FLIGHT_FAQS, BN_LANDING_HOTEL_FAQS, BN_LANDING_VISA_FAQS, BN_SERVICE_CONTACT_FAQS } from "../src/utils/bn-faq-schema";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -1314,32 +1317,6 @@ function renderLandingFaqs(
     .join("\n")}</section>`;
 }
 
-const VISA_OFFICIAL_SOURCES: Record<string, { label: string; url: string }[]> = {
-  "nepal-visa": [
-    { label: "Nepal Department of Immigration: visa information", url: "https://immigration.gov.np/visa-information" },
-    { label: "Nepal official online immigration portal", url: "https://nepaliport.immigration.gov.np/" },
-  ],
-  "thailand-visa": [
-    { label: "Thailand official e-Visa portal", url: "https://www.thaievisa.go.th/" },
-    { label: "Royal Thai Embassy in Dhaka: visa information", url: "https://dhaka.thaiembassy.org/en/page/59898-visa-information?menu=5d83296215e39c2540006a10" },
-  ],
-  "malaysia-visa": [
-    { label: "Malaysia official MYVISA portal", url: "https://malaysiavisa.imi.gov.my/" },
-    { label: "Malaysia Immigration Department: eVISA information", url: "https://www.imi.gov.my/index.php/en/main-services/visa/evisa-en/" },
-  ],
-  "dubai-visa": [
-    { label: "UAE Government: tourist visa information and application channels", url: "https://u.ae/en/information-and-services/visa-and-emirates-id/Types-of-visas/tourist-visa" },
-  ],
-  "singapore-visa": [
-    { label: "Singapore ICA: visa requirements for Bangladesh passport holders", url: "https://www.ica.gov.sg/enter-transit-depart/entering-singapore/visa_requirements/visa-detail-page/bangladesh" },
-    { label: "Singapore ICA: SG Arrival Card e-service", url: "https://eservices.ica.gov.sg/sgarrivalcard/" },
-  ],
-  "maldives-visa": [
-    { label: "Maldives Immigration: tourist visa on arrival and entry requirements", url: "https://www.immigration.gov.mv/visa/tourist-visa" },
-    { label: "Maldives Immigration: Traveller Declaration instructions", url: "https://www.immigration.gov.mv/traveller-declaration" },
-    { label: "Official IMUGA Traveller Declaration portal", url: "https://imuga.immigration.gov.mv/traveller" },
-  ],
-};
 
 function renderVisaOfficialSources(routeId: string): string {
   const sources = VISA_OFFICIAL_SOURCES[routeId] || [];
@@ -1473,18 +1450,10 @@ function renderDestinationDirectoryCards(locale: "en" | "bn"): string {
 }
 
 function renderHotelGuideDirectoryCards(locale: "en" | "bn"): string {
-  const guides = locale === "bn" ? getLocalizedHotels("bn") : HOTELS_DATA;
-  const localePrefix = locale === "bn" ? "/bn" : "";
-  return `<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">${guides.map((guide) => {
-    const destinationId = HOTEL_GUIDE_DESTINATIONS[guide.id];
-    const image = destinationId ? DESTINATION_HERO_IMAGES[destinationId] : undefined;
-    if (!image) return "";
-    const path = `${localePrefix}/hotels/${guide.id}`;
-    const alt = locale === "bn" ? image.altBn : image.altEn;
-    const title = locale === "bn" ? `${guide.city}-এ কোথায় থাকবেন` : `Where to stay in ${guide.city}`;
-    const areaCount = locale === "bn" ? `${bnDigits(guide.neighborhoods.length)}টি এলাকা তুলনা` : `Compare ${guide.neighborhoods.length} areas`;
-    return `<a href="${escapeHtml(path)}" class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><div class="relative aspect-[16/9] overflow-hidden bg-slate-100">${renderResponsiveSearchImage(image.src, alt, "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw")}<span class="absolute left-3 top-3 rounded-full border border-white/70 bg-white/95 px-2.5 py-1 text-xs font-semibold text-brand-navy">${escapeHtml(guide.country)}</span></div><div class="space-y-2 p-4 sm:p-5"><h2 class="font-serif text-lg font-bold text-brand-navy">${escapeHtml(title)}</h2><p class="text-xs font-semibold text-slate-500">${locale === "bn" ? "এলাকা গাইড" : "Neighborhood guide"}</p><p class="line-clamp-3 text-sm leading-relaxed text-slate-600">${escapeHtml(guide.quickAnswer)}</p><span class="text-xs font-bold text-brand-navy">${areaCount}</span></div></a>`;
-  }).join("")}</div>`;
+  return renderToStaticMarkup(React.createElement(HotelDirectoryCards, {
+    guides: locale === "bn" ? getLocalizedHotels("bn") : HOTELS_DATA,
+    isBn: locale === "bn",
+  }));
 }
 
 function renderHotelsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
@@ -1510,14 +1479,12 @@ function renderHotelsHubBody(title: string, description: string, faqSchema: Retu
       <p>Review the neighborhood against your itinerary and check the route to the places you expect to visit using current maps. Ask the property about any specific accessibility, child, luggage or arrival needs. Payment methods vary by property and booking platform, so check card acceptance and foreign-currency settings with your bank before relying on a particular payment method.</p>
     </section>
     ${renderLandingFaqs("hotels-hub-faqs", "Hotel booking questions for Bangladeshi travelers", faqSchema)}
+    <nav aria-label="Related trip planning"><h2>Plan the rest of your trip</h2><ul><li><a href="/destinations">Destination guides</a></li><li><a href="/flights">Flight routes</a></li><li><a href="/visa">Visa guides</a></li><li><a href="/costs">Trip costs</a></li></ul></nav>
   </article>`;
 }
 
 function renderVisaHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
-  const directory = VISA_DATA.map(
-    (guide) =>
-      `<li><a href="/visa/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} visa guide for Bangladeshi passport holders</a> — ${escapeHtml(guide.requirementType)}; fee guidance ${escapeHtml(guide.costBdt)}; processing guidance ${escapeHtml(guide.processingTime)}.</li>`
-  ).join("");
+  const directory = renderToStaticMarkup(React.createElement(VisaDirectoryCards, { guides: VISA_DATA, isBn: false }));
   const guideDetails = VISA_DATA.map(
     (guide) => `
       <section>
@@ -1531,13 +1498,14 @@ function renderVisaHubBody(title: string, description: string, faqSchema: Return
     <p>${escapeHtml(description)}</p>
     <p>If you only need to know which destinations a Bangladeshi passport can enter with nothing arranged in advance, start with <a href="/visa-free-countries">visa-free countries for Bangladeshi passport holders</a> — it separates the destinations you can actually use from the ones that only look easy.</p>
     <p>This visa hub brings together entry-route, fee, processing-time and document guidance for popular destinations for Bangladeshi passport holders. Start with the country-specific guide below to understand whether the route described is visa-free, visa on arrival, electronic or an advance application. Requirements depend on the travel purpose, passport and current policy; the amounts and timeframes shown are guidance from the underlying destination pages, not an approval guarantee. Immigration rules can change without notice, so verify the latest requirements and application channel with the destination's official immigration department, embassy or authorized portal before booking or applying.</p>
-    <section><h2>Country visa guides and application routes</h2><ul>${directory}</ul></section>
+    <section><h2>Country visa guides and application routes</h2>${directory}</section>
     <section><h2>Documents and steps by destination</h2>${guideDetails}</section>
     <section><h2>Before submitting a tourist visa application</h2>
       <p>Check that the visa category matches your real travel purpose and intended length of stay. Use the current application form and document list published by the official authority, and make sure names, passport numbers, dates and supporting bookings match across every document. If an application must be submitted through an embassy or authorized service provider, confirm the Dhaka jurisdiction, appointment process and payment instructions directly with that provider.</p>
       <p>Processing estimates are not guarantees: public holidays, peak demand, additional-document requests and individual circumstances can change the outcome. Avoid non-refundable travel commitments until you understand the relevant entry rules. Keep copies of submitted documents and the approval notice accessible during check-in and arrival. This directory is a starting point for research, not legal advice or a substitute for an official decision.</p>
     </section>
     ${renderLandingFaqs("visa-hub-faqs", "Visa questions for Bangladeshi passport holders", faqSchema)}
+    <nav aria-label="Related trip planning"><h2>Plan the rest of your trip</h2><ul><li><a href="/destinations">Destination guides</a></li><li><a href="/flights">Flight routes</a></li><li><a href="/hotels">Hotel guides</a></li><li><a href="/costs">Trip costs</a></li></ul></nav>
   </article>`;
 }
 
@@ -1941,8 +1909,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: hotelsHubTitle,
     description: hotelsHubDesc,
     imageUrl: defaultOgImage,
-    lcpImageUrl: DESTINATION_HERO_IMAGES[DESTINATIONS_DATA[0].id].src,
-    lcpImageSizes: "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw",
+    lcpImageUrl: "/assets/images/hotel_directory_hero_20261112-1200.webp",
+    lcpImageSizes: "(min-width: 1280px) 1200px, 100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Hotel Neighborhoods", url: `${BASE_URL}/hotels` },
@@ -2158,8 +2126,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: visaHubTitle,
     description: visaHubDesc,
     imageUrl: defaultOgImage,
-    lcpImageUrl: "/assets/images/visa_changi_immigration_20261101-1200.webp",
-    lcpImageSizes: "(min-width: 1024px) 45vw, 100vw",
+    lcpImageUrl: "/assets/images/visa_directory_hero_20261112-1200.webp",
+    lcpImageSizes: "(min-width: 1280px) 1200px, 100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Visa Guides", url: `${BASE_URL}/visa` },
@@ -2192,7 +2160,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           ? "Saudi Visa: Which Route Fits Your Passport (2026)"
           : `${v.country} Visa for Bangladeshi Travelers 2026 | URAL`;
     const description = saudiVisa
-      ? "Bangladesh is not on Saudi Arabia's 68-country tourist eVisa list. The three routes that are actually open, the transit eVisa condition, and why this page publishes no fee figure — checked against official sources."
+      ? "Explore Saudi Package Visa, airline stopover and other possible routes for Bangladeshi travellers. Check official eligibility and current terms before paying."
       : `Review the ${v.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (v.schemaMarkup?.code) {
@@ -2211,8 +2179,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       title,
       description,
       imageUrl: defaultOgImage,
-      lcpImageUrl: "/assets/images/visa_changi_immigration_20261101-1200.webp",
-      lcpImageSizes: "(min-width: 1024px) 34vw, 100vw",
+      lcpImageUrl: "/assets/images/visa_directory_hero_20261112-1200.webp",
+      lcpImageSizes: "(min-width: 1280px) 1200px, 100vw",
       breadcrumbs: [
         { name: "Home", url: `${BASE_URL}/` },
         { name: "Visa Guides", url: `${BASE_URL}/visa` },
@@ -2222,16 +2190,19 @@ function buildAllRoutes(): PrerenderRoute[] {
       bodyHtml: `
         <article>
           <h1>${escapeHtml(v.country)} Visa Requirements for Bangladeshi Citizens</h1>
+          <p><a href="/visa">All visa guides</a></p>
+          <details><summary>Jump to the section you need</summary><nav aria-label="Sections in this guide"><ul><li><a href="#visa-key-facts">Visa facts</a></li><li><a href="#visa-steps">Application steps</a></li><li><a href="#visa-documents">Document checklist</a></li><li><a href="#official-visa-sources">Official sources</a></li></ul></nav></details>
+          ${saudiVisa ? `<p>For Umrah-specific planning, see the <a href="/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost">Umrah visa guide</a>.</p>` : ""}
           <p>${escapeHtml(description)}</p>
           <p>${escapeHtml(v.quickAnswer || description)}</p>
           <p><strong>Entry route:</strong> ${escapeHtml(v.requirementType)} | <strong>Published fee/entry guidance:</strong> ${escapeHtml(v.costBdt)} | <strong>Indicative processing guidance:</strong> ${escapeHtml(v.processingTime)}</p>
           <p>Comparing this route with the rest of the region? See <a href="/visa-free-countries">which countries a Bangladeshi passport can enter without a prior visa</a>.</p>
           <p>These details are an editorial planning summary, not an official decision. Rules, fees, forms and processing windows can change; verify the current requirements with the linked authority before applying or making non-refundable plans.</p>
-          <h2>Key visa facts</h2>
+          <h2 id="visa-key-facts">Key visa facts</h2>
           <ul>${v.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
-          <h2>Documents to check</h2>
+          <h2 id="visa-documents">Documents to check</h2>
           ${v.documentChecklist.map((checklist) => `<section><h3>${escapeHtml(checklist.category)}</h3><ul>${checklist.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>`).join("")}
-          <h2>Application steps</h2>
+          <h2 id="visa-steps">Application steps</h2>
           <ol>${v.stepByStep.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
           ${renderVisaRouteContext(v.id)}
           ${renderVisaApplicationGuidance()}
@@ -3585,7 +3556,10 @@ function buildBengaliBody(
 
     } else {
       parts.push(
-        `<section><h2>গন্তব্য অনুযায়ী হোটেল এলাকা গাইড</h2>${renderHotelGuideDirectoryCards("bn")}</section>`
+        `<section><h2>গন্তব্য অনুযায়ী হোটেল এলাকা গাইড</h2>${renderHotelGuideDirectoryCards("bn")}</section>`,
+        `<section><h2>বুকিংয়ের আগে যা যাচাই করবেন</h2><p>একই তারিখ, অতিথিসংখ্যা ও রুমের ধরন ধরে মোট দাম তুলনা করুন। ঠিকানা, চেক-ইনের সময়, বিছানার ব্যবস্থা, খাবার, কর ও চার্জ, পেমেন্ট এবং বাতিল ও ফেরতের শর্ত নিশ্চিত করুন। মানচিত্রে যাতায়াতের রুট দেখুন; শিশু, লাগেজ বা চলাচলের বিশেষ প্রয়োজন থাকলে সরাসরি হোটেলের সঙ্গে মিলিয়ে নিন।</p></section>`,
+        bnLinkList("ভ্রমণের বাকি পরিকল্পনা", [{ label: "গন্তব্য গাইড", path: "/destinations" }, { label: "ফ্লাইট রুট", path: "/flights" }, { label: "ভিসা গাইড", path: "/visa" }, { label: "ভ্রমণ খরচ", path: "/costs" }]),
+        bnFaqList("হোটেল বুকিং নিয়ে সাধারণ প্রশ্ন", BN_LANDING_HOTEL_FAQS)
       );
     }
     if (id) {
@@ -3615,6 +3589,8 @@ function buildBengaliBody(
     if (id) {
       const visa = getLocalizedVisas("bn").find((item) => item.id === id);
       if (visa) {
+        parts.push(`<p><a href="/bn/visa">সব ভিসা গাইড</a></p>`);
+        if (id === "saudi-arabia-visa") parts.push(`<p>ওমরাহ পরিকল্পনার বিস্তারিত <a href="/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost">ওমরাহ ভিসা গাইডে</a> দেখুন।</p>`);
         parts.push(
           bnFactList([
             { label: "ভিসার ধরন", value: visa.requirementType },
@@ -3622,6 +3598,11 @@ function buildBengaliBody(
             { label: "প্রসেসিং সময়", value: visa.processingTime },
           ])
         );
+        const contentLang = (text: string) => /[\u0980-\u09ff]/.test(text) ? "bn" : "en";
+        parts.push(`<section id="visa-key-facts"><h2>এক নজরে ভিসার তথ্য</h2><ul>${visa.keyFacts.map((fact) => `<li lang="${contentLang(fact.label + fact.value)}"><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul></section>`);
+        parts.push(`<section id="visa-steps"><h2>আবেদনের ধাপ</h2><ol>${visa.stepByStep.map((step) => `<li lang="${contentLang(step)}">${escapeHtml(step)}</li>`).join("")}</ol></section>`);
+        parts.push(`<section id="visa-documents"><h2>ডকুমেন্ট চেকলিস্ট</h2>${visa.documentChecklist.map((group) => `<section><h3 lang="${contentLang(group.category)}">${escapeHtml(group.category)}</h3><ul>${group.items.map((item) => `<li lang="${contentLang(item)}">${escapeHtml(item)}</li>`).join("")}</ul></section>`).join("")}</section>`);
+        parts.push(`<section id="official-visa-sources"><h2>বর্তমান নিয়ম যাচাইয়ের সরকারি সূত্র</h2><ul>${(VISA_OFFICIAL_SOURCES[visa.id] ?? []).map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer" lang="en">${escapeHtml(source.label)}</a></li>`).join("")}</ul></section>`);
         parts.push(
           bnLinkList(
             "এই ট্রিপের বাকি পরিকল্পনা",
@@ -3645,10 +3626,10 @@ function buildBengaliBody(
 
     } else {
       parts.push(
-        bnDirectory(
-          "সব ভিসা গাইড",
-          englishPathsIn("/visa", VISA_DATA.map((visa) => visa.id))
-        )
+        `<section><h2>দেশ অনুযায়ী ভিসা গাইড</h2>${renderToStaticMarkup(React.createElement(VisaDirectoryCards, { guides: getLocalizedVisas("bn"), isBn: true }))}</section>`,
+        `<section><h2>আবেদনের আগে সরকারি নিয়ম দেখুন</h2><p>ভ্রমণের উদ্দেশ্য ও পাসপোর্ট অনুযায়ী ভিসার ধরন বেছে নিন। সরকারি পোর্টাল বা দূতাবাসে বর্তমান নথি, ফি, পেমেন্ট ও প্রসেসিং নির্দেশনা যাচাই করুন। অনুমোদন নিশ্চিত নয়; অফেরতযোগ্য বুকিংয়ের আগে শর্ত বুঝে নিন।</p><p><a href="/bn/visa-free-countries">বাংলাদেশি পাসপোর্টে ভিসা ছাড়া প্রবেশের গাইড</a></p></section>`,
+        bnFaqList("ভিসা নিয়ে সাধারণ প্রশ্ন", BN_LANDING_VISA_FAQS),
+        bnLinkList("ভ্রমণের বাকি পরিকল্পনা", [{ label: "গন্তব্য গাইড", path: "/destinations" }, { label: "ফ্লাইট রুট", path: "/flights" }, { label: "হোটেল গাইড", path: "/hotels" }, { label: "ভ্রমণ খরচ", path: "/costs" }])
       );
     }
     return `<article>${parts.join("")}</article>`;

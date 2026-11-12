@@ -328,7 +328,7 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
 
 
-                    {/* 🛡️ AirHelp Flight Delay Compensation & AirHelp+ (AHTPO11 11% OFF) */}
+                    {/* 🛡️ AirHelp Flight Delay Compensation & TravelPass */}
 
                     <AirHelpWidget
 
