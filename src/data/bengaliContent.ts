@@ -1435,6 +1435,7 @@ Saudia-র প্রকাশিত শর্তে confirmed onward ticket ও 
       { text: "একই ট্রিপে Umrah + Dubai ভ্রমণ গাইড (2026): ঢাকা থেকে ১০ দিনে মক্কা, মদিনা ও দুবাই ঘোরার মাল্টি-সিটি বাজেট", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
       { text: "ইউরোপ, লন্ডন ও আমেরিকা ভ্রমণে বাংলাদেশিদের গাইড (2026): স্কিপ-দ্য-লাইন পাস ও ১ বছরের সৌদি ই-ভিসা সুবিধা", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
           { text: "যুক্তরাজ্য পাসপোর্টের ভিসা রুট: ওমরাহর জন্য ইটিএ, ই-ভিসা বা ওয়েভার", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
+      { text: "যুক্তরাজ্যের ওমরাহ প্যাকেজ: এটিওএল সুরক্ষা ও অপারেটর যাচাই", path: "/blog/uk-umrah-packages-atol-operator-checks" },
     ],
     affiliateCTA: {
       provider: "airalo",

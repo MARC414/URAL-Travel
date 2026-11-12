@@ -29,6 +29,13 @@ re-verified below.**
 - Pattern followed: mirrors the site's existing pillar
   `/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost` (Umrah + Hajj, one URL).
 
+## 1a. Cluster scope (owner-approved 12 November 2026)
+
+The pillar is live; the owner approved seven supporting URLs and removed the weekly cap, so they
+ship in consecutive daily slots. Order and intent are recorded in plan §5 (cluster calendar).
+Money intent first (packages/ATOL, flights), then visa mechanics, Hajj 2027, Ramadan, family
+access, and stopover combinations. Every URL still passes G1–G6; G7 no longer caps cadence.
+
 ## 2. Structure decision
 
 **Option A (chosen unless research says otherwise): one pillar URL** —

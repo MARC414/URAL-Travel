@@ -67,6 +67,8 @@ internalLinksEn:
     path: /blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah
   - text: "Bangladesh flow: outbound immigration checklist for Dhaka airport"
     path: /blog/dhaka-airport-outbound-immigration-checklist-noc-go
+  - text: "UK packages: ATOL cover, operator checks and what a quote includes"
+    path: /blog/uk-umrah-packages-atol-operator-checks
 internalLinksBn:
   - text: "DIY ওমরাহ প্ল্যানিং হাব ও বাজেট ক্যালকুলেটর"
     path: /umrah
@@ -82,6 +84,8 @@ internalLinksBn:
     path: /blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah
   - text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট"
     path: /blog/dhaka-airport-outbound-immigration-checklist-noc-go
+  - text: "যুক্তরাজ্যের প্যাকেজ: এটিওএল সুরক্ষা, অপারেটর যাচাই ও কোটেশনে কী থাকে"
+    path: /blog/uk-umrah-packages-atol-operator-checks
 affiliateCtaProvider: aviasales
 affiliateCtaHeadline: "Compare live fares for your own dates"
 affiliateCtaBody: "Search current fares from London, Manchester and Birmingham to Jeddah and Madinah for the dates you actually plan to travel, then confirm any package booking is ATOL-protected before you pay."
