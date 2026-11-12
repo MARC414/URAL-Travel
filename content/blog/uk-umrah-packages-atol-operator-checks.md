@@ -4,8 +4,8 @@ status: scheduled
 publishDate: "2026-11-13"
 title: "UK Umrah Packages: ATOL, Operator Checks and What You Pay For (2026)"
 titleBn: "যুক্তরাজ্যের ওমরাহ প্যাকেজ (২০২৬): এটিওএল, অপারেটর যাচাই ও টাকাটা কোথায় যায়"
-summary: "What ATOL actually protects on a UK Umrah package, what it never covers, the twelve questions worth asking before you pay, and the dated flight benchmark you can use to sanity-check any quote. All sources checked 12 November 2026."
-summaryBn: "যুক্তরাজ্যের ওমরাহ প্যাকেজে এটিওএল আসলে কী সুরক্ষা দেয়, কী দেয় না, টাকা দেওয়ার আগে যে বারোটি প্রশ্ন করা উচিত, আর যেকোনো কোটেশন যাচাইয়ের জন্য তারিখসহ ফ্লাইট বেঞ্চমার্ক। সব সূত্র ১২ নভেম্বর ২০২৬-এ যাচাই করা।"
+summary: "Checked 12 November 2026: ATOL is financial protection for a package that includes a flight — if the UK operator collapses, the scheme is what returns your money or gets you home. It is not travel insurance: it does not cover illness, injury, hotel complaints, or an accommodation-only booking. There is no official retail price for an Umrah package, so every quote is an operator figure; compare the flight component first — Heathrow to Jeddah from £347 return with one stop, Manchester from £326 — and check the ATOL number on atol.org before you pay."
+summaryBn: "১২ নভেম্বর ২০২৬-এ যাচাই করা: এটিওএল হলো ফ্লাইটসহ প্যাকেজের আর্থিক সুরক্ষা — যুক্তরাজ্যের অপারেটর বন্ধ হয়ে গেলে এই স্কিমই আপনার টাকা ফেরায় বা দেশে ফেরানোর ব্যবস্থা করে। এটি ভ্রমণবীমা নয়: অসুস্থতা, আঘাত, হোটেল নিয়ে অভিযোগ বা শুধু-হোটেল বুকিং এটি কভার করে না। ওমরাহ প্যাকেজের কোনো অফিসিয়াল খুচরা দাম নেই, তাই প্রতিটি কোটেশন অপারেটরের অঙ্ক; আগে ফ্লাইটের অংশ মিলিয়ে দেখুন — হিথরো থেকে জেদ্দা ফেরত £৩৪৭ থেকে (এক স্টপ), ম্যানচেস্টার থেকে £৩২৬ — আর টাকা দেওয়ার আগে atol.org-এ এটিওএল নম্বর যাচাই করুন।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
 author: Farhan Momen (Founder & Travel Editor)

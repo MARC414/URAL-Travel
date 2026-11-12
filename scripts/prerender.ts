@@ -270,6 +270,54 @@ function renderInlineMarkdownLinksHtml(escapedText: string, bengali = false): st
 }
 
 /**
+ * Markdown tables inside a blog body.
+ *
+ * The body renderer used to treat every block as a paragraph, so an authored
+ * pipe table (`| Item | Source |`) reached the reader as literal pipes on the
+ * page and in the prerendered HTML — a table that was not a table. This emits
+ * a real <table> with a header row, so crawlers and AI extractors get row/column
+ * structure instead of a run-on sentence. Cells run through the same inline
+ * pipeline as paragraphs (escaped, emphasis, markdown links).
+ */
+function parseMarkdownTableBlock(paragraph: string): { header: string[]; rows: string[][] } | null {
+  const lines = paragraph
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  if (lines.length < 2) return null;
+  if (!lines.every((line) => line.startsWith("|"))) return null;
+  if (!/^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)+\|?$/.test(lines[1])) return null;
+  const cells = (line: string) =>
+    line
+      .replace(/^\|/, "")
+      .replace(/\|$/, "")
+      .split("|")
+      .map((cell) => cell.trim());
+  const [header, , ...rest] = lines;
+  return { header: cells(header), rows: rest.map(cells) };
+}
+
+function renderMarkdownTableHtml(paragraph: string, bengali = false): string {
+  const table = parseMarkdownTableBlock(paragraph);
+  if (!table) return "";
+  const cell = (text: string, tag: "th" | "td", scope?: string) =>
+    `<${tag}${scope ? ` scope="${scope}"` : ""}>${renderInlineMarkdownLinksHtml(
+      renderInlineEmphasis(escapeHtml(text)),
+      bengali,
+    )}</${tag}>`;
+  const head = `<thead><tr>${table.header.map((text) => cell(text, "th", "col")).join("")}</tr></thead>`;
+  const body = `<tbody>${table.rows
+    .map(
+      (row) =>
+        `<tr>${row
+          .map((text, index) => cell(text, index === 0 ? "th" : "td", index === 0 ? "row" : undefined))
+          .join("")}</tr>`,
+    )
+    .join("")}</tbody>`;
+  return `<div class="overflow-x-auto"><table>${head}${body}</table></div>`;
+}
+
+/**
  * Markdown section headings inside a blog body. The React view turns a lone
  * `## …` / `### …` block into a real <h2>/<h3> (BlogPostRouteView.tsx); the
  * prerendered HTML has to emit the same tags, otherwise a no-JS crawler reads
@@ -2977,6 +3025,8 @@ function buildAllRoutes(): PrerenderRoute[] {
               }
               const faqSection = getVisibleBlogFaqSection(post.slug, trimmedPara, "en");
               if (faqSection) return renderVisibleFaqHtml(faqSection);
+              const tableHtml = renderMarkdownTableHtml(trimmedPara);
+              if (tableHtml) return tableHtml;
               const headingHtml = renderMarkdownHeadingHtml(trimmedPara);
               if (headingHtml) return headingHtml;
               if (trimmedPara === "[[figure]]") {
@@ -3148,6 +3198,8 @@ function bnParagraphs(
       }
       const faqSection = getVisibleBlogFaqSection(slug || "", rawParagraph, "bn");
       if (faqSection) return renderVisibleFaqHtml(faqSection);
+      const tableHtmlBn = renderMarkdownTableHtml(rawParagraph, true);
+      if (tableHtmlBn) return tableHtmlBn;
       const headingHtml = renderMarkdownHeadingHtml(rawParagraph.trim(), true);
       if (headingHtml) return headingHtml;
       const paragraph = rawParagraph.replace(/\n/g, " ").trim();

@@ -438,3 +438,66 @@ Copy this into the queue row or the pull request.
 [ ] EN and BN pages grepped in dist/ for the new anchors and sources block
 [ ] Queue row and claims ledger updated
 ```
+
+---
+
+## 12. Owner authoring rules — 12 November 2026 (normative)
+
+These four rules came from the owner while reviewing the first UK pillar article. They apply to
+every article written or localised from this date, and they are checks, not preferences.
+
+### 12.1 One market per article — no cross-market filler
+
+An article written for one market's audience must not carry the other market's material. **A UK
+article never mentions Bangladesh, Dhaka, BDT or the Bangladesh-side flow** — not in the summary,
+not in a bullet, not as a "what changes if you hold X passport" section, not as an internal link
+to a Bangladesh-only guide.
+
+Where a passport question genuinely arises, write it market-neutrally: *"the table is the British
+citizen passport track; the official eVisa portal publishes the eligible countries, and for any
+passport not on that list the instruction is to contact the nearest Saudi Arabia Embassy."*
+
+Inbound links into the article may come from other markets (that is how G4 is satisfied); the
+article's own body and metadata stay in one market.
+
+### 12.2 The Quick Answer block is an AEO asset
+
+The frontmatter `summary` renders in the **Quick Answer & Key Takeaway** block above the fold, and
+also feeds the meta description and RSS, so it is the passage an AI answer engine is most likely to
+extract. Write it as one:
+
+- **Answer first, in the first sentence.** No throat-clearing, no "this guide will explore".
+- **Every claim dated** — "checked 12 November 2026" — and only facts that are green in the article.
+- **Dense with extractable specifics:** numbers, route names, airports, deadlines, prices with
+  their source. A model should be able to quote a sentence and be right.
+- **No markdown.** This block renders as plain text (`QuickAnswer`), so `**bold**`, lists, tables and
+  links are not supported there — they will appear as literal characters. Links belong in the body.
+
+### 12.3 Tabular data is a table, never a paragraph
+
+If the content compares two or more things across two or more attributes, it is a table:
+
+| Do | Do not |
+| --- | --- |
+| A real pipe table (`\| Item \| Source \| Status \|`) | The same rows written as sentences |
+| One row per item, one column per attribute | "For the ETA it's A, for the e-visa it's B…" |
+| A header row, so a crawler reads column names | Bullet lists standing in for columns |
+
+Both renderers now emit real `<table>`/`<thead>`/`<th scope>` markup
+(`scripts/prerender.ts` → `renderMarkdownTableHtml`, `src/routes/BlogPostRouteView.tsx` →
+`parseMarkdownTableBlock`). This replaced the earlier observation that Bengali posts carried no
+tables — that was inherited habit, not a technical limit. **Bengali articles use the same tables as
+English, with translated headers and cells.**
+
+### 12.4 Every reference is a clickable anchor
+
+- Internal and external links are authored as `[descriptive anchor text](url)`. Bare URLs, "click
+  here", and "see the link below" are defects.
+- The anchor describes the destination ("the Nusuk BRN and Rawdah permit chain"), never "read more".
+- Source URLs belong in frontmatter `references` (rendered as a linked sources list); prose links
+  point at pages a reader would actually open.
+- After any build, grep the rendered HTML for `](` — a match means a markdown link failed to become
+  an anchor.
+
+**Verification for 12.1–12.4:** `npm run build`, then check the locale's `dist/…html` — real
+`<table>` count, zero `<p>|`, zero `](` left as text, and zero off-market terms inside `<article>`.

@@ -163,6 +163,33 @@ function UmrahBudgetTable({ isBengali }: { isBengali: boolean }) {
 }
 
 
+/**
+ * Markdown tables in a blog body.
+ *
+ * Every block used to render as a paragraph, so authored pipe tables reached
+ * readers as literal `| Item | Source |` text. A real <table> is what the
+ * content standard requires (and what AI extractors can read as rows).
+ */
+const MD_TABLE_SEPARATOR = /^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)+\|?$/;
+
+function parseMarkdownTableBlock(block: string): { header: string[]; rows: string[][] } | null {
+  const lines = block
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  if (lines.length < 2) return null;
+  if (!lines.every((line) => line.startsWith("|"))) return null;
+  if (!MD_TABLE_SEPARATOR.test(lines[1])) return null;
+  const cells = (line: string) =>
+    line
+      .replace(/^\|/, "")
+      .replace(/\|$/, "")
+      .split("|")
+      .map((cell) => cell.trim());
+  const [header, , ...rest] = lines;
+  return { header: cells(header), rows: rest.map(cells) };
+}
+
 export default function BlogPostRouteView({ context }: RouteViewProps) {
 
   const { AuthorBioCard, blogBodies, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, parameterId, section, setAffiliateToast } = context;
@@ -1007,6 +1034,57 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                           const trimmed = block.trim();
 
                           if (!trimmed) return null;
+
+                          const markdownTable = parseMarkdownTableBlock(trimmed);
+                          if (markdownTable) {
+                            const [head, ...bodyRows] = [markdownTable.header, ...markdownTable.rows];
+                            return (
+                              <div
+                                key={bIdx}
+                                className="my-6 overflow-x-auto rounded-xl border border-slate-200"
+                              >
+                                <table className="min-w-[36rem] w-full border-collapse text-left text-sm">
+                                  <thead className="bg-slate-100 text-brand-navy">
+                                    <tr>
+                                      {head.map((cell, cellIndex) => (
+                                        <th
+                                          key={`th-${cellIndex}`}
+                                          scope="col"
+                                          className="border-b border-slate-200 px-4 py-3 align-top font-semibold"
+                                        >
+                                          {renderFormattedText(cell)}
+                                        </th>
+                                      ))}
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {bodyRows.map((row, rowIndex) => (
+                                      <tr key={`tr-${rowIndex}`} className="border-b border-slate-100 last:border-0">
+                                        {row.map((cell, cellIndex) =>
+                                          cellIndex === 0 ? (
+                                            <th
+                                              key={`rh-${cellIndex}`}
+                                              scope="row"
+                                              className="px-4 py-3 align-top font-semibold text-slate-800"
+                                            >
+                                              {renderFormattedText(cell)}
+                                            </th>
+                                          ) : (
+                                            <td
+                                              key={`td-${cellIndex}`}
+                                              className="px-4 py-3 align-top text-slate-700"
+                                            >
+                                              {renderFormattedText(cell)}
+                                            </td>
+                                          )
+                                        )}
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                            );
+                          }
 
                           if (
                             trimmed === UMRAH_BUDGET_TABLE_MARKER &&
