@@ -4058,6 +4058,24 @@ if (rss) {
     // marker would otherwise never match the anchored text), so drop the link
     // syntax to its anchor text the same way. Anything else would turn this
     // truncation guard into a markdown-formatting check.
+    // A markdown table is emitted as a real <table>: its cells become <th>/<td>
+    // text, so the raw `| a | b |` line can never be found verbatim in the HTML.
+    // Check the cells instead — every one of them must survive into the page.
+    const flattenTableCells = (para: string): string[] => {
+      const lines = para.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+      if (lines.length < 2 || !lines.every((line) => line.startsWith("|"))) return [para];
+      if (!/^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)+\|?$/.test(lines[1])) return [para];
+      return lines
+        .filter((_, index) => index !== 1)
+        .flatMap((line) =>
+          line
+            .replace(/^\|/, "")
+            .replace(/\|$/, "")
+            .split("|")
+            .map((cell) => cell.trim())
+            .filter(Boolean),
+        );
+    };
     const stripEmphasis = (value: string) =>
       value
         .replace(/\*\*/g, "")
@@ -4078,7 +4096,7 @@ if (rss) {
       .flatMap((para) => {
         const note = getTravellerCheck(para);
         // Check both rendered parts; never drop a caution from the full-body coverage guard.
-        return note ? [note.title, note.text] : [para];
+        return note ? [note.title, note.text] : flattenTableCells(para);
       });
     const missing = paragraphs.filter(
       (para) => !page.includes(normalise(stripEmphasis(para)))
