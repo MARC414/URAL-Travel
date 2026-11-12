@@ -42,6 +42,30 @@ for root, _, files in os.walk(DIST):
             pages.add(r)
 pages.add("/")
 
+# Pending targets: blog links aimed at a post that is committed as
+# `status: scheduled` with a publish time still in the future (09:00 Asia/
+# Dhaka) resolve at publish — the release that adds the in-link ships the
+# scheduled post in the same build (Publication Standard G4). Past that moment
+# a missing page is BROKEN again.
+import datetime as _dt
+_NOW = _dt.datetime.now(_dt.timezone.utc)
+_PENDING = set()
+_blog_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "content", "blog"))
+for _fn in os.listdir(_blog_dir):
+    if not _fn.endswith(".md"):
+        continue
+    _t = io.open(os.path.join(_blog_dir, _fn), encoding="utf-8").read()
+    _st = re.search(r"^status:\s*(\S+)", _t, re.M)
+    _pd = re.search(r'^publishDate:\s*"([^"]+)"', _t, re.M)
+    if _st and _pd and _st.group(1) == "scheduled":
+        try:
+            _pub = _dt.datetime.fromisoformat(_pd.group(1) + "T09:00:00+06:00")
+        except ValueError:
+            continue
+        if _pub > _NOW:
+            _PENDING.add("/blog/" + _fn[:-3])
+            _PENDING.add("/bn/blog/" + _fn[:-3])
+
 def resolve(src, href):
     href = H.unescape(href).strip()
     if not href or href.startswith(("#", "mailto:", "tel:", "javascript:", "data:", "//")):
@@ -97,7 +121,7 @@ fails = defaultdict(list)
 # BROKEN
 for src, links in graph.items():
     for tgt, _ in links:
-        if tgt not in pages:
+        if tgt not in pages and tgt not in _PENDING:
             fails["BROKEN"].append(f"{src} -> {tgt}")
 
 # ORPHANS

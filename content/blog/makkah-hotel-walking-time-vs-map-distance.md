@@ -130,7 +130,7 @@ Run the question on the hours, not on sentiment:
 - **Choose the shuttle zones when** the group is fit, the stay is long, and the saving is being spent on something that matters more — more nights, a better room, or the flights themselves. A week's difference between the plaza ring and the periphery is often an entire extra week of stay.
 - **Choose the middle when** you want the walk without the tower: a Jabal Omar mid-range block, a low floor, and a written note of which gate the route reaches.
 
-Whatever you choose, the permits still decide the gate: the booking has to produce a Booking Reference Number and the permits have to be issued in Nusuk. Our [Nusuk hotel BRN and Rawdah permit guide](/blog/nusuk-hotel-brn-rawdah-gate-guide) covers that chain.
+Whatever you choose, the permits still decide the gate: the booking has to produce a Booking Reference Number and the permits have to be issued in Nusuk. Our [Nusuk BRN and permit issuance guide](/blog/nusuk-hotel-brn-rawdah-gate-guide) covers that chain.
 
 7. Frequently Asked Questions
 Why do Clock Tower hotels take so long when they are only a hundred metres away?
@@ -204,7 +204,7 @@ It is worth it when someone in the group cannot manage a long indoor detour or a
 - **শাটল জোন বাছুন যখন** দল সুস্থ, থাকা দীর্ঘ, আর সাশ্রয়টা বেশি জরুরি কিছুর পেছনে যাচ্ছে—বেশি রাত, ভালো রুম, বা ফ্লাইটের টিকিট। চত্বর-রিং ও বাইরের এলাকার এক সপ্তাহের পার্থক্য প্রায়ই পুরো এক সপ্তাহ বেশি থাকার সমান।
 - **মাঝেরটা বাছুন যখন** টাওয়ার ছাড়া হাঁটা চান: জাবাল ওমরের মধ্য-মানের ব্লক, নিচু তলা, আর রুট কোন গেটে পৌঁছায় তা লিখিতভাবে।
 
-যাই বাছুন, গেট ঠিক করে পারমিটই: বুকিং থেকে Booking Reference Number আসতে হবে আর পারমিট নুসুকে ইস্যু হতে হবে। এই শৃঙ্খল আছে আমাদের [নুসুক হোটেল BRN ও রওদা পারমিট গাইডে](/blog/nusuk-hotel-brn-rawdah-gate-guide)।
+যাই বাছুন, গেট ঠিক করে পারমিটই: বুকিং থেকে Booking Reference Number আসতে হবে আর পারমিট নুসুকে ইস্যু হতে হবে। এই শৃঙ্খল আছে আমাদের [নুসুক BRN ও রওদা পারমিটের গাইডে](/blog/nusuk-hotel-brn-rawdah-gate-guide)।
 
 ৭. সচরাচর জিজ্ঞাসা
 ক্লক টাওয়ারের হোটেল মাত্র একশো মিটার দূরে থেকেও এত সময় নেয় কেন?

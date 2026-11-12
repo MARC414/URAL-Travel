@@ -37,6 +37,7 @@
 | 2 | `/blog/top-budget-family-destinations-from-dhaka` | family trips from Dhaka on a budget | destination comparison; entry rules; broad BDT planning | Comparison article; keep estimates dated and link each destination to its itinerary and cost page. |
 | 2 | `/flights` | flights from Dhaka | routes, airlines and fare comparison | Route directory. Let each `/flights/:route` page own route-specific fare intent. |
 | 2 | `/costs` | trip costs from Bangladesh | international travel budget in BDT | Budget directory. Individual destination cost pages own country-specific cost queries. |
+| 2 | `/blog/umrah-hajj-guide-united-kingdom-2026` | Umrah from the UK | Saudi visa from a UK passport; UK Umrah packages ATOL; Hajj from the United Kingdom | UK-passport track kept distinct from the Bangladesh pillar: visa choice, Nusuk permit, ATOL checks and the dated GBP snapshot, with the current FCDO advisory visible. Fast-moving — owner Farhan Momen, review by 15 Feb 2027 (90 days); first GSC read at the 2 Dec 2026 export. |
 
 ## On-page implementation notes
 

@@ -164,6 +164,12 @@ govt sources and other true links, live record, practical outlook."* Research ph
 [SPEC-uk-umrah-hajj-guide.md](SPEC-uk-umrah-hajj-guide.md) (source matrix, five open questions,
 gates checklist). No URL ships until its gates are green.
 
+**Status, 12 November 2026:** the first cluster URL (`/blog/umrah-hajj-guide-united-kingdom-2026`)
+is green on SPEC §6 and **scheduled for 17 November 2026, 09:00 Dhaka** — that week's single
+slot (≤1/week). G4 in-links (BD pillar EN+BN and `/umrah` hub EN+BN) ship in the same release.
+GBP snapshot captured 12 Nov (KAYAK: LHR→JED from £347 return, MAN→JED from £326); the visa-fee
+and package rows record checked "no published figure" states instead of estimates.
+
 **Options remain:** keep archived · gated candidate (recommended above) · full cadence
 (briefs 1→2→4→5→6, brief 3 last, six gates each, hreflang stays `en-bd`/`bn-bd`, GBP embeds
 `currency=GBP&locale=en-gb`, S2 disclosure verified first).
@@ -219,6 +225,7 @@ six-pillar "architecture" describes the SEO-KEYWORD-MAP we already run — no re
 | **2 Dec 2026** | Re-export; A1–A6 measured (one variable each); B1 verified; decide B-queue for December |
 | **90 days after each new URL** | Publication Standard §3: earns impressions for its own query, or merge + 301 |
 | **Owner decision, on sight of §5** | UK cluster: keep archived / gated candidate / reinstate — **resolved 11 Nov: gated start, see SPEC** |
+| **17 Nov 2026** | UK umrah-hajj guide publishes 09:00 Dhaka (that week's single slot): confirm EN+BN live, G4 in-links resolve, sitemap entry; G6 fast-moving review by 15 Feb 2027; baseline at the 2 Dec export |
 
 ---
 

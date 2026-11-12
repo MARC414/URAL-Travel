@@ -140,7 +140,7 @@ Peripheral sectors are where the space is. Rooms are larger, prices are lower, a
 3. **Is the access step-free from the room to the plaza?** If anyone in the group uses a wheelchair, ask for the route, not the ramp's existence.
 4. **What is the cancellation position if the sector turns out wrong?** A free-cancellation window is the cheapest insurance in this decision.
 
-Once the sector is settled, the paperwork decides whether the gate opens: the hotel's Booking Reference Number has to be tied to your visa before Nusuk will issue anything, which is covered in our guide to [Nusuk hotel BRN and Rawdah permits](/blog/nusuk-hotel-brn-rawdah-gate-guide).
+Once the sector is settled, the paperwork decides whether the gate opens: the hotel's Booking Reference Number has to be tied to your visa before Nusuk will issue anything, which is covered in our guide to [Nusuk BRN permit requirements](/blog/nusuk-hotel-brn-rawdah-gate-guide).
 
 8. Frequently Asked Questions
 Which Makkah sector gives the fastest access to the Haram courtyard?
@@ -223,7 +223,7 @@ The peripheral blocks, by a distance. If sleep between Fajr and breakfast matter
 3. **রুম থেকে চত্বর পর্যন্ত পথ সিঁড়িবিহীন কি না?** দলের কেউ হুইলচেয়ার ব্যবহার করলে র্যাম্প আছে কি না নয়, রুটটা কী জিজ্ঞেস করুন।
 4. **সেক্টর ভুল প্রমাণিত হলে বাতিলের সুযোগ কী?** বিনামূল্যে বাতিলের সময়সীমা এই সিদ্ধান্তে সবচেয়ে সস্তা বীমা।
 
-সেক্টর ঠিক হলে কাগজপত্রই ঠিক করে গেট খুলবে কি না: নুসুক কিছু ইস্যু করার আগে হোটেলের Booking Reference Number আপনার ভিসার সঙ্গে যুক্ত থাকতে হয়—এই ধাপটি আমাদের [নুসুক হোটেল BRN ও রওদা পারমিট গাইডে](/blog/nusuk-hotel-brn-rawdah-gate-guide) আছে।
+সেক্টর ঠিক হলে কাগজপত্রই ঠিক করে গেট খুলবে কি না: নুসুক কিছু ইস্যু করার আগে হোটেলের Booking Reference Number আপনার ভিসার সঙ্গে যুক্ত থাকতে হয়—এই ধাপটি আমাদের [নুসুক BRN ও রওদা পারমিট গাইডে](/blog/nusuk-hotel-brn-rawdah-gate-guide) আছে।
 
 ৮. সচরাচর জিজ্ঞাসা
 মক্কার কোন সেক্টরে হারাম চত্বরে সবচেয়ে দ্রুত পৌঁছানো যায়?

@@ -2154,6 +2154,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Ramadan Umrah booking dates & I'tikaf registration", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
       { text: "Tawaf and Sa'i: Seven Circuits, Counted Correctly", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
       { text: "Hajj Rites Day by Day: Arafah, Mina, Jamarat (2026)", path: "/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" },
+          { text: "Umrah and Hajj from the UK: visas, Nusuk and ATOL", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
     ],
     references: [
       {
@@ -2560,6 +2561,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
       { text: "Umrah + Dubai 10-Day Combo Trip from Dhaka (2026): How to Combine Makkah, Madinah & UAE on One Multi-City Ticket", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
       { text: "Europe, UK & USA Sightseeing for Bangladeshi Travelers (2026): Skip-the-Line Passes + Instant Saudi Stopover Umrah", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
+          { text: "UK passport visa routes: ETA, e-visa or waiver for Umrah", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
     ],
     affiliateCTA: {
       provider: "airalo",

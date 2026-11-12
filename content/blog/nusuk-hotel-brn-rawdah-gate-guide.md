@@ -56,7 +56,7 @@ internalLinksEn:
     path: /blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh
   - text: "DIY Umrah visa routes and the budget checks that go with them"
     path: /blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost
-  - text: "Travelling with elderly parents: assistance, mobilty and medical checks"
+  - text: "Travelling with elderly parents: assistance, mobility and medical checks"
     path: /blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide
   - text: "Search live hotel rates for Makkah and Madinah stays"
     path: /hotels
