@@ -1,4 +1,7 @@
 import { ExternalLink, Wifi } from "lucide-react";
+import React, { lazy, Suspense } from "react";
+
+const PromoCard = lazy(() => import("./PromoCard").then((module) => ({ default: module.PromoCard })));
 
 const AIRALO_AFFILIATE_URL = "https://airalo.tpo.li/mV2QXsXK";
 const YESIM_AFFILIATE_URL = "https://yesim.tpo.li/O8Zvqr73";
@@ -9,7 +12,7 @@ const YESIM_AFFILIATE_URL = "https://yesim.tpo.li/O8Zvqr73";
  * destination-aware link is available; do not imply the selection is passed
  * through to the partner.
  */
-export function AiraloEmbed() {
+export function AiraloEmbed({ lang = "en" }: { lang?: "en" | "bn" }) {
   return (
     <section className="w-full space-y-3.5 overflow-hidden rounded-xl border border-slate-100 bg-slate-50/80 p-4 font-sans sm:p-5">
       <div className="flex items-center gap-2.5">
@@ -59,6 +62,7 @@ export function AiraloEmbed() {
         provider. Keeping a Bangladesh SIM available for OTPs depends on your
         phone, mobile operator, and roaming settings; check possible charges.
       </p>
+      <Suspense fallback={null}><PromoCard partner="yesim" lang={lang} /></Suspense>
     </section>
   );
 }

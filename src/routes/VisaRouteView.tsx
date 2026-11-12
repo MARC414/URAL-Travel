@@ -5,11 +5,15 @@ import { QuickAnswer } from "../components/QuickAnswer";
 
 import { PartnerLinkButton, AFFILIATE_LINKS, AiraloEsimWidget } from "../components/AffiliatePartners";
 
-import { ShieldCheck, ArrowRight, FileText, Wifi, Building, Plane, Globe } from "lucide-react";
+import { ArrowRight, FileText, Wifi, Building, Plane } from "lucide-react";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
-import { EditorialPageHero } from "../components/EditorialPageHero";
+import { HotelHero as ImageOverlayHero } from "../components/HotelHero";
+import { VisaDirectoryCards, getVisaCountryLabel } from "../components/VisaDirectoryCards";
+import { VISA_OFFICIAL_SOURCES } from "../data/visaOfficialSources";
+import { LANDING_VISA_FAQS } from "../utils/faqSchema";
+import { BN_LANDING_VISA_FAQS } from "../utils/bn-faq-schema";
 
 
 
@@ -19,113 +23,78 @@ type RouteViewProps = { context: Record<string, any> };
 
 export default function VisaRouteView({ context }: RouteViewProps) {
 
-  const { TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryFlightId, getCountryHotelId, getCountryIata, isBn, localizedVisas, navigateTo, parameterId, section, setAreTpScriptsReady } = context;
+  const { TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryFlightId, getCountryHotelId, getCountryIata, getLocalizedRouteHref, isBn, localizedVisas, navigateTo, parameterId, setAreTpScriptsReady } = context;
 
   const activeVisa = localizedVisas.find((visa) => visa.id === parameterId) || localizedVisas[0];
+  const countryLabel = activeVisa ? getVisaCountryLabel(activeVisa, isBn) : "";
+  const contentLanguage = (text: string) => isBn && !/[\u0980-\u09ff]/.test(text) ? "en" : undefined;
 
   if (!parameterId) {
+    const faqs = isBn ? BN_LANDING_VISA_FAQS : LANDING_VISA_FAQS;
     return (
-      <div className="space-y-7">
-        <EditorialPageHero
+      <div className="space-y-12 sm:space-y-16">
+        <ImageOverlayHero
           eyebrow={isBn ? "বাংলাদেশি পাসপোর্টধারীদের জন্য" : "FOR BANGLADESHI PASSPORT HOLDERS"}
           title={isBn ? "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড" : "Visa Guides & Travel Document Checklists"}
-          description={isBn
-            ? "জনপ্রিয় গন্তব্যের প্রবেশের নিয়ম, প্রয়োজনীয় নথি, আবেদন ধাপ ও ফি-সংক্রান্ত নির্দেশনা দেখুন। নিয়ম বদলাতে পারে—আবেদনের আগে সরকারি সূত্র যাচাই করুন।"
-            : "Review entry routes, document checklists, application steps and fee guidance for popular destinations. Rules change, so confirm details with official sources before applying."}
-          imageSrc="/assets/images/visa_changi_immigration_20261101-1200.webp"
-          imageAlt={isBn
-            ? "সিঙ্গাপুরের চাঙ্গি বিমানবন্দর টার্মিনাল ১-এর আগমন ইমিগ্রেশন হলে যাত্রীরা"
-            : "Travelers at the arrival immigration hall in Singapore Changi Airport Terminal 1"}
-          imageSizes="(min-width: 1024px) 45vw, 100vw"
-          credit={
-            <>
-              <a href="https://commons.wikimedia.org/wiki/File:Singapore_Changi_Airport_Terminal_1_Arrival_Immigration.jpg" target="_blank" rel="noopener noreferrer">
-                Exec8 / Wikimedia Commons
-              </a>
-              <span aria-hidden="true"> · </span>
-              <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
-            </>
-          }
+          description={isBn ? "গন্তব্য অনুযায়ী প্রবেশের পথ, প্রয়োজনীয় নথি ও আবেদন প্রক্রিয়া বুঝুন। নিয়ম বদলাতে পারে—আবেদনের আগে সরকারি কর্তৃপক্ষের বর্তমান নির্দেশনা যাচাই করুন।" : "Understand entry routes, documents and application steps for your destination. Rules can change, so check current official instructions before applying."}
+          imageSrc="/assets/images/visa_directory_hero_20261112-1200.webp"
+          imageAlt={isBn ? "বিমানবন্দরে ভ্রমণের নথির AI-তৈরি চিত্র" : "AI-generated illustration of travel documents at an airport"}
+          credit={isBn ? "AI-তৈরি চিত্র" : "AI-generated illustration"}
         />
-
-        <section aria-labelledby="visa-guide-index-title" className="space-y-3">
-          <div>
-            <h2 id="visa-guide-index-title" className="ural-section-title font-serif text-xl font-bold text-slate-900">
-              {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa guides by destination"}
-            </h2>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600">
-              {isBn ? "প্রতিটি দেশের গাইডে প্রবেশের ধরন, নথি ও আবেদন প্রক্রিয়ার সারাংশ রয়েছে। চূড়ান্ত সিদ্ধান্তের জন্য সরকারি কর্তৃপক্ষের নির্দেশনা অনুসরণ করুন।" : "Each country guide summarizes the entry route, documents and application process. Use official authority guidance for the final decision."}
-            </p>
+        <section aria-labelledby="visa-guide-index-title" className="space-y-7">
+          <div className="max-w-3xl space-y-3">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-800">{isBn ? "গন্তব্য অনুসারে গাইড" : "THE VISA DIRECTORY"}</p>
+            <h2 id="visa-guide-index-title" className="ural-section-title text-2xl text-brand-navy sm:text-3xl">{isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Where are you travelling?"}</h2>
+            <p className="text-sm leading-relaxed text-slate-600 sm:text-base">{isBn ? "গন্তব্যভিত্তিক গাইডে আবেদন ও প্রবেশের শর্ত পড়ুন। ভিসার সিদ্ধান্ত ও চূড়ান্ত শর্ত সংশ্লিষ্ট কর্তৃপক্ষ নির্ধারণ করে।" : "Explore destination-specific entry guidance. The relevant authorities determine final requirements and visa decisions."}</p>
           </div>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {localizedVisas.map((visa) => (
-              <a
-                key={visa.id}
-                href={`/visa/${visa.id}`}
-                onClick={(event) => {
-                  event.preventDefault();
-                  navigateTo(`/visa/${visa.id}`);
-                }}
-                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
-              >
-                <div className="mb-3 flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-serif text-lg font-bold text-brand-navy">{visa.country}</h3>
-                    <p className="text-xs font-semibold text-slate-500">{visa.requirementType}</p>
-                  </div>
-                  <ArrowRight size={16} className="mt-1 shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-brand-navy" aria-hidden="true" />
-                </div>
-                <p className="line-clamp-3 text-sm leading-relaxed text-slate-600">{visa.quickAnswer}</p>
-                <p className="mt-4 text-xs font-bold text-brand-navy">{isBn ? "চেকলিস্ট ও আবেদনের ধাপ দেখুন" : "View checklist and application steps"}</p>
-              </a>
-            ))}
-          </div>
+          <VisaDirectoryCards guides={localizedVisas} isBn={isBn} />
         </section>
+        <section className="max-w-4xl space-y-4 border-t border-slate-200 pt-9">
+          <h2 className="ural-section-title text-2xl text-brand-navy sm:text-3xl">{isBn ? "আবেদনের আগে সরকারি নিয়ম দেখুন" : "Before you apply"}</h2>
+          <p className="text-sm leading-relaxed text-slate-600 sm:text-base">{isBn ? "ভ্রমণের উদ্দেশ্য ও পাসপোর্ট অনুযায়ী ভিসার ধরন বেছে নিন। সরকারি পোর্টাল বা দূতাবাসে বর্তমান নথি, ফি, পেমেন্ট ও প্রসেসিং নির্দেশনা যাচাই করুন। অনুমোদন নিশ্চিত নয়; অফেরতযোগ্য বুকিংয়ের আগে শর্ত বুঝে নিন।" : "Choose the route that fits your passport and purpose of travel. Check the current documents, fees, payment and processing instructions with the official portal or embassy. Approval is not guaranteed; understand the terms before making non-refundable bookings."}</p>
+          <a href={isBn ? "/bn/visa-free-countries" : "/visa-free-countries"} className="inline-flex min-h-11 items-center font-semibold text-brand-navy underline underline-offset-4">{isBn ? "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া প্রবেশের গাইড" : "Explore visa-free and visa-on-arrival destinations"} →</a>
+        </section>
+        <section aria-labelledby="visa-hub-faqs" className="max-w-4xl space-y-5 border-t border-slate-200 pt-9">
+          <h2 id="visa-hub-faqs" className="ural-section-title text-2xl text-brand-navy sm:text-3xl">{isBn ? "ভিসা নিয়ে সাধারণ প্রশ্ন" : "Visa questions before you go"}</h2>
+          <div>{faqs.map((faq) => <details key={faq.question} className="border-b border-slate-200 py-4"><summary className="cursor-pointer text-sm font-semibold leading-relaxed text-brand-navy sm:text-base">{faq.question}</summary><p className="max-w-prose pt-3 text-sm leading-relaxed text-slate-600">{faq.answer}</p></details>)}</div>
+        </section>
+        <nav aria-label={isBn ? "সম্পর্কিত ভ্রমণ পরিকল্পনা" : "Related trip planning"} className="border-t border-slate-200 pt-8">
+          <h2 className="ural-section-title text-xl text-brand-navy">{isBn ? "ভ্রমণের বাকি পরিকল্পনা" : "Plan the rest of your trip"}</h2>
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-brand-navy">{[
+            { path: "/destinations", en: "Destination guides", bn: "গন্তব্য গাইড" },
+            { path: "/flights", en: "Flight routes", bn: "ফ্লাইট রুট" },
+            { path: "/hotels", en: "Hotel guides", bn: "হোটেল গাইড" },
+            { path: "/costs", en: "Trip costs", bn: "ভ্রমণ খরচ" },
+          ].map((link) => <a key={link.path} href={getLocalizedRouteHref ? getLocalizedRouteHref(link.path) : `${isBn ? "/bn" : ""}${link.path}`} className="underline decoration-slate-300 underline-offset-4 hover:decoration-brand-navy">{isBn ? link.bn : link.en}</a>)}</div>
+        </nav>
       </div>
     );
   }
 
   return (
 
-    <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-10">
+    <div className="space-y-10 sm:space-y-12">
 
       {/* Show the visa context before the country selector on mobile. */}
 
-      <header className="space-y-4 lg:col-start-2 lg:col-span-3 lg:row-start-1">
+      <div className="space-y-6">
 
-        <EditorialPageHero
+        <a href={isBn ? "/bn/visa" : "/visa"} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-navy hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-navy">← {isBn ? "সব ভিসা গাইড" : "All visa guides"}</a>
+        <ImageOverlayHero
           eyebrow={isBn ? "বাংলাদেশি নাগরিকদের প্রবেশ-নিয়ম" : "ENTRY GUIDANCE FOR BANGLADESHI CITIZENS"}
-          title={isBn
-            ? `${activeVisa.country} ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)`
-            : `${activeVisa.country} Visa Requirements for Bangladeshi Citizens`}
-          description={isBn
-            ? `${activeVisa.country}-এ প্রবেশের ধরন, প্রয়োজনীয় নথি ও আবেদন ধাপ পর্যালোচনা করুন। নিয়ম ও ফি বদলাতে পারে—আবেদনের আগে সরকারি নির্দেশনা যাচাই করুন।`
-            : `Review the entry route, required documents and application steps for ${activeVisa.country}. Rules and fees can change, so verify current instructions with official sources before applying.`}
-          imageSrc="/assets/images/visa_changi_immigration_20261101-1200.webp"
-          imageAlt={isBn
-            ? "সিঙ্গাপুরের চাঙ্গি বিমানবন্দর টার্মিনাল ১-এর আগমন ইমিগ্রেশন হলে যাত্রীরা"
-            : "Travelers at the arrival immigration hall in Singapore Changi Airport Terminal 1"}
-          imageSizes="(min-width: 1024px) 45vw, 100vw"
-          credit={
-            <>
-              <a href="https://commons.wikimedia.org/wiki/File:Singapore_Changi_Airport_Terminal_1_Arrival_Immigration.jpg" target="_blank" rel="noopener noreferrer">
-                Exec8 / Wikimedia Commons
-              </a>
-              <span aria-hidden="true"> · </span>
-              <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
-            </>
-          }
-        >
-          <span className="inline-flex w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold text-white">
-            {activeVisa.requirementType}
-          </span>
-        </EditorialPageHero>
+          title={isBn ? (activeVisa.id === "saudi-arabia-visa" ? "সৌদি ভিসা (বাংলাদেশি পাসপোর্ট): কোন পথটি আপনার জন্য প্রযোজ্য" : `${countryLabel} ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)`) : `${activeVisa.country} Visa Requirements for Bangladeshi Citizens`}
+          description={isBn ? `${countryLabel}-এ প্রবেশের ধরন, প্রয়োজনীয় নথি ও আবেদন ধাপ পর্যালোচনা করুন। নিয়ম ও ফি বদলাতে পারে—আবেদনের আগে সরকারি নির্দেশনা যাচাই করুন।` : `Review the entry route, required documents and application steps for ${activeVisa.country}. Rules and fees can change, so verify current instructions with official sources before applying.`}
+          imageSrc="/assets/images/visa_directory_hero_20261112-1200.webp"
+          imageAlt={isBn ? "বিমানবন্দরে ভ্রমণের নথির AI-তৈরি চিত্র" : "AI-generated illustration of travel documents at an airport"}
+          credit={isBn ? "AI-তৈরি চিত্র" : "AI-generated illustration"}
+        />
 
+        {activeVisa.id === "saudi-arabia-visa" && <p className="text-sm text-slate-700">{isBn ? "ওমরাহ পরিকল্পনার বিস্তারিত " : "For Umrah-specific planning, see the "}<a href={isBn ? "/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" : "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost"} className="font-bold text-brand-navy underline underline-offset-4">{isBn ? "ওমরাহ ভিসা গাইড" : "Umrah visa guide"}</a>.</p>}
         <QuickAnswer
           id="visa-aeo-box"
           label={isBn ? "সংক্ষিপ্ত তথ্য (Quick Answer)" : "Quick Answer"}
         >
-          {activeVisa.quickAnswer}
+          <span lang={contentLanguage(activeVisa.quickAnswer)}>{activeVisa.quickAnswer}</span>
         </QuickAnswer>
 
         <GuideJumpNav
@@ -140,6 +109,8 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
             { id: "visa-documents", en: "Document checklist", bn: "ডকুমেন্ট চেকলিস্ট" },
 
+            { id: "official-visa-sources", en: "Official sources", bn: "সরকারি সূত্র" },
+
             { id: "visa-flight-booking", en: "Find flights from Dhaka", bn: "ঢাকা থেকে ফ্লাইট খুঁজুন" },
 
             { id: "visa-internal-loop", en: "Hotels, flights and eSIM", bn: "হোটেল, ফ্লাইট ও eSIM" },
@@ -150,108 +121,9 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
         />
 
-      </header>
+      </div>
 
-
-
-      <aside className="lg:col-start-1 lg:row-start-1 lg:row-span-2" aria-label={isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa guides by country"}>
-
-        <nav className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none">
-
-          <label htmlFor="mobile-visa-country-select" className="mb-3 block font-mono text-xs font-bold uppercase tracking-wider text-slate-500">
-
-            {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "VISA GUIDES BY COUNTRY"}
-
-          </label>
-
-          <select
-
-            id="mobile-visa-country-select"
-
-            value={parameterId}
-
-            onChange={(event) => navigateTo(`/visa/${event.currentTarget.value}`)}
-
-            className="min-h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-semibold text-brand-navy shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] lg:hidden"
-
-          >
-
-            {localizedVisas.map((visa) => (
-
-              <option key={visa.id} value={visa.id}>
-
-                {isBn ? `${visa.country} ভিসা রিকোয়ারমেন্টস` : `${visa.country} Visa Requirements`}
-
-              </option>
-
-            ))}
-
-          </select>
-
-          <div className="hidden space-y-2 lg:block">
-
-            {localizedVisas.map((v) => (
-
-              <button
-
-                key={v.id}
-
-                id={`btn-visa-select-${v.id}`}
-
-                onClick={() => navigateTo(`/visa/${v.id}`)}
-
-                className={`relative flex w-full cursor-pointer items-center justify-between rounded-xl border p-3.5 text-left text-xs font-semibold transition-colors ${
-
-                  parameterId === v.id
-
-                    ? "border-brand-navy bg-brand-navy text-white shadow-md"
-
-                    : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-
-                }`}
-
-              >
-
-                <span className="inline-flex items-center gap-1.5">
-
-                  <ShieldCheck size={13} className={parameterId === v.id ? "text-[#F6B73C]" : "text-brand-navy"} aria-hidden="true" />
-
-                  <span>{isBn ? `${v.country} ভিসা রিকোয়ারমেন্টস` : `${v.country} Visa Requirements`}</span>
-
-                </span>
-
-                <ArrowRight size={12} className={parameterId === v.id ? "text-[#F6B73C]" : "text-text-muted"} aria-hidden="true" />
-
-              </button>
-
-            ))}
-
-            <a
-              href="/visa-free-countries"
-              onClick={(event) => {
-                event.preventDefault();
-                navigateTo("/visa-free-countries");
-              }}
-              className="mt-1 flex w-full cursor-pointer items-start gap-2 rounded-xl border border-[#F6B73C]/50 bg-[#F6B73C]/5 p-3.5 text-left text-xs font-semibold text-brand-navy transition-colors hover:bg-[#F6B73C]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
-            >
-              <Globe size={13} className="mt-0.5 shrink-0 text-[#F6B73C]" aria-hidden="true" />
-              <span>
-                {isBn ? "ভিসা ছাড়া যেসব দেশে যাওয়া যায়" : "Which countries are visa-free?"}
-                <span className="mt-0.5 block font-normal text-text-muted">
-                  {isBn ? "২০২৬ সালের যাচাই করা তালিকা" : "The verified 2026 list"}
-                </span>
-              </span>
-            </a>
-
-          </div>
-
-        </nav>
-
-      </aside>
-
-
-
-      <div className="min-w-0 ural-route-stack animate-fade-in lg:col-start-2 lg:col-span-3 lg:row-start-2">
+      <div className="min-w-0 ural-route-stack animate-fade-in">
 
                     {/* Core facts */}
 
@@ -261,9 +133,9 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                         <div key={fact.label} className="ural-card bg-white border border-border-subtle p-4 text-center shadow-sm">
 
-                          <span className="text-[10px] font-bold text-slate-400 font-mono uppercase tracking-wider block">{fact.label}</span>
+                          <span lang={contentLanguage(fact.label)} className="text-[10px] font-bold text-slate-400 font-mono uppercase tracking-wider block">{fact.label}</span>
 
-                          <span className="text-xs font-semibold text-brand-navy font-mono block mt-1">{fact.value}</span>
+                          <span lang={contentLanguage(fact.value)} className="text-xs font-semibold text-brand-navy font-mono block mt-1">{fact.value}</span>
 
                         </div>
 
@@ -277,7 +149,7 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                     <div id="visa-steps" className="ural-guide-jump-target space-y-4">
 
-                      <h2 className="ural-section-title font-serif font-black text-lg text-slate-900 border-b border-slate-100 pb-2">
+                      <h2 className="ural-section-title text-2xl text-brand-navy sm:text-3xl">
 
                         {isBn ? "ধাপে ধাপে ভিসা আবেদনের নিয়মাবলী" : "Step-by-Step Application Process"}
 
@@ -291,7 +163,7 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                             <span className="w-6 h-6 rounded-full bg-brand-navy text-white font-mono font-bold flex items-center justify-center shrink-0 mt-0.5">{idx + 1}</span>
 
-                            <span>{step}</span>
+                            <span lang={contentLanguage(step)}>{step}</span>
 
                           </div>
 
@@ -307,7 +179,7 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                     <div id="visa-documents" className="ural-guide-jump-target space-y-4">
 
-                      <h2 className="ural-section-title font-serif font-black text-lg text-slate-900">
+                      <h2 className="ural-section-title text-2xl text-brand-navy sm:text-3xl">
 
                         {isBn ? "প্রয়োজনীয় ডকুমেন্ট চেকলিস্ট" : "Document Checklist"}
 
@@ -319,7 +191,7 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                           <div key={cat.category} className="ural-card bg-slate-50 border border-border-subtle p-5">
 
-                            <span className="text-xs font-bold font-mono uppercase tracking-wider text-brand-navy block border-b border-slate-200 pb-2 mb-3"><FileText size={12} className="inline-block mr-1.5 -mt-0.5" />{cat.category}</span>
+                            <span lang={contentLanguage(cat.category)} className="text-xs font-bold font-mono uppercase tracking-wider text-brand-navy block border-b border-slate-200 pb-2 mb-3"><FileText size={12} className="inline-block mr-1.5 -mt-0.5" />{cat.category}</span>
 
                             <ul className="space-y-2 text-sm sm:text-[14.5px] text-slate-700">
 
@@ -329,7 +201,7 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                                   <span className="text-emerald-500 font-bold mt-0.5">✓</span>
 
-                                  <span>{item}</span>
+                                  <span lang={contentLanguage(item)}>{item}</span>
 
                                 </li>
 
@@ -346,6 +218,13 @@ export default function VisaRouteView({ context }: RouteViewProps) {
                     </div>
 
 
+
+                    <section id="official-visa-sources" className="ural-guide-jump-target space-y-4 border-t border-slate-200 pt-8">
+                      <h2 className="ural-section-title text-2xl text-brand-navy sm:text-3xl">{isBn ? "বর্তমান নিয়ম যাচাইয়ের সরকারি সূত্র" : "Official sources to verify current requirements"}</h2>
+                      <p className="text-sm leading-relaxed text-slate-600">{isBn ? "আবেদন বা বুকিংয়ের আগে সংশ্লিষ্ট কর্তৃপক্ষের সর্বশেষ ভিসা, নথি ও ফি নির্দেশনা দেখুন।" : "Check the latest visa, document and fee instructions from the relevant authority before applying or booking."}</p>
+                      <ul className="space-y-2 text-sm font-semibold text-brand-navy">{(VISA_OFFICIAL_SOURCES[activeVisa.id] ?? []).map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{source.label} ↗</a></li>)}</ul>
+                      <p className="text-sm"><a href={isBn ? "/bn/visa-free-countries" : "/visa-free-countries"} className="font-semibold text-brand-navy underline underline-offset-4">{isBn ? "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া প্রবেশের গাইড" : "Explore visa-free and visa-on-arrival destinations"}</a></p>
+                    </section>
 
                     {/* Flight booking CTA after visa checklist */}
 
@@ -389,7 +268,9 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                             <TravelpayoutsEmbed
 
-                              defaultDestination={getCountryIata(activeVisa.country)}
+                              lang={isBn ? "bn" : "en"}
+
+                              defaultDestination={activeVisa.id === "saudi-arabia-visa" ? "MED" : getCountryIata(activeVisa.country)}
 
                             />
 
@@ -475,7 +356,7 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                       <div className="ural-card bg-white p-2 sm:p-4 border border-border-subtle">
 
-                        <AiraloEsimWidget />
+                        <AiraloEsimWidget lang={isBn ? "bn" : "en"} />
 
                       </div>
 
@@ -499,9 +380,9 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                           id={`lnk-view-hotel-from-visa-${activeVisa.id}`}
 
-                          href={`/hotels/${getCountryHotelId(activeVisa.country)}`}
+                          href={getLocalizedRouteHref(activeVisa.id === "saudi-arabia-visa" ? "/hotels" : `/hotels/${getCountryHotelId(activeVisa.country)}`)}
 
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeVisa.country)}`); }}
+                          onClick={(e) => { e.preventDefault(); navigateTo(activeVisa.id === "saudi-arabia-visa" ? "/hotels" : `/hotels/${getCountryHotelId(activeVisa.country)}`); }}
 
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
 
@@ -509,7 +390,7 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                           <Building size={14} className="text-brand-navy shrink-0" />
 
-                          <span>{isBn ? `${activeVisa.country}-এর বাছাইকৃত হোটেল` : `Curated ${activeVisa.country} Hotels`}</span>
+                          <span>{activeVisa.id === "saudi-arabia-visa" ? (isBn ? "হোটেল গাইড দেখুন" : "Browse hotel guides") : (isBn ? `${activeVisa.country}-এর হোটেল এলাকা` : `${activeVisa.country} hotel areas`)}</span>
 
                           <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
 
@@ -519,9 +400,9 @@ export default function VisaRouteView({ context }: RouteViewProps) {
 
                           id={`lnk-view-flight-from-visa-${activeVisa.id}`}
 
-                          href={`/flights/${getCountryFlightId(activeVisa.country)}`}
+                          href={getLocalizedRouteHref(`/flights/${activeVisa.id === "saudi-arabia-visa" ? "dhaka-madinah" : getCountryFlightId(activeVisa.country)}`)}
 
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${getCountryFlightId(activeVisa.country)}`); }}
+                          onClick={(e) => { e.preventDefault(); navigateTo(`/flights/${activeVisa.id === "saudi-arabia-visa" ? "dhaka-madinah" : getCountryFlightId(activeVisa.country)}`); }}
 
                           className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
 
@@ -570,6 +451,8 @@ export default function VisaRouteView({ context }: RouteViewProps) {
                       keyFacts={activeVisa.keyFacts}
 
                       faqs={activeVisa.faqs}
+
+                      lang={isBn ? "bn" : "en"}
 
                     />
 

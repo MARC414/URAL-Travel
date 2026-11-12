@@ -256,7 +256,7 @@ export function TravelEssentials({
           </div>
 
           <div className="lg:col-span-7">
-            <AiraloEmbed />
+            <AiraloEmbed lang={lang} />
           </div>
         </div>
       )}

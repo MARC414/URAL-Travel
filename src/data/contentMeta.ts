@@ -40,11 +40,10 @@
  * once this value is more than `CONTENT_UPDATED_MAX_AGE_DAYS` old, so it cannot
  * rot silently.
  *
- * Last intentional refresh: 2026-11-11 — Batch 2 FAQ expansions on the
- * Singapore/Malaysia/UAE/Thailand visa and Dhaka–Dubai flight guides (EN+BN)
- * and the thailand-evisa blog title de-duplication (plan §3.3 Q1/Q3).
+ * Last intentional refresh: 2026-11-12 — Saudi visa route corrections and
+ * Bengali visa-guide localization, plus visa and hotel directory updates.
  */
-export const CONTENT_UPDATED = "2026-11-11";
+export const CONTENT_UPDATED = "2026-11-12";
 
 /**
  * Warn (do not fail) once CONTENT_UPDATED is older than this. Chosen so a content

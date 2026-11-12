@@ -45,6 +45,7 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "flights_heathrow_b747_takeoff_20261101": 670,
   "haramain_bullet_train_1790484312808": 896,
   "hotel_guide_guest_room_20261101": 670,
+  "hotel_directory_hero_20261112": 498,
   "hotels_london_marylebone_exterior_20261101": 1200,
   "havana_gran_teatro_classic_cars_1791427200000": 1072,
   "ihram_preparation_set_1790484426740": 896,
@@ -89,6 +90,7 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "nusuk_gate_permit_20261108": 800,
   "ural_hero_bg_1781543111624": 670,
   "visa_changi_immigration_20261101": 670,
+  "visa_directory_hero_20261112": 500,
   "zamzam_ajwa_dates_1790484440926": 896,
 };
 

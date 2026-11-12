@@ -1,3 +1,4 @@
+import { PromoCard } from "../components/PromoCard";
 import { TravellerCheckNote } from "../components/TravellerCheckNote";
 import { getTravellerCheck } from "../utils/travellerChecks";
 import { buildShareCaption } from "../utils/shareCaption";
@@ -1801,6 +1802,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
+                      {activePost.slug === "flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp" && <PromoCard partner="airhelp" lang={lang} />}
+                      {activePost.affiliateCTA?.provider === "yesim" && <PromoCard partner="yesim" lang={lang} />}
+
                       {/* Contextual Affiliate Widget */}
 
                       {activePost.affiliateCTA && (
@@ -1863,7 +1867,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                           ) : activePost.affiliateCTA.provider === "airalo" ? (
 
-                            <AiraloEsimWidget />
+                            <AiraloEsimWidget lang={lang} />
 
                           ) : activePost.affiliateCTA.provider === "qeeq" ? (
 

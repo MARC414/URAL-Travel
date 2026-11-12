@@ -448,7 +448,7 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": {
     title: "Europe, UK & USA Attraction Passes from Bangladesh | URAL",
     description:
-      "Book skip-the-line museum and landmark passes in Paris, London, Rome and New York, plus learn how US, UK and Schengen visa holders can do Stopover Umrah.",
+      "Book skip-the-line museum and landmark passes in Paris, London, Rome and New York, and check separate Saudi stopover and visa-eligibility guidance for Umrah.",
   },
   "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah": {
     title: "Islamic Dual-Currency Cards in Bangladesh for Umrah | URAL",
