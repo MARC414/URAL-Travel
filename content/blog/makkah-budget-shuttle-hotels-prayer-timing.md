@@ -125,7 +125,7 @@ Use these as the shortlist pattern rather than a ranking: one international-bran
 
 1. **Which terminal does the shuttle serve, and how often does it run after Isha?** The last return is the number that matters.
 2. **What happens to the schedule during Ramadan's last ten nights and the Hajj season?** Ask for the answer in writing.
-3. **Does the booking generate a BRN?** A licensed booking is what makes the visa chain and the permits work; see our [Nusuk hotel BRN and Rawdah permit guide](/blog/nusuk-hotel-brn-rawdah-gate-guide).
+3. **Does the booking generate a BRN?** A licensed booking is what makes the visa chain and the permits work; see our [Nusuk BRN booking and permit guide](/blog/nusuk-hotel-brn-rawdah-gate-guide).
 4. **How many permanent beds are in the room?** Then compare the true nightly cost including breakfast and any extra bed.
 
 7. Frequently Asked Questions

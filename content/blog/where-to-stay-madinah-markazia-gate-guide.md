@@ -137,7 +137,7 @@ Seasonal multipliers are steeper than in most hotel markets: winter Umrah and in
 
 ## What to confirm before you pay
 
-1. **Does the booking generate a BRN?** The reservation has to be referenceable for the visa chain; a private apartment or an unlicensed channel will not produce one. Our [Nusuk hotel BRN and Rawdah permit guide](/blog/nusuk-hotel-brn-rawdah-gate-guide) walks through the order of checks.
+1. **Does the booking generate a BRN?** The reservation has to be referenceable for the visa chain; a private apartment or an unlicensed channel will not produce one. Our [Nusuk BRN and Rawdah permit walkthrough](/blog/nusuk-hotel-brn-rawdah-gate-guide) walks through the order of checks.
 2. **Which gate does the front desk actually send guests to?** Ask in the booking chat and keep the answer.
 3. **Is the quoted room on the mosque side of the building?** "Mosque view" and "mosque side" are not the same request.
 4. **Is the rate refundable?** A flexible rate costs a little more and covers visa delays and flight changes; a non-refundable promotional rate does not.
@@ -224,7 +224,7 @@ Not normally. Tier 2 is a seven to twelve minute flat walk, which most pilgrims 
 
 ## টাকা দেওয়ার আগে যা নিশ্চিত করবেন
 
-1. **বুকিং কি BRN তৈরি করে?** ভিসার শৃঙ্খলে রেফারেন্সযোগ্য আবাসন লাগে; ব্যক্তিগত ফ্ল্যাট বা লাইসেন্সবিহীন চ্যানেল সেটি দেয় না। যাচাইয়ের ক্রম আমাদের [নুসুক হোটেল BRN ও রওদা পারমিট গাইডে](/blog/nusuk-hotel-brn-rawdah-gate-guide) আছে।
+1. **বুকিং কি BRN তৈরি করে?** ভিসার শৃঙ্খলে রেফারেন্সযোগ্য আবাসন লাগে; ব্যক্তিগত ফ্ল্যাট বা লাইসেন্সবিহীন চ্যানেল সেটি দেয় না। যাচাইয়ের ক্রম আমাদের [নুসুক হোটেল BRN গাইড ও রওদা পারমিট](/blog/nusuk-hotel-brn-rawdah-gate-guide) আছে।
 2. **ফ্রন্ট ডেস্ক আসলে কোন গেটে অতিথি পাঠায়?** বুকিং চ্যাটে জিজ্ঞেস করুন, উত্তরটা রেখে দিন।
 3. **যে রুমের দাম বলছে সেটি ভবনের মসজিদের দিকে?** "মসজিদ ভিউ" আর "মসজিদের পাশে" একই অনুরোধ নয়।
 4. **ভাড়া কি ফেরতযোগ্য?** নমনীয় রেট কিছু বেশি লাগে, কিন্তু ভিসার দেরি ও ফ্লাইট বদল ঢেকে দেয়; অ-ফেরতযোগ্য প্রোমোশনাল রেট দেয় না।

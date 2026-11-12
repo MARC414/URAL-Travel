@@ -145,7 +145,7 @@ The comparison that decides it is per head, not per vehicle. Five train tickets 
 1. **Luggage, measured.** Weigh the cases at home. A 25 kg limit is not a suggestion.
 2. **The station pair.** Makkah Rusaifah to Madinah Central, not an airport station by accident.
 3. **The taxi at both ends.** Budget it, and know that the Madinah rank after a train arrival is busy.
-4. **The hotel's access.** A van cannot always reach the door of a Markazia property in a pedestrian zone; ask where the vehicle can stop, and read our [Madinah sector and gate guide](/blog/where-to-stay-madinah-markazia-gate-guide) before you pick the property.
+4. **The hotel's access.** A van cannot always reach the door of a Markazia property in a pedestrian zone; ask where the vehicle can stop, and read our [Madinah Markazia gate guide](/blog/where-to-stay-madinah-markazia-gate-guide) before you pick the property.
 
 8. Frequently Asked Questions
 What is the luggage allowance on the Haramain train?
