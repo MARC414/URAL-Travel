@@ -7405,7 +7405,11 @@ type LinkAuditPost = {
   affiliateCTA?: { provider: string };
 };
 
-function auditPostLinks(posts: LinkAuditPost[], slugSet: Set<string>): string[] {
+function auditPostLinks(
+  posts: LinkAuditPost[],
+  slugSet: Set<string>,
+  pendingSlugs: Set<string> = new Set(),
+): string[] {
   const issues: string[] = [];
   for (const post of posts) {
     const links = post.internalLinks ?? [];
@@ -7421,7 +7425,9 @@ function auditPostLinks(posts: LinkAuditPost[], slugSet: Set<string>): string[] 
       if (link.path === `/blog/${post.slug}`) issues.push(`${post.id}: self-link ${link.path}`);
       if (link.path.startsWith("/blog/")) {
         const target = link.path.slice("/blog/".length).split(/[?#]/, 1)[0];
-        if (!slugSet.has(target)) issues.push(`${post.id}: dead blog target ${link.path}`);
+        if (!slugSet.has(target) && !pendingSlugs.has(target)) {
+          issues.push(`${post.id}: dead blog target ${link.path}`);
+        }
       }
     }
     if (post.affiliateCTA && !Object.prototype.hasOwnProperty.call(AFFILIATE_LINKS, post.affiliateCTA.provider)) {
@@ -7431,8 +7437,18 @@ function auditPostLinks(posts: LinkAuditPost[], slugSet: Set<string>): string[] 
   return issues;
 }
 
+// Pending targets: a blog link whose target is committed as `status: scheduled`
+// with a publish time still in the future resolves at publish — the release
+// that adds the in-link ships the scheduled post itself (Publication Standard
+// G4: in-links in the same release). After publishTime passes, absence from
+// dist is a real failure again (the nightly self-heal did not run).
+const pendingFutureSlugs = new Set(
+  loadScheduledBlogPosts()
+    .filter((post) => post.status === "scheduled" && !isPublicationTimeReached(post, new Date()))
+    .map((post) => post.slug),
+);
 const CONTENT_SLUGS = new Set(BLOG_DATA.map((post) => post.slug));
-const contentLinkIssues = auditPostLinks(BLOG_DATA, CONTENT_SLUGS);
+const contentLinkIssues = auditPostLinks(BLOG_DATA, CONTENT_SLUGS, pendingFutureSlugs);
 check(
   contentLinkIssues.length === 0,
   `content contract: every post has internal links that resolve, are unique and never self-referential [${

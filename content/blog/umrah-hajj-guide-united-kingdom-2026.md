@@ -1,6 +1,7 @@
 ---
 slug: umrah-hajj-guide-united-kingdom-2026
-status: draft
+status: scheduled
+publishDate: "2026-11-17"
 title: "Umrah and Hajj from the UK: Visas, Nusuk and ATOL (2026)"
 titleBn: "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ (২০২৬): ভিসা, নুসুক ও এটিওএল"
 summary: "Checked 11 November 2026: the three Saudi visa routes for a British passport, what a Bangladeshi passport changes, the Nusuk permit step, Hajj 2027's announcement status, UK flight options, ATOL protection, and the FCDO advisory every UK pilgrim should read before paying."
@@ -11,9 +12,16 @@ author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 8 min read
 readTimeBn: ৮ মিনিট পঠন
-updatedAt: "2026-11-11"
+updatedAt: "2026-11-12"
+coverImage: uk_umrah_hajj_guide_20261112
+coverAltEn: A family with suitcases walks through a sunlit airport departures hall at dawn.
+coverAltBn: রোদে আলোকিত এয়ারপোর্ট প্রস্থান হল দিয়ে সামানসহ হাঁটছে একটি পরিবার।
 seoTitle: "Umrah and Hajj from the UK (2026): Visas, Nusuk & ATOL"
 seoDescription: "Which passport governs your Saudi visa, how Nusuk permits work, ATOL checks and the current FCDO advice — planning Umrah or Hajj from the UK in 2026."
+seoTitleBn: "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ (২০২৬): ভিসা, নুসুক ও এটিওএল"
+seoDescriptionBn: "কোন পাসপোর্টে সৌদি ভিসা কোনটি, নুসুক পারমিট কীভাবে কাজ করে, এটিওএল যাচাই আর বর্তমান এফসিডিও পরামর্শ — ২০২৬ সালে যুক্তরাজ্য থেকে ওমরাহ বা হজ্জ পরিকল্পনা।"
+snippet: "Three online routes — an ETA, an e-visa or a waiver — cover Umrah from a British passport, yet the FCDO currently advises against all but essential travel to most of Saudi Arabia and warns that insurance could be invalidated if you travel against it. This guide walks through the visa choices, the Nusuk permit step, Hajj 2027's announcement status, UK flights, ATOL checks and a dated GBP cost snapshot — plus exactly what changes for a Bangladeshi passport."
+snippetBn: "ব্রিটিশ পাসপোর্টে ওমরাহ তিনটি অনলাইন রুটে — ইটিএ, ই-ভিসা বা ওয়েভার — সম্ভব, তবে এফসিডিও বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে পরামর্শ দেয় এবং পরামর্শের বিরুদ্ধে গেলে বীমা বাতিল হতে পারে বলে সতর্ক করে। এই গাইডে ভিসা পছন্দ, নুসুক পারমিটের ধাপ, হজ্জ ২০২৭ ঘোষণার অবস্থা, যুক্তরাজ্যের ফ্লাইট, এটিওএল যাচাই আর তারিখসহ জিবিপি খরচের স্ন্যাপশট — সঙ্গে বাংলাদেশি পাসপোর্টে কোন নিয়ম বদলায় তাও ঠিক করে।"
 faqHeadingEn: "7. Frequently Asked Questions"
 faqHeadingBn: "৭. সচরাচর জিজ্ঞাসা"
 references:
@@ -77,6 +85,9 @@ internalLinksBn:
 affiliateCtaProvider: aviasales
 affiliateCtaHeadline: "Compare live fares for your own dates"
 affiliateCtaBody: "Search current fares from London, Manchester and Birmingham to Jeddah and Madinah for the dates you actually plan to travel, then confirm any package booking is ATOL-protected before you pay."
+affiliateCtaBnProvider: aviasales
+affiliateCtaBnHeadline: "নিজের তারিখে লাইভ ভাড়া মেলান"
+affiliateCtaBnBody: "যে তারিখে সত্যিই ভ্রমণ করবেন সেই তারিখে লন্ডন, ম্যানচেস্টার ও বার্মিংহাম থেকে জেদ্দা ও মদিনার চলতি ভাড়া খুঁজুন, তারপর যেকোনো প্যাকেজ বুকিং ATOL-এর সঙ্গে মিলিয়ে দেখুন।"
 ---
 
 ## The short answer
@@ -158,14 +169,14 @@ In order — each line is a source you can open:
 
 For the stay itself — zones, gates, lead times — [the Makkah and Madinah accommodation guide](/blog/hajj-umrah-accommodation-guide-makkah-madinah) is the deep dive.
 
-**GBP budget snapshot — pending.** The table ships only with dated figures; the GBP capture (value + checked date) is still to be taken, so no money figures appear here:
+**GBP budget snapshot — checked 12 November 2026.** Dated figures only — rows with no official price say so:
 
 | Item | Where the figure comes from | Status |
 | --- | --- | --- |
-| Visa route fee (ETA / e-visa / waiver) | Official portal at application | Pending capture — add value + checked date |
-| Return flights (LHR / MAN / BHX → JED) | Airline or GBP fare search | Pending capture — add value + checked date |
+| Visa route fee (ETA / e-visa / waiver) | Fee shown at application on official portals; the FCDO publishes none | No static fee page exists |
+| Return flights (LHR / MAN → JED) | KAYAK GBP fare search | From £347 (LHR) / £326 (MAN) return, 1 stop; direct £669 / £515 |
 | MenACWY vaccination | UK travel clinic | Price varies — quote at booking |
-| Umrah package / hotel | ATOL-protected operator or Nusuk-approved booking | Pending capture — add value + checked date |
+| Umrah package / hotel | ATOL-protected operator or Nusuk-approved booking | No official price — operator quote; ATOL certificate on payment |
 
 7. Frequently Asked Questions
 Can you perform Umrah on a Saudi ETA, e-visa or visa waiver from the UK?
@@ -210,11 +221,11 @@ Ask for the ATOL number and check it on atol.org; the certificate arrives as soo
 
 ## সুরক্ষা ও বর্তমান পরামর্শ
 
-ATOL হলো অর্থসুরক্ষা, বীমা নয় — ফ্লাইটসহ প্যাকেজে টাকা দেওয়ার সঙ্গে সঙ্গে ATOL সার্টিফিকেট পাওয়া উচিত, নম্বর atol.org-এ যাচাই করুন। এফসিডিও বলে: ওমরাহ বুকিং ATOL-সুরক্ষিত অপারেটরের কাছে, ক্রেডিট কার্ডে, লিখিত শর্তসহ। বর্তমান পরামর্শ (১১ নভেম্বর ২০২৬; পাতাটি সর্বশেষ আপডেট 27 অক্টোবর 2026): ইয়েমেন সীমান্যের 10 কিমি ভিতরে সকল ভ্রমণ নিষেধ; বাকি সৌদি আরবে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে পরামর্শ; কিং খালিদ আন্তর্জাতিক বিমানবন্দরে 10 অক্টোবর 2026 হামলা হয়েছে, বিমানবন্দরে আরও হামলার ঝুঁকি বলে এফসিডিও সতর্ক। বীমার নীতিমালা এফসিডিও পাতার সঙ্গে মিলিয়ে দেখুন; জরুরি সহায়তায় ব্রিটিশ কনস্যুলেট জেদ্দা +966 11 481 9100।
+ATOL হলো অর্থসুরক্ষা, বীমা নয় — ফ্লাইটসহ প্যাকেজে টাকা দেওয়ার সঙ্গে সঙ্গে ATOL সার্টিফিকেট পাওয়া উচিত, নম্বর atol.org-এ যাচাই করুন। এফসিডিও বলে: ওমরাহ বুকিং ATOL-সুরক্ষিত অপারেটরের কাছে, ক্রেডিট কার্ডে, লিখিত শর্তসহ। বর্তমান পরামর্শ (১১ নভেম্বর ২০২৬; পাতাটি সর্বশেষ আপডেট 27 অক্টোবর 2026): ইয়েমেন সীমান্যের 10 কিমি ভিতরে সকল ভ্রমণ নিষেধ; বাকি সৌদি আরবে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে পরামর্শ; কিং খালিদ আন্তর্জাতিক বিমানবন্দরে 10 অক্টোবর 2026 হামলা হয়েছে, বিমানবন্দরে আরও হামলার ঝুঁকি বলে এফসিডিও সতর্ক। বীমার নীতিমালা এফসিডিও পাতার সঙ্গে মিলিয়ে দেখুন; জরুরি সহায়তায় ব্রিটিশ কনস্যুলেট জেদ্দা +966 11 481 9100; পাসপোর্ট হারালে জরুরি ট্রাভেল ডকুমেন্ট (ETD) £125, প্রসেসিং সময় আগে রাখুন (UK FCDO)।
 
 ## মূল্য দেওয়ার আগে
 
-পাসপোর্টের মেয়াদ, ভিসা ট্র্যাক, ACWY, নুসুক পারমিট, ATOL নম্বর, বীমা ও এফসিডিও পাতা, তারপর এয়ারলাইনের সময়সূচি — এই ক্রমে যাচাই করুন। ঢাকা থেকে ছাড়ার আগে [Dhaka Airport Outbound Immigration চেকলিস্ট](/blog/dhaka-airport-outbound-immigration-checklist-noc-go) দেখুন; নুসুক পারমিট যে BRN-এ যুক্ত হয়, সেই শৃঙ্খল দেখুন [নুসুক BRN ও রওদা পারমিট শৃঙ্খল](/blog/nusuk-hotel-brn-rawdah-gate-guide)। থাকার জায়গার জোন, গেট ও সময় নিয়ে গভীর গাইড [মক্কা ও মদিনার আবাসন গাইড](/blog/hajj-umrah-accommodation-guide-makkah-madinah)। GBP ভাড়া ও ফির সব অঙ্ক তারিখসহ ছবি তোলার পরই এখানে বসবে; এই খসড়ায় কোনো অনুমানমূলক অঙ্ক নেই।
+পাসপোর্টের মেয়াদ, ভিসা ট্র্যাক, ACWY, নুসুক পারমিট, ATOL নম্বর, বীমা ও এফসিডিও পাতা, তারপর এয়ারলাইনের সময়সূচি — এই ক্রমে যাচাই করুন। ঢাকা থেকে ছাড়ার আগে [Dhaka Airport Outbound Immigration চেকলিস্ট](/blog/dhaka-airport-outbound-immigration-checklist-noc-go) দেখুন; নুসুক পারমিট যে BRN-এ যুক্ত হয়, সেই শৃঙ্খল দেখুন [নুসুক BRN ও রওদা পারমিট শৃঙ্খল](/blog/nusuk-hotel-brn-rawdah-gate-guide)। থাকার জায়গার জোন, গেট ও সময় নিয়ে গভীর গাইড [মক্কা ও মদিনার আবাসন গাইড](/blog/hajj-umrah-accommodation-guide-makkah-madinah)। GBP ভাড়ার সদ্য ধরা অঙ্ক (KAYAK, ১২ নভেম্বর ২০২৬): লন্ডন হিথরো থেকে ফেরত ভাড়া £347 থেকে (১ স্টপ), সরাসরি £669 থেকে; ম্যানচেস্টার থেকে £326 থেকে, সরাসরি £515 থেকে। ভিসার ফি আবেদনের সময় অফিসিয়াল পোর্টালে দেখানো হয়, এফসিডিও কোনো অঙ্ক প্রকাশ করে না (১২ নভেম্বর ২০২৬); প্যাকেজের কোনো অফিসিয়াল দাম নেই — ATOL-সুরক্ষিত অপারেটরের কাছে উদ্ধৃতি নিন (১২ নভেম্বর ২০২৬-এ যাচাই)।
 
 ৭. সচরাচর জিজ্ঞাসা
 সৌদি আরব কি এখন স্বাভাবিক পর্যটন নির্দেশনায় ফিরছে?

@@ -938,6 +938,15 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                       ? "যোগ্যতা, শর্ত ও বুকিং ধাপ (ফি চেকআউটে দেখুন)"
                       : "Eligibility, conditions and booking steps (fees shown at checkout)",
                   },
+                  {
+                    slug: "umrah-hajj-guide-united-kingdom-2026",
+                    label: isBn
+                      ? "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ"
+                      : "Umrah & Hajj from the UK",
+                    note: isBn
+                      ? "ব্রিটিশ পাসপোর্টের ভিসা, নুসুক ও এটিওএল"
+                      : "British-passport visas, Nusuk and ATOL",
+                  },
                 ],
               },
               {

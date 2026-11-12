@@ -305,3 +305,28 @@ the claims above carry URL + checked date so any line can be re-verified live.
   audit-internal-links.py (BROKEN/ORPHANS/TWIN/G4/HUB-CHILD/OWN-HUB/DIRECTORY/SITEMAP) all pass.
 - **Still pending for scheduling:** unchanged from §8 (GBP capture, cover image, inbound links on
   BD pillar, keyword-map row, G1–G7, full BN twin pass).
+
+- **Phase 5 execution (12 November 2026):**
+  - **GBP snapshot solved without an owner screenshot.** Flights row = KAYAK UK route pages,
+    checked 12 Nov 2026: LHR→JED from **£347** return (1 stop), direct from **£669**, typical
+    returns £462–£624; MAN→JED from **£326**, direct **£515**, typical £553–£824. Visa-fee row =
+    checked statement (FCDO publishes no figures; ksavisa/visitsaudi/mofa show fees only inside
+    the application flow; secondary figures conflict 395/440/535 — none quoted). Package row =
+    terminal honest state: no official price exists → operator quote, ATOL certificate on
+    payment. Zero "Pending capture" rows remain; Aviasales failed again (documented).
+  - **Cover image:** `uk_umrah_hajj_guide_20261112` (family, sunlit departures hall, no text or
+    logos), 1200×800 master in `src/assets/optimized-social/`, six responsive files under
+    `public/assets/images/` (640/960/1200 × webp/avif, house quality settings),
+    `RESPONSIVE_IMAGE_HEIGHTS` entry = 800, `coverAltEn`/`coverAltBn` set.
+  - **BN parity (G5):** BN prose gained the GBP figures and the ETD £125 line; MenACWY + 10 days,
+    48 hours, flight details, ATOL and the consulate number were already present.
+  - **Frontmatter scheduled:** `status: scheduled`, `publishDate: "2026-11-17"` (09:00 Dhaka =
+    nightly 03:00 UTC cron, time-based `isPublicationTimeReached` + self-healing sitemap check),
+    `updatedAt: 2026-11-12`, `seoTitleBn`/`seoDescriptionBn`, `snippet`/`snippetBn`,
+    `affiliateCtaBn*` trio.
+  - **G4 in-links, same release (5 edits):** BD pillar `internalLinks` EN (`src/constants.ts`)
+    + BN (`src/data/bengaliContent.ts`); `/umrah` hub — prerender `STANDALONE_PAGE_LINKS` EN,
+    `bnLinkList` BN, `UmrahLandingPage` "Visa & permits" group. The links target the future URL
+    until the first build ≥ 17 Nov 09:00 Dhaka — merge the release before that moment.
+  - **SEO-KEYWORD-MAP row** added (G6: fast-moving, owner Farhan Momen, review by 15 Feb 2027;
+    baseline at the 2 Dec export). Plan §5/§9 updated.

@@ -685,6 +685,10 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
       href: "/blog/makkah-hotel-sectors-abraj-al-bait-jabal-omar",
       text: "Makkah Hotel Sectors: Abraj Al-Bait, Jabal Omar or a Shuttle Zone",
     },
+    {
+      href: "/blog/umrah-hajj-guide-united-kingdom-2026",
+      text: "UK passport visa routes, Nusuk permits and ATOL checks",
+    },
   ],
   "/banking": [
     {
@@ -3721,6 +3725,7 @@ function buildBengaliBody(
         { label: "ঢাকা বিমানবন্দরে না মিকাতে ইহরাম", path: "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" },
         { label: "হজ্জ ও ওমরাহর আবাসন: কোথায় ঘুমাবেন তা কীভাবে ঠিক করবেন", path: "/blog/hajj-umrah-accommodation-guide-makkah-madinah" },
         { label: "মক্কার হোটেল সেক্টর: আবরাজ আল-বাইত, জাবাল ওমর নাকি শাটল জোন", path: "/blog/makkah-hotel-sectors-abraj-al-bait-jabal-omar" },
+        { label: "যুক্তরাজ্য থেকে ওমরাহ: ভিসা রুট, নুসুক পারমিট ও এটিওএল যাচাই", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
       ])
     );
     return `<article>${parts.join("")}</article>`;
