@@ -59,6 +59,21 @@ internalLinksEn:
     path: /blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah
   - text: "Bangladesh flow: outbound immigration checklist for Dhaka airport"
     path: /blog/dhaka-airport-outbound-immigration-checklist-noc-go
+internalLinksBn:
+  - text: "DIY ওমরাহ প্ল্যানিং হাব ও বাজেট ক্যালকুলেটর"
+    path: /umrah
+  - text: "হজ্জ ও ওমরাহর আবাসন: কোথায় ঘুমাবেন তা কীভাবে ঠিক করবেন"
+    path: /blog/hajj-umrah-accommodation-guide-makkah-madinah
+  - text: "নুসুক হোটেল BRN ও রওদা পারমিট: গেট আসলে কীসে খোলে"
+    path: /blog/nusuk-hotel-brn-rawdah-gate-guide
+  - text: "মক্কা থেকে মদিনা: হারামাইন ট্রেন, ভিআইপি বাস নাকি প্রাইভেট ভ্যান"
+    path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
+  - text: "ঢাকা থেকে জেদ্দা–মদিনা open-jaw ভাড়া কৌশল"
+    path: /blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia
+  - text: "বাংলাদেশ থেকে ৯৬ ঘণ্টার Saudi Stopover: যোগ্যতা, বুকিং ও ওমরাহ"
+    path: /blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah
+  - text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট"
+    path: /blog/dhaka-airport-outbound-immigration-checklist-noc-go
 affiliateCtaProvider: aviasales
 affiliateCtaHeadline: "Compare live fares for your own dates"
 affiliateCtaBody: "Search current fares from London, Manchester and Birmingham to Jeddah and Madinah for the dates you actually plan to travel, then confirm any package booking is ATOL-protected before you pay."
@@ -66,16 +81,16 @@ affiliateCtaBody: "Search current fares from London, Manchester and Birmingham t
 
 ## The short answer
 
-Umrah and Hajj from the UK are arranged in three moves — visa, permit, booking — and two facts decide the rest: **which passport you travel on**, and **what the FCDO currently advises about travelling to Saudi Arabia**.
+Umrah and Hajj from the UK come down to three moves — visa, permit, booking — and two facts: **which passport you travel on**, and **what the FCDO currently advises about travelling to Saudi Arabia**.
 
-- **British citizen passport:** three online routes cover Umrah outside the Hajj season — an ETA, an e-visa, or an electronic visa waiver (UK FCDO, checked 11 November 2026). Hajj always needs its own visa.
-- **Bangladeshi passport:** Saudi Arabia's official eVisa eligibility list does not include Bangladesh; the portal's own instruction is to contact the nearest Saudi Arabia Embassy (checked 11 November 2026).
-- **Everyone:** the Umrah permit comes through Nusuk, the Ministry's official platform, and the MenACWY certificate is required at least 10 days before arrival (UK FCDO).
+- **British citizen passport:** three online routes cover Umrah outside the Hajj season — an ETA, an e-visa, or an electronic visa waiver (UK FCDO, checked 11 November 2026); Hajj always needs its own visa.
+- **Bangladeshi passport:** the official eVisa eligibility list does not include Bangladesh — the portal says contact the nearest Saudi Arabia Embassy (checked 11 November 2026).
+- **Everyone:** the Umrah permit comes through Nusuk, the Ministry's platform, and MenACWY is required at least 10 days before arrival (UK FCDO).
 - **Before you pay:** the FCDO currently advises against all but essential travel to most of Saudi Arabia, and warns insurance could be invalidated if you travel against its advice (checked 11 November 2026).
 
 ## Which passport governs your Saudi visa?
 
-The FCDO's entry-requirements page is written for people travelling on a full **British citizen passport** from the UK, and it sets out three online routes:
+The FCDO's entry-requirements page covers the full **British citizen passport** route from the UK — three online options:
 
 | Route | Valid for | Total stay | Health cover | Apply at |
 | --- | --- | --- | --- | --- |
@@ -85,15 +100,15 @@ The FCDO's entry-requirements page is written for people travelling on a full **
 
 All three cover **Umrah outside the Hajj season**; none covers Hajj — that needs a separate visa. Passport validity: at least **6 months** after arrival.
 
-If you travel on a **Bangladeshi passport**, do not guess. The official eVisa portal publishes a list of 72 eligible countries: the United Kingdom is on it, Bangladesh is not, and the portal's instruction for everyone else is to contact the nearest Saudi Arabia Embassy. The FCDO gives the same answer to anyone unsure how the rules apply: contact the Saudi Embassy in the UK. Agencies advertise extra routes for residents, but no primary source checked for this guide (11 November 2026) publishes them — verify inside the live application at visa.visitsaudi.com, or with the embassy, before paying anyone.
+If you travel on a **Bangladeshi passport**, do not guess. The official eVisa portal lists 72 eligible countries: the UK is on it, Bangladesh is not; its instruction — and the FCDO's — is to contact the nearest Saudi Arabia Embassy. Agencies advertise extra routes; none was published by a primary source checked on 11 November 2026, so verify in the live application or with the embassy before paying. The Bangladesh-side flow starts at [the Umrah planning hub](/umrah); the stopover question has its own guide: [the Saudia and flynas 96-hour stopover](/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah).
 
 ## Can you do Umrah on each route?
 
 Yes — on all three routes, **outside the Hajj season**, on the same three conditions:
 
-1. **Book the Umrah permit on Nusuk.** Nusuk is the official platform of the Ministry of Hajj and Umrah, and Umrah permit booking is one of its published services (checked 11 November 2026). The visa gets you into the country; the permit is what the Haram entry checks.
+1. **Book the Umrah permit on Nusuk.** Nusuk is the Ministry's official platform and Umrah permit booking is one of its published services (checked 11 November 2026). The visa gets you in; the permit is what the Haram entry checks.
 2. **Carry the MenACWY certificate.** A valid quadrivalent meningococcal vaccination certificate is required for Hajj and Umrah pilgrims **at least 10 days before arrival** (UK FCDO).
-3. **Check your insurance against the current advice** — the e-visa's included cover stops at SAR 100,000, and the FCDO warns that insurance could be invalidated if you travel against its advice (see below).
+3. **Check your insurance against the current advice** — e-visa cover stops at SAR 100,000, and cover could be invalidated if you travel against FCDO advice (see below).
 
 Around Hajj the rules tighten: Saudi authorities have stopped non-Hajj visitors flying to Jeddah, Madinah and Taif, and a Hajj visa may be needed just to board (UK FCDO, checked 11 November 2026).
 
@@ -103,8 +118,8 @@ Around Hajj the rules tighten: Saudi authorities have stopped non-Hajj visitors 
 
 Two rules do not change while you wait:
 
-- **Hajj places are booked only through the official Nusuk Hajj platform** — the FCDO states this directly, and it is the single most effective guard against Hajj fraud.
-- **A tourist visa, e-visa or ETA is not a Hajj visa.** When the Ministry announces dates and registration windows, they will appear on haj.gov.sa and Nusuk; treat any date quoted by a package operator as a booking estimate until then.
+- **Hajj places are booked only through the official Nusuk Hajj platform** — the FCDO states this directly; it is the best guard against Hajj fraud.
+- **A tourist visa, e-visa or ETA is not a Hajj visa.** When they appear on haj.gov.sa and Nusuk, treat any operator-quoted date as an estimate until then.
 
 ## How do you fly from the UK?
 
@@ -113,11 +128,11 @@ Confirmed on the airlines' own pages, checked 11 November 2026:
 - **British Airways:** London Heathrow–Jeddah direct in about **6 hours 15 minutes** (BA's Saudi Arabia page); BA's press room dates the current year-round Jeddah service from **4 November 2024**, launched as **four flights a week** from Heathrow Terminal 5.
 - **SAUDIA:** **London, Manchester and Birmingham** in its network alongside Jeddah and Al Madinah, operating from **Heathrow Terminal 4** (official network page).
 
-Timetables change seasonally, and this guide does not assert Madinah (MED) nonstop options — re-check the current timetable on the airline's own site when you book.
+Timetables change seasonally; this guide does not assert Madinah (MED) nonstop options — re-check on the airline's own site when you book. Travelling the Dhaka leg instead? [The Dhaka–Jeddah–Madinah open-jaw strategy](/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia) covers that routing.
 
 ## Is your booking protected — and what does the current advice change?
 
-**ATOL is your financial seatbelt, not your insurance.** If a package includes a flight, ATOL protects the money you pay a UK travel company; it is separate from travel insurance, and you should get an **ATOL Certificate as soon as you pay any money** (atol.org, checked 11 November 2026). The FCDO adds: ATOL-protected operator, credit card where possible, written terms, every transaction kept.
+**ATOL is your financial seatbelt, not your insurance.** If a package includes a flight, ATOL protects the money you pay a UK travel company — separate from travel insurance. Get an **ATOL Certificate as soon as you pay** (atol.org, checked 11 November 2026); the FCDO adds: ATOL-protected operator, credit card where possible, written terms, every transaction kept.
 
 **Read the current advisory twice.** At check time (11 November 2026; page last updated 27 October 2026) the FCDO advises:
 
@@ -125,23 +140,25 @@ Timetables change seasonally, and this guide does not assert Madinah (MED) nonst
 - against **all but essential travel to the rest of Saudi Arabia**;
 - notes that King Khalid International Airport was struck on **10 October 2026** and that airports remain at risk of further attacks, with disruption and cancellations "very likely".
 
-The line that matters for your wallet: **"Your travel insurance could be invalidated if you travel against advice from the FCDO."** Before you pay any deposit, read your policy wording against the current FCDO page — if cover excludes travel against advice, you are carrying the risk yourself.
+The line for your wallet: **"Your travel insurance could be invalidated if you travel against advice from the FCDO."** Read your policy wording against the current FCDO page before any deposit — if cover excludes travel against advice, you carry the risk yourself.
 
-Consular fallback: British Consulate General Jeddah, **+966 11 481 9100**; a passport lost during Hajj means an Emergency Travel Document — **£125**, allow processing time (UK FCDO).
+Consular fallback: British Consulate General Jeddah **+966 11 481 9100**; a lost passport during Hajj means an Emergency Travel Document — **£125**, allow processing time (UK FCDO).
 
 ## What to check before you pay
 
-In order — each line is a primary source you can open yourself:
+In order — each line is a source you can open:
 
-1. **Decide the track by passport:** British citizen → the three FCDO routes above; Bangladeshi passport → embassy or the live eligibility check, never an agency's summary.
+1. **Decide the track by passport:** British citizen → the three FCDO routes above; Bangladeshi passport → embassy or the live eligibility check, never an agency's summary. Dhaka departures also work through [the Dhaka airport outbound immigration checklist](/blog/dhaka-airport-outbound-immigration-checklist-noc-go).
 2. **Passport validity:** at least 6 months after your arrival date, with blank pages.
 3. **MenACWY:** booked early enough that the certificate is valid **10 days before arrival**.
-4. **Nusuk:** account created and the Umrah permit booked for your dates; Hajj, if that is the intent, only via Nusuk Hajj.
+4. **Nusuk:** account created and the Umrah permit booked for your dates; Hajj, if that is the intent, only via Nusuk Hajj. The BRN chain behind permits: [the Nusuk BRN and Rawdah permit chain](/blog/nusuk-hotel-brn-rawdah-gate-guide).
 5. **ATOL:** number checked on atol.org, certificate expected on payment, terms in writing.
 6. **Insurance:** policy read against the FCDO advisory of the day.
 7. **FCDO page and airline timetable:** re-checked on the day you book — both are live documents.
 
-**GBP budget snapshot — pending.** The fare and fee table ships only with dated figures; the GBP capture (value plus "checked" date) is still to be taken, so this draft deliberately carries no money figures:
+For the stay itself — zones, gates, lead times — [the Makkah and Madinah accommodation guide](/blog/hajj-umrah-accommodation-guide-makkah-madinah) is the deep dive.
+
+**GBP budget snapshot — pending.** The table ships only with dated figures; the GBP capture (value + checked date) is still to be taken, so no money figures appear here:
 
 | Item | Where the figure comes from | Status |
 | --- | --- | --- |
@@ -152,15 +169,15 @@ In order — each line is a primary source you can open yourself:
 
 7. Frequently Asked Questions
 Can you perform Umrah on a Saudi ETA, e-visa or visa waiver from the UK?
-Yes — all three routes cover Umrah outside the Hajj season for a British citizen passport. You still book the Umrah permit through Nusuk, and you still need a valid MenACWY certificate at least 10 days before arrival. None of the three covers Hajj; Hajj needs its own visa booked through Nusuk Hajj (UK FCDO, checked 11 November 2026).
+Yes — all three cover Umrah outside the Hajj season. You still book the permit through Nusuk and need MenACWY at least 10 days before arrival; none covers Hajj, which needs its own Nusuk Hajj visa (UK FCDO, checked 11 November 2026).
 Can you apply for a Saudi visa from the UK on a Bangladeshi passport?
-The official eVisa portal's eligibility list does not include Bangladesh, and its instruction for everyone else is to contact the nearest Saudi Arabia Embassy — the FCDO gives the same advice to anyone unsure. Verify your route inside the live application at visa.visitsaudi.com or with the embassy before paying anyone (checked 11 November 2026).
+The official eVisa eligibility list does not include Bangladesh; the portal says contact the nearest Saudi Arabia Embassy, as does the FCDO. Verify your route in the live application or with the embassy before paying (checked 11 November 2026).
 Is Hajj 2027 registration open for UK pilgrims?
-No Hajj 2027 dates or UK registration window were published by the Ministry of Hajj and Umrah or Nusuk as of 11 November 2026. The Ministry has opened licensing for foreign pilgrim service companies for the 1448 AH season. When registration opens, it will be through the official Nusuk Hajj platform — that is the only channel the FCDO recognises for booking a Hajj place.
+Not as of 11 November 2026 — neither the Ministry nor Nusuk has published Hajj 2027 dates or a UK registration window. Licensing for foreign pilgrim service companies is open for the 1448 AH season; when registration opens it will be through Nusuk Hajj, the only channel the FCDO recognises.
 Does the e-visa's included health insurance mean you do not need travel insurance?
-No. The e-visa includes cover up to SAR 100,000; the FCDO advises considering more. Critically, it currently advises against all but essential travel to most of Saudi Arabia and warns insurance could be invalidated if you travel against its advice — read your policy against the FCDO page before you pay (checked 11 November 2026).
+No. The e-visa includes cover up to SAR 100,000 and the FCDO advises more — and currently against all but essential travel to most of Saudi Arabia, warning cover could be invalidated if you travel against advice. Read your policy against the FCDO page before you pay (checked 11 November 2026).
 How do you check that an Umrah booking company is protected?
-If the package includes a flight, ask for the ATOL number and check it on atol.org; the ATOL Certificate should arrive as soon as you pay. The FCDO adds: ATOL-protected operator, credit card where possible, written terms, every transaction kept (checked 11 November 2026).
+Ask for the ATOL number and check it on atol.org; the certificate arrives as soon as you pay. The FCDO adds: ATOL-protected operator, credit card, written terms, every transaction kept (checked 11 November 2026).
 
 <!-- lang:bn -->
 
@@ -177,7 +194,7 @@ If the package includes a flight, ask for the ATOL number and check it on atol.o
 
 এফসিডিওর প্রবেশ-শর্তের পাতাটি ব্রিটিশ নাগরিক পাসপোর্টের জন্য লেখা। ইটিএ: 730 দিন কার্যকর, একাধিক প্রবেশ, মোট 180 দিন, বীমা নেই, ভ্রমণের আগে ksavisa.sa-তে আবেদন। ই-ভিসা: 365 দিন, মোট 90 দিন, SAR 100,000 পর্যন্ত স্বাস্থ্য বীমা অন্তর্ভুক্ত, visa.visitsaudi.com বা আগমনে; হজ্জ অন্তর্ভুক্ত নয়। ইলেকট্রনিক ভিসা ওয়েভার: একক প্রবেশ, 180 দিন, বীমা নেই, visa.mofa.gov.sa-তে ফ্লাইটের অন্তত 48 ঘণ্টা আগে। পাসপোর্টের মেয়াদ আগমনের তারিখ থেকে অন্তত 6 মাস বাকি থাকতে হবে।
 
-বাংলাদেশি পাসপোর্টে অনুমান চলবে না: অফিসিয়াল তালিকায় যুক্তরাজ্য আছে, বাংলাদেশ নেই — লাইভ আবেদন-যাচাই বা দূতাবাসই একমাত্র নির্ভরযোগ্য উত্তর।
+বাংলাদেশি পাসপোর্টে অনুমান চলবে না: অফিসিয়াল তালিকায় যুক্তরাজ্য আছে, বাংলাদেশ নেই — লাইভ আবেদন-যাচাই বা দূতাবাসই একমাত্র নির্ভরযোগ্য উত্তর। বাংলাদেশ থেকে পরিকল্পনার শুরু [ওমরাহ প্ল্যানিং হাব](/umrah); স্টপওভার প্রশ্নের জন্য আলাদা গাইড [৯৬ ঘণ্টার Saudi Stopover ভিসা](/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah)।
 
 ## প্রতিটি রুটে ওমরাহ কি হয়?
 
@@ -189,7 +206,7 @@ If the package includes a flight, ask for the ATOL number and check it on atol.o
 
 ## যুক্তরাজ্য থেকে কীভাবে উড়বেন
 
-ব্রিটিশ এয়ারওয়েজ: লন্ডন হিথরো–জেদ্দা সরাসরি প্রায় 6 ঘণ্টা 15 মিনিট; বর্তমান বছরজুড়ে জেদ্দা পরিষেবা 4 নভেম্বর 2024 থেকে, শুরুতে সপ্তাহে 4 ফ্লাইট, হিথরো টার্মিনাল 5। সৌদিয়া: লন্ডন, ম্যানচেস্টার ও বার্মিংহাম নেটওয়ার্কে, হিথরো টার্মিনাল 4 থেকে। সময়সূচি মৌসুমভেদে বদলায় — বুকিংয়ের দিনে এয়ারলাইনের নিজস্ব সাইটে যাচাই করুন।
+ব্রিটিশ এয়ারওয়েজ: লন্ডন হিথরো–জেদ্দা সরাসরি প্রায় 6 ঘণ্টা 15 মিনিট; বর্তমান বছরজুড়ে জেদ্দা পরিষেবা 4 নভেম্বর 2024 থেকে, শুরুতে সপ্তাহে 4 ফ্লাইট, হিথরো টার্মিনাল 5। সৌদিয়া: লন্ডন, ম্যানচেস্টার ও বার্মিংহাম নেটওয়ার্কে, হিথরো টার্মিনাল 4 থেকে। সময়সূচি মৌসুমভেদে বদলায় — বুকিংয়ের দিনে এয়ারলাইনের নিজস্ব সাইটে যাচাই করুন। ঢাকা দিয়ে যাচ্ছেন? [ঢাকা থেকে জেদ্দা–মদিনা open-jaw কৌশল](/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia) সেই রুটের গাইড।
 
 ## সুরক্ষা ও বর্তমান পরামর্শ
 
@@ -197,7 +214,7 @@ ATOL হলো অর্থসুরক্ষা, বীমা নয় — ফ
 
 ## মূল্য দেওয়ার আগে
 
-পাসপোর্টের মেয়াদ, ভিসা ট্র্যাক, ACWY, নুসুক পারমিট, ATOL নম্বর, বীমা ও এফসিডিও পাতা, তারপর এয়ারলাইনের সময়সূচি — এই ক্রমে যাচাই করুন। GBP ভাড়া ও ফির সব অঙ্ক তারিখসহ ছবি তোলার পরই এখানে বসবে; এই খসড়ায় কোনো অনুমানমূলক অঙ্ক নেই।
+পাসপোর্টের মেয়াদ, ভিসা ট্র্যাক, ACWY, নুসুক পারমিট, ATOL নম্বর, বীমা ও এফসিডিও পাতা, তারপর এয়ারলাইনের সময়সূচি — এই ক্রমে যাচাই করুন। ঢাকা থেকে ছাড়ার আগে [Dhaka Airport Outbound Immigration চেকলিস্ট](/blog/dhaka-airport-outbound-immigration-checklist-noc-go) দেখুন; নুসুক পারমিট যে BRN-এ যুক্ত হয়, সেই শৃঙ্খল দেখুন [নুসুক BRN ও রওদা পারমিট শৃঙ্খল](/blog/nusuk-hotel-brn-rawdah-gate-guide)। থাকার জায়গার জোন, গেট ও সময় নিয়ে গভীর গাইড [মক্কা ও মদিনার আবাসন গাইড](/blog/hajj-umrah-accommodation-guide-makkah-madinah)। GBP ভাড়া ও ফির সব অঙ্ক তারিখসহ ছবি তোলার পরই এখানে বসবে; এই খসড়ায় কোনো অনুমানমূলক অঙ্ক নেই।
 
 ৭. সচরাচর জিজ্ঞাসা
 সৌদি আরব কি এখন স্বাভাবিক পর্যটন নির্দেশনায় ফিরছে?

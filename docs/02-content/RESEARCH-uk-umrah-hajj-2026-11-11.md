@@ -285,3 +285,23 @@ the claims above carry URL + checked date so any line can be re-verified live.
 - **BN body (condensed):** the scheduling parser requires a non-empty Bengali body plus `faqHeadingBn` verbatim with even Q/A line pairs for every post — so the draft carries a condensed BN twin (all sections + the 5 FAQ pairs) instead of a bare separator. Full BN twin (spec step 3) still pending: word-for-word parity expansion, `titleBn`/`summaryBn` re-composition review (both newly composed — flag for verification), `seoTitleBn`/`seoDescriptionBn`, `snippet`/`snippetBn`, `internalLinksBn`, `affiliateCtaBn*` trio.
 - **Gates run at drafting (all pass):** `lint` ✅ · `test:scheduling` ✅ · `build` ✅ (draft absent from `dist/`, sitemap carries no UK URLs → G1 holds) · `verify:build` ✅ · `test:visa-claims` ✅ · `test:brand-mark` ✅.
 - **Pending for scheduling (spec §6):** GBP snapshot capture → replace 3 pending table rows; cover image (640/960/1200.webp + social jpg + `imageAssets.ts`); 2 inbound links (`src/constants.ts` EN + `src/data/bengaliContent.ts` BN on the BD pillar); `SEO-KEYWORD-MAP` row; G1–G7 full re-check; ≤1 new URL/week. Q2 stopover stays flagged/omitted; Q3 frequencies remain airline-official only (BA 4×/week since 4 Nov 2024).
+
+## 9. Linking pass (updated 11 Nov 2026)
+
+- **Renderer fixed (commit 8ba17a0):** inline `[text](/path)` links previously shipped as raw
+  markdown in the static HTML (regex was `https://`-only in the React view; the prerender had no
+  link pass at all). Both renderers now emit locale-aware anchors; 30 raw occurrences → 0.
+  New `verify:build` guard fails any built blog page (EN/BN) still carrying raw markdown link text.
+- **R4 anchor variety (commit 822ceed):** identical cross-post prose anchors varied — Nusuk target
+  now has 6 distinct EN + 6 distinct BN wordings across the cluster; Madinah target distinct in EN;
+  `mobilty` typo fixed. Module/related-box label texts left uniform (house convention, 23 targets
+  site-wide — product copy, not prose anchors). Owner can override this reading.
+- **Draft linking (this pass):** EN body now threads 6 contextual prose links (Umrah hub, stopover,
+  open-jaw, immigration checklist, Nusuk BRN chain, accommodation guide) + mirrored 6 in the
+  condensed BN body; `internalLinksBn` added (7 entries, texts extracted from target sources);
+  EN length trimmed back to exactly 1,600 words. Cluster-wide prose R4 re-scan: 0 violations.
+  GBP-budget prose link held (SPEC §5: link `/costs/*` or hold — holding until the GBP capture).
+- **Gates:** lint · test:scheduling · build · verify:build 511/511 · visa-claims · brand-mark ·
+  audit-internal-links.py (BROKEN/ORPHANS/TWIN/G4/HUB-CHILD/OWN-HUB/DIRECTORY/SITEMAP) all pass.
+- **Still pending for scheduling:** unchanged from §8 (GBP capture, cover image, inbound links on
+  BD pillar, keyword-map row, G1–G7, full BN twin pass).
