@@ -1,6 +1,8 @@
 # SPEC — Umrah & Hajj from the UK (2026): research-first brief
 
-**Status:** RESEARCH PHASE — owner declared focus, 11 November 2026: *"I will focus on
+**Status:** RESEARCH PHASE — pass 1 (S1–S9) logged 11 Nov 2026 in
+[RESEARCH-uk-umrah-hajj-2026-11-11.md](RESEARCH-uk-umrah-hajj-2026-11-11.md) (6 primaries
+collected; open questions 2, 3, 5 pending pass 2) — owner declared focus, 11 November 2026: *"I will focus on
 UK-umrah-hajj guide fully, maintaining SEO, AEO, natural writing, authentic verified info
 from govt sources and other true links, live record, practical outlook."*
 This is the owner approval the archived S4 cluster required. Publishing still passes
