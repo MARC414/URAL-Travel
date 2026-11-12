@@ -1,7 +1,7 @@
 ---
 slug: umrah-hajj-guide-united-kingdom-2026
 status: scheduled
-publishDate: "2026-11-17"
+publishDate: "2026-11-12"
 title: "Umrah and Hajj from the UK: Visas, Nusuk and ATOL (2026)"
 titleBn: "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ (২০২৬): ভিসা, নুসুক ও এটিওএল"
 summary: "Checked 11 November 2026: the three Saudi visa routes for a British passport, what a Bangladeshi passport changes, the Nusuk permit step, Hajj 2027's announcement status, UK flight options, ATOL protection, and the FCDO advisory every UK pilgrim should read before paying."

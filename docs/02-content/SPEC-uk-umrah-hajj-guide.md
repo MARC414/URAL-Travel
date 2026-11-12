@@ -6,8 +6,9 @@ collected; open questions 2, 3, 5 pending pass 2) — owner declared focus, 11 N
 UK-umrah-hajj guide fully, maintaining SEO, AEO, natural writing, authentic verified info
 from govt sources and other true links, live record, practical outlook."*
 This is the owner approval the archived S4 cluster required. Publishing still passes
-G1–G7 of [Publication Standard v2](../growth/11-PUBLICATION-STANDARD-V2.md), one URL,
-≤1/week cadence.
+G1–G7 of [Publication Standard v2](../growth/11-PUBLICATION-STANDARD-V2.md). The weekly
+cap was removed by owner decision on 12 November 2026; this SPEC now covers the **cluster**
+below, not a single URL.
 **Provenance:** derived from archived [Brief 1](../history/2026-10-strategy-baseline/growth/19-S4-UK-DIASPORA-DRAFTS-PLAN.md)
 (Umrah from London & Manchester), extended to include Hajj at owner's request. Archived
 assumptions (UMM, BIC, GBP-issued ticket proof) are **prompts, not facts — every one is
@@ -116,7 +117,7 @@ unapproved); no domain change; publication ≤1 new URL/week while measurement i
 - [ ] G4 links both ways — §5 map, both locales
 - [ ] G5 EN + BN body at publish, same facts, written BN `internalLinks`
 - [ ] G6 maintenance owner + `fast-moving` (90 days) — visa/fares/ATOL rules drift
-- [ ] G7 cadence — occupies the week's single slot; nothing else ships that week
+- [x] G7 cadence — **no weekly cap** (owner, 12 Nov 2026); cluster ships in consecutive daily slots
 
 ## 7. Drafting order once research closes
 
@@ -126,5 +127,5 @@ unapproved); no domain change; publication ≤1 new URL/week while measurement i
 3. BN twin, same facts, written `internalLinksBn`.
 4. FAQ schema + answer-first block + GBP table with checked dates.
 5. Internal-link release: the two inbound links (§5) ship **in the same release**.
-6. `SEO-KEYWORD-MAP` row + plan §5/§9 update + schedule ≤1/week.
+6. `SEO-KEYWORD-MAP` row + plan §5/§9 update + schedule in the next free daily slot.
 7. Measure at the **2 Dec 2026** export with the UK track (plan §5 checkpoint).

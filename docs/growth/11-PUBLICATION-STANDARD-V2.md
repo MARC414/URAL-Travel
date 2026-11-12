@@ -35,7 +35,7 @@ cadence, not a publishing programme.
 | G4 | **Links both ways** | ≥4 `internalLinks` in the article (≥2 blog→blog, ≥1 hub/money), **and** ≥2 existing posts link *into* it in the same release (EN and BN arrays both). | Not a release. Hold it. |
 | G5 | **Locale parity** | English and Bengali body at publish time, same facts, same caveats, explicitly written BN `internalLinks`. | Publish nothing, or publish English only *without* a `/bn/` URL in the sitemap. |
 | G6 | **Maintenance owner** | A named owner and a review interval: `seasonal` (recheck each season), `static` (recheck annually), or `fast-moving` (90 days). | Do not publish. Orphaned pages decay silently. |
-| G7 | **Cadence** | ≤2 new URLs per week. No same-day batches of unrelated posts. | Queue it. The queue is not a backlog of promises; it is an ordering. |
+| G7 | **Cadence** | **No weekly cap** (owner decision, 12 November 2026). The owner publishes continuously — daily is expected. The only standing rule is no same-day deploy batches of *unrelated* posts; a topical cluster may ship in sequence, one URL per day. | Nothing to queue for cadence. If a post is not finished it waits; being unfinished is the only reason to hold. |
 
 ### 2.2 Domain age overrides absence-of-evidence (added 2 November 2026)
 
@@ -112,17 +112,19 @@ fails the build; a deliberate one is recorded with its reason.
 > The owner supplied a real GSC export — 1,246 impressions, 2 clicks, 10 days —
 > read in `docs/03-social/GSC-READ-2026-11-02.md`. Conversion events are still
 > missing. The practical consequence: **G3 can now be tested against real
-> queries for search-driven articles**, and the cap returns to two per week for
-> work aimed at the queries already ranking. It does not return to two per week
-> for *new* intents, because the export shows the site is at 0.47 impressions
-> per URL per day — the constraint is visibility, not inventory.
+> queries for search-driven articles**. The weekly cap has since been removed
+> altogether (owner decision, 12 November 2026) — cadence belongs to the owner,
+> not to policy. The export still shows 0.47 impressions per URL per day, so the
+> real constraint remains visibility, not inventory: the seven gates are the only
+> brake on what ships.
 
 The 25 October audit classified measurement as **P0** and the public GTM
 container still lacks forwarding for URAL's custom events. The current GSC
 exports in the repository carry **no click or impression values** ("NOT
 SUPPLIED"). Until both are fixed:
 
-- New URLs are capped at **one per week**, not two.
+- **No weekly cap** (owner decision, 12 November 2026). Every article still ships
+  with its intended query and its review date recorded.
 - Every article ships with its intended query and its review date recorded, so
   that the first usable export can be read against an intention rather than a
   guess.
@@ -136,7 +138,7 @@ record intentions.
 | --- | --- |
 | New standalone articles: zero. | New articles permitted, gated by G1–G7. |
 | Coverage gaps become "section upgrades" by default. | Sections still preferred when they fit (G1); a new URL is legitimate when the job is genuinely distinct. |
-| Publishing frequency unaddressed. | ≤2/week, no batches; ≤1/week while measurement is broken. |
+| Publishing frequency unaddressed. | No weekly cap — continuous (typically daily) publishing is the owner's decision; no same-day batches of unrelated posts. |
 | Length unaddressed. | 700–1,000 words for single-question articles; <600 words only with a strong structure. |
 | No decay policy. | 90-day impression check, then merge + 301. |
 
