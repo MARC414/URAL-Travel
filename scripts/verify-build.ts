@@ -3606,14 +3606,43 @@ if (sitemap) {
     umrahCostEn?.affiliateCTA?.provider === "aviasales" &&
     umrahCostBn?.affiliateCTA?.provider === "aviasales" &&
     umrahCostEnHtml.includes(umrahCostEn.affiliateCTA?.headline ?? "—missing—") &&
-    umrahCostEnHtml.includes(FLIGHT_WHITE_LABEL.origin) &&
-    umrahCostEnHtml.includes("sub_id=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost") &&
+    umrahCostEnHtml.includes("/flights?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost") &&
     umrahCostBnHtml.includes(umrahCostBn.affiliateCTA?.headline ?? "—missing—") &&
-    umrahCostBnHtml.includes(FLIGHT_WHITE_LABEL.origin) &&
+    umrahCostBnHtml.includes("/bn/flights?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost") &&
     umrahCostBnHtml.includes('rel="noopener noreferrer sponsored"');
   check(
     umrahCostOk,
-    "the Umrah Cost guide carries its matched live-fare next step (aviasales affiliateCTA) on the white label, with per-article sub_id, in EN and BN"
+    "the Umrah Cost guide carries its matched live-fare next step (aviasales affiliateCTA) to our own /flights page, with the per-article placement id, in EN and BN"
+  );
+
+  // The article CTA now stops on our own /flights page. That page only earns
+  // the click if it exists in both locales and if the widget there actually
+  // forwards the placement id to the white label — otherwise the stop costs a
+  // hop and loses the attribution it was meant to preserve.
+  const widgetSource = read(path.join(process.cwd(), "src/components/TravelpayoutsWidget.tsx")) ?? "";
+  check(
+    fs.existsSync(path.join(DIST_DIR, "flights.html")) &&
+      fs.existsSync(path.join(DIST_DIR, "bn", "flights.html")) &&
+      widgetSource.includes('.get("fsrc")') &&
+      widgetSource.includes("subId: placementSubId"),
+    "the /flights stop exists in EN and BN, and the widget forwards fsrc as the white-label sub_id"
+  );
+
+  // The stop is only worth the hop if it lands where the CTA points: the search
+  // block must carry the anchor id, and the hero must be the homepage photograph
+  // so the reader recognises the site they were just reading.
+  const flightsStopIssues = ["flights.html", "bn/flights.html"].filter((file) => {
+    const html = read(path.join(DIST_DIR, file)) ?? "";
+    return (
+      !html.includes('id="flight-search"') ||
+      !html.includes("clouds_boat_hero_1781438671378")
+    );
+  });
+  check(
+    flightsStopIssues.length === 0,
+    flightsStopIssues.length === 0
+      ? "the /flights stop (EN+BN) anchors #flight-search and carries the homepage hero image"
+      : `the /flights stop is incomplete: ${flightsStopIssues.join(", ")}`
   );
 
   // No blog page may send a reader to the Aviasales-branded site. The flight CTA

@@ -505,7 +505,9 @@ English, with translated headers and cells.**
 ### 12.5 Every flight link goes to the white label — no exceptions in content
 
 A flight next step must resolve through `resolveBookingCtaUrl(provider, { slug, locale })`
-(`src/utils/bookingCta.ts`), which returns `https://flights.uraltravel.co.uk/?currency=…&locale=…&sub_id=post_<slug>`.
+(`src/utils/bookingCta.ts`), which returns our own `/flights?fsrc=post_<slug>#flight-search`
+(`/bn/flights…` in Bengali). The reader keeps our design and the homepage hero, searches in the
+white-label widget embedded there, and the widget forwards `fsrc` as the white-label `sub_id`.
 The `sub_id` is what makes a click attributable to the article that earned it; without it every
 article CTA is one indistinguishable row in the Travelpayouts report.
 

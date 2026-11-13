@@ -1,5 +1,6 @@
 import { TravellerCheckNote } from "../src/components/TravellerCheckNote";
 import { resolveBookingCtaUrl } from "../src/utils/bookingCta";
+import { buildWhiteLabelUrl } from "../src/utils/flightWhiteLabel";
 import { getTravellerCheck } from "../src/utils/travellerChecks";
 import { generateBlogCoverAltText } from "../src/utils/blogAltText";
 import { linkifyCitations, citationAnchorId, CITATION_LINK_CLASS } from "../src/utils/citations";
@@ -5285,6 +5286,51 @@ function generateSiteSearchIndex(enRoutes: PrerenderRoute[], bnRoutes: Prerender
   console.log(`[Site search] Generated a bilingual index for ${entries.length} existing pages in ${SEARCH_INDEX_ONLY ? "public/" : "dist/"}.`);
 }
 
+/**
+ * The article flight CTA stops on /flights before the provider page (see
+ * `resolveBookingCtaUrl`), so this page has to justify the hop: it carries the
+ * homepage hero photograph and an anchor id the CTA can jump to. The React view
+ * renders the same photograph and the same id once the app mounts; this fills in
+ * the static shell so a reader with JS still loading — or no JS at all — sees it.
+ * Idempotent: a rebuild that already has the block is left alone.
+ */
+function applyFlightsHeroStop() {
+  const heroImage = "/assets/images/clouds_boat_hero_1781438671378";
+  for (const [file, isBn] of [
+    ["flights.html", false],
+    ["bn/flights.html", true],
+  ] as const) {
+    const full = path.join(DIST_DIR, file);
+    if (!fs.existsSync(full)) {
+      console.warn(`[SEO Prerender] flights hero stop: ${file} was not written`);
+      continue;
+    }
+    let html = fs.readFileSync(full, "utf8");
+    if (html.includes('id="flight-search"')) continue;
+    if (!html.includes("<article>")) {
+      console.warn(`[SEO Prerender] flights hero stop: no article hook in ${file}`);
+      continue;
+    }
+    const searchUrl = escapeHtml(
+      buildWhiteLabelUrl({ locale: isBn ? "bn" : "en", subId: "flights_hub" })
+    );
+    const block = `<figure style="margin:0 0 20px"><picture>
+      <source type="image/avif" srcset="${heroImage}-640.avif 640w, ${heroImage}-960.avif 960w, ${heroImage}-1200.avif 1200w" sizes="(min-width: 1024px) 900px, 100vw" />
+      <source type="image/webp" srcset="${heroImage}-640.webp 640w, ${heroImage}-960.webp 960w, ${heroImage}-1200.webp 1200w" sizes="(min-width: 1024px) 900px, 100vw" />
+      <img src="${heroImage}-1200.webp" width="1200" height="670" loading="eager" fetchpriority="high" decoding="async" style="width:100%;height:auto;border-radius:16px;display:block" alt="${isBn
+        ? "সূর্যাস্তের মেঘের ওপর কাঠের নৌকার ডেক, সঙ্গে ট্রাভেল জার্নাল ও ক্যামেরা"
+        : "Wooden sailboat deck above a sea of sunset clouds with a travel journal and camera"}" />
+    </picture></figure>
+    <div id="flight-search"><p>${isBn
+      ? "আপনার তারিখের লাইভ ভাড়া দেখতে সার্চ খুলুন"
+      : "Search live fares for your dates"}: <a href="${searchUrl}" target="_blank" rel="noopener noreferrer sponsored">${isBn
+        ? "লাইভ ফ্লাইট ভাড়া দেখুন"
+        : "open the flight search"}</a>.</p></div>`;
+    html = html.replace("<article>", `<article>${block}`);
+    fs.writeFileSync(full, html, "utf8");
+  }
+}
+
 async function main() {
   if (!SEARCH_INDEX_ONLY) copyStaticSeoImages();
   const enRoutes = buildAllRoutes();
@@ -5326,6 +5372,7 @@ async function main() {
   await submitIndexNow(routes.map((r) => r.canonicalUrl));
   generateRssXml();
   prerenderDistHtmlFiles(routes);
+  applyFlightsHeroStop();
   console.log(
     `[SEO Prerender] Generated ${enRoutes.length} English + ${bnRoutes.length} Bengali canonical routes, validated sitemap.xml (with xhtml:link hreflang clusters), sitemap.txt, rss.xml, optimized og-image.jpg & ${BLOG_DATA.length} blog JPEGs.`
   );

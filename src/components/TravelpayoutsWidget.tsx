@@ -1609,13 +1609,21 @@ export default function TravelpayoutsWidget({
     });
   }, [committedQuery]);
 
+  // Placement attribution handed over by an article CTA (`/flights?fsrc=post_…`).
+  // Read once from the URL: the widget must not invent an id when a reader
+  // arrives directly, and must not change it mid-session.
+  const placementSubId = useMemo(() => {
+    if (typeof window === "undefined") return "";
+    return new URLSearchParams(window.location.search).get("fsrc") ?? "";
+  }, []);
+
   const aviasalesPartnerUrl = useMemo(() => {
     return `https://www.aviasales.com/search/${searchCode}?marker=${MARKER_ID}&currency=${currency}`;
   }, [searchCode, currency]);
 
   const uralBrandedWlUrl = useMemo(() => {
-    return buildWhiteLabelUrl({ flightSearch: searchCode, currency, locale: lang });
-  }, [searchCode, currency, lang]);
+    return buildWhiteLabelUrl({ flightSearch: searchCode, currency, locale: lang, subId: placementSubId });
+  }, [searchCode, currency, lang, placementSubId]);
 
   const effectiveOrigin = useMemo(() => {
     if (activeDropdown === 'origin' && originQuery.trim()) {
@@ -1646,8 +1654,8 @@ export default function TravelpayoutsWidget({
   }, [effectiveOrigin.code, effectiveDest.code, departDate, returnDate, tripType, cabinClass, passengers]);
 
   const liveFormUralWlUrl = useMemo(() => {
-    return buildWhiteLabelUrl({ flightSearch: liveFormSearchCode, currency, locale: lang });
-  }, [liveFormSearchCode, currency, lang]);
+    return buildWhiteLabelUrl({ flightSearch: liveFormSearchCode, currency, locale: lang, subId: placementSubId });
+  }, [liveFormSearchCode, currency, lang, placementSubId]);
 
   // Dynamic currency config built from fetched rates — never hard-coded
   const dynamicCurrencyConfig = useMemo(() => {

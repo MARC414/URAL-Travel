@@ -43,12 +43,15 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
         description={isBn
           ? "ঢাকা থেকে সরাসরি ও সংযোগী ফ্লাইটের রুট, যাত্রার সময় ও এয়ারলাইন্স তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।"
           : "Compare nonstop and connecting routes from Dhaka by journey time and airline, then check live fares for your own travel dates."}
-        imageSrc="/assets/images/flights_heathrow_b747_takeoff_20261101-1200.webp"
+        /* Same photograph as the homepage first-paint hero, so a reader who
+           clicks a flight next step from an article lands somewhere that looks
+           like the site they were reading — this page is that stop. */
+        imageSrc="/assets/images/clouds_boat_hero_1781438671378-1200.webp"
         imageAlt={isBn
-          ? "লন্ডনের হিথ্রো বিমানবন্দরের কাছে আকাশে উড়ে যাওয়া থাই এয়ারওয়েজের বোয়িং ৭৪৭ বিমান"
-          : "A Thai Airways Boeing 747 climbing above London Heathrow Airport"}
+          ? "সূর্যাস্তের মেঘের ওপর কাঠের নৌকার ডেক, সঙ্গে ট্রাভেল জার্নাল ও ক্যামেরা"
+          : "Wooden sailboat deck above a sea of sunset clouds with a travel journal and camera"}
         imageSizes="(min-width: 1024px) 45vw, 100vw"
-        imageFit="contain"
+        imageFit="cover"
         credit={
           <>
             <a href="https://en.wikipedia.org/wiki/File:Thai_b747-400_hs-tgp_takeoff_london_heathrow_arp.jpg" target="_blank" rel="noopener noreferrer">
@@ -63,7 +66,10 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
         </span>
       </EditorialPageHero>
 
-      {searchSlot}
+      {/* Anchor target for article flight CTAs (`/flights?fsrc=…#flight-search`). */}
+      <div id="flight-search" className="scroll-mt-24">
+        {searchSlot}
+      </div>
 
       <p className="max-w-prose text-sm leading-relaxed text-slate-700">
         {isBn
