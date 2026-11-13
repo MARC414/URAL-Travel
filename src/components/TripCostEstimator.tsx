@@ -125,7 +125,7 @@ export function TripCostEstimator({ isBn, initialCountry = "thailand" }: { isBn:
           </fieldset>
 
           <fieldset aria-describedby="trip-quotes-help" className="space-y-4 border-t border-slate-200 pt-5">
-            <legend className="pr-3 text-base font-bold text-slate-900">{isBn ? "আপনার কোটেশন ও বরাদ্দ (BDT)" : "Your quotes & allowances (BDT)"}</legend>
+            <legend className="pr-3 text-base font-bold text-slate-900">{isBn ? "আপনার কোটেশন ও বরাদ্দ" : "Your quotes & allowances"}</legend>
             <p id="trip-quotes-help" className="text-xs leading-relaxed text-slate-600">{isBn
               ? "সব ইনপুট BDT-তে। বিদেশি মুদ্রার কোটেশনের জন্য আপনার ব্যাংক/পেমেন্ট সেবার প্রযোজ্য BDT অঙ্ক ব্যবহার করুন। Display currency শুধু ফল দেখানোর মুদ্রা বদলায়। প্যাকেজে অন্তর্ভুক্ত খরচ দুবার গুনবেন না।"
               : "All inputs stay in BDT. For foreign quotes, use your bank/payment provider’s applicable BDT amount. Display currency changes the result only. Avoid counting bundled costs twice."}</p>

@@ -86,8 +86,8 @@ export function UmrahBudgetCalculator({ isBn, originCode }: { isBn: boolean; ori
           <fieldset aria-describedby="umrah-budget-instructions" className="space-y-4">
             <legend className="text-sm font-bold text-slate-900">
               {isBn
-                ? "পুরো দলের খাতওয়ারি মোট (BDT)"
-                : "Whole-party totals by category (BDT)"}
+                ? "পুরো দলের খাতওয়ারি মোট"
+                : "Whole-party totals by category"}
             </legend>
             {UMRAH_BUDGET_ITEMS.map(({ key, en, bn }) => (
               <label key={key} htmlFor={`umrah-cost-${key}`} className="block text-sm font-semibold text-slate-700">

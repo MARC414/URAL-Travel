@@ -32,7 +32,8 @@ import JourneyHelpPanel from "../components/JourneyHelpPanel";
 
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
 
-import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, QeeqCarRentalWidget, getAffiliateCtaButtonLabel, BLOG_AFFILIATE_CTA_DISCLOSURE } from "../components/AffiliatePartners";
+import { resolveBookingCtaUrl } from "../utils/bookingCta";
+import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, MULTI_PARTNER_BLOG_PLACEMENTS, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, QeeqCarRentalWidget, getAffiliateCtaButtonLabel, BLOG_AFFILIATE_CTA_DISCLOSURE } from "../components/AffiliatePartners";
 import { KlookHotelBlogCallout } from "../components/KlookHotelOffers";
 
 
@@ -1541,7 +1542,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                     >
 
-                                      {isBn ? "Umrah BDT ক্যালকুলেটর" : "Open Umrah BDT Calculator"}
+                                      {isBn ? "Umrah ক্যালকুলেটর" : "Open Umrah Calculator"}
 
                                     </a>
 
@@ -1566,13 +1567,10 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                                       <PartnerLinkButton
 
                                         href={
-
-                                          activePost.affiliateCTA
-
-                                            ? AFFILIATE_LINKS[activePost.affiliateCTA.provider]
-
-                                            : AFFILIATE_LINKS.aviasales
-
+                                          resolveBookingCtaUrl(
+                                            activePost.affiliateCTA?.provider ?? "aviasales",
+                                            { slug: activePost.slug, locale: isBn ? "bn" : "en" }
+                                          )
                                         }
 
                                         label={
@@ -1641,7 +1639,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                       >
 
-                                        <span>{isBn ? "BDT-তে হোটেল ও টিকিট বুকিং (WhatsApp)" : "Book Hotel & Flight in BDT (WhatsApp)"}</span>
+                                        <span>{isBn ? "হোটেল ও টিকিট বুকিং (WhatsApp)" : "Book Hotel & Flight (WhatsApp)"}</span>
 
                                       </a>
 
@@ -1786,7 +1784,14 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                       {/* Contextual Multi-Partner Callout (Yesim eSIM, Kiwi.com Multi-City, GetTransfer Vans & Go City Passes) */}
 
-                      <MultiPartnerBlogCallout slug={activePost.slug} lang={lang} />
+                      <MultiPartnerBlogCallout
+                        slug={activePost.slug}
+                        lang={lang}
+                        primaryHrefOverride={resolveBookingCtaUrl(
+                          MULTI_PARTNER_BLOG_PLACEMENTS[activePost.slug]?.primaryPartner ?? "aviasales",
+                          { slug: activePost.slug, locale: isBn ? "bn" : "en" }
+                        )}
+                      />
 
 
 

@@ -2802,7 +2802,7 @@ export default function App() {
                           <span className="text-xs text-slate-400 block">
                             {isBn
                               ? "বাংলাদেশিদের শীর্ষ বুকিংকৃত আকর্ষণ"
-                              : "Top Residency Experiences in BDT"}
+                              : "Top Residency Experiences"}
                           </span>
                         </div>
 
@@ -3217,7 +3217,7 @@ export default function App() {
                         {
                           id: "umrah",
                           label: isBn ? "ওমরাহ ও হজ প্ল্যানার ২০২৬" : "Umrah & Hajj 2026 Hub",
-                          meta: isBn ? "Nusuk অ্যাপ ও DIY খরচ" : "Nusuk permit & DIY BDT cost",
+                          meta: isBn ? "Nusuk অ্যাপ ও DIY খরচ" : "Nusuk permit & DIY cost",
                           path: "/umrah",
                         },
                       ],
@@ -3287,7 +3287,7 @@ export default function App() {
                         {
                           id: "costs",
                           label: t.navCosts,
-                          meta: isBn ? "বাজেট, মিড-রেঞ্জ ও ফ্যামিলি খরচ" : "3-tier BDT cost matrices by country",
+                          meta: isBn ? "বাজেট, মিড-রেঞ্জ ও ফ্যামিলি খরচ" : "3-tier cost matrices by country",
                           path: "/costs",
                         },
                       ],
@@ -4169,8 +4169,8 @@ export default function App() {
                 </h2>
                 <p className="text-xs text-slate-500 font-mono">
                   {isBn
-                    ? "বাংলাদেশি টাকা (BDT) কনভার্ট করুন, প্যাকিং চেকলিস্ট মিলিয়ে নিন এবং ট্রিপের মোট বাজেট হিসাব করুন।"
-                    : "Quick tools to help you convert BDT, check what to pack, and estimate your trip budget."}
+                    ? "কারেন্সি কনভার্ট করুন, প্যাকিং চেকলিস্ট মিলিয়ে নিন এবং ট্রিপের মোট বাজেট হিসাব করুন।"
+                    : "Quick tools to help you convert currency, check what to pack, and estimate your trip budget."}
                 </p>
               </div>
 
