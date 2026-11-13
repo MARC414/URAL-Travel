@@ -12,7 +12,7 @@ export function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSu
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
       "Request airline wheelchair help at booking, not at the airport: Biman calls it mandatory and recommends 48 hours, while Saudia publishes free carriage of wheelchairs and up to two mobility items. Inside the Grand Mosque, free manual wheelchairs and paid Tanaqol carts are separate services. No universal free airport service, guaranteed gate delivery or step-free hotel route is promised.",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
-      "A Saudi stopover may allow up to 96 hours, including Umrah, subject to eligibility, visa approval and separate appointments. Check exact documents and the airline’s itemized charges before payment. Saudia publishes a booking sequence; detailed current flynas conditions remain unverified. No universal free hotel, instant issuance or two-city feasibility is promised.",
+      "A Saudi stopover may allow up to 96 hours, including Umrah, subject to eligibility, visa approval and separate appointments. Check exact documents and the airline’s itemized charges before payment. The detailed current airline eligibility and booking flows remain unverified. No universal free hotel, instant issuance or two-city feasibility is promised.",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
       "Saudi Visa Bio applies when your Umrah visa application requires biometrics; it is not a universal tourist/stopover rule. Nusuk manages separate permits. The official Rawdah page describes annual regular booking, nearby Instant Track and attendance confirmation before an entry QR is available. Follow current booking instructions; paid data is not a permit requirement.",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
@@ -36,7 +36,7 @@ export function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSu
     "malaysia-islamic-heritage-putrajaya-halal-family-tour-guide":
       "Ranked #1 for Muslim family travel, Malaysia offers 100% JAKIM-certified Halal dining and Surau prayer rooms in every mall. Take the MRT Putrajaya Line from KLCC (MYR 5.40 / BDT 150) to Putrajaya's Pink Mosque (Masjid Putra) and Lake Cruise, and visit the Islamic Arts Museum Malaysia.",
     "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide":
-      "Bangladeshi passport holders with a valid used US, UK, or Schengen visa qualify for an instant 1-year Saudi e-Visa or Visa on Arrival to perform Umrah on their return leg. In Paris, London, Rome, and New York, pre-book official Tiqets skip-the-line passes to avoid 2.5-hour museum queues.",
+      "Plan attraction bookings in Europe and North America, and review Saudi visa eligibility separately before considering an onward stopover. A foreign visa does not guarantee Saudi visa approval or entry.",
     "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
       "Shariah-compliant dual-currency cards are issued by Islamic banks and Islamic windows in Bangladesh: a debit or prepaid card spends your own endorsed foreign exchange, while a charge card uses a fixed Ujrah fee instead of interest. Structures, fees and features differ by bank, so ask each bank about its own product; the USD 18,000 passport travel entitlement and the USD 300 single online-purchase rule apply whoever issued the card.",
     "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":
@@ -103,7 +103,7 @@ export function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSu
     "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide":
       "এয়ারপোর্টে নয়, বুকিংয়ের সময়ই এয়ারলাইন হুইলচেয়ার সহায়তা চাইুন: বিমান এটি বাধ্যতামূলক বলে ও ৪৮ ঘণ্টা আগে আবেদনের পরামর্শ দেয়; সৌদিয়া হুইলচেয়ার ও সর্বোচ্চ দুইটি মোবিলিটি সামগ্রী বিনামূল্যে বহনের কথা বলে। মসজিদুল হারামে বিনামূল্যে ম্যানুয়াল হুইলচেয়ার ও সাশুল্ক তানাকুল কার্ট আলাদা সেবা। সবার জন্য বিনামূল্যে এয়ারপোর্ট সেবা, দরজায় ফেরত বা ধাপবিহীন হোটেল রুটের প্রতিশ্রুতি নয়।",
     "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah":
-      "যোগ্যতা, visa approval ও আলাদা appointment সাপেক্ষে Saudi stopover-এ ওমরাহসহ সর্বোচ্চ ৯৬ ঘণ্টা থাকা যেতে পারে। টাকা দেওয়ার আগে exact document ও airline-এর itemized charge দেখুন। Saudia booking sequence প্রকাশ করে; flynas-এর বর্তমান detailed conditions যাচাই হয়নি। সবার জন্য free hotel, instant issuance বা দুই শহরের plan নিশ্চিত নয়।",
+      "যোগ্যতা, visa approval ও আলাদা appointment সাপেক্ষে Saudi stopover-এ ওমরাহসহ সর্বোচ্চ ৯৬ ঘণ্টা থাকা যেতে পারে। টাকা দেওয়ার আগে exact document ও airline-এর itemized charge দেখুন। দুই airline-এর বর্তমান বিস্তারিত eligibility ও booking flow যাচাই হয়নি। সবার জন্য free hotel, instant issuance বা দুই শহরের plan নিশ্চিত নয়।",
     "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit":
       "নিজের Umrah visa আবেদনে বায়োমেট্রিক চাইলে Saudi Visa Bio ব্যবহার করুন; এটি প্রত্যেক ট্যুরিস্ট/স্টপওভার যাত্রীর নিয়ম নয়। Nusuk-এ পারমিট আলাদা। অফিশিয়াল Rawdah পেজ সাধারণ বার্ষিক বুকিং, কাছাকাছি ভিজিটরের Instant Track এবং entry QR পাওয়ার আগে attendance confirmation বলে। নিজের বুকিংয়ের নির্দেশনা অনুসরণ করুন; পেইড ডেটা পারমিটের শর্ত নয়।",
     "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates":
@@ -127,7 +127,7 @@ export function getBlogAeoSnippet50Words(slug: string, isBn: boolean, fallbackSu
     "malaysia-islamic-heritage-putrajaya-halal-family-tour-guide":
       "মুসলিম পরিবারের ভ্রমণের জন্য মালয়েশিয়া বিশ্বে ১ নম্বর—প্রতিটি শপিং মলে সরকারি JAKIM হালাল খাবার ও নামাজের স্থান (Surau) রয়েছে। কুয়ালালামপুর থেকে MRT ট্রেনে মাত্র ৫.৪০ রিঙ্গিতে (১৫০ টাকা) পুত্রজায়া পিঙ্ক মসজিদ ও লেক ক্রুজ এবং ইসলামিক আর্টস মিউজিয়াম ঘুরে দেখুন।",
     "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide":
-      "বাংলাদেশি পাসপোর্টে বৈধ ও একবার ব্যবহৃত (Used) US, UK বা Schengen ভিসা থাকলে ফেরার পথে তাৎক্ষণিক ১ বছরের সৌদি ই-ভিসা নিয়ে ওমরাহ করা যায়। এছাড়া প্যারিসের লুভর, আইফেল টাওয়ার, লন্ডন আই ও রোমের কলোসিয়ামে ২–৩ ঘণ্টার লাইন এড়াতে Tiqets স্কিপ-দ্য-লাইন পাস বুক করুন।",
+      "ইউরোপ ও উত্তর আমেরিকার দর্শনীয় স্থান পরিকল্পনা করুন। পথে Saudi stopover ভাবলে আলাদাভাবে visa eligibility দেখুন; বিদেশি visa থাকলেই Saudi visa বা entry নিশ্চিত নয়।",
     "shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah":
       "বাংলাদেশে ইসলামি ব্যাংক ও ইসলামিক উইন্ডো শরীয়াহ-সম্মত ডুয়েল-কারেন্সি কার্ড দেয়: ডেবিট বা প্রিপেইড কার্ড আপনার নিজের এনডোর্স করা বৈদেশিক মুদ্রা খরচ করে, আর চার্জ কার্ড সুদের বদলে নির্দিষ্ট উজরাহ ফি নেয়। গঠন, ফি ও সুবিধা ব্যাংকভেদে আলাদা, তাই প্রতিটি ব্যাংকের নিজের পণ্য সম্পর্কে জেনে নিন; USD 18,000 পাসপোর্ট ট্রাভেল entitlement ও USD 300 একবারের অনলাইন-কেনাকাটার নিয়ম যে কার্ডেই প্রযোজ্য।",
     "rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix":

@@ -250,8 +250,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                       <Check size={14} className="text-[#F6B73C] shrink-0 mt-0.5" />
                       <span>
                         {isBn
-                          ? "Saudia বা Flynas থ্রু-টিকিটে যোগ্য রুটে ৯৬ ঘণ্টার Stopover Visa আবেদনের সুযোগ (চেকআউটের শর্ত সাপেক্ষে)।"
-                          : "96-Hour Stopover Option: Eligible Saudia or flynas through-itineraries allow applying for a 96-hour stopover visa (subject to airline checkout terms)."}
+                          ? "Visit Saudi সর্বোচ্চ ৯৬ ঘণ্টার airline-linked stopover বর্ণনা করে; নির্দিষ্ট eligibility ও booking flow যাচাই হয়নি।"
+                          : "Stopover option: Visit Saudi describes airline-linked stays of up to 96 hours; specific eligibility and booking flows were not verified."}
                       </span>
                     </li>
                   </ul>
@@ -386,7 +386,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
               diyLabel: isBn ? "সরাসরি ও স্টপওভার রুট:" : "Direct / Stopover Route:",
               diyPoint: isBn
                 ? "umrah.nusuk.sa-এ বিদেশি যাত্রীদের সরাসরি আবেদনের সুযোগ রয়েছে; অথবা Saudia/flynas থ্রু-টিকিটে ৯৬ ঘণ্টার স্টপওভার ভিসা নেওয়া যায়।"
-                : "Overseas pilgrims can apply via umrah.nusuk.sa or use an eligible 96-hour Saudia/flynas stopover visa subject to live portal checkout rules.",
+                : "Overseas pilgrims can explore umrah.nusuk.sa and Visit Saudi’s airline-linked stopover information. Specific airline eligibility and booking flows were not verified.",
               agencyLabel: isBn ? "এক্সটার্নাল এজেন্টের নিয়ম:" : "External Agent Requirement:",
               agencyPoint: isBn
                 ? "সৌদি হজ ও ওমরাহ মন্ত্রণালয়ের FAQ (haj.gov.sa/en/FAQ) অনুযায়ী, কোনো এক্সটার্নাল এজেন্ট হোটেল ও ট্রান্সপোর্ট ছাড়া শুধু স্ট্যান্ডঅ্যালোন ওমরাহ ভিসা ইস্যু করতে পারে না।"
@@ -686,8 +686,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
                 ? "স্ট্যান্ডার্ড ওমরাহ, ৯৬ ঘণ্টার স্টপওভার ও যোগ্য ট্যুরিস্ট রুট"
                 : "Standard Umrah, 96-Hour Stopover & Eligible Tourist Routes",
               body: isBn
-                ? "১) স্ট্যান্ডার্ড ওমরাহ ভিসা: umrah.nusuk.sa বা অনুমোদিত এক্সটার্নাল এজেন্টের মাধ্যমে (এজেন্টের ক্ষেত্রে হোটেল ও ট্রান্সপোর্ট বান্ডল বাধ্যতামূলক — haj.gov.sa/en/FAQ)। ২) ৯৬ ঘণ্টার স্টপওভার ভিসা: Saudia বা flynas থ্রু-টিকিটে (visitsaudi.com)। ৩) ট্যুরিস্ট ভিসা রুট: সাধারণ বাংলাদেশি পাসপোর্ট একক ন্যাশনালিটি ই-ভিসা তালিকায় নেই; তবে Package Visa, পূর্বে ব্যবহৃত বৈধ US/UK/Schengen ভিসাধারীদের VOA বা যোগ্য GCC রেসিডেন্ট রুট প্রযোজ্য।"
-                : "1) Standard Umrah Visa via umrah.nusuk.sa or an approved external agent (external agents must bundle hotel + transport per haj.gov.sa/en/FAQ). 2) 96-Hour Stopover Visa on Saudia or flynas through-tickets (visitsaudi.com). 3) Tourist routes: ordinary BD passports are not on the standalone nationality eVisa list (visa.visitsaudi.com), but may qualify via Package Visa, Visa-on-Arrival with a valid used US/UK/Schengen visa, or GCC residency.",
+                ? "১) স্ট্যান্ডার্ড ওমরাহ ভিসা: umrah.nusuk.sa বা অনুমোদিত এক্সটার্নাল এজেন্টের মাধ্যমে (এজেন্টের ক্ষেত্রে হোটেল ও ট্রান্সপোর্ট বান্ডল বাধ্যতামূলক — haj.gov.sa/en/FAQ)। ২) সর্বোচ্চ ৯৬ ঘণ্টার airline-linked stopover (visitsaudi.com); নির্দিষ্ট airline eligibility ও booking flow যাচাই হয়নি। ৩) ট্যুরিস্ট রুট: সাধারণ বাংলাদেশি পাসপোর্ট nationality তালিকায় নেই, তবে Package Visa-তে বাংলাদেশ তালিকাভুক্ত। বিস্তারিত Saudi visa guide-এ দেখুন; approval নিশ্চিত নয়।"
+                : "1) Standard Umrah Visa via umrah.nusuk.sa or an approved external agent (external agents must bundle hotel + transport per haj.gov.sa/en/FAQ). 2) Airline-linked stopover of up to 96 hours (visitsaudi.com); specific airline eligibility and booking flows were not verified. 3) Tourist routes: Bangladesh is not on the standard nationality eVisa list, but Visit Saudi lists Bangladesh for the separate Package Visa. See the Saudi visa guide; approval is not guaranteed.",
             },
             {
               step: "02 · Biometrics & Health (U-07–U-08)",
@@ -1165,9 +1165,9 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             },
             {
               label: isBn
-                ? "৬. Visit Saudi Help Center — ব্যবহৃত US/UK/Schengen ভিসা VOA শর্ত"
-                : "6. Visit Saudi Help Center — Used US/UK/Schengen Visa on Arrival",
-              url: "https://help.visitsaudi.com/hc/en-us/articles/360018933099-Can-I-get-a-visit-visa-if-I-have-a-valid-US-or-UK-or-Schengen-visa-",
+                ? "৬. Ministry of Tourism — Tourist Visa Regulations (সর্বশেষ revision date নিশ্চিত নয়)"
+                : "6. Ministry of Tourism — Tourist Visa Regulations (latest revision date not established)",
+              url: "https://cdn.mt.gov.sa/mtportal/mt-fe-production/content/policies-regulations/documents/tourism-regulations/Tourist-Visa-Regulations-En-V012.pdf",
             },
             {
               label: isBn
@@ -1213,8 +1213,8 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
         }
         quickAnswer={
           isBn
-            ? "বাংলাদেশি নাগরিকদের ফরজ হজ্জের জন্য ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হয়। আর ওমরাহ পালনের জন্য ৩টি ভিসা ক্যাটাগরি রয়েছে: ১) স্ট্যান্ডার্ড ওমরাহ ভিসা (umrah.nusuk.sa বা হোটেল-ট্রান্সপোর্টসহ অনুমোদিত এজেন্ট), ২) Saudia বা flynas থ্রু-টিকিটে ৯৬ ঘণ্টার স্টপওভার ভিসা এবং ৩) যোগ্য Package Visa বা পূর্বে ব্যবহৃত বৈধ US/UK/Schengen ভিসাধারীদের ভিসা-অন-অ্যারাইভাল। ১০ দিনের (৪ জন শেয়ারিং) সংরক্ষিত প্ল্যানিং রেফারেন্স বাজেট জনপ্রতি BDT 1,16,000–1,32,000 (১৪ অক্টোবর ২০২৬; পুনঃমূল্যায়িত নয়—লাইভ কোটেশন নয়)।"
-            : "Bangladeshi citizens register via hajj.gov.bd for obligatory Fard Hajj. For Umrah, three eligible visa-route categories apply (checked 14 Oct 2026): (1) Standard Umrah Visa via umrah.nusuk.sa or an approved external agent bundling hotel and transport, (2) a 96-hour Saudia or flynas stopover visa, or (3) eligible Package Visa / used US, UK, or Schengen visa-on-arrival routes. Our preserved 10-day, 4-person sharing planning estimate is BDT 1,16,000–1,32,000 per person (unre-priced reference; not a live quote)."
+            ? "বাংলাদেশি নাগরিকদের ফরজ হজ্জের জন্য ধর্ম মন্ত্রণালয়ের পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হয়। আর ওমরাহ পালনের জন্য ৩টি ভিসা ক্যাটাগরি রয়েছে: ১) স্ট্যান্ডার্ড ওমরাহ ভিসা (umrah.nusuk.sa বা হোটেল-ট্রান্সপোর্টসহ অনুমোদিত এজেন্ট), ২) সর্বোচ্চ ৯৬ ঘণ্টার airline-linked stopover এবং ৩) যোগ্য Package Visa। Airline-এর বিস্তারিত শর্ত যাচাই হয়নি; visa বা entry নিশ্চিত নয়। ১০ দিনের (৪ জন শেয়ারিং) সংরক্ষিত প্ল্যানিং রেফারেন্স বাজেট জনপ্রতি BDT 1,16,000–1,32,000 (১৪ অক্টোবর ২০২৬; পুনঃমূল্যায়িত নয়—লাইভ কোটেশন নয়)।"
+            : "Bangladeshi citizens register via hajj.gov.bd for obligatory Fard Hajj. For Umrah, three eligible visa-route categories apply (checked 14 Oct 2026): (1) Standard Umrah Visa via umrah.nusuk.sa or an approved external agent bundling hotel and transport, (2) an airline-linked stopover of up to 96 hours, or (3) a qualifying Package Visa. Airline-specific conditions were not verified; approval and entry are not guaranteed. Our preserved 10-day, 4-person sharing planning estimate is BDT 1,16,000–1,32,000 per person (unre-priced reference; not a live quote)."
         }
         keyFacts={[
           {

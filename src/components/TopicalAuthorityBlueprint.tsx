@@ -419,14 +419,14 @@ export const TOPICAL_BLOG_NODES: TopicalBlogNode[] = [
     secondaryKeywords: ["louvre eiffel tower ticket booking bd", "london eye thames cruise ticket", "us uk schengen stopover umrah"],
     monthlyIntentSignal: "Not measured · High-Net-Worth & NRB Diaspora Intent",
     customerPsychologyEn:
-      "Bridging Western Travel with Umrah Eligibility: Travelers holding US/UK/Schengen visas represent the exact demographic eligible for instant 1-year Saudi e-Visas AND high-ticket Tiqets attraction bundles.",
+      "Travelers combining Western sightseeing with a Saudi stopover must check Saudi visa and entry conditions separately.",
     customerPsychologyBn:
-      "উন্নত দেশের ভ্রমণ ও ইনস্ট্যান্ট ওমরাহ সুবিধা: যাদের পাসপোর্টে US, UK বা Schengen ভিসা আছে তারা যেমন ইউরোপ-আমেরিকা ঘোরেন, তেমনি তাৎক্ষণিক ১ বছরের সৌদি ই-ভিসারও যোগ্য।",
+      "ইউরোপ-আমেরিকা ভ্রমণের সঙ্গে সৌদি stopover ভাবলে সৌদি visa ও entry-এর শর্ত আলাদাভাবে যাচাই করুন।",
     aeoDirectAnswerEn:
-      "Bangladeshi travelers holding valid used US, UK, or Schengen visas can pair their London, Paris, Rome, or New York itinerary with an instant 1-year Saudi e-Visa, while pre-booking Tiqets skip-the-line passes to save 2–3 hours at the Louvre, Eiffel Tower, and Colosseum.",
+      "A foreign visa does not guarantee Saudi visa approval or entry. Review the Saudi visa guide before booking an onward stopover.",
     aeoDirectAnswerBn:
-      "বৈধ US, UK বা Schengen ভিসাধারীরা অনলাইনে ১ বছরের সৌদি ই-ভিসা নিতে পারেন এবং প্যারিস, লন্ডন ও রোমের জনপ্রিয় স্থানে Tiqets স্কিপ-দ্য-লাইন পাস বুক করে ঘণ্টার পর ঘণ্টা লাইন এড়াতে পারেন।",
-    eavTriples: "Used US/UK/Schengen Visa on BD Passport (Entity) → Saudi Visa Benefit (Attribute) → Instant 1-Year Multiple-Entry e-Visa / VOA (Value)",
+      "বিদেশি visa থাকলেই Saudi visa বা entry নিশ্চিত নয়। Onward stopover বুকিংয়ের আগে Saudi visa guide দেখুন।",
+    eavTriples: "Saudi visa routes (Entity) → Eligibility (Attribute) → Check current official conditions (Value)",
     targetPath: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
     isLiveBlog: false,
   },

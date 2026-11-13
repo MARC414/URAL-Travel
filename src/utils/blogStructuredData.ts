@@ -244,21 +244,6 @@ const HOW_TO_CONFIGS: Record<string, BlogHowToConfig[]> = {
       parseStep: bengaliNumberedStep,
     },
   }],
-  "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": [{
-    idSuffix: "howto-saudia-stopover-request",
-    en: {
-      start: /^2\.\s*How do you request a stopover through Saudia/i,
-      end: /^3\.\s*Is a used US/i,
-      name: "How to prepare a Saudia stopover request subject to eligibility and approval",
-      parseStep: englishNumberedStep,
-    },
-    bn: {
-      start: /^২\.\s*Saudia-তে stopover-এর আবেদন/,
-      end: /^৩\.\s*ব্যবহৃত US/,
-      name: "যোগ্যতা ও অনুমোদনসাপেক্ষে Saudia stopover আবেদনের প্রস্তুতি",
-      parseStep: bengaliNumberedStep,
-    },
-  }],
   "umrah-hajj-guide-bangladesh-nusuk-bdt-cost": [{
     idSuffix: "howto-diy-umrah-sequence",
     en: {

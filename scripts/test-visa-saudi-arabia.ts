@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { BLOG_BODY } from "../src/data/blogContent";
+import { getLocalizedBlogs } from "../src/data/bengaliContent";
 import { VISA_DATA } from "../src/constants";
 import { getLocalizedVisas, getLocalizedVisaFaqs } from "../src/data/bengaliContent";
 import { VISA_OFFICIAL_SOURCES } from "../src/data/visaOfficialSources";
@@ -30,6 +33,31 @@ assert.ok(!JSON.stringify(schema).includes("FAQPage"), "FAQ schema is generated 
 const sources = VISA_OFFICIAL_SOURCES[id].map(s => s.url);
 assert.ok(sources.includes("https://www.visitsaudi.com/en/campaigns/package-visa"));
 assert.ok(sources.includes("https://www.visitsaudi.com/en/campaigns/saudi-stopover"));
+assert.ok(sources.some(url => url.endsWith("Tourist-Visa-Regulations-En-V012.pdf")));
+assert.ok(sources.includes("https://webook.com/en/e-visa"));
+assert.ok(sources.includes("https://www.reserval.com/packagevisa"));
+for (const guide of [en, bn]) {
+  const foreign = guide.faqs.find(f => /Schengen.*(residence|বাস)/i.test(f.question));
+  const packageFaq = guide.faqs.find(f => /Package Visa/.test(f.question));
+  assert.ok(foreign && packageFaq);
+  assert.match(foreign.answer, /Article 6\(2\)/);
+  assert.match(foreign.answer, /revision/);
+  assert.match(packageFaq.answer, /webook/);
+  assert.match(packageFaq.answer, /Reserval/);
+  assert.match(packageFaq.answer, /Makkah/);
+  assert.match(packageFaq.answer, /Madinah/);
+}
+for (const locale of ["en", "bn"] as const) {
+  const post = getLocalizedBlogs(locale).find(p => p.slug === "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide")!;
+  const body = locale === "en" ? BLOG_BODY[post.slug] : post.content!;
+  const article = [post.title, post.summary, body].join(" ");
+  assert.doesNotMatch(article, /instant 1.year Saudi|১ বছরের সৌদি ই-ভিসা|student visa.*do NOT need/i);
+  assert.ok(post.internalLinks?.some(link => link.path === "/visa/saudi-arabia-visa"));
+  const html = readFileSync(`dist/${locale === "bn" ? "bn/" : ""}visa/${id}.html`, "utf8");
+  assert.ok(html.includes("webook.com/en/e-visa") && html.includes("reserval.com/packagevisa"));
+  assert.ok(html.includes("Tourist-Visa-Regulations-En-V012.pdf"));
+}
+
 
 for (const localized of getLocalizedVisas("bn")) {
   const original = VISA_DATA.find(v => v.id === localized.id)!;

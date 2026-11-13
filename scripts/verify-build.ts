@@ -4667,7 +4667,7 @@ for (const locale of ["en", "bn"] as const) {
   const post = getLocalizedBlogs(locale).find((entry) => entry.slug === diyReviewSlug);
   const text = normalizeStructuredText(html);
   check(
-    post?.updatedAt === "2026-10-19" && post.references?.length === 26 &&
+    post?.updatedAt === "2026-11-12" && post.references?.length === 26 &&
       post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
       text.includes("SAR 4,000") && text.includes("SAR 1,000") &&
       text.includes(locale === "bn" ? "সর্বশেষ revision date নিশ্চিত হয়নি" : "does not establish its latest revision date") &&
@@ -6441,7 +6441,7 @@ check(
 );
 const stopoverCheckoutCopyIsSafe =
   /not an all-in quote/i.test(stopoverBodies[0]) &&
-  /Ministry of Foreign Affairs regulations/i.test(stopoverBodies[0]) &&
+  /current application flow and a guaranteed processing deadline were not established/i.test(stopoverBodies[0]) &&
   stopoverBodies[1].includes("প্রকাশিত উদাহরণ all-in quote নয়") &&
   stopoverBodies[1].includes("সবার জন্য অন্তর্ভুক্ত") &&
   stopoverBodies[1].includes("itemized checkout total") &&
@@ -6469,13 +6469,13 @@ const stopoverReferencesAreLocalized = (() => {
       enRefs.every((ref, index) => ref.url === bnRefs[index]?.url && enHtml.includes(`href="${ref.url}"`) && bnHtml.includes(`href="${ref.url}"`)) &&
       /\u098f\u0987 \u0997\u09be\u0987\u09a1\u09c7\u09b0 \u09a4\u09a5\u09cd\u09af\u09b8\u09c2\u09a4\u09cd\u09b0/.test(bnHtml) &&
       enHtml.includes("Sources for this guide") &&
-      BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.updatedAt === "2026-10-19"
+      BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.updatedAt === "2026-11-12"
   );
 })();
 check(
   stopoverReferencesAreLocalized,
   stopoverReferencesAreLocalized
-    ? "the stopover guide renders 10 scoped references in both locales and carries updatedAt 2026-10-19"
+    ? "the stopover guide renders 10 scoped references in both locales and carries updatedAt 2026-11-12"
     : "stopover references are missing, unlocalized, or the update date is not recorded"
 );
 
@@ -6492,11 +6492,10 @@ for (const [index, locale] of (["en", "bn"] as const).entries()) {
     return Boolean(note && visible.includes(normalizeStructuredText(note.title)) && visible.includes(normalizeStructuredText(note.text)));
   };
   check(
-    procedures.length === 1 && procedures[0]["@id"] === `${SITE_ORIGIN}${locale === "bn" ? "/bn" : ""}/blog/${STOPOVER_SLUG}#howto-saudia-stopover-request` &&
-      Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
+    procedures.length === 0 &&
       Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6 &&
       notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
-    `${locale} stopover output has the Saudia-only six-step procedure and six matching FAQ answers`
+    `${locale} stopover output omits unverified airline procedure schema and retains six matching FAQ answers`
   );
   check(
     [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((m) => m[1]).join(",") === "stopoverEligibility,stopoverPermits" &&
