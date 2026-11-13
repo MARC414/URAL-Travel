@@ -9,7 +9,7 @@ This register records the source and attribution obligations for the site's loca
 | `hotel_directory_hero_20261112` | Hotel-guide index | AI-generated illustrative hotel room for URAL Travel; not an identifiable property | No third-party photo attribution required. |
 | `hotel_guide_guest_room_20261101` | Destination hotel guides | [Hotel room interior](https://www.pexels.com/photo/interior-design-of-hotel-room-19045884) — Pexels | [Pexels License](https://www.pexels.com/license/). |
 | `visa_directory_hero_20261112` | Visa index and country guides | AI-generated illustrative travel documents at an airport for URAL Travel; not a real passport or document | No third-party photo attribution required. |
-| `visa_changi_immigration_20261101` | Visa index and country guides | [Singapore Changi Airport Terminal 1 Arrival Immigration](https://commons.wikimedia.org/wiki/File:Singapore_Changi_Airport_Terminal_1_Arrival_Immigration.jpg) — Exec8 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The cropped and resized derivative is distributed under the same license. |
+| `visa_changi_immigration_20261101` | Former visa hero; not currently used on pages | [Singapore Changi Airport Terminal 1 Arrival Immigration](https://commons.wikimedia.org/wiki/File:Singapore_Changi_Airport_Terminal_1_Arrival_Immigration.jpg) — Exec8 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The cropped and resized derivative is distributed under the same license. |
 | `destination_nepal_hero_20261101` | Nepal destination guide | AI-generated for URAL Travel; Annapurna range and Phewa Lake scene | No third-party photo attribution required. |
 | `destination_thailand_hero_20261101` | Thailand destination guide | AI-generated for URAL Travel; Wat Arun and Chao Phraya River scene | No third-party photo attribution required. |
 | `destination_malaysia_hero_20261101` | Malaysia destination guide | AI-generated for URAL Travel; Petronas Twin Towers and Kuala Lumpur scene | No third-party photo attribution required. |
@@ -21,7 +21,7 @@ This register records the source and attribution obligations for the site's loca
 | `destination_paris_hero_20261101` | Paris destination guide | AI-generated for URAL Travel; Eiffel Tower and Seine scene | No third-party photo attribution required. |
 | `destination_new_york_hero_20261101` | New York City destination guide | AI-generated for URAL Travel; Statue of Liberty and Lower Manhattan scene | No third-party photo attribution required. |
 
-The Commons credits and license are also linked in each hero's visible photo credit. The hotel photos are credited to Pexels in the UI; Pexels attribution is optional, and the source links are retained here for provenance. Re-check the source page before replacing or re-licensing any source image.
+Visible credit overlays are omitted for the currently used public-domain flight image, Pexels hotel photo, and generated artwork; source links remain here for provenance. The former Changi image is CC BY-SA 4.0 and requires appropriate attribution and licence information if used again. Re-check licence requirements before using, replacing or re-licensing any source image.
 
 ## Video assets
 

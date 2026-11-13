@@ -1,4 +1,5 @@
 import { TravellerCheckNote } from "../src/components/TravellerCheckNote";
+import { FLIGHT_ROUTES } from "../src/data/flightRoutes";
 import { getTravellerCheck } from "../src/utils/travellerChecks";
 import { generateBlogCoverAltText } from "../src/utils/blogAltText";
 import { linkifyCitations, citationAnchorId, CITATION_LINK_CLASS } from "../src/utils/citations";
@@ -1361,47 +1362,21 @@ function uniqueFlightRoutes(): typeof FLIGHTS_DATA {
   });
 }
 
-const isNonstopRoute = (route: (typeof FLIGHTS_DATA)[number]) => /\(direct/i.test(route.duration);
+const isNonstopRoute = (route: (typeof FLIGHTS_DATA)[number]) => FLIGHT_ROUTES[route.id]?.hasNonstop === true;
 
 function renderFlightsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
   const routeDirectory = uniqueFlightRoutes().map(
     (route) =>
-      `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} to ${escapeHtml(route.to.split(" (")[0])}</a> — ${isNonstopRoute(route) ? "Nonstop" : "Connecting"}; ${escapeHtml(route.duration)}. Compare live fares for your dates.</li>`
+      `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} to ${escapeHtml(route.to.split(" (")[0])}</a> — ${isNonstopRoute(route) ? "Nonstop may be available" : "Check connections"}; ${escapeHtml(route.duration)}. Compare live fares for your dates.</li>`
   ).join("");
   return `<article>
     <h1>International Flights from Dhaka: Routes, Fares &amp; Airlines</h1>
     <p>${escapeHtml(description)}</p>
     <p>Use these Dhaka flight guides to compare the destinations covered, journey duration, airlines and booking guidance in one place. No fixed fare is published: prices and schedules change with travel dates, seat inventory, baggage choices and fare conditions, so compare live totals for your own dates. Before booking, check the full itinerary—not only the headline fare—including baggage, stopovers, transit requirements, change or cancellation terms, and arrival time. Travelers starting in Chattogram, Sylhet or another city should plan any separate domestic leg and allow a realistic connection buffer. Confirm the operating carrier and current departure details with the airline or booking provider.</p>
-    <section id="direct-flights-from-dhaka" aria-labelledby="direct-flights-h2">
-      <h2 id="direct-flights-h2">Direct flights from Dhaka (DAC): where you can fly nonstop</h2>
-      <p>Hazrat Shahjalal International Airport (DAC) has nonstop service to about 30 international destinations across roughly 20 countries, plus domestic routes. Schedules and operators change by season, so confirm on the airline's website before booking. Last reviewed: October 2026.</p>
-
-      <h3>Nonstop routes covered by URAL guides</h3>
-      <ul>
-        <li><a href="/flights/dhaka-kathmandu">Dhaka to Kathmandu</a> — Biman Bangladesh Airlines, Himalaya Airlines (~1h 30m)</li>
-          <li><a href="/flights/ktm-dhaka">Kathmandu to Dhaka</a> — Biman Bangladesh Airlines, Himalaya Airlines (~1h 30m)</li>
-        <li><a href="/flights/dhaka-bangkok">Dhaka to Bangkok</a> — Biman Bangladesh Airlines, Thai Airways, US-Bangla Airlines, Thai Lion Air (~2h 30m)</li>
-        <li><a href="/flights/dhaka-kuala-lumpur">Dhaka to Kuala Lumpur</a> — Malaysia Airlines, Biman Bangladesh Airlines, AirAsia, US-Bangla Airlines, Batik Air (~3h 50m)</li>
-        <li><a href="/flights/dhaka-singapore">Dhaka to Singapore</a> — Singapore Airlines, Biman Bangladesh Airlines, US-Bangla Airlines (~4h 15m)</li>
-        <li><a href="/flights/dhaka-dubai">Dhaka to Dubai</a> — Emirates, flydubai, Biman Bangladesh Airlines, US-Bangla Airlines (~4h 45m)</li>
-        <li><a href="/flights/dhaka-maldives">Dhaka to Malé, Maldives</a> — US-Bangla Airlines, SriLankan Airlines (~4h 10m)</li>
-      </ul>
-
-      <h3>Saudi Arabia (Umrah and Hajj)</h3>
-      <p>Nonstop flights run to Jeddah and Madinah. See the <a href="/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">open-jaw ticket guide</a> and the <a href="/umrah">DIY Umrah planner</a>.</p>
-
-      <h3>Routes with no nonstop</h3>
-      <p>Some popular searches, such as the US, Canada and most of Europe, usually involve a connection, often through the Gulf. Check the airline's route map for current options. For long-haul planning, see <a href="/flights/dhaka-los-angeles">Dhaka to Los Angeles</a>.</p>
-
-      <h4>FAQ</h4>
-      <details>
-        <summary>Which airlines fly nonstop from Dhaka?</summary>
-        <p>Biman Bangladesh Airlines and US-Bangla operate the most nonstop routes from DAC. Several foreign carriers also serve Dhaka nonstop. Check each airline's site for the current timetable.</p>
-      </details>
-      <details>
-        <summary>Are fares shown on URAL?</summary>
-        <p>URAL publishes route guidance and links to the airline or search partner. Fares change daily.</p>
-      </details>
+    <section id="direct-flights-from-dhaka"><h2>Possible nonstop routes from Dhaka</h2>
+      <p>Availability and operating airlines change. Check current schedules for your dates.</p>
+      <ul>${uniqueFlightRoutes().filter(isNonstopRoute).map((route) => `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from)} to ${escapeHtml(route.to)}</a> — check current schedules</li>`).join("")}</ul>
+      <p>For long-haul connections see <a href="/flights/dhaka-los-angeles">Dhaka to Los Angeles</a>. For Umrah planning see the <a href="/umrah">Umrah planner</a>.</p>
     </section>
     <section><h2>Dhaka international flight routes and fare guide</h2><ul>${routeDirectory}</ul></section>
     <section><h2>How to compare international flights from Bangladesh</h2>
@@ -1822,12 +1797,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         : r.id === "ktm-dhaka"
           ? "Kathmandu to Dhaka Flights: Price & Route Guide | URAL"
           : `Flights from Dhaka to ${r.to.split(" (")[0]} (${r.country}) 2026 | URAL`;
-    const description =
-      r.id === "dhaka-kathmandu"
-        ? "Direct Dhaka to Kathmandu flights take 1h30m on Biman Bangladesh or Himalaya Airlines. Compare live fares for your dates; Bangladeshis get a free visa on arrival."
-        : r.id === "ktm-dhaka"
-          ? "Direct Kathmandu to Dhaka (DAC) flights take 1h 30m on Biman Bangladesh Airlines and Himalaya Airlines; compare live fares for your own dates."
-          : `Compare flights from Dhaka to ${r.to.split(" (")[0]}. Check flight duration, direct airlines and live fares for your own travel dates.`;
+    const description = `Compare flights from ${r.from.split(" (")[0]} to ${r.to.split(" (")[0]}. Check schedules, baggage and current fares for your dates.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (r.schemaMarkup?.code) {
       try {
@@ -1870,18 +1840,19 @@ function buildAllRoutes(): PrerenderRoute[] {
           </section>
           <section>
             <h2>Booking window and airline choice</h2>
-            <p>The route guidance suggests starting fare checks around ${escapeHtml(r.bestTimeToBook)}. That is a planning cue rather than a guaranteed cheapest day to buy: compare current schedules and prices, then balance fare against departure time, total travel duration, baggage and support if plans change. Airlines listed for this route include ${escapeHtml(r.airlines.join(", "))}; operating carriers, aircraft and schedules can vary by date, so confirm the carrier shown on each segment.</p>
+            <p>Start comparing fares early and across dates; no fixed booking window guarantees the cheapest fare. Compare current schedules and prices, then balance fare against departure time, total travel duration, baggage and support if plans change. Airlines listed for this route include ${escapeHtml(r.airlines.join(", "))}; operating carriers, aircraft and schedules can vary by date, so confirm the carrier shown on each segment.</p>
             <p>Before choosing a direct or connecting itinerary, check the exact origin and destination airport codes on the ticket. If a connection is involved, verify whether all sectors are on one ticket, whether baggage is checked through, and whether you need permission to enter or transit the connection country. Do not assume a booking platform's itinerary summary replaces the airline's conditions.</p>
           </section>
           <section>
             <h2>Entry requirements and departure preparation</h2>
             <p>The current route data describes the entry requirement as: ${escapeHtml(r.visaRequirement)}. Visa rules depend on the traveler and can change; verify the latest instructions with the destination's official immigration authority or embassy before purchasing a non-refundable ticket. Check that passport details match the booking, understand the permitted stay and any pre-arrival form requirements, and carry the documents requested for your specific trip.</p>
-            <p>For departure from Dhaka, check your airline's current check-in time, baggage limits and airport instructions before travel. Keep the passport, ticket, visa or entry authorization, accommodation details and onward or return itinerary accessible. Requirements differ by destination and individual circumstances, so use the linked visa guide as a starting point and confirm with official sources.</p>
+            <p>Before departure, check your airline's current check-in time, baggage limits and airport instructions before travel. Keep the passport, ticket, visa or entry authorization, accommodation details and onward or return itinerary accessible. Requirements differ by destination and individual circumstances, so use the linked visa guide as a starting point and confirm with official sources.</p>
           </section>
           <section>
             <h2>Plan the full journey around this flight</h2>
-            <p>Door-to-door timing includes more than the time in the air. Plan how you will reach Hazrat Shahjalal International Airport from your starting point, allow the airline's required check-in time, and consider the time needed to collect bags and reach accommodation after landing. For this route, confirm the destination airport shown on the ticket (${escapeHtml(r.to)}) before arranging a pickup or choosing a hotel; airport names and codes matter when comparing transfer options. If you arrive late or have a connection, confirm the transfer plan and the accommodation's check-in arrangements in advance. Keep enough flexibility for traffic and schedule changes rather than planning a tight onward connection on a separate booking.</p>
+            <p>Door-to-door timing includes more than the time in the air. Plan how you will reach your departure airport (${escapeHtml(r.from)}) from your starting point, allow the airline's required check-in time, and consider the time needed to collect bags and reach accommodation after landing. For this route, confirm the destination airport shown on the ticket (${escapeHtml(r.to)}) before arranging a pickup or choosing a hotel; airport names and codes matter when comparing transfer options. If you arrive late or have a connection, confirm the transfer plan and the accommodation's check-in arrangements in advance. Keep enough flexibility for traffic and schedule changes rather than planning a tight onward connection on a separate booking.</p>
           </section>
+          <section><h2>Continue planning</h2><p><a href="${escapeHtml(FLIGHT_ROUTES[r.id].visaPath)}">${FLIGHT_ROUTES[r.id].visaPath === "/visa" ? "Browse visa guides" : "Visa guidance"}</a>${r.id === "dhaka-los-angeles" ? ' · <a href="https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html">Official US visitor visa guidance</a>' : ""} · <a href="${escapeHtml(FLIGHT_ROUTES[r.id].hotelPath)}">${FLIGHT_ROUTES[r.id].hotelPath === "/hotels" ? "Browse hotel guides" : "Where to stay"}</a></p></section>
           <section>
             <h2>Arrival and connection checklist</h2>
             <ol>
@@ -1892,7 +1863,7 @@ function buildAllRoutes(): PrerenderRoute[] {
               <li>Plan the transfer from the arrival airport to your accommodation using current local information, and share your hotel address with your travel party.</li>
             </ol>
           </section>
-          ${renderLandingFaqs("flight-route-faqs", "Questions about this Dhaka flight route", routeFaq)}
+          ${renderLandingFaqs("flight-route-faqs", "Questions about this flight route", routeFaq)}
         </article>
       `,
     });
@@ -3429,9 +3400,10 @@ function buildBengaliBody(
         parts.push(
           bnLinkList(
             "এই ট্রিপের বাকি পরিকল্পনা",
-            bnCountryCrossLinks(route.country, englishPath)
+            [{ label: "ভিসা গাইড", path: FLIGHT_ROUTES[route.id].visaPath }, { label: "থাকার গাইড", path: FLIGHT_ROUTES[route.id].hotelPath }]
           )
         );
+        if (route.id === "dhaka-los-angeles") parts.push(`<p><a href="https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html">US visitor visa-এর সরকারি নির্দেশনা</a></p>`);
         const localizedRouteFaqs = getLocalizedFlightFaqs(route.id);
         if (localizedRouteFaqs?.length) {
           parts.push(bnFaqList("এই রুট সম্পর্কে সাধারণ প্রশ্ন", localizedRouteFaqs));
@@ -3447,30 +3419,6 @@ function buildBengaliBody(
         );
       }
 
-      // Bengali: Direct flights from Dhaka section for the flights hub
-      parts.push(
-        `<section id="direct-flights-from-dhaka" aria-labelledby="direct-flights-h2-bn">` +
-          `<h2 id="direct-flights-h2-bn">ঢাকা (DAC) থেকে সরাসরি ফ্লাইট: আপনি কোথায় ননস্টপ ভ্রমণ করতে পারেন</h2>` +
-          `<p>হাজর শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) প্রায় ৩০টি আন্তর্জাতিক গন্তব্যে এবং দেশীয় রুটে সরাসরি সেবা প্রদান করে। এয়ারলাইনের টাইম-টেবিল মৌসুম অনুযায়ী পরিবর্তিত হতে পারে, তাই বুকিং করার আগে এয়ারলাইনের ওয়েবসাইটে নিশ্চিত হয়ে নিন। শেষ পর্যালোচনা: অক্টোবর ২০২৬।</p>` +
-          `<h3>ইউআরএল গাইডে কভার করা ননস্টপ রুটসমূহ</h3>` +
-          `<ul>` +
-            `<li><a href="/bn/flights/dhaka-kathmandu">ঢাকা থেকে কাঠমান্ডু</a> — Biman Bangladesh Airlines, Himalaya Airlines (~১ ঘণ্টা ২৫ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-bangkok">ঢাকা থেকে ব্যাংকক</a> — Biman Bangladesh Airlines, Thai Airways, US-Bangla Airlines, Thai Lion Air (~২ ঘণ্টা ৩০ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-kuala-lumpur">ঢাকা থেকে কুয়ালালামপুর</a> — Malaysia Airlines, Biman Bangladesh Airlines, AirAsia, US-Bangla Airlines, Batik Air (~৩ ঘণ্টা ৫০ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-singapore">ঢাকা থেকে সিঙ্গাপুর</a> — Singapore Airlines, Biman Bangladesh Airlines, US-Bangla Airlines (~৪ ঘণ্টা ১৫ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-dubai">ঢাকা থেকে দুবাই</a> — Emirates, flydubai, Biman Bangladesh Airlines, US-Bangla Airlines (~৪ ঘণ্টা ৪৫ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-maldives">ঢাকা থেকে মালদ্বীপ (মালে)</a> — US-Bangla Airlines, SriLankan Airlines (~৪ ঘণ্টা ১০ মিনিট)</li>` +
-          `</ul>` +
-          `<p>প্রতিটি রুটের ভাড়া আপনার তারিখ, আসন ও ব্যাগেজ অনুযায়ী বদলায়—নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, তাই বুকিংয়ের আগে লাইভ ভাড়া তুলনা করুন।</p>` +
-          `<h3>সৌদি আরব (ওমরাহ ও হজ)</h3>` +
-          `<p>জেদ্দা ও মদিনার সরাসরি ফ্লাইট চলতে থাকে। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জেদ্দা টিকিট গাইড</a> এবং <a href="/bn/umrah">ডিআইওয়াই ওমরাহ প্ল্যানার দেখুন</a>।</p>` +
-          `<h3>কোনো ননস্টপ নেই এমন রুট</h3>` +
-          `<p>আমেরিকা, কানাডা ও ইউরোপের মতো কিছু জনপ্রিয় গন্তব্যে সাধারণত কানেকশন থাকা লাগে। দীর্ঘ-দূরত্ব পরিকল্পনার জন্য <a href="/bn/flights/dhaka-los-angeles">ঢাকা থেকে লস অ্যাঞ্জেলেস</a> দেখুন।</p>` +
-          `<h4>সচরাচর জিজ্ঞাসা প্রশ্ন</h4>` +
-          `<details><summary>ঢাকা থেকে কোন এয়ারলাইন্স ননস্টপ উড়ে? </summary><p>Biman Bangladesh Airlines ও US-Bangla DAC থেকে সবচেয়ে বেশি ননস্টপ রুট পরিচালনা করে। কিছু বিদেশি এয়ারলাইন্সও ঢাকা থেকে সরাসরি উড়ে। বর্তমান টাইম-টেবিল-এর জন্য প্রতিটি এয়ারলাইনের ওয়েবসাইট দেখুন।</p></details>` +
-          `<details><summary>ভাড়া কি এখানে দেখানো হয়?</summary><p>পেজটি রুট গাইড প্রকাশ করে এবং এয়ারলাইন বা সার্চ পার্টনারের লিংক দেয়। নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ ভাড়া প্রতিদিন ও প্রতিটি তারিখে পরিবর্তিত হয়—আপনার তারিখের লাইভ ভাড়া ও শর্ত যাচাই করুন।</p></details>` +
-          `</section>`
-      );
 
     } else {
       const seenPairs = new Set<string>();
@@ -3483,11 +3431,11 @@ function buildBengaliBody(
         seenPairs.add(key);
         return true;
       });
-      const nonstopRoutes = hubRoutes.filter((route) => /direct/i.test(route.flightDuration || route.duration));
+      const nonstopRoutes = hubRoutes.filter(isNonstopRoute);
       const nonstopItems = nonstopRoutes
         .map(
           (route) =>
-            `<li><a href="/bn/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} → ${escapeHtml(route.to.split(" (")[0])}</a> — ${escapeHtml(route.airlines.join(", "))} (${escapeHtml(route.flightDuration || route.duration)})</li>`
+            `<li><a href="/bn/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} → ${escapeHtml(route.to.split(" (")[0])}</a> — আপনার তারিখের সময়সূচি যাচাই করুন</li>`
         )
         .join("");
       parts.push(
@@ -3497,11 +3445,11 @@ function buildBengaliBody(
         ),
         `<p>নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না: তারিখ, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী দাম বদলায়। রুট গাইডে যাত্রার সময় ও এয়ারলাইন্স দেখে নিন, তারপর নিজের তারিখের লাইভ মোট ভাড়া তুলনা করুন।</p>`,
         bnSection(
-          "ঢাকা (DAC) থেকে সরাসরি ফ্লাইট",
-          `<p>হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর থেকে প্রায় ৩০টি আন্তর্জাতিক গন্তব্যে সরাসরি ফ্লাইট চলে, পাশাপাশি দেশীয় রুটও। মৌসুম অনুযায়ী সময়সূচি ও পরিচালনাকারী এয়ারলাইন্স বদলায়, তাই বুকিংয়ের আগে এয়ারলাইনের ওয়েবসাইটে নিশ্চিত হয়ে নিন।</p>` +
+          "ঢাকা (DAC) থেকে সরাসরি বিকল্প",
+          `<p>নিচের রুটে সরাসরি বিকল্প থাকতে পারে। সময়সূচি ও পরিচালনাকারী এয়ারলাইন তারিখ অনুযায়ী বদলায়; বুকিংয়ের আগে যাচাই করুন।</p>` +
             (nonstopItems ? `<ul>${nonstopItems}</ul>` : "") +
-            `<h3>সৌদি আরব (ওমরাহ ও হজ)</h3><p>জেদ্দা ও মদিনায় সরাসরি ফ্লাইট চলে। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জ টিকিট গাইড</a> এবং <a href="/bn/umrah">DIY ওমরাহ প্ল্যানার</a> দেখুন।</p>` +
-            `<h3>কোনো ননস্টপ ফ্লাইট নেই এমন রুট</h3><p>আমেরিকা, কানাডা ও ইউরোপের অনেক গন্তব্যে সাধারণত সংযোগ লাগে, প্রায়ই উপসাগরীয় হাব হয়ে। দীর্ঘ-দূরত্বের পরিকল্পনার জন্য <a href="/bn/flights/dhaka-los-angeles">ঢাকা থেকে লস অ্যাঞ্জেলেস</a> গাইড দেখুন।</p>`
+            `<h3>সৌদি আরব (ওমরাহ ও হজ)</h3><p>জেদ্দা ও মদিনার বর্তমান সরাসরি ফ্লাইট যাচাই করুন। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জ টিকিট গাইড</a> এবং <a href="/bn/umrah">DIY ওমরাহ প্ল্যানার</a> দেখুন।</p>` +
+            `<h3>যেসব রুটে সংযোগ যাচাই করবেন</h3><p>আমেরিকা, কানাডা ও ইউরোপের অনেক গন্তব্যে সাধারণত সংযোগ লাগে, প্রায়ই উপসাগরীয় হাব হয়ে। দীর্ঘ-দূরত্বের পরিকল্পনার জন্য <a href="/bn/flights/dhaka-los-angeles">ঢাকা থেকে লস অ্যাঞ্জেলেস</a> গাইড দেখুন।</p>`
         ),
         bnSection(
           "বাংলাদেশ থেকে আন্তর্জাতিক ফ্লাইট কীভাবে তুলনা করবেন",

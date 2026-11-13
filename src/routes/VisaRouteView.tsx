@@ -39,7 +39,6 @@ export default function VisaRouteView({ context }: RouteViewProps) {
           description={isBn ? "গন্তব্য অনুযায়ী প্রবেশের পথ, প্রয়োজনীয় নথি ও আবেদন প্রক্রিয়া বুঝুন। নিয়ম বদলাতে পারে—আবেদনের আগে সরকারি কর্তৃপক্ষের বর্তমান নির্দেশনা যাচাই করুন।" : "Understand entry routes, documents and application steps for your destination. Rules can change, so check current official instructions before applying."}
           imageSrc="/assets/images/visa_directory_hero_20261112-1200.webp"
           imageAlt={isBn ? "বিমানবন্দরে ভ্রমণের নথির AI-তৈরি চিত্র" : "AI-generated illustration of travel documents at an airport"}
-          credit={isBn ? "AI-তৈরি চিত্র" : "AI-generated illustration"}
         />
         <section aria-labelledby="visa-guide-index-title" className="space-y-7">
           <div className="max-w-3xl space-y-3">
@@ -86,7 +85,6 @@ export default function VisaRouteView({ context }: RouteViewProps) {
           description={isBn ? `${countryLabel}-এ প্রবেশের ধরন, প্রয়োজনীয় নথি ও আবেদন ধাপ পর্যালোচনা করুন। নিয়ম ও ফি বদলাতে পারে—আবেদনের আগে সরকারি নির্দেশনা যাচাই করুন।` : `Review the entry route, required documents and application steps for ${activeVisa.country}. Rules and fees can change, so verify current instructions with official sources before applying.`}
           imageSrc="/assets/images/visa_directory_hero_20261112-1200.webp"
           imageAlt={isBn ? "বিমানবন্দরে ভ্রমণের নথির AI-তৈরি চিত্র" : "AI-generated illustration of travel documents at an airport"}
-          credit={isBn ? "AI-তৈরি চিত্র" : "AI-generated illustration"}
         />
 
         {activeVisa.id === "saudi-arabia-visa" && <p className="text-sm text-slate-700">{isBn ? "ওমরাহ পরিকল্পনার বিস্তারিত " : "For Umrah-specific planning, see the "}<a href={isBn ? "/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost" : "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost"} className="font-bold text-brand-navy underline underline-offset-4">{isBn ? "ওমরাহ ভিসা গাইড" : "Umrah visa guide"}</a>.</p>}
