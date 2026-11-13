@@ -1,4 +1,5 @@
 import { TravellerCheckNote } from "../src/components/TravellerCheckNote";
+import { resolveBookingCtaUrl } from "../src/utils/bookingCta";
 import { getTravellerCheck } from "../src/utils/travellerChecks";
 import { generateBlogCoverAltText } from "../src/utils/blogAltText";
 import { linkifyCitations, citationAnchorId, CITATION_LINK_CLASS } from "../src/utils/citations";
@@ -610,10 +611,11 @@ function renderCoxsBazarBookingCtaHtml(locale: "en" | "bn"): string {
  */
 function renderBlogAffiliateCtaHtml(
   cta: { provider: string; headline: string; body: string } | undefined,
-  locale: "en" | "bn"
+  locale: "en" | "bn",
+  slug?: string
 ): string {
   if (!cta) return "";
-  const href = resolvePartnerUrl(AFFILIATE_LINKS[cta.provider as keyof typeof AFFILIATE_LINKS]);
+  const href = resolveBookingCtaUrl(cta.provider, { slug, locale });
   if (!href) return "";
   const label = getAffiliateCtaButtonLabel(cta.provider, locale);
   return `<section aria-labelledby="article-affiliate-cta"><h2 id="article-affiliate-cta">${escapeHtml(
@@ -2960,7 +2962,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     const radicalStorageHtml = renderBlogLuggagePlacementHtml(post.slug, "en");
     const multiPlacement = MULTI_PARTNER_BLOG_PLACEMENTS[post.slug];
     const multiPartnerHtml = multiPlacement
-      ? `<section aria-labelledby="partner-travel-tools"><h2 id="partner-travel-tools">${escapeHtml(multiPlacement.headlineEn)}</h2><p>${escapeHtml(multiPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.primaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.anchorTextEn)}</a>${escapeHtml(multiPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.primaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.primaryButtonEn)}</a>${
+      ? `<section aria-labelledby="partner-travel-tools"><h2 id="partner-travel-tools">${escapeHtml(multiPlacement.headlineEn)}</h2><p>${escapeHtml(multiPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolveBookingCtaUrl(multiPlacement.primaryPartner, { slug: post.slug, locale: "en" }))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.anchorTextEn)}</a>${escapeHtml(multiPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolveBookingCtaUrl(multiPlacement.primaryPartner, { slug: post.slug, locale: "en" }))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.primaryButtonEn)}</a>${
           multiPlacement.secondaryPartner && multiPlacement.secondaryButtonEn
             ? ` · <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.secondaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.secondaryButtonEn)}</a>`
             : ""
@@ -2972,7 +2974,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     // HTML or a browser that failed to load the widget chunk saw no monetised
     // next step at all. Render it for every post that defines one, from the same
     // fields and the same label helper the React route uses.
-    const affiliateCtaHtml = renderBlogAffiliateCtaHtml(post.affiliateCTA, "en");
+    const affiliateCtaHtml = renderBlogAffiliateCtaHtml(post.affiliateCTA, "en", post.slug);
     const klookHotelPlacement = KLOOK_HOTEL_BLOG_PLACEMENTS[post.slug];
     const klookHotelHtml =
       klookHotelPlacement && AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
@@ -3398,7 +3400,7 @@ function buildBengaliBody(
         // same partner next step as /blog/<slug>, using the placement's own
         // Bengali copy (the React callout already renders it after hydration;
         // without this block the crawlable BN page silently had none).
-        const multiUrlBn = escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacementBn.primaryPartner]));
+        const multiUrlBn = escapeHtml(resolveBookingCtaUrl(multiPlacementBn.primaryPartner, { slug: id, locale: "bn" }));
         const multiSecondaryBn =
           multiPlacementBn.secondaryPartner && multiPlacementBn.secondaryButtonBn
             ? ` · <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacementBn.secondaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacementBn.secondaryButtonBn)}</a>`
@@ -3416,7 +3418,7 @@ function buildBengaliBody(
         // getLocalizedBlogs does) and rendered by the same shared helper.
         const blogCtaBn =
           override.affiliateCTA !== undefined ? override.affiliateCTA : bnPost?.affiliateCTA;
-        const blogCtaHtmlBn = renderBlogAffiliateCtaHtml(blogCtaBn || undefined, "bn");
+        const blogCtaHtmlBn = renderBlogAffiliateCtaHtml(blogCtaBn || undefined, "bn", id);
         if (blogCtaHtmlBn) parts.push(blogCtaHtmlBn);
       }
       const klookHotelPlacementBn = KLOOK_HOTEL_BLOG_PLACEMENTS[id];
