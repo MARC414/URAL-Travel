@@ -8,6 +8,7 @@ summary: "Checked 8 November 2026: how incline, gate alignment and lift design d
 summaryBn: "৮ নভেম্বর ২০২৬-এ যাচাই করা: ঢাল, গেটের মিল ও লিফটের নকশা কীভাবে ঠিক করে বাবা-মা ও হুইলচেয়ারের জন্য হোটেলটি উপযুক্ত কি না, কোয়াড রুমে আসলে কী থাকে, আর টাকা দেওয়ার আগে পাঁচটি যাচাই।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: prepare
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 11 min read

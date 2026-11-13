@@ -2332,7 +2332,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                           Placed after the body and before related links: the
                           reader has just finished the job, so this is where the
                           next problem is actually on their mind. */}
-                      <JourneyHelpPanel stage={activePost.journeyStage} isBn={isBn} />
+                      <JourneyHelpPanel stage={activePost.journeyStage} isBn={isBn} slug={activePost.slug} />
 
                       <BlogPlanningLinks post={activePost} locale={isBn ? "bn" : "en"} navigate={navigateTo} />
 

@@ -8,6 +8,7 @@ summary: "Checked 8 November 2026: the real door-to-door timing of the Haramain 
 summaryBn: "৮ নভেম্বর ২০২৬-এ যাচাই করা: হারামাইন হাই-স্পিড ট্রেন, ভিআইপি কোচ ও প্রাইভেট ভ্যানের আসল দরজা-থেকে-দরজা সময়, যে লাগেজ নিয়মে হাজিদের গেটে ফেরানো হয়, আর দলের সংখ্যা কীভাবে উত্তরটা বদলে দেয়।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: perform
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 11 min read

@@ -40,6 +40,9 @@ function toBlogMetadata(post: ScheduledBlogPost) {
     ...(post.inlineFigure ? { inlineFigure: post.inlineFigure } : {}),
     ...(post.references.length ? { references: post.references } : {}),
     ...(post.affiliateCta ? { affiliateCTA: post.affiliateCta } : {}),
+    // Journey Help is chosen by stage, never by topic (docs/growth/10 §4.4), so
+    // the stage must travel with the post or the panel silently disappears.
+    ...(post.journeyStage ? { journeyStage: post.journeyStage } : {}),
     internalLinks: post.internalLinksEn,
   };
 }

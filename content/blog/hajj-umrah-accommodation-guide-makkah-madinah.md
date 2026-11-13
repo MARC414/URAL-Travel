@@ -8,6 +8,7 @@ summary: "Checked 8 November 2026: the whole accommodation picture for both holy
 summaryBn: "৮ নভেম্বর ২০২৬-এ যাচাই করা: দুই পবিত্র শহরের আবাসনের পুরো চিত্র এক জায়গায়—মক্কার তিন জোন, মদিনার চার মারকাজিয়া পাশ, আরাম ঠিক করে দেওয়া চারটি বিষয়, আর কখন বুক করবেন।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: prepare
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 13 min read
