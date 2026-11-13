@@ -8,6 +8,7 @@ summary: "Checked 8 November 2026: the four stages that make up room-to-carpet t
 summaryBn: "৮ নভেম্বর ২০২৬-এ যাচাই করা: মক্কায় রুম থেকে সিজদা পর্যন্ত সময়ের চারটি ধাপ, ক্লক টাওয়ার ও জাবাল ওমরের ব্লক বাস্তবে কীভাবে আলাদা, আর মাটির স্তরের প্রবেশে টাকা খরচ কখন সার্থক।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: prepare
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 10 min read

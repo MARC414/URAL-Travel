@@ -8,6 +8,7 @@ summary: "Checked 8 November 2026: how the northern, eastern, western and southe
 summaryBn: "৮ নভেম্বর ২০২৬-এ যাচাই করা: উত্তর, পূর্ব, পশ্চিম ও দক্ষিণ মারকাজিয়া কোন দিক দিয়ে মাসজিদ আন-নববীর সঙ্গে যুক্ত, কোন গেট কোন হাজির জন্য, আর বুকিংয়ের আগে তিনটি দূরত্ব-স্তর কীভাবে পড়বেন।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: prepare
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 11 min read

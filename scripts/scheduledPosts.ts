@@ -76,12 +76,29 @@ export interface ScheduledBlogPost {
   references: ScheduledBlogReference[];
   internalLinksEn: ScheduledBlogLink[];
   internalLinksBn: ScheduledBlogLink[];
+  /**
+   * Which stage of the Hajj/Umrah journey this article answers for, so the
+   * Journey Help panel offers the reader their *next* problem rather than this
+   * one. Required for Hajj & Umrah posts by `scripts/test-journey-help.ts`;
+   * optional in the type because other categories have no journey to place the
+   * reader in. Unknown values fail the build.
+   */
+  journeyStage?: ScheduledBlogJourneyStage;
   affiliateCta?: ScheduledBlogAffiliateCta;
   affiliateCtaBn?: ScheduledBlogAffiliateCta;
   englishBody: string;
   bengaliBody: string;
   sourceFile: string;
 }
+
+/**
+ * The four stages used by the Journey Help panel (`src/utils/journeyHelp.ts`).
+ * Declared here as a value, not just a type, so frontmatter can be validated
+ * against it and a typo becomes a build error instead of a silently missing
+ * panel.
+ */
+export const JOURNEY_STAGES = ["prepare", "travel", "perform", "return"] as const;
+export type ScheduledBlogJourneyStage = (typeof JOURNEY_STAGES)[number];
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const BLOG_DRAFTS_DIR = path.join(ROOT_DIR, "content", "blog");
@@ -109,6 +126,24 @@ function optionalString(data: Record<string, unknown>, key: string, file: string
     return fail(file, `frontmatter field "${key}" must be a non-empty string when provided`);
   }
   return value.trim();
+}
+
+/** Like `optionalString`, but the value must be one of a fixed list. */
+function optionalEnum<T extends string>(
+  data: Record<string, unknown>,
+  key: string,
+  file: string,
+  allowed: readonly T[],
+): T | undefined {
+  const value = optionalString(data, key, file);
+  if (value === undefined) return undefined;
+  if (!(allowed as readonly string[]).includes(value)) {
+    return fail(
+      file,
+      `frontmatter field "${key}" must be one of ${allowed.join(", ")} (got "${value}")`,
+    );
+  }
+  return value as T;
 }
 
 function dateString(value: unknown, field: string, file: string): string | undefined {
@@ -357,6 +392,7 @@ function parsePost(file: string): ScheduledBlogPost {
     references: parseReferences(data.references, file),
     internalLinksEn: parseLinks(data.internalLinksEn, "internalLinksEn", file),
     internalLinksBn: parseLinks(data.internalLinksBn, "internalLinksBn", file),
+    journeyStage: optionalEnum(data, "journeyStage", file, JOURNEY_STAGES),
     affiliateCta: parseAffiliateCta(data, file, {
       prefix: "affiliateCta",
       partnerKeys,

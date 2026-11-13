@@ -8,6 +8,7 @@ summary: "Checked 8 November 2026: what the three Makkah accommodation tiers act
 summaryBn: "৮ নভেম্বর ২০২৬-এ যাচাই করা: মক্কার তিন ধরনের আবাসন হাঁটার সময়, লিফটের লাইন ও শাটলের সময়ে আসলে কী দেয়, আর আপনার দলের জন্য কোনটি ঠিক।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: prepare
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 10 min read

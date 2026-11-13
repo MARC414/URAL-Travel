@@ -8,6 +8,7 @@ summary: "Checked 8 November 2026: how the pre-Adhan road closures change what a
 summaryBn: "৮ নভেম্বর ২০২৬-এ যাচাই করা: আজানের আগের রাস্তা বন্ধ কীভাবে মক্কা ও মদিনার সস্তা শাটল হোটেলের মূল্য বদলে দেয়, বাস আসলে কোথায় নামায়, আর কোন রুম-স্তরের খরচ সাশ্রয়টা খেয়ে ফেলে।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: prepare
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 11 min read
