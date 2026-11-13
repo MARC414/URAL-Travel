@@ -1924,10 +1924,11 @@ export const BLOG_DATA: BlogPost[] = [
     category: "Hajj & Umrah",
     journeyStage: "prepare",
     date: "September 26, 2026",
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-11-12",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "12 min read",
     internalLinks: [
+      { text: "Saudi visa routes and sources", path: "/visa/saudi-arabia-visa" },
       { text: "Plan Ziyarah stops and agree transport terms", path: "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" },
       { text: "Nusuk registration, Visa Bio and Rawdah checks", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Saudi stopover: the separate 96-hour trip", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
@@ -2281,11 +2282,11 @@ export const BLOG_DATA: BlogPost[] = [
     slug: "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
     title: "96-Hour Saudi Stopover from Bangladesh: Eligibility, Booking & Umrah",
     summary:
-      "Checked 19 October 2026: Saudia’s published stopover booking sequence, up to 96 hours, onward-document checks and actual checkout costs. Current detailed flynas eligibility remains unverified. Separate Umrah/Rawdah permits and realistic transfer buffers matter; no universal approval, free hotel or instant-issuance promise.",
+      "Checked 12 November 2026: Visit Saudi describes stopovers up to 96 hours and separate charges. Detailed current airline eligibility and booking flows were not verified. Umrah/Rawdah permits are separate; approval, free hotels and instant issuance are not guaranteed.",
     category: "Hajj & Umrah",
     journeyStage: "prepare",
     date: "September 27, 2026",
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-11-12",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "9 min read",
     references: [
@@ -2295,8 +2296,8 @@ export const BLOG_DATA: BlogPost[] = [
         url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover",
       },
       {
-        name: "Saudia — dedicated transit visa conditions and booking sequence",
-        nameBn: "Saudia — নির্দিষ্ট transit visa শর্ত ও booking sequence",
+        name: "Saudia — previously reviewed transit page (unavailable when reopened 12 November 2026)",
+        nameBn: "Saudia — পূর্বে দেখা transit page (১২ নভেম্বর ২০২৬-এ খোলা যায়নি)",
         url: "https://www.saudia.com/transit-visa",
       },
       {
@@ -2347,7 +2348,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dual-Currency Card Endorsement Guide for Online Flight Booking", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
       { text: "Umrah + Dubai 10-Day Combo Trip from Dhaka (2026): How to Combine Makkah, Madinah & UAE on One Multi-City Ticket", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
-      { text: "Europe, UK & USA Sightseeing for Bangladeshi Travelers (2026): Skip-the-Line Passes + Instant Saudi Stopover Umrah", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
+      { text: "Europe, UK & USA Sightseeing and Saudi Visa Planning for Bangladeshi Travelers", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
           { text: "UK passport visa routes: ETA, e-visa or waiver for Umrah", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
       { text: "UK Umrah packages: ATOL cover and operator checks", path: "/blog/uk-umrah-packages-atol-operator-checks" },
     ],
@@ -2933,15 +2934,17 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-27",
     slug: "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
-    title: "Europe, UK & USA Sightseeing for Bangladeshi Travelers (2026): Skip-the-Line Passes + Instant Saudi Stopover Umrah",
-    summary: "Bangladeshi travelers and NRB families flying to London, Paris, Rome, Milan, Venice, or New York face two major opportunities: first, avoiding 2-to-3 hour ticket counter queues at iconic landmarks like the Louvre, Eiffel Tower, Tower of London, and Colosseum by pre-booking official Tiqets mobile passes; and second, unlocking an instant 1-Year Multiple-Entry Saudi e-Visa or Visa on Arrival using their valid US, UK, or Schengen visa to perform Umrah on the way! Verified against Saudi Unified Visa Platform (ksavisa.sa) and official museum regulations, here is your complete Western travel & Umrah bridge playbook.",
+    title: "Europe, UK & USA Sightseeing and Saudi Visa Planning for Bangladeshi Travelers",
+    summary: "Plan sightseeing bookings in Europe and North America and review Saudi visa requirements separately when considering an onward stopover. A foreign visa does not guarantee Saudi approval or entry.",
     category: "Ziyarah & Stopovers",
     date: "September 27, 2026",
+    updatedAt: "2026-11-12",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
     internalLinks: [
+      { text: "Saudi visa routes and sources", path: "/visa/saudi-arabia-visa" },
       { text: "Browse Official Europe, UK & USA Skip-the-Line Passes (Tiqets Hub)", path: "/experiences?region=west" },
-      { text: "96-Hour Saudi Stopover Visa & US/UK/Schengen Umrah Rules", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
+      { text: "Saudi Stopover Visa: eligibility and Umrah planning", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
       { text: "Dual-Currency Card Endorsement ($18,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" }
     ],
     affiliateCTA: { provider: "tiqets", headline: "Book Instant Mobile Skip-the-Line Tickets for Paris, London, Rome & NYC (Tiqets)", body: "Secure guaranteed timed-entry QR passes for the Louvre, Eiffel Tower, London Eye, Colosseum, and Statue of Liberty with instant confirmation." }
@@ -3141,9 +3144,11 @@ export const BLOG_DATA: BlogPost[] = [
     summary: "If you are holding a brand-new, blank Bangladeshi e-Passport with zero visas or stamps, applying directly for a Singapore, Schengen, UK, or US tourist visa without prior travel history often leads to a frustrating refusal under 'insufficient travel compliance.' Seasoned Bangladeshi travelers solve this Catch-22 using a proven 3-Step Travel History Ladder: starting with zero-risk Visa-on-Arrival countries (Nepal or the Maldives), stepping up to fast online Southeast Asian e-Visas (Malaysia and Thailand), and unlocking global destinations (Singapore, Dubai, Saudi Umrah, and Europe). Here is your complete 12-to-18 month passport-building roadmap with BDT budgets.",
     category: "Visa & Immigration",
     date: "September 27, 2026",
+    updatedAt: "2026-11-12",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
     internalLinks: [
+      { text: "Saudi visa routes and sources", path: "/visa/saudi-arabia-visa" },
       { text: "Apply for or reissue your passport accurately", path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },

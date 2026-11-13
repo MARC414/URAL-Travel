@@ -368,14 +368,14 @@ export const BENGALI_BLOG_OVERRIDES: Record<
 শুধু উদ্বোধনী ঘোষণা নয়, বর্তমান অফার পড়ুন। Nusuk-এর শর্তে individual package একাধিক সেবার সমন্বয়; লক্ষ্য দেশ ও সেবা বদলাতে পারে। বাইরের এজেন্টের ক্ষেত্রে মন্ত্রণালয়ের FAQ বলে, আবাসন ও পরিবহন ছাড়া Umrah visa ইস্যু করা যায় না [৩–৪]। টাকা দেওয়ার আগে অফিশিয়াল মাধ্যমে সেবাদাতা যাচাই করে সুনির্দিষ্ট সেবা, সরবরাহকারী, মোট খরচ, পেমেন্টের ধাপ এবং বাতিল/ফেরতের শর্ত লিখিতভাবে নিন। ভিসার টাকা ফেরতযোগ্য বা ফেরত সঙ্গে সঙ্গে হবে ধরে নেবেন না।
 
 পথ ২: যোগ্য airline stopover — সর্বোচ্চ ৯৬ ঘণ্টা
-Stopover হলো পরবর্তী গন্তব্যে যাওয়ার পথে ছোট বিরতি, ১০ দিনের ওমরাহের পথ নয়। যাচাই করা Saudia নির্দেশনায় ফ্লাইট বুকিংয়ের মধ্যেই ভিসা আবেদন করতে হয়; অন্তত ছয় মাস মেয়াদের পাসপোর্ট, পরবর্তী গন্তব্যের নিশ্চিত টিকিট এবং প্রযোজ্য হলে সেই দেশের ভিসা বা বসবাসের অনুমতি লাগে। চূড়ান্ত প্রবেশ passport control-এর সিদ্ধান্তের অধীন [৬–৭]।
+Stopover হলো পরবর্তী গন্তব্যে যাওয়ার পথে ছোট বিরতি, ১০ দিনের ওমরাহের পথ নয়। Visit Saudi Saudia বা flynas-সংশ্লিষ্ট সর্বোচ্চ ৯৬ ঘণ্টার পথ এবং আলাদা application ও insurance charge বর্ণনা করে। ১২ নভেম্বর ২০২৬-এ Saudia-র বিস্তারিত পেজ আবার খোলা যায়নি; বর্তমান airline eligibility, booking flow ও itinerary অনুযায়ী charge যাচাই হয়নি। Approval বা entry নিশ্চিত নয় [৬–৭]।
 
-কেনার আগে নিজের airline-এর প্রকৃত checkout পড়ুন। Saudia বলে, visa, service, medical ও insurance-এর খরচ MOFA নিয়মে হিসাব হয়; Visit Saudi-র প্রচারিত line-item উদাহরণ আপনার নিশ্চিত মোট প্রদেয় খরচ নয়। ফ্রি হোটেল বা নিশ্চিত processing time ধরে পরিকল্পনা করবেন না। অন্য carrier হলে তার নিজস্ব বর্তমান itinerary ও আবেদন-শর্ত যাচাই করুন। ছোট এই সফরের বিস্তারিত আলাদা stopover গাইডে আছে [৬–৭]।
+কেনার আগে নিজের airline-এর প্রকৃত checkout পড়ুন। Visit Saudi-র প্রচারিত line-item উদাহরণ আপনার নিশ্চিত মোট প্রদেয় খরচ নয়। ফ্রি হোটেল বা নিশ্চিত processing time ধরে পরিকল্পনা করবেন না। অন্য carrier হলে তার নিজস্ব বর্তমান itinerary ও আবেদন-শর্ত যাচাই করুন। ছোট এই সফরের বিস্তারিত আলাদা stopover গাইডে আছে [৬–৭]।
 
 পথ ৩: Package Visa-সহ যোগ্য tourist-visa route
 ১৯ অক্টোবর ২০২৬-এ আবার খোলা সাধারণ nationality-only eVisa তালিকায় Bangladesh নেই। Visit Saudi আলাদাভাবে অনুমোদিত পর্যটন সেবাদাতার Package Visa-তে বাংলাদেশি পাসপোর্টধারীদের নাম বলে। এটি tourist শ্রেণির উপ-পথ, চতুর্থ শ্রেণি বা বাধাহীন শুধু ভিসা কেনার সুযোগ নয় [৮–৯]।
 
-যাচাই করা Package Visa FAQ অনুযায়ী নিশ্চিত যাওয়া-আসার ফ্লাইট এবং মন্ত্রণালয়ের লাইসেন্সপ্রাপ্ত অন্তত চার তারকার হোটেলে নিশ্চিত আবাসন লাগে। প্রকাশিত package minimum জনপ্রতি প্রাপ্তবয়স্কের প্রথম দুই দিন মিলিয়ে SAR 4,000, এরপর প্রতিটি পরবর্তী দিনের জন্য SAR 1,000। এগুলো তারিখযুক্ত প্রকাশিত শর্ত, আপনার পরিবারের কোট বা BDT রূপান্তর নয়। টাকা দেওয়ার আগে বর্তমান অফার, মোট, অন্তর্ভুক্ত সেবা ও ফেরতের শর্ত নিশ্চিত করুন; পুরোনো বাজেটের সঙ্গে একই সেবার হিসাব ধরে তুলনা করবেন না [৮]।
+যাচাই করা Package Visa FAQ অনুযায়ী নিশ্চিত যাওয়া-আসার ফ্লাইট এবং মন্ত্রণালয়ের লাইসেন্সপ্রাপ্ত অন্তত চার তারকার হোটেলে নিশ্চিত আবাসন লাগে। ১২ নভেম্বর ২০২৬-এ Visit Saudi-তে তালিকাভুক্ত webook ও Reserval তাদের package offer-এ Makkah ও Madinah বাদ বলেছে; এটি সব provider বা visa-র সাধারণ নিষেধ হিসেবে যাচাই হয়নি। ওমরাহ পরিকল্পনার আগে Saudi visa guide-এ দেওয়া provider পেজ দেখুন। প্রকাশিত package minimum জনপ্রতি প্রাপ্তবয়স্কের প্রথম দুই দিন মিলিয়ে SAR 4,000, এরপর প্রতিটি পরবর্তী দিনের জন্য SAR 1,000। এগুলো তারিখযুক্ত প্রকাশিত শর্ত, আপনার পরিবারের কোট বা BDT রূপান্তর নয়। টাকা দেওয়ার আগে বর্তমান অফার, মোট, অন্তর্ভুক্ত সেবা ও ফেরতের শর্ত নিশ্চিত করুন; পুরোনো বাজেটের সঙ্গে একই সেবার হিসাব ধরে তুলনা করবেন না [৮]।
 
 প্রকাশিত বিদেশি ভিসা ও residence-এর শর্ত আসলে কী বলে?
 Ministry of Tourism-এর ইংরেজি Tourist Visa Regulations-এর Article 6(2) এবং ১২ জুন ২০২৩-এ SPA-তে প্রকাশিত মন্ত্রণালয়ের ঘোষণা standard nationality list-এর বাইরে থাকা ব্যক্তিদের জন্য ব্যতিক্রম বর্ণনা করে। ১৯ অক্টোবর ২০২৬-এ আবার দেখা সূত্রগুলো নিচের document-এর পার্থক্য করে; পাওয়া PDF থেকে সর্বশেষ revision date নিশ্চিত হয়নি [১৯–২০]:
@@ -455,6 +455,7 @@ Tourist বা stopover visa দিয়ে ফরজ হজ করা যা�
 Umrah ও Rawdah permit কোথায় বুক করব?
 প্রতিটি কাজের অফিশিয়াল Ministry/Nusuk service ব্যবহার করুন। এগুলো আলাদা অ্যাপয়েন্টমেন্ট; live availability ও বর্তমান booking নির্দেশনা প্রযোজ্য। Account বা initial reservation-কে নিশ্চিত প্রবেশ না ধরে confirmation ও entry-code access যাচাই করুন [১৫–১৬]।`,
     internalLinks: [
+      { text: "সৌদি ভিসার পথ ও সূত্র", path: "/visa/saudi-arabia-visa" },
       { text: "জিয়ারতের স্থান ও পরিবহনের শর্ত যাচাই", path: "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" },
       { text: "দুবাইয়ে যাত্রাবিরতি ও ভ্রমণের পরিকল্পনা", path: "/destinations/dubai-guide" },
       { text: "Nusuk নিবন্ধন, Visa Bio ও Rawdah যাচাই", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
@@ -1300,7 +1301,7 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
   "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": {
     title: "বাংলাদেশ থেকে ৯৬ ঘণ্টার Saudi Stopover: যোগ্যতা, বুকিং ও ওমরাহ",
     summary:
-      "১৯ অক্টোবর ২০২৬-এ দেখা Saudia stopover sequence, সর্বোচ্চ ৯৬ ঘণ্টা, onward document ও checkout খরচের শর্ত। flynas-এর বর্তমান detailed eligibility যাচাই হয়নি; আলাদা Umrah/Rawdah permit ও সময়ের buffer দরকার। Universal approval, free hotel বা instant issuance-এর প্রতিশ্রুতি নয়।",
+      "১২ নভেম্বর ২০২৬-এ দেখা Visit Saudi সর্বোচ্চ ৯৬ ঘণ্টার stopover ও আলাদা charge বর্ণনা করে। Saudia ও flynas-এর বর্তমান বিস্তারিত eligibility ও booking flow যাচাই হয়নি; Umrah/Rawdah permit আলাদা। Approval, free hotel বা instant issuance নিশ্চিত নয়।",
     category: "Hajj & Umrah",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "Farhan Momen (Founder & Travel Editor)",
@@ -1308,44 +1309,40 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
     content: `কার জন্য: আন্তর্জাতিক onward journey-র মধ্যে সৌদিতে স্বল্প সময় থাকতে চান এমন বাংলাদেশি পাসপোর্টধারী—প্রবাসী পরিবার ও শিক্ষার্থীসহ। নিজের document, airline booking ও সময়ের সঙ্গে stopover মেলে কি না বুঝতে এই গাইড; এটি অনুমোদন বা সম্পন্ন বুকিংয়ের প্রতিবেদন নয়।
 
 দ্রুত উত্তর
-১৯ অক্টোবর ২০২৬-এ দেখা সূত্র অনুযায়ী Visit Saudi ওমরাহসহ সর্বোচ্চ ৯৬ ঘণ্টার stopover stay বর্ণনা করে; Saudia ফ্লাইট বুকিংয়ের সময় আবেদনের ধাপ প্রকাশ করেছে। ভিসা নিয়ে প্রবেশের মেয়াদ ও থাকার অনুমোদিত সময় এক নয়। টাকা দেওয়ার আগে নিজের passport, onward destination-এর অনুমতি, itinerary ও airline-এর শর্ত মিলিয়ে নিন; flight বা visa দিয়ে প্রবেশ কিংবা Nusuk appointment নিশ্চিত হয় না [১–২, ৪, ৯]। Redirect হওয়া guide থেকে flynas-এর বর্তমান বিস্তারিত যোগ্যতা যাচাই হয়নি। তাদের ৩০ জানুয়ারি ২০২৩-এর launch ঘোষণা পুরোনো প্রমাণ, বর্তমান checkout test নয় [৩, ১০]।
+১২ নভেম্বর ২০২৬-এ দেখা Visit Saudi অনুযায়ী Saudia বা flynas booking-এ সর্বোচ্চ ৯৬ ঘণ্টার stopover-এর জন্য আবেদন করা যায়; ওমরাহও অন্তর্ভুক্ত। Saudia offer-এ visa fee free, তবে application ও insurance charge আলাদা। এটি কোনো নির্দিষ্ট বাংলাদেশি passport বা itinerary-র নিশ্চিত যোগ্যতা বা মোট খরচ নয় [১]। Visa issuance বা entry নিশ্চিত নয়। Redirect হওয়া guide থেকে flynas-এর বর্তমান বিস্তারিত যোগ্যতা যাচাই হয়নি; Saudia-র বিস্তারিত page-ও আবার খোলা যায়নি। flynas-এর ৩০ জানুয়ারি ২০২৩-এর launch পুরোনো তথ্য, বর্তমান checkout test নয় [২–৩, ১০]।
 
 ১. Stopover visa কী দেয়—আগে কী যাচাই করবেন?
-Saudia-র নির্দিষ্ট transit page অনুযায়ী ইস্যু থেকে visa validity ৯০ দিন, থাকা সর্বোচ্চ ৯৬ ঘণ্টা, মেয়াদ বাড়ানো যায় না এবং প্রতি booking-এ একটি stopover trip। Visit Saudi Saudia offer-কে single entry ও তিন মাস validity বলে। প্রবেশের সময়সীমাকে তিন মাস থাকার অনুমতি ভাববেন না: ইস্যু হওয়া visa পড়ে নিজের অনুমোদিত entry ও departure time নিশ্চিত করুন [১–২]।
+Visit Saudi সর্বোচ্চ ৯৬ ঘণ্টা থাকা এবং Saudia offer-এ single entry ও তিন মাস validity বর্ণনা করে। প্রবেশের সময়সীমা ও থাকার অনুমোদিত সময় এক নয়; ইস্যু হওয়া document দেখুন [১]। Visit Saudi stopover-এ Umrah এবং আলাদা Nusuk appointment-এর কথাও বলে [১, ৪, ৯]।
 
-Saudia স্বীকৃত passport-এর অন্তত ছয় মাস মেয়াদ—প্রযোজ্য দ্বিপক্ষীয় চুক্তির শর্তসাপেক্ষে—confirmed onward ticket এবং প্রয়োজন হলে destination visa বা residence permission চায়; visa exemption থাকলে ব্যতিক্রম। চূড়ান্ত গন্তব্যের অনুমতি আর বিদেশি document দিয়ে Saudi tourist visa-র যোগ্যতা এক প্রশ্ন নয়। পাওয়া শর্ত থেকে সব বাংলাদেশির entitlement বা সব prior-visa requirement থেকে নিঃশর্ত ছাড় প্রমাণ হয় না [২]।
+পরবর্তী গন্তব্যের entry requirement ও সৌদি stopover-এর শর্ত আলাদা। প্রতিটি airline-এর বর্তমান বিস্তারিত eligibility, গ্রহণযোগ্য document ও booking sequence এখানে যাচাই হয়নি [১–৩]।
 
-Saudia ও flynas আলাদাভাবে যাচাই করতে হবে। Saudia-র নির্দিষ্ট page-এ নিচের booking sequence আছে। flynas guide URL homepage-এ নিয়ে গেছে; public form-এ Stop Over Booking option দেখা গেছে, কোনো বাংলাদেশি যাত্রীর visa result নয়। খোলা flynas ঘোষণাটি ৩০ জানুয়ারি ২০২৩-এর। সেটি service launch ও ticket কেনার পরে আবেদনের কথা বলে; আজকের eligible destination, required foreign visa, price, refund rule বা application screen প্রমাণ করে না [৩, ১০]।
+Saudia ও flynas আলাদা। flynas-এর ঘোষণা ৩০ জানুয়ারি ২০২৩-এর; এটি বর্তমান checkout বা eligibility প্রমাণ করে না। আগে উদ্ধৃত Saudia বিস্তারিত page ১২ নভেম্বর ২০২৬-এ আবার খোলা যায়নি [২–৩, ১০]।
 
-যাত্রীর যাচাই (stopoverEligibility): Flight কেনার আগে নিজের সুনির্দিষ্ট passport, onward destination ও entry document দিয়ে নির্বাচিত airline-কে stopover route নিশ্চিত করতে বলুন—qualifying visa বা residence লাগলে সেটিসহ। flynas-এর জন্য বর্তমান নির্দেশনা নিন; redirect হওয়া guide বা Saudia-র flow একই ধরে নেবেন না। Booking option দেখা মানে visa approval নয়। যোগ্যতা বা ticket কেনার পরে visa আবেদনের ঝুঁকি অস্পষ্ট হলে non-refundable payment-এর আগে official support-এ মিটিয়ে নিন। এখানে কোনো application বা booking test করা হয়নি; URAL/chat-এ passport scan, visa number বা credential পাঠাবেন না। [১–৩, ১০]
+যাত্রীর যাচাই (stopoverEligibility): টাকা দেওয়ার আগে নিজের passport, onward itinerary ও পরবর্তী গন্তব্যের entry requirement প্রকৃত airline booking terms-এর সঙ্গে দেখুন। কোনো নির্দিষ্ট বাংলাদেশি যাত্রীর জন্য airline-এর বর্তমান visa flow ও eligibility এখানে যাচাই হয়নি। আবেদন ব্যর্থ হলে refund ধরে নেবেন না; যাচাই না হওয়া route ধরে non-refundable travel কিনবেন না। এখানে কোনো application বা booking test করা হয়নি; URAL/chat-এ passport scan, visa number বা credential পাঠাবেন না। [১–৩, ১০]
 
 Visa ও hotel-এর বাজেটে কী রাখবেন?
-Visit Saudi Saudia offer-এ promotional free visa-fee line-এর সঙ্গে application ও insurance charge প্রকাশ করে। প্রকাশিত উদাহরণ all-in quote নয়। Saudia বলছে visa fee, service charge, medical fee ও insurance cost Ministry of Foreign Affairs-এর বিধি অনুযায়ী হিসাব হয়। নিজের itemized checkout total, payment currency ও bank charge লিখে রাখুন; promotional starting price রূপান্তর করে বানানো BDT মোট নয় [১–২]।
+Visit Saudi-র visa fee, application ও insurance-এর প্রকাশিত উদাহরণ all-in quote নয়। নিজের itemized checkout total, payment currency ও bank charge দেখুন [১]। Hotel সবার জন্য অন্তর্ভুক্ত—এমন যাচাই হয়নি; payment-এর আগে প্রকৃত fare ও accommodation terms পড়ুন।
 
-Hotel সবার জন্য অন্তর্ভুক্ত—এমন যাচাই হয়নি। Saudia-র নির্দিষ্ট page বলছে hotel booking round-trip ও selected destination-এর জন্য; তা দিয়ে আপনার booking-এ free room প্রমাণ হয় না। কোনো inclusion দাবি থাকলে property, city, date, tax ও cancellation terms লিখিতভাবে নিন। তা না হলে নিজের accommodation-এর বাজেট রাখুন। এই যাচাইয়ে hotel voucher পরীক্ষা বা কোনো conditional promotion নেই—এমন সিদ্ধান্ত নেওয়া হয়নি [১–২]।
+২. Stopover request-এর প্রস্তুতি কীভাবে নেবেন?
+এটি planning checklist, যাচাইকৃত airline application sequence নয়। আগে উদ্ধৃত Saudia page আবার খোলা যায়নি এবং live booking পরীক্ষা হয়নি। বর্তমান application flow ও guaranteed processing deadline নিশ্চিত হয়নি [১–৩]।
 
-২. Saudia-তে stopover-এর আবেদন কীভাবে করবেন?
-এটি Saudia-র প্রকাশিত sequence; flynas procedure বা login করা screen-এর test নয়। Ticket আগেই ইস্যু হলে visa আবেদন করা যাবে কি না এবং কীভাবে—carrier-কে জিজ্ঞেস করুন; new-booking flow পরে যোগ করা যাবে ধরে নেবেন না [২]।
+ধাপ ১: Onward itinerary দেখুন।
+- প্রকৃত offer-এ passport, পরবর্তী গন্তব্যের entry requirement ও airline eligibility দেখুন; আলাদা কেনা flight স্বয়ংক্রিয়ভাবে একটি protected booking নয়।
 
-Saudia-র page দ্রুত email issuance প্রচার করে; এই যাচাইয়ে timing test বা আপনার application-এর guaranteed processing deadline নিশ্চিত হয়নি। অতিরিক্ত check বা failure-এর জন্য সময় রাখুন; marketing promise ধরে সঙ্গে সঙ্গে departure পরিকল্পনা করবেন না [২]।
+ধাপ ২: Visa, fare ও cancellation terms পড়ুন।
+- তারিখ, baggage, visa ও থাকার শর্ত এবং Visa দেরি বা refusal হলে কী হবে দেখুন। Refund নিশ্চিত ভাববেন না [১]।
 
-ধাপ ১: কেনার আগে onward journey ও stopover নিশ্চিত করুন।
-- Passport, destination permission ও airline eligibility দেখুন। Airline-এর stopover booking flow-তে Saudi connection ও duration বাছুন। আলাদা কেনা flight leg যোগ্য বা এক journey হিসেবে সুরক্ষিত ধরে নেবেন না [২]।
-
-ধাপ ২: প্রকৃত visa, fare ও cancellation terms পড়ুন।
-- কোন যাত্রীর visa লাগবে, তারিখ, baggage ও hotel arrangement দেখুন। Visa দেরি বা refusal হলে ticket ও অন্য payment-এর কী হবে জিজ্ঞেস করুন; refund নিশ্চিত ভাববেন না [১–২]।
-
-ধাপ ৩: Booking-এর সময় stopover visa request পূরণ করুন।
-- Saudia আবেদনের জন্য Seats & Extras / Additional Services বলে। প্রকাশিত FAQ-তে photo ২০০ × ২০০ pixel ও সর্বোচ্চ ২০ KB; বর্তমান form আলাদা কিছু চাইলে সেই নির্দেশনা অনুসরণ করুন। এটি Saudia-র নির্দেশনা, flynas-এর সার্বজনীন photo specification নয় [২]।
+ধাপ ৩: Live offer-এ application instruction দেখুন।
+- Airline-এর বর্তমান application flow ও প্রয়োজনীয় document পড়ুন। নির্দিষ্ট form, photo specification বা payment sequence এখানে যাচাই হয়নি [১–৩]।
 
 ধাপ ৪: টাকা দেওয়ার আগে itemized total দেখুন।
-- Saudia flight ও visa একসঙ্গে payment-এর কথা বলে। অনুমতি দেওয়ার আগে insurance, অন্য charge, currency ও terms দেখুন। Payment করা visa approval-এর প্রমাণ নয় [২]।
+- Insurance, অন্য charge, currency ও terms দেখুন। Payment করা visa approval-এর প্রমাণ নয় [১]।
 
 ধাপ ৫: ইস্যু হওয়া visa ও insurance document পরীক্ষা করুন।
-- Saudia বলছে document email-এ আসে। Traveller, passport detail, entry count, validity ও permitted stay onward flight-এর সঙ্গে মিলিয়ে নিন; কিছু অনুপস্থিত বা অমিল হলে official visa service বা carrier support ব্যবহার করুন [২, ৫]।
+- Traveller, passport detail, entry count, validity ও permitted stay onward itinerary-র সঙ্গে মিলিয়ে নিন।
 
 ধাপ ৬: Permit ও departure logistics আবার নিশ্চিত করুন।
-- Valid visa নিয়ে প্রযোজ্য Nusuk visitor process এবং available Umrah/Rawdah service অনুসরণ করুন। যাওয়ার আগে flight, transfer, accommodation, বর্তমান মৌসুমের health instruction ও প্রকৃত permit খুলতে পারছেন কি না দেখুন [৪, ৯]। Confirmation ও privacy check-এর জন্য পর্যালোচিত Nusuk guide পড়ুন।
+- Valid visa নিয়ে প্রযোজ্য Nusuk visitor process এবং available Umrah/Rawdah service অনুসরণ করুন। যাওয়ার আগে flight, transfer, accommodation, বর্তমান মৌসুমের health instruction ও permit দেখুন [৪, ৯]।
 
 ৩. ব্যবহৃত US, UK বা Schengen visa কি একই route?
 না। Onward itinerary-র stopover permission আর foreign visa বা residence-এর ভিত্তিতে tourist-visa exception আলাদা route। Main guide-এর পৃথক review-তে ব্যবহৃত standard nationality-only eVisa list-এ Bangladesh নেই। Main DIY guide-এ সূত্রসহ tourist/business prior-use ও permanent-residence category আছে; বর্তমান carrier, GCC ও accepted-entry-evidence-এর সীমাও বলা আছে [৬–৭]। বিকল্প route-এর জন্য সেই guide ও official checker দেখুন; যেকোনো student/work visa, residence card বা আগের trip দিয়েই automatic eligibility ভাববেন না। এই stopover review বিকল্প route-এর fine print নতুন করে যাচাই করেনি।
@@ -1365,17 +1362,17 @@ Rail-এর প্রকৃত schedule, ticket terms ও fare operator-এর c
 
 ৫. সচরাচর জিজ্ঞাসা
 ৯৬ ঘণ্টার Saudi stopover visa-র খরচ কত?
-Visit Saudi promotional Saudia line item প্রকাশ করে, আপনার all-in bill নয়। Saudia বলে MOFA বিধি অনুযায়ী charge হিসাব হয়। নিজের passenger ও itinerary-র itemized total এবং bank/payment charge ধরুন; এখানে বানানো BDT মোট বা flynas price নেই [১–২]।
+Visit Saudi promotional Saudia line item প্রকাশ করে, আপনার all-in bill নয়। নিজের passenger ও itinerary-র itemized total এবং bank/payment charge ধরুন; এখানে বানানো BDT মোট বা flynas price নেই [১]।
 Stopover visa-তে কি free hotel night থাকে?
-সবার জন্য free-night entitlement যাচাই হয়নি। Saudia round-trip ও selected destination-এ hotel booking বলে। Booking-specific inclusion লিখিতভাবে নিশ্চিত করুন; তা না হলে আলাদা বাজেট রাখুন [১–২]।
+সবার জন্য free-night entitlement যাচাই হয়নি। Booking-specific inclusion ও cancellation terms দেখুন; তা না হলে আলাদা বাজেট রাখুন [১]।
 সব বাংলাদেশি passport holder কি যোগ্য?
 এই review তা প্রমাণ করে না। টাকা দেওয়ার আগে exact passport, itinerary, destination permission ও অন্য required document airline-এর সঙ্গে নিশ্চিত করুন। Saudia ও flynas একই নয়; redirect হওয়া flynas guide থেকে বর্তমান detailed conditions পাওয়া যায়নি [২–৩, ১০]।
 Stopover-এ Umrah ও Rawdah visit করা যাবে?
 Visit Saudi stopover activity-তে Umrah বলে, কিন্তু visa দিয়ে appointment নিশ্চিত হয় না। প্রযোজ্য আলাদা Umrah ও Rawdah service নিন; সাধারণ mosque visit আর Rawdah-তে প্রবেশ এক নয়। হজের জন্য নিজস্ব অনুমোদন লাগে [১, ৪, ৯]।
 Payment-এর পরই কি visa ইস্যু হয়?
-Saudia দ্রুত email delivery প্রচার করে, পুরোনো flynas launch-এও immediate issuance-এর কথা ছিল। কোনোটিই আপনার ক্ষেত্রে tested processing guarantee নয়। যাওয়ার আগে প্রকৃত issuance ও visa detail দেখুন; document না এলে carrier-কে জানান [২–৩, ৫]।
+Visit Saudi approval-এর পর email-এ visa পাঠানোর কথা বলে, তবে আপনার ক্ষেত্রে processing time পরীক্ষা করা হয়নি। যাওয়ার আগে প্রকৃত issuance ও visa detail দেখুন [১, ৫]।
 Onward ticket ও destination visa লাগবে?
-Saudia-র প্রকাশিত শর্তে confirmed onward ticket ও প্রয়োজন হলে destination entry visa বা residence permission লাগে, exemption থাকলে ব্যতিক্রম; passport-এর অন্তত ছয় মাস মেয়াদও দ্বিপক্ষীয় চুক্তিসাপেক্ষে লাগে। এগুলো দিয়ে Saudi admission নিশ্চিত হয় না; চূড়ান্ত সিদ্ধান্ত passport control-এর [২]।`,
+Stopover-এর সঙ্গে onward journey থাকে। নিজের passport ও itinerary-র জন্য airline এবং পরবর্তী গন্তব্যের বর্তমান শর্ত দেখুন; airline-এর বিস্তারিত শর্ত এখানে যাচাই হয়নি। এসব document দিয়ে Saudi entry নিশ্চিত নয় [১–৩]।`,
     references: [
       {
         name: "Visit Saudi — stopover campaign, Saudia offer and Nusuk note",
@@ -1383,8 +1380,8 @@ Saudia-র প্রকাশিত শর্তে confirmed onward ticket ও 
         url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover",
       },
       {
-        name: "Saudia — dedicated transit visa conditions and booking sequence",
-        nameBn: "Saudia — নির্দিষ্ট transit visa শর্ত ও booking sequence",
+        name: "Saudia — previously reviewed transit page (unavailable when reopened 12 November 2026)",
+        nameBn: "Saudia — পূর্বে দেখা transit page (১২ নভেম্বর ২০২৬-এ খোলা যায়নি)",
         url: "https://www.saudia.com/transit-visa",
       },
       {
@@ -1435,7 +1432,7 @@ Saudia-র প্রকাশিত শর্তে confirmed onward ticket ও 
       { text: "টিকিট কাটার জন্য Dual-Currency Card Endorsement গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "DIY Umrah পোর্টাল ও BDT ক্যালকুলেটর", path: "/umrah" },
       { text: "একই ট্রিপে Umrah + Dubai ভ্রমণ গাইড (2026): ঢাকা থেকে ১০ দিনে মক্কা, মদিনা ও দুবাই ঘোরার মাল্টি-সিটি বাজেট", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
-      { text: "ইউরোপ, লন্ডন ও আমেরিকা ভ্রমণে বাংলাদেশিদের গাইড (2026): স্কিপ-দ্য-লাইন পাস ও ১ বছরের সৌদি ই-ভিসা সুবিধা", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
+      { text: "ইউরোপ, যুক্তরাজ্য ও আমেরিকা দর্শনীয় স্থান এবং সৌদি ভিসা গাইড", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
           { text: "যুক্তরাজ্য পাসপোর্টের ভিসা রুট: ওমরাহর জন্য ইটিএ, ই-ভিসা বা ওয়েভার", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
       { text: "যুক্তরাজ্যের ওমরাহ প্যাকেজ: এটিওএল সুরক্ষা ও অপারেটর যাচাই", path: "/blog/uk-umrah-packages-atol-operator-checks" },
     ],
@@ -2599,7 +2596,7 @@ Landing থেকে train বা আরেক flight-এর মাঝে কত
 ২. এই কম্বো ট্যুরের জন্য বাংলাদেশি পাসপোর্টে কোন ২টি ভিসা লাগবে?
 ধাপ ১: সৌদি ওমরাহ ভিসা (nusuk.sa / ksavisa.sa):
 - **অপশন ক — মন্ত্রণালয়ের Umrah ভিসা:** অফিশিয়াল FAQ-তে সরকারি ফি 'আনুমানিক ৩০০ সৌদি রিয়াল' বলা হয়েছে (১৫ অক্টোবর ২০২৬ যাচাই) এবং বাইরের এজেন্সি আবাসন ও যাতায়াতের সার্ভিস প্যাকেজ ছাড়া ভিসা ইস্যু করতে পারে না; তাই মোট খরচ হবে অনুমোদিত প্ল্যাটফর্ম বা এজেন্সি ইস্যুর সময় যা দেখায় সেটাই। এখানে কোনো BDT অঙ্ক প্রকাশ করা হলো না, নির্দিষ্ট processing time-এর নিশ্চয়তা নেই, আর প্রবেশের সময়সীমা ও অবস্থানের মেয়াদ ভিসায় ছাপা তারিখ অনুযায়ী চলবে।
-- **অপশন খ — ৯৬ ঘণ্টার Saudi Stopover Visa:** যোগ্য Saudia বা flynas ইটিনারারিতে টিকিট বুক করার সময় ৯৬ ঘণ্টার stopover যোগ করা যায়। কোনো নির্দিষ্ট দাম কোথাও প্রকাশিত নেই—ভিসা, ইনস্যুরেন্স ও সার্ভিস চার্জ এয়ারলাইন্সের checkout-এ হিসাব হয় ও বদলায়; হোটেল রাত অন্তর্ভুক্ত ধরে বুকবেন না। পেমেন্টের আগে ৯৬ ঘণ্টার stopover গাইডে বর্তমান শর্ত দেখে নিন।
+- **অপশন খ — ৯৬ ঘণ্টার Saudi Stopover Visa:** Visit Saudi সর্বোচ্চ ৯৬ ঘণ্টার stopover এবং Saudia ও flynas-এর মাধ্যমে আবেদনের কথা বলে। Saudia offer-এ visa fee free, কিন্তু application ও insurance charge আলাদা। বর্তমান airline-specific eligibility, booking sequence ও নিজের itinerary-র মোট খরচ যাচাই হয়নি; hotel night অন্তর্ভুক্ত ধরে নেবেন না। পেমেন্টের আগে stopover guide দেখুন।
 ধাপ ২: দুবাই / UAE ভিসা (u.ae / gdrfad.gov.ae):
 - **অপশন ক — ৯৬ ঘণ্টার (৪ দিন) UAE Transit Visa:** Emirates বা flydubai ফ্লাইটের যাত্রীদের জন্য খরচ মাত্র **~AED 180 – 250 (~BDT 6,200 – 8,500)**।
 - **অপশন খ — ৩০ দিনের UAE Tourist e-Visa:** যেকোনো এয়ারলাইন্সে ৩–৭ দিন দুবাই ও আবুধাবি ঘোরার জন্য খরচ **BDT 14,500 – 17,500**।
@@ -2717,22 +2714,17 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
     },
   },
   "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": {
-    title: "ইউরোপ, লন্ডন ও আমেরিকা ভ্রমণে বাংলাদেশিদের গাইড (2026): স্কিপ-দ্য-লাইন পাস ও ১ বছরের সৌদি ই-ভিসা সুবিধা",
+    title: "ইউরোপ, যুক্তরাজ্য ও আমেরিকা দর্শনীয় স্থান এবং সৌদি ভিসা গাইড",
     summary:
-      "বাংলাদেশ থেকে লন্ডন, প্যারিস, রোম, মিলান, ভেনিস বা নিউ ইয়র্কগামী ভ্রমণকারী ও প্রবাসী (NRB) পরিবারগুলোর জন্য দুটি বিশাল সুবিধা রয়েছে: প্রথমত, প্যারিসের লুভর মিউজিয়াম, আইফেল টাওয়ার, লন্ডন আই বা রোমের কলোসিয়ামে ২–৩ ঘণ্টার দীর্ঘ লাইন এড়াতে অফিশিয়াল Tiqets স্কিপ-দ্য-লাইন পাস প্রি-বুকিং; এবং দ্বিতীয়ত, পাসপোর্টে থাকা বৈধ US, UK বা Schengen ভিসা ব্যবহার করে ফেরার পথে ১ বছরের মাল্টিপল-এন্ট্রি সৌদি ই-ভিসা বা অন-অ্যারাইভাল ভিসা নিয়ে ওমরাহ পালন! সৌদি ভিসা পোর্টাল (ksavisa.sa) ও ইউরোপীয় মিউজিয়াম নিয়ম অনুযায়ী বিস্তারিত গাইড।",
+      "ইউরোপ ও উত্তর আমেরিকার দর্শনীয় স্থানের বুকিং পরিকল্পনা এবং সৌদি stopover ভাবলে আলাদাভাবে ভিসার শর্ত যাচাইয়ের গাইড। বিদেশি ভিসা থাকলেই সৌদি ভিসা বা প্রবেশ নিশ্চিত নয়।",
     category: "Ziyarah & Stopovers",
     date: "২৭ সেপ্টেম্বর, ২০২৬",
     author: "ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)",
     readTime: "৭ মিনিট পড়া",
-    content: `প্রতি মাসে হাজার হাজার বাংলাদেশি পেশাজীবী, ব্যবসায়ী, শিক্ষার্থী ও অভিভাবক **ঢাকা (DAC)** থেকে **লন্ডন, প্যারিস, রোম ও নিউ ইয়র্কে** ভ্রমণ করেন। সঠিক পরিকল্পনা করলে আপনি একই সফরে ইউরোপ-আমেরিকার বিশ্বখ্যাত দর্শনীয় স্থানগুলো লাইন ছাড়া ঘোরার পাশাপাশি সৌদি আরবের বিশেষ ভিসা সুবিধায় পবিত্র ওমরাহও পালন করতে পারেন।
+    content: `ইউরোপ ও উত্তর আমেরিকার দর্শনীয় স্থান বুকিংয়ের পরিকল্পনা করুন। পথে সৌদি stopover ভাবলে ভিসার শর্ত আলাদাভাবে যাচাই করুন।
 
-১. বৈধ US, UK বা SCHENGEN ভিসা থাকলে কীভাবে তাৎক্ষণিক ১ বছরের সৌদি ই-ভিসা পাবেন?
-সৌদি আরবের অফিশিয়াল ভিসা পোর্টাল (**ksavisa.sa**) এবং সৌদি পর্যটন মন্ত্রণালয়ের (**visitsaudi.com**) নিয়ম অনুযায়ী:
-নিয়ম ১: বাংলাদেশি পাসপোর্টধারীদের জন্য বিশেষ ভিসা সুবিধা:
-- আপনার বাংলাদেশি পাসপোর্টে যদি একটি **বৈধ ও মেয়াদযুক্ত US, UK অথবা Schengen (ট্যুরিস্ট বা বিজনেস) ভিসা** থাকে এবং সেই ভিসাটি দিয়ে অন্তত একবার সংশ্লিষ্ট দেশে প্রবেশের স্ট্যাম্প (Used Stamp) থাকে—তবে আপনার কোনো এজেন্সির মাধ্যমে ওমরাহ ভিসা করার প্রয়োজন নেই!
-নিয়ম ২: অনলাইনে ১০ মিনিটে ১ বছরের মাল্টিপল-এন্ট্রি e-Visa বা Visa on Arrival:
-- আপনি সরাসরি **ksavisa.sa** পোর্টালে আবেদন করে অথবা জেদ্দা/মদিনা এয়ারপোর্টে নেমে **~SAR 395 – 440 (~BDT 12,900 – 14,500 ইনস্যুরেন্সসহ)** ফি দিয়ে **১ বছরের মাল্টিপল-এন্ট্রি সৌদি ভিসা** নিতে পারেন এবং Nusuk অ্যাপে পারমিট নিয়ে ওমরাহ ও রওজা শরীফ জিয়ারত করতে পারেন।
-- **স্মার্ট ফ্লাইট কৌশল:** ঢাকা থেকে লন্ডন, প্যারিস বা নিউ ইয়র্কে প্রবেশের পর (যাতে ভিসাটি Used হয়ে যায়), দেশে ফেরার টিকিটটি **জেদ্দা (JED) বা মদিনা (MED)** হয়ে কাটুন!
+১. সৌদি ভিসার পথ আকর্ষণের টিকিট বুকিং থেকে আলাদা
+Saudi Ministry of Tourism-এর প্রকাশিত Tourist Visa Regulations-এ নির্দিষ্ট বিদেশি visa ও permanent residence-এর category আছে; PDF-এর সর্বশেষ revision date এবং বর্তমান airline বা প্রবেশের প্রমাণের শর্ত নিশ্চিত হয়নি। বিদেশি visa থাকলেই Saudi visa, boarding, entry বা Umrah permit নিশ্চিত নয়। অফেরতযোগ্য বুকিংয়ের আগে আমাদের Saudi visa guide ও তার official সূত্র দেখুন। Airline-linked stopover আলাদা পথ; এটি tourist-visa exception নয়।
 
 ২. প্যারিস, লন্ডন, রোম ও নিউ ইয়র্কে কেন আগে থেকেই SKIP-THE-LINE পাস বুক করতে হয়?
 ইউরোপ ও আমেরিকার শীর্ষ মিউজিয়ামগুলোতে এশিয়ার মতো গিয়েই কাউন্টার থেকে টিকিট পাওয়া যায় না—সবই **Timed-Entry Slot** অনুযায়ী চলে:
@@ -2749,8 +2741,9 @@ KL Sentral থেকে মাত্র ৫ মিনিট দূরত্ব�
 ৩. ইউরোপ ও যুক্তরাজ্যের ফ্লাইট ৩+ ঘণ্টা বিলম্ব হলে €600 (BDT 78,000) ক্ষতিপূরণ পাওয়ার নিয়ম
 - **EU261 ও UK261 যাত্রী অধিকার আইন:** লন্ডন, প্যারিস, রোম, ফ্রাঙ্কফুর্ট বা আমস্টারডাম থেকে ছেড়ে আসা ফ্লাইট যদি ৩ ঘণ্টার বেশি দেরি (Delay) হয় বা বাতিল (Cancelled) হয়, তবে ইউরোপীয় আইন অনুযায়ী আপনি **AirHelp**-এর মাধ্যমে জনপ্রতি সর্বোচ্চ **€600 বা £520 (~BDT 78,000)** পর্যন্ত নগদ ক্ষতিপূরণ দাবি করতে পারেন!`,
     internalLinks: [
+      { text: "সৌদি ভিসার পথ ও সূত্র", path: "/visa/saudi-arabia-visa" },
       { text: "ইউরোপ, UK ও USA-এর অফিশিয়াল Tiqets পাস হাব দেখুন", path: "/experiences?region=west" },
-      { text: "৯৬ ঘণ্টার Saudi Stopover Visa ও US/UK/Schengen ওমরাহ গাইড", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
+      { text: "Saudi Stopover Visa: যোগ্যতা ও ওমরাহ পরিকল্পনা", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
       { text: "Dual-Currency Card ও $18,000 পাসপোর্ট এনডোর্সমেন্ট গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
     ],
     affiliateCTA: {
@@ -3103,8 +3096,9 @@ RFCD card কি POS বা ATM limit-ও সরিয়ে দেয়?
 ৩. ধাপ ৩ (১০ম–১৮তম মাস): SINGAPORE, DUBAI + UMRAH এবং SCHENGEN / UK / US ভিসা
 আপনার পাসপোর্টে যখন **নেপাল/মালদ্বীপ + মালয়েশিয়া + থাইল্যান্ড** ভ্রমণের রেকর্ড থাকবে এবং সাথে ৬ মাসের ব্যাংক স্টেটমেন্ট ও আয়কর রিটার্ন (TIN/ITR) থাকবে:
 - **🇸🇬 সিঙ্গাপুর, 🇦🇪 দুবাই ও 🇸🇦 সৌদি ওমরাহ:** সিঙ্গাপুরের অনুমোদিত ভিসা এজেন্ট এবং দুবাই/সৌদি স্পনসরদের কাছে আপনার প্রোফাইল তখন একজন পরীক্ষিত পর্যটক হিসেবে গণ্য হবে। আপনি সহজেই **১০ দিনের ওমরাহ + দুবাই কম্বো ট্রিপ** করতে পারবেন।
-- **🇪🇺 ইউরোপ (Schengen), 🇬🇧 যুক্তরাজ্য ও 🇺🇸 আমেরিকা:** উন্নত দেশগুলোর দূতাবাসে আবেদন করলে অফিসাররা দেখবেন আপনি ৩–৪টি দেশ ভ্রমণ করে সময়মতো দেশে ফিরেছেন। আর একবার আপনার পাসপোর্টে বৈধ ও ব্যবহৃত **US, UK বা Schengen ভিসা** যুক্ত হলে আপনি ভবিষ্যতে যেকোনো সময় **১ বছরের মাল্টিপল-এন্ট্রি সৌদি ই-ভিসা বা অন-অ্যারাইভাল ভিসা** নিয়ে ওমরাহ করতে পারবেন!`,
+- **🇪🇺 ইউরোপ (Schengen), 🇬🇧 যুক্তরাজ্য ও 🇺🇸 আমেরিকা:** প্রতিটি visa আবেদন সংশ্লিষ্ট গন্তব্যের নিয়মে মূল্যায়ন হয়। বিদেশি visa থাকলেই Saudi visa বা entry নিশ্চিত নয়; পরিকল্পনার আগে আমাদের Saudi visa guide ও সরকারি সূত্র দেখুন।`,
     internalLinks: [
+      { text: "সৌদি ভিসার পথ ও সূত্র", path: "/visa/saudi-arabia-visa" },
       { text: "সঠিক তথ্য দিয়ে পাসপোর্ট আবেদন বা পুনরায় ইস্যু", path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" },
       { text: "মালয়েশিয়া eVisa ও MDAC-এর চেকলিস্ট", path: "/visa/malaysia-visa" },
       { text: "ঢাকা–কুয়ালালামপুর রুট ও লাইভ ভাড়া যাচাই", path: "/flights/dhaka-kuala-lumpur" },
@@ -4043,7 +4037,7 @@ export const BENGALI_HAJJ_UMRAH_FAQS = [
   {
     question: "২০২৬ সালে বাংলাদেশি নাগরিকরা কীভাবে Umrah ভিসা করবেন এবং Nusuk অ্যাপ ব্যবহার করবেন?",
     answer:
-      "তিনটি পথই আছে, আর কোনোটিতেই BDT-তে নির্ধারিত দাম প্রকাশ করা হয় না। মন্ত্রণালয়ের Umrah ভিসার সরকারি ফি অফিশিয়াল FAQ-তে 'আনুমানিক ৩০০ সৌদি রিয়াল' বলা হয়েছে (১৫ অক্টোবর ২০২৬ তারিখে যাচাই); বাইরের এজেন্সি আবাসন ও যাতায়াতের সার্ভিস প্যাকেজ ছাড়া এই ভিসা ইস্যু করতে পারে না, তাই ইনস্যুরেন্সসহ মোট খরচ হবে অনুমোদিত প্ল্যাটফর্ম বা এজেন্সি ইস্যুর সময় যা দেখায় সেটাই। একই FAQ ভিসা ইস্যুর তিন মাসের মধ্যে প্রবেশের কথা বলে এবং এক উত্তরে অবস্থানের সীমা ৩০ দিন, অন্য উত্তরে ৯০ দিন লেখে—সুতরাং ভিসায় ছাপা তারিখই আসল। যোগ্য Saudia বা flynas ইটিনারারিতে টিকিটের চেকআউটে ৯৬ ঘণ্টার stopover ভিসা যোগ করা যায়; বৈধ ও আগে ব্যবহৃত US/UK/Schengen ভিসা থাকলে বর্তমান পোর্টাল শর্ত পূরণ হলে visa-on-arrival প্রযোজ্য হতে পারে, এটা স্বয়ংক্রিয় ধরে নেবেন না। ওমরাহ পারমিটনির্ভর: অফিশিয়াল Nusuk (nusuk.sa) অ্যাপে ওমরাহ স্লট ও মদিনার Rawdah Shareef পারমিট বুক করতে হয়। Saudi Visa Bio বায়োমেট্রিকের নিয়ম ভিসা আবেদনের সঙ্গে থাকা নির্দেশনা অনুযায়ী চলে—ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah ভিসার ক্ষেত্রে মন্ত্রণালয় বাংলাদেশকেও উল্লেখ করেছে।",
+      "তিনটি পথই আছে, আর কোনোটিতেই BDT-তে নির্ধারিত দাম প্রকাশ করা হয় না। মন্ত্রণালয়ের Umrah ভিসার সরকারি ফি অফিশিয়াল FAQ-তে 'আনুমানিক ৩০০ সৌদি রিয়াল' বলা হয়েছে (১৫ অক্টোবর ২০২৬ তারিখে যাচাই); বাইরের এজেন্সি আবাসন ও যাতায়াতের সার্ভিস প্যাকেজ ছাড়া এই ভিসা ইস্যু করতে পারে না, তাই ইনস্যুরেন্সসহ মোট খরচ হবে অনুমোদিত প্ল্যাটফর্ম বা এজেন্সি ইস্যুর সময় যা দেখায় সেটাই। একই FAQ ভিসা ইস্যুর তিন মাসের মধ্যে প্রবেশের কথা বলে এবং এক উত্তরে অবস্থানের সীমা ৩০ দিন, অন্য উত্তরে ৯০ দিন লেখে—সুতরাং ভিসায় ছাপা তারিখই আসল। Visit Saudi সর্বোচ্চ ৯৬ ঘণ্টার airline-linked stopover বর্ণনা করে; নির্দিষ্ট itinerary-র বর্তমান airline eligibility ও booking flow এখানে যাচাই হয়নি। Saudi Ministry-এর প্রকাশিত Tourist Visa Regulations-এ কিছু foreign-visa ও permanent-residence category আছে, তবে PDF-এর বর্তমান revision নিশ্চিত নয়; visa বা entry স্বয়ংক্রিয় ধরে নেবেন না। ওমরাহ পারমিটনির্ভর: অফিশিয়াল Nusuk (nusuk.sa) অ্যাপে ওমরাহ স্লট ও মদিনার Rawdah Shareef পারমিট বুক করতে হয়। Saudi Visa Bio বায়োমেট্রিকের নিয়ম ভিসা আবেদনের সঙ্গে থাকা নির্দেশনা অনুযায়ী চলে—ইলেকট্রনিকভাবে ইস্যু হওয়া Umrah ভিসার ক্ষেত্রে মন্ত্রণালয় বাংলাদেশকেও উল্লেখ করেছে।",
   },
   {
     question: "বাংলাদেশ থেকে ফরজ হজ (Hajj) নিবন্ধনের সরকারি নিয়ম কী?",
@@ -4058,7 +4052,7 @@ export const BENGALI_HAJJ_UMRAH_FAQS = [
   {
     question: "বাংলাদেশি পাসপোর্টধারীরা কি ৯৬ ঘণ্টার Saudi Stopover Transit Visa-তে ওমরাহ করতে পারবেন?",
     answer:
-      "হ্যাঁ, যোগ্য ইটিনারারিতে। Saudia অথবা Flynas এয়ারলাইন্সের আন্তর্জাতিক ট্রানজিট ফ্লাইটে জেদ্দা (JED) বা মদিনায় (MED) যাত্রাবিরতি থাকলে টিকিট বুকিংয়ের সময় অনলাইনে ৯৬ ঘণ্টার Saudi Stopover Visa নেওয়া যায়, যা দিয়ে ৪ দিন সৌদি আরবে অবস্থান করে ওমরাহ ও মদিনা জিয়ারত করা সম্ভব। যোগ্যতা, ইনস্যুরেন্সের শর্ত ও ফি বুকিং চেকআউটে নির্ধারিত হয় এবং সময়ের সাথে বদলায় — এয়ারলাইন্সের বুকিং পেজে যাচাই করুন; কোনো সার্বজনীন নির্দিষ্ট দাম নেই।",
+      "Visit Saudi ওমরাহসহ সর্বোচ্চ ৯৬ ঘণ্টার airline-linked stopover বর্ণনা করে এবং Saudia বা flynas booking-এ আবেদনের কথা বলে। Saudia offer-এ visa fee free, তবে application ও insurance charge আলাদা। নির্দিষ্ট itinerary-র airline eligibility, booking flow ও মোট খরচ যাচাই হয়নি। Visa approval, entry বা Nusuk appointment নিশ্চিত নয়।",
   },
   {
     question: "ঢাকা (DAC) থেকে মক্কা ও মদিনায় ওমরাহ ফ্লাইটের সেরা রুট বা কৌশল কোনটি?",
