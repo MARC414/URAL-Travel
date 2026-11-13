@@ -123,6 +123,7 @@ import { KiwitaxiEmbed } from "../src/components/KiwitaxiEmbed";
 import { WelcomePickupsEmbed, WELCOME_PICKUPS_PARTNER_URL } from "../src/components/WelcomePickupsEmbed";
 import { TopBarSiteSearch } from "../src/components/TopBarSiteSearch";
 import BlogPostRouteView from "../src/routes/BlogPostRouteView";
+import FlightsRouteView from "../src/routes/FlightsRouteView";
 import HotelsRouteView from "../src/routes/HotelsRouteView";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
 import { calculateUmrahBudget, emptyUmrahBudget, UMRAH_BUDGET_ITEMS } from "../src/utils/umrahBudget";
@@ -623,9 +624,8 @@ const savedHotelGuideCardsValid = HOTELS_DATA.every((hotel) =>
 );
 check(
   savedHotelGuideCardsValid && hotelsHubHtml.includes("Open guide (new tab)") &&
-    bnHotelsHubHtml.includes("গাইড খুলুন (নতুন ট্যাবে)") &&
-    hotelsHubHtml.includes("AI-generated illustration"),
-  "saved hotel directories expose all localized guide links in new tabs and label illustrative artwork"
+    bnHotelsHubHtml.includes("গাইড খুলুন (নতুন ট্যাবে)"),
+  "saved hotel directories expose all localized guide links in new tabs"
 );
 const renderHotelDirectory = (locale: "en" | "bn") =>
   renderToStaticMarkup(
@@ -950,6 +950,27 @@ function collectSourceFiles(dir: string, acc: string[] = []): string[] {
 
 const distHtmlFiles = collectHtmlFiles(DIST_DIR);
 const distIndexHtml = read(path.join(DIST_DIR, "index.html"));
+
+// Credit overlays are removed for the current public-domain, Pexels and generated
+// images. Match text nodes rather than alt attributes, which still describe artwork.
+const retiredImageNote = />\s*(?:AI-generated illustration|AI-তৈরি চিত্র|Adrian Pingstone \/ Wikimedia Commons|Pexels · hotel room photo)\s*</i;
+const imageNotePages = distHtmlFiles.filter((file) => retiredImageNote.test(read(file) ?? ""));
+check(imageNotePages.length === 0, `saved HTML has no retired image-credit or illustration overlays [${imageNotePages.map((file) => path.relative(DIST_DIR, file)).join(", ")}]`);
+
+const flightImageNotes = (["en", "bn"] as const).flatMap((lang) =>
+  [undefined, ...FLIGHTS_DATA.map((route) => route.id)].filter((parameterId) => {
+    const context = {
+      isBn: lang === "bn", lang, parameterId, localizedFlights: getLocalizedFlights(lang),
+      areTpScriptsReady: false, TravelpayoutsWidgetSkeleton: () => null,
+      setAreTpScriptsReady: () => {}, navigateTo: () => {}, openPriceAlert: () => {},
+      getCountryHotelId: (country: string) => country,
+      getCountryVisaId: (country: string) => country,
+      getCountryIata: (country: string) => country,
+    };
+    return retiredImageNote.test(renderToStaticMarkup(React.createElement(FlightsRouteView, { context })));
+  }).map((id) => `${lang}/${id ?? "flights"}`)
+);
+check(flightImageNotes.length === 0, `interactive flight hubs and route guides omit retired image overlays [${flightImageNotes.join(", ")}]`);
 
 // The prerendered shells intentionally defer the React app to hydration, so
 // guard the shared signup's source placement: one card after <main>, before the

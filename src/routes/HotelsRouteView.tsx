@@ -40,7 +40,6 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
             : "A good stay starts with the right location. Compare neighborhoods, find a base that suits your trip and know what to check before booking."}
           imageSrc="/assets/images/hotel_directory_hero_20261112-1200.webp"
           imageAlt={isBn ? "AI-তৈরি একটি শান্ত হোটেল কক্ষের চিত্র" : "AI-generated illustration of a calm hotel room"}
-          credit={isBn ? "AI-তৈরি চিত্র" : "AI-generated illustration"}
         />
 
         <section aria-labelledby="hotel-guide-index-title" className="space-y-7">
@@ -98,11 +97,6 @@ export default function HotelsRouteView({ context }: RouteViewProps) {
           imageAlt={isBn
             ? "দুইজনের বিছানা ও উষ্ণ আলোসহ একটি পরিচ্ছন্ন হোটেল কক্ষ"
             : "A clean hotel guest room with a double bed and warm bedside lighting"}
-          credit={
-            <a href="https://www.pexels.com/photo/interior-design-of-hotel-room-19045884" target="_blank" rel="noopener noreferrer">
-              Pexels · hotel room photo
-            </a>
-          }
         />
 
         <QuickAnswer

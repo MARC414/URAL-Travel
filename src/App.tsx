@@ -1441,7 +1441,7 @@ export default function App() {
   }, [section, bankingFaqs]);
 
   useEffect(() => {
-    if (section !== "contact" || !isBn || bnFaqSchema) return;
+    if ((section !== "contact" && section !== "flights") || !isBn || bnFaqSchema) return;
     let cancelled = false;
     void import("./utils/bn-faq-schema").then((mod) => {
       if (!cancelled) setBnFaqSchema(mod);
@@ -1489,7 +1489,7 @@ export default function App() {
           description: r.quickAnswer,
         })),
       });
-      const faqSchema = getFaqSchemaForPage("flights", undefined, true, hubUrl, localizedFlights);
+      const faqSchema = isBn ? bnFaqSchema?.getBnFaqSchemaForPage("flights", undefined, true, hubUrl, localizedFlights) : getFaqSchemaForPage("flights", undefined, true, hubUrl, localizedFlights);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1499,8 +1499,8 @@ export default function App() {
       const routeUrl = siteUrl(`/flights/${activeRoute.id}`, lang);
       seoTitle = activeRoute.id === "dhaka-kathmandu"
         ? `Dhaka to Kathmandu Flight Guide 2026: Price, Time & Visa | URAL`
-        : `Flights from Dhaka to ${activeRoute.to.split(" (")[0]} (${activeRoute.country}) ${year} | URAL`;
-      seoDescription = `Compare flights from Dhaka to ${activeRoute.to.split(" (")[0]}. Check flight times, airlines and live fares for your own travel dates before booking.`;
+        : `Flights from ${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]} ${year} | URAL`;
+      seoDescription = `Compare flights from ${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]}. Check flight times, airlines and live fares for your own travel dates before booking.`;
 
       let schemaObj: any = undefined;
       try {
@@ -1510,7 +1510,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl, localizedFlights);
+      const faqSchema = isBn ? bnFaqSchema?.getBnFaqSchemaForPage("flights", activeRoute.id, false, routeUrl, localizedFlights) : getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl, localizedFlights);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [

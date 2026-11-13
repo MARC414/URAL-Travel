@@ -35,26 +35,11 @@ interface RouteFaqEntry {
  * the main section overview (/flights, /hotels, /visa, /costs).
  */
 export const LANDING_FLIGHT_FAQS: FAQItem[] = [
-  {
-    question: "What are the cheapest international flight destinations from Dhaka?",
-    answer: "The routes usually compared first from Hazrat Shahjalal International Airport (DAC) are Kolkata, Kathmandu (Nepal), Bangkok (Thailand), and Kuala Lumpur (Malaysia). No fixed fare is published here: compare live totals for your own dates and check baggage, transit and change conditions, because a low headline price can exclude costs that apply to your itinerary."
-  },
-  {
-    question: "Which airlines fly direct international routes from Dhaka?",
-    answer: "Biman Bangladesh Airlines, US-Bangla Airlines, Himalaya Airlines, Thai Airways, AirAsia, Malaysia Airlines, Emirates, Flydubai, and Air Arabia operate direct scheduled flights from Dhaka to popular outbound destinations across South Asia, Southeast Asia, and the Middle East."
-  },
-  {
-    question: "How early should Bangladeshi travelers book flights to get the best prices?",
-    answer: "For short-haul Asian destinations (Nepal, Thailand, Malaysia), the optimal booking window is 4 to 8 weeks before departure. For peak seasons like Eid holidays, Puja vacations, or December winter break, booking 8 to 12 weeks ahead is strongly advised to avoid last-minute fare spikes."
-  },
-  {
-    question: "Can I pay for international flight tickets with a local Bangladeshi debit or credit card?",
-    answer: "Yes. Domestic travel agencies and online portals accept local BDT debit cards, bKash, and Nagad. If purchasing directly from international airline websites, your credit card must have foreign currency endorsement (dual currency) enabled by your bank under your passport travel quota."
-  },
-  {
-    question: "What documents must I present at Dhaka airport immigration for international travel?",
-    answer: "You must have a Bangladeshi passport valid for at least 6 months, a confirmed roundtrip flight ticket, a valid visa (or proof of Visa on Arrival eligibility), hotel booking vouchers, and foreign currency (either cash or endorsed international credit cards) as required by immigration guidelines."
-  }
+  { question: "How can I compare international flight fares from Dhaka?", answer: "Compare current totals for the same dates, passengers and baggage. Check payment charges and change conditions before booking." },
+  { question: "Which airlines offer nonstop flights from Dhaka?", answer: "Availability and operating carriers vary by route and date. Check the airline's current timetable and the airport codes on each itinerary." },
+  { question: "How early should I book to get the best fare?", answer: "No fixed booking window guarantees the lowest price. Start checking early and compare flexible dates where possible." },
+  { question: "Can I pay with a Bangladeshi debit or credit card?", answer: "Payment options depend on the provider and bank. For foreign-currency transactions, check card acceptance, endorsement and international payment settings with your bank." },
+  { question: "What documents do I need for an international flight?", answer: "Requirements depend on your passport, destination, transit and purpose. Check passport validity, visas and any onward travel or accommodation evidence with the relevant authorities and airline." },
 ];
 
 export const LANDING_HOTEL_FAQS: FAQItem[] = [

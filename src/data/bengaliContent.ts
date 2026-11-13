@@ -1,3 +1,5 @@
+import { flightEditorial } from "./flightEditorial";
+import { FLIGHT_ROUTES } from "./flightRoutes";
 import { BlogPost, DestinationGuide, FAQ, FlightRoute, HotelGuide, VisaGuide, TripCostData } from "../types";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, VISA_DATA, TRIP_COSTS_DATA } from "../constants";
 import { BENGALI_VISA_DETAILS } from "./bengaliVisaDetails";
@@ -4080,148 +4082,14 @@ export function getLocalizedHajjFaqs(lang: Language) {
   return lang === "bn" ? BENGALI_HAJJ_UMRAH_FAQS : HAJJ_UMRAH_FAQS;
 }
 
-const BENGALI_FLIGHTS_OVERRIDES: Record<
-  string,
-  Partial<FlightRoute>
-> = {
-  "dhaka-kathmandu": {
-    from: "Dhaka (DAC)",
-    to: "Kathmandu (KTM)",
-    flightDuration: "১ ঘণ্টা ২৫ মিনিট (Direct)",
-    bestTimeToBook: "যাত্রার ৩–৪ সপ্তাহ আগে",
-    visaRequirement: "ফ্রি SAARC Visa on Arrival (কাঠমান্ডু এয়ারপোর্টে)",
-    quickAnswer: "ঢাকা (DAC) থেকে কাঠমান্ডু (KTM) সরাসরি ফ্লাইটে মাত্র ১ ঘণ্টা ২৫ মিনিট সময় লাগে। Biman Bangladesh Airlines এবং Himalaya Airlines প্রতিদিন এই রুটে সরাসরি ফ্লাইট পরিচালনা করে। আপনার তারিখের বর্তমান ভাড়া ফ্লাইট সার্চে তুলনা করুন; নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ মৌসুম, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী মোট দাম বদলায়।",
-    keyFacts: [
-      { label: "যাত্রার সময়", value: "১ ঘণ্টা ৩০ মিনিট (সরাসরি)" },
-      { label: "সরাসরি এয়ারলাইন্স", value: "Biman Bangladesh, Himalaya Airlines" },
-      { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
-      { label: "বাংলাদেশিদের জন্য ভিসা", value: "ফ্রি (প্রতি ক্যালেন্ডার বছরে প্রথম ভ্রমণ)" },
-    ],
-  },
-  "ktm-dhaka": {
-    from: "Kathmandu (KTM)",
-    to: "Dhaka (DAC)",
-    flightDuration: "১ ঘণ্টা ২৫ মিনিট (Direct)",
-    bestTimeToBook: "যাত্রার ৩–৪ সপ্তাহ আগে",
-    visaRequirement: "বাংলাদেশি নাগরিকের জন্য ভিসা নেই; নেপালী নাগরিকের জন্য বাংলাদেশ ভিসা (eVisa অথবা DAC এয়ারপোর্টে Visa on Arrival, বর্তমান আইন অনুযায়ী)",
-    quickAnswer: "কাঠমান্ডু (KTM) থেকে ঢাকা (DAC) সরাসরি ফ্লাইটে মাত্র ১ ঘণ্টা ২৫ মিনিট সময় লাগে। Biman Bangladesh Airlines এবং Himalaya Airlines এই রুটে নিয়মিত সরাসরি ফ্লাইট পরিচালনা করে। আপনার তারিখের বর্তমান ভাড়া ফ্লাইট সার্চে তুলনা করুন; নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ মৌসুম, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী মোট দাম বদলায়।",
-    keyFacts: [
-      { label: "যাত্রার সময়", value: "১ ঘণ্টা ৩০ মিনিট (সরাসরি)" },
-      { label: "সরাসরি এয়ারলাইন্স", value: "Biman Bangladesh, Himalaya Airlines" },
-      { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
-      { label: "রুট", value: "কাঠমান্ডু (KTM) → ঢাকা (DAC)" },
-    ],
-  },
-  "dhaka-bangkok": {
-    from: "Dhaka (DAC)",
-    to: "Bangkok (BKK / DMK)",
-    flightDuration: "২ ঘণ্টা ৩০ মিনিট (Direct)",
-    bestTimeToBook: "যাত্রার ৪–৬ সপ্তাহ আগে",
-    visaRequirement: "Thailand Official e-Visa (যাত্রার আগে অনলাইনে)",
-    quickAnswer: "ঢাকা (DAC) থেকে ব্যাংকক (BKK ও DMK) সরাসরি ফ্লাইটে মাত্র ২ ঘণ্টা ৩০ মিনিট লাগে। Biman Bangladesh, US-Bangla, Thai Airways এবং বাজেট ক্যারিয়ার Thai AirAsia ও Thai Lion Air নিয়মিত চলাচল করে। আপনার তারিখের বর্তমান ভাড়া ফ্লাইট সার্চে তুলনা করুন; নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ মৌসুম, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী মোট দাম বদলায়।",
-    keyFacts: [
-      { label: "যাত্রার সময়", value: "২ ঘণ্টা ৩০ মিনিট (সরাসরি)" },
-      { label: "সরাসরি এয়ারলাইন্স", value: "Biman, Thai Airways, US-Bangla, Thai Lion" },
-      { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
-      { label: "বিমানবন্দর", value: "সুবর্ণভূমি (BKK) ও ডন মুয়াং (DMK)" },
-    ],
-  },
-  "dhaka-kuala-lumpur": {
-    from: "Dhaka (DAC)",
-    to: "Kuala Lumpur (KUL)",
-    flightDuration: "৩ ঘণ্টা ৫০ মিনিট (Direct)",
-    bestTimeToBook: "যাত্রার ৪–৫ সপ্তাহ আগে",
-    visaRequirement: "Malaysia Online e-Visa + ফ্রি MDAC কার্ড",
-    quickAnswer: "ঢাকা (DAC) থেকে কুয়ালালামপুর (KUL) রুটে প্রতিদিন একাধিক সরাসরি ফ্লাইট রয়েছে (সময় ৩ ঘণ্টা ৫০ মিনিট)। AirAsia, Batik Air, Biman Bangladesh এবং US-Bangla এই রুটে ফ্লাইট পরিচালনা করে। আপনার তারিখের বর্তমান ভাড়া ফ্লাইট সার্চে তুলনা করুন; নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ মৌসুম, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী মোট দাম বদলায়।",
-    keyFacts: [
-      { label: "যাত্রার সময়", value: "৩ ঘণ্টা ৫০ মিনিট (সরাসরি)" },
-      { label: "সরাসরি এয়ারলাইন্স", value: "Malaysia Airlines, AirAsia, Biman, Batik, US-Bangla" },
-      { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
-      { label: "বিমানবন্দর", value: "কুয়ালালামপুর (KUL)" },
-    ],
-  },
-  "dhaka-singapore": {
-    from: "Dhaka (DAC)",
-    to: "Singapore (SIN)",
-    flightDuration: "৪ ঘণ্টা ১৫ মিনিট (Direct)",
-    bestTimeToBook: "যাত্রার ৫–৬ সপ্তাহ আগে",
-    visaRequirement: "Authorized Agent e-Visa + ফ্রি SG Arrival Card",
-    quickAnswer: "ঢাকা (DAC) থেকে সিঙ্গাপুর চাঙ্গি এয়ারপোর্ট (SIN) সরাসরি ফ্লাইটে ৪ ঘণ্টা ১৫ মিনিট সময় লাগে। Singapore Airlines, Biman Bangladesh এবং US-Bangla সরাসরি ফ্লাইট পরিচালনা করে। আপনার তারিখের বর্তমান ভাড়া ফ্লাইট সার্চে তুলনা করুন; নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ মৌসুম, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী মোট দাম বদলায়।",
-    keyFacts: [
-      { label: "যাত্রার সময়", value: "৪ ঘণ্টা ১৫ মিনিট (সরাসরি)" },
-      { label: "এয়ারলাইন্স", value: "Singapore Airlines, Biman, US-Bangla" },
-      { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
-      { label: "বিমানবন্দর", value: "সিঙ্গাপুর চাঙ্গি (SIN)" },
-    ],
-  },
-  "dhaka-maldives": {
-    from: "Dhaka (DAC)",
-    to: "Malé, Maldives (MLE)",
-    flightDuration: "৪ ঘণ্টা ১০ মিনিট (Direct) / ৬ ঘণ্টা (1-Stop)",
-    bestTimeToBook: "যাত্রার ৪–৬ সপ্তাহ আগে",
-    visaRequirement: "ফ্রি ৩০ দিনের Visa on Arrival + ফ্রি IMUGA ফর্ম",
-    quickAnswer: "ঢাকা (DAC) থেকে মালদ্বীপের মালে (MLE) রুটে US-Bangla Airlines সরাসরি ফ্লাইট এবং SriLankan Airlines কলম্বো হয়ে সাশ্রয়ী কানেক্টিং ফ্লাইট পরিচালনা করে। আপনার তারিখের বর্তমান ভাড়া ফ্লাইট সার্চে তুলনা করুন; নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ মৌসুম, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী মোট দাম বদলায়।",
-    keyFacts: [
-      { label: "যাত্রার সময়", value: "৪ ঘণ্টা ১০ মিনিট (সরাসরি) / ৬ ঘণ্টা ৩০ মিনিট (কলম্বো হয়ে)" },
-      { label: "এয়ারলাইন্স", value: "US-Bangla (সরাসরি), SriLankan (১ স্টপ)" },
-      { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
-      { label: "ভিসা", value: "ফ্রি ৩০ দিনের Visa on Arrival" },
-    ],
-  },
-  "dhaka-dubai": {
-    faqs: [
-      { question: "Emirates-এ উড়লে কি দুবাইয়ে ট্রানজিট ভিসা-অন-অ্যারাইভাল পাওয়া যায়?", answer: "ট্রানজিট ভিসা সম্ভব, তবে আগে অনুমোদন লাগে বা US/UK/Schengen-এর নির্দিষ্ট রেসিডেন্ট ভিসা থাকতে হবে। সাধারণ বাংলাদেশি পর্যটকদের আগে থেকেই e-Tourist visa বুক করতে হয়।" },
-      { question: "ঢাকা থেকে দুবাই এয়ারটিকেটের দাম এখন কত?", answer: "ভাড়া তারিখ, এয়ারলাইন ও কেবিন অনুযায়ী প্রতিদিন বদলায়—তাই এই গাইড স্থির দাম প্রকাশ করে না। DAC থেকে DXB উড়ে এমন এয়ারলাইনগুলোর আপনার তারিখের লাইভ ভাড়া তুলনা করুন, আর বুকিংয়ের আগে ব্যাগেজ ও পরিবর্তনের শর্ত দেখুন—শুধু বেস ভাড়াই যে সব খরচ না।" },
-      { question: "DAC to DXB ফ্লাইট কোন কোন এয়ারলাইন চালায় আর কতক্ষণ লাগে?", answer: "Emirates, flydubai, Biman Bangladesh Airlines ও US-Bangla Airlines DAC to DXB চালায়; সরাসরি ফ্লাইটে প্রায় ৪ ঘণ্টা ৪৫ মিনিট লাগে। সময়সূচি ঋতুভেদে বদলায়; বুকিংয়ের আগে এয়ারলাইনের ওয়েবসাইটে চলতি টাইমটেবিল নিশ্চিত করুন।" },
-    ],
-    from: "Dhaka (DAC)",
-    to: "Dubai (DXB)",
-    flightDuration: "৪ ঘণ্টা ৪৫ মিনিট (Direct)",
-    bestTimeToBook: "যাত্রার ৫–৭ সপ্তাহ আগে",
-    visaRequirement: "UAE Tourist e-Visa (৩–৫ কার্যদিবসে অনুমোদন)",
-    quickAnswer: "ঢাকা (DAC) থেকে দুবাই (DXB) সরাসরি ফ্লাইটে ৪ ঘণ্টা ৪৫ মিনিট সময় লাগে। Emirates, flydubai, Biman Bangladesh ও US-Bangla সরাসরি ফ্লাইট পরিচালনা করে এবং Air Arabia ও SalamAir কানেক্টিং রুটে কম ভাড়ায় টিকিট দেয়। আপনার তারিখের বর্তমান ভাড়া ফ্লাইট সার্চে তুলনা করুন; নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ মৌসুম, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী মোট দাম বদলায়।",
-    keyFacts: [
-      { label: "যাত্রার সময়", value: "৪ ঘণ্টা ৪৫ মিনিট (সরাসরি)" },
-      { label: "সরাসরি এয়ারলাইন্স", value: "Emirates, flydubai, Biman, US-Bangla" },
-      { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
-      { label: "রুট", value: "ঢাকা (DAC) → দুবাই (DXB)" },
-    ],
-  },
-  "dhaka-los-angeles": {
-    from: "Dhaka (DAC)",
-    to: "Los Angeles (LAX)",
-    flightDuration: "১৯ ঘণ্টা ৩০ মিনিট - ২৪ ঘণ্টা (১-২ স্টপ)",
-    bestTimeToBook: "যাত্রার ৩-৫ মাস আগে",
-    visaRequirement: "US B1/B2 ভিসা (আগে থেকে US Embassy Dhaka-তে আবেদন)",
-    quickAnswer: "ঢাকা (DAC) থেকে লস অ্যাঞ্জেলেস (LAX)-এ সরাসরি ফ্লাইট নেই। সব রুটেই ১-২ টি স্টপ থাকে, সাধারণত দুবাই (DXB), দোহা (DOH), আবু Dhabi (AUH) অথবা ইস্তანবুল (IST) হতে। মোট যাতায়াতের সময় ১৯ ঘণ্টা ৩০ মিনিট থেকে ২৪ ঘণ্টা পর্যন্ত। বাংলাদেশি পাসপোর্টধারীদের জন্য আগে থেকে US B1/B2 ভিসা আবশ্যক, এটি ভিজা-অন-অ্যারাইভাল বা ESTA-যোগ্য নয়। আপনার তারিখের বর্তমান ভাড়া ফ্লাইট সার্চে তুলনা করুন; নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ মৌসুম, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী মোট দাম বদলায়।",
-    keyFacts: [
-      { label: "যাত্রার সময়", value: "১৯ ঘণ্টা ৩০ মিনিট – ২৪ ঘণ্টা (১–২ স্টপ)" },
-      { label: "সরাসরি ফ্লাইট", value: "নেই — সব রুটে সংযোগ লাগবে" },
-      { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
-      { label: "সাধারণ সংযোগ হাব", value: "দুবাই, দোহা, আবু Dhabi, ইস্তানবুল" },
-    ],
-  },
-  "dhaka-madinah": {
-    from: "Dhaka (DAC)",
-    to: "মাদিনাহ (MED)",
-    flightDuration: "৬ ঘণ্টা ৩০ মিনিট - ৮ ঘণ্টা (প্রাত্যক)",
-    bestTimeToBook: "যাত্রার ২-৩ মাস আগে, বিশেষ করে রমজান ও হজ মৌসুমের আগে; অপ-পিক মৌসুমে কম ভাড়া পাওয়া যায়",
-    visaRequirement: "সৌদি উমরাহ ভিসা বা ট্যুরিস্ট ভিসা (সৌদি ভিসা পোর্টাল অথবা অনুমোদিত এজেন্টের মাধ্যমে আগে থেকে আবেদন; বাংলাদেশি পাসপোর্টধারীদের জন্য ভিজা-অন-অ্যারাইভাল নেই)",
-    quickAnswer: "হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) থেকে সৌদি আরবের মাদিনাহের প্রিন্স মোহাম্মদ বিন আবদুলআজিজ আন্তর্জাতিক বিমানবন্দর (MED)-এ সরাসরি ফ্লাইট চলে। ফ্লাইটের সময় প্রায় ৬ ঘণ্টা ৩০ মিনিট। বাংলাদেশি পাসপোর্টধারীদের জন্য আগে থেকে সৌদি উমরাহ ভিসা বা ট্যুরিস্ট ভিসা আবশ্যক—এটি ভিজা-অন-অ্যারাইভাল নয়। মাদিনাহ ইসলামের দ্বিতীয় পবিত্র নগর, এখানে আল-মসজিদ আন-নববী অবস্থিত। আপনার তারিখের বর্তমান ভাড়া ফ্লাইট সার্চে তুলনা করুন; নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ মৌসুম, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী মোট দাম বদলায়।",
-    keyFacts: [
-      { label: "যাত্রার সময়", value: "৬ ঘণ্টা ৩০ মিনিট – ৮ ঘণ্টা (সরাসরি)" },
-      { label: "সরাসরি এয়ারলাইন্স", value: "Saudia, Biman Bangladesh" },
-      { label: "ভাড়া যাচাই", value: "আপনার তারিখের লাইভ ভাড়া তুলনা করুন" },
-      { label: "ভিসা", value: "আগে থেকে Umrah বা Tourist ভিসা" },
-    ],
-  },
-};
-
 export function getLocalizedFlights(lang: Language): FlightRoute[] {
   if (lang === "en") return FLIGHTS_DATA;
-  return FLIGHTS_DATA.map((f) => {
-    const bn = BENGALI_FLIGHTS_OVERRIDES[f.id];
-    return bn ? { ...f, ...bn } : f;
+  return FLIGHTS_DATA.map((route) => {
+    const info = FLIGHT_ROUTES[route.id];
+    const editorial = flightEditorial(route, "bn");
+    if (!info || !editorial) throw new Error(`Missing Bengali flight route: ${route.id}`);
+    const destinationCodes = route.to.match(/\s*\([^)]+\)$/)?.[0] ?? ` (${info.destination})`;
+    return { ...route, ...editorial, from: `${info.fromBn} (${info.origin})`, to: `${info.toBn}${destinationCodes}`, flightDuration: editorial.duration };
   });
 }
 
@@ -4422,7 +4290,7 @@ export function getLocalizedVisaFaqs(id: string): VisaGuide["faqs"] | undefined 
 
 /** Localized Bengali FAQs only — never the English defaults. */
 export function getLocalizedFlightFaqs(id: string): FlightRoute["faqs"] | undefined {
-  return BENGALI_FLIGHTS_OVERRIDES[id]?.faqs;
+  return getLocalizedFlights("bn").find((route) => route.id === id)?.faqs;
 }
 
 /**
@@ -4649,12 +4517,12 @@ const BENGALI_ROUTE_SEO: Record<string, BengaliSeoCopy> = {};
 // Flights — Bengali title from the localized route name, Bengali description
 // from the hand-written quick answer.
 for (const flight of getLocalizedFlights("bn")) {
-  const bn = BENGALI_FLIGHTS_OVERRIDES[flight.id];
-  if (!bn) continue;
-  const h1 = `${bnPlace(bn.from || flight.from)} → ${bnPlace(bn.to || flight.to)} বিমান ভাড়া, সময় ও ভিসা গাইড (২০২৬)`;
+  const info = FLIGHT_ROUTES[flight.id];
+  if (!info) continue;
+  const h1 = `${info.fromBn} → ${info.toBn} বিমান ভাড়া, সময় ও ভিসা গাইড`;
   BENGALI_ROUTE_SEO[`/flights/${flight.id}`] = {
-    title: bnTitle(`${bnPlace(bn.to || flight.to)} ফ্লাইট গাইড: ভাড়া, সময় ও ভিসা`),
-    description: bnClamp(bn.quickAnswer || flight.quickAnswer, 160),
+    title: bnTitle(`${info.fromBn} থেকে ${info.toBn} ফ্লাইট গাইড: ভাড়া, সময় ও ভিসা`),
+    description: bnClamp(flight.quickAnswer, 160),
     h1,
   };
 }

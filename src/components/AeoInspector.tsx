@@ -60,7 +60,7 @@ export function TravelIntelligence({
         <div className="bg-[#F6B73C]/5 border border-[#F6B73C]/20 rounded-xl p-5 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#F6B73C]/5 rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-start gap-3">
-            <span className="flex-shrink-0 text-sm font-mono font-bold text-[#F6B73C] bg-[#F6B73C]/10 px-2.5 py-1 rounded">
+            <span className="flex-shrink-0 text-sm font-mono font-bold text-brand-navy bg-[#F6B73C]/10 px-2.5 py-1 rounded">
               {isBn ? "সারসংক্ষেপ" : "SUMMARY"}
             </span>
             <div className="space-y-1">

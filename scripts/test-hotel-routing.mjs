@@ -42,6 +42,7 @@ try {
     const selector = `a[target="_blank"][href^="${prefix}/hotels/"]`;
     await waitFor(() => document.querySelectorAll(selector).length === 6, `${prefix} hotel cards`);
     const cards = [...document.querySelectorAll(selector)];
+    assert.doesNotMatch(document.querySelector("main").textContent, /AI-generated illustration|AI-তৈরি চিত্র|Pexels · hotel room photo/);
     assert.equal(new Set(cards.map((link) => link.getAttribute("href"))).size, 6);
     for (const card of cards) {
       assert.match(card.rel, /noopener/);
@@ -57,6 +58,7 @@ try {
     ];
     for (const [id, city] of guides) {
       await visit(`${prefix}/hotels/${id}`, prefix ? `${city}-এ কোথায় থাকবেন` : `Where to Stay in ${city}`);
+      assert.doesNotMatch(document.querySelector("main").textContent, /AI-generated illustration|AI-তৈরি চিত্র|Pexels · hotel room photo/);
       assert.ok(document.querySelector("#hotel-neighborhoods"));
       assert.ok(document.querySelector("#hotel-curated-stays"));
       assert.ok(document.querySelector("details.ural-guide-jump"));

@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { EditorialPageHero } from "./EditorialPageHero";
 import type { FlightRoute } from "../types";
+import { FLIGHT_ROUTES } from "../data/flightRoutes";
 import { LANDING_FLIGHT_FAQS } from "../utils/faqSchema";
 import { BN_LANDING_FLIGHT_FAQS } from "../utils/bn-faq-schema";
 
@@ -13,7 +14,7 @@ type FlightsIndexProps = {
 };
 
 // Nonstop when the duration label says "(Direct)"; otherwise connecting.
-const isNonstop = (route: FlightRoute) => /\(direct/i.test(route.duration);
+const isNonstop = (route: FlightRoute) => FLIGHT_ROUTES[route.id]?.hasNonstop === true;
 
 const cityName = (value: string) => value.split(" (")[0];
 
@@ -49,14 +50,6 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
           : "A Thai Airways Boeing 747 climbing above London Heathrow Airport"}
         imageSizes="(min-width: 1024px) 45vw, 100vw"
         imageFit="contain"
-        credit={
-          <>
-            <a href="https://en.wikipedia.org/wiki/File:Thai_b747-400_hs-tgp_takeoff_london_heathrow_arp.jpg" target="_blank" rel="noopener noreferrer">
-              Adrian Pingstone / Wikimedia Commons
-            </a>
-            <span aria-hidden="true"> · Public domain</span>
-          </>
-        }
       >
         <span className="rounded-full bg-[#F6B73C]/20 px-3 py-1.5 font-mono text-xs font-bold text-[#FFE0A0]">
           {isBn ? "লাইভ ভাড়া তুলনা করুন" : "Compare live fares"}
@@ -80,9 +73,8 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
             const nonstopRoute = isNonstop(route);
             return (
               <li key={route.id}>
-                <button
-                  type="button"
-                  onClick={() => navigateTo(`/flights/${route.id}`)}
+                <a
+                  href={link(`/flights/${route.id}`)}
                   className="flex w-full items-start justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-colors hover:bg-slate-50"
                 >
                   <span className="min-w-0 space-y-1.5">
@@ -90,13 +82,13 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
                       {cityName(route.from)} <span className="text-[#F6B73C]">→</span> {cityName(route.to)}
                     </span>
                     <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-bold ${nonstopRoute ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"}`}>
-                      {nonstopRoute ? (isBn ? "সরাসরি ফ্লাইট" : "Nonstop") : (isBn ? "সংযোগী ফ্লাইট" : "Connecting")}
+                      {nonstopRoute ? (isBn ? "সরাসরি বিকল্প থাকতে পারে" : "Nonstop may be available") : (isBn ? "সংযোগ যাচাই করুন" : "Check connections")}
                     </span>
                     <span className="block text-xs text-slate-600">{route.duration}</span>
                     <span className="block font-mono text-xs text-slate-500">{isBn ? "লাইভ ভাড়া তুলনা করুন" : "Compare live fares"}</span>
                   </span>
                   <ArrowRight size={14} className="mt-1 shrink-0 text-slate-400" aria-hidden="true" />
-                </button>
+                </a>
               </li>
             );
           })}
@@ -105,20 +97,20 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
 
       <section aria-labelledby="flights-nonstop-heading" className="space-y-3">
         <h2 id="flights-nonstop-heading" className="ural-section-title font-serif font-black text-lg text-slate-900">
-          {isBn ? "ঢাকা (DAC) থেকে সরাসরি ফ্লাইট" : "Direct flights from Dhaka (DAC)"}
+          {isBn ? "ঢাকা (DAC) থেকে সরাসরি বিকল্প" : "Possible nonstop routes from Dhaka (DAC)"}
         </h2>
         <p className="max-w-prose text-sm leading-relaxed text-slate-700">
           {isBn
-            ? "হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর থেকে প্রায় ৩০টি আন্তর্জাতিক গন্তব্যে সরাসরি ফ্লাইট চলে, পাশাপাশি দেশীয় রুটও। মৌসুম অনুযায়ী সময়সূচি ও পরিচালনাকারী এয়ারলাইন্স বদলায়, তাই বুকিংয়ের আগে এয়ারলাইনের ওয়েবসাইটে নিশ্চিত হয়ে নিন।"
-            : "Hazrat Shahjalal International Airport (DAC) has nonstop service to about 30 international destinations across roughly 20 countries, plus domestic routes. Schedules and operators change by season, so confirm on the airline's website before booking."}
+            ? "নিচের রুটে সরাসরি বিকল্প থাকতে পারে। সময়সূচি ও পরিচালনাকারী এয়ারলাইন তারিখ অনুযায়ী বদলায়; বুকিংয়ের আগে যাচাই করুন।"
+            : "Nonstop options may be available on the routes below. Schedules and operating airlines change; confirm availability for your dates before booking."}
         </p>
         <ul className="space-y-1.5 text-sm text-slate-700">
           {nonstop.map((route) => (
             <li key={route.id}>
-              <button type="button" onClick={() => navigateTo(`/flights/${route.id}`)} className="text-brand-navy underline decoration-slate-300 underline-offset-2 hover:decoration-brand-navy">
+              <a href={link(`/flights/${route.id}`)} className="text-brand-navy underline decoration-slate-300 underline-offset-2 hover:decoration-brand-navy">
                 {cityName(route.from)} → {cityName(route.to)}
-              </button>{" "}
-              — {route.airlines.join(", ")} ({route.duration})
+              </a>{" "}
+              — {isBn ? "আপনার তারিখের সময়সূচি যাচাই করুন" : "Check schedules for your dates"}
             </li>
           ))}
         </ul>
@@ -128,7 +120,7 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
         <p className="max-w-prose text-sm leading-relaxed text-slate-700">
           {isBn ? (
             <>
-              জেদ্দা ও মদিনায় সরাসরি ফ্লাইট চলে।{" "}
+              জেদ্দা ও মদিনার বর্তমান সরাসরি ফ্লাইট যাচাই করুন।{" "}
               <a className="text-brand-navy underline decoration-slate-300 underline-offset-2 hover:decoration-brand-navy" href={link("/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia")}>ওপেন-জ টিকিট গাইড</a>{" "}
               এবং{" "}
               <a className="text-brand-navy underline decoration-slate-300 underline-offset-2 hover:decoration-brand-navy" href={link("/umrah")}>DIY ওমরাহ প্ল্যানার</a>{" "}
@@ -136,7 +128,7 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
             </>
           ) : (
             <>
-              Nonstop flights run to Jeddah and Madinah. See the{" "}
+              Check current nonstop options to Jeddah and Madinah. See the{" "}
               <a className="text-brand-navy underline decoration-slate-300 underline-offset-2 hover:decoration-brand-navy" href={link("/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia")}>open-jaw ticket guide</a>{" "}
               and the{" "}
               <a className="text-brand-navy underline decoration-slate-300 underline-offset-2 hover:decoration-brand-navy" href={link("/umrah")}>DIY Umrah planner</a>.
@@ -146,7 +138,7 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
         {connecting.length > 0 && (
           <>
             <h3 className="font-serif text-base font-bold text-slate-900">
-              {isBn ? "কোনো ননস্টপ ফ্লাইট নেই এমন রুট" : "Routes with no nonstop flight"}
+              {isBn ? "যেসব রুটে সংযোগ যাচাই করবেন" : "Routes to check for connections"}
             </h3>
             <p className="max-w-prose text-sm leading-relaxed text-slate-700">
               {isBn
