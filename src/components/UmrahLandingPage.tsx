@@ -76,7 +76,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             <div className="lg:col-span-7 space-y-6">
               <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
                 <span className="font-mono text-[11px] text-emerald-300">
-                  {isBn ? "BDT বাজেট টুল পর্যালোচনা: ১৮ অক্টোবর ২০২৬" : "BDT budget tool reviewed: 18 October 2026"}
+                  {isBn ? "বাজেট টুল পর্যালোচনা: ১৮ অক্টোবর ২০২৬" : "Budget tool reviewed: 18 October 2026"}
                 </span>
               </div>
 
@@ -311,7 +311,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
             {[
               {
                 href: "#umrah-calculator",
-                label: isBn ? "১. BDT বাজেট ক্যালকুলেটর" : "1. BDT Cost Calculator",
+                label: isBn ? "১. কস্ট ক্যালকুলেটর" : "1. Cost Calculator",
               },
               {
                 href: "#umrah-diy-vs-agency",
@@ -347,7 +347,7 @@ export const UmrahLandingPage: React.FC<UmrahLandingPageProps> = ({
       </section>
 
       {/* =====================================================================
-          2. H2: UMRAH COST FROM BANGLADESH 2026 — INTERACTIVE BDT CALCULATOR
+          2. H2: UMRAH COST FROM BANGLADESH 2026 — INTERACTIVE COST CALCULATOR
       ===================================================================== */}
       <UmrahBudgetCalculator isBn={isBn} />
 

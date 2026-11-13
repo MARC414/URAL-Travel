@@ -90,7 +90,11 @@ test("Umrah currency defaults follow origin while all eight inputs remain BDT", 
   for (const [originCode, currency] of [["DAC", "BDT"], ["ZYL", "BDT"], ["LHR", "USD"]] as const) {
     const html = renderToStaticMarkup(React.createElement(UmrahBudgetCalculator, { isBn: false, originCode }));
     assert.ok(html.includes(`<option value="${currency}" selected=""`));
-    assert.ok(html.includes("Whole-party totals by category (BDT)"));
+    // The label lost its "(BDT)" suffix in Wave 1 of the global-label change
+    // (docs/growth/11-GLOBAL-LABELS-AUDIT-AND-PLAN.md): the totals are still
+    // taka, but the heading no longer names the currency — the selector does.
+    assert.ok(html.includes("Whole-party totals by category"));
+    assert.ok(!html.includes("Whole-party totals by category (BDT)"));
     assert.ok(!html.includes('data-umrah-budget-total="true"'));
   }
 });

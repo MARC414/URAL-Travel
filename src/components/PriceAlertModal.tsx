@@ -256,7 +256,7 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
             {/* Target Budget (Optional) */}
             <div className="space-y-1.5">
               <label htmlFor="price-alert-target-budget" className="text-xs font-bold text-text-primary flex items-center justify-between">
-                <span>{lang === "bn" ? "৩. লক্ষ্যমাত্রা বাজেট (ঐচ্ছিক):" : "3. Target Budget in BDT (Optional):"}</span>
+                <span>{lang === "bn" ? "৩. লক্ষ্যমাত্রা বাজেট (ঐচ্ছিক):" : "3. Target Budget (Optional):"}</span>
                 <span className="text-[10px] text-slate-400 font-normal">{lang === "bn" ? "খালি রাখলে যেকোনো অফার" : "Optional"}</span>
               </label>
               <input

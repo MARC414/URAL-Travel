@@ -274,7 +274,22 @@ Wave 1 as a companion:
 
 ## 12. Status
 
-- This document: report only. **No label, title, URL or money string has been changed.**
+- **Wave 1 executed on owner approval (13 Nov 2026):** the 20 rows of §10 plus the `/experiences`
+  H1 — 21 items, 34 strings including Bengali twins. Titles, meta descriptions, slugs, prose, money
+  strings, FAQ/schema answers and the 83 internal anchors were **not** touched.
+- Two rows needed a word added rather than deleted (`toolRoutes` "in your chosen currency") because a
+  pure deletion left the sentence ungrammatical; both were listed before execution.
+- The Bengali `(BDT)` suffixes were removed with byte-level edits on the existing strings — never
+  retyped — because four hand-typed replacements did not match the file's codepoints on the first pass.
+- `scripts/test-umrah-budget.ts` assertion updated in the same commit, and a negative assertion added
+  so the old label cannot creep back.
+- Verification: old strings absent and new strings present for all 17 English pairs in the shipped
+  bundle; `verify:build` 514/514; lint, tsc and 10 test scripts pass. `test:journey-help` fails on a
+  clean checkout of `672d8a2` as well (10 cluster posts lack `journeyStage`) — pre-existing, unrelated.
+
+### Superseded note (kept for the record)
+- This document was originally report-only: **no label, title, URL or money string changed** until the
+  owner approved §10 on 13 November 2026.
 - Wave 1 as listed in §10 is ready to execute on your word: one PR, ~20 edits, tests updated in the
   same commit, rendered EN+BN HTML inspected, Bengali codepoint scan, `verify:build` at full count.
 - Waves 2–4 remain undecided and unstarted.

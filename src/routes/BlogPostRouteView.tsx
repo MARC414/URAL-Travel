@@ -1541,7 +1541,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                     >
 
-                                      {isBn ? "Umrah BDT ক্যালকুলেটর" : "Open Umrah BDT Calculator"}
+                                      {isBn ? "Umrah ক্যালকুলেটর" : "Open Umrah Calculator"}
 
                                     </a>
 
@@ -1638,7 +1638,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                                       >
 
-                                        <span>{isBn ? "BDT-তে হোটেল ও টিকিট বুকিং (WhatsApp)" : "Book Hotel & Flight in BDT (WhatsApp)"}</span>
+                                        <span>{isBn ? "হোটেল ও টিকিট বুকিং (WhatsApp)" : "Book Hotel & Flight (WhatsApp)"}</span>
 
                                       </a>
 
