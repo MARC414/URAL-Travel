@@ -1,6 +1,7 @@
 import { TravellerCheckNote } from "../src/components/TravellerCheckNote";
 import { resolveBookingCtaUrl } from "../src/utils/bookingCta";
 import { buildWhiteLabelUrl } from "../src/utils/flightWhiteLabel";
+import { FLIGHT_ROUTES } from "../src/data/flightRoutes";
 import { getTravellerCheck } from "../src/utils/travellerChecks";
 import { generateBlogCoverAltText } from "../src/utils/blogAltText";
 import { linkifyCitations, citationAnchorId, CITATION_LINK_CLASS } from "../src/utils/citations";
@@ -9,6 +10,9 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
 import { TripCostEstimator } from "../src/components/TripCostEstimator";
 import { CurrencyConverter } from "../src/components/CurrencyConverter";
+import { VISA_OFFICIAL_SOURCES } from "../src/data/visaOfficialSources";
+import { VisaDirectoryCards } from "../src/components/VisaDirectoryCards";
+import { HotelDirectoryCards } from "../src/components/HotelDirectoryCards";
 import { CostPlanningGuide, CostPlanningHub } from "../src/components/CostPlanningGuide";
 import { BlogArticleHeader } from "../src/components/BlogArticleHeader";
 import { BlogPlanningLinks, BlogPlanningHubs, BlogRelatedArticles } from "../src/components/BlogArticleNavigation";
@@ -144,7 +148,7 @@ import {
   toEnglishBasePath,
 } from "../src/utils/localeRoutes";
 import { BENGALI_SEO_COPY, getBengaliSeoCopy } from "../src/utils/seoCopy";
-import { getBnFaqSchemaForPage, BN_LANDING_FLIGHT_FAQS, BN_SERVICE_CONTACT_FAQS } from "../src/utils/bn-faq-schema";
+import { getBnFaqSchemaForPage, BN_LANDING_FLIGHT_FAQS, BN_LANDING_HOTEL_FAQS, BN_LANDING_VISA_FAQS, BN_SERVICE_CONTACT_FAQS } from "../src/utils/bn-faq-schema";
 import {
   DESTINATION_AFFILIATE_PARTNERS,
   DESTINATION_PARTNER_COPY,
@@ -1317,32 +1321,6 @@ function renderLandingFaqs(
     .join("\n")}</section>`;
 }
 
-const VISA_OFFICIAL_SOURCES: Record<string, { label: string; url: string }[]> = {
-  "nepal-visa": [
-    { label: "Nepal Department of Immigration: visa information", url: "https://immigration.gov.np/visa-information" },
-    { label: "Nepal official online immigration portal", url: "https://nepaliport.immigration.gov.np/" },
-  ],
-  "thailand-visa": [
-    { label: "Thailand official e-Visa portal", url: "https://www.thaievisa.go.th/" },
-    { label: "Royal Thai Embassy in Dhaka: visa information", url: "https://dhaka.thaiembassy.org/en/page/59898-visa-information?menu=5d83296215e39c2540006a10" },
-  ],
-  "malaysia-visa": [
-    { label: "Malaysia official MYVISA portal", url: "https://malaysiavisa.imi.gov.my/" },
-    { label: "Malaysia Immigration Department: eVISA information", url: "https://www.imi.gov.my/index.php/en/main-services/visa/evisa-en/" },
-  ],
-  "dubai-visa": [
-    { label: "UAE Government: tourist visa information and application channels", url: "https://u.ae/en/information-and-services/visa-and-emirates-id/Types-of-visas/tourist-visa" },
-  ],
-  "singapore-visa": [
-    { label: "Singapore ICA: visa requirements for Bangladesh passport holders", url: "https://www.ica.gov.sg/enter-transit-depart/entering-singapore/visa_requirements/visa-detail-page/bangladesh" },
-    { label: "Singapore ICA: SG Arrival Card e-service", url: "https://eservices.ica.gov.sg/sgarrivalcard/" },
-  ],
-  "maldives-visa": [
-    { label: "Maldives Immigration: tourist visa on arrival and entry requirements", url: "https://www.immigration.gov.mv/visa/tourist-visa" },
-    { label: "Maldives Immigration: Traveller Declaration instructions", url: "https://www.immigration.gov.mv/traveller-declaration" },
-    { label: "Official IMUGA Traveller Declaration portal", url: "https://imuga.immigration.gov.mv/traveller" },
-  ],
-};
 
 function renderVisaOfficialSources(routeId: string): string {
   const sources = VISA_OFFICIAL_SOURCES[routeId] || [];
@@ -1387,47 +1365,21 @@ function uniqueFlightRoutes(): typeof FLIGHTS_DATA {
   });
 }
 
-const isNonstopRoute = (route: (typeof FLIGHTS_DATA)[number]) => /\(direct/i.test(route.duration);
+const isNonstopRoute = (route: (typeof FLIGHTS_DATA)[number]) => FLIGHT_ROUTES[route.id]?.hasNonstop === true;
 
 function renderFlightsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
   const routeDirectory = uniqueFlightRoutes().map(
     (route) =>
-      `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} to ${escapeHtml(route.to.split(" (")[0])}</a> — ${isNonstopRoute(route) ? "Nonstop" : "Connecting"}; ${escapeHtml(route.duration)}. Compare live fares for your dates.</li>`
+      `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} to ${escapeHtml(route.to.split(" (")[0])}</a> — ${isNonstopRoute(route) ? "Nonstop may be available" : "Check connections"}; ${escapeHtml(route.duration)}. Compare live fares for your dates.</li>`
   ).join("");
   return `<article>
     <h1>International Flights from Dhaka: Routes, Fares &amp; Airlines</h1>
     <p>${escapeHtml(description)}</p>
     <p>Use these Dhaka flight guides to compare the destinations covered, journey duration, airlines and booking guidance in one place. No fixed fare is published: prices and schedules change with travel dates, seat inventory, baggage choices and fare conditions, so compare live totals for your own dates. Before booking, check the full itinerary—not only the headline fare—including baggage, stopovers, transit requirements, change or cancellation terms, and arrival time. Travelers starting in Chattogram, Sylhet or another city should plan any separate domestic leg and allow a realistic connection buffer. Confirm the operating carrier and current departure details with the airline or booking provider.</p>
-    <section id="direct-flights-from-dhaka" aria-labelledby="direct-flights-h2">
-      <h2 id="direct-flights-h2">Direct flights from Dhaka (DAC): where you can fly nonstop</h2>
-      <p>Hazrat Shahjalal International Airport (DAC) has nonstop service to about 30 international destinations across roughly 20 countries, plus domestic routes. Schedules and operators change by season, so confirm on the airline's website before booking. Last reviewed: October 2026.</p>
-
-      <h3>Nonstop routes covered by URAL guides</h3>
-      <ul>
-        <li><a href="/flights/dhaka-kathmandu">Dhaka to Kathmandu</a> — Biman Bangladesh Airlines, Himalaya Airlines (~1h 30m)</li>
-          <li><a href="/flights/ktm-dhaka">Kathmandu to Dhaka</a> — Biman Bangladesh Airlines, Himalaya Airlines (~1h 30m)</li>
-        <li><a href="/flights/dhaka-bangkok">Dhaka to Bangkok</a> — Biman Bangladesh Airlines, Thai Airways, US-Bangla Airlines, Thai Lion Air (~2h 30m)</li>
-        <li><a href="/flights/dhaka-kuala-lumpur">Dhaka to Kuala Lumpur</a> — Malaysia Airlines, Biman Bangladesh Airlines, AirAsia, US-Bangla Airlines, Batik Air (~3h 50m)</li>
-        <li><a href="/flights/dhaka-singapore">Dhaka to Singapore</a> — Singapore Airlines, Biman Bangladesh Airlines, US-Bangla Airlines (~4h 15m)</li>
-        <li><a href="/flights/dhaka-dubai">Dhaka to Dubai</a> — Emirates, flydubai, Biman Bangladesh Airlines, US-Bangla Airlines (~4h 45m)</li>
-        <li><a href="/flights/dhaka-maldives">Dhaka to Malé, Maldives</a> — US-Bangla Airlines, SriLankan Airlines (~4h 10m)</li>
-      </ul>
-
-      <h3>Saudi Arabia (Umrah and Hajj)</h3>
-      <p>Nonstop flights run to Jeddah and Madinah. See the <a href="/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">open-jaw ticket guide</a> and the <a href="/umrah">DIY Umrah planner</a>.</p>
-
-      <h3>Routes with no nonstop</h3>
-      <p>Some popular searches, such as the US, Canada and most of Europe, usually involve a connection, often through the Gulf. Check the airline's route map for current options. For long-haul planning, see <a href="/flights/dhaka-los-angeles">Dhaka to Los Angeles</a>.</p>
-
-      <h4>FAQ</h4>
-      <details>
-        <summary>Which airlines fly nonstop from Dhaka?</summary>
-        <p>Biman Bangladesh Airlines and US-Bangla operate the most nonstop routes from DAC. Several foreign carriers also serve Dhaka nonstop. Check each airline's site for the current timetable.</p>
-      </details>
-      <details>
-        <summary>Are fares shown on URAL?</summary>
-        <p>URAL publishes route guidance and links to the airline or search partner. Fares change daily.</p>
-      </details>
+    <section id="direct-flights-from-dhaka"><h2>Possible nonstop routes from Dhaka</h2>
+      <p>Availability and operating airlines change. Check current schedules for your dates.</p>
+      <ul>${uniqueFlightRoutes().filter(isNonstopRoute).map((route) => `<li><a href="/flights/${escapeHtml(route.id)}">${escapeHtml(route.from)} to ${escapeHtml(route.to)}</a> — check current schedules</li>`).join("")}</ul>
+      <p>For long-haul connections see <a href="/flights/dhaka-los-angeles">Dhaka to Los Angeles</a>. For Umrah planning see the <a href="/umrah">Umrah planner</a>.</p>
     </section>
     <section><h2>Dhaka international flight routes and fare guide</h2><ul>${routeDirectory}</ul></section>
     <section><h2>How to compare international flights from Bangladesh</h2>
@@ -1476,18 +1428,10 @@ function renderDestinationDirectoryCards(locale: "en" | "bn"): string {
 }
 
 function renderHotelGuideDirectoryCards(locale: "en" | "bn"): string {
-  const guides = locale === "bn" ? getLocalizedHotels("bn") : HOTELS_DATA;
-  const localePrefix = locale === "bn" ? "/bn" : "";
-  return `<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">${guides.map((guide) => {
-    const destinationId = HOTEL_GUIDE_DESTINATIONS[guide.id];
-    const image = destinationId ? DESTINATION_HERO_IMAGES[destinationId] : undefined;
-    if (!image) return "";
-    const path = `${localePrefix}/hotels/${guide.id}`;
-    const alt = locale === "bn" ? image.altBn : image.altEn;
-    const title = locale === "bn" ? `${guide.city}-এ কোথায় থাকবেন` : `Where to stay in ${guide.city}`;
-    const areaCount = locale === "bn" ? `${bnDigits(guide.neighborhoods.length)}টি এলাকা তুলনা` : `Compare ${guide.neighborhoods.length} areas`;
-    return `<a href="${escapeHtml(path)}" class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><div class="relative aspect-[16/9] overflow-hidden bg-slate-100">${renderResponsiveSearchImage(image.src, alt, "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw")}<span class="absolute left-3 top-3 rounded-full border border-white/70 bg-white/95 px-2.5 py-1 text-xs font-semibold text-brand-navy">${escapeHtml(guide.country)}</span></div><div class="space-y-2 p-4 sm:p-5"><h2 class="font-serif text-lg font-bold text-brand-navy">${escapeHtml(title)}</h2><p class="text-xs font-semibold text-slate-500">${locale === "bn" ? "এলাকা গাইড" : "Neighborhood guide"}</p><p class="line-clamp-3 text-sm leading-relaxed text-slate-600">${escapeHtml(guide.quickAnswer)}</p><span class="text-xs font-bold text-brand-navy">${areaCount}</span></div></a>`;
-  }).join("")}</div>`;
+  return renderToStaticMarkup(React.createElement(HotelDirectoryCards, {
+    guides: locale === "bn" ? getLocalizedHotels("bn") : HOTELS_DATA,
+    isBn: locale === "bn",
+  }));
 }
 
 function renderHotelsHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
@@ -1513,14 +1457,12 @@ function renderHotelsHubBody(title: string, description: string, faqSchema: Retu
       <p>Review the neighborhood against your itinerary and check the route to the places you expect to visit using current maps. Ask the property about any specific accessibility, child, luggage or arrival needs. Payment methods vary by property and booking platform, so check card acceptance and foreign-currency settings with your bank before relying on a particular payment method.</p>
     </section>
     ${renderLandingFaqs("hotels-hub-faqs", "Hotel booking questions for Bangladeshi travelers", faqSchema)}
+    <nav aria-label="Related trip planning"><h2>Plan the rest of your trip</h2><ul><li><a href="/destinations">Destination guides</a></li><li><a href="/flights">Flight routes</a></li><li><a href="/visa">Visa guides</a></li><li><a href="/costs">Trip costs</a></li></ul></nav>
   </article>`;
 }
 
 function renderVisaHubBody(title: string, description: string, faqSchema: ReturnType<typeof getFaqSchemaForPage>): string {
-  const directory = VISA_DATA.map(
-    (guide) =>
-      `<li><a href="/visa/${escapeHtml(guide.id)}">${escapeHtml(guide.country)} visa guide for Bangladeshi passport holders</a> — ${escapeHtml(guide.requirementType)}; fee guidance ${escapeHtml(guide.costBdt)}; processing guidance ${escapeHtml(guide.processingTime)}.</li>`
-  ).join("");
+  const directory = renderToStaticMarkup(React.createElement(VisaDirectoryCards, { guides: VISA_DATA, isBn: false }));
   const guideDetails = VISA_DATA.map(
     (guide) => `
       <section>
@@ -1534,13 +1476,14 @@ function renderVisaHubBody(title: string, description: string, faqSchema: Return
     <p>${escapeHtml(description)}</p>
     <p>If you only need to know which destinations a Bangladeshi passport can enter with nothing arranged in advance, start with <a href="/visa-free-countries">visa-free countries for Bangladeshi passport holders</a> — it separates the destinations you can actually use from the ones that only look easy.</p>
     <p>This visa hub brings together entry-route, fee, processing-time and document guidance for popular destinations for Bangladeshi passport holders. Start with the country-specific guide below to understand whether the route described is visa-free, visa on arrival, electronic or an advance application. Requirements depend on the travel purpose, passport and current policy; the amounts and timeframes shown are guidance from the underlying destination pages, not an approval guarantee. Immigration rules can change without notice, so verify the latest requirements and application channel with the destination's official immigration department, embassy or authorized portal before booking or applying.</p>
-    <section><h2>Country visa guides and application routes</h2><ul>${directory}</ul></section>
+    <section><h2>Country visa guides and application routes</h2>${directory}</section>
     <section><h2>Documents and steps by destination</h2>${guideDetails}</section>
     <section><h2>Before submitting a tourist visa application</h2>
       <p>Check that the visa category matches your real travel purpose and intended length of stay. Use the current application form and document list published by the official authority, and make sure names, passport numbers, dates and supporting bookings match across every document. If an application must be submitted through an embassy or authorized service provider, confirm the Dhaka jurisdiction, appointment process and payment instructions directly with that provider.</p>
       <p>Processing estimates are not guarantees: public holidays, peak demand, additional-document requests and individual circumstances can change the outcome. Avoid non-refundable travel commitments until you understand the relevant entry rules. Keep copies of submitted documents and the approval notice accessible during check-in and arrival. This directory is a starting point for research, not legal advice or a substitute for an official decision.</p>
     </section>
     ${renderLandingFaqs("visa-hub-faqs", "Visa questions for Bangladeshi passport holders", faqSchema)}
+    <nav aria-label="Related trip planning"><h2>Plan the rest of your trip</h2><ul><li><a href="/destinations">Destination guides</a></li><li><a href="/flights">Flight routes</a></li><li><a href="/hotels">Hotel guides</a></li><li><a href="/costs">Trip costs</a></li></ul></nav>
   </article>`;
 }
 
@@ -1857,12 +1800,7 @@ function buildAllRoutes(): PrerenderRoute[] {
         : r.id === "ktm-dhaka"
           ? "Kathmandu to Dhaka Flights: Price & Route Guide | URAL"
           : `Flights from Dhaka to ${r.to.split(" (")[0]} (${r.country}) 2026 | URAL`;
-    const description =
-      r.id === "dhaka-kathmandu"
-        ? "Direct Dhaka to Kathmandu flights take 1h30m on Biman Bangladesh or Himalaya Airlines. Compare live fares for your dates; Bangladeshis get a free visa on arrival."
-        : r.id === "ktm-dhaka"
-          ? "Direct Kathmandu to Dhaka (DAC) flights take 1h 30m on Biman Bangladesh Airlines and Himalaya Airlines; compare live fares for your own dates."
-          : `Compare flights from Dhaka to ${r.to.split(" (")[0]}. Check flight duration, direct airlines and live fares for your own travel dates.`;
+    const description = `Compare flights from ${r.from.split(" (")[0]} to ${r.to.split(" (")[0]}. Check schedules, baggage and current fares for your dates.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (r.schemaMarkup?.code) {
       try {
@@ -1905,18 +1843,19 @@ function buildAllRoutes(): PrerenderRoute[] {
           </section>
           <section>
             <h2>Booking window and airline choice</h2>
-            <p>The route guidance suggests starting fare checks around ${escapeHtml(r.bestTimeToBook)}. That is a planning cue rather than a guaranteed cheapest day to buy: compare current schedules and prices, then balance fare against departure time, total travel duration, baggage and support if plans change. Airlines listed for this route include ${escapeHtml(r.airlines.join(", "))}; operating carriers, aircraft and schedules can vary by date, so confirm the carrier shown on each segment.</p>
+            <p>Start comparing fares early and across dates; no fixed booking window guarantees the cheapest fare. Compare current schedules and prices, then balance fare against departure time, total travel duration, baggage and support if plans change. Airlines listed for this route include ${escapeHtml(r.airlines.join(", "))}; operating carriers, aircraft and schedules can vary by date, so confirm the carrier shown on each segment.</p>
             <p>Before choosing a direct or connecting itinerary, check the exact origin and destination airport codes on the ticket. If a connection is involved, verify whether all sectors are on one ticket, whether baggage is checked through, and whether you need permission to enter or transit the connection country. Do not assume a booking platform's itinerary summary replaces the airline's conditions.</p>
           </section>
           <section>
             <h2>Entry requirements and departure preparation</h2>
             <p>The current route data describes the entry requirement as: ${escapeHtml(r.visaRequirement)}. Visa rules depend on the traveler and can change; verify the latest instructions with the destination's official immigration authority or embassy before purchasing a non-refundable ticket. Check that passport details match the booking, understand the permitted stay and any pre-arrival form requirements, and carry the documents requested for your specific trip.</p>
-            <p>For departure from Dhaka, check your airline's current check-in time, baggage limits and airport instructions before travel. Keep the passport, ticket, visa or entry authorization, accommodation details and onward or return itinerary accessible. Requirements differ by destination and individual circumstances, so use the linked visa guide as a starting point and confirm with official sources.</p>
+            <p>Before departure, check your airline's current check-in time, baggage limits and airport instructions before travel. Keep the passport, ticket, visa or entry authorization, accommodation details and onward or return itinerary accessible. Requirements differ by destination and individual circumstances, so use the linked visa guide as a starting point and confirm with official sources.</p>
           </section>
           <section>
             <h2>Plan the full journey around this flight</h2>
-            <p>Door-to-door timing includes more than the time in the air. Plan how you will reach Hazrat Shahjalal International Airport from your starting point, allow the airline's required check-in time, and consider the time needed to collect bags and reach accommodation after landing. For this route, confirm the destination airport shown on the ticket (${escapeHtml(r.to)}) before arranging a pickup or choosing a hotel; airport names and codes matter when comparing transfer options. If you arrive late or have a connection, confirm the transfer plan and the accommodation's check-in arrangements in advance. Keep enough flexibility for traffic and schedule changes rather than planning a tight onward connection on a separate booking.</p>
+            <p>Door-to-door timing includes more than the time in the air. Plan how you will reach your departure airport (${escapeHtml(r.from)}) from your starting point, allow the airline's required check-in time, and consider the time needed to collect bags and reach accommodation after landing. For this route, confirm the destination airport shown on the ticket (${escapeHtml(r.to)}) before arranging a pickup or choosing a hotel; airport names and codes matter when comparing transfer options. If you arrive late or have a connection, confirm the transfer plan and the accommodation's check-in arrangements in advance. Keep enough flexibility for traffic and schedule changes rather than planning a tight onward connection on a separate booking.</p>
           </section>
+          <section><h2>Continue planning</h2><p><a href="${escapeHtml(FLIGHT_ROUTES[r.id].visaPath)}">${FLIGHT_ROUTES[r.id].visaPath === "/visa" ? "Browse visa guides" : "Visa guidance"}</a>${r.id === "dhaka-los-angeles" ? ' · <a href="https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html">Official US visitor visa guidance</a>' : ""} · <a href="${escapeHtml(FLIGHT_ROUTES[r.id].hotelPath)}">${FLIGHT_ROUTES[r.id].hotelPath === "/hotels" ? "Browse hotel guides" : "Where to stay"}</a></p></section>
           <section>
             <h2>Arrival and connection checklist</h2>
             <ol>
@@ -1927,7 +1866,7 @@ function buildAllRoutes(): PrerenderRoute[] {
               <li>Plan the transfer from the arrival airport to your accommodation using current local information, and share your hotel address with your travel party.</li>
             </ol>
           </section>
-          ${renderLandingFaqs("flight-route-faqs", "Questions about this Dhaka flight route", routeFaq)}
+          ${renderLandingFaqs("flight-route-faqs", "Questions about this flight route", routeFaq)}
         </article>
       `,
     });
@@ -1944,8 +1883,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: hotelsHubTitle,
     description: hotelsHubDesc,
     imageUrl: defaultOgImage,
-    lcpImageUrl: DESTINATION_HERO_IMAGES[DESTINATIONS_DATA[0].id].src,
-    lcpImageSizes: "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw",
+    lcpImageUrl: "/assets/images/hotel_directory_hero_20261112-1200.webp",
+    lcpImageSizes: "(min-width: 1280px) 1200px, 100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Hotel Neighborhoods", url: `${BASE_URL}/hotels` },
@@ -2161,8 +2100,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: visaHubTitle,
     description: visaHubDesc,
     imageUrl: defaultOgImage,
-    lcpImageUrl: "/assets/images/visa_changi_immigration_20261101-1200.webp",
-    lcpImageSizes: "(min-width: 1024px) 45vw, 100vw",
+    lcpImageUrl: "/assets/images/visa_directory_hero_20261112-1200.webp",
+    lcpImageSizes: "(min-width: 1280px) 1200px, 100vw",
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
       { name: "Visa Guides", url: `${BASE_URL}/visa` },
@@ -2195,7 +2134,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           ? "Saudi Visa: Which Route Fits Your Passport (2026)"
           : `${v.country} Visa for Bangladeshi Travelers 2026 | URAL`;
     const description = saudiVisa
-      ? "Bangladesh is not on Saudi Arabia's 68-country tourist eVisa list. The three routes that are actually open, the transit eVisa condition, and why this page publishes no fee figure — checked against official sources."
+      ? "Explore Saudi Package Visa, airline stopover and other possible routes for Bangladeshi travellers. Check official eligibility and current terms before paying."
       : `Review the ${v.country} entry route, required documents and application steps for Bangladeshi travelers. Verify current rules and fees with official sources before applying.`;
     const extraNodes: Record<string, unknown>[] = [];
     if (v.schemaMarkup?.code) {
@@ -2214,8 +2153,8 @@ function buildAllRoutes(): PrerenderRoute[] {
       title,
       description,
       imageUrl: defaultOgImage,
-      lcpImageUrl: "/assets/images/visa_changi_immigration_20261101-1200.webp",
-      lcpImageSizes: "(min-width: 1024px) 34vw, 100vw",
+      lcpImageUrl: "/assets/images/visa_directory_hero_20261112-1200.webp",
+      lcpImageSizes: "(min-width: 1280px) 1200px, 100vw",
       breadcrumbs: [
         { name: "Home", url: `${BASE_URL}/` },
         { name: "Visa Guides", url: `${BASE_URL}/visa` },
@@ -2225,16 +2164,19 @@ function buildAllRoutes(): PrerenderRoute[] {
       bodyHtml: `
         <article>
           <h1>${escapeHtml(v.country)} Visa Requirements for Bangladeshi Citizens</h1>
+          <p><a href="/visa">All visa guides</a></p>
+          <details><summary>Jump to the section you need</summary><nav aria-label="Sections in this guide"><ul><li><a href="#visa-key-facts">Visa facts</a></li><li><a href="#visa-steps">Application steps</a></li><li><a href="#visa-documents">Document checklist</a></li><li><a href="#official-visa-sources">Official sources</a></li></ul></nav></details>
+          ${saudiVisa ? `<p>For Umrah-specific planning, see the <a href="/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost">Umrah visa guide</a>.</p>` : ""}
           <p>${escapeHtml(description)}</p>
           <p>${escapeHtml(v.quickAnswer || description)}</p>
           <p><strong>Entry route:</strong> ${escapeHtml(v.requirementType)} | <strong>Published fee/entry guidance:</strong> ${escapeHtml(v.costBdt)} | <strong>Indicative processing guidance:</strong> ${escapeHtml(v.processingTime)}</p>
           <p>Comparing this route with the rest of the region? See <a href="/visa-free-countries">which countries a Bangladeshi passport can enter without a prior visa</a>.</p>
           <p>These details are an editorial planning summary, not an official decision. Rules, fees, forms and processing windows can change; verify the current requirements with the linked authority before applying or making non-refundable plans.</p>
-          <h2>Key visa facts</h2>
+          <h2 id="visa-key-facts">Key visa facts</h2>
           <ul>${v.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
-          <h2>Documents to check</h2>
+          <h2 id="visa-documents">Documents to check</h2>
           ${v.documentChecklist.map((checklist) => `<section><h3>${escapeHtml(checklist.category)}</h3><ul>${checklist.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>`).join("")}
-          <h2>Application steps</h2>
+          <h2 id="visa-steps">Application steps</h2>
           <ol>${v.stepByStep.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
           ${renderVisaRouteContext(v.id)}
           ${renderVisaApplicationGuidance()}
@@ -3461,9 +3403,10 @@ function buildBengaliBody(
         parts.push(
           bnLinkList(
             "এই ট্রিপের বাকি পরিকল্পনা",
-            bnCountryCrossLinks(route.country, englishPath)
+            [{ label: "ভিসা গাইড", path: FLIGHT_ROUTES[route.id].visaPath }, { label: "থাকার গাইড", path: FLIGHT_ROUTES[route.id].hotelPath }]
           )
         );
+        if (route.id === "dhaka-los-angeles") parts.push(`<p><a href="https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html">US visitor visa-এর সরকারি নির্দেশনা</a></p>`);
         const localizedRouteFaqs = getLocalizedFlightFaqs(route.id);
         if (localizedRouteFaqs?.length) {
           parts.push(bnFaqList("এই রুট সম্পর্কে সাধারণ প্রশ্ন", localizedRouteFaqs));
@@ -3479,30 +3422,6 @@ function buildBengaliBody(
         );
       }
 
-      // Bengali: Direct flights from Dhaka section for the flights hub
-      parts.push(
-        `<section id="direct-flights-from-dhaka" aria-labelledby="direct-flights-h2-bn">` +
-          `<h2 id="direct-flights-h2-bn">ঢাকা (DAC) থেকে সরাসরি ফ্লাইট: আপনি কোথায় ননস্টপ ভ্রমণ করতে পারেন</h2>` +
-          `<p>হাজর শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) প্রায় ৩০টি আন্তর্জাতিক গন্তব্যে এবং দেশীয় রুটে সরাসরি সেবা প্রদান করে। এয়ারলাইনের টাইম-টেবিল মৌসুম অনুযায়ী পরিবর্তিত হতে পারে, তাই বুকিং করার আগে এয়ারলাইনের ওয়েবসাইটে নিশ্চিত হয়ে নিন। শেষ পর্যালোচনা: অক্টোবর ২০২৬।</p>` +
-          `<h3>ইউআরএল গাইডে কভার করা ননস্টপ রুটসমূহ</h3>` +
-          `<ul>` +
-            `<li><a href="/bn/flights/dhaka-kathmandu">ঢাকা থেকে কাঠমান্ডু</a> — Biman Bangladesh Airlines, Himalaya Airlines (~১ ঘণ্টা ২৫ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-bangkok">ঢাকা থেকে ব্যাংকক</a> — Biman Bangladesh Airlines, Thai Airways, US-Bangla Airlines, Thai Lion Air (~২ ঘণ্টা ৩০ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-kuala-lumpur">ঢাকা থেকে কুয়ালালামপুর</a> — Malaysia Airlines, Biman Bangladesh Airlines, AirAsia, US-Bangla Airlines, Batik Air (~৩ ঘণ্টা ৫০ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-singapore">ঢাকা থেকে সিঙ্গাপুর</a> — Singapore Airlines, Biman Bangladesh Airlines, US-Bangla Airlines (~৪ ঘণ্টা ১৫ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-dubai">ঢাকা থেকে দুবাই</a> — Emirates, flydubai, Biman Bangladesh Airlines, US-Bangla Airlines (~৪ ঘণ্টা ৪৫ মিনিট)</li>` +
-            `<li><a href="/bn/flights/dhaka-maldives">ঢাকা থেকে মালদ্বীপ (মালে)</a> — US-Bangla Airlines, SriLankan Airlines (~৪ ঘণ্টা ১০ মিনিট)</li>` +
-          `</ul>` +
-          `<p>প্রতিটি রুটের ভাড়া আপনার তারিখ, আসন ও ব্যাগেজ অনুযায়ী বদলায়—নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, তাই বুকিংয়ের আগে লাইভ ভাড়া তুলনা করুন।</p>` +
-          `<h3>সৌদি আরব (ওমরাহ ও হজ)</h3>` +
-          `<p>জেদ্দা ও মদিনার সরাসরি ফ্লাইট চলতে থাকে। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জেদ্দা টিকিট গাইড</a> এবং <a href="/bn/umrah">ডিআইওয়াই ওমরাহ প্ল্যানার দেখুন</a>।</p>` +
-          `<h3>কোনো ননস্টপ নেই এমন রুট</h3>` +
-          `<p>আমেরিকা, কানাডা ও ইউরোপের মতো কিছু জনপ্রিয় গন্তব্যে সাধারণত কানেকশন থাকা লাগে। দীর্ঘ-দূরত্ব পরিকল্পনার জন্য <a href="/bn/flights/dhaka-los-angeles">ঢাকা থেকে লস অ্যাঞ্জেলেস</a> দেখুন।</p>` +
-          `<h4>সচরাচর জিজ্ঞাসা প্রশ্ন</h4>` +
-          `<details><summary>ঢাকা থেকে কোন এয়ারলাইন্স ননস্টপ উড়ে? </summary><p>Biman Bangladesh Airlines ও US-Bangla DAC থেকে সবচেয়ে বেশি ননস্টপ রুট পরিচালনা করে। কিছু বিদেশি এয়ারলাইন্সও ঢাকা থেকে সরাসরি উড়ে। বর্তমান টাইম-টেবিল-এর জন্য প্রতিটি এয়ারলাইনের ওয়েবসাইট দেখুন।</p></details>` +
-          `<details><summary>ভাড়া কি এখানে দেখানো হয়?</summary><p>পেজটি রুট গাইড প্রকাশ করে এবং এয়ারলাইন বা সার্চ পার্টনারের লিংক দেয়। নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না, কারণ ভাড়া প্রতিদিন ও প্রতিটি তারিখে পরিবর্তিত হয়—আপনার তারিখের লাইভ ভাড়া ও শর্ত যাচাই করুন।</p></details>` +
-          `</section>`
-      );
 
     } else {
       const seenPairs = new Set<string>();
@@ -3515,11 +3434,11 @@ function buildBengaliBody(
         seenPairs.add(key);
         return true;
       });
-      const nonstopRoutes = hubRoutes.filter((route) => /direct/i.test(route.flightDuration || route.duration));
+      const nonstopRoutes = hubRoutes.filter(isNonstopRoute);
       const nonstopItems = nonstopRoutes
         .map(
           (route) =>
-            `<li><a href="/bn/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} → ${escapeHtml(route.to.split(" (")[0])}</a> — ${escapeHtml(route.airlines.join(", "))} (${escapeHtml(route.flightDuration || route.duration)})</li>`
+            `<li><a href="/bn/flights/${escapeHtml(route.id)}">${escapeHtml(route.from.split(" (")[0])} → ${escapeHtml(route.to.split(" (")[0])}</a> — আপনার তারিখের সময়সূচি যাচাই করুন</li>`
         )
         .join("");
       parts.push(
@@ -3529,11 +3448,11 @@ function buildBengaliBody(
         ),
         `<p>নির্দিষ্ট ভাড়া এখানে প্রকাশ করা হয় না: তারিখ, আসন, ব্যাগেজ ও টিকিটের শর্ত অনুযায়ী দাম বদলায়। রুট গাইডে যাত্রার সময় ও এয়ারলাইন্স দেখে নিন, তারপর নিজের তারিখের লাইভ মোট ভাড়া তুলনা করুন।</p>`,
         bnSection(
-          "ঢাকা (DAC) থেকে সরাসরি ফ্লাইট",
-          `<p>হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর থেকে প্রায় ৩০টি আন্তর্জাতিক গন্তব্যে সরাসরি ফ্লাইট চলে, পাশাপাশি দেশীয় রুটও। মৌসুম অনুযায়ী সময়সূচি ও পরিচালনাকারী এয়ারলাইন্স বদলায়, তাই বুকিংয়ের আগে এয়ারলাইনের ওয়েবসাইটে নিশ্চিত হয়ে নিন।</p>` +
+          "ঢাকা (DAC) থেকে সরাসরি বিকল্প",
+          `<p>নিচের রুটে সরাসরি বিকল্প থাকতে পারে। সময়সূচি ও পরিচালনাকারী এয়ারলাইন তারিখ অনুযায়ী বদলায়; বুকিংয়ের আগে যাচাই করুন।</p>` +
             (nonstopItems ? `<ul>${nonstopItems}</ul>` : "") +
-            `<h3>সৌদি আরব (ওমরাহ ও হজ)</h3><p>জেদ্দা ও মদিনায় সরাসরি ফ্লাইট চলে। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জ টিকিট গাইড</a> এবং <a href="/bn/umrah">DIY ওমরাহ প্ল্যানার</a> দেখুন।</p>` +
-            `<h3>কোনো ননস্টপ ফ্লাইট নেই এমন রুট</h3><p>আমেরিকা, কানাডা ও ইউরোপের অনেক গন্তব্যে সাধারণত সংযোগ লাগে, প্রায়ই উপসাগরীয় হাব হয়ে। দীর্ঘ-দূরত্বের পরিকল্পনার জন্য <a href="/bn/flights/dhaka-los-angeles">ঢাকা থেকে লস অ্যাঞ্জেলেস</a> গাইড দেখুন।</p>`
+            `<h3>সৌদি আরব (ওমরাহ ও হজ)</h3><p>জেদ্দা ও মদিনার বর্তমান সরাসরি ফ্লাইট যাচাই করুন। <a href="/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia">ওপেন-জ টিকিট গাইড</a> এবং <a href="/bn/umrah">DIY ওমরাহ প্ল্যানার</a> দেখুন।</p>` +
+            `<h3>যেসব রুটে সংযোগ যাচাই করবেন</h3><p>আমেরিকা, কানাডা ও ইউরোপের অনেক গন্তব্যে সাধারণত সংযোগ লাগে, প্রায়ই উপসাগরীয় হাব হয়ে। দীর্ঘ-দূরত্বের পরিকল্পনার জন্য <a href="/bn/flights/dhaka-los-angeles">ঢাকা থেকে লস অ্যাঞ্জেলেস</a> গাইড দেখুন।</p>`
         ),
         bnSection(
           "বাংলাদেশ থেকে আন্তর্জাতিক ফ্লাইট কীভাবে তুলনা করবেন",
@@ -3588,7 +3507,10 @@ function buildBengaliBody(
 
     } else {
       parts.push(
-        `<section><h2>গন্তব্য অনুযায়ী হোটেল এলাকা গাইড</h2>${renderHotelGuideDirectoryCards("bn")}</section>`
+        `<section><h2>গন্তব্য অনুযায়ী হোটেল এলাকা গাইড</h2>${renderHotelGuideDirectoryCards("bn")}</section>`,
+        `<section><h2>বুকিংয়ের আগে যা যাচাই করবেন</h2><p>একই তারিখ, অতিথিসংখ্যা ও রুমের ধরন ধরে মোট দাম তুলনা করুন। ঠিকানা, চেক-ইনের সময়, বিছানার ব্যবস্থা, খাবার, কর ও চার্জ, পেমেন্ট এবং বাতিল ও ফেরতের শর্ত নিশ্চিত করুন। মানচিত্রে যাতায়াতের রুট দেখুন; শিশু, লাগেজ বা চলাচলের বিশেষ প্রয়োজন থাকলে সরাসরি হোটেলের সঙ্গে মিলিয়ে নিন।</p></section>`,
+        bnLinkList("ভ্রমণের বাকি পরিকল্পনা", [{ label: "গন্তব্য গাইড", path: "/destinations" }, { label: "ফ্লাইট রুট", path: "/flights" }, { label: "ভিসা গাইড", path: "/visa" }, { label: "ভ্রমণ খরচ", path: "/costs" }]),
+        bnFaqList("হোটেল বুকিং নিয়ে সাধারণ প্রশ্ন", BN_LANDING_HOTEL_FAQS)
       );
     }
     if (id) {
@@ -3618,6 +3540,8 @@ function buildBengaliBody(
     if (id) {
       const visa = getLocalizedVisas("bn").find((item) => item.id === id);
       if (visa) {
+        parts.push(`<p><a href="/bn/visa">সব ভিসা গাইড</a></p>`);
+        if (id === "saudi-arabia-visa") parts.push(`<p>ওমরাহ পরিকল্পনার বিস্তারিত <a href="/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost">ওমরাহ ভিসা গাইডে</a> দেখুন।</p>`);
         parts.push(
           bnFactList([
             { label: "ভিসার ধরন", value: visa.requirementType },
@@ -3625,6 +3549,11 @@ function buildBengaliBody(
             { label: "প্রসেসিং সময়", value: visa.processingTime },
           ])
         );
+        const contentLang = (text: string) => /[\u0980-\u09ff]/.test(text) ? "bn" : "en";
+        parts.push(`<section id="visa-key-facts"><h2>এক নজরে ভিসার তথ্য</h2><ul>${visa.keyFacts.map((fact) => `<li lang="${contentLang(fact.label + fact.value)}"><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul></section>`);
+        parts.push(`<section id="visa-steps"><h2>আবেদনের ধাপ</h2><ol>${visa.stepByStep.map((step) => `<li lang="${contentLang(step)}">${escapeHtml(step)}</li>`).join("")}</ol></section>`);
+        parts.push(`<section id="visa-documents"><h2>ডকুমেন্ট চেকলিস্ট</h2>${visa.documentChecklist.map((group) => `<section><h3 lang="${contentLang(group.category)}">${escapeHtml(group.category)}</h3><ul>${group.items.map((item) => `<li lang="${contentLang(item)}">${escapeHtml(item)}</li>`).join("")}</ul></section>`).join("")}</section>`);
+        parts.push(`<section id="official-visa-sources"><h2>বর্তমান নিয়ম যাচাইয়ের সরকারি সূত্র</h2><ul>${(VISA_OFFICIAL_SOURCES[visa.id] ?? []).map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer" lang="en">${escapeHtml(source.label)}</a></li>`).join("")}</ul></section>`);
         parts.push(
           bnLinkList(
             "এই ট্রিপের বাকি পরিকল্পনা",
@@ -3648,10 +3577,10 @@ function buildBengaliBody(
 
     } else {
       parts.push(
-        bnDirectory(
-          "সব ভিসা গাইড",
-          englishPathsIn("/visa", VISA_DATA.map((visa) => visa.id))
-        )
+        `<section><h2>দেশ অনুযায়ী ভিসা গাইড</h2>${renderToStaticMarkup(React.createElement(VisaDirectoryCards, { guides: getLocalizedVisas("bn"), isBn: true }))}</section>`,
+        `<section><h2>আবেদনের আগে সরকারি নিয়ম দেখুন</h2><p>ভ্রমণের উদ্দেশ্য ও পাসপোর্ট অনুযায়ী ভিসার ধরন বেছে নিন। সরকারি পোর্টাল বা দূতাবাসে বর্তমান নথি, ফি, পেমেন্ট ও প্রসেসিং নির্দেশনা যাচাই করুন। অনুমোদন নিশ্চিত নয়; অফেরতযোগ্য বুকিংয়ের আগে শর্ত বুঝে নিন।</p><p><a href="/bn/visa-free-countries">বাংলাদেশি পাসপোর্টে ভিসা ছাড়া প্রবেশের গাইড</a></p></section>`,
+        bnFaqList("ভিসা নিয়ে সাধারণ প্রশ্ন", BN_LANDING_VISA_FAQS),
+        bnLinkList("ভ্রমণের বাকি পরিকল্পনা", [{ label: "গন্তব্য গাইড", path: "/destinations" }, { label: "ফ্লাইট রুট", path: "/flights" }, { label: "হোটেল গাইড", path: "/hotels" }, { label: "ভ্রমণ খরচ", path: "/costs" }])
       );
     }
     return `<article>${parts.join("")}</article>`;

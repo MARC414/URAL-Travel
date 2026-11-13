@@ -124,6 +124,7 @@ import { KiwitaxiEmbed } from "../src/components/KiwitaxiEmbed";
 import { WelcomePickupsEmbed, WELCOME_PICKUPS_PARTNER_URL } from "../src/components/WelcomePickupsEmbed";
 import { TopBarSiteSearch } from "../src/components/TopBarSiteSearch";
 import BlogPostRouteView from "../src/routes/BlogPostRouteView";
+import FlightsRouteView from "../src/routes/FlightsRouteView";
 import HotelsRouteView from "../src/routes/HotelsRouteView";
 import { UmrahBudgetCalculator } from "../src/components/UmrahBudgetCalculator";
 import { calculateUmrahBudget, emptyUmrahBudget, UMRAH_BUDGET_ITEMS } from "../src/utils/umrahBudget";
@@ -291,28 +292,18 @@ check(
 );
 const airHelpPlusSource = read(path.join(ROOT_DIR, "src", "components", "AirHelpWidget.tsx")) ?? "";
 const airHelpPlusCopyClear =
-  airHelpPlusSource.includes("AirHelp+ is a paid membership, not travel insurance.") &&
-  airHelpPlusSource.includes("Plans, prices, included services and trip limits can vary by market and may change.") &&
-  airHelpPlusSource.includes("Membership does not guarantee compensation") &&
-  airHelpPlusSource.includes("AirHelp+ একটি পেইড মেম্বারশিপ, ভ্রমণ বীমা নয়।") &&
-  airHelpPlusSource.includes("আপনার বাজার ও প্ল্যানে কোডটি গ্রহণযোগ্য হলে অফার প্রযোজ্য") &&
-  airHelpPlusSource.includes('href="https://www.airhelp.com/en/airhelp-plus-terms/"') &&
-  !/Covers up to 3 trips|Up to 3 Trips \/ Year|Up to 9 Trips|Covers up to 9 trips|zero fee on €600|Keep 100% of your €600|instant airport lounge|valid across all markets/i.test(airHelpPlusSource) &&
+  airHelpPlusSource.includes("TravelPass by AirHelp is an optional paid membership") &&
+  airHelpPlusSource.includes("Silver, Gold and Platinum") &&
+  airHelpPlusSource.includes("coverage, trip limits and exclusions") &&
+  !/AirHelp\+|AHTPO11|TPO9|11% OFF/.test(airHelpPlusSource) &&
   AFFILIATE_LINKS.airhelp === "https://airhelp.tpo.li/XS95LnEC" &&
   AFFILIATE_OFFER_REGISTRY.airhelp.status === "active";
-check(
-  airHelpPlusCopyClear,
-  "AirHelp+ plan copy avoids fixed market-dependent benefits, directs users to current official terms, qualifies the code at checkout, and preserves the active partner link"
-);
+check(airHelpPlusCopyClear, "TravelPass copy is current and preserves the separate claims handoff");
 const airHelpFallbackCopyClear =
   airHelpPlusSource.includes("The embedded form did not load.") &&
   airHelpPlusSource.includes("AirHelp's current terms") &&
-  airHelpPlusSource.includes("confirm offer eligibility at checkout") &&
   !/check €600 compensation eligibility|up to €600 compensation eligibility for free/i.test(airHelpPlusSource);
-check(
-  airHelpFallbackCopyClear,
-  "the AirHelp embedded-form fallback makes no free or fixed-amount eligibility promise and keeps offer eligibility conditional"
-);
+check(airHelpFallbackCopyClear, "AirHelp's embedded-form fallback avoids fixed eligibility promises");
 
 /**
  * `**bold**` in a blog body is authored markdown that the React view renders as
@@ -626,14 +617,16 @@ check(
     hotelInlineDispatchHtml.includes(`href="${AFFILIATE_LINKS.klookHotels}"`),
   "hotel inline dispatch also omits the removed date-handoff and commission message"
 );
+const savedHotelGuideCardsValid = HOTELS_DATA.every((hotel) =>
+  [hotelsHubHtml, bnHotelsHubHtml].every((html, index) => {
+    const href = `${index === 1 ? "/bn" : ""}/hotels/${hotel.id}`;
+    return html.includes(`href="${href}" target="_blank" rel="noopener noreferrer"`);
+  })
+);
 check(
-  (hotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&
-    (bnHotelsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 6 &&
-    hotelsHubHtml.includes('href="/hotels/dubai-hotels"') &&
-    bnHotelsHubHtml.includes('href="/bn/hotels/dubai-hotels"') &&
-    hotelsHubHtml.includes("Neighborhood guide") &&
-    !hotelsHubHtml.includes("verified property directory"),
-  "English and Bengali hotel directories prerender six destination-image area-guide cards, not property listings"
+  savedHotelGuideCardsValid && hotelsHubHtml.includes("Open guide (new tab)") &&
+    bnHotelsHubHtml.includes("গাইড খুলুন (নতুন ট্যাবে)"),
+  "saved hotel directories expose all localized guide links in new tabs"
 );
 const renderHotelDirectory = (locale: "en" | "bn") =>
   renderToStaticMarkup(
@@ -657,10 +650,13 @@ const clientHotelGuideLinksLocalized = HOTELS_DATA.every((hotel) =>
 );
 check(
   clientHotelGuideLinksLocalized &&
-    clientHotelsHubHtml.includes('alt="The Annapurna Himalayan range above Phewa Lake at dawn in Nepal"') &&
-    clientBnHotelsHubHtml.includes('alt="নেপালের ফেওয়া লেকের ওপরে ভোরের আলোয় অন্নপূর্ণা হিমালয় পর্বতমালা"') &&
-    !clientHotelsHubHtml.includes("Pexels") && !clientHotelsHubHtml.includes("London hotel"),
-  "hydrated hotel directories keep all guide links localized and use the shared, non-property destination hero without stock-source credit"
+    clientHotelsHubHtml.includes("Illustration inspired by Kathmandu") &&
+    clientBnHotelsHubHtml.includes("কাঠমান্ডুর বৌদ্ধনাথ স্তূপ থেকে অনুপ্রাণিত চিত্র") &&
+    clientHotelsHubHtml.includes("hotel_directory_hero_20261112-1200.webp") &&
+    clientHotelsHubHtml.includes("Open guide (new tab)") &&
+    clientBnHotelsHubHtml.includes("গাইড খুলুন (নতুন ট্যাবে)") &&
+    !clientHotelsHubHtml.includes("Pexels"),
+  "hotel directories use localized guide links, new-tab notices, correctly identified Kathmandu artwork and the hotel hero"
 );
 const blogIndexInSync =
   BLOG_POST_COUNT === BLOG_DATA.length &&
@@ -956,6 +952,27 @@ function collectSourceFiles(dir: string, acc: string[] = []): string[] {
 const distHtmlFiles = collectHtmlFiles(DIST_DIR);
 const distIndexHtml = read(path.join(DIST_DIR, "index.html"));
 
+// Credit overlays are removed for the current public-domain, Pexels and generated
+// images. Match text nodes rather than alt attributes, which still describe artwork.
+const retiredImageNote = />\s*(?:AI-generated illustration|AI-তৈরি চিত্র|Adrian Pingstone \/ Wikimedia Commons|Pexels · hotel room photo)\s*</i;
+const imageNotePages = distHtmlFiles.filter((file) => retiredImageNote.test(read(file) ?? ""));
+check(imageNotePages.length === 0, `saved HTML has no retired image-credit or illustration overlays [${imageNotePages.map((file) => path.relative(DIST_DIR, file)).join(", ")}]`);
+
+const flightImageNotes = (["en", "bn"] as const).flatMap((lang) =>
+  [undefined, ...FLIGHTS_DATA.map((route) => route.id)].filter((parameterId) => {
+    const context = {
+      isBn: lang === "bn", lang, parameterId, localizedFlights: getLocalizedFlights(lang),
+      areTpScriptsReady: false, TravelpayoutsWidgetSkeleton: () => null,
+      setAreTpScriptsReady: () => {}, navigateTo: () => {}, openPriceAlert: () => {},
+      getCountryHotelId: (country: string) => country,
+      getCountryVisaId: (country: string) => country,
+      getCountryIata: (country: string) => country,
+    };
+    return retiredImageNote.test(renderToStaticMarkup(React.createElement(FlightsRouteView, { context })));
+  }).map((id) => `${lang}/${id ?? "flights"}`)
+);
+check(flightImageNotes.length === 0, `interactive flight hubs and route guides omit retired image overlays [${flightImageNotes.join(", ")}]`);
+
 // The prerendered shells intentionally defer the React app to hydration, so
 // guard the shared signup's source placement: one card after <main>, before the
 // common footer, with no subscriber form nested in the footer.
@@ -1066,40 +1083,17 @@ const airHelpArticleEn = BLOG_DATA.find((post) => post.slug === airHelpArticleSl
 const airHelpArticleBn = getLocalizedBlogs("bn").find((post) => post.slug === airHelpArticleSlug);
 const airHelpArticleBodyEn = BLOG_BODY[airHelpArticleSlug] ?? "";
 const airHelpArticleBodyBn = airHelpArticleBn?.content ?? "";
-const originalDateNow = Date.now;
-let airHelpActiveCtaEn = "";
-let airHelpActiveCtaBn = "";
-let airHelpExpiredCtaEn = "";
-let airHelpExpiredCtaBn = "";
-try {
-  Date.now = () => Date.parse("2026-11-29T12:00:00+06:00");
-  airHelpActiveCtaEn = sanitizeExpiredPromoText(airHelpArticleEn?.affiliateCTA?.body ?? "");
-  airHelpActiveCtaBn = sanitizeExpiredPromoText(airHelpArticleBn?.affiliateCTA?.body ?? "");
-  Date.now = () => Date.parse("2026-12-01T12:00:00+06:00");
-  airHelpExpiredCtaEn = sanitizeExpiredPromoText(airHelpArticleEn?.affiliateCTA?.body ?? "");
-  airHelpExpiredCtaBn = sanitizeExpiredPromoText(airHelpArticleBn?.affiliateCTA?.body ?? "");
-} finally {
-  Date.now = originalDateNow;
-}
 const airHelpArticlePromoLifecycleClear =
   airHelpArticleEn?.affiliateCTA?.provider === "airhelp" &&
   airHelpArticleBn?.affiliateCTA?.provider === "airhelp" &&
-  airHelpActiveCtaEn.includes("AHTPO11") && airHelpActiveCtaEn.includes("11% OFF") &&
-  airHelpActiveCtaBn.includes("AHTPO11") && airHelpActiveCtaBn.includes("১১% ছাড়") &&
-  !/AHTPO11|11% OFF/i.test(airHelpExpiredCtaEn) &&
-  !/AHTPO11|১১% ছাড়/.test(airHelpExpiredCtaBn) &&
-  !/AHTPO11|11% off/i.test(airHelpArticleBodyEn) &&
-  !/AHTPO11|১১% ছাড়/.test(airHelpArticleBodyBn) &&
+  !/AHTPO11|TPO9|AirHelp\+|11% OFF/i.test((airHelpArticleEn?.affiliateCTA?.body ?? "") + (airHelpArticleBn?.affiliateCTA?.body ?? "") + airHelpArticleBodyEn + airHelpArticleBodyBn) &&
   airHelpArticleBodyEn.includes("service fees from recovered compensation") &&
   airHelpArticleBodyBn.includes("সার্ভিস ফি কাটা হতে পারে") &&
   (airHelpArticleEn?.references?.some((reference) => reference.url === "https://www.airhelp.com/en/our-fees/") ?? false) &&
-  airHelpArticleEn?.affiliateCTA?.provider === "airhelp" &&
   AFFILIATE_LINKS.airhelp === "https://airhelp.tpo.li/XS95LnEC" &&
   AFFILIATE_OFFER_REGISTRY.airhelp.status === "active";
-check(
-  airHelpArticlePromoLifecycleClear,
-  "the EN/BN AirHelp article separates claims fees from AirHelp+ discounts, keeps the configured offer only while active, removes it after expiry, and preserves the active affiliate handoff"
-);
+check(airHelpArticlePromoLifecycleClear, "the AirHelp article separates claims from membership and does not publish obsolete or private codes");
+
 const airHelpGacaScopeClear =
   airHelpArticleBodyEn.includes("all flights departing Saudi airports") &&
   airHelpArticleBodyEn.includes("whether operated by Saudi or foreign carriers") &&
@@ -1562,16 +1556,16 @@ function imgsMissingAlt(html: string): string[] {
   const editorialHeroContracts = [
     ["flights.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "International Flights from Dhaka"],
     ["bn/flights.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "ঢাকা থেকে ফ্লাইট"],
-    ["hotels.html", "destination_nepal_hero_20261101-1200.avif", "Hotel Area Guides"],
-    ["bn/hotels.html", "destination_nepal_hero_20261101-1200.avif", "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড"],
-    ["visa.html", "visa_changi_immigration_20261101-1200.avif", "Visa Guides &amp; Travel Document Checklists"],
-    ["bn/visa.html", "visa_changi_immigration_20261101-1200.avif", "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড"],
+    ["hotels.html", "hotel_directory_hero_20261112-1200.avif", "Hotel Area Guides"],
+    ["bn/hotels.html", "hotel_directory_hero_20261112-1200.avif", "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড"],
+    ["visa.html", "visa_directory_hero_20261112-1200.avif", "Visa Guides &amp; Travel Document Checklists"],
+    ["bn/visa.html", "visa_directory_hero_20261112-1200.avif", "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড"],
     ["flights/dhaka-kathmandu.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "Flights from Dhaka"],
     ["bn/flights/dhaka-kathmandu.html", "flights_heathrow_b747_takeoff_20261101-1200.avif", "ঢাকা → কাঠমান্ডু"],
     ["hotels/kathmandu-hotels.html", "hotel_guide_guest_room_20261101-1200.avif", "Where to Stay in Kathmandu"],
     ["bn/hotels/kathmandu-hotels.html", "hotel_guide_guest_room_20261101-1200.avif", "কাঠমান্ডু-এ কোথায় থাকবেন"],
-    ["visa/nepal-visa.html", "visa_changi_immigration_20261101-1200.avif", "Nepal Visa Requirements"],
-    ["bn/visa/nepal-visa.html", "visa_changi_immigration_20261101-1200.avif", "নেপাল ভিসা (বাংলাদেশি পাসপোর্ট)"],
+    ["visa/nepal-visa.html", "visa_directory_hero_20261112-1200.avif", "Nepal Visa Requirements"],
+    ["bn/visa/nepal-visa.html", "visa_directory_hero_20261112-1200.avif", "নেপাল ভিসা (বাংলাদেশি পাসপোর্ট)"],
   ] as const;
   const brokenEditorialHeroes = editorialHeroContracts.flatMap(([relativePath, imageStem, h1Text]) => {
     const file = path.join(DIST_DIR, relativePath);
@@ -3885,13 +3879,20 @@ if (sitemap) {
     const value = match[1];
     const isBlogTimestamp = value.includes("T"); // ISO publish or explicit editorial update datetime
     const isContentDate = value === CONTENT_UPDATED; // committed content date
-    if (!isBlogTimestamp && !isContentDate) badLastmod.push(value);
+    // Cost guides carry their own editorial date rather than the site-wide fallback.
+    const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1] ?? "";
+    const cost = TRIP_COSTS_DATA.find((item) =>
+      loc === `https://uraltravel.co.uk/costs/${item.id}` ||
+      loc === `https://uraltravel.co.uk/bn/costs/${item.id}`
+    );
+    const isCostDate = !!cost && value === cost.updatedAt;
+    if (!isBlogTimestamp && !isContentDate && !isCostDate) badLastmod.push(value);
   }
   check(
     badLastmod.length === 0,
     badLastmod.length === 0
-      ? `every lastmod is a blog timestamp or CONTENT_UPDATED (${CONTENT_UPDATED})`
-      : `lastmod must be a blog ISO timestamp or CONTENT_UPDATED (${CONTENT_UPDATED}); ` +
+      ? `every lastmod is a blog timestamp, cost guide date or CONTENT_UPDATED (${CONTENT_UPDATED})`
+      : `lastmod must be a blog ISO timestamp, cost guide date or CONTENT_UPDATED (${CONTENT_UPDATED}); ` +
           `found ${badLastmod.length} unexpected value(s): ${[...new Set(badLastmod)].slice(0, 5).join(", ")}`
   );
 
@@ -4752,7 +4753,7 @@ for (const locale of ["en", "bn"] as const) {
   const post = getLocalizedBlogs(locale).find((entry) => entry.slug === diyReviewSlug);
   const text = normalizeStructuredText(html);
   check(
-    post?.updatedAt === "2026-10-19" && post.references?.length === 26 &&
+    post?.updatedAt === "2026-11-12" && post.references?.length === 26 &&
       post.references.every((reference) => html.includes(`href="${reference.url}"`)) &&
       text.includes("SAR 4,000") && text.includes("SAR 1,000") &&
       text.includes(locale === "bn" ? "সর্বশেষ revision date নিশ্চিত হয়নি" : "does not establish its latest revision date") &&
@@ -6526,7 +6527,7 @@ check(
 );
 const stopoverCheckoutCopyIsSafe =
   /not an all-in quote/i.test(stopoverBodies[0]) &&
-  /Ministry of Foreign Affairs regulations/i.test(stopoverBodies[0]) &&
+  /current application flow and a guaranteed processing deadline were not established/i.test(stopoverBodies[0]) &&
   stopoverBodies[1].includes("প্রকাশিত উদাহরণ all-in quote নয়") &&
   stopoverBodies[1].includes("সবার জন্য অন্তর্ভুক্ত") &&
   stopoverBodies[1].includes("itemized checkout total") &&
@@ -6554,13 +6555,13 @@ const stopoverReferencesAreLocalized = (() => {
       enRefs.every((ref, index) => ref.url === bnRefs[index]?.url && enHtml.includes(`href="${ref.url}"`) && bnHtml.includes(`href="${ref.url}"`)) &&
       /\u098f\u0987 \u0997\u09be\u0987\u09a1\u09c7\u09b0 \u09a4\u09a5\u09cd\u09af\u09b8\u09c2\u09a4\u09cd\u09b0/.test(bnHtml) &&
       enHtml.includes("Sources for this guide") &&
-      BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.updatedAt === "2026-10-19"
+      BLOG_DATA.find((post) => post.slug === STOPOVER_SLUG)?.updatedAt === "2026-11-12"
   );
 })();
 check(
   stopoverReferencesAreLocalized,
   stopoverReferencesAreLocalized
-    ? "the stopover guide renders 10 scoped references in both locales and carries updatedAt 2026-10-19"
+    ? "the stopover guide renders 10 scoped references in both locales and carries updatedAt 2026-11-12"
     : "stopover references are missing, unlocalized, or the update date is not recorded"
 );
 
@@ -6577,11 +6578,10 @@ for (const [index, locale] of (["en", "bn"] as const).entries()) {
     return Boolean(note && visible.includes(normalizeStructuredText(note.title)) && visible.includes(normalizeStructuredText(note.text)));
   };
   check(
-    procedures.length === 1 && procedures[0]["@id"] === `${SITE_ORIGIN}${locale === "bn" ? "/bn" : ""}/blog/${STOPOVER_SLUG}#howto-saudia-stopover-request` &&
-      Array.isArray(procedures[0].step) && procedures[0].step.length === 6 &&
+    procedures.length === 0 &&
       Array.isArray(faq?.mainEntity) && faq.mainEntity.length === 6 &&
       notes.every((note) => !JSON.stringify(procedures).includes(note.text)),
-    `${locale} stopover output has the Saudia-only six-step procedure and six matching FAQ answers`
+    `${locale} stopover output omits unverified airline procedure schema and retains six matching FAQ answers`
   );
   check(
     [...html.matchAll(/data-traveller-check="([^"]+)"/g)].map((m) => m[1]).join(",") === "stopoverEligibility,stopoverPermits" &&

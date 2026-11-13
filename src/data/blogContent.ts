@@ -297,14 +297,14 @@ The Ministry's 20 August 2025 announcement describes direct overseas application
 Read the current offer, not just the launch announcement. Nusuk's terms define individual packages as multiple services and say target countries and services can change. For the external-agent channel, the Ministry FAQ says an Umrah visa cannot be issued without accommodation and transport services [3–4]. Before paying, verify the provider through official channels and obtain the exact services, suppliers, total, payment milestones and cancellation/refund terms in writing. Do not assume a refundable visa or an instant refund.
 
 Pathway 2: An eligible airline stopover of up to 96 hours
-A stopover is a short stay within an onward itinerary, not a ten-day Umrah route. Saudia's checked instructions put the visa application inside flight booking and require a passport with at least six months' validity, an onward ticket and the destination visa/residence permission where required. Final admission remains subject to passport control [6–7].
+A stopover is a short stay within an onward itinerary, not a ten-day Umrah route. Visit Saudi describes the airline-linked option for Saudia or flynas, a stay of up to 96 hours and separate application and insurance charges. The Saudia detail page could not be reopened on 12 November 2026; exact current airline eligibility, booking flow and itinerary-specific charges were not verified. Approval and entry are not guaranteed [6–7].
 
-Read your airline's actual checkout before purchase. Saudia says visa, service, medical and insurance costs are calculated under MOFA rules; Visit Saudi's advertised line-item examples are not your guaranteed payable total. Do not add a free hotel or guaranteed processing time to the plan. If using another carrier, verify that carrier's own current itinerary and application conditions. The dedicated stopover guide covers this shorter trip separately [6–7].
+Read your airline's actual checkout before purchase. Visit Saudi's advertised line-item examples are not your guaranteed payable total. Do not add a free hotel or guaranteed processing time to the plan. If using another carrier, verify that carrier's own current itinerary and application conditions. The dedicated stopover guide covers this shorter trip separately [6–7].
 
 Pathway 3: An eligible tourist-visa route, including Package Visa
 Bangladesh is not on the nationality-only eVisa list reopened on 19 October 2026. Visit Saudi separately names Bangladeshi passport holders for Package Visa through approved tourism providers. This is a tourist sub-route, not a fourth category and not an unrestricted visa-only purchase [8–9].
 
-The checked Package Visa FAQ requires confirmed round-trip flights and accommodation in a Ministry-licensed hotel rated at least four stars. It publishes a package minimum of SAR 4,000 per adult for the first two days combined, plus SAR 1,000 for each consecutive day. These are dated published conditions, not a quote for your family or a BDT conversion. Confirm the current offer, total, inclusions and refund terms before payment; do not compare it with the old budget reference as if the baskets match [8].
+The checked Package Visa FAQ requires confirmed round-trip flights and accommodation in a Ministry-licensed hotel rated at least four stars. On 12 November 2026, Visit Saudi-listed providers webook and Reserval described their package offers as excluding Makkah and Madinah; this is not established as a restriction on every provider or visa. Read the linked provider pages on our Saudi visa guide before planning Umrah. Visit Saudi publishes a package minimum of SAR 4,000 per adult for the first two days combined, plus SAR 1,000 for each consecutive day. These are dated published conditions, not a quote for your family or a BDT conversion. Confirm the current offer, total, inclusions and refund terms before payment; do not compare it with the old budget reference as if the baskets match [8].
 
 What do the published foreign-visa and residence rules actually say?
 The Ministry of Tourism's English Tourist Visa Regulations, Article 6(2), and its announcement reported by SPA on 12 June 2023 describe exceptions for people whose nationality is not on the standard list. Reopened on 19 October 2026, these sources distinguish the following documents; the retrieved PDF does not establish its latest revision date [19–20]:
@@ -603,44 +603,40 @@ The Ministry advises carrying an adequate supply of medication and a medical rep
   "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah": `Who this guide is for: Bangladeshi passport holders considering a short Saudi visit within an international onward journey, including NRB families and students. Use it to decide whether the stopover fits your documents, airline booking and available time—not as an approval or a completed-booking report.
 
 Quick Answer
-Checked on 19 October 2026: Visit Saudi describes a stopover stay of up to 96 hours, including Umrah, and Saudia publishes an application during flight booking. The visa's entry-validity period is different from its permitted stay. Confirm your exact passport, onward-destination permission, itinerary and airline conditions before payment; neither a flight nor a visa guarantees admission or a Nusuk appointment [1–2, 4, 9]. Detailed current flynas eligibility could not be verified from its redirected guide. Its 30 January 2023 launch is historical evidence, not a current checkout test [3, 10].
+Checked on 12 November 2026: Visit Saudi describes airline-linked stopovers of up to 96 hours, including Umrah, and says those booking Saudia or flynas can apply. Its Saudia offer lists a free visa fee and separate application and insurance charges. This is not a verified eligibility or total-price quote for a particular Bangladeshi passport or itinerary [1]. Neither visa issuance nor entry is guaranteed. Detailed current flynas eligibility could not be verified from its redirected guide; Saudia's detailed page could not be reopened. The 30 January 2023 flynas launch is historical evidence, not a current checkout test [2–3, 10].
 
 1. What does the stopover visa cover—and what needs checking first?
-Saudia's dedicated transit page says the visa is valid for 90 days from issue, permits a stay of up to 96 hours, is not extendable and allows one stopover trip per booking. Visit Saudi describes the Saudia offer as single entry with three-month validity. Do not mistake the entry-validity window for permission to remain for three months: read the issued visa and confirm your permitted entry and departure times [1–2].
+Visit Saudi describes a stay of up to 96 hours and a Saudia offer with single entry and a three-month validity. The entry-validity period is not the permitted length of stay; check the issued document [1]. Visit Saudi describes Umrah during a stopover and separate Nusuk appointment requirements [1, 4, 9].
 
-Saudia lists a recognized passport with at least six months remaining, subject to applicable bilateral agreements, a confirmed onward ticket and a destination visa or residence permission where required unless exempt. Permission for your final destination is not the same question as qualifying for a Saudi tourist visa through a foreign document. The retrieved conditions do not establish a universal Bangladesh entitlement or an unconditional exemption from every prior-visa requirement [2].
+Your final destination's entry requirements and any Saudi stopover requirements are separate. Current detailed eligibility, accepted documents and the exact booking sequence for each airline could not be verified here [1–3].
 
-Saudia and flynas must be checked separately. Saudia's current dedicated page provides the booking sequence below. The flynas guide URL redirected to its homepage; the public form showed a Stop Over Booking option, not a visa result for a Bangladeshi traveller. The opened flynas announcement is dated 30 January 2023. It describes the service launch and application after ticket purchase, but does not prove today's eligible destinations, required foreign visas, price, refund rules or application screens [3, 10].
+Saudia and flynas must be evaluated separately. The flynas announcement is dated 30 January 2023 and does not establish the present checkout or eligibility. Saudia's formerly cited detailed page could not be reopened on 12 November 2026 [2–3, 10].
 
-Traveller check (stopoverEligibility): Before buying the flight, ask your selected airline to confirm the stopover route for your exact passport, onward destination and entry documents, including any qualifying-visa or residence requirement. For flynas, obtain current instructions rather than relying on the redirected guide or assuming Saudia's flow applies. A visible booking option is not visa approval. If eligibility or the visa-after-ticket risk is unclear, resolve it with official support before non-refundable payment. No application or booking was tested here; do not send passport scans, visa numbers or credentials to URAL/chat. [1–3, 10]
+Traveller check (stopoverEligibility): Check your passport, onward itinerary and destination-entry requirements against the actual airline booking terms before paying. The current airline-specific visa flow and eligibility for a particular Bangladeshi traveller were not verified here. Do not assume a refund if an application fails or buy non-refundable travel based on an unverified route. No application or booking was tested here; do not send passport scans, visa numbers or credentials to URAL/chat. [1–3, 10]
 
 What should you budget for the visa and hotel?
-Visit Saudi publishes a promotional free visa-fee line plus application and insurance charges for the Saudia offer. Those published examples are not an all-in quote. Saudia says visa fees, service charges, medical fees and insurance costs are calculated under Ministry of Foreign Affairs regulations. Record your actual itemized checkout total, payment currency and bank charges rather than converting a promotional starting price into an invented BDT total [1–2].
+Visit Saudi's published visa-fee, application and insurance examples are not an all-in quote. Check the itemized checkout total, payment currency and bank charges [1]. Hotel is not a verified universal inclusion; read the actual fare and accommodation terms before payment.
 
-A hotel is not a verified universal inclusion. Saudia's dedicated page says hotel bookings are available for round-trip bookings and selected destinations only; that does not establish a free room for your booking. Get any claimed inclusion, property, city, dates, taxes and cancellation terms in writing. Otherwise budget for your own accommodation. This review did not test a hotel voucher or establish that no conditional promotion exists [1–2].
+2. How do you prepare for a stopover request?
+This is a planning checklist, not a verified airline application sequence. We could not reopen the previously cited Saudia page and did not test a live booking. The current application flow and a guaranteed processing deadline were not established [1–3].
 
-2. How do you request a stopover through Saudia?
-This is Saudia's published sequence, not a flynas procedure or an authenticated screen test. If a ticket has already been issued, ask the carrier whether and how a visa can be requested; do not assume this new-booking flow can be added later [2].
+Step 1: Check the onward itinerary.
+- Review the passport, onward-destination entry requirements and airline eligibility in the actual offer; separately purchased flights are not automatically one protected booking.
 
-Saudia's page advertises fast email issuance, but this review did not test timing or establish a guaranteed processing deadline for your application. Leave room for checks or failure; do not plan an immediate departure on a marketing promise [2].
+Step 2: Read the visa, fare and cancellation terms.
+- Review dates, baggage, visa and accommodation, and what happens if the visa is delayed or refused. Do not assume a refund [1].
 
-Step 1: Confirm the onward journey and stopover before purchase.
-- Check your passport, destination permission and airline eligibility. Select the Saudi connection and duration inside the airline's stopover booking flow. Do not assume independently purchased flight legs qualify or are protected as one journey [2].
-
-Step 2: Read the actual visa, fare and cancellation conditions.
-- Identify which travellers need a visa, the proposed dates, baggage and any hotel arrangements. Ask what happens to the ticket and other payments if the visa is delayed or refused; do not assume a refund [1–2].
-
-Step 3: Complete the stopover visa request during booking.
-- Saudia describes Seats & Extras / Additional Services for the application. Its published FAQ specifies a 200 × 200 pixel photo up to 20 KB; follow the current form if its requirements differ. These are Saudia instructions, not universal flynas photo specifications [2].
+Step 3: Review the application instructions in the live offer.
+- Check the airline's current application flow and required documents. We have not verified a specific form, photo specification or payment sequence [1–3].
 
 Step 4: Check the itemized total before paying.
-- Saudia describes paying the flight and visa together. Check the insurance, other charges, currency and terms before authorizing payment. Payment is not proof of visa approval [2].
+- Review insurance, other charges, currency and terms. Payment is not proof of visa approval [1].
 
-Step 5: Inspect the issued visa and insurance documents.
-- Saudia says the documents arrive by email. Match the traveller, passport details, entry count, validity and permitted stay to the onward flight; use official visa services or carrier support if anything is missing or inconsistent [2, 5].
+Step 5: Inspect any issued visa and insurance documents.
+- Match the traveller, passport details, entry count, validity and permitted stay to the onward itinerary.
 
 Step 6: Arrange permits and reconfirm departure logistics.
-- With a valid visa, follow the applicable Nusuk visitor process and available Umrah/Rawdah services. Recheck flights, transfers, accommodation, current-season health instructions and access to your actual permit before departure [4, 9]. Use the reviewed Nusuk guide for confirmation and privacy checks.
+- With a valid visa, follow the applicable Nusuk visitor process and available Umrah/Rawdah services. Recheck flights, transfers, accommodation, current-season health instructions and access to your actual permit before departure [4, 9].
 
 3. Is a used US, UK or Schengen visa the same route?
 No. Stopover permission within an onward itinerary and a tourist-visa exception based on a foreign visa or residence are different routes. Bangladesh is not on the standard nationality-only eVisa list used in the main guide's separate review. The main DIY guide explains the attributed tourist/business prior-use and permanent-residence categories, with current carrier, GCC and accepted-entry-evidence limits [6–7]. Use that guide and the official checker for the alternative route; do not assume that any student/work visa, residence card or previous trip creates automatic eligibility. This stopover review does not newly verify that alternative's fine print.
@@ -660,17 +656,17 @@ For exact rail schedules, ticket conditions and fares, use the operator's curren
 
 5. Frequently Asked Questions
 How much does the 96-hour Saudi stopover visa cost?
-Visit Saudi publishes promotional Saudia line items, not your all-in bill. Saudia says charges are calculated under MOFA rules. Use the itemized total for your passenger and itinerary, plus bank/payment charges; this guide provides no invented BDT total or flynas price [1–2].
+Visit Saudi publishes promotional Saudia line items, not your all-in bill. Use the itemized total for your passenger and itinerary, plus bank/payment charges; this guide provides no invented BDT total or flynas price [1].
 Does the stopover visa include a free hotel night?
-No universal free-night entitlement was verified. Saudia lists hotel bookings for round-trip bookings and selected destinations. Confirm any booking-specific inclusion in writing; otherwise budget separately [1–2].
+No universal free-night entitlement was verified. Read booking-specific inclusions and cancellation terms; otherwise budget separately [1].
 Is every Bangladeshi passport holder eligible?
 This review does not establish that. Confirm the exact passport, itinerary, destination permission and any other required document with the airline before payment. Saudia and flynas are not interchangeable; current detailed flynas conditions were not retrievable from its redirected guide [2–3, 10].
 Can I perform Umrah and visit Rawdah on a stopover?
 Visit Saudi includes Umrah in the stopover activities, but a visa does not guarantee appointments. Use the separate Umrah and Rawdah services as applicable; an ordinary mosque visit is not the same as entering Rawdah. Hajj needs its own authorization [1, 4, 9].
 Is issuance immediate after payment?
-Saudia advertises fast email delivery, and the historical flynas launch used immediate-issuance language. Neither is a tested processing guarantee for your case. Check actual issuance and visa details before departure; contact the carrier if documents are missing [2–3, 5].
+Visit Saudi describes emailing a visa after approval, but this is not a tested processing guarantee for your case. Check actual issuance and visa details before departure [1, 5].
 Do I need an onward ticket and destination visa?
-Saudia's published conditions require a confirmed onward ticket and destination entry visa or residence permission where required, unless exempt, plus at least six months' passport validity subject to bilateral agreements. These documents do not guarantee Saudi admission; passport control makes the final decision [2].`,
+A stopover involves an onward journey. Check the actual airline's requirements for your passport and itinerary and the entry rules for your onward destination; the detailed current airline requirements were not verified here. These documents do not guarantee Saudi admission [1–3].`,
 
   "nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit": `Who this guide is for: Bangladeshi visitors leaving Dhaka who need to understand Saudi Visa Bio, create a Nusuk visitor account and arrange an Umrah or Rawdah permit without confusing those tasks with visa approval.
 
@@ -1353,7 +1349,7 @@ Let us compare booking two separate trips from Dhaka versus one integrated Multi
 To execute this itinerary smoothly, your family needs one Saudi authorization and one UAE authorization before flying from Dhaka:
 Step 1: Saudi Umrah Visa (Choose Your Eligible Pathway on nusuk.sa / ksavisa.sa):
 - **Pathway A — Ministry Umrah visa:** the official Ministry of Hajj and Umrah FAQ states a government fee 'estimated at 300 Saudi Riyals' (checked 15 October 2026) and says an external agent cannot issue the Umrah visa without an accommodation-and-transport service package, so your all-in figure is what the approved platform or agent shows at issuance. No BDT total is published here, no processing time is guaranteed, and the entry window and permitted stay are the dates printed on your own visa.
-- **Pathway B — 96-Hour Saudi Stopover Visa:** On a qualifying Saudia or flynas through-itinerary you can add the 96-hour stopover while booking the ticket. No fixed price is published anywhere: the visa, insurance and service charges are calculated at the airline's checkout and change, and no hotel night should be assumed. Read the 96-hour stopover guide for the current conditions before you pay.
+- **Pathway B — 96-Hour Saudi Stopover Visa:** Visit Saudi describes a stopover of up to 96 hours and lists Saudia and flynas as application channels. Its Saudia offer separates a free visa fee from application and insurance charges. Current airline-specific eligibility, booking sequence and the total for your itinerary were not verified; no hotel night should be assumed. Read the stopover guide before paying.
 Step 2: UAE / Dubai Visa (Issued via u.ae / gdrfad.gov.ae Authorized Channels):
 - **Option A — 96-Hour (4-Day) UAE Transit/Stopover Visa:** Available when flying Emirates or flydubai through Dubai International Airport (DXB) for **~AED 180 – AED 250 (~BDT 6,200 – BDT 8,500)**.
 - **Option B — 30-Day UAE Tourist e-Visa:** Best if flying mixed carriers or staying 4–6 days in Dubai and Abu Dhabi (**BDT 14,500 – BDT 17,500**, processed in 3–5 working days).
@@ -1412,15 +1408,10 @@ Located beside the lush Perdana Botanical Gardens (5 minutes from KL Sentral):
   • **Damascus Bukit Bintang & Halab Gate:** Famous Syrian/Arabic shawarma and grilled platters right next to Bukit Bintang MRT.
   • **Masjid India & Lebuh Ampang:** Authentic Bangladeshi, South Indian Muslim (Mamak Nasi Kandar), and briyani restaurants.
 - **Complete 5-Day Malaysia Family Budget:** **BDT 66,000 – BDT 82,000 per person** (including roundtrip Dhaka–KL flights on AirAsia/Batik/Biman, online Malaysia e-Visa + free MDAC card, 4 nights hotel, Putrajaya day trip, and Genting Highlands Awana SkyWay Cable Car).`,
-  "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": `Thousands of Bangladeshi professionals, business owners, students, and visiting parents fly from **Dhaka (DAC)** to **London (LHR), Paris (CDG), Rome (FCO), and New York (JFK)** every month. Combining smart **Skip-the-Line attraction pre-booking** with **Saudi Arabia's Western Visa Holder Umrah Policy** lets you maximize both your European/American vacation and your spiritual journey.
+  "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide": `Explore attraction booking in Europe and North America, and separately review Saudi visa requirements if considering an onward stopover.
 
-1. HOW YOUR US, UK, OR SCHENGEN VISA UNLOCKS AN INSTANT 1-YEAR SAUDI UMRAH E-VISA
-According to the **Saudi Unified National Visa Platform (ksavisa.sa)** and **Saudi Ministry of Tourism (visitsaudi.com)**:
-Rule 1: The Qualified Visa Holder Exemption for Bangladeshi Citizens:
-- If your Bangladeshi passport contains a **valid Tourist, Business, or Student Visa from the USA, UK, or any Schengen Area country**—and that visa has been **stamped/used at least once** to enter the issuing country (or you hold permanent residency/PR in the US, UK, or EU)—you do NOT need a local Umrah agency sponsor!
-Rule 2: Apply Online in 10 Minutes or Get Visa on Arrival at Jeddah/Madinah:
-- You can apply directly on **ksavisa.sa** for a **1-Year Multiple-Entry Saudi e-Visa** (permitting up to 90 days of stay and full Umrah + Rawdah access via Nusuk) or obtain an instant **Visa on Arrival (VOA)** at Jeddah or Madinah Airport for **~SAR 395 – SAR 440 (~BDT 12,900 – BDT 14,500 including medical insurance)**.
-- **Smart Routing Tip:** After entering London, Paris, or New York (getting your entry stamp on the US/UK/Schengen visa), book your return leg via **Jeddah (JED) or Madinah (MED)** to perform a 4-to-7 day Umrah before landing back in Dhaka!
+1. SAUDI VISA ROUTES ARE SEPARATE FROM ATTRACTION BOOKINGS
+Saudi Arabia's Ministry of Tourism has published Tourist Visa Regulations describing certain foreign-visa and permanent-residence categories; the PDF's latest revision date and current airline or entry-evidence conditions were not established. A foreign visa does not automatically guarantee a Saudi visa, boarding, entry or an Umrah permit. See our Saudi visa guide and its official sources before making non-refundable plans. An airline-linked stopover is a distinct route, not the same as a tourist-visa exception.
 
 2. WHY YOU MUST PRE-BOOK SKIP-THE-LINE PASSES IN PARIS, LONDON, ROME & NEW YORK
 Unlike Asian attractions where walk-up tickets are often available, Europe and New York's top museums operate on **mandatory timed-entry capacity quotas**:
@@ -1604,7 +1595,7 @@ Once your passport shows at least 1 completed international trip (and your 6-mon
 3. STEP 3 (MONTHS 10–18): UNLOCK SINGAPORE, DUBAI + UMRAH, AND SCHENGEN / UK / US VISAS
 With **Nepal/Maldives + Malaysia + Thailand** stamped in your passport and a consistent 6-month bank statement + Income Tax Return (TIN/ITR acknowledgment slip):
 - **🇸🇬 Singapore & 🇦🇪 Dubai (UAE) + 🇸🇦 Saudi Umrah:** Your profile is now considered a **proven, low-risk tourist profile** by Singapore Authorized Visa Agents (AVAs) and UAE/Saudi sponsors. You can easily book a **10-Day Umrah + Dubai Stopover Combo**.
-- **🇪🇺 Schengen Area, 🇬🇧 UK & 🇺🇸 USA:** When you apply for Europe, the UK, or the US, consular officers see 3 to 4 countries visited and exited on time—And once you receive and use your **US, UK, or Schengen visa**, your Bangladeshi passport automatically qualifies for an **instant 1-Year Multiple-Entry Saudi e-Visa or Visa on Arrival** for future Umrah trips!`,
+- **🇪🇺 Schengen Area, 🇬🇧 UK & 🇺🇸 USA:** Each visa application is assessed under the relevant destination's rules. A foreign visa does not automatically guarantee a Saudi visa or entry; see our Saudi visa guide and its official sources before making plans.`,
   "singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide": `Singapore is Asia's cleanest, safest, and most wheelchair- and stroller-friendly family destination—just **4 hours 10 minutes direct from Dhaka (DAC)** on Biman Bangladesh Airlines, Singapore Airlines, or US-Bangla Airlines. While Singapore has a reputation for high prices, smart Bangladeshi travelers cut local expenses by 45% using three insider strategies: **MRT SimplyGo contactless card tapping**, **Little India / Bugis hotel positioning**, and **MUIS Halal Hawker dining**.
 
 1. THE MRT SIMPLYGO SECRET: USE YOUR BANGLADESHI DUAL-CURRENCY CARD AS YOUR TRAIN PASS!
@@ -1814,7 +1805,7 @@ Keep your paper or digital boarding passes, electronic ticket receipt showing th
 Step 2: Obtain a Property Irregularity Report (PIR) before leaving customs
 If your checked suitcase is missing or visibly damaged upon arrival at Dhaka (DAC), Jeddah (JED) or any international destination, report it immediately to the operating airline's baggage service desk before exiting the baggage hall and ask for a Property Irregularity Report (PIR). Separately, the Montreal Convention requires a written complaint for checked-baggage damage promptly after discovery and no later than 7 calendar days after receipt; for delay, the complaint must be made within 21 calendar days after the baggage is placed at your disposal [8].
 Step 3: Decide between direct airline submission or claims assistance
-You can submit a claim directly to the operating airline without a claims-service fee [2][7]. AirHelp is an optional commercial claims service; its no-win, no-fee model can deduct service fees from recovered compensation, and additional fees may apply in limited cases [12][14]. AirHelp+ is a separate paid membership; any current offer applies only to eligible membership purchases, not to the claim service. Check the current offer at checkout.
+You can submit a claim directly to the operating airline without a claims-service fee [2][7]. AirHelp is an optional commercial claims service; its no-win, no-fee model can deduct service fees from recovered compensation, and additional fees may apply in limited cases [12][14]. TravelPass by AirHelp is a separate paid membership; any current offer applies only to eligible membership purchases, not to the claim service. Check the current offer at checkout.
 
 3. Frequently Asked Questions
 Does EU/UK compensation apply to Dhaka to Jeddah flights on Gulf carriers?

@@ -12,6 +12,7 @@ import { PartnerLinkButton, AFFILIATE_LINKS } from "../components/AffiliatePartn
 import { TravelIntelligence } from "../components/AeoInspector";
 import { FlightsIndex } from "../components/FlightsIndex";
 import { EditorialPageHero } from "../components/EditorialPageHero";
+import { FLIGHT_ROUTES } from "../data/flightRoutes";
 
 
 
@@ -21,9 +22,13 @@ type RouteViewProps = { context: Record<string, any> };
 
 export default function FlightsRouteView({ context }: RouteViewProps) {
 
-  const { TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryHotelId, getCountryIata, getCountryVisaId, isBn, lang, localizedFlights, navigateTo, openPriceAlert, parameterId, section, setAreTpScriptsReady } = context;
+  const { TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, isBn, lang, localizedFlights, navigateTo, openPriceAlert, parameterId, section, setAreTpScriptsReady } = context;
 
   const activeRoute = localizedFlights.find((route) => route.id === parameterId) || localizedFlights[0];
+
+  const routeInfo = FLIGHT_ROUTES[activeRoute.id];
+  const localPath = (path: string) => `${isBn ? "/bn" : ""}${path}`;
+  const destination = (isBn ? routeInfo?.destinationBn : routeInfo?.destinationEn) ?? activeRoute.to;
 
   // The same search card serves the /flights hub and each route guide.
   const searchCard = (
@@ -31,7 +36,9 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
       <span className="text-[10px] font-mono font-bold text-brand-navy block">
         {isBn ? (parameterId ? "এই রুটের ফ্লাইট সার্চ করুন" : "ফ্লাইট সার্চ করুন") : parameterId ? "Search Flights on This Route" : "Search Flights"}
       </span>
-      {areTpScriptsReady ? (
+      {parameterId && !routeInfo ? (
+        <p role="status">{isBn ? "এই রুটের সার্চ ডিফল্ট পাওয়া যায়নি। ফ্লাইট সার্চে বিমানবন্দর নির্বাচন করুন।" : "Search defaults are unavailable for this route. Choose your airports in flight search."}</p>
+      ) : areTpScriptsReady ? (
         <React.Suspense
           fallback={
             <TravelpayoutsWidgetSkeleton
@@ -42,7 +49,8 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
           }
         >
           <TravelpayoutsEmbed
-            defaultDestination={parameterId ? getCountryIata(activeRoute.country) : undefined}
+            defaultOrigin={parameterId ? routeInfo?.origin : undefined}
+            defaultDestination={parameterId ? routeInfo?.destination : undefined}
             lang={lang}
             onOpenPriceAlert={openPriceAlert}
           />
@@ -83,26 +91,18 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
       <header className="space-y-4 lg:col-start-2 lg:col-span-3 lg:row-start-1">
 
         <EditorialPageHero
-          eyebrow={isBn ? "ঢাকা থেকে ফ্লাইট রুট" : "FLIGHT ROUTE FROM DHAKA"}
+          eyebrow={isBn ? "ফ্লাইট রুট গাইড" : "FLIGHT ROUTE GUIDE"}
           title={isBn
-            ? `ঢাকা → ${activeRoute.to.split(" (")[0]} বিমান ভাড়া, সময় ও ভিসা গাইড (২০২৬)`
+            ? `${routeInfo?.fromBn ?? activeRoute.from} → ${routeInfo?.toBn ?? activeRoute.to} বিমান ভাড়া, সময় ও ভিসা গাইড`
             : `Flights from ${activeRoute.from} to ${activeRoute.to}`}
           description={isBn
             ? `${activeRoute.to} রুটের লাইভ ভাড়া, ভ্রমণের সময় এবং এয়ারলাইন্স তুলনা করুন। বুকিংয়ের আগে তারিখ অনুযায়ী বর্তমান সময়সূচি, ব্যাগেজ ও প্রবেশের নিয়ম যাচাই করুন।`
-            : `Compare live fares, journey times and airline options from Dhaka to ${activeRoute.to.split(" (")[0]}. Check current schedules, baggage and entry rules for your dates before booking.`}
+            : `Compare live fares, journey times and airline options from ${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]}. Check current schedules, baggage and entry rules for your dates before booking.`}
           imageSrc="/assets/images/flights_heathrow_b747_takeoff_20261101-1200.webp"
           imageAlt={isBn
             ? "লন্ডনের হিথ্রো বিমানবন্দরের কাছে আকাশে উড়ে যাওয়া থাই এয়ারওয়েজের বোয়িং ৭৪৭ বিমান"
             : "A Thai Airways Boeing 747 climbing above London Heathrow Airport"}
           imageFit="contain"
-          credit={
-            <>
-              <a href="https://en.wikipedia.org/wiki/File:Thai_b747-400_hs-tgp_takeoff_london_heathrow_arp.jpg" target="_blank" rel="noopener noreferrer">
-                Adrian Pingstone / Wikimedia Commons
-              </a>
-              <span aria-hidden="true"> · Public domain</span>
-            </>
-          }
         >
           <div className="flex flex-wrap items-center gap-2.5">
             <span className="rounded-full bg-[#F6B73C]/20 px-3 py-1.5 font-mono text-xs font-bold text-[#FFE0A0]">
@@ -111,7 +111,7 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
             <button
               type="button"
               onClick={() => openPriceAlert(activeRoute.to)}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-emerald-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-colors hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-emerald-700 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-colors hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
             >
               <Bell size={12} className="text-white" aria-hidden="true" />
               <span>{isBn ? "ফেয়ার অ্যালার্ট" : "Price Alert"}</span>
@@ -156,7 +156,7 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
         <nav className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none">
 
-          <label htmlFor="mobile-flight-route-select" className="mb-3 block font-mono text-xs font-bold uppercase tracking-wider text-slate-500">
+          <label htmlFor="mobile-flight-route-select" className="mb-3 block font-mono text-xs font-bold uppercase tracking-wider text-slate-600">
 
             {isBn ? "ফ্লাইট রুট নির্বাচন করুন:" : "SELECT FLIGHT ROUTE:"}
 
@@ -190,13 +190,14 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
             {localizedFlights.map((route) => (
 
-              <button
+              <a
 
                 key={route.id}
 
                 id={`btn-route-select-${route.id}`}
 
-                onClick={() => navigateTo(`/flights/${route.id}`)}
+                href={localPath(`/flights/${route.id}`)}
+                aria-current={parameterId === route.id ? "page" : undefined}
 
                 className={`flex w-full cursor-pointer items-center justify-between rounded-xl border p-3.5 text-left text-xs font-semibold transition-colors ${
 
@@ -214,7 +215,7 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
                 <ArrowRight size={12} className={parameterId === route.id ? "text-[#F6B73C]" : "text-text-muted"} />
 
-              </button>
+              </a>
 
             ))}
 
@@ -244,7 +245,7 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
                           <div key={fact.label} className="ural-card bg-white border border-border-subtle p-4 rounded-xl text-center shadow-sm">
 
-                            <span className="text-[10px] font-bold text-slate-400 font-mono uppercase tracking-wider block">{fact.label}</span>
+                            <span className="text-[10px] font-bold text-slate-600 font-mono uppercase tracking-wider block">{fact.label}</span>
 
                             <span className="text-xs font-semibold text-brand-navy font-mono block mt-1">{fact.value}</span>
 
@@ -272,9 +273,9 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
                         {isBn
 
-                          ? "হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দর (DAC) থেকে প্রতিদিন একাধিক ফ্লাইট এই রুটে চলাচল করে। সময় ও ভ্রমণ ক্লান্তি কমাতে Direct Flight বেছে নেওয়া সবচেয়ে সুবিধাজনক:"
+                          ? "এই রুটে সরাসরি বা সংযোগী যাত্রায় নিচের এয়ারলাইনগুলো দেখা যেতে পারে। প্রতিটি সেগমেন্টের অপারেটর ও আপনার তারিখের সময়সূচি যাচাই করুন:"
 
-                          : "Bangladeshi outbound travellers can leverage several daily flight profiles from Hazrat Shahjalal International Airport (DAC). Direct options are highly recommended to save travel fatigue:"}
+                          : "These airlines may appear on direct or connecting itineraries. Confirm the operating carrier for each segment and the schedule for your dates:"}
 
                       </p>
 
@@ -291,32 +292,11 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
 
                       <h3 className="ural-card-title font-serif font-black text-base text-slate-900 mt-4">
-
-                        {isBn ? "সবচেয়ে কম ভাড়ায় টিকেট কাটার উপযুক্ত সময়" : "When to Book for the Best Price"}
-
+                        {isBn ? "কখন ও কীভাবে ভাড়া তুলনা করবেন" : "When and how to compare fares"}
                       </h3>
-
-                      <p>
-
-                        {isBn ? (
-
-                          <>
-
-                            আমরা ভ্রমণের অন্তত <strong>{activeRoute.bestTimeToBook}</strong> ফ্লাইট টিকেট বুক করার পরামর্শ দিই। এতে শেষ মুহূর্তের অতিরিক্ত ভাড়া এড়ানো যায়। পাশাপাশি আপনার ভিসার মেয়াদ ও শর্তাবলী (<strong>{activeRoute.visaRequirement}</strong>) মিলিয়ে টিকেট ইস্যু করুন।
-
-                          </>
-
-                        ) : (
-
-                          <>
-
-                            We advise booking flights approximately <strong>{activeRoute.bestTimeToBook}</strong>. In doing so, economy flyers can generally avoid peak dynamic pricing models. Ensure that you synchronize your flight bookings with visa durations, which are pre-configured at {activeRoute.visaRequirement}.
-
-                          </>
-
-                        )}
-
-                      </p>
+                      <p>{isBn
+                        ? "আগে থেকে খোঁজ শুরু করে একাধিক তারিখে মোট ভাড়া তুলনা করুন; কোনো নির্দিষ্ট বুকিং সময় কম দামের নিশ্চয়তা দেয় না। ব্যাগেজ, পরিবর্তনের শর্ত এবং আপনার পাসপোর্ট ও যাত্রার উদ্দেশ্য অনুযায়ী প্রবেশের নিয়ম যাচাই করুন।"
+                        : "Start comparing early and check total fares across dates; no fixed booking window guarantees the lowest price. Check baggage and change conditions, and verify entry rules for your passport and purpose of travel."}</p>
 
                     </div>
 
@@ -328,7 +308,7 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
 
 
-                    {/* 🛡️ AirHelp Flight Delay Compensation & AirHelp+ (AHTPO11 11% OFF) */}
+                    {/* 🛡️ AirHelp Flight Delay Compensation & TravelPass */}
 
                     <AirHelpWidget
 
@@ -352,51 +332,23 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold font-mono">
 
-                        <a
-
-                          id={`lnk-view-visa-from-flight-${activeRoute.id}`}
-
-                          href={`/visa/${getCountryVisaId(activeRoute.country)}`}
-
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/visa/${getCountryVisaId(activeRoute.country)}`); }}
-
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-
-                        >
-
+                        {routeInfo && <a id={`lnk-view-visa-from-flight-${activeRoute.id}`} href={localPath(routeInfo.visaPath)} className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
                           <ShieldCheck size={14} className="text-brand-navy shrink-0" />
-
-                          <span>{isBn ? `${activeRoute.country} ভিসা চেকলিস্ট দেখুন` : `Check ${activeRoute.country} Visa Checklist`}</span>
-
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-
-                        </a>
-
-                        <a
-
-                          id={`lnk-view-hotel-from-flight-${activeRoute.id}`}
-
-                          href={`/hotels/${getCountryHotelId(activeRoute.country)}`}
-
-                          onClick={(e) => { e.preventDefault(); navigateTo(`/hotels/${getCountryHotelId(activeRoute.country)}`); }}
-
-                          className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm"
-
-                        >
-
+                          <span>{routeInfo.visaPath === "/visa" ? (isBn ? "ভিসা গাইড দেখুন" : "Browse visa guides") : (isBn ? `${destination} ভিসা গাইড দেখুন` : `Check visa guidance for ${destination}`)}</span><ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                        </a>}
+                        {activeRoute.id === "dhaka-los-angeles" && <a href="https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
+                          <ShieldCheck size={14} className="text-brand-navy shrink-0" /><span>{isBn ? "US visitor visa-এর সরকারি নির্দেশনা" : "Official US visitor visa guidance"}</span><ExternalLink size={12} className="ml-auto" />
+                        </a>}
+                        {routeInfo && <a id={`lnk-view-hotel-from-flight-${activeRoute.id}`} href={localPath(routeInfo.hotelPath)} className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
                           <Building size={14} className="text-brand-navy shrink-0" />
-
-                          <span>{isBn ? `${activeRoute.country}-এ কোথায় থাকবেন` : `Where to Stay in ${activeRoute.country}`}</span>
-
-                          <ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
-
-                        </a>
+                          <span>{routeInfo.hotelPath === "/hotels" ? (isBn ? "হোটেল গাইড দেখুন" : "Browse hotel guides") : (isBn ? `${destination}-এ কোথায় থাকবেন` : `Where to stay in ${destination}`)}</span><ArrowRight size={12} className="ml-auto text-[#F6B73C]" />
+                        </a>}
 
                         <a href={AFFILIATE_LINKS.kiwitaxi} target="_blank" rel="noopener noreferrer sponsored" className="flex items-center gap-2 text-brand-navy hover:text-[#F6B73C] p-3 bg-white border border-slate-200 rounded-lg text-left shadow-sm">
 
                           <Car size={14} className="text-brand-navy shrink-0" />
 
-                          <span>{isBn ? `${activeRoute.country} Airport Transfer বুক করুন` : `Book Airport Transfer in ${activeRoute.country}`}</span>
+                          <span>{isBn ? `${destination} Airport Transfer খুঁজুন` : `Find an Airport Transfer in ${destination}`}</span>
 
                           <ExternalLink size={12} className="ml-auto text-[#F6B73C]" />
 
@@ -410,7 +362,7 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
                     <TravelIntelligence
 
-                      pageTitle={isBn ? `${activeRoute.country} ফ্লাইট গাইড` : `Flights to ${activeRoute.country}`}
+                      pageTitle={isBn ? `${routeInfo?.fromBn} থেকে ${routeInfo?.toBn} ফ্লাইট গাইড` : `Flights from ${activeRoute.from} to ${activeRoute.to}`}
 
                       quickAnswer={activeRoute.quickAnswer}
 
@@ -474,9 +426,9 @@ export default function FlightsRouteView({ context }: RouteViewProps) {
 
             {isBn
 
-              ? `${activeRoute.country || "Nepal"}-এ নেমে সরাসরি হোটেলে যেতে আগে থেকেই প্রাইভেট Airport Transfer বুক করুন।`
+              ? `${destination}-এ নেমে সরাসরি হোটেলে যেতে আগে থেকেই প্রাইভেট Airport Transfer বুক করুন।`
 
-              : `Pre-book a private airport transfer to your hotel in ${activeRoute.country || "Nepal"} — skip the taxi line.`}
+              : `Pre-book a private airport transfer to your hotel in ${destination}; check the pickup details and terms.`}
 
           </p>
 

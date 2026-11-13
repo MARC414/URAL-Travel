@@ -82,13 +82,18 @@ export function buildTravelpayoutsReferralUrl(slug?: string): string {
     : TRAVELPAYOUTS_REFERRAL_URL;
 }
 
+// Campaign URLs are separate from the evergreen partner links. Do not publish
+// the AirHelp code: Travelpayouts requires its intermediate reveal page.
 export const AIRHELP_PROMO = {
-  code: "AHTPO11",
-  discount: "11% OFF",
-  validUntil: "November 30, 2026",
-  expiresAt: "2026-11-30",
-  plans: "AirHelp+ Smart & AirHelp+ Pro",
+  affiliateUrl: "https://airhelp.tpo.li/kiYHVufj",
+  startsAt: "2026-11-10",
+  expiresAt: "2026-12-31",
   scriptSrc: "https://tpemd.com/content?promo_id=8679&campaign_id=120&powered_by=true&lang=en&shmarker=675992&trs=589561"
+};
+export const YESIM_PROMO = {
+  affiliateUrl: "https://yesim.tpo.li/r76SUuQd",
+  startsAt: "2026-11-11",
+  expiresAt: "2027-02-28",
 };
 
 export const KKDAY_PROMO = {
@@ -207,15 +212,14 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
   },
   airhelp: {
     id: "airhelp",
-    partnerName: "AirHelp (€600 Claim + AirHelp+)",
+    partnerName: "AirHelp claims and TravelPass by AirHelp",
     status: "active",
     offerType: "customer-promo",
     url: AFFILIATE_LINKS.airhelp,
     fallbackPartner: "aviasales",
     expiresAt: AIRHELP_PROMO.expiresAt,
-    promoCode: AIRHELP_PROMO.code,
-    activeNote: `11% OFF AirHelp+ with code ${AIRHELP_PROMO.code} through ${AIRHELP_PROMO.validUntil}`,
-    expiredFallbackBehavior: "Auto-hides AHTPO11 code after Nov 30, 2026 & keeps permanent €600 claim link"
+    activeNote: "TravelPass by AirHelp promotion: 9% off eligible plans through December 31, 2026",
+    expiredFallbackBehavior: "Hides the promotion after expiry and keeps the permanent claims link"
   },
   kkday: {
     id: "kkday",
@@ -381,8 +385,8 @@ export function resolvePartnerUrl(hrefOrKey: string): string {
 
 
 /**
- * Automatically strips or replaces time-bound campaign references (KKday 9.9 Sale,
- * AirHelp AHTPO11) inside blog body paragraphs and CTA headlines once their
+ * Automatically strips or replaces time-bound KKday campaign references
+ * inside blog body paragraphs and CTA headlines once their
  * `expiresAt` date has passed in Bangladesh Standard Time (UTC+06:00).
  */
 export function sanitizeExpiredPromoText(text: string): string {
@@ -396,13 +400,7 @@ export function sanitizeExpiredPromoText(text: string): string {
       .replace(/৩০% ফ্ল্যাশ ভাউচার/g, "অনলাইন ডিসকাউন্ট")
       .replace(/৩০% ছাড় \+ Buy 1 Get 1/g, "অনলাইন ডিসকাউন্ট");
   }
-  if (!isPromoActive(AIRHELP_PROMO.expiresAt)) {
-    out = out
-      .replace(/\s*\(and using promo code \*\*`AHTPO11`\*\* for an \*\*11% discount on AirHelp\+ Smart & Pro protection\*\*\)/gi, "")
-      .replace(/\s*\(Use Promo Code AHTPO11 for 11% OFF AirHelp\+ Smart & Pro\)/gi, "")
-      .replace(/\s*\(এবং \*\*AirHelp\+ Smart ও Pro প্রোটেকশনে ১১% ছাড় পেতে প্রোমো কোড `AHTPO11`\*\* ব্যবহার করুন\)/g, "")
-      .replace(/\s*\(AirHelp\+ এ ১১% ছাড়ের কোড: AHTPO11\)/g, "");
-  }
+
   return out;
 }
 
@@ -650,8 +648,8 @@ export function WelcomePickupsWidget({ defaultCountry }: { defaultCountry?: stri
 }
 
 /* 05. Airalo — eSIM / connectivity widget */
-export function AiraloEsimWidget() {
-  return <AiraloEmbed />;
+export function AiraloEsimWidget({ lang = "en" }: { lang?: "en" | "bn" }) {
+  return <AiraloEmbed lang={lang} />;
 }
 
 /* 06. QEEQ — Car Rental widget */

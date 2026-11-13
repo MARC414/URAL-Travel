@@ -64,7 +64,6 @@ import {
   MultiPartnerBlogCallout,
   TravelpayoutsReferralCallout,
   AFFILIATE_LINKS,
-  AIRHELP_PROMO,
   KKDAY_PROMO,
   isPromoActive,
   resolvePartnerUrl,
@@ -1164,7 +1163,7 @@ export default function App() {
     } else if (root === "hotels" && segs.length <= 2) {
       const cityParam = searchParams.get("city") || subSegment;
       section = "hotels";
-      parameterId = cityParam || "kathmandu-hotels";
+      parameterId = cityParam;
       isLanding = !cityParam;
     } else if (root === "visa-free-countries" && segs.length === 1) {
       section = "visaFree";
@@ -1172,7 +1171,7 @@ export default function App() {
     } else if (root === "visa" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
       section = "visa";
-      parameterId = countryParam || "nepal-visa";
+      parameterId = countryParam;
       isLanding = !countryParam;
     } else if (root === "destinations" && segs.length <= 2) {
       const countryParam = searchParams.get("country") || subSegment;
@@ -1442,7 +1441,7 @@ export default function App() {
   }, [section, bankingFaqs]);
 
   useEffect(() => {
-    if (section !== "contact" || !isBn || bnFaqSchema) return;
+    if ((section !== "contact" && section !== "flights") || !isBn || bnFaqSchema) return;
     let cancelled = false;
     void import("./utils/bn-faq-schema").then((mod) => {
       if (!cancelled) setBnFaqSchema(mod);
@@ -1490,7 +1489,7 @@ export default function App() {
           description: r.quickAnswer,
         })),
       });
-      const faqSchema = getFaqSchemaForPage("flights", undefined, true, hubUrl, localizedFlights);
+      const faqSchema = isBn ? bnFaqSchema?.getBnFaqSchemaForPage("flights", undefined, true, hubUrl, localizedFlights) : getFaqSchemaForPage("flights", undefined, true, hubUrl, localizedFlights);
       seoSchema = faqSchema ? [collectionNode, faqSchema] : [collectionNode];
       seoBreadcrumbs = [
         { name: "Home", url: siteUrl("/", lang) },
@@ -1500,8 +1499,8 @@ export default function App() {
       const routeUrl = siteUrl(`/flights/${activeRoute.id}`, lang);
       seoTitle = activeRoute.id === "dhaka-kathmandu"
         ? `Dhaka to Kathmandu Flight Guide 2026: Price, Time & Visa | URAL`
-        : `Flights from Dhaka to ${activeRoute.to.split(" (")[0]} (${activeRoute.country}) ${year} | URAL`;
-      seoDescription = `Compare flights from Dhaka to ${activeRoute.to.split(" (")[0]}. Check flight times, airlines and live fares for your own travel dates before booking.`;
+        : `Flights from ${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]} ${year} | URAL`;
+      seoDescription = `Compare flights from ${activeRoute.from.split(" (")[0]} to ${activeRoute.to.split(" (")[0]}. Check flight times, airlines and live fares for your own travel dates before booking.`;
 
       let schemaObj: any = undefined;
       try {
@@ -1511,7 +1510,7 @@ export default function App() {
       } catch (e) {
         console.error("Schema parse error:", e);
       }
-      const faqSchema = getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl, localizedFlights);
+      const faqSchema = isBn ? bnFaqSchema?.getBnFaqSchemaForPage("flights", activeRoute.id, false, routeUrl, localizedFlights) : getFaqSchemaForPage("flights", activeRoute.id, false, routeUrl, localizedFlights);
       seoSchema = schemaObj && faqSchema ? [schemaObj, faqSchema] : (schemaObj || faqSchema);
 
       seoBreadcrumbs = [
@@ -1610,8 +1609,8 @@ export default function App() {
           ? "সৌদি ভিসা: বাংলাদেশি পাসপোর্টে কোন পথ প্রযোজ্য (২০২৬) | URAL"
           : "Saudi Visa: Which Route Fits Your Passport (2026)";
         seoDescription = isBn
-          ? "বাংলাদেশ সৌদি আরবের ৬৮ দেশের পর্যটন ই-ভিসা তালিকায় নেই। কোন পথগুলো বাস্তবে খোলা, ট্রানজিট ই-ভিসার শর্ত কী, আর কেন আমরা কোনো ফি-র অঙ্ক প্রকাশ করি না — সরকারি সূত্রে যাচাই করা গাইড।"
-          : "Bangladesh is not on Saudi Arabia's 68-country tourist eVisa list. The three routes that are actually open, the transit eVisa condition, and why this page publishes no fee figure — checked against official sources.";
+          ? "বাংলাদেশি পাসপোর্টে সৌদি Package Visa, airline stopover ও অন্য সম্ভাব্য পথের শর্ত দেখুন। আবেদন ও অর্থ দেওয়ার আগে সরকারি নিয়ম যাচাই করুন।"
+          : "Explore Saudi Package Visa, airline stopover and other possible routes for Bangladeshi travellers. Check official eligibility and current terms before paying.";
       } else {
         seoTitle = activeVisa.id === "nepal-visa"
           ? `Nepal Visa for Bangladeshi Citizens 2026: Free Visa on Arrival Guide | URAL`
@@ -3038,13 +3037,7 @@ export default function App() {
                         id: "airhelp",
                         icon: ShieldCheck,
                         label: isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)" : "Flight Disruption Check (AirHelp)",
-                        sub: isPromoActive(AIRHELP_PROMO.expiresAt)
-                          ? isBn
-                            ? `প্রোমো কোড ${AIRHELP_PROMO.code} · যোগ্যতা যাচাই করুন`
-                            : `Code ${AIRHELP_PROMO.code} · Check eligibility`
-                          : isBn
-                          ? "যোগ্যতা ঘটনার বিবরণের ওপর নির্ভর করে"
-                          : "Eligibility depends on case details",
+                        sub: isBn ? "যোগ্যতা ঘটনার বিবরণের ওপর নির্ভর করে" : "Eligibility depends on case details",
                         path: "/tools/flight-delay-claim",
                       },
                       {
@@ -3344,13 +3337,7 @@ export default function App() {
                         {
                           id: "airhelp",
                           label: isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)" : "Flight Disruption Check (AirHelp)",
-                          meta: isPromoActive(AIRHELP_PROMO.expiresAt)
-                            ? isBn
-                              ? `প্রোমো কোড ${AIRHELP_PROMO.code} · যোগ্যতা যাচাই করুন`
-                              : `Code ${AIRHELP_PROMO.code} · Check eligibility`
-                            : isBn
-                            ? "যোগ্যতা ঘটনার বিবরণের ওপর নির্ভর করে"
-                            : "Eligibility depends on case details",
+                          meta: isBn ? "যোগ্যতা ঘটনার বিবরণের ওপর নির্ভর করে" : "Eligibility depends on case details",
                           path: "/tools/flight-delay-claim",
                         },
                         {

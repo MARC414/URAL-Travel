@@ -1,556 +1,26 @@
 import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, BlogPost } from "./types";
+import { flightEditorial } from "./data/flightEditorial";
+import { SAUDI_VISA } from "./data/saudiVisaData";
 import { SCHEDULED_BLOG_DATA } from "./data/scheduledBlogPosts.generated";
 
-export const FLIGHTS_DATA: FlightRoute[] = [
-  {
-    id: "dhaka-kathmandu",
-    from: "Dhaka (DAC)",
-    to: "Kathmandu (KTM)",
-    country: "Nepal",
-    airlines: ["Biman Bangladesh Airlines", "Himalaya Airlines"],
-    bestTimeToBook: "4-8 weeks before departure, especially for the October-November peak season",
-    duration: "1h 30m (Direct)",
-    visaRequirement: "Free 30-day Visa on Arrival for the first entry of each calendar year (SAARC gratis visa)",
-    quickAnswer: "Direct flights from Dhaka (DAC) to Kathmandu (KTM) take about 1 hour 30 minutes on Biman Bangladesh Airlines and Himalaya Airlines. Compare current fares for your own dates through the flight search; no fixed fare is published here because the total changes with season, availability, baggage and fare conditions. Bangladeshi passport holders get a free 30-day Visa on Arrival for their first trip of each calendar year, making this one of the simplest international routes from Dhaka.",
-    keyFacts: [
-      { label: "Flight Time", value: "1 hour 30 mins (Direct)" },
-      { label: "Direct Airlines", value: "Biman Bangladesh, Himalaya Airlines" },
-      { label: "Fare check", value: "Compare live fares for your dates" },
-      { label: "Visa on Arrival for Bangladeshis", value: "Free (1st trip per year)" }
-    ],
-    faqs: [
-      {
-        question: "Which airlines fly direct from Dhaka to Kathmandu?",
-        answer: "Biman Bangladesh Airlines and Himalaya Airlines both operate regular direct flights between Hazrat Shahjalal International Airport (DAC) in Dhaka and Tribhuvan International Airport (KTM) in Kathmandu, with a flight time of about 1 hour 30 minutes."
-      },
-      {
-        question: "How can I find the cheapest Dhaka to Kathmandu flight ticket?",
-        answer: "Book 4-8 weeks ahead where possible, avoid the October-November peak season if your dates are flexible, and compare both Biman Bangladesh and Himalaya Airlines directly - prices on this short route can vary significantly between the two."
-      },
-      {
-        question: "Do Bangladeshi passport holders need a visa before flying to Nepal?",
-        answer: "No advance visa is needed for most travelers. Bangladeshi citizens receive a free 30-day Visa on Arrival at Tribhuvan International Airport for their first entry of each calendar year, under Nepal's SAARC gratis visa policy."
-      },
-      {
-        question: "How long is the flight from Dhaka to Kathmandu?",
-        answer: "The direct flight time between Dhaka and Kathmandu is approximately 1 hour 30 minutes, making it one of the shortest international routes available from Bangladesh."
-      },
-      {
-        question: "Is Tribhuvan International Airport close to Thamel, Kathmandu?",
-        answer: "Yes. Tribhuvan International Airport is roughly 15-20 minutes by taxi from Thamel, Kathmandu's main tourist hub, depending on traffic - making it convenient for short trips."
-      },
-      {
-        question: "What documents must I present at Hazrat Shahjalal International Airport in Dhaka before boarding a flight to Nepal?",
-        answer: "Before boarding your flight to Nepal in Dhaka, you must present a passport valid for at least six months from your travel date, along with a confirmed return flight ticket which is strictly required for Visa on Arrival. Immigration officials at Hazrat Shahjalal International Airport (DAC) may also ask to see your hotel booking confirmation and proof of sufficient foreign currency, such as a credit card endorsed by an international bank or a reasonable amount of cash in US Dollars. Having printed copies of all these documents ready will ensure a smooth check-in and departure experience."
-      },
-      {
-        question: "Should I choose Biman Bangladesh Airlines or Himalaya Airlines for a trip from Dhaka to Kathmandu?",
-        answer: "Both airlines offer regular direct flights on this route, so your choice should depend on price, baggage policies, and schedule preferences. Biman Bangladesh Airlines is a full-service schedule carrier offering complimentary standard meals and generous checked luggage, making it a reliable option for families or those traveling with heavy baggage. Himalaya Airlines is a private carrier based in Nepal that also operates direct flights with basic services, often providing competitive pricing or better timing for quick weekend getaways. It is highly recommended to compare current flight fares and luggage policies for your specific travel dates before making a decision."
-      },
-      {
-        question: "What is the baggage allowance for Biman Bangladesh and Himalaya Airlines on flights from Dhaka to Kathmandu?",
-        answer: "Biman Bangladesh Airlines generally provides a generous baggage allowance of 20 kg to 30 kg for checked luggage and 7 kg for carry-on baggage in Economy Class, though you should verify the exact limit printed on your ticket. Himalaya Airlines typically allows up to 20 kg of checked baggage and 7 kg of carry-on baggage for their standard economy fares, although they sometimes offer lower-priced promotional tickets with smaller allowances. If you plan to carry heavy trekking gear or winter clothing, always check current baggage specifications at the time of reserving your ticket, as excess baggage fees at Dhaka airport can be quite costly."
-      }
-    ],
-    schemaMarkup: {
-      type: "Flight",
-      description: "DAC to KTM flight route details for Bangladeshi travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Flight",
-  "provider": {
-    "@type": "Airline",
-    "name": "Biman Bangladesh Airlines"
-  },
-  "departureAirport": {
-    "@type": "Airport",
-    "name": "Hazrat Shahjalal International Airport",
-    "iataCode": "DAC"
-  },
-  "arrivalAirport": {
-    "@type": "Airport",
-    "name": "Tribhuvan International Airport",
-    "iataCode": "KTM"
-  },
-  "estimatedFlightDuration": "PT1H30M"
-}`
-    }
-  },
-  {
-    id: "ktm-dhaka",
-    from: "Kathmandu (KTM)",
-    to: "Dhaka (DAC)",
-    country: "Nepal",
-    airlines: ["Biman Bangladesh Airlines", "Himalaya Airlines"],
-    bestTimeToBook: "4-8 weeks before departure, especially for the October-November peak season",
-    duration: "1h 30m (Direct)",
-    visaRequirement: "Bangladeshi citizens do not need a visa to enter Bangladesh. Nepali citizens require a Bangladesh visa (eVisa or Visa on Arrival at DAC, subject to current rules).",
-    quickAnswer: "Direct flights from Kathmandu (KTM) to Dhaka (DAC) take about 1 hour 30 minutes on Biman Bangladesh Airlines and Himalaya Airlines. Compare current fares for your own dates through the flight search; no fixed fare is published here because the total changes with season, availability, baggage and fare conditions. Tribhuvan International Airport (KTM) serves as the departure point, with arrivals at Hazrat Shahjalal International Airport (DAC) in Dhaka.",
-    keyFacts: [
-      { label: "Flight Time", value: "1 hour 30 mins (Direct)" },
-      { label: "Direct Airlines", value: "Biman Bangladesh, Himalaya Airlines" },
-      { label: "Fare check", value: "Compare live fares for your dates" },
-      { label: "Departure Airport", value: "Tribhuvan International Airport (KTM)" },
-      { label: "Arrival Airport", value: "Hazrat Shahjalal International Airport (DAC)" }
-    ],
-    faqs: [
-      {
-        question: "Which airlines fly direct from Kathmandu to Dhaka?",
-        answer: "Biman Bangladesh Airlines and Himalaya Airlines both operate regular direct flights between Tribhuvan International Airport (KTM) in Kathmandu and Hazrat Shahjalal International Airport (DAC) in Dhaka, with a flight time of about 1 hour 30 minutes."
-      },
-      {
-        question: "How can I find the cheapest Kathmandu to Dhaka flight ticket?",
-        answer: "Book 4-8 weeks ahead where possible, avoid the October-November peak season if your dates are flexible, and compare both Biman Bangladesh and Himalaya Airlines directly - prices on this short route can vary significantly between the two."
-      },
-      {
-        question: "Do Nepali citizens need a visa to enter Bangladesh from Kathmandu?",
-        answer: "Nepali citizens require a visa to enter Bangladesh. Check current Bangladesh visa rules - options may include eVisa or Visa on Arrival at Hazrat Shahjalal International Airport (DAC), subject to prevailing immigration policy. Bangladeshi citizens do not need a visa to enter their own country."
-      },
-      {
-        question: "How long is the flight from Kathmandu to Dhaka?",
-        answer: "The direct flight time between Kathmandu and Dhaka is approximately 1 hour 30 minutes, making it one of the shortest international routes connecting Nepal and Bangladesh."
-      },
-      {
-        question: "Is Hazrat Shahjalal International Airport close to central Dhaka?",
-        answer: "Yes. Hazrat Shahjalal International Airport (DAC) is roughly 30-45 minutes by taxi from central Dhaka (Gulshan, Banani, Motijheel), depending on traffic conditions."
-      },
-      {
-        question: "What documents must I present at Tribhuvan International Airport in Kathmandu before boarding a flight to Dhaka?",
-        answer: "Before boarding your flight to Dhaka in Kathmandu, you must present a passport valid for at least six months from your travel date, along with a confirmed flight ticket. Bangladeshi citizens should carry their national ID or passport. Nepali citizens should carry their passport with a valid Bangladesh visa if required. Immigration officials at Tribhuvan International Airport (KTM) may also ask to see proof of sufficient funds or accommodation details."
-      },
-      {
-        question: "Should I choose Biman Bangladesh Airlines or Himalaya Airlines for a trip from Kathmandu to Dhaka?",
-        answer: "Both airlines offer regular direct flights on this route, so your choice should depend on price, baggage policies, and schedule preferences. Biman Bangladesh Airlines is a full-service carrier offering complimentary standard meals and generous checked luggage, making it a reliable option for families. Himalaya Airlines is a private carrier based in Nepal that also operates direct flights with basic services, often providing competitive pricing or better timing for quick weekend getaways."
-      },
-      {
-        question: "What is the baggage allowance for Biman Bangladesh and Himalaya Airlines on flights from Kathmandu to Dhaka?",
-        answer: "Biman Bangladesh Airlines generally provides a generous baggage allowance of 20 kg to 30 kg for checked luggage and 7 kg for carry-on baggage in Economy Class, though you should verify the exact limit printed on your ticket. Himalaya Airlines typically allows up to 20 kg of checked baggage and 7 kg of carry-on baggage for their standard economy fares, although they sometimes offer lower-priced promotional tickets with smaller allowances. Always check current baggage specifications at the time of reserving your ticket."
-      }
-    ],
-    schemaMarkup: {
-      type: "Flight",
-      description: "KTM to DAC flight route details for Bangladeshi travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Flight",
-  "provider": {
-    "@type": "Airline",
-    "name": "Biman Bangladesh Airlines"
-  },
-  "departureAirport": {
-    "@type": "Airport",
-    "name": "Tribhuvan International Airport",
-    "iataCode": "KTM"
-  },
-  "arrivalAirport": {
-    "@type": "Airport",
-    "name": "Hazrat Shahjalal International Airport",
-    "iataCode": "DAC"
-  },
-  "estimatedFlightDuration": "PT1H30M"
-}`
-    }
-  },
-  {
-    id: "dhaka-bangkok",
-    from: "Dhaka (DAC)",
-    to: "Bangkok (BKK / DMK)",
-    country: "Thailand",
-    airlines: ["Biman Bangladesh Airlines", "Thai Airways", "US-Bangla Airlines", "Thai Lion Air"],
-    bestTimeToBook: "30-50 days before departure",
-    duration: "2h 30m (Direct)",
-    visaRequirement: "Advance Tourist e-Visa via Thailand's official portal (thaievisa.go.th)",
-    quickAnswer: "Direct flights from Dhaka to Bangkok take about 2 hours and 30 minutes. Major carriers like Biman Bangladesh Airlines, Thai Airways, and US-Bangla Airlines fly to Suvarnabhumi Airport (BKK), while Thai Lion Air operates to Don Mueang Airport (DMK). Compare current fares, baggage rules and airport choice for your own dates through the flight search; no fixed fare is published here. Bangladeshi passport holders should obtain an approved Tourist e-Visa through Thailand's official portal before departure; check current Dhaka mission instructions.",
-    keyFacts: [
-      { label: "Flight Time", value: "2 hours 30 mins" },
-      { label: "Direct Airlines", value: "Thai Airways, Biman, US-Bangla, Thai Lion" },
-      { label: "Fare check", value: "Compare live fares for your dates" },
-      { label: "Main Airports", value: "Suvarnabhumi (BKK) & Don Mueang (DMK)" }
-    ],
-    faqs: [
-      {
-        question: "Which airline is usually cheapest flying from Dhaka to Bangkok?",
-        answer: "Thai Lion Air (flying to Don Mueang DMK) is usually the most budget-friendly carrier. Compare its current total with the same dates and baggage allowance against full-service fares, because a low headline price may exclude checked baggage or airport transfer costs."
-      },
-      {
-        question: "Can citizens of Bangladesh get a Visa on Arrival in Thailand?",
-        answer: "No. Bangladeshi citizens must obtain an advance Tourist e-Visa through Thailand's official portal (thaievisa.go.th). Follow the current Dhaka mission checklist and any instructions shown in your application."
-      }
-    ],
-    schemaMarkup: {
-      type: "Flight",
-      description: "DAC to BKK Flight Route Info",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Flight",
-  "provider": {
-    "@type": "Airline",
-    "name": "Thai Airways"
-  },
-  "departureAirport": {
-    "@type": "Airport",
-    "name": "Hazrat Shahjalal International Airport",
-    "iataCode": "DAC"
-  },
-  "arrivalAirport": {
-    "@type": "Airport",
-    "name": "Suvarnabhumi Airport",
-    "iataCode": "BKK"
-  },
-  "estimatedFlightDuration": "PT2H30M"
-}`
-    }
-  },
-  {
-    id: "dhaka-kuala-lumpur",
-    from: "Dhaka (DAC)",
-    to: "Kuala Lumpur (KUL)",
-    country: "Malaysia",
-    airlines: ["Malaysia Airlines", "Biman Bangladesh Airlines", "AirAsia", "US-Bangla Airlines", "Batik Air"],
-    bestTimeToBook: "60 days prior to departure",
-    duration: "3h 50m (Direct)",
-    visaRequirement: "Malaysia eVisa (Single Entry eVisa is highly reliable for Bangladeshis)",
-    quickAnswer: "Bangladeshi outbound tourists can reach Kuala Lumpur (KUL) directly from Dhaka within 3 hours and 50 minutes. Excellent premium services are provided by Malaysia Airlines and Biman, with budget routes run by AirAsia and Batik Air. Compare current fares, baggage allowances and seat availability for your own dates through the flight search; no fixed fare is published here. Tourists can smoothly apply for a Malaysian eVisa online, which typically takes 2-5 business days to process.",
-    keyFacts: [
-      { label: "Flight Time", value: "3 hours 50 mins" },
-      { label: "Direct Airlines", value: "Malaysia Airlines, AirAsia, Biman, Batik, US-Bangla" },
-      { label: "Fare check", value: "Compare live fares for your dates" },
-      { label: "Visa Requirement", value: "eVisa (Applied online prior)" }
-    ],
-    faqs: [
-      {
-        question: "How long does the Malaysia eVisa take to process for Bangladeshis?",
-        answer: "The Immigration Department of Malaysia publishes 2-7 working days, excluding weekends, Malaysian public holidays and any query or interview stage. Its FAQ advises applying at least 14 days before departure. Verify the current figure at malaysiavisa.imi.gov.my (checked 6 November 2026)."
-      },
-      {
-        question: "Which low-cost carrier connects Dhaka to KL directly?",
-        answer: "AirAsia and Batik Air run regular budget flights with competitive luggage-excluded base fares, ideal for backpackers."
-      }
-    ],
-    schemaMarkup: {
-      type: "Flight",
-      description: "DAC to KUL Direct flight guide",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Flight",
-  "provider": {
-    "@type": "Airline",
-    "name": "Malaysia Airlines"
-  },
-  "departureAirport": {
-    "@type": "Airport",
-    "name": "Hazrat Shahjalal International Airport",
-    "iataCode": "DAC"
-  },
-  "arrivalAirport": {
-    "@type": "Airport",
-    "name": "Kuala Lumpur International Airport",
-    "iataCode": "KUL"
-  },
-  "estimatedFlightDuration": "PT3H50M"
-}`
-    }
-  },
-  {
-    id: "dhaka-dubai",
-    from: "Dhaka (DAC)",
-    to: "Dubai (DXB)",
-    country: "UAE",
-    airlines: ["Emirates", "flydubai", "Biman Bangladesh Airlines", "US-Bangla Airlines"],
-    bestTimeToBook: "60-90 days before departure",
-    duration: "4h 45m (Direct)",
-    visaRequirement: "UAE eVisa (Pre-arranged Tourist visa, usually secured via registered travel agencies or airlines)",
-    quickAnswer: "Direct flights from Dhaka to Dubai (DXB) take about 4 hours 45 mins. Direct options range from ultra-premium on Emirates to budget-friendly flydubai, Biman, and US-Bangla Airlines. Compare current fares, baggage rules and fare conditions for your own dates through the flight search; no fixed fare is published here. Tourist eVisas (30 or 60 days) are processed in 3-5 days via agencies or designated portals, making pre-travel planning vital.",
-    keyFacts: [
-      { label: "Flight Time", value: "4 hours 45 mins" },
-      { label: "Direct Airlines", value: "Emirates, flydubai, Biman, US-Bangla" },
-      { label: "Fare check", value: "Compare live fares for your dates" },
-      { label: "Best Booking Window", value: "2-3 months prior" }
-    ],
-    faqs: [
-      {
-        question: "Can I get a transit visa on arrival in Dubai if flying Emirates?",
-        answer: "Transit visas are possible but require pre-clearance or holding specific resident visas from the US/UK/Schengen. General Bangladeshi tourists must book their e-Tourist visas in advance."
-      },
-      {
-        question: "What is the current Dhaka to Dubai air ticket price?",
-        answer: "Fares change daily by date, airline, and cabin, so this guide does not publish a fixed price. Compare live fares for your dates across the airlines flying DAC to DXB, and check baggage and change rules before booking so the base fare is not the only cost you compare."
-      },
-      {
-        question: "Which airlines operate the DAC to DXB flight and how long is it?",
-        answer: "Emirates, flydubai, Biman Bangladesh Airlines, and US-Bangla Airlines operate DAC to DXB, with direct flights taking about 4 hours 45 minutes. Schedules change seasonally; confirm the current timetable on the airline’s website before booking."
-      },
-    ],
-    schemaMarkup: {
-      type: "Flight",
-      description: "DAC to DXB Direct path",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Flight",
-  "provider": {
-    "@type": "Airline",
-    "name": "Emirates"
-  },
-  "departureAirport": {
-    "@type": "Airport",
-    "name": "Hazrat Shahjalal International Airport",
-    "iataCode": "DAC"
-  },
-  "arrivalAirport": {
-    "@type": "Airport",
-    "name": "Dubai International Airport",
-    "iataCode": "DXB"
-  },
-  "estimatedFlightDuration": "PT4H45M"
-}`
-    }
-  },
-  {
-    id: "dhaka-singapore",
-    from: "Dhaka (DAC)",
-    to: "Singapore (SIN)",
-    country: "Singapore",
-    airlines: ["Biman Bangladesh Airlines", "Singapore Airlines", "US-Bangla Airlines"],
-    bestTimeToBook: "45-60 days before departure",
-    duration: "4h 15m (Direct)",
-    visaRequirement: "Pre-arranged Singapore e-Visa (Applied via Authorized Visa Agents in Dhaka/Chattogram)",
-    quickAnswer: "Direct flights from Dhaka (DAC) to Singapore Changi Airport (SIN) take approximately 4 hours and 15 minutes. Biman Bangladesh Airlines, US-Bangla Airlines, and Singapore Airlines operate daily non-stop flights on this route. Compare current direct and one-stop fares for your own dates through the flight search; no fixed fare is published here. Bangladeshi passport holders must obtain a pre-arranged Singapore e-Visa through an embassy-authorized agent and submit the free SG Arrival Card online within 3 days before flying.",
-    keyFacts: [
-      { label: "Flight Time", value: "4 hours 15 mins (Direct)" },
-      { label: "Direct Airlines", value: "Singapore Airlines, Biman, US-Bangla" },
-      { label: "Fare check", value: "Compare live fares for your dates" },
-      { label: "Visa Requirement", value: "Authorized Agent e-Visa + SGAC" }
-    ],
-    faqs: [
-      {
-        question: "Which airlines fly direct from Dhaka to Singapore?",
-        answer: "Singapore Airlines, Biman Bangladesh Airlines, and US-Bangla Airlines operate daily non-stop flights from Hazrat Shahjalal International Airport (DAC) to Singapore Changi Airport (SIN), taking roughly 4 hours and 15 minutes."
-      },
-      {
-        question: "How can I compare the cheapest way to fly from Dhaka to Singapore?",
-        answer: "Compare direct and one-stop itineraries for the same dates, then add baggage, seat and transfer costs before deciding. A one-stop flight via Kuala Lumpur can have a lower headline fare, but check the total journey time, baggage rules and whether both sectors are on one ticket."
-      },
-      {
-        question: "Do Bangladeshi travelers need to fill out the SG Arrival Card before boarding?",
-        answer: "Yes. Every traveler flying from Dhaka to Singapore must submit the free electronic SG Arrival Card (SGAC) via the official ICA website or MyICA mobile app within 3 days (72 hours) prior to arrival, in addition to holding a printed Singapore e-Visa."
-      }
-    ],
-    schemaMarkup: {
-      type: "Flight",
-      description: "DAC to SIN Direct Flight Route Guide for Bangladeshi Travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Flight",
-  "provider": {
-    "@type": "Airline",
-    "name": "Biman Bangladesh Airlines"
-  },
-  "departureAirport": {
-    "@type": "Airport",
-    "name": "Hazrat Shahjalal International Airport",
-    "iataCode": "DAC"
-  },
-  "arrivalAirport": {
-    "@type": "Airport",
-    "name": "Singapore Changi Airport",
-    "iataCode": "SIN"
-  },
-  "estimatedFlightDuration": "PT4H15M"
-}`
-    }
-  },
-  {
-    id: "dhaka-maldives",
-    from: "Dhaka (DAC)",
-    to: "Malé (MLE)",
-    country: "Maldives",
-    airlines: ["US-Bangla Airlines", "SriLankan Airlines", "Maldivian", "Malaysia Airlines"],
-    bestTimeToBook: "45-75 days before departure (especially ahead of November-March dry season)",
-    duration: "4h 10m (Direct) / 6h 30m (via Colombo)",
-    visaRequirement: "Free 30-day Tourist Visa on Arrival + Mandatory IMUGA form within 96 hours",
-    quickAnswer: "Direct flights from Dhaka (DAC) to Velana International Airport in Malé (MLE) take 4 hours and 10 minutes on US-Bangla Airlines, while SriLankan Airlines offers convenient 1-stop connections via Colombo. Compare current direct and connecting fares for your own dates through the flight search; no fixed fare is published here. Bangladeshi passport holders receive a free 30-day Tourist Visa on Arrival in the Maldives, provided they carry a confirmed hotel voucher, return ticket, USD endorsement, and complete the free IMUGA Traveller Declaration online within 96 hours of flying.",
-    keyFacts: [
-      { label: "Flight Time", value: "4 hours 10 mins (Direct)" },
-      { label: "Popular Airlines", value: "US-Bangla (Direct), SriLankan (1-Stop)" },
-      { label: "Fare check", value: "Compare live fares for your dates" },
-      { label: "Visa on Arrival", value: "Free 30 Days (+ IMUGA Form)" }
-    ],
-    faqs: [
-      {
-        question: "Is there a direct flight from Dhaka to the Maldives?",
-        answer: "Yes, US-Bangla Airlines operates direct scheduled flights from Dhaka (DAC) to Malé Velana International Airport (MLE) with a flight time of around 4 hours and 10 minutes. SriLankan Airlines also operates daily flights with a short transit in Colombo (CMB)."
-      },
-      {
-        question: "Do Bangladeshi citizens need an advance visa before flying to the Maldives?",
-        answer: "No advance visa is required for tourism. Bangladeshi tourists are granted a free 30-day Tourist Visa on Arrival at Malé Airport. However, you must complete the free online IMUGA Traveller Declaration within 96 hours before departure and present confirmed hotel and return flight bookings at Dhaka immigration."
-      },
-      {
-        question: "Can I combine Sri Lanka and Maldives on a single flight ticket from Dhaka?",
-        answer: "Yes. When flying SriLankan Airlines from Dhaka to Malé via Colombo, you can book a multi-city or stopover ticket to spend 2-3 days in Colombo/Galle before continuing to Malé for almost the same airfare."
-      }
-    ],
-    schemaMarkup: {
-      type: "Flight",
-      description: "DAC to MLE Flight Route Guide for Bangladeshi Travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Flight",
-  "provider": {
-    "@type": "Airline",
-    "name": "US-Bangla Airlines"
-  },
-  "departureAirport": {
-    "@type": "Airport",
-    "name": "Hazrat Shahjalal International Airport",
-    "iataCode": "DAC"
-  },
-  "arrivalAirport": {
-    "@type": "Airport",
-    "name": "Velana International Airport",
-    "iataCode": "MLE"
-  },
-  "estimatedFlightDuration": "PT4H10M"
-}`
-    }
-  },
-  {
-    id: "dhaka-los-angeles",
-    from: "Dhaka (DAC)",
-    to: "Los Angeles (LAX)",
-    country: "United States",
-    airlines: ["Emirates", "Qatar Airways", "Etihad Airways", "Turkish Airlines", "Biman Bangladesh Airlines", "US-Bangla Airlines"],
-    bestTimeToBook: "3-5 months before departure, especially for summer (June-August) and winter holiday (December-January) travel",
-    duration: "19h 30m - 24h 0m (1-2 Stops)",
-    visaRequirement: "US B1/B2 Tourist Visa (advance application via US Embassy Dhaka, DS-160 form, visa interview required)",
-    quickAnswer: "There are no nonstop flights from Dhaka (DAC) to Los Angeles (LAX). All itineraries require 1-2 stops, typically through Middle Eastern hubs (Dubai, Doha, Abu Dhabi), Istanbul, or European gateways. Total journey time ranges from 19 hours 30 minutes to 24 hours depending on connection length. Compare current fares for your own dates and connection hubs through the flight search; no fixed fare is published here. Bangladeshi passport holders must obtain a US B1/B2 visitor visa in advance through the US Embassy in Dhaka — this is not Visa on Arrival or ESTA-eligible.",
-    keyFacts: [
-      { label: "Flight Time", value: "19h 30m - 24h 0m (1-2 Stops)" },
-      { label: "Direct Flights", value: "None — all routes require connections" },
-      { label: "Common Connection Hubs", value: "Dubai (DXB), Doha (DOH), Abu Dhabi (AUH), Istanbul (IST)" },
-      { label: "Fare check", value: "Compare live fares for your dates" },
-      { label: "Visa for Bangladeshis", value: "US B1/B2 Tourist Visa (advance, via US Embassy Dhaka)" }
-    ],
-    faqs: [
-      {
-        question: "Are there direct flights from Dhaka to Los Angeles?",
-        answer: "No. There are currently no nonstop flights from Hazrat Shahjalal International Airport (DAC) to Los Angeles International Airport (LAX). All itineraries require at least one connection, most commonly through Dubai (DXB), Doha (DOH), Abu Dhabi (AUH), or Istanbul (IST)."
-      },
-      {
-        question: "Which airlines fly from Dhaka to Los Angeles with the fewest stops?",
-        answer: "Emirates (via Dubai), Qatar Airways (via Doha), Etihad Airways (via Abu Dhabi), and Turkish Airlines (via Istanbul) offer 1-stop itineraries with the shortest total journey times, typically 19h 30m to 21h. Biman Bangladesh and US-Bangla can connect you to these carriers at the Middle Eastern hubs."
-      },
-      {
-        question: "Do Bangladeshi citizens need a visa to travel to Los Angeles?",
-        answer: "Yes. Bangladeshi passport holders must obtain a US B1/B2 visitor visa before travel. This requires completing the DS-160 form online, paying the visa fee, and attending an in-person interview at the US Embassy in Dhaka. The US is not part of the Visa Waiver Program, so ESTA is not available for Bangladeshi citizens."
-      },
-      {
-        question: "When is the cheapest time to fly from Dhaka to Los Angeles?",
-        answer: "Book 3-5 months in advance. Avoid peak periods: US summer (June-August), winter holidays (December-January), and Eid travel seasons. Shoulder periods (late January-March, September-October) often have more fare choice, but compare live prices for your exact dates rather than relying on a seasonal rule."
-      },
-      {
-        question: "How long does a flight from Dhaka to Los Angeles take?",
-        answer: "Total journey time ranges from 19 hours 30 minutes to 24 hours, depending on the connection hub and layover duration. A typical Emirates itinerary via Dubai is about 20-21 hours including a 2-4 hour layover."
-      },
-      {
-        question: "What documents do I need at Hazrat Shahjalal International Airport before flying to Los Angeles?",
-        answer: "You must present: (1) a passport valid for at least 6 months beyond your US stay, (2) a valid US B1/B2 visa stamped in your passport, (3) a confirmed roundtrip flight ticket, (4) proof of sufficient funds for your US stay, and (5) accommodation details or an invitation letter if applicable. US immigration officers at LAX may ask additional questions on arrival."
-      },
-      {
-        question: "Can I transit through Dubai or Doha without a separate transit visa?",
-        answer: "Bangladeshi citizens typically do not need a separate transit visa for short layovers in Dubai (DXB) or Doha (DOH) if you remain airside and have a confirmed onward ticket. However, if you plan to leave the airport or your layover exceeds the airline's permitted transit window, you may need a transit visa. Check with your airline before booking."
-      }
-    ],
-    schemaMarkup: {
-      type: "Flight",
-      description: "DAC to LAX flight route details for Bangladeshi travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Flight",
-  "provider": {
-    "@type": "Airline",
-    "name": "Emirates"
-  },
-  "departureAirport": {
-    "@type": "Airport",
-    "name": "Hazrat Shahjalal International Airport",
-    "iataCode": "DAC"
-  },
-  "arrivalAirport": {
-    "@type": "Airport",
-    "name": "Los Angeles International Airport",
-    "iataCode": "LAX"
-  },
-  "estimatedFlightDuration": "PT20H0M"
-}`
-    }
-  },
-  {
-    id: "dhaka-madinah",
-    from: "Dhaka (DAC)",
-    to: "Madinah (MED)",
-    country: "Saudi Arabia",
-    airlines: ["Saudia", "Biman Bangladesh Airlines", "Flynas", "Flyadeal"],
-    bestTimeToBook: "2-3 months before departure, especially before Ramadan and Hajj season; off-peak (post-Hajj, Muharram-Safar) offers lowest fares",
-    duration: "6h 30m - 8h 0m (Direct)",
-    visaRequirement: "Saudi Umrah visa or tourist visa (advance application via Saudi visa portal or authorized agents; Bangladeshi passport holders are NOT visa-exempt)",
-    quickAnswer: "Direct flights operate from Hazrat Shahjalal International Airport (DAC) to Prince Mohammad bin Abdulaziz International Airport (MED) in Madinah, Saudi Arabia. Flight time is approximately 6 hours 30 minutes. Compare current fares, baggage rules and airline conditions for your own dates through the flight search; no fixed fare is published here. Bangladeshi passport holders need a Saudi Umrah visa or tourist visa before travel — this is not Visa on Arrival. Madinah is the second-holiest city in Islam, home to Al-Masjid an-Nabawi (the Prophet's Mosque).",
-    keyFacts: [
-      { label: "Flight Time", value: "6h 30m - 8h 0m (Direct)" },
-      { label: "Direct Flights", value: "Yes — Saudia and Biman Bangladesh operate direct DAC–MED" },
-      { label: "Fare check", value: "Compare live fares for your dates" },
-      { label: "Visa for Bangladeshis", value: "Saudi Umrah visa or tourist visa (advance, via Saudi visa portal)" }
-    ],
-    faqs: [
-      {
-        question: "Are there direct flights from Dhaka to Madinah?",
-        answer: "Yes. Saudia and Biman Bangladesh Airlines operate direct flights from Hazrat Shahjalal International Airport (DAC) to Prince Mohammad bin Abdulaziz International Airport (MED) in Madinah. Flight time is approximately 6 hours 30 minutes."
-      },
-      {
-        question: "Do Bangladeshi citizens need a visa to travel to Madinah for Umrah?",
-        answer: "Yes. Bangladeshi passport holders must obtain a Saudi Umrah visa or tourist visa before travel. Applications can be made through the Saudi visa portal or authorized travel agents in Dhaka. This is not Visa on Arrival."
-      },
-      {
-        question: "When is the cheapest time to fly from Dhaka to Madinah?",
-        answer: "Book 2-3 months in advance. Avoid peak periods: Ramadan, Hajj season (Dhul-Hijjah), and Eid travel seasons. Off-peak months (Muharram-Safar, post-Hajj) often have more fare choice, but compare live prices for your exact dates and fare conditions."
-      },
-      {
-        question: "How long does a flight from Dhaka to Madinah take?",
-        answer: "Direct flights take approximately 6 hours 30 minutes to 8 hours, depending on the airline and specific routing."
-      },
-      {
-        question: "What documents do I need at Hazrat Shahjalal International Airport before flying to Madinah?",
-        answer: "You must present: (1) a passport valid for at least 6 months beyond your stay, (2) a valid Saudi Umrah visa or tourist visa, (3) a confirmed roundtrip flight ticket, (4) proof of accommodation in Saudi Arabia, and (5) proof of sufficient funds for your stay."
-      },
-      {
-        question: "Can I visit Makkah from Madinah on the same trip?",
-        answer: "Yes. Makkah is about 450 km from Madinah (approximately 4-5 hours by car or bus via the Haramain High-Speed Railway or SAPTCO bus). Many Umrah pilgrims visit both cities — Madinah first (Al-Masjid an-Nabawi) then Makkah (Masjid al-Haram), or vice versa."
-      }
-    ],
-    schemaMarkup: {
-      type: "Flight",
-      description: "DAC to MED flight route details for Bangladeshi Umrah travelers",
-      code: `{
-  "@context": "https://schema.org",
-  "@type": "Flight",
-  "provider": {
-    "@type": "Airline",
-    "name": "Saudia"
-  },
-  "departureAirport": {
-    "@type": "Airport",
-    "name": "Hazrat Shahjalal International Airport",
-    "iataCode": "DAC"
-  },
-  "arrivalAirport": {
-    "@type": "Airport",
-    "name": "Prince Mohammad bin Abdulaziz International Airport",
-    "iataCode": "MED"
-  },
-  "estimatedFlightDuration": "PT6H30M"
-}`
-    }
-  }
+// Airport pairs and historical candidate carriers, not a current timetable.
+const FLIGHT_ROUTE_BASES: Pick<FlightRoute, "id" | "from" | "to" | "country" | "airlines">[] = [
+  { id: "dhaka-kathmandu", from: "Dhaka (DAC)", to: "Kathmandu (KTM)", country: "Nepal", airlines: ["Biman Bangladesh Airlines", "Himalaya Airlines"] },
+  { id: "ktm-dhaka", from: "Kathmandu (KTM)", to: "Dhaka (DAC)", country: "Nepal", airlines: ["Biman Bangladesh Airlines", "Himalaya Airlines"] },
+  { id: "dhaka-bangkok", from: "Dhaka (DAC)", to: "Bangkok (BKK / DMK)", country: "Thailand", airlines: ["Biman Bangladesh Airlines", "Thai Airways", "US-Bangla Airlines", "Thai Lion Air"] },
+  { id: "dhaka-kuala-lumpur", from: "Dhaka (DAC)", to: "Kuala Lumpur (KUL)", country: "Malaysia", airlines: ["Malaysia Airlines", "Biman Bangladesh Airlines", "AirAsia", "US-Bangla Airlines", "Batik Air"] },
+  { id: "dhaka-dubai", from: "Dhaka (DAC)", to: "Dubai (DXB)", country: "UAE", airlines: ["Emirates", "flydubai", "Biman Bangladesh Airlines", "US-Bangla Airlines"] },
+  { id: "dhaka-singapore", from: "Dhaka (DAC)", to: "Singapore (SIN)", country: "Singapore", airlines: ["Biman Bangladesh Airlines", "Singapore Airlines", "US-Bangla Airlines"] },
+  { id: "dhaka-maldives", from: "Dhaka (DAC)", to: "Malé (MLE)", country: "Maldives", airlines: ["US-Bangla Airlines", "SriLankan Airlines", "Maldivian", "Malaysia Airlines"] },
+  { id: "dhaka-los-angeles", from: "Dhaka (DAC)", to: "Los Angeles (LAX)", country: "United States", airlines: ["Emirates", "Qatar Airways", "Etihad Airways", "Turkish Airlines", "Biman Bangladesh Airlines", "US-Bangla Airlines"] },
+  { id: "dhaka-madinah", from: "Dhaka (DAC)", to: "Madinah (MED)", country: "Saudi Arabia", airlines: ["Saudia", "Biman Bangladesh Airlines", "Flynas", "Flyadeal"] },
 ];
+
+export const FLIGHTS_DATA: FlightRoute[] = FLIGHT_ROUTE_BASES.map((route) => {
+  const editorial = flightEditorial(route, "en");
+  if (!editorial) throw new Error(`Missing flight route editorial: ${route.id}`);
+  return { ...route, ...editorial, schemaMarkup: { type: "", description: "", code: "" } };
+});
 
 export const HOTELS_DATA: HotelGuide[] = [
   {
@@ -1302,221 +772,7 @@ export const VISA_DATA: VisaGuide[] = [
 }`
     }
   },
-  {
-    id: "saudi-arabia-visa",
-    country: "Saudi Arabia",
-    requirementType: "Multiple routes — check eligibility",
-    costBdt:
-      "No single published figure. The Saudi authorities do not publish one central fee for a consulate visa, and the amount differs by the channel you apply through. Confirm the fee with the embassy or the accredited provider before paying anything; treat any website quoting an exact fee for a visa it has not yet assessed as a sales page.",
-    processingTime:
-      "Not published as a fixed number, and it differs by channel and season. Get the current estimate from the embassy or the accredited provider for your own dates, and do not book a non-refundable fare until the visa is in hand.",
-    documentChecklist: [
-        {
-          "category": "Prove which route applies to you first",
-          "items": [
-            "Open https://visa.visitsaudi.com and read the eligible-countries list yourself. Bangladesh is not on it, and that single fact decides your route.",
-            "If you already hold a valid GCC, UK, US or Schengen tourist visa, check the stopover transit eVisa terms on your airline's own visa page before assuming you qualify.",
-            "If you do not hold one of those, the consulate route is your route — there is no legitimate way around it.",
-            "Never pay a website that promises an instant Saudi eVisa to a Bangladeshi passport without first checking that list."
-          ]
-        },
-        {
-          "category": "Then, at the embassy or through an accredited provider",
-          "items": [
-            "The Royal Embassy of Saudi Arabia in Dhaka is the official channel for a consulate visa. Contact them directly for the current document list, because that list is issued consularly and is not published centrally in English.",
-            "For Umrah, the Ministry of Hajj and Umrah states that packages are booked through accredited service providers and approved platforms integrated with the Nusuk platform.",
-            "Do not treat a quote as an approval. A package price does not mean the visa has been decided."
-          ]
-        },
-        {
-          "category": "Health requirements before you travel",
-          "items": [
-            "The Saudi Ministry of Health publishes the current Hajj and Umrah health requirement documents. Download the Umrah one and read it before you apply, not after you book.",
-            "Requirements can be season-dated. Check the document that is current at the time you apply, not the one you remember from a previous trip."
-          ]
-        }
-      ],
-    stepByStep: [
-        "Check the official eligible-countries list at visa.visitsaudi.com. If Bangladesh is absent, as it is today, the tourist eVisa is closed to your passport.",
-        "If you hold a valid GCC, UK, US or Schengen tourist visa, read your airline's stopover visa page. Saudia states the transit eVisa is available to travellers holding a valid tourist visa for the GCC, the UK, the USA or the Schengen area.",
-        "If you do not, contact the Royal Embassy of Saudi Arabia in Dhaka for the consulate visa requirements. Both the official portal and the national carrier direct travellers from non-eligible countries to Saudi embassies and consulates.",
-        "For Umrah specifically, the Ministry of Hajj and Umrah states that packages are booked through accredited providers and approved platforms integrated with the Nusuk platform. Confirm the provider is accredited before you transfer money.",
-        "Read the current Ministry of Health requirements for Umrah and complete whatever they require before your application, not after.",
-        "Get the visa before you book a non-refundable ticket. A fare is not a reason to assume an approval.",
-        "On arrival, carry printed copies of the visa, the accommodation booking and the health documentation. Do not rely on a phone that may not have a working SIM yet.",
-        "Confirm the exit and entry conditions on the visa itself. A visa issued for one purpose is not automatically valid for another."
-      ],
-    quickAnswer:
-      "Bangladesh is not one of the 68 countries on Saudi Arabia's official tourist eVisa list, so the direct online tourist visa is not open to an ordinary Bangladeshi passport. The routes that remain are a consulate visa through the Saudi embassy, a free stopover transit eVisa if you already hold a valid GCC, UK, US or Schengen tourist visa, or an Umrah package booked through an accredited provider integrated with Nusuk. A tourist visa, where you can get one, does permit Umrah but never Hajj.",
-    keyFacts: [
-        {
-          "label": "Tourist eVisa eligible?",
-          "value": "No — Bangladesh is not on the 68-country list"
-        },
-        {
-          "label": "Route if not eligible",
-          "value": "Consulate visa via the Saudi embassy"
-        },
-        {
-          "label": "Transit eVisa condition",
-          "value": "Valid GCC / UK / US / Schengen tourist visa"
-        },
-        {
-          "label": "Transit eVisa terms",
-          "value": "90-day validity, stay up to 96 hours"
-        },
-        {
-          "label": "Umrah on a tourist visa",
-          "value": "Permitted, excluding Hajj"
-        },
-        {
-          "label": "Umrah packages",
-          "value": "Through accredited Nusuk-integrated providers"
-        },
-        {
-          "label": "Published fee",
-          "value": "Not published centrally — confirm consularly"
-        }
-      ],
-    faqs: [
-        {
-          "question": "Can a Bangladeshi passport holder apply for the Saudi tourist eVisa online?",
-          "answer": "Not directly. The official Saudi eVisa portal lists 68 eligible countries and Bangladesh is not among them. The portal's own instruction for a country that is not listed is to contact the nearest Saudi embassy, and the national carrier states the same thing in different words: travellers from non-eligible countries should apply for a consulate visa through Saudi embassies and consulates."
-        },
-        {
-          "question": "I have a US or UK or Schengen visa. Does that change anything?",
-          "answer": "It can open the stopover transit eVisa, which is a different product from the tourist eVisa. Saudia states the transit eVisa is available to citizens and residents of 60+ countries or to travellers holding a valid tourist visa for the GCC countries, the UK, the USA or the Schengen area. It is valid for 90 days and allows a stay of up to 96 hours. Read the conditions on the airline page for your own trip, because eligibility is checked at booking, not by us."
-        },
-        {
-          "question": "Can I perform Umrah on a tourist visa?",
-          "answer": "Yes, where you hold one. The official eVisa portal describes the tourist visa as covering tourism-related activities including Umrah, excluding Hajj. That is a permission, not a booking: you still need an Umrah package through an accredited provider and you still need to meet the health requirements."
-        },
-        {
-          "question": "Do I need a travel agent?",
-          "answer": "The Ministry of Hajj and Umrah describes Umrah packages as booked through accredited service providers and approved platforms integrated with the Nusuk platform. That is the ministry's own description of how packages are sold. We do not state that an agent is legally mandatory, because the official English pages do not say that in those words — ask the embassy for your own case."
-        },
-        {
-          "question": "What does the visa cost, and how long does it take?",
-          "answer": "We deliberately publish no figure, because the Saudi authorities do not publish a single central fee or processing time for a consulate visa, and a number copied from an agency page would be wrong for most readers. Fee and timing are set by the channel you apply through. Ask the embassy, and treat any website that quotes you a precise fee for a visa it has not yet assessed as a sales page rather than an authority."
-        },
-        {
-          "question": "Are vaccinations required?",
-          "answer": "The Saudi Ministry of Health publishes current health requirement documents for both Hajj and Umrah, and states that pilgrims should receive necessary vaccinations in advance of travel. The specific requirement changes by season, so read the current document rather than a summary. We do not reproduce a vaccine list here because it is season-dated and getting it wrong is a health risk, not a formatting error."
-        },
-        {
-          "question": "Is there a visa on arrival for Bangladeshi passports?",
-          "answer": "The official portal lists visa on arrival for eligible nationalities, and Bangladesh is not on the eligible-countries list. If you hold a qualifying GCC, UK, US or Schengen tourist visa, the stopover transit route is the one to check — it is a different product with different conditions, and it is confirmed at booking."
-        },
-        {
-          "question": "What should I do before paying anyone?",
-          "answer": "Open the official eligible-countries list and confirm your own position on it. Then confirm the provider is accredited and integrated with Nusuk before transferring money. Two checks, both free, and between them they remove almost every way a Bangladeshi pilgrim loses money on a Saudi visa."
-        },
-        {
-          "question": "How can I check this page is still correct?",
-          "answer": "Read the eligible-country list on the official Saudi eVisa portal yourself, and check it on the day you pay rather than the day you plan. That portal decides, and this page is built from it: the list was read on 2 November 2026. Eligibility lists, fees and health requirements all change between seasons, so treat every sentence here as a dated snapshot rather than a live feed. If this page and the official portal ever disagree, the portal is right and this page is out of date."
-        }
-      ],
-    schemaMarkup: {
-      type: "GovernmentService + FAQPage",
-      description: "Saudi visa routes for Bangladeshi passport holders, checked against the official eVisa portal, the national carrier and the Ministry of Health",
-      code: `{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "GovernmentService",
-      "name": "Saudi Arabia visa routes for Bangladeshi passport holders",
-      "serviceType": "Visa guidance",
-      "provider": {
-        "@type": "GovernmentOrganization",
-        "name": "Saudi Ministry of Foreign Affairs / Ministry of Hajj and Umrah"
-      },
-      "areaServed": "Bangladesh",
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Bangladeshi passport holders"
-      }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Can a Bangladeshi passport holder apply for the Saudi tourist eVisa online?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Not directly. The official Saudi eVisa portal lists 68 eligible countries and Bangladesh is not among them. The portal's own instruction for a country that is not listed is to contact the nearest Saudi embassy, and the national carrier states the same thing in different words: travellers from non-eligible countries should apply for a consulate visa through Saudi embassies and consulates."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "I have a US or UK or Schengen visa. Does that change anything?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It can open the stopover transit eVisa, which is a different product from the tourist eVisa. Saudia states the transit eVisa is available to citizens and residents of 60+ countries or to travellers holding a valid tourist visa for the GCC countries, the UK, the USA or the Schengen area. It is valid for 90 days and allows a stay of up to 96 hours. Read the conditions on the airline page for your own trip, because eligibility is checked at booking, not by us."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I perform Umrah on a tourist visa?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, where you hold one. The official eVisa portal describes the tourist visa as covering tourism-related activities including Umrah, excluding Hajj. That is a permission, not a booking: you still need an Umrah package through an accredited provider and you still need to meet the health requirements."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need a travel agent?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The Ministry of Hajj and Umrah describes Umrah packages as booked through accredited service providers and approved platforms integrated with the Nusuk platform. That is the ministry's own description of how packages are sold. We do not state that an agent is legally mandatory, because the official English pages do not say that in those words — ask the embassy for your own case."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What does the visa cost, and how long does it take?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We deliberately publish no figure, because the Saudi authorities do not publish a single central fee or processing time for a consulate visa, and a number copied from an agency page would be wrong for most readers. Fee and timing are set by the channel you apply through. Ask the embassy, and treat any website that quotes you a precise fee for a visa it has not yet assessed as a sales page rather than an authority."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Are vaccinations required?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The Saudi Ministry of Health publishes current health requirement documents for both Hajj and Umrah, and states that pilgrims should receive necessary vaccinations in advance of travel. The specific requirement changes by season, so read the current document rather than a summary. We do not reproduce a vaccine list here because it is season-dated and getting it wrong is a health risk, not a formatting error."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is there a visa on arrival for Bangladeshi passports?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The official portal lists visa on arrival for eligible nationalities, and Bangladesh is not on the eligible-countries list. If you hold a qualifying GCC, UK, US or Schengen tourist visa, the stopover transit route is the one to check — it is a different product with different conditions, and it is confirmed at booking."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What should I do before paying anyone?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Open the official eligible-countries list and confirm your own position on it. Then confirm the provider is accredited and integrated with Nusuk before transferring money. Two checks, both free, and between them they remove almost every way a Bangladeshi pilgrim loses money on a Saudi visa."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How can I check this page is still correct?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Read the eligible-country list on the official Saudi eVisa portal yourself, and check it on the day you pay rather than the day you plan. That portal decides, and this page is built from it: the list was read on 2 November 2026. Eligibility lists, fees and health requirements all change between seasons, so treat every sentence here as a dated snapshot rather than a live feed. If this page and the official portal ever disagree, the portal is right and this page is out of date."
-          }
-        }
-      ]
-    }
-  ]
-}`,
-    },
-  },
+  SAUDI_VISA,
 ];
 
 export const DESTINATIONS_DATA: DestinationGuide[] = [
@@ -2137,10 +1393,11 @@ export const BLOG_DATA: BlogPost[] = [
     category: "Hajj & Umrah",
     journeyStage: "prepare",
     date: "September 26, 2026",
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-11-12",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "12 min read",
     internalLinks: [
+      { text: "Saudi visa routes and sources", path: "/visa/saudi-arabia-visa" },
       { text: "Plan Ziyarah stops and agree transport terms", path: "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" },
       { text: "Nusuk registration, Visa Bio and Rawdah checks", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Saudi stopover: the separate 96-hour trip", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
@@ -2494,11 +1751,11 @@ export const BLOG_DATA: BlogPost[] = [
     slug: "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
     title: "96-Hour Saudi Stopover from Bangladesh: Eligibility, Booking & Umrah",
     summary:
-      "Checked 19 October 2026: Saudia’s published stopover booking sequence, up to 96 hours, onward-document checks and actual checkout costs. Current detailed flynas eligibility remains unverified. Separate Umrah/Rawdah permits and realistic transfer buffers matter; no universal approval, free hotel or instant-issuance promise.",
+      "Checked 12 November 2026: Visit Saudi describes stopovers up to 96 hours and separate charges. Detailed current airline eligibility and booking flows were not verified. Umrah/Rawdah permits are separate; approval, free hotels and instant issuance are not guaranteed.",
     category: "Hajj & Umrah",
     journeyStage: "prepare",
     date: "September 27, 2026",
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-11-12",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "9 min read",
     references: [
@@ -2508,8 +1765,8 @@ export const BLOG_DATA: BlogPost[] = [
         url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover",
       },
       {
-        name: "Saudia — dedicated transit visa conditions and booking sequence",
-        nameBn: "Saudia — নির্দিষ্ট transit visa শর্ত ও booking sequence",
+        name: "Saudia — previously reviewed transit page (unavailable when reopened 12 November 2026)",
+        nameBn: "Saudia — পূর্বে দেখা transit page (১২ নভেম্বর ২০২৬-এ খোলা যায়নি)",
         url: "https://www.saudia.com/transit-visa",
       },
       {
@@ -2560,7 +1817,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dual-Currency Card Endorsement Guide for Online Flight Booking", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "DIY Umrah Intelligence Portal & BDT Calculator", path: "/umrah" },
       { text: "Umrah + Dubai 10-Day Combo Trip from Dhaka (2026): How to Combine Makkah, Madinah & UAE on One Multi-City Ticket", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
-      { text: "Europe, UK & USA Sightseeing for Bangladeshi Travelers (2026): Skip-the-Line Passes + Instant Saudi Stopover Umrah", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
+      { text: "Europe, UK & USA Sightseeing and Saudi Visa Planning for Bangladeshi Travelers", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
           { text: "UK passport visa routes: ETA, e-visa or waiver for Umrah", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
       { text: "UK Umrah packages: ATOL cover and operator checks", path: "/blog/uk-umrah-packages-atol-operator-checks" },
     ],
@@ -3146,15 +2403,17 @@ export const BLOG_DATA: BlogPost[] = [
   {
     id: "blog-27",
     slug: "europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
-    title: "Europe, UK & USA Sightseeing for Bangladeshi Travelers (2026): Skip-the-Line Passes + Instant Saudi Stopover Umrah",
-    summary: "Bangladeshi travelers and NRB families flying to London, Paris, Rome, Milan, Venice, or New York face two major opportunities: first, avoiding 2-to-3 hour ticket counter queues at iconic landmarks like the Louvre, Eiffel Tower, Tower of London, and Colosseum by pre-booking official Tiqets mobile passes; and second, unlocking an instant 1-Year Multiple-Entry Saudi e-Visa or Visa on Arrival using their valid US, UK, or Schengen visa to perform Umrah on the way! Verified against Saudi Unified Visa Platform (ksavisa.sa) and official museum regulations, here is your complete Western travel & Umrah bridge playbook.",
+    title: "Europe, UK & USA Sightseeing and Saudi Visa Planning for Bangladeshi Travelers",
+    summary: "Plan sightseeing bookings in Europe and North America and review Saudi visa requirements separately when considering an onward stopover. A foreign visa does not guarantee Saudi approval or entry.",
     category: "Ziyarah & Stopovers",
     date: "September 27, 2026",
+    updatedAt: "2026-11-12",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
     internalLinks: [
+      { text: "Saudi visa routes and sources", path: "/visa/saudi-arabia-visa" },
       { text: "Browse Official Europe, UK & USA Skip-the-Line Passes (Tiqets Hub)", path: "/experiences?region=west" },
-      { text: "96-Hour Saudi Stopover Visa & US/UK/Schengen Umrah Rules", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
+      { text: "Saudi Stopover Visa: eligibility and Umrah planning", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
       { text: "Dual-Currency Card Endorsement ($18,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" }
     ],
     affiliateCTA: { provider: "tiqets", headline: "Book Instant Mobile Skip-the-Line Tickets for Paris, London, Rome & NYC (Tiqets)", body: "Secure guaranteed timed-entry QR passes for the Louvre, Eiffel Tower, London Eye, Colosseum, and Statue of Liberty with instant confirmation." }
@@ -3354,9 +2613,11 @@ export const BLOG_DATA: BlogPost[] = [
     summary: "If you are holding a brand-new, blank Bangladeshi e-Passport with zero visas or stamps, applying directly for a Singapore, Schengen, UK, or US tourist visa without prior travel history often leads to a frustrating refusal under 'insufficient travel compliance.' Seasoned Bangladeshi travelers solve this Catch-22 using a proven 3-Step Travel History Ladder: starting with zero-risk Visa-on-Arrival countries (Nepal or the Maldives), stepping up to fast online Southeast Asian e-Visas (Malaysia and Thailand), and unlocking global destinations (Singapore, Dubai, Saudi Umrah, and Europe). Here is your complete 12-to-18 month passport-building roadmap with BDT budgets.",
     category: "Visa & Immigration",
     date: "September 27, 2026",
+    updatedAt: "2026-11-12",
     author: "Farhan Momen (Founder & Travel Editor)",
     readTime: "7 min read",
     internalLinks: [
+      { text: "Saudi visa routes and sources", path: "/visa/saudi-arabia-visa" },
       { text: "Apply for or reissue your passport accurately", path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide" },
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Malaysia Online e-Visa & Free MDAC Arrival Card Guide", path: "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration" },
@@ -3674,7 +2935,7 @@ export const BLOG_DATA: BlogPost[] = [
     affiliateCTA: {
       provider: "airhelp",
       headline: "Check Whether AirHelp Can Review Your Disruption or Baggage Case",
-      body: "AirHelp offers a free eligibility check; its optional claims service has separate terms and fees. AirHelp+ is a separate membership (Use Promo Code AHTPO11 for 11% OFF AirHelp+ Smart & Pro).",
+      body: "AirHelp offers a free eligibility check; its optional claims service has separate terms and fees. TravelPass by AirHelp is a separate membership.",
     },
   },
   {
