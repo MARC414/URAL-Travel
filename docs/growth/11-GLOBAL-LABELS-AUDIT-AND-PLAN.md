@@ -191,3 +191,90 @@ will not know which half caused it.
    (my recommendation), or keep BDT hard-set on BD-facing tools?
 3. **Language of the new names:** "Cost Calculator" for English — and for Bengali, "খরচ ক্যালকুলেটর"
    (natural Bengali) rather than "কস্ট ক্যালকুলেটর" (transliteration)?
+
+---
+
+## 9. Decision log (13 November 2026)
+
+| # | Decision | Choice | Consequence |
+|---|---|---|---|
+| 1 | Titles that say "in BDT" | **Keep for now** | Waves 1–2 cannot touch `<title>`, `<h1>`, meta description, or article headlines |
+| 2 | Visible currency control | **Yes** — BDT preselected for Bangladeshi readers | See §11: the pattern already exists, so this is extension, not invention |
+| 3 | Bengali wording for the universal name | **"কস্ট ক্যালকুলেটর"** (transliteration) | Applied exactly as chosen |
+
+**One caution on decision 3, recorded once and then respected.** Bangladeshi readers search
+"খরচ ক্যালকুলেটর" and "কত টাকা লাগবে" far more than "কস্ট". So the plan pairs the transliterated
+*label* with the natural *body phrase* — the button says "কস্ট ক্যালকুলেটর", and the page's own
+sentence still says "খরচ ক্যালকুলেটর" once, which keeps the query match without contradicting the
+label. This is the same principle as keeping "BDT calculator" in body copy: the label can be brand
+language, the sentence must be search language.
+
+---
+
+## 10. Exact Wave 1 change list — the strings, not a category
+
+The earlier estimate of "~38 tool names" was an over-count from a keyword filter: it included prose
+sentences and SEO descriptions. Curated by hand, the true button/badge/tool-title set is **20 items
+(22 strings, EN+BN)**. Nothing else in Wave 1.
+
+| # | File:line | Current | Proposed |
+|---|---|---|---|
+| 1 | `SitemapPage.tsx:86` | "Open BDT Currency Tool" | "Open Currency Converter" |
+| 2 | `SitemapPage.tsx:1077` | "BDT Budget" / "BDT বাজেট" | "Trip Budget" / "ট্রিপ বাজেট" |
+| 3 | `SitemapPage.tsx:1316` | "Trip Cost Calculators (BDT)" | "Trip Cost Calculators" *(BN already natural — unchanged)* |
+| 4 | `UmrahLandingPage.tsx:79` | "BDT budget tool reviewed: 18 October 2026" | "Budget tool reviewed: 18 October 2026" + BN twin |
+| 5 | `UmrahLandingPage.tsx:314` | "1. BDT Cost Calculator" / "১. BDT বাজেট ক্যালকুলেটর" | "1. Cost Calculator" / "১. কস্ট ক্যালকুলেটর" |
+| 6 | `UmrahLandingPage.tsx:350` | "…INTERACTIVE BDT CALCULATOR" (H2) | "…INTERACTIVE COST CALCULATOR" |
+| 7 | `GlobalAttractionsHub.tsx:290-291` | "Live Availability Calendar & BDT Calculator" / BN | "Live Availability Calendar & Cost Calculator" / "লাইভ অ্যাভেইলেবিলিটি ক্যালেন্ডার ও কস্ট ক্যালকুলেটর" |
+| 8 | `ExperiencesPage.tsx:564-565` | "…Skip the Line in BDT" / BN | "…Skip the Line" / "…(BDT গাইড)" → "…গাইড" |
+| 9 | `ExperiencesPage.tsx:649` | BN "লাইভ সিটি পাস ও BDT ক্যালকুলেটর" | "লাইভ সিটি পাস ও কস্ট ক্যালকুলেটর" |
+| 10 | `ExperiencesPage.tsx:654` | "Calculate Full-Day City Bundle in BDT" | "Calculate Full-Day City Bundle" |
+| 11 | `TripCostEstimator.tsx:128` | "Your quotes & allowance (BDT)" / BN | "Your quotes & allowance" / "আপনার কোটেশন ও বরাদ্দ" |
+| 12 | `UmrahBudgetCalculator.tsx:89-90` | "Whole-party totals by category (BDT)" / BN | "Whole-party totals by category" / "পুরো দলের খাতওয়ারি মোট" |
+| 13 | `BlogPostRouteView.tsx:1544` | "Open Umrah BDT Calculator" / "Umrah BDT ক্যালকুলেটর" | "Open Cost Calculator" / "কস্ট ক্যালকুলেটর খুলুন" |
+| 14 | `App.tsx:2806` | "Top Residency Experiences in BDT" | "Top Residency Experiences" |
+| 15 | `App.tsx:3227` | "Nusuk permit & DIY BDT cost" | "Nusuk permit & DIY cost" |
+| 16 | `App.tsx:3297` | "3-tier BDT cost matrices by country" | "3-tier cost matrices by country" |
+| 17 | `App.tsx:4186` | "…convert BDT, check what to pack…" / BN twin | "…convert currency, check what to pack…" / "…কারেন্সি কনভার্ট করুন…" |
+| 18 | `PriceAlertModal.tsx:259` | "3. Target Budget in BDT (Optional)" | "3. Target Budget (Optional)" |
+| 19 | `toolRoutes.ts:141` | "…display your estimate in BDT" | "…display your estimate in your currency" |
+| 20 | `ContactRouteView.tsx:465` | BN "হোটেল বুকিং সহায়তা (BDT)" | "হোটেল বুকিং সহায়তা" |
+
+### Flagged — need your word before they move (not in Wave 1)
+- `translations.ts:27` — homepage hero highlight **"Flights, Hotels & Visas in BDT"**. That is brand
+  copy on the first screen of the site. Neutral version: "Flights, Hotels & Visas". Say the word and it
+  joins Wave 1; otherwise it stays.
+- `BlogPostRouteView.tsx:1641` — "Book Hotel & Flight in BDT (WhatsApp)". That is a **payment method**
+  (the WhatsApp desk settles in Taka), not a tool name. My recommendation: keep.
+
+### Tests that must change in the same commit
+`scripts/test-umrah-budget.ts:93` asserts `"Whole-party totals by category (BDT)"` — item 12 breaks it
+by design. Any `verify:build` assertion pinned to these labels gets found and updated in the same PR;
+the gate going red is the correct signal, not an obstacle.
+
+---
+
+## 11. Decision 2 is already half-built
+
+`TripCostEstimator.tsx` already carries a real currency control:
+
+- `displayCurrency = currencyChoice ?? preferredCurrencyForOrigin(origin)` (line 40)
+- a visible `<select id="trip-display-currency">` with BDT/USD (line 168)
+- graceful fallback to BDT when a USD rate is unavailable (line 49, 192)
+
+So "universal tool, Bangladeshi default" is **already true** on the estimator, and the label on that
+page is the only thing lying about it. The remaining work for decision 2 is small and belongs with
+Wave 1 as a companion:
+
+1. widen the selector beyond BDT/USD (EUR, GBP available from the same rates table) — optional;
+2. add the same control to `UmrahBudgetCalculator` (it currently hard-sets BDT);
+3. label the control "Currency" / "কারেন্সি", with BDT preselected for BD origins.
+
+---
+
+## 12. Status
+
+- This document: report only. **No label, title, URL or money string has been changed.**
+- Wave 1 as listed in §10 is ready to execute on your word: one PR, ~20 edits, tests updated in the
+  same commit, rendered EN+BN HTML inspected, Bengali codepoint scan, `verify:build` at full count.
+- Waves 2–4 remain undecided and unstarted.
