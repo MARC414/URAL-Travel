@@ -1,5 +1,7 @@
 import { TravellerCheckNote } from "../src/components/TravellerCheckNote";
 import { resolveBookingCtaUrl } from "../src/utils/bookingCta";
+import JourneyHelpPanel from "../src/components/JourneyHelpPanel";
+import type { JourneyStage } from "../src/utils/journeyHelp";
 import { buildWhiteLabelUrl } from "../src/utils/flightWhiteLabel";
 import { FLIGHT_ROUTES } from "../src/data/flightRoutes";
 import { getTravellerCheck } from "../src/utils/travellerChecks";
@@ -614,6 +616,26 @@ function renderCoxsBazarBookingCtaHtml(locale: "en" | "bn"): string {
  * resolution yields nothing the section is dropped rather than shipped as a
  * link to nowhere.
  */
+/**
+ * The Journey Help panel is chosen by stage and, until now, was rendered only by
+ * the client view (`BlogPostRouteView`) — so it appeared in no shipped HTML at
+ * all. Crawlers, AI answer engines and readers whose JavaScript is blocked or
+ * slow never saw the reader's next step on any post, including the 24 Hajj &
+ * Umrah pages it was built for.
+ *
+ * Rendering the same component into the static page fixes that with the same
+ * mechanism the prerenderer already uses for the Umrah budget calculator, the
+ * trip cost estimator and the currency converter. The React view draws into
+ * `#root`, which replaces this markup on hydration, so the reader sees one panel,
+ * never two — `verify:build` asserts the single occurrence.
+ */
+function renderJourneyHelpHtml(stage: string | undefined, isBn: boolean, slug: string): string {
+  if (!stage) return "";
+  return renderToStaticMarkup(
+    React.createElement(JourneyHelpPanel, { stage: stage as JourneyStage, isBn, slug })
+  );
+}
+
 function renderBlogAffiliateCtaHtml(
   cta: { provider: string; headline: string; body: string } | undefined,
   locale: "en" | "bn",
@@ -2918,6 +2940,7 @@ function buildAllRoutes(): PrerenderRoute[] {
     // next step at all. Render it for every post that defines one, from the same
     // fields and the same label helper the React route uses.
     const affiliateCtaHtml = renderBlogAffiliateCtaHtml(post.affiliateCTA, "en", post.slug);
+    const journeyHelpHtml = renderJourneyHelpHtml(post.journeyStage, false, post.slug);
     const klookHotelPlacement = KLOOK_HOTEL_BLOG_PLACEMENTS[post.slug];
     const klookHotelHtml =
       klookHotelPlacement && AFFILIATE_OFFER_REGISTRY.klook.status === "active" && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active"
@@ -3003,6 +3026,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           ${travelpayoutsReferralHtml}
           ${affiliateCtaHtml}
           ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarBookingCtaHtml("en") : ""}
+          ${journeyHelpHtml}
           ${renderBlogReadingSectionsHtml(post, "en")}
         </article>
       `,
@@ -3381,6 +3405,15 @@ function buildBengaliBody(
       }
       if (id === "kathmandu-to-coxs-bazar-flights-route-status-booking") {
         parts.push(renderCoxsBazarBookingCtaHtml("bn"));
+      }
+      // Same panel, same position as the English page and the React view.
+      {
+        const journeyHelpHtmlBn = renderJourneyHelpHtml(
+          localizedPost?.journeyStage,
+          true,
+          id
+        );
+        if (journeyHelpHtmlBn) parts.push(journeyHelpHtmlBn);
       }
       parts.push(renderBlogReadingSectionsHtml(localizedPost, "bn"));
     }

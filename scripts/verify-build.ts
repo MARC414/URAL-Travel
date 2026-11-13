@@ -7642,6 +7642,41 @@ check(
   }]`
 );
 
+// --- Journey Help must exist in the shipped HTML, exactly once ----------------
+// The panel is chosen by stage and was, until 2026-11-14, rendered only by the
+// client view: crawlers, AI answer engines and readers without JavaScript saw no
+// next step on any post. It is now server-rendered by the prerenderer, so this
+// asserts the bytes — present once for staged posts, absent for unstaged ones,
+// and never twice (React draws into #root over the top, which must replace it).
+const journeyPanelIssues: string[] = [];
+const stagedJourneyPosts = BLOG_DATA.filter((post) => post.journeyStage);
+const unstagedJourneyPosts = BLOG_DATA.filter((post) => !post.journeyStage);
+const countPanels = (html: string, stage: string) =>
+  html.split(`data-journey-stage="${stage}"`).length - 1;
+for (const post of stagedJourneyPosts) {
+  const stage = post.journeyStage as string;
+  const enHtml = read(path.join(DIST_DIR, "blog", `${post.slug}.html`)) ?? "";
+  const bnHtml = read(path.join(DIST_DIR, "bn", "blog", `${post.slug}.html`)) ?? "";
+  const enCount = countPanels(enHtml, stage);
+  if (enCount !== 1) journeyPanelIssues.push(`${post.slug}: EN has ${enCount} journey panels`);
+  if (bnHtml) {
+    const bnCount = countPanels(bnHtml, stage);
+    if (bnCount !== 1) journeyPanelIssues.push(`${post.slug}: BN has ${bnCount} journey panels`);
+  }
+}
+for (const post of unstagedJourneyPosts.slice(0, 12)) {
+  const html = read(path.join(DIST_DIR, "blog", `${post.slug}.html`)) ?? "";
+  if (html.includes("data-journey-stage=")) {
+    journeyPanelIssues.push(`${post.slug}: journey panel rendered without a stage`);
+  }
+}
+check(
+  stagedJourneyPosts.length >= 20 && journeyPanelIssues.length === 0,
+  journeyPanelIssues.length === 0
+    ? `${stagedJourneyPosts.length} staged posts carry exactly one server-rendered Journey Help panel in EN and BN, and no unstaged post carries one`
+    : `Journey Help panel is wrong on: ${journeyPanelIssues.slice(0, 5).join("; ")}`
+);
+
 // --- Every declared affiliate next step must exist in the static HTML --------
 // Until 2026-11-05 the prerenderer emitted an article-level affiliate CTA for a
 // single hardcoded slug. Every other post's `affiliateCTA` rendered only after
