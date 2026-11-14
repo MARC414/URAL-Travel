@@ -106,6 +106,26 @@ function generate(posts: ScheduledBlogPost[]): void {
       .filter((post) => post.faqHeadingEn && post.faqHeadingBn)
       .map((post) => [post.slug, { en: post.faqHeadingEn, bn: post.faqHeadingBn }]),
   );
+  const aeoPanels = Object.fromEntries(
+    posts
+      .filter((post) => post.aeoSummary && post.aeoSummaryBn && post.aeoFacts?.length)
+      .map((post) => [
+        post.slug,
+        {
+          audience: post.audience ?? "bd",
+          ...(post.audienceLabelEn && post.audienceLabelBn
+            ? { audienceLabelEn: post.audienceLabelEn, audienceLabelBn: post.audienceLabelBn }
+            : {}),
+          summary: { en: post.aeoSummary as string, bn: post.aeoSummaryBn as string },
+          facts: (post.aeoFacts ?? []).map((fact) => ({
+            label: fact.label,
+            labelBn: fact.labelBn,
+            value: fact.value,
+            valueBn: fact.valueBn,
+          })),
+        },
+      ]),
+  );
   const imageMap = Object.fromEntries(
     posts
       .filter((post) => post.coverImage)
@@ -120,6 +140,11 @@ function generate(posts: ScheduledBlogPost[]): void {
       serializeModule("SCHEDULED_BLOG_DIRECTORY", indexPosts, "{ slug: string; title: string }[]"),
       serializeModule("SCHEDULED_BLOG_COVER_IMAGES", coverImages, "Record<string, string>"),
       serializeModule("SCHEDULED_BLOG_ALT_TEXT", altText, "Record<string, { en: string; bn: string }>"),
+      serializeModule(
+        "SCHEDULED_BLOG_AEO_PANELS",
+        aeoPanels,
+        'Record<string, { audience: "uk" | "bd"; audienceLabelEn?: string; audienceLabelBn?: string; summary: { en: string; bn: string }; facts: { label: string; labelBn: string; value: string; valueBn: string }[] }>',
+      ),
     ].join("\n"),
   );
 

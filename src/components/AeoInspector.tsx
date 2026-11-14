@@ -11,14 +11,27 @@ interface FAQItem {
   answer: string;
 }
 
+export type TravelAudience = "uk" | "bd";
+
 interface TravelIntelligenceProps {
-  pageTitle: string;
+  pageTitle?: string;
   quickAnswer: string;
   keyFacts: KeyFact[];
-  faqs: FAQItem[];
+  /**
+   * Optional. Blog articles no longer pass FAQs: every article already ends
+   * with its own author-written FAQ (server-rendered, and the source of the
+   * page's FAQPage markup), so a second accordion repeated the question heading
+   * and sometimes contradicted the answer above it.
+   */
+  faqs?: FAQItem[];
   schemaMarkup?: { type: string; description: string; code: string };
   metaDescription?: string;
   lang?: "en" | "bn";
+  /** Which audience the panel copy addresses. Defaults to the Bangladesh site audience. */
+  audience?: TravelAudience;
+  /** Overrides the audience wording, e.g. "British passport holders" for visa pages. */
+  audienceLabel?: string;
+  audienceLabelBn?: string;
 }
 
 export function TravelIntelligence({
@@ -27,31 +40,48 @@ export function TravelIntelligence({
   keyFacts,
   faqs,
   lang,
+  audience = "bd",
+  audienceLabel,
+  audienceLabelBn,
 }: TravelIntelligenceProps) {
   // State to track which FAQ index is open (accordion style)
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-  const isBn = lang === "bn" || /[\u0980-\u09FF]/.test(pageTitle);
+  const isBn = lang === "bn" || /[\u0980-\u09FF]/.test(pageTitle ?? "");
+  // The Bengali labels are stored in the genitive form that precedes "জন্য"
+  // ("যুক্তরাজ্যের ভ্রমণকারীদের জন্য"), so a template cannot produce
+  // "ভ্রমণকারী-এর জন্য".
+  const resolvedAudienceLabel = isBn
+    ? audienceLabelBn ?? (audience === "uk" ? "যুক্তরাজ্যের ভ্রমণকারীদের" : "বাংলাদেশি ভ্রমণকারীদের")
+    : audienceLabel ?? (audience === "uk" ? "UK travellers" : "travellers from Bangladesh");
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
   return (
-    <div id="travel-intelligence-panel" className="ural-panel bg-white border border-border-subtle p-6 shadow-sm space-y-6 my-8">
+    <div
+      id="travel-intelligence-panel"
+      data-audience={audience}
+      aria-labelledby="travel-intelligence-heading"
+      className="ural-panel bg-white border border-border-subtle p-6 shadow-sm space-y-6 my-8"
+    >
       {/* Header section */}
       <div className="border-b border-slate-100 pb-5">
         <div className="flex items-center gap-2.5 text-brand-navy mb-1">
           <div className="p-1.5 bg-[#F6B73C]/10 rounded-lg text-[#F6B73C]">
             <Info size={18} />
           </div>
-          <h2 className="ural-section-title font-serif text-xl font-bold text-slate-900">
-            {isBn ? "প্রয়োজনীয় ভ্রমণ তথ্য ও প্রশ্নোত্তর" : "Essential Travel Insights"}
+          <h2
+            id="travel-intelligence-heading"
+            className="ural-section-title font-serif text-xl font-bold text-slate-900"
+          >
+            {isBn ? "প্রয়োজনীয় ভ্রমণ তথ্য" : "Essential Travel Insights"}
           </h2>
         </div>
         <p className="text-sm text-slate-500">
           {isBn
-            ? "বাংলাদেশি ভ্রমণকারীদের জন্য মূল তথ্য এবং সাধারণ প্রশ্নোত্তর।"
-            : "Quick guides, key metrics, and frequently asked questions for travelers from Bangladesh."}
+            ? `${resolvedAudienceLabel} জন্য যাচাই করা মূল তথ্য, তারিখসহ সংখ্যা ও করণীয়।`
+            : `Key facts, dated figures and checks for ${resolvedAudienceLabel}.`}
         </p>
       </div>
 
@@ -105,7 +135,7 @@ export function TravelIntelligence({
         <div className="space-y-4 pt-4 border-t border-slate-100">
           <h3 className="ural-card-title font-serif text-base font-bold text-brand-navy flex items-center gap-2">
             <HelpCircle size={16} className="text-[#F6B73C]" />
-            {isBn ? "সচরাচর জিজ্ঞাসিত প্রশ্ন (FAQ)" : "Frequently Asked Questions"}
+            {isBn ? "সচরাচর জিজ্ঞাসিত প্রশ্ন" : "Common questions about these facts"}
           </h3>
           <div className="space-y-2.5">
             {faqs.map((faq, index) => {

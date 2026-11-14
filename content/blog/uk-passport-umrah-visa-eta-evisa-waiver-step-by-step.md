@@ -25,6 +25,24 @@ snippet: "For Umrah outside Hajj season a British passport has three routes: ETA
 snippetBn: "হজ্জ মৌসুমের বাইরে ওমরাহর জন্য ব্রিটিশ পাসপোর্টে তিনটি রুট: ইটিএ (৭৩০ দিন, মোট ১৮০ দিন, স্বাস্থ্যবিমা নেই), ই-ভিসা (৩৬৫ দিন, মোট ৯০ দিন, ১ লাখ রিয়াল পর্যন্ত বিমা) আর ইলেকট্রনিক ভিসা ওয়েভার (এক-entry, ১৮০ দিন পর্যন্ত, ফ্লাইটের ৪৮ ঘণ্টা থেকে ৯০ দিন আগে আবেদন)। পাসপোর্টে পৌঁছানোর পরে ছয় মাস মেয়াদ লাগে, এসিডব্লিউওয়াই সার্টিফিকেট পৌঁছানোর অন্তত ১০ দিন আগের হতে হবে, হজ্জের জন্য নুসুক হজ্জ দিয়ে আলাদা ও বাড়ানো-অযোগ্য ভিসা লাগে, আর যুক্তরাজ্যে থাকা বাংলাদেশি পাসপোর্ট এই প্রকাশিত নিয়মের আওতায় নয় — এফসিডিও তাদের সৌদি দূতাবাসে যেতে বলে।"
 faqHeadingEn: "10. Frequently Asked Questions"
 faqHeadingBn: "১০. সচরাচর জিজ্ঞাসা"
+audience: uk
+audienceLabelEn: British passport holders
+audienceLabelBn: ব্রিটিশ পাসপোর্টধারীদের
+aeoSummary: "A British citizen passport has three legal entry routes for Umrah outside Hajj season. The ETA runs 730 days with 180 days in total and no health insurance, the e-visa runs 365 days with 90 days in total and insurance to SAR 100,000, and the electronic visa waiver is single entry for up to 180 days, applied for 48 hours to 90 days ahead with flight details. The passport needs six months left after arrival and the ACWY meningitis certificate must be dated at least 10 days before arrival. Hajj needs its own non-extendable visa, booked only through Nusuk Hajj."
+aeoSummaryBn: "ব্রিটিশ নাগরিক পাসপোর্টে হজ্জ মৌসুমের বাইরে ওমরাহর জন্য তিনটি বৈধ প্রবেশ রুট আছে। ইটিএ ৭৩০ দিনের, মোট ১৮০ দিন, স্বাস্থ্যবিমা অন্তর্ভুক্ত নয়; ই-ভিসা ৩৬৫ দিনের, মোট ৯০ দিন, ১ লাখ রিয়াল পর্যন্ত বিমা; আর ইলেকট্রনিক ভিসা ওয়েভার এক-entry, ১৮০ দিন পর্যন্ত, ফ্লাইটের তথ্যসহ ৪৮ ঘণ্টা থেকে ৯০ দিন আগে আবেদন করতে হয়। পাসপোর্টে পৌঁছানোর পরে ছয় মাস মেয়াদ থাকতে হবে এবং এসিডব্লিউওয়াই মেনিনজাইটিস সার্টিফিকেট পৌঁছানোর অন্তত ১০ দিন আগের হতে হবে। হজ্জের জন্য আলাদা, বাড়ানো-অযোগ্য ভিসা লাগে, শুধু নুসুক হজ্জ দিয়ে।"
+aeoFacts:
+  - label: ETA (730 days)
+    labelBn: ইটিএ (৭৩০ দিন)
+    value: 180 days in total, multiple entry, health insurance not included — checked 14 Nov 2026
+    valueBn: মোট ১৮০ দিন, একাধিক প্রবেশ, স্বাস্থ্যবিমা অন্তর্ভুক্ত নয় — ১৪ নভেম্বর ২০২৬-এ যাচাই
+  - label: e-Visa (365 days)
+    labelBn: ই-ভিসা (৩৬৫ দিন)
+    value: 90 days in total with insurance to SAR 100,000 — checked 14 Nov 2026
+    valueBn: মোট ৯০ দিন, ১ লাখ রিয়াল পর্যন্ত বিমাসহ — ১৪ নভেম্বর ২০২৬-এ যাচাই
+  - label: Visa waiver (single entry)
+    labelBn: ভিসা ওয়েভার (এক প্রবেশ)
+    value: Up to 180 days, applied for 48 hours to 90 days ahead with flight details — checked 14 Nov 2026
+    valueBn: ১৮০ দিন পর্যন্ত, ফ্লাইটের তথ্যসহ ৪৮ ঘণ্টা থেকে ৯০ দিন আগে আবেদন — ১৪ নভেম্বর ২০২৬-এ যাচাই
 references:
   - name: "UK FCDO — Saudi Arabia entry requirements: ETA, e-visa and electronic visa waiver terms (checked 14 November 2026)"
     nameBn: "যুক্তরাজ্য এফসিডিও — সৌদি আরবের প্রবেশ শর্ত: ইটিএ, ই-ভিসা ও ইলেকট্রনিক ভিসা ওয়েভারের শর্ত (১৪ নভেম্বর ২০২৬-এ যাচাই)"

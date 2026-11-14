@@ -17,6 +17,7 @@ import { ChevronLeft, ExternalLink, Link2, ArrowRight, Lightbulb, KeyRound, Tria
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { BlogArticleHeader } from "../components/BlogArticleHeader";
 import { BlogPlanningLinks, BlogPlanningHubs, BlogRelatedArticles } from "../components/BlogArticleNavigation";
+import { getBlogAeoPanel, isUkAudiencePost } from "../utils/blogAeoPanel";
 
 import { TiqetsEmbedWidget } from "../components/TiqetsEmbedWidget";
 
@@ -301,6 +302,10 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                 activePost.author;
 
               const activeCoverImg = getBlogCoverImage(activePost.slug);
+
+              const aeoPanel = getBlogAeoPanel(activePost.slug);
+
+              const isUkAudience = isUkAudiencePost(activePost.slug);
 
               const relatedPosts = getArticleRelatedPosts(activePost.slug, BLOG_DATA, localizedBlogs);
 
@@ -1970,73 +1975,20 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                         </section>
                       )}
 
-                      {/* Visible Hajj, Umrah & Ziyarah Preparation FAQs (Matches JSON-LD FAQPage Schema 100%) */}
-
-                      {(activePost.category === "Hajj & Umrah" || activePost.category === "Ziyarah & Stopovers") &&
-                        activePost.slug !== UMRAH_GUIDE_SLUG && activePost.slug !== NUSUK_GUIDE_SLUG &&
-                        activePost.slug !== "saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" &&
-                        activePost.slug !== "makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" &&
-                        activePost.slug !== "dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" &&
-                        activePost.slug !== "umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates" &&
-                        activePost.slug !== "umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide" &&
-                        activePost.slug !== "wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules" &&
-                        activePost.slug !== "ramadan-umrah-itikaf-guide-bangladesh-booking-budget" &&
-                        activePost.slug !== "official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport" && (
-
+                      {/* Page-specific Essential Travel Insights. Rendered only when the
+                          article declares its own dated aeoSummary + aeoFacts in frontmatter;
+                          there is deliberately no shared fallback block, because the old one
+                          printed Bangladesh visa, BDT and Dhaka advice on UK articles. */}
+                      {aeoPanel && (
                         <TravelIntelligence
-
-                          pageTitle={
-
-                            isBn
-
-                              ? "বাংলাদেশ থেকে Umrah ও Hajj প্রস্তুতি — সাধারণ প্রশ্নোত্তর (FAQ)"
-
-                              : "Umrah & Hajj Preparation from Bangladesh — Verified FAQs"
-
-                          }
-
-                          quickAnswer={
-
-                            isBn
-
-                              ? "বাংলাদেশি নাগরিকদের ফরজ হজের জন্য ধর্ম বিষয়ক মন্ত্রণালয়ের অফিশিয়াল পোর্টাল (hajj.gov.bd)-এ নিবন্ধন করতে হবে। ওমরাহ মন্ত্রণালয়ের সিজন ক্যালেন্ডার অনুযায়ী চলে—১৪৪৮ হিজরিতে Umrah ভিসা ইস্যু সর্বশেষ ৯ মার্চ ২০২৭ এবং প্রবেশ সর্বশেষ ২৩ মার্চ ২০২৭, তাই বুক করার আগে বর্তমান ক্যালেন্ডার দেখে নিন। সরকারি Umrah ভিসার ফি 'আনুমানিক ৩০০ সৌদি রিয়াল' বলা হয়েছে (১৫ অক্টোবর ২০২৬ যাচাই); ইনস্যুরেন্স ও সার্ভিস প্যাকেজের অঙ্ক ইস্যুর সময় নির্ধারিত হয়, তাই এখানে কোনো BDT মোট খরচ প্রকাশ করা হলো না। Visit Saudi সর্বোচ্চ ৯৬ ঘণ্টার stopover বর্ণনা করে; নির্দিষ্ট airline eligibility ও booking flow যাচাই হয়নি। প্রকাশিত foreign-visa category দিয়ে approval বা entry নিশ্চিত নয়; সূত্রের জন্য Saudi visa guide দেখুন।"
-
-                              : "Bangladeshi citizens must register via hajj.gov.bd for obligatory Hajj. Umrah follows the Ministry's season calendar — for 1448H, Umrah visas are issued through 9 March 2027 and entry closes 23 March 2027, so check the current calendar before booking. The government Umrah visa fee is stated as 'estimated at 300 Saudi Riyals' (checked 15 October 2026), with insurance and the service package priced at issuance; no BDT total is published. Visit Saudi describes a stopover of up to 96 hours; airline-specific eligibility and booking flow were not verified. Published foreign-visa categories do not guarantee approval or entry; see the Saudi visa guide for sources."
-
-                          }
-
-                          keyFacts={[
-
-                            {
-
-                              label: isBn ? "Umrah ভিসার সরকারি ফি" : "Umrah visa government fee",
-
-                              value: isBn ? "SAR ৩০০ ('আনুমানিক', ১৫ অক্টোবর ২০২৬ যাচাই) — প্যাকেজসহ মোট অঙ্ক ইস্যুর সময় জানা যায়" : "SAR 300 (stated as an estimate; checked 15 Oct 2026) — insurance and package priced at issuance",
-
-                            },
-
-                            {
-
-                              label: isBn ? "১০ দিনের DIY Umrah বাজেট" : "10-Day DIY Umrah Budget",
-
-                              value: isBn ? "BDT ১,১৬,০০০ – ১,৩২,০০০ / জন (১৪ অক্টোবর ২০২৬ যাচাই; লাইভ কোট নয়)" : "BDT 1,16,000 – 1,32,000 / Person (checked 14 Oct 2026; not a live quote)",
-
-                            },
-
-                            {
-
-                              label: isBn ? "বায়োমেট্রিক ও পারমিট অ্যাপ (ভিসাভেদে প্রযোজ্য)" : "Biometric & permit apps (visa-specific)",
-
-                              value: isBn ? "Nusuk (nusuk.sa) + প্রযোজ্য হলে Saudi Visa Bio" : "Nusuk (nusuk.sa) + Saudi Visa Bio where your visa application requires it",
-
-                            },
-
-                          ]}
-
-                          faqs={localizedHajjFaqs}
-
+                          pageTitle={activePost.title}
+                          quickAnswer={isBn ? aeoPanel.summary.bn : aeoPanel.summary.en}
+                          keyFacts={isBn ? aeoPanel.facts.bn : aeoPanel.facts.en}
+                          audience={aeoPanel.audience}
+                          audienceLabel={aeoPanel.audienceLabel.en}
+                          audienceLabelBn={aeoPanel.audienceLabel.bn}
+                          lang={isBn ? "bn" : "en"}
                         />
-
                       )}
 
 
@@ -2072,7 +2024,11 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                             ? isBn
                               ? "কেনার আগে Saudi eSIM provider-এর coverage, data, validity, device compatibility ও activation নিয়ম যাচাই করুন। Nusuk permit ও booking-এর তথ্য offline কপিও রাখুন।"
                               : "Before buying a Saudi eSIM, check the provider's coverage, data, validity, device compatibility and activation terms. Keep offline copies of Nusuk permits and booking details too."
-                            : isBn
+                            : isUkAudience
+                              ? isBn
+                                ? "যুক্তরাজ্য থেকে রওনা হওয়ার আগেই সৌদি আরবের 4G/5G eSIM ইনস্টল করে রাখুন, যাতে জেদ্দায় নামার পরই নুসুক রওদা পারমিটের QR, হারামাইন ট্রেনের টিকিট ও Uber/Careem কাজ করে।"
+                                : "Install a Saudi Arabia 4G/5G eSIM before you leave the UK so your Nusuk Rawdah permit QR code, Haramain train ticket and Uber/Careem work the moment you land at Jeddah."
+                              : isBn
                               ? "ঢাকা থেকে উড়ে নামার সাথে সাথেই আপনার Nusuk Rawdah পারমিট QR, Haramain ট্রেন টিকিট এবং Uber/Careem কাজ করবে — সৌদি আরব 4G/5G eSIM আগেই ইনস্টল করে রাখুন।"
                               : "Install a Saudi Arabia 4G/5G eSIM before flying from Dhaka so your Nusuk Rawdah permit QR code, Haramain train ticket, and Uber/Careem work the moment you land at Jeddah Airport."}
 
@@ -2127,10 +2083,12 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                         <p className="text-[11px] text-slate-400 leading-relaxed">
 
                           {isBn
-
-                            ? "গন্তব্য, ডেটা, মেয়াদ ও ডিভাইস সাপোর্ট প্রভাইডারের সাইটে চেক করুন। OTPs-এর জন্য বাংলাদেশি SIM রাখা কার্ডওয়াইজ, অপারেটর ও রোমিং সেটিংসের উপর নির্ভর করে।"
-
-                            : "Choose destination & plan on the provider's site. Check coverage, data allowance, validity, device compatibility, activation rules, and current price before you buy. Keeping a Bangladesh SIM for OTPs depends on your phone, operator, and roaming settings."}
+                            ? (isUkAudience
+                              ? "গন্তব্য, ডেটা, মেয়াদ ও ডিভাইস সাপোর্ট প্রভাইডারের সাইটে চেক করুন। OTP-এর জন্য যুক্তরাজ্যের SIM রাখা ফোন, অপারেটর ও রোমিং সেটিংসের উপর নির্ভর করে।"
+                              : "গন্তব্য, ডেটা, মেয়াদ ও ডিভাইস সাপোর্ট প্রভাইডারের সাইটে চেক করুন। OTPs-এর জন্য বাংলাদেশি SIM রাখা কার্ডওয়াইজ, অপারেটর ও রোমিং সেটিংসের উপর নির্ভর করে।")
+                            : (isUkAudience
+                              ? "Choose the destination and plan on the provider's site. Check coverage, data allowance, validity, device compatibility, activation rules and current price before you buy. Keeping your UK SIM for bank OTPs depends on your phone, operator and roaming settings."
+                              : "Choose destination & plan on the provider's site. Check coverage, data allowance, validity, device compatibility, activation rules, and current price before you buy. Keeping a Bangladesh SIM for OTPs depends on your phone, operator, and roaming settings.")}
 
                         </p>
 
@@ -2316,7 +2274,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                         </div>
 
-                        <PartnerLinkButton href={AFFILIATE_LINKS.aviasales} label={isBn ? "Flight ভাড়া তুলনা করুন" : "Compare Flights from Dhaka"} variant="dark" />
+                        <PartnerLinkButton href={AFFILIATE_LINKS.aviasales} label={isUkAudience ? (isBn ? "যুক্তরাজ্যের ফ্লাইটের ভাড়া তুলনা করুন" : "Compare fares from UK airports") : isBn ? "Flight ভাড়া তুলনা করুন" : "Compare Flights from Dhaka"} variant="dark" />
 
                         <PartnerLinkButton href={AFFILIATE_LINKS.klook} label={isBn ? "Tours ও টিকিট বুক করুন" : "Book Tours & Attractions"} variant="dark" />
 
@@ -2392,6 +2350,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                     getCoverImage={getBlogCoverImage}
                     getSnippet={getBlogAeoSnippet50Words}
                     navigate={navigateTo}
+                    audience={isUkAudience ? "uk" : "bd"}
                   />
                   <BlogPlanningHubs locale={isBn ? "bn" : "en"} navigate={navigateTo} />
 

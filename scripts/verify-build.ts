@@ -42,6 +42,7 @@ import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { SITE_ORIGIN, localizePublicSiteUrl } from "../src/utils/localeRoutes";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
+import { getBlogAeoPanel } from "../src/utils/blogAeoPanel";
 import {
   AFFILIATE_LINKS,
   AFFILIATE_OFFER_REGISTRY,
@@ -836,6 +837,71 @@ check(
       ]
         .filter(Boolean)
         .join("; "),
+);
+
+// --- Essential Travel Insights panels are page-specific --------------------
+//
+// The panel used to be one hard-coded Bangladesh block printed on every
+// Hajj/Umrah article through a denylist of exceptions, so the UK pillar, the
+// ATOL guide and the flights guide told readers to register on hajj.gov.bd and
+// quoted a BDT budget inside a GBP article. It also only ever rendered after
+// hydration, so the block written for answer engines was in no shipped HTML at
+// all. A post now either declares its own dated aeoSummary/aeoFacts or renders
+// no panel; these assertions keep that true.
+const AEO_UK_FORBIDDEN: Array<[RegExp, string]> = [
+  [/hajj\.gov\.bd/i, "hajj.gov.bd (Bangladesh Hajj portal)"],
+  [/\bBDT\b/, "a BDT amount"],
+  [/\bDhaka\b/i, "Dhaka departure advice"],
+  [/Bangladesh/i, "Bangladesh audience wording"],
+];
+const aeoPanelIssues: string[] = [];
+const aeoPanelSlugs: string[] = [];
+for (const post of BLOG_DATA) {
+  const panel = getBlogAeoPanel(post.slug);
+  if (!panel) continue;
+  aeoPanelSlugs.push(post.slug);
+  const authored = [
+    panel.summary.en,
+    panel.summary.bn,
+    ...panel.facts.en.flatMap((fact) => [fact.label, fact.value]),
+    ...panel.facts.bn.flatMap((fact) => [fact.label, fact.value]),
+  ].join(" ");
+  if (panel.audience === "uk") {
+    for (const [pattern, description] of AEO_UK_FORBIDDEN) {
+      if (pattern.test(authored)) {
+        aeoPanelIssues.push(`${post.slug} (uk panel carries ${description})`);
+      }
+    }
+    for (const fact of panel.facts.en) {
+      if (!/\b(?:19|20)\d{2}\b/.test(fact.value)) {
+        aeoPanelIssues.push(`${post.slug} (undated uk fact: ${fact.label})`);
+      }
+    }
+  }
+  for (const [locale, relative] of [
+    ["en", `blog/${post.slug}.html`],
+    ["bn", `bn/blog/${post.slug}.html`],
+  ] as const) {
+    const file = path.join(DIST_DIR, relative);
+    if (!fs.existsSync(file)) {
+      aeoPanelIssues.push(`${post.slug} (${locale} panel has no rendered route)`);
+      continue;
+    }
+    const html = fs.readFileSync(file, "utf8");
+    if (!html.includes('id="travel-intelligence-panel"')) {
+      aeoPanelIssues.push(`${post.slug} (${locale} panel ships only after hydration)`);
+    }
+    const faqHeadings = (html.match(/Frequently Asked Questions|সচরাচর জিজ্ঞাসিত প্রশ্ন/g) ?? []).length;
+    if (faqHeadings > 1) {
+      aeoPanelIssues.push(`${post.slug} (${locale} repeats the article FAQ heading ${faqHeadings}×)`);
+    }
+  }
+}
+check(
+  aeoPanelIssues.length === 0,
+  aeoPanelIssues.length === 0
+    ? `Essential Travel Insights panels are page-specific, dated and in the shipped HTML (${aeoPanelSlugs.length} post(s): ${aeoPanelSlugs.join(", ")})`
+    : `AEO panel problems: ${aeoPanelIssues.slice(0, 6).join("; ")}`,
 );
 
 const altTextIssues: string[] = [];
@@ -6640,9 +6706,13 @@ const sharedUmrahSurfaces: { label: string; text: string; needs: RegExp[] }[] = 
     needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_DATE],
   },
   {
-    label: "blog-post hub copy (source)",
-    text: read(path.join(ROOT_DIR, "src/routes/BlogPostRouteView.tsx")) ?? "",
-    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_DATE],
+    // The blog-post hub panel that used to live in BlogPostRouteView is gone:
+    // articles now carry their own AEO panels. The last shared "Umrah & Hajj
+    // Preparation from Bangladesh" panel is the /umrah landing page, so that is
+    // where the dated official fee anchor has to stay.
+    label: "Umrah hub panel copy (source)",
+    text: read(path.join(ROOT_DIR, "src/components/UmrahLandingPage.tsx")) ?? "",
+    needs: [SHARED_UMRAH_EN_ANCHOR, SHARED_UMRAH_BN_ANCHOR, SHARED_UMRAH_DATE, SHARED_UMRAH_BN_DATE],
   },
   {
     label: "Dubai-combo article (EN)",
@@ -6677,9 +6747,11 @@ check(
   `the shared Umrah-visa framing on /umrah, /blog, blog posts and the Dubai combo carries only the dated official fee anchor [${sharedUmrahIssues.slice(0, 2).join("; ")}]`
 );
 
-// The hub tiles are client-rendered only, so a `dist` grep cannot see them. Render
-// a Umrah-category article through the real route component and assert the panel
-// exists there with the qualified copy.
+// The old fixture rendered a Umrah-category article and expected the shared
+// Bangladesh panel to appear in it. That is exactly the behaviour that put
+// hajj.gov.bd and BDT figures on UK articles, so the fixture now asserts the
+// opposite: an article without its own aeoSummary/aeoFacts renders no panel, and
+// nothing banned reaches the markup.
 function renderSharedUmrahPanel(locale: "en" | "bn"): string {
   // Reviewed procedural guides suppress this generic price panel. Preserve its independent regression fixture.
   const slug = "bangladeshi-halal-food-guide-makkah-madinah-budget-meals";
@@ -6716,11 +6788,8 @@ const sharedUmrahPanelIssues: string[] = [];
 for (const locale of ["en", "bn"] as const) {
   try {
     const markup = renderSharedUmrahPanel(locale);
-    if (!markup.includes('id="travel-intelligence-panel"')) {
-      sharedUmrahPanelIssues.push(`${locale}: hub panel did not render`);
-    }
-    if (!(locale === "bn" ? SHARED_UMRAH_BN_ANCHOR : SHARED_UMRAH_EN_ANCHOR).test(markup)) {
-      sharedUmrahPanelIssues.push(`${locale}: no official fee anchor in the tiles`);
+    if (markup.includes('id="travel-intelligence-panel"')) {
+      sharedUmrahPanelIssues.push(`${locale}: a post without its own AEO data fell back to a shared panel`);
     }
     for (const entry of SHARED_UMRAH_BANNED_PATTERNS) {
       if (entry.pattern.test(markup)) sharedUmrahPanelIssues.push(`${locale}: ${entry.label}`);
@@ -6731,7 +6800,7 @@ for (const locale of ["en", "bn"] as const) {
 }
 check(
   sharedUmrahPanelIssues.length === 0,
-  `the client-rendered hub tiles on Umrah-category posts show the SAR fee anchor and no BDT visa price [${sharedUmrahPanelIssues.slice(0, 2).join("; ")}]`
+  `Umrah-category posts without their own AEO data render no shared Bangladesh panel and carry no banned visa claim [${sharedUmrahPanelIssues.slice(0, 2).join("; ")}]`
 );
 
 // The prerendered hub page is the one surface that feeds both readers and
