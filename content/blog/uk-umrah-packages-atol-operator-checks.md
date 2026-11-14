@@ -174,7 +174,7 @@ Insurance is a separate purchase with its own rules. If a policy excludes travel
 
 Useful to have written down: the British Consulate General in Jeddah is **+966 11 481 9100**, and a replacement emergency travel document if a passport is lost costs **£125** — so leave processing time.
 
-If the package's inclusions do not match what you actually want, the alternative is worth pricing honestly: our [UK pillar guide](/blog/umrah-hajj-guide-united-kingdom-2026) covers the visa routes and Nusuk step, [where to stay](/blog/hajj-umrah-accommodation-guide-makkah-madinah) covers hotel zones, and the [BRN and Rawdah walkthrough](/blog/nusuk-hotel-brn-rawdah-gate-guide) covers the permit chain. DIY is not automatically cheaper — it is simply a different set of risks, and the one you carry yourself.
+If the package's inclusions do not match what you actually want, the alternative is worth pricing honestly: our [UK pillar guide](/blog/umrah-hajj-guide-united-kingdom-2026) covers the visa routes and Nusuk step, [where to stay](/blog/hajj-umrah-accommodation-guide-makkah-madinah) covers hotel zones, and the [BRN and Rawdah walkthrough](/blog/nusuk-hotel-brn-rawdah-gate-guide) covers the permit chain. DIY is not automatically cheaper — it is simply a different set of risks, and the one you carry yourself. Two of those steps now have their own walkthroughs: [the UK–Saudi flights guide](/blog/uk-to-saudi-flights-umrah-direct-or-connecting) for what is nonstop and what it costs, and [the passport and visa step-by-step](/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step) for which entry route a British passport should use.
 
 9. Frequently Asked Questions
 
@@ -270,7 +270,7 @@ There is no official retail price, so compare the flight component first: KAYAK'
 
 লিখে রাখার মতো তথ্য: জেদ্দায় ব্রিটিশ কনস্যুলেট জেনারেল **+৯৬৬ ১১ ৪৮১ ৯১০০**, আর পাসপোর্ট হারালে জরুরি ট্রাভেল ডকুমেন্টের খরচ **£১২৫** — তাই সময় হাতে রাখুন।
 
-প্যাকেজের অন্তর্ভুক্তি আপনার চাওয়ার সঙ্গে না মিললে বিকল্পটাও সৎভাবে দাম দেখুন: আমাদের [যুক্তরাজ্যের পিলার গাইডে](/blog/umrah-hajj-guide-united-kingdom-2026) আছে ভিসার রুট ও নুসুকের ধাপ, [আবাসন গাইডে](/blog/hajj-umrah-accommodation-guide-makkah-madinah) আছে হোটেল জোন, আর [BRN ও রওদা পারমিটের ধাপে](/blog/nusuk-hotel-brn-rawdah-gate-guide) আছে পারমিটের শৃঙ্খল। নিজে করলে খরচ স্বয়ংক্রিয়ভাবে কমে না — বদলে যায় ঝুঁকির বণ্টন, আর সেটি নিজেকেই বহন করতে হয়।
+প্যাকেজের অন্তর্ভুক্তি আপনার চাওয়ার সঙ্গে না মিললে বিকল্পটাও সৎভাবে দাম দেখুন: আমাদের [যুক্তরাজ্যের পিলার গাইডে](/blog/umrah-hajj-guide-united-kingdom-2026) আছে ভিসার রুট ও নুসুকের ধাপ, [আবাসন গাইডে](/blog/hajj-umrah-accommodation-guide-makkah-madinah) আছে হোটেল জোন, আর [BRN ও রওদা পারমিটের ধাপে](/blog/nusuk-hotel-brn-rawdah-gate-guide) আছে পারমিটের শৃঙ্খল। নিজে করলে খরচ স্বয়ংক্রিয়ভাবে কমে না — বদলে যায় ঝুঁকির বণ্টন, আর সেটি নিজেকেই বহন করতে হয়। এর দুটি ধাপের আলাদা গাইড আছে: কোনটা নন-স্টপ ও দাম কত, তা [যুক্তরাজ্য থেকে সৌদি ফ্লাইট গাইডে](/blog/uk-to-saudi-flights-umrah-direct-or-connecting); ব্রিটিশ পাসপোর্টে কোন প্রবেশ রুট, তা [পাসপোর্ট ও ভিসা গাইডে](/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step)।
 
 ৯. সচরাচর জিজ্ঞাসা
 

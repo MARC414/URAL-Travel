@@ -180,8 +180,8 @@ placeholder ships.
 | --- | --- | --- |
 | 12 Nov | `/blog/umrah-hajj-guide-united-kingdom-2026` (pillar) | **published** (moved forward from 17 Nov) |
 | 13 Nov | `/blog/uk-umrah-packages-atol-operator-checks` — ATOL, operator vetting, quote sanity check | **scheduled** |
-| 14 Nov | UK→Saudi flights: LHR/MAN/BHX, direct vs 1-stop, seasons, baggage | next |
-| 15 Nov | UK passport → Umrah visa, step by step (ETA / e-visa / waiver) | queued |
+| 14 Nov | UK→Saudi flights: LHR/MAN/BHX, direct vs 1-stop, seasons, baggage | **published 14 Nov 2026** — `content/blog/uk-to-saudi-flights-umrah-direct-or-connecting.md`, `status: scheduled` + `publishDate: 2026-11-14`; cover `uk_saudi_flights_20261114` (640/960/1200 webp+avif, social JPEG, height 800); inbound links from the pillar and the ATOL page; keyword-map row added; build 143 EN/143 BN, verify:build 517/517 |
+| 15 Nov | UK passport → Umrah visa, step by step (ETA / e-visa / waiver) | **scheduled 15 Nov 2026** — `content/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step.md`, `status: scheduled` + `publishDate: 2026-11-15` (09:00 Dhaka gate); cover `uk_umrah_visa_20261114`; inbound links and keyword-map row in place; verified in preview build, absent from production sitemap until the gate opens |
 | 16 Nov | Hajj 2027 from the UK: registration, quotas, operators, costs | queued |
 | 17 Nov | Ramadan Umrah 2027 from the UK: dates, fares, crowd planning | queued |
 | 18 Nov | Umrah from the UK with elderly parents / family: hotels, access | queued |

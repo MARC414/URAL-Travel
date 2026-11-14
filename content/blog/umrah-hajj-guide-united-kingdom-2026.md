@@ -140,7 +140,7 @@ Confirmed on the airlines' own pages, checked 11 November 2026:
 - **British Airways:** London Heathrow–Jeddah direct in about **6 hours 15 minutes** (BA's Saudi Arabia page); BA's press room dates the current year-round Jeddah service from **4 November 2024**, launched as **four flights a week** from Heathrow Terminal 5.
 - **SAUDIA:** **London, Manchester and Birmingham** in its network alongside Jeddah and Al Madinah, operating from **Heathrow Terminal 4** (official network page).
 
-Timetables change seasonally; this guide does not assert Madinah (MED) nonstop options — re-check on the airline's own site when you book. Fares for those routes, with the dates they were checked, sit in the budget snapshot below.
+Timetables change seasonally; this guide does not assert Madinah (MED) nonstop options — re-check on the airline's own site when you book. Fares for those routes, with the dates they were checked, sit in the budget snapshot below. For the airport-by-airport picture — what is genuinely nonstop, what only connects, and the Hajj-season rule that can stop you boarding — read [the UK–Saudi flights guide](/blog/uk-to-saudi-flights-umrah-direct-or-connecting).
 
 ## Is your booking protected — and what does the current advice change?
 
@@ -160,7 +160,7 @@ Consular fallback: British Consulate General Jeddah **+966 11 481 9100**; a lost
 
 In order — each line is a source you can open:
 
-1. **Decide the route by passport:** British citizen → the three FCDO routes above; any other passport → the live eligibility check or the embassy, never an agency's summary. If a package is involved, [the ATOL and operator checks](/blog/uk-umrah-packages-atol-operator-checks) are the next thing to read.
+1. **Decide the route by passport:** British citizen → the three FCDO routes above; any other passport → the live eligibility check or the embassy, never an agency's summary. The three British routes are walked through, document by document, in [the passport and visa step-by-step](/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step). If a package is involved, [the ATOL and operator checks](/blog/uk-umrah-packages-atol-operator-checks) are the next thing to read.
 2. **Passport validity:** at least 6 months after your arrival date, with blank pages.
 3. **MenACWY:** booked early enough that the certificate is valid **10 days before arrival**.
 4. **Nusuk:** account created and the Umrah permit booked for your dates; Hajj, if that is the intent, only via Nusuk Hajj. The BRN chain behind permits: [the Nusuk BRN and Rawdah permit chain](/blog/nusuk-hotel-brn-rawdah-gate-guide).
@@ -226,7 +226,7 @@ Ask for the ATOL number and check it on atol.org; the certificate arrives as soo
 
 ## যুক্তরাজ্য থেকে কীভাবে উড়বেন
 
-ব্রিটিশ এয়ারওয়েজ: লন্ডন হিথরো–জেদ্দা সরাসরি প্রায় 6 ঘণ্টা 15 মিনিট; বর্তমান বছরজুড়ে জেদ্দা পরিষেবা 4 নভেম্বর 2024 থেকে, শুরুতে সপ্তাহে 4 ফ্লাইট, হিথরো টার্মিনাল 5। সৌদিয়া: লন্ডন, ম্যানচেস্টার ও বার্মিংহাম নেটওয়ার্কে, হিথরো টার্মিনাল 4 থেকে। সময়সূচি মৌসুমভেদে বদলায় — বুকিংয়ের দিনে এয়ারলাইনের নিজস্ব সাইটে যাচাই করুন। এই রুটগুলোর ভাড়া, যাচাইয়ের তারিখসহ, নিচের বাজেট স্ন্যাপশটে আছে।
+ব্রিটিশ এয়ারওয়েজ: লন্ডন হিথরো–জেদ্দা সরাসরি প্রায় 6 ঘণ্টা 15 মিনিট; বর্তমান বছরজুড়ে জেদ্দা পরিষেবা 4 নভেম্বর 2024 থেকে, শুরুতে সপ্তাহে 4 ফ্লাইট, হিথরো টার্মিনাল 5। সৌদিয়া: লন্ডন, ম্যানচেস্টার ও বার্মিংহাম নেটওয়ার্কে, হিথরো টার্মিনাল 4 থেকে। সময়সূচি মৌসুমভেদে বদলায় — বুকিংয়ের দিনে এয়ারলাইনের নিজস্ব সাইটে যাচাই করুন। এই রুটগুলোর ভাড়া, যাচাইয়ের তারিখসহ, নিচের বাজেট স্ন্যাপশটে আছে। কোন বিমানবন্দর থেকে সত্যিই নন-স্টপ, কোনটা শুধু কানেক্টিং, আর হজ্জ মৌসুমে কোন নিয়মে বোর্ডিং আটকে যায় — বিস্তারিত [যুক্তরাজ্য থেকে সৌদি ফ্লাইট গাইডে](/blog/uk-to-saudi-flights-umrah-direct-or-connecting)।
 
 ## সুরক্ষা ও বর্তমান পরামর্শ
 
@@ -234,7 +234,7 @@ ATOL হলো অর্থসুরক্ষা, বীমা নয় — ফ
 
 ## মূল্য দেওয়ার আগে
 
-পাসপোর্টের মেয়াদ, ভিসা রুট, ACWY, নুসুক পারমিট, ATOL নম্বর, বীমা ও এফসিডিও পাতা, তারপর এয়ারলাইনের সময়সূচি — এই ক্রমে যাচাই করুন। নুসুক পারমিট যে BRN-এ যুক্ত হয়, সেই শৃঙ্খল দেখুন [নুসুক BRN ও রওদা পারমিট শৃঙ্খল](/blog/nusuk-hotel-brn-rawdah-gate-guide); থাকার জায়গার জোন, গেট ও সময় নিয়ে গভীর গাইড [মক্কা ও মদিনার আবাসন গাইড](/blog/hajj-umrah-accommodation-guide-makkah-madinah); প্যাকেজে গেলে [এটিওএল ও অপারেটর যাচাই](/blog/uk-umrah-packages-atol-operator-checks)।
+পাসপোর্টের মেয়াদ, ভিসা রুট, ACWY, নুসুক পারমিট, ATOL নম্বর, বীমা ও এফসিডিও পাতা, তারপর এয়ারলাইনের সময়সূচি — এই ক্রমে যাচাই করুন। নুসুক পারমিট যে BRN-এ যুক্ত হয়, সেই শৃঙ্খল দেখুন [নুসুক BRN ও রওদা পারমিট শৃঙ্খল](/blog/nusuk-hotel-brn-rawdah-gate-guide); থাকার জায়গার জোন, গেট ও সময় নিয়ে গভীর গাইড [মক্কা ও মদিনার আবাসন গাইড](/blog/hajj-umrah-accommodation-guide-makkah-madinah); ব্রিটিশ পাসপোর্টের তিনটি রুটের ধাপে ধাপে ব্যাখ্যা [পাসপোর্ট ও ভিসা গাইডে](/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step); প্যাকেজে গেলে [এটিওএল ও অপারেটর যাচাই](/blog/uk-umrah-packages-atol-operator-checks)।
 
 **জিবিপি বাজেট স্ন্যাপশট — ১২ নভেম্বর ২০২৬-এ যাচাই।** শুধু তারিখসহ অঙ্ক; যেখানে অফিসিয়াল দাম নেই, সেখানে তা-ই লেখা:
 
