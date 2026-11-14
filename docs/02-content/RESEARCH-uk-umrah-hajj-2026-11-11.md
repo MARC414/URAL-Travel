@@ -410,3 +410,15 @@ confirmation rather than asserting a schedule.
 - **Still needed before scheduling:** validated cover image (640/960/1200 WebP + social JPEG +
   `imageAssets.ts` row), ≥2 inbound links from existing posts in the same release, `SEO-KEYWORD-MAP`
   rows, and a re-check of FCDO + KAYAK on the day the date is set.
+
+### Cover-image encoder note (14 November 2026)
+
+`scripts/optimize-images-production.sh` needs `cwebp` (and is interactive), and this build box has neither `cwebp`, `avifenc`, `magick` nor `ffmpeg` — only ImageMagick 6 with WebP/AVIF delegates. The two UK covers were therefore encoded with `sharp` installed ad hoc (`npm install --no-save sharp`, so `package.json` is untouched):
+
+| Output | Setting used |
+| --- | --- |
+| `src/assets/optimized-social/<base>.jpg` (social master) | 1200×800 cover crop, JPEG q82, mozjpeg, progressive |
+| `<base>-640/-960/-1200.webp` | WebP q76 / q78 / q80, effort 6 |
+| `<base>-640/-960/-1200.avif` | AVIF q48 / q50 / q54, effort 6 |
+
+Resulting weights match the existing cluster (1200w WebP 76–89 KB, AVIF 44–55 KB). If the pipeline is ever run again on a machine with libwebp tools, `cwebp -q 80` reproduces these files closely enough that no visual regression is expected; `RESPONSIVE_IMAGE_HEIGHTS` stays at 800 because the master is a 3:2 crop.
