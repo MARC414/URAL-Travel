@@ -75,6 +75,8 @@ internalLinksEn:
     path: /blog/uk-umrah-packages-atol-operator-checks
   - text: "Haramain train, VIP bus or private van between Makkah and Madinah"
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
+  - text: "Madinah first or Jeddah first: the three routings priced"
+    path: /blog/madinah-first-uk-umrah-routings-open-jaw-stopover
   - text: "Choosing where to sleep in Makkah and Madinah"
     path: /blog/hajj-umrah-accommodation-guide-makkah-madinah
   - text: "Compare UK departures and live fares"
