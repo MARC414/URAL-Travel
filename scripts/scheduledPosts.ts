@@ -36,6 +36,39 @@ export interface ScheduledBlogAffiliateCta {
   body: string;
 }
 
+/**
+ * Audience the Essential Travel Insights panel speaks to.
+ *
+ * `uk` is the UK cluster (British passports, GBP, LHR/MAN/BHM departures);
+ * `bd` is the Bangladesh cluster (BDT, Dhaka departures, hajj.gov.bd). It only
+ * selects the label wording — the panel copy itself always comes from the
+ * article's own `aeo*` fields, never from a shared block.
+ */
+export const AEO_AUDIENCES = ["uk", "bd"] as const;
+export type ScheduledBlogAeoAudience = (typeof AEO_AUDIENCES)[number];
+
+/**
+ * One dated key fact in the Essential Travel Insights panel. Every field is
+ * required in both locales so a Bengali page can never inherit English text,
+ * and `value` / `valueBn` must carry a four-digit year so an undated figure
+ * cannot reach the panel (the same rule the fare and visa-fee guards apply).
+ */
+export interface ScheduledBlogAeoFact {
+  label: string;
+  labelBn: string;
+  value: string;
+  valueBn: string;
+}
+
+export interface ScheduledBlogAeoPanel {
+  audience: ScheduledBlogAeoAudience;
+  audienceLabelEn?: string;
+  audienceLabelBn?: string;
+  summaryEn: string;
+  summaryBn: string;
+  facts: ScheduledBlogAeoFact[];
+}
+
 export interface ScheduledBlogPost {
   slug: string;
   status: ScheduledPostStatus;
@@ -86,6 +119,17 @@ export interface ScheduledBlogPost {
   journeyStage?: ScheduledBlogJourneyStage;
   affiliateCta?: ScheduledBlogAffiliateCta;
   affiliateCtaBn?: ScheduledBlogAffiliateCta;
+  /**
+   * Page-specific Essential Travel Insights panel. Optional: a post without it
+   * renders no panel at all, which is deliberate — the panel used to print one
+   * shared Bangladesh block on every Hajj/Umrah article, including the UK ones.
+   */
+  audience?: ScheduledBlogAeoAudience;
+  audienceLabelEn?: string;
+  audienceLabelBn?: string;
+  aeoSummary?: string;
+  aeoSummaryBn?: string;
+  aeoFacts?: ScheduledBlogAeoFact[];
   englishBody: string;
   bengaliBody: string;
   sourceFile: string;
@@ -220,6 +264,67 @@ function parseAffiliateCta(
     );
   }
   return { provider: provider as string, headline: headline as string, body: body as string };
+}
+
+/**
+ * Parses the optional page-specific AEO panel.
+ *
+ * All-or-nothing: supplying any one of `audience` / `aeoSummary` / `aeoFacts`
+ * requires the full bilingual set, because a half-authored panel would either
+ * fall back to another page's copy (the bug this replaced) or ship English into
+ * a Bengali article. Exactly three facts keeps the grid honest.
+ */
+function parseAeoPanel(data: Record<string, unknown>, file: string): {
+  audience?: ScheduledBlogAeoAudience;
+  audienceLabelEn?: string;
+  audienceLabelBn?: string;
+  aeoSummary?: string;
+  aeoSummaryBn?: string;
+  aeoFacts?: ScheduledBlogAeoFact[];
+} {
+  const audience = optionalEnum(data, "audience", file, AEO_AUDIENCES);
+  const aeoSummary = optionalString(data, "aeoSummary", file);
+  const aeoSummaryBn = optionalString(data, "aeoSummaryBn", file);
+  const audienceLabelEn = optionalString(data, "audienceLabelEn", file);
+  const audienceLabelBn = optionalString(data, "audienceLabelBn", file);
+  const rawFacts = data.aeoFacts;
+  const declared = Boolean(audience || aeoSummary || aeoSummaryBn || audienceLabelEn || audienceLabelBn || rawFacts !== undefined);
+  if (!declared) return {};
+
+  if (!audience) return fail(file, 'an AEO panel needs "audience": "uk" or "bd"');
+  if (!aeoSummary || !aeoSummaryBn) {
+    return fail(file, "an AEO panel needs both aeoSummary and aeoSummaryBn");
+  }
+  if ((audienceLabelEn && !audienceLabelBn) || (audienceLabelBn && !audienceLabelEn)) {
+    return fail(file, "audienceLabelEn and audienceLabelBn must be supplied together");
+  }
+  if (!Array.isArray(rawFacts)) return fail(file, 'frontmatter field "aeoFacts" must be a list');
+  if (rawFacts.length !== 3) {
+    return fail(file, `an AEO panel needs exactly 3 aeoFacts (got ${rawFacts.length})`);
+  }
+  const facts = rawFacts.map((item, index): ScheduledBlogAeoFact => {
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      return fail(file, `frontmatter field "aeoFacts[${index}]" must be a mapping`);
+    }
+    const fact = item as Record<string, unknown>;
+    const out: ScheduledBlogAeoFact = {
+      label: requiredString(fact, "label", file),
+      labelBn: requiredString(fact, "labelBn", file),
+      value: requiredString(fact, "value", file),
+      valueBn: requiredString(fact, "valueBn", file),
+    };
+    if (!/\b(?:19|20)\d{2}\b/.test(out.value)) {
+      return fail(file, `aeoFacts[${index}].value must carry the year it was checked (e.g. "checked 14 Nov 2026")`);
+    }
+    // Bengali copy writes the year in Bengali digits (২০২৬), so accept a run of
+    // four Bengali numerals as the localised equivalent of the ASCII year.
+    if (!/\b(?:19|20)\d{2}\b/.test(out.valueBn) && !/[\u09E6-\u09EF]{4}/.test(out.valueBn)) {
+      return fail(file, `aeoFacts[${index}].valueBn must carry the year it was checked (e.g. "১৪ নভেম্বর ২০২৬")`);
+    }
+    return out;
+  });
+
+  return { audience, audienceLabelEn, audienceLabelBn, aeoSummary, aeoSummaryBn, aeoFacts: facts };
 }
 
 function parseReferences(value: unknown, file: string): ScheduledBlogReference[] {
@@ -362,6 +467,7 @@ function parsePost(file: string): ScheduledBlogPost {
   }
 
   const updatedAt = dateString(data.updatedAt, "updatedAt", file);
+  const aeo = parseAeoPanel(data, file);
   return {
     slug,
     status,
@@ -403,6 +509,7 @@ function parsePost(file: string): ScheduledBlogPost {
       partnerKeys,
       required: false,
     }),
+    ...aeo,
     englishBody,
     bengaliBody,
     sourceFile: file,

@@ -25,6 +25,24 @@ snippet: "Three online routes — an ETA, an e-visa or a waiver — cover Umrah 
 snippetBn: "ব্রিটিশ পাসপোর্টে ওমরাহ তিনটি অনলাইন রুটে — ইটিএ, ই-ভিসা বা ওয়েভার — সম্ভব, তবে এফসিডিও বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে পরামর্শ দেয় এবং পরামর্শের বিরুদ্ধে গেলে বীমা বাতিল হতে পারে বলে সতর্ক করে। এই গাইডে ভিসার পছন্দ, নুসুক পারমিটের ধাপ, হজ্জ ২০২৭ ঘোষণার অবস্থা, হিথরো-ম্যানচেস্টার-বার্মিংহাম থেকে ফ্লাইট, এটিওএল সুরক্ষা আর তারিখসহ জিবিপি খরচের স্ন্যাপশট।"
 faqHeadingEn: "7. Frequently Asked Questions"
 faqHeadingBn: "৭. সচরাচর জিজ্ঞাসা"
+audience: uk
+audienceLabelEn: UK travellers
+audienceLabelBn: যুক্তরাজ্যের ভ্রমণকারীদের
+aeoSummary: "From the UK, Umrah outside Hajj season runs on three British passport routes — ETA, e-visa or visa waiver — and every traveller needs a Nusuk permit and an ACWY certificate dated at least 10 days before arrival. Hajj is separate: place only through Nusuk Hajj, and no 2027 dates have been published. Flights are nonstop only from Heathrow and Manchester to Jeddah, and no UK airport flies nonstop to Madinah. The FCDO still advises against all but essential travel to most of Saudi Arabia, and insurance may be invalid if you travel against that advice."
+aeoSummaryBn: "যুক্তরাজ্য থেকে হজ্জ মৌসুমের বাইরে ওমরাহ চলে ব্রিটিশ পাসপোর্টের তিনটি রুটে — ইটিএ, ই-ভিসা বা ভিসা ওয়েভার — আর প্রত্যেকেরই লাগে নুসুক পারমিট এবং পৌঁছানোর অন্তত ১০ দিন আগের এসিডব্লিউওয়াই সার্টিফিকেট। হজ্জ আলাদা: জায়গা শুধু নুসুক হজ্জ দিয়ে, আর ২০২৭-এর কোনো তারিখ এখনো প্রকাশিত হয়নি। নন-স্টপ ফ্লাইট শুধু হিথরো ও ম্যানচেস্টার থেকে জেদ্দার; মদিনার জন্য যুক্তরাজ্যের কোনো বিমানবন্দর থেকে নন-স্টপ নেই। এফসিডিও এখনো সৌদি আরবের বেশিরভাগ অংশে অতিজরুরি নয় এমন ভ্রমণের বিরুদ্ধে পরামর্শ দেয়, আর সেই পরামর্শের বিরুদ্ধে গেলে বিমা বাতিল হতে পারে।"
+aeoFacts:
+  - label: British passport routes
+    labelBn: ব্রিটিশ পাসপোর্টের রুট
+    value: ETA, e-visa or visa waiver cover Umrah outside Hajj season — checked 14 Nov 2026
+    valueBn: ইটিএ, ই-ভিসা বা ভিসা ওয়েভার হজ্জ মৌসুমের বাইরের ওমরাহ কভার করে — ১৪ নভেম্বর ২০২৬-এ যাচাই
+  - label: Hajj 2027
+    labelBn: হজ্জ ২০২৭
+    value: No dates published; 1448H licensing applications open at haj.gov.sa — checked 14 Nov 2026
+    valueBn: তারিখ প্রকাশিত হয়নি; ১৪৪৮ হিজরি মৌসুমের লাইসেন্সিং আবেদন haj.gov.sa-তে খোলা — ১৪ নভেম্বর ২০২৬-এ যাচাই
+  - label: Current FCDO position
+    labelBn: এফসিডিওর বর্তমান অবস্থান
+    value: Against all but essential travel to most of Saudi Arabia; insurance may be void — checked 14 Nov 2026
+    valueBn: সৌদি আরবের বেশিরভাগ অংশে অতিজরুরি নয় ভ্রমণের বিরুদ্ধে; বিমা বাতিল হতে পারে — ১৪ নভেম্বর ২০২৬-এ যাচাই
 references:
   - name: "UK FCDO — Saudi Arabia travel advice (still current at 11 November 2026)"
     nameBn: "যুক্তরাজ্য এফসিডিও — সৌদি আরব ভ্রমণ পরামর্শ (১১ নভেম্বর ২০২৬ পর্যন্ত সচল)"

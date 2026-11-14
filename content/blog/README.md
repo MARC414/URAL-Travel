@@ -40,6 +40,25 @@ Any article in the `Hajj & Umrah` category must also declare `journeyStage`, one
 
 The frontmatter fields `slug`, `status`, `title`, `titleBn`, `summary`, `summaryBn`, `category`, `categoryBn`, `author`, `authorBn`, `readTime`, and `readTimeBn` are required. `publishDate` is required only when status is `scheduled`. Optional fields include `updatedAt`, the localized SEO title/description, a cover image, localized alt text, AEO snippets, FAQ headings, references, and internal links. A post must have a validated cover image plus English and Bengali alt text before it can be marked `scheduled`. Reference URLs must use HTTPS.
 
+### Page-specific Essential Travel Insights panel
+
+Every article can carry its own "Essential Travel Insights" panel — the summary, dated key facts and checks that the page ends with. It is **opt-in and per post**: an article that declares no `aeo*` fields renders no panel. There is deliberately no shared fallback, because the old single panel printed Bangladesh visa advice, a BDT budget and Dhaka departure tips on every Hajj/Umrah article, including the UK cluster, and it rendered only after hydration so no crawler ever saw it.
+
+```yaml
+audience: uk                     # "uk" or "bd" — selects the label wording only
+audienceLabelEn: British passport holders   # optional override
+audienceLabelBn: ব্রিটিশ পাসপোর্টধারীদের     # optional override, genitive form (precedes "জন্য")
+aeoSummary: 60–80 word answer-first summary, in the article's own terms and currency.
+aeoSummaryBn: ৬০–৮০ শব্দের সারসংক্ষেপ, একই তথ্য বাংলায়।
+aeoFacts:                        # exactly three
+  - label: ETA (730 days)
+    labelBn: ইটিএ (৭৩০ দিন)
+    value: 180 days in total, multiple entry, no insurance — checked 14 Nov 2026
+    valueBn: মোট ১৮০ দিন, একাধিক প্রবেশ, বিমা নেই — ১৪ নভেম্বর ২০২৬-এ যাচাই
+```
+
+Rules the build enforces: all fields are all-or-nothing; exactly three facts; every `value` carries the four-digit year it was checked and every `valueBn` carries a Bengali-numeral year, so an undated figure cannot reach the panel; `audience: uk` panels may not mention `hajj.gov.bd`, `BDT`, `Dhaka` or `Bangladesh`; and the rendered panel must appear in the static HTML (`dist/blog/<slug>.html`) in both locales. The panel never carries FAQs — every article already ends with its own author-written FAQ, which is the source of the page's `FAQPage` markup, and a second accordion contradicted it.
+
 An article can also declare its own affiliate next step, so a scheduled post earns the same way a hand-written one does: `affiliateCtaProvider`, `affiliateCtaHeadline`, `affiliateCtaBody` for English, and the `affiliateCtaBn*` equivalents. The three keys must be supplied together, and `affiliateCtaProvider` must be a real key in `AFFILIATE_LINKS` (`src/components/AffiliatePartners.tsx`) — the build fails otherwise. The section renders in the static HTML as well as after hydration; the button label comes from `getAffiliateCtaButtonLabel()` and the disclosure is evergreen, so do not write a price, discount or end date into `affiliateCtaBody`. Leave the fields out if the article should carry no commercial next step.
 
 Split the article body with this exact marker on a line by itself:

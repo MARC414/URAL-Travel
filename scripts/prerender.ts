@@ -18,6 +18,8 @@ import { HotelDirectoryCards } from "../src/components/HotelDirectoryCards";
 import { CostPlanningGuide, CostPlanningHub } from "../src/components/CostPlanningGuide";
 import { BlogArticleHeader } from "../src/components/BlogArticleHeader";
 import { BlogPlanningLinks, BlogPlanningHubs, BlogRelatedArticles } from "../src/components/BlogArticleNavigation";
+import { TravelIntelligence } from "../src/components/AeoInspector";
+import { getBlogAeoPanel } from "../src/utils/blogAeoPanel";
 import { getArticleRelatedPosts, type ArticleLocale } from "../src/utils/blogPresentation";
 import { getBlogCoverImage } from "../src/utils/blogCoverImages";
 import { getBlogAeoSnippet50Words } from "../src/utils/blogSnippets";
@@ -943,9 +945,35 @@ function renderBlogReadingSectionsHtml(post: BlogPost, locale: ArticleLocale): s
       locale,
       getCoverImage: getBlogCoverImage,
       getSnippet: getBlogAeoSnippet50Words,
+      audience: getBlogAeoPanel(post.slug)?.audience ?? "bd",
     }),
     React.createElement(BlogPlanningHubs, { locale }),
   ));
+}
+
+/**
+ * The article's own Essential Travel Insights panel, rendered into the shipped
+ * HTML.
+ *
+ * Until now this panel existed only in the React view: no `dist/blog/*.html`
+ * file contained `#travel-intelligence-panel`, so the block a crawler or an AI
+ * answer engine never saw was the very block written for them — and the block
+ * readers did see was a shared Bangladesh one, on every Hajj/Umrah article.
+ * A post without its own `aeoSummary`/`aeoFacts` renders nothing here.
+ */
+function renderBlogAeoPanelHtml(post: BlogPost, locale: ArticleLocale): string {
+  const panel = getBlogAeoPanel(post.slug);
+  if (!panel) return "";
+  const isBn = locale === "bn";
+  return renderToStaticMarkup(React.createElement(TravelIntelligence, {
+    pageTitle: post.title,
+    quickAnswer: isBn ? panel.summary.bn : panel.summary.en,
+    keyFacts: isBn ? panel.facts.bn : panel.facts.en,
+    audience: panel.audience,
+    audienceLabel: panel.audienceLabel.en,
+    audienceLabelBn: panel.audienceLabel.bn,
+    lang: isBn ? "bn" : "en",
+  }));
 }
 
 function renderBlogLuggagePlacementHtml(slug: string, locale: ArticleLocale): string {
@@ -3018,6 +3046,7 @@ function buildAllRoutes(): PrerenderRoute[] {
               )}</p>`;
             })
             .join("\n")}
+          ${renderBlogAeoPanelHtml(post, "en")}
           ${renderArticleReferencesHtml(post.references, "en", post.updatedAt)}
           ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarAuthorBioHtml("en") : renderAuthorBioHtml(getAuthorProfile(post.author), "en")}
           ${radicalStorageHtml}
@@ -3414,6 +3443,10 @@ function buildBengaliBody(
           id
         );
         if (journeyHelpHtmlBn) parts.push(journeyHelpHtmlBn);
+      }
+      {
+        const aeoPanelHtmlBn = renderBlogAeoPanelHtml(localizedPost, "bn");
+        if (aeoPanelHtmlBn) parts.push(aeoPanelHtmlBn);
       }
       parts.push(renderBlogReadingSectionsHtml(localizedPost, "bn"));
     }

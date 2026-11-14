@@ -25,6 +25,24 @@ snippet: "ATOL is financial protection for a package that includes a flight: if 
 snippetBn: "এটিওএল হলো ফ্লাইটসহ প্যাকেজের আর্থিক সুরক্ষা: অপারেটর বন্ধ হয়ে গেলে এই স্কিমই আপনার টাকা ফেরায় বা আপনাকে দেশে ফেরার ব্যবস্থা করে। এটি ভ্রমণবীমা নয়, আর অসুস্থতা, অভিযোগ বা নিরাপত্তা পরিস্থিতি এটি কভার করে না। যুক্তরাজ্যের ওমরাহ অপারেটরকে টাকা দেওয়ার আগে atol.org-এ এটিওএল নম্বর যাচাই করুন, পেমেন্টের সঙ্গে আসা সার্টিফিকেট চান, এবং এফসিডিওর পরামর্শ পড়ুন — যা বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে। এই গাইডে যাচাইয়ের ধাপ, বারোটি প্রশ্ন, বিপদসংকেত আর তারিখসহ শুধু-ফ্লাইট বেঞ্চমার্ক আছে।"
 faqHeadingEn: "9. Frequently Asked Questions"
 faqHeadingBn: "৯. সচরাচর জিজ্ঞাসা"
+audience: uk
+audienceLabelEn: UK travellers
+audienceLabelBn: যুক্তরাজ্যের ভ্রমণকারীদের
+aeoSummary: "ATOL is financial protection for a package that includes a flight, run under the CAA; it pays out if the operator fails, and it is not travel insurance. Ask for the ATOL certificate when you pay, check the number on atol.org, and get the terms in writing. A package is only worth the premium if the inclusions match what you would book yourself — the flight-only comparison for the same dates is the honest test. The FCDO advisory and your insurance wording matter more than the brochure: cover can be invalid if you travel against advice."
+aeoSummaryBn: "এটিওএল হলো ফ্লাইটসহ প্যাকেজের অর্থসুরক্ষা, সিএএর অধীনে; অপারেটর বন্ধ হলে এটি ক্ষতিপূরণ দেয়, আর এটি ভ্রমণবীমা নয়। টাকা দেওয়ার সঙ্গে সঙ্গে এটিওএল সার্টিফিকেট চান, নম্বর atol.org-এ যাচাই করুন, আর শর্ত লিখিতভাবে নিন। প্যাকেজের বাড়তি দাম ততটুকুই justified, যতটুকু অন্তর্ভুক্তি নিজে বুক করলে যা হতো তার সঙ্গে মেলে — একই তারিখের শুধু-ফ্লাইট তুলনাই এর সৎ পরীক্ষা। ব্রোশিওরের চেয়ে এফসিডিওর পরামর্শ ও আপনার বিমার শর্ত বেশি জরুরি: পরামর্শের বিরুদ্ধে গেলে কভার বাতিল হতে পারে।"
+aeoFacts:
+  - label: What ATOL covers
+    labelBn: এটিওএল কী কভার করে
+    value: Financial protection if a package operator fails, for packages with a flight — checked 13 Nov 2026
+    valueBn: ফ্লাইটসহ প্যাকেজে অপারেটর বন্ধ হলে অর্থসুরক্ষা — ১৩ নভেম্বর ২০২৬-এ যাচাই
+  - label: What ATOL does not cover
+    labelBn: এটিওএল কী কভার করে না
+    value: Medical costs, personal cancellation, hotel complaints — that is insurance, not ATOL — checked 13 Nov 2026
+    valueBn: চিকিৎসার খরচ, ব্যক্তিগত কারণে বাতিল, হোটেলের অভিযোগ — সেগুলো বিমার বিষয়, এটিওএলের নয় — ১৩ নভেম্বর ২০২৬-এ যাচাই
+  - label: Flight-only benchmark
+    labelBn: শুধু-ফ্লাইটের তুলনা
+    value: Heathrow return £347 with stops to £669 nonstop, 14 Nov 2026 snapshot
+    valueBn: হিথরো ফেরত £৩৪৭ (স্টপসহ) থেকে নন-স্টপ £৬৬৯, ১৪ নভেম্বর ২০২৬ স্ন্যাপশট
 references:
   - name: "ATOL — what ATOL protection means (checked 12 November 2026)"
     nameBn: "এটিওএল — এটিওএল সুরক্ষা মানে কী (১২ নভেম্বর ২০২৬-এ যাচাই)"

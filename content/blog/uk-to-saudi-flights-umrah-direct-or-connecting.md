@@ -25,6 +25,24 @@ snippet: "On 14 November 2026 Heathrow and Manchester sold non-stop flights to J
 snippetBn: "১৪ নভেম্বর ২০২৬-এ হিথরো ও ম্যানচেস্টার থেকে জেদ্দার নন-স্টপ ফ্লাইট ছিল; বার্মিংহাম থেকে ছিল না, মদিনার জন্য যুক্তরাজ্যের কোথাও নন-স্টপ ছিল না। সবচেয়ে কম ভাড়া হিথরো থেকে £৩৪৭ (তিন স্টপ) ও নন-স্টপ £৬৬৯, ম্যানচেস্টার থেকে £৩২৬ (এক স্টপ) ও নন-স্টপ £৫১৫, বার্মিংহাম থেকে দুই স্টপে £৩৫৪। বুকিংয়ের আগে হজ্জ মৌসুমের বিমানবন্দর নিয়ম দেখুন: জেদ্দা, মদিনা ও তায়েফগামী ফ্লাইটে হজ্জবিহীন যাত্রী আটকে যেতে পারেন, বোর্ডিংয়ের জন্য হজ্জ ভিসাও লাগতে পারে।"
 faqHeadingEn: "9. Frequently Asked Questions"
 faqHeadingBn: "৯. সচরাচর জিজ্ঞাসা"
+audience: uk
+audienceLabelEn: UK travellers
+audienceLabelBn: যুক্তরাজ্যের ভ্রমণকারীদের
+aeoSummary: "Nonstop flights from the UK to Saudi Arabia exist only from Heathrow and Manchester, both to Jeddah: Heathrow on Saudia and British Airways at about 6h05, Manchester on Saudia at about 6h27. Birmingham has no nonstop, and no UK airport sells a nonstop to Madinah. In the 14 November 2026 KAYAK snapshot the cheapest Heathrow return was £347 with stops and £669 nonstop, Manchester £326 and £515, Birmingham £354 with two stops. Two rules outrank price: the FCDO advisory, and the Hajj-season restriction that can stop a non-Hajj visitor boarding a flight to Jeddah, Madinah or Taif."
+aeoSummaryBn: "যুক্তরাজ্য থেকে সৌদি আরবে নন-স্টপ ফ্লাইট আছে শুধু হিথরো ও ম্যানচেস্টার থেকে, দুটোই জেদ্দার জন্য — হিথরো থেকে সৌদিয়া ও ব্রিটিশ এয়ারওয়েজে প্রায় ৬ ঘণ্টা ০৫ মিনিট, ম্যানচেস্টার থেকে সৌদিয়ায় প্রায় ৬ ঘণ্টা ২৭ মিনিট। বার্মিংহাম থেকে নন-স্টপ নেই, আর মদিনার জন্য যুক্তরাজ্যের কোনো বিমানবন্দরেই নন-স্টপ ফ্লাইট নেই। ১৪ নভেম্বর ২০২৬-এর কায়াক স্ন্যাপশটে সবচেয়ে কম ভাড়া হিথরো থেকে £৩৪৭ (স্টপসহ) ও নন-স্টপ £৬৬৯, ম্যানচেস্টার থেকে £৩২৬ ও £৫১৫, বার্মিংহাম থেকে দুই স্টপে £৩৫৪। ভাড়ার চেয়ে বড় দুই নিয়ম: এফসিডিওর পরামর্শ, এবং হজ্জ মৌসুমের সেই বিধি যা জেদ্দা, মদিনা বা তায়েফগামী ফ্লাইটে হজ্জবিহীন যাত্রীকে বোর্ডিং থেকে আটকে দিতে পারে।"
+aeoFacts:
+  - label: Nonstop UK–Jeddah routes
+    labelBn: যুক্তরাজ্য–জেদ্দা নন-স্টপ রুট
+    value: Heathrow (Saudia, British Airways) and Manchester (Saudia) only, 6h05–6h27 — checked 14 Nov 2026
+    valueBn: শুধু হিথরো (সৌদিয়া, ব্রিটিশ এয়ারওয়েজ) ও ম্যানচেস্টার (সৌদিয়া), ৬ ঘণ্টা ০৫–২৭ মিনিট — ১৪ নভেম্বর ২০২৬-এ যাচাই
+  - label: Cheapest returns, 14 Nov 2026 snapshot
+    labelBn: সবচেয়ে কম ফেরত ভাড়া, ১৪ নভেম্বর ২০২৬ স্ন্যাপশট
+    value: Heathrow £347 with stops and £669 nonstop; Manchester £326 and £515; Birmingham £354 with two stops — checked 14 Nov 2026
+    valueBn: হিথরো £৩৪৭ (স্টপসহ) ও নন-স্টপ £৬৬৯; ম্যানচেস্টার £৩২৬ ও £৫১৫; বার্মিংহাম দুই স্টপে £৩৫৪ — ১৪ নভেম্বর ২০২৬-এ যাচাই
+  - label: Birmingham and Madinah
+    labelBn: বার্মিংহাম ও মদিনা
+    value: No nonstop from Birmingham, and no UK nonstop to Madinah at all — checked 14 Nov 2026
+    valueBn: বার্মিংহাম থেকে নন-স্টপ নেই, মদিনার জন্য যুক্তরাজ্যের কোনো নন-স্টপ ফ্লাইটও নেই — ১৪ নভেম্বর ২০২৬-এ যাচাই
 references:
   - name: "UK FCDO — Saudi Arabia travel advice (still current at 14 November 2026)"
     nameBn: "যুক্তরাজ্য এফসিডিও — সৌদি আরব ভ্রমণ পরামর্শ (১৪ নভেম্বর ২০২৬ পর্যন্ত সচল)"

@@ -66,16 +66,27 @@ interface BlogRelatedArticlesProps {
   getCoverImage: (slug: string) => string;
   getSnippet: (slug: string, isBn: boolean, fallback: string) => string;
   navigate?: Navigate;
+  /**
+   * Which audience this article addresses. The heading used to name Bangladeshi
+   * flyers on every post, including the UK cluster and the UK pillar.
+   */
+  audience?: "uk" | "bd";
 }
 
-export function BlogRelatedArticles({ posts, locale, getCoverImage, getSnippet, navigate }: BlogRelatedArticlesProps) {
+const RELATED_HEADINGS: Record<"uk" | "bd", { en: string; bn: string }> = {
+  uk: { en: "More Travel Guides for UK Travellers", bn: "যুক্তরাজ্যের ভ্রমণকারীদের জন্য আরও গাইড" },
+  bd: { en: "More Travel Guides for Bangladeshi Flyers", bn: "বাংলাদেশি ভ্রমণকারীদের জন্য আরও প্রয়োজনীয় গাইড" },
+};
+
+export function BlogRelatedArticles({ posts, locale, getCoverImage, getSnippet, navigate, audience = "bd" }: BlogRelatedArticlesProps) {
   if (!posts.length) return null;
   const isBn = locale === "bn";
+  const heading = RELATED_HEADINGS[audience];
   return (
     <section aria-labelledby="related-travel-guides" className="space-y-6 border-t border-slate-200 pt-10 font-sans">
       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
         <h2 id="related-travel-guides" className="ural-section-title font-serif text-2xl font-bold leading-relaxed text-brand-navy">
-          {isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য আরও প্রয়োজনীয় গাইড" : "More Travel Guides for Bangladeshi Flyers"}
+          {isBn ? heading.bn : heading.en}
         </h2>
         <a href={articleLinkHref("/blog", locale)} onClick={(event) => handleArticleNavigation(event, "/blog", navigate)} className={`${linkClass} self-start font-semibold sm:shrink-0`}>
           {isBn ? "সব গাইড দেখুন" : "View all guides"}<ArrowRight size={14} aria-hidden="true" />
