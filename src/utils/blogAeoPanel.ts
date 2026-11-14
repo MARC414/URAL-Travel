@@ -1,4 +1,5 @@
-import { SCHEDULED_BLOG_AEO_PANELS } from "../data/scheduledBlogIndex.generated";
+import { SCHEDULED_BLOG_AEO_PANELS } from "../data/scheduledBlogAeoPanels.generated";
+import { STATIC_BLOG_AEO_PANELS } from "../data/blogAeoStaticPanels";
 
 /**
  * Per-article copy for the Essential Travel Insights panel
@@ -27,13 +28,36 @@ export interface BlogAeoPanel {
   facts: { en: BlogAeoKeyFact[]; bn: BlogAeoKeyFact[] };
 }
 
+/**
+ * Shape shared by the generated (markdown) panels and the hand-written ones in
+ * `src/data/blogAeoStaticPanels.ts`. Keeping one type means a static entry
+ * cannot quietly drift from the frontmatter contract.
+ */
+export interface BlogAeoFactRecord {
+  label: string;
+  labelBn: string;
+  value: string;
+  valueBn: string;
+}
+
+export interface BlogAeoPanelRecord {
+  audience: BlogAeoAudience;
+  audienceLabelEn?: string;
+  audienceLabelBn?: string;
+  summary: { en: string; bn: string };
+  facts: BlogAeoFactRecord[];
+}
+
 const DEFAULT_AUDIENCE_LABELS: Record<BlogAeoAudience, { en: string; bn: string }> = {
   uk: { en: "UK travellers", bn: "যুক্তরাজ্যের ভ্রমণকারীদের" },
   bd: { en: "travellers from Bangladesh", bn: "বাংলাদেশি ভ্রমণকারীদের" },
 };
 
 export function getBlogAeoPanel(slug: string): BlogAeoPanel | undefined {
-  const panel = SCHEDULED_BLOG_AEO_PANELS[slug];
+  // Frontmatter-declared panels win; older hand-written articles read from the
+  // static map. There is still no category-wide fallback.
+  const panel: BlogAeoPanelRecord | undefined =
+    SCHEDULED_BLOG_AEO_PANELS[slug] ?? STATIC_BLOG_AEO_PANELS[slug];
   if (!panel) return undefined;
   const fallback = DEFAULT_AUDIENCE_LABELS[panel.audience];
   return {
@@ -57,7 +81,7 @@ export function getBlogAeoPanel(slug: string): BlogAeoPanel | undefined {
  * claiming to be UK content.
  */
 export function getBlogAudience(slug: string): BlogAeoAudience {
-  return SCHEDULED_BLOG_AEO_PANELS[slug]?.audience ?? "bd";
+  return (SCHEDULED_BLOG_AEO_PANELS[slug] ?? STATIC_BLOG_AEO_PANELS[slug])?.audience ?? "bd";
 }
 
 export function isUkAudiencePost(slug: string): boolean {
@@ -66,7 +90,17 @@ export function isUkAudiencePost(slug: string): boolean {
 
 /** Slugs whose panel speaks to UK readers — used by the build guards. */
 export function getUkAudienceSlugs(): string[] {
-  return Object.entries(SCHEDULED_BLOG_AEO_PANELS)
+  return Object.entries({ ...STATIC_BLOG_AEO_PANELS, ...SCHEDULED_BLOG_AEO_PANELS })
     .filter(([, panel]) => panel.audience === "uk")
     .map(([slug]) => slug);
+}
+
+/** Slugs that declare an Essential Travel Insights panel, in either source. */
+export function getBlogAeoPanelSlugs(): string[] {
+  return Object.keys({ ...STATIC_BLOG_AEO_PANELS, ...SCHEDULED_BLOG_AEO_PANELS });
+}
+
+/** Static-map slugs, so the build can prove none of them is an orphan. */
+export function getStaticBlogAeoSlugs(): string[] {
+  return Object.keys(STATIC_BLOG_AEO_PANELS);
 }

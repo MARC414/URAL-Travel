@@ -25,6 +25,22 @@ snippet: "Makkah hotels sit in three practical tiers: the Abraj Al-Bait towers o
 snippetBn: "মক্কার হোটেল ব্যবহারিকভাবে তিন স্তরে ভাগ করা যায়: দক্ষিণ পাশে আবরাজ আল-বাইতের টাওয়ার, পশ্চিমে জাবাল ওমরের নিচু পোডিয়াম ব্লক, আর আজিজিয়া বা কুদাইয়ের শাটল জোন। বুকিং ম্যাপের দূরত্ব খুব কম ক্ষেত্রেই বলে দেয় রুম থেকে সিজদার জায়গা পর্যন্ত আসল যাত্রা কেমন হবে; তাই লিফট ব্যাংক, কোন গেট ব্যবহার করবেন আর নামাজের সময় শাটল কেমন আচরণ করে—এই তিনটি মিলিয়ে দেখুন।"
 faqHeadingEn: "8. Frequently Asked Questions"
 faqHeadingBn: "৮. সচরাচর জিজ্ঞাসা"
+audience: bd
+aeoSummary: "Makkah's three accommodation tiers are not a price ladder, they are three different schedules. In the Clock Tower towers the lift bank and the pre-prayer crowd decide your trip to the prayer carpet; in the ground-level Jabal Omar blocks the same map distance costs minutes instead of half an hour; and a shuttle-zone hotel adds a bus timetable you have to obey. Compare the gate you will actually use, the vertical transit at prayer time and the shower queue before you compare the metres in the listing (checked 8 Nov 2026)."
+aeoSummaryBn: "মক্কার তিনটি আবাসন স্তর আসলে তিনটি আলাদা সময়সূচি, দামের সিঁড়ি নয়। ক্লক টাওয়ারের টাওয়ারগুলোতে লিফটের লাইন আর নামাজের আগের ভিড়ই ঠিক করে দেয় জায়নামাজ পর্যন্ত যাত্রা কত সময় নেবে; সমতল জাবাল ওমর ব্লকে একই দূরত্ব আধা ঘণ্টার বদলে কয়েক মিনিট; আর শাটল জোনের হোটেলে যোগ হয় বাসের সময়সূচি, যা মানতেই হবে। লিস্টিংয়ের মিটার নয় — যে গেট দিয়ে রোজ যাবেন, নামাজের সময় উল্লম্ব চলাচল আর গোসলের লাইন — এই তিনটাই আগে মিলিয়ে নিন (৮ নভেম্বর ২০২৬-এ যাচাই)।"
+aeoFacts:
+  - label: Three Makkah tiers
+    labelBn: 'মক্কার তিনটি স্তর'
+    value: 'Clock Tower towers, ground-level Jabal Omar blocks and shuttle zones, compared on walking time and lift queues — checked 8 Nov 2026'
+    valueBn: 'ক্লক টাওয়ারের টাওয়ার, সমতল জাবাল ওমর ব্লক ও শাটল জোন — হাঁটার সময় ও লিফটের লাইন ধরে তুলনা — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: What a map hides
+    labelBn: 'ম্যাপ যা দেখায় না'
+    value: 'A 300-metre listing can still take twenty minutes once the lift bank and pre-Adhan crowds are counted — checked 8 Nov 2026'
+    valueBn: '৩০০ মিটারের লিস্টিংও বিশ মিনিট নিতে পারে, যদি লিফটের লাইন ও আজানের আগের ভিড় ধরা হয় — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Confirm in writing
+    labelBn: 'লিখিতভাবে নিশ্চিত করুন'
+    value: 'Ask for the gate number and the walking route in the chat thread, not the listing''s "500 m from Haram" line — checked 8 Nov 2026'
+    valueBn: 'চ্যাটে গেটের নম্বর ও হাঁটার রুট লিখে নিন, লিস্টিংয়ের "হারাম থেকে ৫০০ মিটার" লেখায় ভরসা করবেন না — ৮ নভেম্বর ২০২৬-এ যাচাই'
 references:
   - name: "Saudi Ministry of Hajj and Umrah — official portal for Umrah services and pilgrim guidance"
     nameBn: "সৌদি হজ্জ ও ওমরাহ মন্ত্রণালয় — ওমরাহ সেবা ও হাজি-নির্দেশনার অফিসিয়াল পোর্টাল"

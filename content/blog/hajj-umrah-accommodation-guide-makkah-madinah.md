@@ -25,6 +25,22 @@ snippet: "Accommodation decides how much energy you bring to worship. In Makkah 
 snippetBn: "আবাসনই ঠিক করে দেয় ইবাদতে আপনি কতটা শক্তি নিয়ে যাবেন। মক্কায় পছন্দ ক্লক টাওয়ারের টাওয়ার, মাটির স্তরের জাবাল ওমর ব্লক আর শাটল জোনের মধ্যে; মদিনায় পছন্দ কোন পাশের মারকাজিয়ায় ঘুমাবেন, কারণ গেট সেক্টর অনুযায়ী বরাদ্দ। প্রতিটি হোটেল চারটি বিষয়ে বিচার করুন—ম্যাপের মিটার নয় আসল হাঁটার সময়, নামাজের সময় উল্লম্ব চলাচল, রুমে আসলে কী আছে, আর কোন গেট ব্যবহার করবেন—আর রমজান, হজ্জ ও ডিসেম্বর মৌসুমের জন্য তিন থেকে ছয় মাস আগে বুক করুন।"
 faqHeadingEn: "7. Frequently Asked Questions"
 faqHeadingBn: "৭. সচরাচর জিজ্ঞাসা"
+audience: bd
+aeoSummary: "Accommodation decides how much energy you bring to worship, so choose it on the journey, not the star rating. In Makkah the choice is between the Clock Tower towers, the ground-level Jabal Omar blocks and the shuttle zones; in Madinah it is which side of the Markazia you sleep on, because the gates are assigned by sector. Judge every hotel on four things — real walking time rather than map metres, vertical transit at prayer time, what the room actually contains, and how many lifts serve how many floors. Then book early: Ramadan's last ten nights, Hajj season and the December holidays run three to six months ahead (checked 8 Nov 2026)."
+aeoSummaryBn: "আবাসনই ঠিক করে দেয় ইবাদতে কত শক্তি নিয়ে যাবেন, তাই তারকা-রেটিং নয় — যাত্রাটা দেখে বাছুন। মক্কায় বেছে নিতে হয় ক্লক টাওয়ারের টাওয়ার, সমতল জাবাল ওমর ব্লক আর শাটল জোনের মধ্যে; মদিনায় কোন দিকের মারকাজিয়ায় ঘুমাবেন, কারণ গেট নির্ধারিত হয় সেক্টর ধরে। প্রতিটি হোটেল চারটি বিষয়ে বিচার করুন — ম্যাপের মিটার নয় আসল হাঁটার সময়, নামাজের সময় উল্লম্ব চলাচল, ঘরে আসলে কী আছে, আর কত তলায় কতগুলো লিফট। তারপর আগেভাগে বুক করুন: রমজানের শেষ দশ রাত, হজ্জ মৌসুম ও ডিসেম্বরের ছুটিতে তিন থেকে ছয় মাস আগে (৮ নভেম্বর ২০২৬-এ যাচাই)।"
+aeoFacts:
+  - label: Makkah zones
+    labelBn: 'মক্কার জোন'
+    value: 'Clock Tower towers, ground-level Jabal Omar blocks and shuttle zones — checked 8 Nov 2026'
+    valueBn: 'ক্লক টাওয়ারের টাওয়ার, সমতল জাবাল ওমর ব্লক ও শাটল জোন — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Madinah sectors
+    labelBn: 'মদিনার সেক্টর'
+    value: 'Gates are assigned by Markazia sector, so the side you sleep on decides your daily walk — checked 8 Nov 2026'
+    valueBn: 'গেট নির্ধারিত হয় মারকাজিয়া সেক্টর ধরে, তাই কোন দিকে ঘুমাবেন তা রোজের হাঁটা ঠিক করে — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Booking lead time
+    labelBn: 'বুকিংয়ের সময়'
+    value: 'Ramadan''s last ten nights, Hajj season and the December holidays: book three to six months ahead — checked 8 Nov 2026'
+    valueBn: 'রমজানের শেষ দশ রাত, হজ্জ মৌসুম ও ডিসেম্বরের ছুটি: তিন থেকে ছয় মাস আগে বুক করুন — ৮ নভেম্বর ২০২৬-এ যাচাই'
 references:
   - name: "Saudi Ministry of Hajj and Umrah — official pilgrim portal for Hajj, Umrah and Madinah visiting"
     nameBn: "সৌদি হজ্জ ও ওমরাহ মন্ত্রণালয় — হজ্জ, ওমরাহ ও মদিনা জিয়ারতের অফিসিয়াল হাজি পোর্টাল"

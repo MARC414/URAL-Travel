@@ -1,7 +1,8 @@
 # SPEC — page-specific "Essential Travel Insights" panels
 
-Status: **Phase 0 + Phase 1 shipped 14 Nov 2026**. Phase 2 (authoring the 17
-Bangladesh panels) is queued. Owner decision recorded below.
+Status: **Phase 0, 1 and 2 shipped 14 Nov 2026.** Twenty published articles now
+carry a page-specific panel (17 Bangladesh, 3 UK; the visa walkthrough makes 4 UK
+when it publishes on 15 Nov). Owner decisions recorded below.
 
 ## The problem
 
@@ -81,18 +82,44 @@ Guards added to `verify:build`:
   "estimated at 300 Saudi Riyals (checked 15 Oct 2026)" anchor so it quotes the
   Ministry fee instead of only a BDT planning estimate.
 
-## Phase 2 queue (Bangladesh cluster, 17 posts)
+## Phase 2 — done (Bangladesh cluster, 17 posts)
 
-Author `aeoFacts` per post from its own dated material, in this order:
+All 17 now carry their own panel, authored from the dated material already in
+each article:
 
-1. Hajj/Umrah (11): `hajj-registration-bangladesh-…`, `nusuk-app-saudi-visa-bio-…`,
-   `tawaf-sai-…`, `hajj-rites-…`, `makkah-hotel-sectors-…`,
-   `where-to-stay-madinah-…`, `makkah-budget-shuttle-…`,
-   `makkah-to-madinah-haramain-…`, `family-elderly-umrah-hotels-…`,
-   `makkah-hotel-walking-time-…`, `hajj-umrah-accommodation-…`
-2. Ziyarah/stopovers (6): `makkah-madinah-badr-taif-…`, `umrah-dubai-10-day-…`,
-   `abu-dhabi-sheikh-zayed-…`, `malaysia-islamic-heritage-…`,
-   `europe-uk-usa-sightseeing-…`, `bangladeshi-halal-food-guide-…`
+- **Markdown posts (7)** — frontmatter `aeoSummary` / `aeoFacts`, checked 8 Nov
+  2026: `makkah-hotel-sectors-abraj-al-bait-jabal-omar`,
+  `where-to-stay-madinah-markazia-gate-guide`,
+  `makkah-budget-shuttle-hotels-prayer-timing`,
+  `makkah-to-madinah-haramain-train-vs-bus-taxi`,
+  `family-elderly-umrah-hotels-ground-access`,
+  `makkah-hotel-walking-time-vs-map-distance`,
+  `hajj-umrah-accommodation-guide-makkah-madinah`.
+- **Hand-written posts (10)** — `src/data/blogAeoStaticPanels.ts`, same shape:
+  `hajj-registration-…` (18 Oct 2026), `nusuk-app-saudi-visa-bio-…` (19 Oct
+  2026), `tawaf-sai-…` and `hajj-rites-…` (2 Nov 2026), and the six Ziyarah and
+  stopover guides (19 Oct 2026, or "guide published 27 Sep 2026" where the page
+  carries no separate check date).
 
-Acceptance per batch: `npm run build` + `npm run verify:build` green, panel in
-both locales, `audience: bd`, SAR/BDT figures dated, no duplicate FAQ heading.
+The static map exists because `content/blog/*.md` is the only file type the
+frontmatter parser reads; the older articles compile from
+`src/data/blogContent.ts`. `verify:build` now asserts, for every panel from either
+source: exactly three facts, a four-digit year in each English value, a
+Bengali-numeral year in each Bengali value, presence in both locales of the
+shipped HTML, no repeated FAQ heading, and no orphaned slug.
+
+One build lesson worth keeping: `scheduledBlogIndex.generated.ts` is in the
+**eager** module graph (`constants` → `blogIndex` needs the slug list), so twenty
+panels of prose written into it pushed eager JS 5 KB over the 215 KB budget. The
+panels now live in `scheduledBlogAeoPanels.generated.ts`, imported only by the
+blog route and the prerender script; eager JS measures 212.4 KB.
+
+## Still open
+
+- The four `.md` UK panels and the seventeen Bangladesh panels are authored; the
+  remaining Hajj/Umrah articles that were already exempt (the DIY pillar, the
+  Nusuk app guide's siblings on the old denylist) can gain panels opportunistically
+  when their facts are re-checked.
+- Adjacent Bangladesh defaults that Phase 3 named — the eSIM card,
+  `TravelEssentials`, and site-wide labels — are still Bangladesh-worded on
+  non-UK landing pages; that is correct there and out of scope here.

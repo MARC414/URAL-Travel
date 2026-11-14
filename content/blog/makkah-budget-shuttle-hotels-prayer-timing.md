@@ -25,6 +25,22 @@ snippet: "A shuttle hotel is not a cheaper version of a Haram hotel; it is a dif
 snippetBn: "শাটল হোটেল হারামের হোটেলের সস্তা সংস্করণ নয়, এটি আলাদা সময়সূচি। প্রতিটি জামাতের আগে মাসজিদ আল-হারামের আশপাশের রাস্তা বন্ধ করা হয়, তাই যে বাসের ওপর ভরসা করছেন সেটিতে আজানের অনেক আগে উঠতে হয়, আর বাস গেটে নয়—কুদাই বা জারওয়ালের মতো পৌর টার্মিনালে নামায়। টার্মিনাল থেকে ৭–১২ মিনিট হাঁটা হিসাবে রাখুন, আর দাম তুলনার আগে বিছানার বিন্যাস দেখে নিন।"
 faqHeadingEn: "7. Frequently Asked Questions"
 faqHeadingBn: "৭. সচরাচর জিজ্ঞাসা"
+audience: bd
+aeoSummary: "A cheap Makkah or Madinah shuttle hotel is not a cheaper Haram hotel, it is a different timetable. Roads around the central area close to private cars, taxis and hotel shuttles shortly before each congregational prayer, so the bus has to leave early and it cannot drop you at a mosque gate even when it leaves on time. Budget the 7 to 12 minute walk from the terminal, check where the return bus actually stops, and price the saving against the room: a Jarham hotel 1.8 km out makes the bus the whole plan (checked 8 Nov 2026)."
+aeoSummaryBn: "মক্কা বা মদিনার সস্তা শাটল হোটেল হারামের হোটেলের সস্তা সংস্করণ নয়, এটি আলাদা সময়সূচি। কেন্দ্রীয় এলাকার রাস্তা প্রতিটি জামাতের আগে ব্যক্তিগত গাড়ি, ট্যাক্সি ও হোটেল শাটলের জন্য বন্ধ হয়ে যায়, তাই বাসকে আগে বেরোতে হয়, আর সময়মতো বেরোলেও মসজিদের গেটে নামাতে পারে না। টার্মিনাল থেকে ৭–১২ মিনিটের হাঁটা ধরে রাখুন, ফেরার বাস আসলে কোথায় থামে দেখে নিন, আর সঞ্চয়টা ঘরের সঙ্গে মিলিয়ে দেখুন: জারহামে ১.৮ কিমি দূরে হোটেল মানে বাসই পুরো পরিকল্পনা (৮ নভেম্বর ২০২৬-এ যাচাই)।"
+aeoFacts:
+  - label: Pre-Adhan closures
+    labelBn: 'আজানের আগে রাস্তা বন্ধ'
+    value: 'Private cars, taxis and hotel shuttles are kept out of the central zone shortly before each adhan — checked 8 Nov 2026'
+    valueBn: 'প্রতিটি আজানের কিছু আগে ব্যক্তিগত গাড়ি, ট্যাক্সি ও হোটেল শাটল কেন্দ্রীয় এলাকা থেকে আটকে রাখা হয় — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Terminal-to-Haram walk
+    labelBn: 'টার্মিনাল থেকে হারাম'
+    value: 'Budget the 7 to 12 minute walk from the bus terminal, and the return queue as well — checked 8 Nov 2026'
+    valueBn: 'বাস টার্মিনাল থেকে ৭–১২ মিনিটের হাঁটা ধরুন, ফেরার লাইনও — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: District distances
+    labelBn: 'এলাকাভিত্তিক দূরত্ব'
+    value: 'voco Makkah in Jarham sits about 1.8 km from the Haram; Crowne Plaza Madinah is roughly 500 m — checked 8 Nov 2026'
+    valueBn: 'জারহামের ভোকো মক্কা হারাম থেকে প্রায় ১.৮ কিমি দূরে; ক্রাউন প্লাজা মদিনা প্রায় ৫০০ মিটার — ৮ নভেম্বর ২০২৬-এ যাচাই'
 references:
   - name: "Saudi Ministry of Hajj and Umrah — official pilgrim portal and Umrah service guidance"
     nameBn: "সৌদি হজ্জ ও ওমরাহ মন্ত্রণালয় — অফিসিয়াল হাজি পোর্টাল ও ওমরাহ সেবা নির্দেশনা"

@@ -25,6 +25,22 @@ snippet: "With elderly parents or a wheelchair in the group, the hotel decision 
 snippetBn: "দলে বয়স্ক বাবা-মা বা হুইলচেয়ার থাকলে হোটেলের সিদ্ধান্ত আসলে যাত্রার মাটির স্তর নিয়ে: কোন গেট সিঁড়িবিহীন, সমতল হাঁটা কত দূর, আর নামাজ শেষ হলে ভবনটি মানুষকে কীভাবে সরায়। মক্কায় এটি সাধারণত পশ্চিম চত্বর ও কিং ফাহদ গেটের দিকেই নিয়ে যায়, উঁচু টাওয়ার বা শাটল জোনে নয়; মদিনায় নিয়ে যায় উত্তর মারকাজিয়ায়, যেখানে মহিলাদের গেট ও সমতল চত্বর একসঙ্গে মেলে। তারপর বিছানা দেখুন: আসল কোয়াডে চারটি স্থায়ী একক বিছানা, দুই বিছানা যোগ দুই ভাঁজ খাট নয়।"
 faqHeadingEn: "8. Frequently Asked Questions"
 faqHeadingBn: "৮. সচরাচর জিজ্ঞাসা"
+audience: bd
+aeoSummary: "With elderly parents or a wheelchair in the group, the hotel decision is about the ground floor of the journey: which gate is step-free, how far the flat walk is, and how the building moves people when a prayer ends. In Makkah that usually points to the western plaza and the King Fahad Gate side rather than to a tall tower or a shuttle zone; in Madinah it points to the northern Markazia, where the women's gates meet the flat plaza. Then check the room itself: a quad can be four real beds or two beds and two folding cots (checked 8 Nov 2026)."
+aeoSummaryBn: "পরিবারে বয়স্ক বাবা-মা বা হুইলচেয়ার থাকলে হোটেলের সিদ্ধান্ত আসলে যাত্রার মাটির অংশ নিয়ে: কোন গেট সিঁড়ি ছাড়া, সমান হাঁটা কত দূর, আর নামাজ শেষ হলে ভবনটি মানুষকে কীভাবে বের করে। মক্কায় এটি সাধারণত পশ্চিম প্লাজা ও কিং ফাহাদ গেটের দিকে নিয়ে যায়, উঁচু টাওয়ার বা শাটল জোনে নয়; মদিনায় উত্তর মারকাজিয়া, যেখানে নারীদের গেট আর সমতল প্লাজা মেলে। এরপর ঘরটাও দেখুন: কোয়াড চারটি আসল বিছানা হতে পারে, আবার দুই বিছানা ও দুই ভাঁজ-খাটও হতে পারে (৮ নভেম্বর ২০২৬-এ যাচাই)।"
+aeoFacts:
+  - label: Makkah step-free side
+    labelBn: 'মক্কায় সিঁড়ি ছাড়া দিক'
+    value: 'Western plaza and the King Fahad Gate side give step-free routes; a tower or shuttle zone adds queues — checked 8 Nov 2026'
+    valueBn: 'পশ্চিম প্লাজা ও কিং ফাহাদ গেটের দিক সিঁড়ি ছাড়া রুট দেয়; টাওয়ার বা শাটল জোনে লাইন বাড়ে — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Madinah step-free side
+    labelBn: 'মদিনায় সিঁড়ি ছাড়া দিক'
+    value: 'Northern Markazia, where the women''s gates meet the flat plaza — checked 8 Nov 2026'
+    valueBn: 'উত্তর মারকাজিয়া, যেখানে নারীদের গেট ও সমতল প্লাজা মেলে — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: What a quad room holds
+    labelBn: 'কোয়াড রুমে কী থাকে'
+    value: 'A "quad" can be four real beds or two beds plus two folding cots — confirm before paying — checked 8 Nov 2026'
+    valueBn: 'কোয়াড চারটি আসল বিছানা হতে পারে, আবার দুই বিছানা ও দুটি ভাঁজ-খাটও — টাকা দেওয়ার আগে নিশ্চিত করুন — ৮ নভেম্বর ২০২৬-এ যাচাই'
 references:
   - name: "Saudi Ministry of Hajj and Umrah — official pilgrim portal and guidance for pilgrims with disabilities"
     nameBn: "সৌদি হজ্জ ও ওমরাহ মন্ত্রণালয় — অফিসিয়াল হাজি পোর্টাল ও প্রতিবন্ধী হাজিদের নির্দেশনা"
