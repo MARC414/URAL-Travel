@@ -67,6 +67,8 @@ internalLinksEn:
     path: /blog/umrah-hajj-guide-united-kingdom-2026
   - text: "UK Umrah packages: ATOL and the twelve operator checks"
     path: /blog/uk-umrah-packages-atol-operator-checks
+  - text: "Ramadan Umrah 2027 from the UK: dates, fares and permits"
+    path: /blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights
   - text: "Nusuk hotel BRN and the Rawdah permit chain"
     path: /blog/nusuk-hotel-brn-rawdah-gate-guide
   - text: "Where to stay in Madinah and which gate you will use"
@@ -78,6 +80,8 @@ internalLinksEn:
 internalLinksBn:
   - text: "যুক্তরাজ্যের পিলার গাইড: কোন রুট, কোন এয়ারলাইন, খরচ কত"
     path: /blog/umrah-hajj-guide-united-kingdom-2026
+  - text: "রমজান ওমরাহ ২০২৭: তারিখ, ভাড়া ও পারমিট"
+    path: /blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights
   - text: "যুক্তরাজ্যের ওমরাহ প্যাকেজ: এটিওএল ও বারোটি অপারেটর যাচাই"
     path: /blog/uk-umrah-packages-atol-operator-checks
   - text: "নুসুক হোটেল BRN ও রওদা পারমিটের ধাপ"
