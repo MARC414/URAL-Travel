@@ -140,12 +140,20 @@ function generate(posts: ScheduledBlogPost[]): void {
       serializeModule("SCHEDULED_BLOG_DIRECTORY", indexPosts, "{ slug: string; title: string }[]"),
       serializeModule("SCHEDULED_BLOG_COVER_IMAGES", coverImages, "Record<string, string>"),
       serializeModule("SCHEDULED_BLOG_ALT_TEXT", altText, "Record<string, { en: string; bn: string }>"),
-      serializeModule(
-        "SCHEDULED_BLOG_AEO_PANELS",
-        aeoPanels,
-        'Record<string, { audience: "uk" | "bd"; audienceLabelEn?: string; audienceLabelBn?: string; summary: { en: string; bn: string }; facts: { label: string; labelBn: string; value: string; valueBn: string }[] }>',
-      ),
     ].join("\n"),
+  );
+
+  // Panel copy lives in its own module: `scheduledBlogIndex.generated.ts` is in
+  // the eager graph (constants -> blogIndex needs the slug list), and 20 panels
+  // of prose there blew the eager-JS budget. Only the blog route and the
+  // prerender script import this file.
+  writeIfChanged(
+    path.join(OUTPUT_DIR, "scheduledBlogAeoPanels.generated.ts"),
+    serializeModule(
+      "SCHEDULED_BLOG_AEO_PANELS",
+      aeoPanels,
+      'Record<string, { audience: "uk" | "bd"; audienceLabelEn?: string; audienceLabelBn?: string; summary: { en: string; bn: string }; facts: { label: string; labelBn: string; value: string; valueBn: string }[] }>',
+    ),
   );
 
   writeIfChanged(

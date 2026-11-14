@@ -25,6 +25,22 @@ snippet: "The Haramain high-speed train covers Makkah to Madinah in about two ho
 snippetBn: "হারামাইন হাই-স্পিড ট্রেন মক্কা থেকে মদিনা লাইনে প্রায় দুই ঘণ্টা বিশ মিনিটে যায়, কিন্তু স্টেশন ট্রান্সফার, নিরাপত্তা ও ট্যাক্সির লাইন মিলিয়ে আসল দরজা-থেকে-দরজা সময় প্রায় সাড়ে চার থেকে সাড়ে পাঁচ ঘণ্টা। ট্রেনে প্রতি যাত্রীর জন্য এক ব্যাগ, ২৫ কেজি—এই কঠিন নিয়মটি ভারী লাগেজের পরিবারের জন্য সময়সূচির চেয়েও জরুরি। পাঁচজন বা বেশি হলে প্রাইভেট ভ্যান প্রায়ই সস্তা ও সহজ; একা বা দম্পতির জন্য ট্রেনই এগিয়ে।"
 faqHeadingEn: "8. Frequently Asked Questions"
 faqHeadingBn: "৮. সচরাচর জিজ্ঞাসা"
+audience: bd
+aeoSummary: "The Haramain high-speed train covers Makkah to Madinah in about two hours twenty minutes on the rails, but station transfers, security and taxi queues stretch the real door-to-door time to roughly four and a half to five and a half hours. The train also enforces one bag up to 25 kg and 65 × 55 × 35 cm plus one hand item per passenger, which decides the answer more often than the timetable for a family with heavy luggage. For five or more travellers a private van usually beats per-seat fares (checked 8 Nov 2026)."
+aeoSummaryBn: "হারামাইন হাই-স্পিড ট্রেনে মক্কা থেকে মদিনা রেলপথে প্রায় দুই ঘণ্টা বিশ মিনিট, কিন্তু স্টেশন বদল, নিরাপত্তা ও ট্যাক্সির লাইন মিলিয়ে দরজা থেকে দরজা বাস্তবে প্রায় সাড়ে চার থেকে সাড়ে পাঁচ ঘণ্টা। ট্রেনে যাত্রীপ্রতি নিয়ম এক ব্যাগ, সর্বোচ্চ ২৫ কেজি ও ৬৫ × ৫৫ × ৩৫ সেমি, সঙ্গে একটি হাতের ব্যাগ — ভারী লাগেজের পরিবারে সময়সূচির চেয়ে এই নিয়মই উত্তর ঠিক করে দেয়। পাঁচজন বা বেশি হলে ব্যক্তিগত ভ্যান সাধারণত সিট-ভাড়ার চেয়ে সস্তা পড়ে (৮ নভেম্বর ২০২৬-এ যাচাই)।"
+aeoFacts:
+  - label: Rail time vs door-to-door
+    labelBn: 'রেলের সময় বনাম দরজা থেকে দরজা'
+    value: 'About 2 h 20 min on the rails, roughly 4½ to 5½ hours door to door — checked 8 Nov 2026'
+    valueBn: 'রেলে প্রায় ২ ঘণ্টা ২০ মিনিট, দরজা থেকে দরজা প্রায় সাড়ে ৪ থেকে সাড়ে ৫ ঘণ্টা — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Train luggage rule
+    labelBn: 'ট্রেনের লাগেজ নিয়ম'
+    value: 'One bag up to 25 kg and 65 × 55 × 35 cm, plus one hand item, per passenger — checked 8 Nov 2026'
+    valueBn: 'যাত্রীপ্রতি একটি ব্যাগ সর্বোচ্চ ২৫ কেজি ও ৬৫ × ৫৫ × ৩৫ সেমি, সঙ্গে একটি হাতের ব্যাগ — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Group maths
+    labelBn: 'দলের হিসাব'
+    value: 'For five or more travellers a private van usually beats per-seat fares once luggage is counted — checked 8 Nov 2026'
+    valueBn: 'পাঁচজন বা বেশি হলে লাগেজ ধরলে ব্যক্তিগত ভ্যান সাধারণত সিট-ভাড়ার চেয়ে সস্তা — ৮ নভেম্বর ২০২৬-এ যাচাই'
 references:
   - name: "Saudi Arabia Railways — official operator of the Haramain High-Speed Railway (route, timetables, classes and conditions of carriage)"
     nameBn: "সৌদি আরব রেলওয়ে — হারামাইন হাই-স্পিড রেলওয়ে (অফিসিয়াল অপারেটর, সময়সূচি, শ্রেণি ও পরিবহন শর্ত)"

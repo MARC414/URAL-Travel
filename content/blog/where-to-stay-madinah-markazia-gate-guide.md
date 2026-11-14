@@ -25,6 +25,22 @@ snippet: "Madinah is flat and open, so distance is readable — but which side o
 snippetBn: "মদিনা সমতল ও খোলা, তাই দূরত্ব বোঝা সহজ—কিন্তু মাসজিদ আন-নববীর কোন পাশে ঘুমাবেন, সেটাই ঠিক করে দেয় আপনি কোন গেটে হাঁটবেন। মহিলাদের নামাজের জায়গা ও রওদার সমাবেশ মূলত উত্তর ও উত্তর-পূর্ব ঘেরাও এলাকায়, আর পুরুষদের সালামের রুট ও বাণিজ্যিক মারকাজিয়ার বড় অংশ দক্ষিণ ও পশ্চিমে। লিস্টিংয়ের মিটার নয়, প্রতিদিন যে গেট ব্যবহার করবেন সেটি দেখে সেক্টর বাছুন।"
 faqHeadingEn: "9. Frequently Asked Questions"
 faqHeadingBn: "৯. সচরাচর জিজ্ঞাসা"
+audience: bd
+aeoSummary: "In Madinah, pick the Markazia sector from the gate you will use every day, not from the metres on the listing. A hotel 200 metres north and a hotel 200 metres south of Masjid an-Nabawi are the same distance and completely different journeys, because the gates are assigned by side: the women's Rawdah queue assembles towards Gate 37 on the north-east, men's Rawdah access and bus arrivals work best from gates 5 to 8 on the west, the Baqi side runs 32 to 34, and Gate 1 south is the historic Bab Al-Salam entrance (checked 8 Nov 2026)."
+aeoSummaryBn: "মদিনায় মারকাজিয়ার কোন দিকে থাকবেন, তা ঠিক করুন রোজ যে গেট দিয়ে যাবেন তা দিয়ে — লিস্টিংয়ের মিটার দিয়ে নয়। মাসজিদ আন-নববীর ২০০ মিটার উত্তরে একটি হোটেল আর ২০০ মিটার দক্ষিণে আরেকটি হোটেল একই দূরত্ব, কিন্তু সম্পূর্ণ আলাদা যাত্রা — কারণ গেট ভাগ করা হয় দিক ধরে: নারীদের রওদা লাইন উত্তর-পূর্বে গেট ৩৭-এর দিকে জমে, পুরুষদের রওদা ও বাসের আগমন পশ্চিমে গেট ৫–৮ দিয়ে সহজ, বাকি দিক ৩২–৩৪, আর দক্ষিণে গেট ১ ঐতিহাসিক বাব আস-সালাম প্রবেশপথ (৮ নভেম্বর ২০২৬-এ যাচাই)।"
+aeoFacts:
+  - label: Gates by side
+    labelBn: 'কোন দিকে কোন গেট'
+    value: 'Gate 37 north-east for the women''s Rawdah queue, gates 5–8 west for men''s Rawdah and bus arrivals, 32–34 east for the Baqi side, Gate 1 south — checked 8 Nov 2026'
+    valueBn: 'নারীদের রওদা লাইনের জন্য উত্তর-পূর্বে গেট ৩৭, পুরুষদের রওদা ও বাসের জন্য পশ্চিমে গেট ৫–৮, বাকির দিকে পূর্বে ৩২–৩৪, দক্ষিণে গেট ১ — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Same metres, different journey
+    labelBn: 'একই মিটার, আলাদা যাত্রা'
+    value: '200 m north and 200 m south are the same distance but open onto different gates — checked 8 Nov 2026'
+    valueBn: '২০০ মিটার উত্তর আর ২০০ মিটার দক্ষিণ একই দূরত্ব, কিন্তু খোলে আলাদা গেটে — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Three distance tiers
+    labelBn: 'দূরত্বের তিন স্তর'
+    value: 'On the plaza, one ring out, and the outer quarters along Al Salam and Airport Road — checked 8 Nov 2026'
+    valueBn: 'প্লাজার উপর, এক রিং বাইরে, আর আল সালাম ও এয়ারপোর্ট রোডের বাইরের এলাকা — ৮ নভেম্বর ২০২৬-এ যাচাই'
 references:
   - name: "Saudi Ministry of Hajj and Umrah — official pilgrim portal, including Madinah visiting guidance"
     nameBn: "সৌদি হজ্জ ও ওমরাহ মন্ত্রণালয় — অফিসিয়াল হাজি পোর্টাল, মদিনা জিয়ারত নির্দেশনা"

@@ -25,6 +25,22 @@ snippet: "Booking maps measure a straight line from a building to the mosque bou
 snippetBn: "বুকিং ম্যাপ ভবন থেকে মসজিদের সীমানা পর্যন্ত সোজা রেখা মাপে। আপনার আসল যাত্রায় চারটি ধাপ: লিফটের অপেক্ষা, ভেতরের করিডোর, চত্বরে হাঁটা আর গেটে ছাড় পাওয়া। ক্লক টাওয়ারের হোটেলে প্রথম ধাপটাই সবচেয়ে বড় হতে পারে; জাবাল ওমর ও পশ্চিম চত্বরে সেটি কয়েক মিনিটে ছোট হয়ে যায়। লিস্টিংয়ের মিটারে নয়, এই চার ধাপে হোটেল তুলনা করুন, আর মনে রাখুন ফেরার পথ সাধারণত ধীর দিক।"
 faqHeadingEn: "7. Frequently Asked Questions"
 faqHeadingBn: "৭. সচরাচর জিজ্ঞাসা"
+audience: bd
+aeoSummary: "Booking maps measure a straight line from a building to the mosque boundary. Your real journey has four stages: the lift wait, the internal corridor, the plaza walk and the gate clearance. In the Clock Tower towers the first stage can dominate; in Jabal Omar and on the western plaza it shrinks to a few minutes. Compare hotels on those four stages rather than on the metres in the listing, and remember the return trip after a prayer is usually the slower direction (checked 8 Nov 2026)."
+aeoSummaryBn: "বুকিং ম্যাপ ভবন থেকে মসজিদের সীমানা পর্যন্ত সোজা রেখা মাপে। আপনার আসল যাত্রায় চারটি ধাপ: লিফটের অপেক্ষা, ভেতরের করিডর, প্লাজার হাঁটা আর গেটে ঢোকার সময়। ক্লক টাওয়ারের টাওয়ারে প্রথম ধাপটাই প্রভাব ফেলে; জাবাল ওমর ও পশ্চিম প্লাজায় তা কয়েক মিনিটে নেমে আসে। লিস্টিংয়ের মিটার নয়, এই চার ধাপেই হোটেল তুলনা করুন — আর মনে রাখুন, নামাজের পর ফেরার পথ সাধারণত ধীর দিক (৮ নভেম্বর ২০২৬-এ যাচাই)।"
+aeoFacts:
+  - label: The four stages
+    labelBn: 'চারটি ধাপ'
+    value: 'Lift wait, internal corridor, plaza walk and gate clearance are what a map distance leaves out — checked 8 Nov 2026'
+    valueBn: 'লিফটের অপেক্ষা, ভেতরের করিডর, প্লাজার হাঁটা ও গেটে ঢোকা — ম্যাপের দূরত্ব এসব বাদ দেয় — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: Towers vs ground access
+    labelBn: 'টাওয়ার বনাম সমতল প্রবেশ'
+    value: 'In the Clock Tower towers the lift wait can dominate; in Jabal Omar and the western plaza it shrinks to minutes — checked 8 Nov 2026'
+    valueBn: 'ক্লক টাওয়ারের টাওয়ারে লিফটের অপেক্ষাই প্রভাব ফেলে; জাবাল ওমর ও পশ্চিম প্লাজায় তা কয়েক মিনিট — ৮ নভেম্বর ২০২৬-এ যাচাই'
+  - label: The return is slower
+    labelBn: 'ফেরার পথ ধীর'
+    value: 'The walk back after a congregational prayer is usually the slower direction — checked 8 Nov 2026'
+    valueBn: 'জামাতের পর ফেরার হাঁটা সাধারণত ধীর দিক — ৮ নভেম্বর ২০২৬-এ যাচাই'
 references:
   - name: "Presidency of Religious Affairs of the Grand Mosque and the Prophet's Mosque — official authority for the Two Holy Mosques (Arabic)"
     nameBn: "মহান মসজিদ ও নবী মসজিদের ধর্মীয় বিষয়ক প্রেসিডেন্সি — দুই পবিত্র মসজিদের অফিসিয়াল কর্তৃপক্ষ (আরবি)"

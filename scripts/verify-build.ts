@@ -42,7 +42,7 @@ import { fileURLToPath } from "node:url";
 import { CONTENT_UPDATED } from "../src/data/contentMeta";
 import { SITE_ORIGIN, localizePublicSiteUrl } from "../src/utils/localeRoutes";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
-import { getBlogAeoPanel } from "../src/utils/blogAeoPanel";
+import { getBlogAeoPanel, getStaticBlogAeoSlugs } from "../src/utils/blogAeoPanel";
 import {
   AFFILIATE_LINKS,
   AFFILIATE_OFFER_REGISTRY,
@@ -866,15 +866,25 @@ for (const post of BLOG_DATA) {
     ...panel.facts.en.flatMap((fact) => [fact.label, fact.value]),
     ...panel.facts.bn.flatMap((fact) => [fact.label, fact.value]),
   ].join(" ");
+  if (panel.facts.en.length !== 3) {
+    aeoPanelIssues.push(`${post.slug} (needs exactly 3 facts, has ${panel.facts.en.length})`);
+  }
+  panel.facts.en.forEach((fact, index) => {
+    if (!/\b(?:19|20)\d{2}\b/.test(fact.value)) {
+      aeoPanelIssues.push(`${post.slug} (fact ${index + 1} has no checked year: ${fact.label})`);
+    }
+  });
+  panel.facts.bn.forEach((fact, index) => {
+    // Frontmatter panels are validated by the parser; the static map is not, so
+    // the Bengali half is asserted here for every source.
+    if (!/[\u09E6-\u09EF]{4}/.test(fact.value) && !/\b(?:19|20)\d{2}\b/.test(fact.value)) {
+      aeoPanelIssues.push(`${post.slug} (Bengali fact ${index + 1} has no checked year)`);
+    }
+  });
   if (panel.audience === "uk") {
     for (const [pattern, description] of AEO_UK_FORBIDDEN) {
       if (pattern.test(authored)) {
         aeoPanelIssues.push(`${post.slug} (uk panel carries ${description})`);
-      }
-    }
-    for (const fact of panel.facts.en) {
-      if (!/\b(?:19|20)\d{2}\b/.test(fact.value)) {
-        aeoPanelIssues.push(`${post.slug} (undated uk fact: ${fact.label})`);
       }
     }
   }
@@ -902,6 +912,16 @@ check(
   aeoPanelIssues.length === 0
     ? `Essential Travel Insights panels are page-specific, dated and in the shipped HTML (${aeoPanelSlugs.length} post(s): ${aeoPanelSlugs.join(", ")})`
     : `AEO panel problems: ${aeoPanelIssues.slice(0, 6).join("; ")}`,
+);
+
+const orphanStaticPanels = getStaticBlogAeoSlugs().filter(
+  (slug) => !BLOG_DATA.some((post) => post.slug === slug),
+);
+check(
+  orphanStaticPanels.length === 0,
+  orphanStaticPanels.length === 0
+    ? "every hand-written AEO panel still belongs to a live blog slug"
+    : `orphaned AEO panels (slug no longer published): ${orphanStaticPanels.join(", ")}`,
 );
 
 const altTextIssues: string[] = [];
@@ -6754,7 +6774,10 @@ check(
 // nothing banned reaches the markup.
 function renderSharedUmrahPanel(locale: "en" | "bn"): string {
   // Reviewed procedural guides suppress this generic price panel. Preserve its independent regression fixture.
-  const slug = "bangladeshi-halal-food-guide-makkah-madinah-budget-meals";
+  // A post that deliberately carries no AEO data: the shared panel must not
+  // reappear on it. (Every Umrah/ Haji article with authored facts is covered by
+  // the page-specific panel check above.)
+  const slug = "nusuk-hotel-brn-rawdah-gate-guide";
   const isBn = locale === "bn";
   const sourcePosts = getLocalizedBlogs(locale);
   const sourcePost = sourcePosts.find((post) => post.slug === slug);
