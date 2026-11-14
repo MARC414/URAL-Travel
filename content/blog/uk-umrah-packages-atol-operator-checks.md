@@ -74,6 +74,8 @@ references:
 internalLinksEn:
   - text: "The UK pillar: visas, Nusuk and Hajj for 2027"
     path: /blog/umrah-hajj-guide-united-kingdom-2026
+  - text: "Hajj 2027 bookings: Nusuk Hajj only, and no package on sale yet"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
   - text: "DIY Umrah intelligence portal and budget calculator"
     path: /umrah
   - text: "Choosing where to stay in Makkah and Madinah"
@@ -87,6 +89,8 @@ internalLinksEn:
 internalLinksBn:
   - text: "যুক্তরাজ্যের পিলার গাইড: ভিসা, নুসুক ও ২০২৭-এর হজ্জ"
     path: /blog/umrah-hajj-guide-united-kingdom-2026
+  - text: "হজ্জ ২০২৭ বুকিং: শুধু নুসুক হজ্জ, আর এখনো কোনো প্যাকেজ বিক্রি হচ্ছে না"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
   - text: "ডিআইওয়াই ওমরাহ পোর্টাল ও বাজেট ক্যালকুলেটর"
     path: /umrah
   - text: "মক্কা ও মদিনায় কোথায় থাকবেন"
