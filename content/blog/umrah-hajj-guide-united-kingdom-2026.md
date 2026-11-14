@@ -82,6 +82,8 @@ internalLinksEn:
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
   - text: "UK packages: ATOL cover and operator checks before you pay"
     path: /blog/uk-umrah-packages-atol-operator-checks
+  - text: "Hajj 2027 from the UK: dates, Nusuk Hajj registration and what it costs"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
   - text: "Search live hotel rates in Makkah and Madinah"
     path: /hotels
   - text: "Compare UK routes and fare options"
@@ -97,6 +99,8 @@ internalLinksBn:
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
   - text: "যুক্তরাজ্যের প্যাকেজ: এটিওএল সুরক্ষা ও অপারেটর যাচাই"
     path: /blog/uk-umrah-packages-atol-operator-checks
+  - text: "যুক্তরাজ্য থেকে হজ্জ ২০২৭: তারিখ, নুসুক হজ্জ নিবন্ধন ও খরচ"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
   - text: "মক্কা ও মদিনার লাইভ হোটেল ভাড়া"
     path: /hotels
   - text: "যুক্তরাজ্যের রুট ও ভাড়ার তুলনা"
