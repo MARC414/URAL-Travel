@@ -331,3 +331,82 @@ the claims above carry URL + checked date so any line can be re-verified live.
     request (weekly cap removed the same day), so the links resolve from the first deploy.
   - **SEO-KEYWORD-MAP row** added (G6: fast-moving, owner Farhan Momen, review by 15 Feb 2027;
     baseline at the 2 Dec export). Plan §5/§9 updated.
+
+---
+
+## 10. Pass 3 — re-verification before the flights and visa drafts (14 November 2026)
+
+**Checked date for every fetch below: 14 November 2026.** Same rule as pass 1: primaries carry
+rules; KAYAK is a meta-search and is used only for dated fare snapshots (S9), never for a rule.
+
+### S1 — FCDO re-checked (still current, unchanged wording)
+
+- `gov.uk/foreign-travel-advice/saudi-arabia` — "Still current at: **14 November 2026**", "Updated:
+  **27 October 2026**". Advisory unchanged: against all travel within 10km of the Yemen border and
+  against all but essential travel to the rest of Saudi Arabia; insurance may be invalidated if you
+  travel against it. KKIA struck 10 October 2026; airports "continue to be targeted"; land exit to a
+  neighbouring country suggested as an alternative.
+- `…/entry-requirements` — ETA (**730 days**, multiple, **180 days total**, no health insurance,
+  `ksavisa.sa` before travel, Umrah outside Hajj); e-visa (**365 days**, multiple, **90 days total**,
+  insurance to **SAR 100,000**, `visa.visitsaudi.com` or on arrival); electronic visa waiver
+  (**single entry**, up to **180 days**, no insurance, `visa.mofa.gov.sa`, **48 hours to 90 days**
+  before the flight with flight details); passport **6 months after arrival**; transit-visa triggers
+  (immigration control, separate ticket, >12h connection); Hajj-season flight restriction to Jeddah,
+  Madinah and Taif; MenACWY for pilgrims.
+- `…/pilgrimage` — e-visa or EVW for Umrah outside Hajj; **Hajj only via Nusuk Hajj**; Hajj visa set
+  length, **not extendable**; ETD **£125**; ACWY **10 days before arrival**; fraud reporting
+  (City of London Police Fraud Desk, Action Fraud); Nusuk Hajj **+966 9200 31201**; consulate
+  **+9661 1481 9100**; FCDO **+44 207 008 5000**.
+
+**Nothing in the pass-1 record needed correcting.** The 12–13 Nov articles' advisory framing holds.
+
+### S2 — Saudi eVisa portal re-checked
+
+`visa.visitsaudi.com` — one-year, multiple-entry, up to 90 days; activities include **Umrah
+(excluding Hajj)**; **72 eligible countries**, **United Kingdom listed**, **Bangladesh not listed**;
+others told to contact the nearest Saudi Embassy. No published residence-based addendum.
+
+### S4 — Ministry of Hajj and Umrah
+
+`haj.gov.sa/en` (page stamp 14 November 2026) — still advertising **"Applications Now Open for
+Licensing Foreign Pilgrim Service Companies for the 1448 AH Hajj Season"**; **no ritual calendar and
+no UK registration window**; e-services list includes **Rawdah Sharif permits**; Nusuk promoted for
+self-planned Umrah.
+
+### S6 / S9 — routes and GBP snapshots (KAYAK, checked 14 November 2026)
+
+| Route | Non-stop today | Cheapest return | Cheapest non-stop | Non-stop typical | All-returns typical |
+| --- | --- | --- | --- | --- | --- |
+| LHR→JED | Yes (Saudia, BA) | £347 (3 stops) | £669 | £642–£949 | £462–£624 |
+| MAN→JED | Yes (Saudia) | £326 (1 stop) | £515 | £631–£936 | £553–£824 |
+| BHX→JED | **No** ("no direct flights between Birmingham and Jeddah") | £354 (2 stops) | — | — | £460–£667 |
+| LHR→MED | **No** | £387 (1 stop) | — | — | £494–£687 |
+
+Non-stop block times quoted by the same pages: LHR→JED **6h 05m**, MAN→JED **6h 27m**; shortest BHX
+connection **10h 36m** via Cairo; shortest LHR→MED **9h 00m**.
+
+**Finding that changed the article's spine:** Birmingham has **no direct Jeddah service** on this
+check, and no UK airport reaches Madinah non-stop. Operator pages fetched during this pass (As-Suffa,
+Perfect Umrah, Taqwa Tours, 5 Oct 2026) still advertise "direct from Birmingham" — that is exactly
+the claim the article now tells the reader to test by asking for a flight number. Saudia's own
+network page (`saudia.com/.../our-network`) was serving a "digital upgrade" placeholder on
+14 Nov 2026, so no airline-official route list could be re-confirmed this pass; the article therefore
+attributes the route claim to the dated KAYAK snapshot and sends the reader to the airline for
+confirmation rather than asserting a schedule.
+
+### Drafting status (14 November 2026)
+
+- `content/blog/uk-to-saudi-flights-umrah-direct-or-connecting.md` — `status: draft`, 8 references,
+  6 EN + 6 BN internal links (5 blog→blog), `aviasales` CTA in both locales, `journeyStage: prepare`,
+  EN 1,596 prose words / BN 1,331.
+- `content/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step.md` — `status: draft`,
+  6 references, 6 EN + 6 BN internal links (4 blog→blog), `kiwitaxi` CTA in both locales,
+  `journeyStage: prepare`, EN 1,594 prose words / BN 1,453.
+- Gates run: draft-gate script (refs, links, CTA, stage, FAQ pairing, word band, dead-link check) ✅ ·
+  `lint` ✅ · `test:scheduling` ✅ · `test:journey-help` ✅ · preview build with
+  `--include-unpublished` (144 EN + 144 BN routes, both drafts render EN+BN, FAQPage 6 questions,
+  CTAs server-rendered) ✅ · production `build` + `verify:build` **517/517** ✅ (drafts absent from
+  `dist/` and the sitemap).
+- **Still needed before scheduling:** validated cover image (640/960/1200 WebP + social JPEG +
+  `imageAssets.ts` row), ≥2 inbound links from existing posts in the same release, `SEO-KEYWORD-MAP`
+  rows, and a re-check of FCDO + KAYAK on the day the date is set.
