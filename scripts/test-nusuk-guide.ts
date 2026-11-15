@@ -119,7 +119,18 @@ for (const locale of ["en", "bn"] as const) {
     assert.equal([...markup.matchAll(/<aside role="note"/g)].length, 5);
     assert.ok(!markup.includes(isBn ? "যাত্রীর যাচাই (" : "Traveller check ("));
     assert.ok(markup.includes('id="blog-article-faq-heading"'));
-    assert.ok(!markup.includes('id="travel-intelligence-panel"'));
+    // This article now carries its own page-specific panel (audience: bd). What
+    // must not return is the shared FAO accordion the panel used to repeat.
+    assert.ok(markup.includes('id="travel-intelligence-panel"'), "the article's own AEO panel renders");
+    assert.equal(
+      (markup.match(/id="blog-article-faq-heading"/g) ?? []).length,
+      1,
+      "only the article's own FAQ heading remains",
+    );
+    assert.ok(
+      !markup.includes("Common questions about these facts") && !markup.includes("সচরাচর জিজ্ঞাসিত প্রশ্ন (FAQ)"),
+      "the panel carries no second FAQ accordion",
+    );
     assert.ok(markup.includes(isBn ? "ডেটা প্ল্যান ঐচ্ছিক" : "A data plan is optional"));
     for (const pattern of retired) assert.ok(!pattern.test(clean(markup)), `Retired React copy: ${pattern}`);
   });

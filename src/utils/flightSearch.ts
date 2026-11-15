@@ -1,24 +1,23 @@
 /**
- * Travelpayouts Page-type flight search, configured in the partner dashboard.
- * The provider owns hosting, TLS and booking handoffs on this subdomain.
- * Native search-code contract:
- * https://support.travelpayouts.com/hc/en-us/articles/115003710648
+ * Flight-search plumbing built on the shared white-label module.
+ *
+ * The white-label constants and URL builder live in `flightWhiteLabel.ts` so
+ * entry-chunk code can use them without this file's airport directory. They are
+ * re-exported here for existing imports and tests — one definition, two doors.
  */
-export const FLIGHT_WHITE_LABEL = {
-  origin: "https://flights.uraltravel.co.uk",
-  id: 24232,
-  marker: "675992",
-  project: "589561",
-} as const;
+export {
+  FLIGHT_WHITE_LABEL,
+  DEFAULT_FLIGHT_CURRENCY,
+  isFlightSearchCode,
+  sanitizeSubId,
+  flightSubIdForSlug,
+  buildWhiteLabelUrl,
+} from "./flightWhiteLabel";
 
-const CURRENCIES = new Set(["BDT", "USD", "EUR", "GBP", "SAR", "AED", "CNY"]);
-
-/**
- * The hosted Page is an international page whose dashboard default is USD.
- * BDT is a convenience for searches departing Bangladesh, not the global default;
- * otherwise every London→New York handoff would open priced in taka.
- */
-export const DEFAULT_FLIGHT_CURRENCY = "USD";
+import {
+  buildWhiteLabelUrl,
+  DEFAULT_FLIGHT_CURRENCY,
+} from "./flightWhiteLabel";
 
 /** Active Bangladeshi gateways in the airport directory. Do not include codes owned elsewhere. */
 const BANGLADESH_AIRPORT_CODES = new Set(["DAC", "CGP", "CXB", "ZYL", "JSR", "RJH", "SPD", "BZL"]);
@@ -63,22 +62,6 @@ export function buildFlightSearchCode({
   if (tripType === "roundtrip" && (!returning || returnDate < departureDate)) return "";
   const count = Number.isFinite(adults) ? Math.max(1, Math.min(9, Math.trunc(adults))) : 1;
   return `${from}${departure}${to}${returning}${CABIN_CODES[cabinClass] ?? ""}${count}`;
-}
-
-/** Includes documented child/infant suffixes when preserving an existing link. */
-export function isFlightSearchCode(code: string): boolean {
-  return /^[A-Z]{3}\d{4}[A-Z]{2,3}(?:\d{4})?[cwf]?[1-9]\d{0,2}$/.test(code);
-}
-
-export function buildWhiteLabelUrl({
-  flightSearch = "", currency = DEFAULT_FLIGHT_CURRENCY, locale = "en",
-}: { flightSearch?: string; currency?: string; locale?: string } = {}): string {
-  const url = new URL("/", FLIGHT_WHITE_LABEL.origin);
-  if (isFlightSearchCode(flightSearch)) url.searchParams.set("flightSearch", flightSearch);
-  const selectedCurrency = currency.toUpperCase();
-  url.searchParams.set("currency", CURRENCIES.has(selectedCurrency) ? selectedCurrency : DEFAULT_FLIGHT_CURRENCY);
-  url.searchParams.set("locale", locale.toLowerCase() === "bn" ? "bn" : "en");
-  return url.toString();
 }
 
 /** Old bookmarks carry shell-only origin/destination/standalone parameters. */

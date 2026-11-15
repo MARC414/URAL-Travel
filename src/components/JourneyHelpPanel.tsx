@@ -1,6 +1,7 @@
 import React from "react";
 import { AFFILIATE_LINKS, resolvePartnerUrl } from "./AffiliatePartners";
 import { getJourneyHelp, type JourneyStage } from "../utils/journeyHelp";
+import { resolveBookingCtaUrl } from "../utils/bookingCta";
 
 /**
  * Journey Help panel — see docs/growth/10-CONTENT-UPGRADE-STANDARD.md §4.4.
@@ -22,9 +23,12 @@ export const JOURNEY_HELP_PLACEMENT = "journey_help";
 export default function JourneyHelpPanel({
   stage,
   isBn,
+  slug,
 }: {
   stage?: JourneyStage;
   isBn: boolean;
+  /** Article slug, so a flight link can carry its own per-placement sub_id. */
+  slug?: string;
 }) {
   const config = getJourneyHelp(stage);
   if (!config) return null;
@@ -55,7 +59,19 @@ export default function JourneyHelpPanel({
           // A3/§4.1: never emit the raw registry URL. `resolvePartnerUrl` swaps
           // in the fallback when a programme is paused, so a dead partner cannot
           // leave a broken button on a live pilgrimage page.
-          const href = resolvePartnerUrl(AFFILIATE_LINKS[link.partner]);
+          //
+          // Flight links are the exception: the `travel` stage offers fares, and
+          // the raw registry entry points at the branded short link.
+          // Every other flight surface in the site stops on our own /flights page
+          // first (see `resolveBookingCtaUrl`), and this panel must not be the one
+          // door that still sends a reader to someone else's brand. The build
+          // cannot see it either: this panel is client-rendered, so the static-HTML
+          // guard in `verify:build` never inspects it — `test-journey-help.ts`
+          // renders it and asserts the host instead.
+          const href =
+            link.partner === "aviasales"
+              ? resolveBookingCtaUrl("aviasales", { slug, locale: isBn ? "bn" : "en" })
+              : resolvePartnerUrl(AFFILIATE_LINKS[link.partner]);
           const label = isBn ? link.labelBn : link.labelEn;
           const reason = isBn ? link.reasonBn : link.reasonEn;
           return (

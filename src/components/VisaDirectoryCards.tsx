@@ -42,7 +42,6 @@ export function VisaDirectoryCards({ guides, isBn }: { guides: VisaGuide[]; isBn
       return <a key={guide.id} href={`${isBn ? "/bn" : ""}/visa/${guide.id}`} target="_blank" rel="noopener noreferrer" className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2">
         <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
           {image && <ResponsiveImage src={image.src} alt={isBn ? image.altBn : image.altEn} sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw" loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]" />}
-          {image && <span className="absolute bottom-2 right-2 rounded bg-slate-950/75 px-2 py-1 text-[10px] text-white">{isBn ? "AI-তৈরি চিত্র" : "AI-generated illustration"}</span>}
         </div>
         <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
           <h3 className="ural-card-title font-serif text-xl text-brand-navy">{isBn ? `${card?.nameBn ?? guide.country} ভিসা গাইড` : `${guide.country} visa guide`}</h3>

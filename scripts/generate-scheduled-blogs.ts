@@ -40,6 +40,9 @@ function toBlogMetadata(post: ScheduledBlogPost) {
     ...(post.inlineFigure ? { inlineFigure: post.inlineFigure } : {}),
     ...(post.references.length ? { references: post.references } : {}),
     ...(post.affiliateCta ? { affiliateCTA: post.affiliateCta } : {}),
+    // Journey Help is chosen by stage, never by topic (docs/growth/10 §4.4), so
+    // the stage must travel with the post or the panel silently disappears.
+    ...(post.journeyStage ? { journeyStage: post.journeyStage } : {}),
     internalLinks: post.internalLinksEn,
   };
 }
@@ -103,6 +106,26 @@ function generate(posts: ScheduledBlogPost[]): void {
       .filter((post) => post.faqHeadingEn && post.faqHeadingBn)
       .map((post) => [post.slug, { en: post.faqHeadingEn, bn: post.faqHeadingBn }]),
   );
+  const aeoPanels = Object.fromEntries(
+    posts
+      .filter((post) => post.aeoSummary && post.aeoSummaryBn && post.aeoFacts?.length)
+      .map((post) => [
+        post.slug,
+        {
+          audience: post.audience ?? "bd",
+          ...(post.audienceLabelEn && post.audienceLabelBn
+            ? { audienceLabelEn: post.audienceLabelEn, audienceLabelBn: post.audienceLabelBn }
+            : {}),
+          summary: { en: post.aeoSummary as string, bn: post.aeoSummaryBn as string },
+          facts: (post.aeoFacts ?? []).map((fact) => ({
+            label: fact.label,
+            labelBn: fact.labelBn,
+            value: fact.value,
+            valueBn: fact.valueBn,
+          })),
+        },
+      ]),
+  );
   const imageMap = Object.fromEntries(
     posts
       .filter((post) => post.coverImage)
@@ -118,6 +141,19 @@ function generate(posts: ScheduledBlogPost[]): void {
       serializeModule("SCHEDULED_BLOG_COVER_IMAGES", coverImages, "Record<string, string>"),
       serializeModule("SCHEDULED_BLOG_ALT_TEXT", altText, "Record<string, { en: string; bn: string }>"),
     ].join("\n"),
+  );
+
+  // Panel copy lives in its own module: `scheduledBlogIndex.generated.ts` is in
+  // the eager graph (constants -> blogIndex needs the slug list), and 20 panels
+  // of prose there blew the eager-JS budget. Only the blog route and the
+  // prerender script import this file.
+  writeIfChanged(
+    path.join(OUTPUT_DIR, "scheduledBlogAeoPanels.generated.ts"),
+    serializeModule(
+      "SCHEDULED_BLOG_AEO_PANELS",
+      aeoPanels,
+      'Record<string, { audience: "uk" | "bd"; audienceLabelEn?: string; audienceLabelBn?: string; summary: { en: string; bn: string }; facts: { label: string; labelBn: string; value: string; valueBn: string }[] }>',
+    ),
   );
 
   writeIfChanged(

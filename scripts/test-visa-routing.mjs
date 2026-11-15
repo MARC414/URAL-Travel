@@ -51,6 +51,7 @@ try {
     const selector = `a[target="_blank"][href^="${prefix}/visa/"]`;
     await waitFor(() => document.querySelectorAll(selector).length === VISA_DATA.length, `${prefix} visa cards`);
     const cards = [...document.querySelectorAll(selector)];
+    assert.doesNotMatch(document.querySelector("main").textContent, /AI-generated illustration|AI-তৈরি চিত্র|Pexels · hotel room photo/);
     assert.equal(new Set(cards.map((link) => link.getAttribute("href"))).size, VISA_DATA.length);
     for (const guide of VISA_DATA) {
       const card = cards.find((link) => link.getAttribute("href") === `${prefix}/visa/${guide.id}`);
@@ -71,6 +72,7 @@ try {
       const bnCountries = { "nepal-visa": "নেপাল", "thailand-visa": "থাইল্যান্ড", "malaysia-visa": "মালয়েশিয়া", "dubai-visa": "সংযুক্ত আরব আমিরাত", "singapore-visa": "সিঙ্গাপুর", "maldives-visa": "মালদ্বীপ", "saudi-arabia-visa": "সৌদি" };
       const expected = prefix ? `${bnCountries[guide.id]} ভিসা` : `${guide.country} Visa Requirements`;
       await visit(`${prefix}/visa/${guide.id}`, expected);
+      assert.doesNotMatch(document.querySelector("main").textContent, /AI-generated illustration|AI-তৈরি চিত্র|Pexels · hotel room photo/);
       const localized = prefix ? getLocalizedVisas("bn").find((v) => v.id === guide.id) : guide;
       const firstQuestion = localized.faqs[0].question;
       await waitFor(() => document.body.textContent.includes(firstQuestion), `${prefix}/${guide.id} localized FAQ`);

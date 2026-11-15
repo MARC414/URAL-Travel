@@ -57,6 +57,9 @@ export const PartnerLogoMarquee: React.FC<PartnerLogoMarqueeProps> = ({ lang = "
       logoSrc: "/assets/partners/aviasales.svg",
       roleEn: "Flight search",
       roleBn: "ফ্লাইট সার্চ",
+      // Deliberate exception: a logo tile advertises the partner, so it links to
+      // the partner. Every money path (article CTAs, widgets, inline blocks)
+      // goes through the white label — see resolveBookingCtaUrl.
       href: resolvePartnerUrl(AFFILIATE_LINKS.aviasales),
       brandColor: "#1E60F2",
     },

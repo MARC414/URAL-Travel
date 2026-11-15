@@ -56,42 +56,42 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/flights/dhaka-kathmandu": {
     title: "Dhaka to Kathmandu Flights: Price & Route Guide | URAL",
     description:
-      "Compare Dhaka–Kathmandu flight options and journey times, then check live fares for your dates. Practical booking tips for Bangladeshi travelers planning a Nepal trip.",
+      "Compare Dhaka to Kathmandu fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
   },
   "/flights/dhaka-bangkok": {
     title: "Dhaka to Bangkok Flights: Fares, Airlines & Tips | URAL",
     description:
-      "Compare Dhaka to Bangkok flights across BKK and DMK airports, direct airlines, 2h 30m flight time, then check live fares for your dates.",
+      "Compare Dhaka to Bangkok fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
   },
   "/flights/dhaka-kuala-lumpur": {
     title: "Dhaka to Kuala Lumpur Flights: Price & Airlines | URAL",
     description:
-      "Compare direct Dhaka to Kuala Lumpur (KUL) flights, 3h 50m duration and budget vs full-service airlines, then check live fares for your dates.",
+      "Compare Dhaka to Kuala Lumpur fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
   },
   "/flights/dhaka-dubai": {
     title: "Dhaka to Dubai Flights: BDT Fares & Airlines | URAL",
     description:
-      "Compare direct and connecting Dhaka to Dubai (DXB) flights, 4h 45m flight time and operating airlines, then check live fares for your dates.",
+      "Compare Dhaka to Dubai fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
   },
   "/flights/dhaka-singapore": {
     title: "Dhaka to Singapore Flights: Airlines & BDT Fares | URAL",
     description:
-      "Compare direct Dhaka to Singapore (SIN) flights, 4h 15m journey time and carrier options, then check live fares for your dates.",
+      "Compare Dhaka to Singapore fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
   },
   "/flights/dhaka-maldives": {
     title: "Dhaka to Maldives Flights: Direct & Transit Fares | URAL",
     description:
-      "Compare Dhaka to Malé (MLE) direct and Colombo-transit flights, journey times and operating airlines, then check live fares for your dates.",
+      "Compare Dhaka to Malé fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
   },
   "/flights/ktm-dhaka": {
     title: "Kathmandu to Dhaka Flights: Price & Route Guide | URAL",
     description:
-      "Direct Kathmandu to Dhaka (DAC) flights take 1h 30m on Biman Bangladesh Airlines and Himalaya Airlines; compare live fares for your own dates.",
+      "Compare Kathmandu to Dhaka fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
   },
   "/flights/dhaka-los-angeles": {
     title: "Dhaka to Los Angeles Flights: Route & Fares | URAL",
     description:
-      "Compare flights from Dhaka to Los Angeles. Check flight duration, direct airlines and live fares for your own travel dates.",
+      "Compare Dhaka to Los Angeles fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
   },
   "/hotels": {
     title: "Hotel Area Guides for Bangladesh Travelers | URAL",
@@ -616,38 +616,38 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/flights/dhaka-bangkok": {
     title: "ঢাকা টু ব্যাংকক ফ্লাইট: ভাড়া, এয়ারলাইন ও টিপস | URAL",
     description:
-      "BKK ও DMK বিমানবন্দরে ঢাকা টু ব্যাংকক ফ্লাইট, সরাসরি এয়ারলাইন ও ২ঘ. ৩০মি. ফ্লাইট সময় তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
+      "ঢাকা থেকে ব্যাংকক ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
   },
   "/flights/dhaka-dubai": {
     title: "ঢাকা টু দুবাই ফ্লাইট: টাকায় ভাড়া ও এয়ারলাইন | URAL",
     description:
-      "সরাসরি ও কানেকটিং ঢাকা টু দুবাই (DXB) ফ্লাইট, ৪ঘ. ৪৫মি. সময় ও পরিচালনাকারী এয়ারলাইন তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
+      "ঢাকা থেকে দুবাই ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
   },
   "/flights/dhaka-kathmandu": {
     title: "ঢাকা টু কাঠমান্ডু ফ্লাইট: ভাড়া ও রুট গাইড | URAL",
     description:
-      "ঢাকা–কাঠমান্ডু ফ্লাইটের বিকল্প ও যাত্রার সময় তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন। নেপাল ভ্রমণের পরিকল্পনায় বাংলাদেশি যাত্রীদের জন্য ব্যবহারিক বুকিং টিপস।",
+      "ঢাকা থেকে কাঠমান্ডু ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
   },
   "/flights/dhaka-kuala-lumpur": {
     title: "ঢাকা টু কুয়ালালামপুর ফ্লাইট: ভাড়া ও এয়ারলাইন | URAL",
     description:
-      "সরাসরি ঢাকা টু কুয়ালালামপুর (KUL) ফ্লাইট, ৩ঘ. ৫০মি. সময় ও বাজেট বনাম ফুল-সার্ভিস এয়ারলাইন তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
+      "ঢাকা থেকে কুয়ালালামপুর ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
   },
   "/flights/dhaka-maldives": {
     title: "ঢাকা টু মালদ্বীপ ফ্লাইট: সরাসরি ও ট্রানজিট ভাড়া | URAL",
     description:
-      "ঢাকা টু মালে (MLE) সরাসরি ও কলম্বো-ট্রানজিট ফ্লাইট, যাত্রার সময় ও পরিচালনাকারী এয়ারলাইন তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
+      "ঢাকা থেকে মালে ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
   },
   "/flights/ktm-dhaka": {
     title: "কাঠমান্ডু টু ঢাকা ফ্লাইট: ভাড়া ও রুট গাইড | URAL",
     description:
-      "কাঠমান্ডু (KTM) থেকে ঢাকা (DAC) সরাসরি ফ্লাইটে মাত্র ১ ঘণ্টা ২৫ মিনিট সময় লাগে। Biman Bangladesh Airlines এবং Himalaya Airlines এই রুটে নিয়মিত সরাসরি ফ্লাইট পরিচালনা করে।",
+      "কাঠমান্ডু থেকে ঢাকা ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
   },
 
   "/flights/dhaka-singapore": {
     title: "ঢাকা টু সিঙ্গাপুর ফ্লাইট: এয়ারলাইন ও টাকায় ভাড়া | URAL",
     description:
-      "সরাসরি ঢাকা টু সিঙ্গাপুর (SIN) ফ্লাইট, ৪ঘ. ১৫মি. সময় ও এয়ারলাইন্সের বিকল্প তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।",
+      "ঢাকা থেকে সিঙ্গাপুর ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
   },
   "/hotels": {
     title: "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড | URAL",

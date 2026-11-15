@@ -287,8 +287,8 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
                 <Calendar size={14} className="text-[#F6B73C]" />
                 <span>
                   {isBn
-                    ? "লাইভ অ্যাভেইলেবিলিটি ক্যালেন্ডার ও BDT ক্যালকুলেটর"
-                    : "Live Availability Calendar & BDT Calculator"}
+                    ? "লাইভ অ্যাভেইলেবিলিটি ক্যালেন্ডার ও কস্ট ক্যালকুলেটর"
+                    : "Live Availability Calendar & Cost Calculator"}
                 </span>
               </button>
 
@@ -586,7 +586,7 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
           )}
 
           {/* ===============================================================
-              WIDGET MODE 3: AVAILABILITY CALENDAR & FAMILY BDT CALCULATOR
+              WIDGET MODE 3: AVAILABILITY CALENDAR & FAMILY COST CALCULATOR
              =============================================================== */}
           {widgetTab === "availability-calendar" && (
             <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8">

@@ -8,6 +8,7 @@ summary: "Checked 12 November 2026: three online routes cover Umrah from a Briti
 summaryBn: "১২ নভেম্বর ২০২৬-এ যাচাই করা: ব্রিটিশ পাসপোর্টে ওমরাহর জন্য তিনটি অনলাইন রুট — ইটিএ, ই-ভিসা বা ইলেকট্রনিক ভিসা ওয়েভার — আর হজ্জের জন্য আলাদা ভিসা লাগে। নুসুক পারমিট আলাদা ধাপ, মেনিঙ্গোকক্যাল ACWY টিকা আগমনের অন্তত ১০ দিন আগে, আর হজ্জ ২০২৭-এর কোনো তারিখ বা যুক্তরাজ্য নিবন্ধন উইন্ডো এখনো ঘোষণা হয়নি। ফ্লাইট ছাড়ে হিথরো, ম্যানচেস্টার ও বার্মিংহাম থেকে; এটিওএল অপারেটর বন্ধ হলে আপনার টাকা রক্ষা করে, স্বাস্থ্য নয়; আর এফসিডিও বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে, এবং পরামর্শের বিরুদ্ধে গেলে বীমা বাতিল হতে পারে বলে সতর্ক করে।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: prepare
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 8 min read
@@ -24,6 +25,24 @@ snippet: "Three online routes — an ETA, an e-visa or a waiver — cover Umrah 
 snippetBn: "ব্রিটিশ পাসপোর্টে ওমরাহ তিনটি অনলাইন রুটে — ইটিএ, ই-ভিসা বা ওয়েভার — সম্ভব, তবে এফসিডিও বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে পরামর্শ দেয় এবং পরামর্শের বিরুদ্ধে গেলে বীমা বাতিল হতে পারে বলে সতর্ক করে। এই গাইডে ভিসার পছন্দ, নুসুক পারমিটের ধাপ, হজ্জ ২০২৭ ঘোষণার অবস্থা, হিথরো-ম্যানচেস্টার-বার্মিংহাম থেকে ফ্লাইট, এটিওএল সুরক্ষা আর তারিখসহ জিবিপি খরচের স্ন্যাপশট।"
 faqHeadingEn: "7. Frequently Asked Questions"
 faqHeadingBn: "৭. সচরাচর জিজ্ঞাসা"
+audience: uk
+audienceLabelEn: UK travellers
+audienceLabelBn: যুক্তরাজ্যের ভ্রমণকারীদের
+aeoSummary: "From the UK, Umrah outside Hajj season runs on three British passport routes — ETA, e-visa or visa waiver — and every traveller needs a Nusuk permit and an ACWY certificate dated at least 10 days before arrival. Hajj is separate: place only through Nusuk Hajj, and no 2027 dates have been published. Flights are nonstop only from Heathrow and Manchester to Jeddah, and no UK airport flies nonstop to Madinah. The FCDO still advises against all but essential travel to most of Saudi Arabia, and insurance may be invalid if you travel against that advice."
+aeoSummaryBn: "যুক্তরাজ্য থেকে হজ্জ মৌসুমের বাইরে ওমরাহ চলে ব্রিটিশ পাসপোর্টের তিনটি রুটে — ইটিএ, ই-ভিসা বা ভিসা ওয়েভার — আর প্রত্যেকেরই লাগে নুসুক পারমিট এবং পৌঁছানোর অন্তত ১০ দিন আগের এসিডব্লিউওয়াই সার্টিফিকেট। হজ্জ আলাদা: জায়গা শুধু নুসুক হজ্জ দিয়ে, আর ২০২৭-এর কোনো তারিখ এখনো প্রকাশিত হয়নি। নন-স্টপ ফ্লাইট শুধু হিথরো ও ম্যানচেস্টার থেকে জেদ্দার; মদিনার জন্য যুক্তরাজ্যের কোনো বিমানবন্দর থেকে নন-স্টপ নেই। এফসিডিও এখনো সৌদি আরবের বেশিরভাগ অংশে অতিজরুরি নয় এমন ভ্রমণের বিরুদ্ধে পরামর্শ দেয়, আর সেই পরামর্শের বিরুদ্ধে গেলে বিমা বাতিল হতে পারে।"
+aeoFacts:
+  - label: British passport routes
+    labelBn: ব্রিটিশ পাসপোর্টের রুট
+    value: ETA, e-visa or visa waiver cover Umrah outside Hajj season — checked 14 Nov 2026
+    valueBn: ইটিএ, ই-ভিসা বা ভিসা ওয়েভার হজ্জ মৌসুমের বাইরের ওমরাহ কভার করে — ১৪ নভেম্বর ২০২৬-এ যাচাই
+  - label: Hajj 2027
+    labelBn: হজ্জ ২০২৭
+    value: No dates published; 1448H licensing applications open at haj.gov.sa — checked 14 Nov 2026
+    valueBn: তারিখ প্রকাশিত হয়নি; ১৪৪৮ হিজরি মৌসুমের লাইসেন্সিং আবেদন haj.gov.sa-তে খোলা — ১৪ নভেম্বর ২০২৬-এ যাচাই
+  - label: Current FCDO position
+    labelBn: এফসিডিওর বর্তমান অবস্থান
+    value: Against all but essential travel to most of Saudi Arabia; insurance may be void — checked 14 Nov 2026
+    valueBn: সৌদি আরবের বেশিরভাগ অংশে অতিজরুরি নয় ভ্রমণের বিরুদ্ধে; বিমা বাতিল হতে পারে — ১৪ নভেম্বর ২০২৬-এ যাচাই
 references:
   - name: "UK FCDO — Saudi Arabia travel advice (still current at 11 November 2026)"
     nameBn: "যুক্তরাজ্য এফসিডিও — সৌদি আরব ভ্রমণ পরামর্শ (১১ নভেম্বর ২০২৬ পর্যন্ত সচল)"
@@ -63,6 +82,12 @@ internalLinksEn:
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
   - text: "UK packages: ATOL cover and operator checks before you pay"
     path: /blog/uk-umrah-packages-atol-operator-checks
+  - text: "Hajj 2027 from the UK: dates, Nusuk Hajj registration and what it costs"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
+  - text: "Ramadan Umrah 2027: dates, dated fares and the last ten nights"
+    path: /blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights
+  - text: "Madinah first or Jeddah first: three routings compared"
+    path: /blog/madinah-first-uk-umrah-routings-open-jaw-stopover
   - text: "Search live hotel rates in Makkah and Madinah"
     path: /hotels
   - text: "Compare UK routes and fare options"
@@ -78,6 +103,12 @@ internalLinksBn:
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
   - text: "যুক্তরাজ্যের প্যাকেজ: এটিওএল সুরক্ষা ও অপারেটর যাচাই"
     path: /blog/uk-umrah-packages-atol-operator-checks
+  - text: "যুক্তরাজ্য থেকে হজ্জ ২০২৭: তারিখ, নুসুক হজ্জ নিবন্ধন ও খরচ"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
+  - text: "রমজান ওমরাহ ২০২৭: তারিখ, যাচাই করা ভাড়া ও শেষ দশ রাত"
+    path: /blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights
+  - text: "আগে মদিনা নাকি আগে জেদ্দা: তিন রুটের তুলনা"
+    path: /blog/madinah-first-uk-umrah-routings-open-jaw-stopover
   - text: "মক্কা ও মদিনার লাইভ হোটেল ভাড়া"
     path: /hotels
   - text: "যুক্তরাজ্যের রুট ও ভাড়ার তুলনা"
@@ -139,7 +170,7 @@ Confirmed on the airlines' own pages, checked 11 November 2026:
 - **British Airways:** London Heathrow–Jeddah direct in about **6 hours 15 minutes** (BA's Saudi Arabia page); BA's press room dates the current year-round Jeddah service from **4 November 2024**, launched as **four flights a week** from Heathrow Terminal 5.
 - **SAUDIA:** **London, Manchester and Birmingham** in its network alongside Jeddah and Al Madinah, operating from **Heathrow Terminal 4** (official network page).
 
-Timetables change seasonally; this guide does not assert Madinah (MED) nonstop options — re-check on the airline's own site when you book. Fares for those routes, with the dates they were checked, sit in the budget snapshot below.
+Timetables change seasonally; this guide does not assert Madinah (MED) nonstop options — re-check on the airline's own site when you book. Fares for those routes, with the dates they were checked, sit in the budget snapshot below. For the airport-by-airport picture — what is genuinely nonstop, what only connects, and the Hajj-season rule that can stop you boarding — read [the UK–Saudi flights guide](/blog/uk-to-saudi-flights-umrah-direct-or-connecting).
 
 ## Is your booking protected — and what does the current advice change?
 
@@ -159,7 +190,7 @@ Consular fallback: British Consulate General Jeddah **+966 11 481 9100**; a lost
 
 In order — each line is a source you can open:
 
-1. **Decide the route by passport:** British citizen → the three FCDO routes above; any other passport → the live eligibility check or the embassy, never an agency's summary. If a package is involved, [the ATOL and operator checks](/blog/uk-umrah-packages-atol-operator-checks) are the next thing to read.
+1. **Decide the route by passport:** British citizen → the three FCDO routes above; any other passport → the live eligibility check or the embassy, never an agency's summary. The three British routes are walked through, document by document, in [the passport and visa step-by-step](/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step). If a package is involved, [the ATOL and operator checks](/blog/uk-umrah-packages-atol-operator-checks) are the next thing to read.
 2. **Passport validity:** at least 6 months after your arrival date, with blank pages.
 3. **MenACWY:** booked early enough that the certificate is valid **10 days before arrival**.
 4. **Nusuk:** account created and the Umrah permit booked for your dates; Hajj, if that is the intent, only via Nusuk Hajj. The BRN chain behind permits: [the Nusuk BRN and Rawdah permit chain](/blog/nusuk-hotel-brn-rawdah-gate-guide).
@@ -225,7 +256,7 @@ Ask for the ATOL number and check it on atol.org; the certificate arrives as soo
 
 ## যুক্তরাজ্য থেকে কীভাবে উড়বেন
 
-ব্রিটিশ এয়ারওয়েজ: লন্ডন হিথরো–জেদ্দা সরাসরি প্রায় 6 ঘণ্টা 15 মিনিট; বর্তমান বছরজুড়ে জেদ্দা পরিষেবা 4 নভেম্বর 2024 থেকে, শুরুতে সপ্তাহে 4 ফ্লাইট, হিথরো টার্মিনাল 5। সৌদিয়া: লন্ডন, ম্যানচেস্টার ও বার্মিংহাম নেটওয়ার্কে, হিথরো টার্মিনাল 4 থেকে। সময়সূচি মৌসুমভেদে বদলায় — বুকিংয়ের দিনে এয়ারলাইনের নিজস্ব সাইটে যাচাই করুন। এই রুটগুলোর ভাড়া, যাচাইয়ের তারিখসহ, নিচের বাজেট স্ন্যাপশটে আছে।
+ব্রিটিশ এয়ারওয়েজ: লন্ডন হিথরো–জেদ্দা সরাসরি প্রায় 6 ঘণ্টা 15 মিনিট; বর্তমান বছরজুড়ে জেদ্দা পরিষেবা 4 নভেম্বর 2024 থেকে, শুরুতে সপ্তাহে 4 ফ্লাইট, হিথরো টার্মিনাল 5। সৌদিয়া: লন্ডন, ম্যানচেস্টার ও বার্মিংহাম নেটওয়ার্কে, হিথরো টার্মিনাল 4 থেকে। সময়সূচি মৌসুমভেদে বদলায় — বুকিংয়ের দিনে এয়ারলাইনের নিজস্ব সাইটে যাচাই করুন। এই রুটগুলোর ভাড়া, যাচাইয়ের তারিখসহ, নিচের বাজেট স্ন্যাপশটে আছে। কোন বিমানবন্দর থেকে সত্যিই নন-স্টপ, কোনটা শুধু কানেক্টিং, আর হজ্জ মৌসুমে কোন নিয়মে বোর্ডিং আটকে যায় — বিস্তারিত [যুক্তরাজ্য থেকে সৌদি ফ্লাইট গাইডে](/blog/uk-to-saudi-flights-umrah-direct-or-connecting)।
 
 ## সুরক্ষা ও বর্তমান পরামর্শ
 
@@ -233,7 +264,7 @@ ATOL হলো অর্থসুরক্ষা, বীমা নয় — ফ
 
 ## মূল্য দেওয়ার আগে
 
-পাসপোর্টের মেয়াদ, ভিসা রুট, ACWY, নুসুক পারমিট, ATOL নম্বর, বীমা ও এফসিডিও পাতা, তারপর এয়ারলাইনের সময়সূচি — এই ক্রমে যাচাই করুন। নুসুক পারমিট যে BRN-এ যুক্ত হয়, সেই শৃঙ্খল দেখুন [নুসুক BRN ও রওদা পারমিট শৃঙ্খল](/blog/nusuk-hotel-brn-rawdah-gate-guide); থাকার জায়গার জোন, গেট ও সময় নিয়ে গভীর গাইড [মক্কা ও মদিনার আবাসন গাইড](/blog/hajj-umrah-accommodation-guide-makkah-madinah); প্যাকেজে গেলে [এটিওএল ও অপারেটর যাচাই](/blog/uk-umrah-packages-atol-operator-checks)।
+পাসপোর্টের মেয়াদ, ভিসা রুট, ACWY, নুসুক পারমিট, ATOL নম্বর, বীমা ও এফসিডিও পাতা, তারপর এয়ারলাইনের সময়সূচি — এই ক্রমে যাচাই করুন। নুসুক পারমিট যে BRN-এ যুক্ত হয়, সেই শৃঙ্খল দেখুন [নুসুক BRN ও রওদা পারমিট শৃঙ্খল](/blog/nusuk-hotel-brn-rawdah-gate-guide); থাকার জায়গার জোন, গেট ও সময় নিয়ে গভীর গাইড [মক্কা ও মদিনার আবাসন গাইড](/blog/hajj-umrah-accommodation-guide-makkah-madinah); ব্রিটিশ পাসপোর্টের তিনটি রুটের ধাপে ধাপে ব্যাখ্যা [পাসপোর্ট ও ভিসা গাইডে](/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step); প্যাকেজে গেলে [এটিওএল ও অপারেটর যাচাই](/blog/uk-umrah-packages-atol-operator-checks)।
 
 **জিবিপি বাজেট স্ন্যাপশট — ১২ নভেম্বর ২০২৬-এ যাচাই।** শুধু তারিখসহ অঙ্ক; যেখানে অফিসিয়াল দাম নেই, সেখানে তা-ই লেখা:
 

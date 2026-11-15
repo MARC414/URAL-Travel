@@ -24,9 +24,10 @@ export const VISA_OFFICIAL_SOURCES: Record<string, { label: string; url: string 
     { label: "Saudi official eVisa portal and nationality list", url: "https://visa.visitsaudi.com/" },
     { label: "Visit Saudi: tourist Package Visa requirements", url: "https://www.visitsaudi.com/en/campaigns/package-visa" },
     { label: "Visit Saudi: stopover visa and charges", url: "https://www.visitsaudi.com/en/campaigns/saudi-stopover" },
-    { label: "Ministry of Hajj and Umrah: Umrah journey and visa guidance", url: "https://haj.gov.sa/-/media/Project/HAJJ/PDF-and-FILES/umrah-hero-guide/EN-Umrah-Guide.pdf" },
+    { label: "Saudi Ministry of Tourism: Tourist Visa Regulations (revision date not established)", url: "https://cdn.mt.gov.sa/mtportal/mt-fe-production/content/policies-regulations/documents/tourism-regulations/Tourist-Visa-Regulations-En-V012.pdf" },
+    { label: "Visit Saudi-listed provider webook: package conditions (provider information)", url: "https://webook.com/en/e-visa" },
+    { label: "Visit Saudi-listed provider Reserval: package conditions (provider information)", url: "https://www.reserval.com/packagevisa" },
     { label: "Saudi Ministry of Health: Umrah health requirements", url: "https://www.moh.gov.sa/en/HealthAwareness/Pilgrims-Health/Documents/Health-Regulations-Umrah-EN.pdf" },
-    { label: "Saudia: transit visa information", url: "https://www.saudia.com/transit-visa" },
   ],
   "maldives-visa": [
     { label: "Maldives Immigration: tourist visa on arrival and entry requirements", url: "https://www.immigration.gov.mv/visa/tourist-visa" },

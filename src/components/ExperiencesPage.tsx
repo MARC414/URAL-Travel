@@ -561,8 +561,8 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               style={{ textWrap: "balance" }}
             >
               {isBn
-                ? "ইউরোপ, যুক্তরাজ্য, আমেরিকা ও এশিয়ার সেরা দর্শনীয় স্থানের টিকিট ও ডে-ট্যুর (BDT গাইড)"
-                : "Europe, UK, USA & Asian Attraction Passes — Skip the Line in BDT"}
+                ? "ইউরোপ, যুক্তরাজ্য, আমেরিকা ও এশিয়ার সেরা দর্শনীয় স্থানের টিকিট ও ডে-ট্যুর (গাইড)"
+                : "Europe, UK, USA & Asian Attraction Passes — Skip the Line"}
             </h1>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
@@ -646,12 +646,12 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
             <div className="flex items-center justify-between border-b border-slate-700/80 pb-3">
               <div>
                 <span className="text-[11px] font-mono text-[#F6B73C] font-semibold block">
-                  {isBn ? "লাইভ সিটি পাস ও BDT ক্যালকুলেটর" : "City Pass & Availability Planner"}
+                  {isBn ? "লাইভ সিটি পাস ও কস্ট ক্যালকুলেটর" : "City Pass & Availability Planner"}
                 </span>
                 <h2 className="ural-section-title font-serif text-base sm:text-lg font-bold text-white">
                   {isBn
                     ? "১ দিনের ফুল-ডে বান্ডেল খরচ হিসাব করুন"
-                    : "Calculate Full-Day City Bundle in BDT"}
+                    : "Calculate Full-Day City Bundle"}
                 </h2>
               </div>
               <Calendar size={18} className="text-[#F6B73C] shrink-0" />

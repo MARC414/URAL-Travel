@@ -501,3 +501,27 @@ English, with translated headers and cells.**
 
 **Verification for 12.1–12.4:** `npm run build`, then check the locale's `dist/…html` — real
 `<table>` count, zero `<p>|`, zero `](` left as text, and zero off-market terms inside `<article>`.
+
+### 12.5 Every flight link goes to the white label — no exceptions in content
+
+A flight next step must resolve through `resolveBookingCtaUrl(provider, { slug, locale })`
+(`src/utils/bookingCta.ts`), which returns our own `/flights?fsrc=post_<slug>#flight-search`
+(`/bn/flights…` in Bengali). The reader keeps our design and the homepage hero, searches in the
+white-label widget embedded there, and the widget forwards `fsrc` as the white-label `sub_id`.
+The `sub_id` is what makes a click attributable to the article that earned it; without it every
+article CTA is one indistinguishable row in the Travelpayouts report.
+
+Rules:
+
+- Never paste `aviasales.tpo.li/…` or `aviasales.com/search/…` into article copy, an `affiliateCTA`,
+  a `MULTI_PARTNER_BLOG_PLACEMENTS` block or a FAQ answer. The branded site keeps the money but loses
+  the brand and the per-placement attribution.
+- Widgets keep their inline search (they already build the white-label URL) and the article CTA is the
+  fallback for readers who never hydrate.
+- `npm run verify:build` scans every `dist/blog/**/*.html` and fails if either Aviasales host appears,
+  and re-checks that each declared `affiliateCTA` renders with its expected white-label href.
+- Partner logo tiles are the one deliberate exception: a logo advertises the partner, so it links to
+  the partner's tracked short link.
+
+**Verification:** `npm run build && npm run verify:build` — the check reads
+"no blog page links to the Aviasales-branded site".

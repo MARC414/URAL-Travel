@@ -8,6 +8,7 @@ summary: "Checked 12 November 2026: ATOL is financial protection for a package t
 summaryBn: "১২ নভেম্বর ২০২৬-এ যাচাই করা: এটিওএল হলো ফ্লাইটসহ প্যাকেজের আর্থিক সুরক্ষা — যুক্তরাজ্যের অপারেটর বন্ধ হয়ে গেলে এই স্কিমই আপনার টাকা ফেরায় বা দেশে ফেরানোর ব্যবস্থা করে। এটি ভ্রমণবীমা নয়: অসুস্থতা, আঘাত, হোটেল নিয়ে অভিযোগ বা শুধু-হোটেল বুকিং এটি কভার করে না। ওমরাহ প্যাকেজের কোনো অফিসিয়াল খুচরা দাম নেই, তাই প্রতিটি কোটেশন অপারেটরের অঙ্ক; আগে ফ্লাইটের অংশ মিলিয়ে দেখুন — হিথরো থেকে জেদ্দা ফেরত £৩৪৭ থেকে (এক স্টপ), ম্যানচেস্টার থেকে £৩২৬ — আর টাকা দেওয়ার আগে atol.org-এ এটিওএল নম্বর যাচাই করুন।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: prepare
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 9 min read
@@ -24,6 +25,24 @@ snippet: "ATOL is financial protection for a package that includes a flight: if 
 snippetBn: "এটিওএল হলো ফ্লাইটসহ প্যাকেজের আর্থিক সুরক্ষা: অপারেটর বন্ধ হয়ে গেলে এই স্কিমই আপনার টাকা ফেরায় বা আপনাকে দেশে ফেরার ব্যবস্থা করে। এটি ভ্রমণবীমা নয়, আর অসুস্থতা, অভিযোগ বা নিরাপত্তা পরিস্থিতি এটি কভার করে না। যুক্তরাজ্যের ওমরাহ অপারেটরকে টাকা দেওয়ার আগে atol.org-এ এটিওএল নম্বর যাচাই করুন, পেমেন্টের সঙ্গে আসা সার্টিফিকেট চান, এবং এফসিডিওর পরামর্শ পড়ুন — যা বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে। এই গাইডে যাচাইয়ের ধাপ, বারোটি প্রশ্ন, বিপদসংকেত আর তারিখসহ শুধু-ফ্লাইট বেঞ্চমার্ক আছে।"
 faqHeadingEn: "9. Frequently Asked Questions"
 faqHeadingBn: "৯. সচরাচর জিজ্ঞাসা"
+audience: uk
+audienceLabelEn: UK travellers
+audienceLabelBn: যুক্তরাজ্যের ভ্রমণকারীদের
+aeoSummary: "ATOL is financial protection for a package that includes a flight, run under the CAA; it pays out if the operator fails, and it is not travel insurance. Ask for the ATOL certificate when you pay, check the number on atol.org, and get the terms in writing. A package is only worth the premium if the inclusions match what you would book yourself — the flight-only comparison for the same dates is the honest test. The FCDO advisory and your insurance wording matter more than the brochure: cover can be invalid if you travel against advice."
+aeoSummaryBn: "এটিওএল হলো ফ্লাইটসহ প্যাকেজের অর্থসুরক্ষা, সিএএর অধীনে; অপারেটর বন্ধ হলে এটি ক্ষতিপূরণ দেয়, আর এটি ভ্রমণবীমা নয়। টাকা দেওয়ার সঙ্গে সঙ্গে এটিওএল সার্টিফিকেট চান, নম্বর atol.org-এ যাচাই করুন, আর শর্ত লিখিতভাবে নিন। প্যাকেজের বাড়তি দাম ততটুকুই justified, যতটুকু অন্তর্ভুক্তি নিজে বুক করলে যা হতো তার সঙ্গে মেলে — একই তারিখের শুধু-ফ্লাইট তুলনাই এর সৎ পরীক্ষা। ব্রোশিওরের চেয়ে এফসিডিওর পরামর্শ ও আপনার বিমার শর্ত বেশি জরুরি: পরামর্শের বিরুদ্ধে গেলে কভার বাতিল হতে পারে।"
+aeoFacts:
+  - label: What ATOL covers
+    labelBn: এটিওএল কী কভার করে
+    value: Financial protection if a package operator fails, for packages with a flight — checked 13 Nov 2026
+    valueBn: ফ্লাইটসহ প্যাকেজে অপারেটর বন্ধ হলে অর্থসুরক্ষা — ১৩ নভেম্বর ২০২৬-এ যাচাই
+  - label: What ATOL does not cover
+    labelBn: এটিওএল কী কভার করে না
+    value: Medical costs, personal cancellation, hotel complaints — that is insurance, not ATOL — checked 13 Nov 2026
+    valueBn: চিকিৎসার খরচ, ব্যক্তিগত কারণে বাতিল, হোটেলের অভিযোগ — সেগুলো বিমার বিষয়, এটিওএলের নয় — ১৩ নভেম্বর ২০২৬-এ যাচাই
+  - label: Flight-only benchmark
+    labelBn: শুধু-ফ্লাইটের তুলনা
+    value: Heathrow return £347 with stops to £669 nonstop, 14 Nov 2026 snapshot
+    valueBn: হিথরো ফেরত £৩৪৭ (স্টপসহ) থেকে নন-স্টপ £৬৬৯, ১৪ নভেম্বর ২০২৬ স্ন্যাপশট
 references:
   - name: "ATOL — what ATOL protection means (checked 12 November 2026)"
     nameBn: "এটিওএল — এটিওএল সুরক্ষা মানে কী (১২ নভেম্বর ২০২৬-এ যাচাই)"
@@ -55,6 +74,8 @@ references:
 internalLinksEn:
   - text: "The UK pillar: visas, Nusuk and Hajj for 2027"
     path: /blog/umrah-hajj-guide-united-kingdom-2026
+  - text: "Hajj 2027 bookings: Nusuk Hajj only, and no package on sale yet"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
   - text: "DIY Umrah intelligence portal and budget calculator"
     path: /umrah
   - text: "Choosing where to stay in Makkah and Madinah"
@@ -68,6 +89,8 @@ internalLinksEn:
 internalLinksBn:
   - text: "যুক্তরাজ্যের পিলার গাইড: ভিসা, নুসুক ও ২০২৭-এর হজ্জ"
     path: /blog/umrah-hajj-guide-united-kingdom-2026
+  - text: "হজ্জ ২০২৭ বুকিং: শুধু নুসুক হজ্জ, আর এখনো কোনো প্যাকেজ বিক্রি হচ্ছে না"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
   - text: "ডিআইওয়াই ওমরাহ পোর্টাল ও বাজেট ক্যালকুলেটর"
     path: /umrah
   - text: "মক্কা ও মদিনায় কোথায় থাকবেন"
@@ -173,7 +196,7 @@ Insurance is a separate purchase with its own rules. If a policy excludes travel
 
 Useful to have written down: the British Consulate General in Jeddah is **+966 11 481 9100**, and a replacement emergency travel document if a passport is lost costs **£125** — so leave processing time.
 
-If the package's inclusions do not match what you actually want, the alternative is worth pricing honestly: our [UK pillar guide](/blog/umrah-hajj-guide-united-kingdom-2026) covers the visa routes and Nusuk step, [where to stay](/blog/hajj-umrah-accommodation-guide-makkah-madinah) covers hotel zones, and the [BRN and Rawdah walkthrough](/blog/nusuk-hotel-brn-rawdah-gate-guide) covers the permit chain. DIY is not automatically cheaper — it is simply a different set of risks, and the one you carry yourself.
+If the package's inclusions do not match what you actually want, the alternative is worth pricing honestly: our [UK pillar guide](/blog/umrah-hajj-guide-united-kingdom-2026) covers the visa routes and Nusuk step, [where to stay](/blog/hajj-umrah-accommodation-guide-makkah-madinah) covers hotel zones, and the [BRN and Rawdah walkthrough](/blog/nusuk-hotel-brn-rawdah-gate-guide) covers the permit chain. DIY is not automatically cheaper — it is simply a different set of risks, and the one you carry yourself. Two of those steps now have their own walkthroughs: [the UK–Saudi flights guide](/blog/uk-to-saudi-flights-umrah-direct-or-connecting) for what is nonstop and what it costs, and [the passport and visa step-by-step](/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step) for which entry route a British passport should use.
 
 9. Frequently Asked Questions
 
@@ -269,7 +292,7 @@ There is no official retail price, so compare the flight component first: KAYAK'
 
 লিখে রাখার মতো তথ্য: জেদ্দায় ব্রিটিশ কনস্যুলেট জেনারেল **+৯৬৬ ১১ ৪৮১ ৯১০০**, আর পাসপোর্ট হারালে জরুরি ট্রাভেল ডকুমেন্টের খরচ **£১২৫** — তাই সময় হাতে রাখুন।
 
-প্যাকেজের অন্তর্ভুক্তি আপনার চাওয়ার সঙ্গে না মিললে বিকল্পটাও সৎভাবে দাম দেখুন: আমাদের [যুক্তরাজ্যের পিলার গাইডে](/blog/umrah-hajj-guide-united-kingdom-2026) আছে ভিসার রুট ও নুসুকের ধাপ, [আবাসন গাইডে](/blog/hajj-umrah-accommodation-guide-makkah-madinah) আছে হোটেল জোন, আর [BRN ও রওদা পারমিটের ধাপে](/blog/nusuk-hotel-brn-rawdah-gate-guide) আছে পারমিটের শৃঙ্খল। নিজে করলে খরচ স্বয়ংক্রিয়ভাবে কমে না — বদলে যায় ঝুঁকির বণ্টন, আর সেটি নিজেকেই বহন করতে হয়।
+প্যাকেজের অন্তর্ভুক্তি আপনার চাওয়ার সঙ্গে না মিললে বিকল্পটাও সৎভাবে দাম দেখুন: আমাদের [যুক্তরাজ্যের পিলার গাইডে](/blog/umrah-hajj-guide-united-kingdom-2026) আছে ভিসার রুট ও নুসুকের ধাপ, [আবাসন গাইডে](/blog/hajj-umrah-accommodation-guide-makkah-madinah) আছে হোটেল জোন, আর [BRN ও রওদা পারমিটের ধাপে](/blog/nusuk-hotel-brn-rawdah-gate-guide) আছে পারমিটের শৃঙ্খল। নিজে করলে খরচ স্বয়ংক্রিয়ভাবে কমে না — বদলে যায় ঝুঁকির বণ্টন, আর সেটি নিজেকেই বহন করতে হয়। এর দুটি ধাপের আলাদা গাইড আছে: কোনটা নন-স্টপ ও দাম কত, তা [যুক্তরাজ্য থেকে সৌদি ফ্লাইট গাইডে](/blog/uk-to-saudi-flights-umrah-direct-or-connecting); ব্রিটিশ পাসপোর্টে কোন প্রবেশ রুট, তা [পাসপোর্ট ও ভিসা গাইডে](/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step)।
 
 ৯. সচরাচর জিজ্ঞাসা
 

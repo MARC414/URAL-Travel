@@ -8,6 +8,7 @@ summary: "Checked 8 November 2026: how a hotel's Booking Reference Number links 
 summaryBn: "৮ নভেম্বর ২০২৬-এ যাচাই করা: হোটেলের Booking Reference Number কীভাবে ওমরাহ ভিসার সঙ্গে যুক্ত হয়, নুসুক কীভাবে ওমরাহ ও রওদা পারমিট দেয়, আর গেটে আটকে গেলে কোন ক্রমে কী যাচাই করবেন।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
+journeyStage: perform
 author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 11 min read

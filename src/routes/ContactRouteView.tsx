@@ -462,7 +462,7 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                         <option value="Custom Group Itinerary planning">{isBn ? "ফ্যামিলি বা গ্রুপ ট্যুর প্ল্যানিং" : "Custom Group Itinerary planning"}</option>
 
-                        <option value="Hotel Booking Assistance">{isBn ? "হোটেল বুকিং সহায়তা (BDT)" : "Hotel Booking Assistance"}</option>
+                        <option value="Hotel Booking Assistance">{isBn ? "হোটেল বুকিং সহায়তা" : "Hotel Booking Assistance"}</option>
 
                         <option value="Umrah & Makkah/Madinah Booking">{isBn ? "Umrah ভিসা ও Makkah/Madinah হোটেল" : "Umrah & Makkah/Madinah Booking"}</option>
 

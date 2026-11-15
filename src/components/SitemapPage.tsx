@@ -83,7 +83,7 @@ const PRE_DEPARTURE_CHECKLIST: ChecklistItem[] = [
       "Carry crisp, undamaged 2013+ series $100 USD bills for Visa on Arrival fees, Thailand immigration proof of funds, or emergency money exchange.",
     detailBn:
       "দাগ বা ভাঁজ ছাড়া নতুন সিরিজের $১০০ ডলার নোট সাথে রাখুন—অন-অ্যারাইভাল ভিসা ফি, থাইল্যান্ড ইমিগ্রেশন বা জরুরি মানি এক্সচেঞ্জে প্রয়োজন হয়।",
-    actionLabelEn: "Open BDT Currency Tool",
+    actionLabelEn: "Open Currency Tool",
     actionLabelBn: "কারেন্সি কনভার্টার দেখুন",
     actionPath: "/tools/currency-converter",
   },
@@ -1074,7 +1074,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
                   }}
                   className="px-3 py-2 rounded-xl bg-white border border-slate-200 hover:border-brand-navy text-slate-800 text-left flex items-center justify-between cursor-pointer"
                 >
-                  <span>📊 {isBn ? "BDT বাজেট" : "BDT Budget"}</span>
+                  <span>📊 {isBn ? "বাজেট" : "Budget"}</span>
                   <ArrowRight size={11} className="text-slate-400" />
                 </a>
               </div>
@@ -1313,7 +1313,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
               { path: "/hotels", en: "Hotel Neighborhoods", bn: "হোটেল এলাকা" },
               { path: "/visa", en: "Visa Requirements", bn: "ভিসা চেকলিস্ট" },
               { path: "/destinations", en: "Destination Itineraries", bn: "গন্তব্য ভ্রমণ গাইড" },
-              { path: "/costs", en: "Trip Cost Calculators (BDT)", bn: "ভ্রমণ খরচ ক্যালকুলেটর" },
+              { path: "/costs", en: "Trip Cost Calculators", bn: "ভ্রমণ খরচ ক্যালকুলেটর" },
               { path: "/experiences", en: "Attractions & Passes", bn: "আকর্ষণ ও টিকিট" },
               { path: "/umrah", en: "DIY Umrah & Hajj Hub", bn: "উমরাহ ও হজ হাব" },
               { path: "/tools", en: "Interactive Travel Tools", bn: "ইন্টারেক্টিভ ট্রাভেল টুলস" },

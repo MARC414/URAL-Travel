@@ -26,7 +26,7 @@ for (const locale of ["en", "bn"] as const) {
   const post = posts.find((entry) => entry.slug === slug)!;
   const body = (isBn ? post.content : BLOG_BODY[slug])!;
   test(`${locale}: update is scoped, original publication and references survive`, () => {
-    assert.equal(post.updatedAt, "2026-10-19");
+    assert.equal(post.updatedAt, "2026-11-12");
     assert.equal(BLOG_DATA.find((entry) => entry.slug === slug)!.date, "September 26, 2026");
     assert.equal(post.references?.length, 26);
     assert.equal(post.references![9].url, "https://www.visitsaudi.com/en/plan-your-trip/visa-regulations");

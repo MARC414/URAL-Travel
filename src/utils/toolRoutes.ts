@@ -138,9 +138,9 @@ export const TOOL_PAGE_SEO: Record<string, ToolPageMeta> = {
     h1En: "Trip Cost Estimator",
     h1Bn: "ট্রিপ কস্ট এস্টিমেটর",
     subEn:
-      "Plan 1–30 days for up to 12 travellers. Add dated quotes, check every cost, and display your estimate in BDT or USD.",
+      "Plan 1–30 days for up to 12 travellers. Add dated quotes, check every cost, and display your estimate in your chosen currency.",
     subBn:
-      "সর্বোচ্চ ১২ জনের জন্য ১–৩০ দিনের পরিকল্পনা করুন। তারিখসহ কোটেশন দিয়ে প্রতিটি খরচ মিলিয়ে BDT বা USD-তে ফল দেখুন।",
+      "সর্বোচ্চ ১২ জনের জন্য ১–৩০ দিনের পরিকল্পনা করুন। তারিখসহ কোটেশন দিয়ে প্রতিটি খরচ মিলিয়ে আপনার নির্বাচিত কারেন্সিতে ফল দেখুন।",
     serviceNameEn: "Trip Cost Estimator",
   },
   "packing-checklist": {

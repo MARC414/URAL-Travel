@@ -231,4 +231,32 @@ test("the panel renders nothing when a post has no stage", () => {
   assert.equal(html, "", "panel must not render without a stage");
 });
 
+test("the travel stage never sends a reader to the Aviasales-branded site", () => {
+  // This panel is client-rendered, so the static-HTML brand-leak guard in
+  // `verify:build` can never see it. Rendering it here is the only place that
+  // catches a flight link going back to the branded host.
+  for (const isBn of [false, true]) {
+    const html = renderToStaticMarkup(
+      React.createElement(JourneyHelpPanel, { stage: "travel", isBn, slug: "uk-umrah-packages-atol-operator-checks" }),
+    );
+    assert.ok(!html.includes("aviasales.tpo.li"), "journey panel leaked the branded short link");
+    assert.ok(!html.includes("www.aviasales.com"), "journey panel leaked the branded site");
+    const flight = html.match(/href="(\/(?:bn\/)?flights[^"]*)"/);
+    assert.ok(flight, "journey panel has no flight stop link");
+    assert.ok(
+      flight![1].includes("fsrc=post_uk_umrah_packages_atol_operator_checks"),
+      `flight stop lost its placement id: ${flight![1]}`,
+    );
+    if (isBn) assert.ok(flight![1].startsWith("/bn/flights"), "Bengali flight stop must stay Bengali");
+  }
+});
+
+test("every assigned stage is one the panel knows", () => {
+  const known = Object.keys(JOURNEY_HELP) as JourneyStage[];
+  for (const post of BLOG_DATA) {
+    if (!post.journeyStage) continue;
+    assert.ok(known.includes(post.journeyStage), `${post.slug}: unknown stage ${post.journeyStage}`);
+  }
+});
+
 console.log(`\n${count} checks passed for Journey Help`);

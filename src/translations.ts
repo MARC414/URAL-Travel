@@ -24,7 +24,7 @@ export const translations = {
     // Hero Section
     heroBadge: "🇧🇩 Trusted Travel Companion for Bangladeshis",
     heroTitlePart1: "Smart Travel from Dhaka: ",
-    heroTitleHighlight: "Flights, Hotels & Visas in BDT",
+    heroTitleHighlight: "Flights, Hotels & Visas",
     heroSubtitle: "Compare direct flights from Hazrat Shahjalal International (DAC), unlock instant visa requirements for BD passport holders, and calculate your entire trip budget in Bangladeshi Taka.",
     heroSearchBtn: "Find Lowest Flights",
     heroExploreHotels: "Explore Hotels",

@@ -3,7 +3,7 @@ import fs from "node:fs";
 import vm from "node:vm";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { buildFlightSearchCode, buildWhiteLabelUrl, getLegacyWhiteLabelUrl, FLIGHT_WHITE_LABEL, DEFAULT_FLIGHT_CURRENCY, isBangladeshAirport, preferredCurrencyForOrigin } from "../src/utils/flightSearch";
+import { buildFlightSearchCode, buildWhiteLabelUrl, getLegacyWhiteLabelUrl, sanitizeSubId, flightSubIdForSlug, FLIGHT_WHITE_LABEL, DEFAULT_FLIGHT_CURRENCY, isBangladeshAirport, preferredCurrencyForOrigin } from "../src/utils/flightSearch";
 import { onRequest } from "../functions/_middleware.js";
 import TravelpayoutsWidget from "../src/components/TravelpayoutsWidget.tsx";
 import { TravelpayoutsCustomWidget } from "../src/components/TravelpayoutsCustomWidget";
@@ -133,4 +133,19 @@ for (const lang of ["en", "bn"] as const) {
     }
   }
 }
+// Per-placement attribution: every article CTA must be distinguishable in the
+// Travelpayouts report, and the id must survive a hostile slug without either
+// colliding with another placement or producing an empty parameter.
+const attributed = buildWhiteLabelUrl({ locale: "en", subId: "post_uk_umrah_packages_atol_operator_checks" });
+assert.equal(new URL(attributed).searchParams.get("sub_id"), "post_uk_umrah_packages_atol_operator_checks");
+assert.equal(buildWhiteLabelUrl({ locale: "en" }).includes("sub_id"), false, "no empty sub_id parameter");
+assert.equal(
+  buildWhiteLabelUrl({ subId: "Post A/B & C" }).includes("sub_id=post_a_b_c"),
+  true,
+  "a hostile slug folds to a safe id rather than vanishing"
+);
+assert.equal(sanitizeSubId("__--__"), "", "punctuation-only ids collapse to nothing");
+assert.equal(flightSubIdForSlug("Sri Lanka/Maldives Combo"), "post_sri_lanka_maldives_combo");
+assert.equal(flightSubIdForSlug(""), "", "no slug, no id");
+
 console.log("Flight search: native date/cabin/adult encoding, USD-first international handoffs, Bangladesh-route BDT, legacy redirects, cached iframe recovery and both widgets passed.");
