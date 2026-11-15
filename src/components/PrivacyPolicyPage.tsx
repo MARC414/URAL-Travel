@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { Language } from "../translations";
 import { updateGoogleConsentMode, GranularConsentSettings } from "./ConsentBanner";
+import { EvisaWidgetPrivacyNote } from "./EvisaPanels";
 
 interface PrivacyPolicyPageProps {
   onNavigate: (path: string) => void;
@@ -844,6 +845,7 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
               </tbody>
             </table>
           </div>
+          <EvisaWidgetPrivacyNote lang={lang} />
           <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs space-y-2">
             <p>
               <strong className="text-white">{isBn ? "যা আমরা ব্যবহার করি না:" : "What we do not use:"}</strong>{" "}

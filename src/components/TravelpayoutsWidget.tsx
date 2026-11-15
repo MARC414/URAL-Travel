@@ -53,17 +53,6 @@ const currencySymbols: Record<string, string> = {
 
 const BANGLADESH_AIRPORT_CODES = new Set(['DAC', 'CGP', 'ZYL', 'CXB', 'RJH', 'SPD', 'JSR', 'BZL']);
 
-const POPULAR_ROUTES = [
-  { label: 'Kathmandu', origin: 'DAC', destination: 'KTM', flag: '🇳🇵', badge: 'Visa on Arrival' },
-  { label: 'Bangkok', origin: 'DAC', destination: 'BKK', flag: '🇹🇭', badge: '2h 30m Direct' },
-  { label: 'Kuala Lumpur', origin: 'DAC', destination: 'KUL', flag: '🇲🇾', badge: 'Easy e-Visa' },
-  { label: 'Jeddah / Umrah', origin: 'DAC', destination: 'JED', flag: '🇸🇦', badge: 'Direct Umrah' },
-  { label: 'Dubai', origin: 'DAC', destination: 'DXB', flag: '🇦🇪', badge: '4 Daily Direct' },
-  { label: 'London', origin: 'DAC', destination: 'LHR', flag: '🇬🇧', badge: 'Global Route' },
-  { label: 'Paris', origin: 'DAC', destination: 'CDG', flag: '🇫🇷', badge: 'Global Route' },
-  { label: 'New York', origin: 'DAC', destination: 'JFK', flag: '🇺🇸', badge: 'Global Route' },
-];
-
 const AIRPORTS_DIRECTORY = [
   // Bangladesh
   { code: 'DAC', city: 'Dhaka', name: 'Hazrat Shahjalal International Airport', country: 'Bangladesh', flag: '🇧🇩' },
@@ -1520,23 +1509,6 @@ export default function TravelpayoutsWidget({
     }
   };
 
-  const handleQuickRouteSelect = (route) => {
-    const o = findAirportInfo(route.origin);
-    const d = findAirportInfo(route.destination);
-    setOriginInfo(o);
-    setDestInfo(d);
-    setOriginQuery('');
-    setDestQuery('');
-    setActiveDropdown(null);
-    if (showInlineResults) {
-      executeSearch({
-        nextOrigin: o,
-        nextDest: d,
-        scrollToResults: false,
-      });
-    }
-  };
-
   const handleSwapLocations = () => {
     const prevO = originInfo;
     const prevD = destInfo;
@@ -2330,44 +2302,6 @@ export default function TravelpayoutsWidget({
           </div>
         )}
 
-        {/* Popular route shortcuts stay close to the search controls. */}
-        {showQuickRoutes && (
-          <div className="mt-5 border-t border-slate-100 pt-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="mr-1 text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                {isBn ? 'জনপ্রিয় রুট:' : 'Popular Hubs:'}
-              </span>
-              {POPULAR_ROUTES.map((route) => {
-                const isSelected =
-                  originInfo.code === route.origin && destInfo.code === route.destination;
-                return (
-                  <button
-                    key={`${route.origin}-${route.destination}`}
-                    type="button"
-                    onClick={() => handleQuickRouteSelect(route)}
-                    className={`inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
-                      isSelected
-                        ? 'border-brand-navy bg-brand-navy text-[#F6B73C] shadow-xs'
-                        : 'border-slate-200/90 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100'
-                    }`}
-                  >
-                    <span aria-hidden="true">{route.flag}</span>
-                    <span>{route.label}</span>
-                    <span
-                      className={`rounded px-1.5 py-0.5 font-mono text-[10px] ${
-                        isSelected
-                          ? 'bg-white/15 text-[#F6B73C]'
-                          : 'bg-slate-200/70 text-slate-600'
-                      }`}
-                    >
-                      {route.destination}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
       </form>
 
       {/* 3. OPTIONAL INLINE RESULTS SECTION (Disabled by default so search opens strictly in a new tab) */}

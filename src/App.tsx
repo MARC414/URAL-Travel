@@ -69,6 +69,10 @@ import {
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
 } from "./components/AffiliatePartners";
+// Keep the partner module outside the guarded homepage entry graph.
+const EvisaHomeSection = React.lazy(() =>
+  import("./components/EvisaPanels").then((m) => ({ default: m.EvisaHomeSection }))
+);
 import {
   useSeoMeta,
   generateFAQSchema,
@@ -353,25 +357,14 @@ export function TravelpayoutsWidgetSkeleton({
       onFocus={onInteract}
       className="w-full overflow-hidden rounded-xl bg-white shadow-sm border border-slate-200/90 text-slate-900 select-none"
     >
-      {/* 1. Popular Routes Bar Skeleton */}
-      <div className="bg-slate-50 border-b border-slate-200/80 px-3 sm:px-5 py-2.5 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex flex-wrap items-center gap-1.5">
-          <div className="h-3.5 w-20 rounded bg-slate-200 animate-pulse mr-1" />
-          {[1, 2, 3, 4, 5].map((pill) => (
-            <div
-              key={pill}
-              className="h-7 w-28 rounded-lg bg-slate-200/90 animate-pulse"
-            />
-          ))}
-        </div>
-        <div className="flex items-center gap-2 text-[11px] font-mono text-slate-600">
-          <span className="w-2 h-2 rounded-full bg-[#07C369]" />
-          <span>
-            {isBn
-              ? "লাইভ এয়ারলাইন ভাড়া লোড হচ্ছে..."
-              : "Initializing Travelpayouts live fares..."}
-          </span>
-        </div>
+      {/* 1. Status bar — the popular-route chips row was removed from the widget. */}
+      <div className="bg-slate-50 border-b border-slate-200/80 px-3 sm:px-5 py-2.5 flex items-center justify-end gap-2 text-[11px] font-mono text-slate-600">
+        <span className="w-2 h-2 rounded-full bg-[#07C369]" />
+        <span>
+          {isBn
+            ? "লাইভ এয়ারলাইন ভাড়া লোড হচ্ছে..."
+            : "Initializing Travelpayouts live fares..."}
+        </span>
       </div>
 
       {/* 2. Main Interactive Search Form Skeleton */}
@@ -3865,71 +3858,14 @@ export default function App() {
                   </button>
                 </div>
 
-              <section
-                id="airport-code-reference"
-                aria-labelledby="quick-airport-codes-title"
-                className="rounded-3xl border border-slate-200/90 bg-white p-4 shadow-sm sm:p-6"
-              >
-                <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-                  <div className="space-y-2">
-                    <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-brand-emerald">
-                        <Plane size={14} aria-hidden="true" />
-                      </span>
-                      <span>{isBn ? "দ্রুত IATA রেফারেন্স" : "Quick IATA reference"}</span>
-                    </div>
-                    <h3
-                      id="quick-airport-codes-title"
-                      className="ural-card-title font-serif text-lg font-black tracking-tight text-slate-900 sm:text-xl"
-                    >
-                      {isBn ? "এয়ারপোর্ট কোড এক নজরে" : "Quick Airport Code Reference"}
-                    </h3>
-                    <p className="max-w-2xl text-xs leading-relaxed text-slate-600">
-                      {isBn
-                        ? "ফ্লাইট খোঁজার সময় এই তিন-অক্ষরের IATA কোডগুলো ব্যবহার করুন।"
-                        : "Use these three-letter IATA codes when searching for your route."}
-                    </p>
-                  </div>
-                  <a
-                    href="/tools/airport-codes"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigateTo("/tools/airport-codes");
-                    }}
-                    className="inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-semibold text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] md:w-auto"
-                  >
-                    <span>
-                      {isBn
-                        ? "সম্পূর্ণ এয়ারপোর্ট ডিরেক্টরি ও অনুসন্ধান টুল খুলুন"
-                        : "Open Full Airport Directory & Tool"}
-                    </span>
-                    <ArrowRight size={14} aria-hidden="true" />
-                  </a>
-                </div>
-                <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
-                  {[
-                    { code: "DAC", en: "Dhaka", bn: "ঢাকা" },
-                    { code: "CGP", en: "Chattogram", bn: "চট্টগ্রাম" },
-                    { code: "ZYL", en: "Sylhet", bn: "সিলেট" },
-                    { code: "CXB", en: "Cox's Bazar", bn: "কক্সবাজার" },
-                    { code: "DXB", en: "Dubai", bn: "দুবাই" },
-                    { code: "JED", en: "Jeddah", bn: "জেদ্দা" },
-                  ].map((airport) => (
-                    <div
-                      key={airport.code}
-                      className="flex min-h-[68px] flex-col justify-center rounded-xl border border-slate-200/90 bg-slate-50/80 px-3 py-2.5"
-                    >
-                      <span className="font-mono text-base font-black tracking-wide text-brand-navy">
-                        {airport.code}
-                      </span>
-                      <span className="text-xs font-medium text-slate-600">
-                        {isBn ? airport.bn : airport.en}
-                      </span>
-                    </div>
-                  ))}
-                </div>
               </section>
-              </section>
+
+              {/* eVisas now sits directly below the flight search. The quick
+                  airport-code reference moved under the "Where Are You Flying
+                  Next?" cards below. */}
+              <React.Suspense fallback={null}>
+                <EvisaHomeSection lang={isBn ? "bn" : "en"} />
+              </React.Suspense>
             </div>
 
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}
@@ -4057,6 +3993,72 @@ export default function App() {
                 ))}
               </div>
             </div>
+
+            {/* Quick airport-code reference now follows the destination cards. */}
+            <section
+              id="airport-code-reference"
+              aria-labelledby="quick-airport-codes-title"
+              className="rounded-3xl border border-slate-200/90 bg-white p-4 shadow-sm sm:p-6"
+            >
+              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div className="space-y-2">
+                  <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-brand-emerald">
+                      <Plane size={14} aria-hidden="true" />
+                    </span>
+                    <span>{isBn ? "দ্রুত IATA রেফারেন্স" : "Quick IATA reference"}</span>
+                  </div>
+                  <h3
+                    id="quick-airport-codes-title"
+                    className="ural-card-title font-serif text-lg font-black tracking-tight text-slate-900 sm:text-xl"
+                  >
+                    {isBn ? "এয়ারপোর্ট কোড এক নজরে" : "Quick Airport Code Reference"}
+                  </h3>
+                  <p className="max-w-2xl text-xs leading-relaxed text-slate-600">
+                    {isBn
+                      ? "ফ্লাইট খোঁজার সময় এই তিন-অক্ষরের IATA কোডগুলো ব্যবহার করুন।"
+                      : "Use these three-letter IATA codes when searching for your route."}
+                  </p>
+                </div>
+                <a
+                  href="/tools/airport-codes"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo("/tools/airport-codes");
+                  }}
+                  className="inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-semibold text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] md:w-auto"
+                >
+                  <span>
+                    {isBn
+                      ? "সম্পূর্ণ এয়ারপোর্ট ডিরেক্টরি ও অনুসন্ধান টুল খুলুন"
+                      : "Open Full Airport Directory & Tool"}
+                  </span>
+                  <ArrowRight size={14} aria-hidden="true" />
+                </a>
+              </div>
+              <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                {[
+                  { code: "DAC", en: "Dhaka", bn: "ঢাকা" },
+                  { code: "CGP", en: "Chattogram", bn: "চট্টগ্রাম" },
+                  { code: "ZYL", en: "Sylhet", bn: "সিলেট" },
+                  { code: "CXB", en: "Cox's Bazar", bn: "কক্সবাজার" },
+                  { code: "DXB", en: "Dubai", bn: "দুবাই" },
+                  { code: "JED", en: "Jeddah", bn: "জেদ্দা" },
+                ].map((airport) => (
+                  <div
+                    key={airport.code}
+                    className="flex min-h-[68px] flex-col justify-center rounded-xl border border-slate-200/90 bg-slate-50/80 px-3 py-2.5"
+                  >
+                    <span className="font-mono text-base font-black tracking-wide text-brand-navy">
+                      {airport.code}
+                    </span>
+                    <span className="text-xs font-medium text-slate-600">
+                      {isBn ? airport.bn : airport.en}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
 
             {/* 🟦 SECTION 3: “PLAN YOUR TRIP” PATHWAY */}
             <div className="ural-panel bg-slate-50 p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">

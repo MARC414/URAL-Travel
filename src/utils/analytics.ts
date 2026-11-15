@@ -105,6 +105,12 @@ const PARTNER_DOMAINS: Array<[string, string]> = [
 /** Known partner identification from URL */
 export function identifyPartnerFromUrl(url: string): string {
   const lower = url.toLowerCase();
+  try {
+    const host = new URL(url).hostname.toLowerCase();
+    if (host === "evisas.com" || host === "www.evisas.com") return "eVisas";
+  } catch {
+    // Relative editorial links are handled by the existing same-origin filter.
+  }
   if (isTravelpayoutsReferralUrl(url)) return "Travelpayouts (creator referral)";
   for (const [token, name] of PARTNER_DOMAINS) {
     if (lower.includes(token)) return name;
@@ -171,7 +177,7 @@ export function initGlobalClickTracking(): () => void {
 
     const href = target.getAttribute("href") || "";
     const rel = target.getAttribute("rel") || "";
-    const text = (target.textContent || "").trim().slice(0, 100);
+    const text = ((target.textContent || "").trim() || target.getAttribute("aria-label") || "").slice(0, 100);
     // Stable first-party link placement. This scopes our click event only; it is
     // not appended to the partner URL and does not establish partner-side attribution.
     const affiliatePlacement = target.dataset?.affiliatePlacement || "";

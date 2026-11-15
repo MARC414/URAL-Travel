@@ -3570,7 +3570,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
       { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools/flight-delay-claim" }
     ],
-    affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Morocco?", body: "Search multi-city routings from Dhaka via Istanbul, Dubai or Doha to Casablanca or Tangier and watch how fares move before you lock your dates." }
+    affiliateCTA: { provider: "evisas", campaign: "morocco", headline: "Check your Morocco eVisa route", body: "Morocco eVisa eligibility depends on your passport and, for some applicants, a qualifying residence permit or existing visa. Check your category on the official Accès Maroc portal before using eVisas’ paid application assistance. Confirm the supporting documents and full fee before paying." }
   },
   {
     id: "blog-46",

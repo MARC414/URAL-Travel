@@ -181,21 +181,6 @@ function getHotelOptions(_hotelCity: string) {
   return [];
 }
 
-const EXPLORE_POPULAR_CITIES = [
-  { city: "Makkah", country: "Saudi Arabia", flag: "🇸🇦", tag: "Haram area guide", flightDest: "Jeddah (JED)" },
-  { city: "Paris", country: "France", flag: "🇫🇷", tag: "City area guide", flightDest: "Paris (CDG)" },
-  { city: "Dubai", country: "UAE", flag: "🇦🇪", tag: "Deira & Downtown", flightDest: "Dubai (DXB)" },
-  { city: "Madinah", country: "Saudi Arabia", flag: "🇸🇦", tag: "Haram area guide", flightDest: "Madinah (MED)" },
-  { city: "Bangkok", country: "Thailand", flag: "🇹🇭", tag: "Pratunam & Sukhumvit", flightDest: "Bangkok (BKK)" },
-  { city: "Kuala Lumpur", country: "Malaysia", flag: "🇲🇾", tag: "KLCC & Bukit Bintang", flightDest: "Kuala Lumpur (KUL)" },
-  { city: "London", country: "United Kingdom", flag: "🇬🇧", tag: "City area guide", flightDest: "London Heathrow (LHR)" },
-  { city: "Singapore", country: "Singapore", flag: "🇸🇬", tag: "Little India & Bugis", flightDest: "Singapore (SIN)" },
-  { city: "Maldives", country: "Maldives", flag: "🇲🇻", tag: "Local islands & resorts", flightDest: "Malé (MLE)" },
-  { city: "Istanbul", country: "Turkey", flag: "🇹🇷", tag: "City area guide", flightDest: "Istanbul (IST)" },
-  { city: "Kathmandu", country: "Nepal", flag: "🇳🇵", tag: "Thamel & Boudha", flightDest: "Kathmandu (KTM)" },
-  { city: "New York", country: "United States", flag: "🇺🇸", tag: "City area guide", flightDest: "New York (JFK)" },
-];
-
 export function TravelpayoutsCustomWidget({
   initialTab = "flights",
   initialFrom = "Dhaka (DAC)",
@@ -625,49 +610,6 @@ export function TravelpayoutsCustomWidget({
           </div>
         </div>
       </div>
-
-      {!flightSearchOnly && (
-        <>
-          {/* Explore Popular Cities — Horizontal Scrollable One-Click Hub Bar */}
-          <div className="bg-slate-50/90 px-4 sm:px-6 py-3 border-b border-slate-200/80 flex items-center gap-2 overflow-x-auto no-scrollbar">
-            <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-brand-navy shrink-0 mr-1">
-              <MapPin size={12} className="text-[#F6B73C]" />
-              {isBn ? "জনপ্রিয় গন্তব্য:" : "Popular Hubs:"}
-            </span>
-            {EXPLORE_POPULAR_CITIES.map((hub) => {
-              const firstWord = hub.city.toLowerCase().split(" ")[0];
-              const isActive =
-                searchTab === "hotels" &&
-                hotelCity.toLowerCase().includes(firstWord);
-              const displayLabel = hub.city;
-
-              return (
-                <button
-                  key={hub.city}
-                  type="button"
-                  title={`${hub.city} (${hub.tag})`}
-                  onClick={() => {
-                    setSearchTab("hotels");
-                    setHotelCity(hub.city);
-                    setToCity(hub.flightDest);
-                    setActiveDropdown(null);
-                    setSelectedItem(null);
-                  }}
-                  className={`min-h-[34px] shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs font-medium transition-colors cursor-pointer ${
-                    isActive
-                      ? "bg-brand-navy text-white border-brand-navy shadow-2xs"
-                      : "bg-white hover:bg-amber-50/60 text-slate-800 border-slate-200/90 hover:border-[#F6B73C]"
-                  }`}
-                >
-                  <span className="font-bold">
-                    {hub.flag} {displayLabel}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </>
-      )}
 
       {/* Unified Search Strip Form */}
       <div

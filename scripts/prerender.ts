@@ -111,6 +111,9 @@ import {
   getAffiliateCtaButtonLabel,
   BLOG_AFFILIATE_CTA_DISCLOSURE,
 } from "../src/components/AffiliatePartners";
+import { EvisaArticleCta, EvisaBanner, EvisaBlogBanner, EvisaBlogContextLink, EvisaDestinationPlacement, EvisaHomeSection, EvisaVisaPanel, EvisaWidgetPrivacyNote } from "../src/components/EvisaPanels";
+import type { EvisaBannerSize, EvisaCampaignKey } from "../src/data/evisaProgram";
+import { resolveBlogAffiliateUrl } from "../src/utils/blogAffiliate";
 import {
   KLOOK_HOTEL_BLOG_PLACEMENTS,
   KLOOK_HOTEL_COMMISSION_NOTE,
@@ -612,11 +615,12 @@ function renderCoxsBazarBookingCtaHtml(locale: "en" | "bn"): string {
  * link to nowhere.
  */
 function renderBlogAffiliateCtaHtml(
-  cta: { provider: string; headline: string; body: string } | undefined,
+  cta: BlogPost["affiliateCTA"],
   locale: "en" | "bn"
 ): string {
   if (!cta) return "";
-  const href = resolvePartnerUrl(AFFILIATE_LINKS[cta.provider as keyof typeof AFFILIATE_LINKS]);
+  if (cta.provider === "evisas") return renderToStaticMarkup(React.createElement(EvisaArticleCta, { cta, lang: locale }));
+  const href = resolveBlogAffiliateUrl(cta);
   if (!href) return "";
   const label = getAffiliateCtaButtonLabel(cta.provider, locale);
   return `<section aria-labelledby="article-affiliate-cta"><h2 id="article-affiliate-cta">${escapeHtml(
@@ -1326,6 +1330,19 @@ function renderVisaOfficialSources(routeId: string): string {
     .join("")}</ul></section>`;
 }
 
+/** Share the actual components so static and interactive placements stay in step. */
+function renderEvisaVisaBlockHtml(visaId: string, locale: "en" | "bn"): string {
+  return renderToStaticMarkup(React.createElement(EvisaVisaPanel, { visaId, lang: locale }));
+}
+
+function renderEvisaBannerHtml(
+  size: EvisaBannerSize,
+  campaign?: EvisaCampaignKey,
+  locale: "en" | "bn" = "en"
+): string {
+  return renderToStaticMarkup(React.createElement(EvisaBanner, { size, campaign, lang: locale, placement: "evisas_visa_hub_banner" }));
+}
+
 function renderVisaRouteContext(routeId: string): string {
   const contextByRoute: Record<string, string> = {
     "nepal-visa": `<p>Nepal's Department of Immigration describes tourist visa on arrival and provides an online immigration portal. The department's current instructions explain the arrival-card and online-form or kiosk process, and set out the applicable tourist-visa categories and gratis eligibility. Check those official instructions close to travel: a saved fee table or old application receipt may no longer reflect the current visa year, charge or stay period. A tourist visa is for tourism; if your purpose is different, confirm the correct category before travel.</p>`,
@@ -1499,6 +1516,7 @@ function renderVisaHubBody(title: string, description: string, faqSchema: Return
     <p>If you only need to know which destinations a Bangladeshi passport can enter with nothing arranged in advance, start with <a href="/visa-free-countries">visa-free countries for Bangladeshi passport holders</a> — it separates the destinations you can actually use from the ones that only look easy.</p>
     <p>This visa hub brings together entry-route, fee, processing-time and document guidance for popular destinations for Bangladeshi passport holders. Start with the country-specific guide below to understand whether the route described is visa-free, visa on arrival, electronic or an advance application. Requirements depend on the travel purpose, passport and current policy; the amounts and timeframes shown are guidance from the underlying destination pages, not an approval guarantee. Immigration rules can change without notice, so verify the latest requirements and application channel with the destination's official immigration department, embassy or authorized portal before booking or applying.</p>
     <section><h2>Country visa guides and application routes</h2>${directory}</section>
+    ${renderEvisaBannerHtml("horizontal")}
     <section><h2>Documents and steps by destination</h2>${guideDetails}</section>
     <section><h2>Before submitting a tourist visa application</h2>
       <p>Check that the visa category matches your real travel purpose and intended length of stay. Use the current application form and document list published by the official authority, and make sure names, passport numbers, dates and supporting bookings match across every document. If an application must be submitted through an embassy or authorized service provider, confirm the Dhaka jurisdiction, appointment process and payment instructions directly with that provider.</p>
@@ -2202,6 +2220,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <ul>${v.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
           <h2 id="visa-documents">Documents to check</h2>
           ${v.documentChecklist.map((checklist) => `<section><h3>${escapeHtml(checklist.category)}</h3><ul>${checklist.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>`).join("")}
+          ${renderEvisaVisaBlockHtml(v.id, "en")}
           <h2 id="visa-steps">Application steps</h2>
           <ol>${v.stepByStep.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
           ${renderVisaRouteContext(v.id)}
@@ -2326,6 +2345,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>Local transport options</h2>
           <ul>${d.localTransport.map((option) => `<li>${escapeHtml(option)}</li>`).join("")}</ul>
           <p><strong>Budget planning note:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
+          ${renderToStaticMarkup(React.createElement(EvisaDestinationPlacement, { guideId: d.id, lang: "en" }))}
           ${renderDestinationOfficialSources(d.id, "en")}
           ${d.id === "london-guide" ? '<p><a href="/experiences?region=west&amp;city=london">Explore London activities and experiences</a></p>' : d.id === "italy-guide" ? '<p><a href="/experiences?region=west&amp;city=rome-italy">Explore Italy activities and experiences</a></p>' : d.id === "paris-guide" ? '<p><a href="/experiences?region=west&amp;city=paris">Explore Paris activities and experiences</a></p>' : d.id === "new-york-guide" ? '<p><a href="/experiences?region=west&amp;city=new-york">Explore New York City activities and experiences</a></p>' : ""}
           <section>
@@ -2825,6 +2845,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <h2>3. Affiliate Partnerships &amp; FTC Transparency</h2>
           <p>URAL participates in Travelpayouts, Aviasales, Klook, KKday, Airalo, and other affiliate programs. Outbound links may earn referral commissions at zero added cost to visitors.</p>
         </section>
+        ${renderToStaticMarkup(React.createElement(EvisaWidgetPrivacyNote, { lang: "en" }))}
       </article>
     `,
   });
@@ -3023,6 +3044,7 @@ function buildAllRoutes(): PrerenderRoute[] {
             .join("\n")}
           ${renderArticleReferencesHtml(post.references, "en", post.updatedAt)}
           ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarAuthorBioHtml("en") : renderAuthorBioHtml(getAuthorProfile(post.author), "en")}
+          ${renderToStaticMarkup(React.createElement(EvisaBlogContextLink, { slug: post.slug, lang: "en" }))}
           ${radicalStorageHtml}
           ${multiPartnerHtml}
           ${klookHotelHtml}
@@ -3030,6 +3052,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           ${affiliateCtaHtml}
           ${post.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking" ? renderCoxsBazarBookingCtaHtml("en") : ""}
           ${renderBlogReadingSectionsHtml(post, "en")}
+          ${renderToStaticMarkup(React.createElement(EvisaBlogBanner, { slug: post.slug, lang: "en" }))}
         </article>
       `,
     });
@@ -3272,6 +3295,12 @@ function buildBengaliBody(
     `<h1>${escapeHtml(h1)}</h1>`,
     `<p>${escapeHtml(description)}</p>`,
   ];
+  if (englishPath === "/") {
+    parts.push(renderToStaticMarkup(React.createElement(EvisaHomeSection, { lang: "bn" })));
+  }
+  if (englishPath === "/privacy") {
+    parts.push(renderToStaticMarkup(React.createElement(EvisaWidgetPrivacyNote, { lang: "bn" })));
+  }
   if (englishPath === "/kkday-hotels") {
     // Same direct hotel affiliate CTA as the English page (AFFILIATE_LINKS.kkdayHotels).
     parts.push(
@@ -3351,6 +3380,7 @@ function buildBengaliBody(
           : renderAuthorBioHtml(getAuthorProfile(bnPost?.author), "bn")
       );
       parts.push(renderBlogLuggagePlacementHtml(id, "bn"));
+      parts.push(renderToStaticMarkup(React.createElement(EvisaBlogContextLink, { slug: id, lang: "bn" })));
       const refPlacementBn = TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[id];
       if (refPlacementBn) {
         // Same SubID as the English sibling: the report should tell us which PAGE
@@ -3409,6 +3439,7 @@ function buildBengaliBody(
         parts.push(renderCoxsBazarBookingCtaHtml("bn"));
       }
       parts.push(renderBlogReadingSectionsHtml(localizedPost, "bn"));
+      parts.push(renderToStaticMarkup(React.createElement(EvisaBlogBanner, { slug: id, lang: "bn" })));
     }
     return `<article>${parts.join("")}</article>`;
   }
@@ -3602,6 +3633,7 @@ function buildBengaliBody(
         parts.push(`<section id="visa-key-facts"><h2>এক নজরে ভিসার তথ্য</h2><ul>${visa.keyFacts.map((fact) => `<li lang="${contentLang(fact.label + fact.value)}"><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul></section>`);
         parts.push(`<section id="visa-steps"><h2>আবেদনের ধাপ</h2><ol>${visa.stepByStep.map((step) => `<li lang="${contentLang(step)}">${escapeHtml(step)}</li>`).join("")}</ol></section>`);
         parts.push(`<section id="visa-documents"><h2>ডকুমেন্ট চেকলিস্ট</h2>${visa.documentChecklist.map((group) => `<section><h3 lang="${contentLang(group.category)}">${escapeHtml(group.category)}</h3><ul>${group.items.map((item) => `<li lang="${contentLang(item)}">${escapeHtml(item)}</li>`).join("")}</ul></section>`).join("")}</section>`);
+        parts.push(renderEvisaVisaBlockHtml(visa.id, "bn"));
         parts.push(`<section id="official-visa-sources"><h2>বর্তমান নিয়ম যাচাইয়ের সরকারি সূত্র</h2><ul>${(VISA_OFFICIAL_SOURCES[visa.id] ?? []).map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer" lang="en">${escapeHtml(source.label)}</a></li>`).join("")}</ul></section>`);
         parts.push(
           bnLinkList(
@@ -3627,6 +3659,7 @@ function buildBengaliBody(
     } else {
       parts.push(
         `<section><h2>দেশ অনুযায়ী ভিসা গাইড</h2>${renderToStaticMarkup(React.createElement(VisaDirectoryCards, { guides: getLocalizedVisas("bn"), isBn: true }))}</section>`,
+        renderEvisaBannerHtml("horizontal", undefined, "bn"),
         `<section><h2>আবেদনের আগে সরকারি নিয়ম দেখুন</h2><p>ভ্রমণের উদ্দেশ্য ও পাসপোর্ট অনুযায়ী ভিসার ধরন বেছে নিন। সরকারি পোর্টাল বা দূতাবাসে বর্তমান নথি, ফি, পেমেন্ট ও প্রসেসিং নির্দেশনা যাচাই করুন। অনুমোদন নিশ্চিত নয়; অফেরতযোগ্য বুকিংয়ের আগে শর্ত বুঝে নিন।</p><p><a href="/bn/visa-free-countries">বাংলাদেশি পাসপোর্টে ভিসা ছাড়া প্রবেশের গাইড</a></p></section>`,
         bnFaqList("ভিসা নিয়ে সাধারণ প্রশ্ন", BN_LANDING_VISA_FAQS),
         bnLinkList("ভ্রমণের বাকি পরিকল্পনা", [{ label: "গন্তব্য গাইড", path: "/destinations" }, { label: "ফ্লাইট রুট", path: "/flights" }, { label: "হোটেল গাইড", path: "/hotels" }, { label: "ভ্রমণ খরচ", path: "/costs" }])
@@ -3684,6 +3717,7 @@ function buildBengaliBody(
           )
         );
         parts.push(renderDestinationOfficialSources(id, "bn"));
+        parts.push(renderToStaticMarkup(React.createElement(EvisaDestinationPlacement, { guideId: id, lang: "bn" })));
 
         parts.push(
           bnSection(
@@ -5127,6 +5161,10 @@ function staticAffiliateDisclosure(isBn: boolean): string {
 
     if (r.routePath === "/") {
       pageHtml = injectScheduledBlogDirectory(pageHtml);
+      const evisaHomeMarker = "<!-- HOME_EVISAS -->";
+      if (!pageHtml.includes(evisaHomeMarker)) throw new Error("The source homepage is missing the eVisas marker.");
+      const evisaHomeHtml = renderToStaticMarkup(React.createElement(EvisaHomeSection, { lang: "en" }));
+      pageHtml = pageHtml.replace(evisaHomeMarker, evisaHomeHtml);
       pageHtml = injectHomeFaq(pageHtml);
       // The home is the one route skipped by the shell replacement above, so it
       // needs the disclosure injected explicitly - it hosts the hotel search

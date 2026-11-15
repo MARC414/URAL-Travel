@@ -26,7 +26,12 @@ export const AFFILIATE_LINKS = {
   yesim: "https://yesim.tpo.li/O8Zvqr73",
   kiwi: "https://kiwi.tpo.li/9isVGzpF",
   getTransfer: "https://gettransfer.tpo.li/sekWRAM1",
-  goCity: "https://gocity.tpo.li/rpHETE4N"
+  goCity: "https://gocity.tpo.li/rpHETE4N",
+  // eVisas (operated by TravelRox, Inc.) — a PAID visa-application service, not a
+  // government portal. This is the account-level link: it attributes every click
+  // to the `uraltravel` partner code and lands on eVisas' destination chooser.
+  // Destination campaigns live in src/data/evisaProgram.ts.
+  evisas: "https://evisas.com/?ref=uraltravel"
 };
 
 export type AffiliatePartnerKey = keyof typeof AFFILIATE_LINKS;
@@ -334,6 +339,19 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     expiresAt: GO_CITY_PROMO.expiresAt,
     activeNote: `Boosted 8.5% Commission on All-Inclusive & Explorer Passes through ${GO_CITY_PROMO.validUntil} · 90-day cookie`,
     expiredFallbackBehavior: "Keeps permanent Go City All-Inclusive & Explorer Pass link live after Dec 31, 2026; falls back to Tiqets if ever paused"
+  },
+  evisas: {
+    id: "evisas",
+    partnerName: "eVisas (TravelRox, Inc.) Visa Application Service",
+    status: "active",
+    offerType: "evergreen",
+    url: AFFILIATE_LINKS.evisas,
+    // No equivalent visa-service fallback. The cycle resolves to "" on pause.
+    fallbackPartner: "evisas",
+    activeNote:
+      "Private, paid visa application assistance. Check eligibility for your passport and residence on eVisas.",
+    expiredFallbackBehavior:
+      "Removes eVisas placements; each guide retains its separate official-source links"
   }
 };
 
@@ -428,6 +446,9 @@ const AFFILIATE_CTA_LABELS: Record<string, { en: string; bn: string }> = {
   qeeq: { en: "Compare Car Rental Rates", bn: "গাড়ি ভাড়ার দাম তুলনা করুন" },
   klookHotels: { en: "Compare Hotel Rates & Availability", bn: "হোটেলের ভাড়া ও রুমের Availability দেখুন" },
   kkdayHotels: { en: "Compare Hotel Rates & Availability", bn: "হোটেলের ভাড়া ও রুমের Availability দেখুন" },
+  // No price in the label: the destination page decides what it shows, and the
+  // widget's filtering is unverified. Promise the check, not the number.
+  evisas: { en: "Check Visa Eligibility", bn: "ভিসার যোগ্যতা যাচাই করুন" },
 };
 
 const AFFILIATE_CTA_FALLBACK_LABEL = {
@@ -1204,4 +1225,3 @@ export function TravelpayoutsReferralCallout({
     </aside>
   );
 }
-

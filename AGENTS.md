@@ -53,6 +53,7 @@ the rules below are the required convention, not a claim that every existing cal
   - Time-limited customer promos (such as `KKDAY_PROMO` or `AIRHELP_PROMO`) must always be gated by `isPromoActive(PROMO.expiresAt)`.
   - Blog post body text and CTA headlines must pass through `sanitizeExpiredPromoText(text)` in both `src/App.tsx` and `scripts/prerender.ts` so expired coupon codes or sale dates never appear in live or prerendered HTML.
 - **Required Link Attributes**: Every outbound affiliate `<a>` element must include `target="_blank" rel="noopener noreferrer sponsored"`.
+- **eVisas destination campaigns**: Resolve the owner-supplied links through `evisasDestinationUrl(...)` in `src/data/evisaProgram.ts`; article CTAs use `resolveBlogAffiliateUrl(...)`. Do not derive embed URLs or invent campaign IDs. The owner-supplied `EVISAS_WIDGET` URL is marketing-consent gated. [The eVisas reference](docs/04-monetization/EVISAS.md) records the placement map, passport qualifications, Bengali treatment and widget behavior.
 
 ---
 

@@ -5,6 +5,7 @@ import type { Language } from "../translations";
 import { AFFILIATE_LINKS, PartnerLinkButton } from "./AffiliatePartners";
 import { ResponsiveImage } from "./ResponsiveImage";
 import { DESTINATION_HERO_IMAGES } from "../data/destinationHeroImages";
+import { EvisaDestinationPlacement } from "./EvisaPanels";
 import {
   DESTINATION_FLIGHT_SEARCHES,
   DESTINATION_OFFICIAL_SOURCES,
@@ -197,6 +198,7 @@ export default function CityDestinationLanding({
         </article>
 
         <aside className="space-y-5">
+          <EvisaDestinationPlacement guideId={guide.id} lang={lang} />
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
             <h2 className="ural-section-title font-serif text-lg font-bold text-slate-900">{isBn ? "আরও গন্তব্য গাইড" : "More destination guides"}</h2>
             <ul className="mt-3 space-y-2">

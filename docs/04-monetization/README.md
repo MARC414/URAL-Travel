@@ -12,6 +12,7 @@ URAL's model is editorial travel intelligence with affiliate referrals and a hum
 
 ## Implementation references
 
+- [eVisas placements](EVISAS.md) records the supplied destination campaigns and homepage widget, responsive banner map, Bengali treatment, shared prerendering and widget-consent behavior.
 - `src/components/AffiliatePartners.tsx` owns the canonical partner registry, fallback rules and promotion-expiry helpers.
 - `src/components/KlookHotelOffers.tsx` owns the route-lazy Klook deep-link helpers and curated picks; keep them out of the eager registry module. `HOTELS_DATA` in `src/constants.ts` defines published hotel guides, not the search widget's city suggestions.
 - `src/utils/analytics.ts`, `index.html` and the published GTM container participate in measurement. The audit identifies gaps; a data-layer push alone is not proof of GA4 receipt.
