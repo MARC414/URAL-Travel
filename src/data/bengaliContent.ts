@@ -459,20 +459,19 @@ Umrah ও Rawdah permit কোথায় বুক করব?
     internalLinks: [
       { text: "সৌদি ভিসার পথ ও সূত্র", path: "/visa/saudi-arabia-visa" },
       { text: "জিয়ারতের স্থান ও পরিবহনের শর্ত যাচাই", path: "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide" },
-      { text: "দুবাইয়ে যাত্রাবিরতি ও ভ্রমণের পরিকল্পনা", path: "/destinations/dubai-guide" },
       { text: "Nusuk নিবন্ধন, Visa Bio ও Rawdah যাচাই", path: "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit" },
       { text: "Saudi stopover: আলাদা ৯৬ ঘণ্টার সফর", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
       { text: "হোটেলে প্রবেশ ও Haramain রেল পরিকল্পনা", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "ঢাকা–জেদ্দা/মদিনা ফ্লাইট পরিকল্পনার চেকলিস্ট", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "বাংলাদেশের পৃথক হজ নিবন্ধন ও প্যাকেজ গাইড", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
-      { text: "Makkah ও Madinah হোটেল জোন এবং Haramain Train গাইড", path: "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh" },
       { text: "Dual-Currency Card ও Passport Endorsement গাইড", path: "/blog/dual-currency-card-endorsement-bangladesh" },
       { text: "Dhaka Airport (DAC) Immigration ডকুমেন্ট চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
+      { text: "দুবাইয়ে যাত্রাবিরতি ও ভ্রমণের পরিকল্পনা", path: "/destinations/dubai-guide" },
       { text: "DIY Umrah Intelligence Portal ও BDT Calculator", path: "/umrah" },
       { text: "রমজান ওমরাহের তারিখ ও ইতিকাফ নিবন্ধন গাইড", path: "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget" },
       { text: "তাওয়াফ ও সাঈ: সাত প্রদক্ষিণ, সঠিক গণনা", path: "/blog/tawaf-sai-seven-circuits-step-by-step-guide" },
       { text: "হজের আমল দিনে দিনে: আরাফাহ, মিনা ও জামারাত (২০২৬)", path: "/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day" },
-          { text: "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ: ভিসা, নুসুক ও এটিওএল", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
+      { text: "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ: ভিসা, নুসুক ও এটিওএল", path: "/blog/umrah-hajj-guide-united-kingdom-2026" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -783,9 +782,9 @@ Nepal এবং Maldives-এ বাংলাদেশিদের জন্য �
       { text: "Singapore Tourist Visa গাইড (অনুমোদিত এজেন্ট ও LOI V39A)", path: "/blog/singapore-visa-guide-bangladesh-agents" },
     ],
     affiliateCTA: {
-      provider: "kiwitaxi",
-      headline: "বিদেশের এয়ারপোর্টে নেমেই ঝামেলামুক্ত হোটেল ট্রান্সফার চান?",
-      body: "কাঠমান্ডু, ব্যাংকক, কুয়ালালামপুর, দুবাই বা সিঙ্গাপুর এয়ারপোর্ট থেকে আপনার হোটেলে যাওয়ার জন্য ফিক্সড রেটে প্রাইভেট কার আগেভাগে বুক করে রাখুন।",
+      provider: "airalo",
+      headline: "গন্তব্যের ইমিগ্রেশন ডেস্কেই ইন্টারনেট প্রস্তুত রাখুন",
+      body: "ফ্লাইটের আগেই একটি ট্রাভেল eSIM চালু করে নিন, যাতে অবতরণের পরপরই রিটার্ন টিকিট, হোটেল ভাউচার বা IMUGA ও অ্যারাইভাল QR কোড দেখাতে পারেন।",
     },
   },
 
@@ -991,9 +990,9 @@ Bangkok-এ Pratunam, Sukhumvit ও Khao San Road-কে শপিং, যাত
       { text: "কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট (২০২৬): সরাসরি রুট এখনো নেই — ঢাকা সংযোগ, ভাড়া ও ভিসা গাইড", path: "/blog/kathmandu-to-coxs-bazar-flights-route-status-booking" },
     ],
     affiliateCTA: {
-      provider: "airalo",
-      headline: "কাঠমান্ডু ও পোখারার পাহাড়ি পথে সবসময় অনলাইনে থাকুন",
-      body: "নেপালে নামার সাথে সাথেই Google Maps, Pathao ও WhatsApp ব্যবহারের জন্য আগে থেকেই Nepal eSIM ইনস্টল করে নিন।",
+      provider: "aviasales",
+      headline: "ঢাকা–কাঠমান্ডু ফ্লাইটের চলতি ভাড়া দেখে নিন",
+      body: "নিজের ভ্রমণের তারিখে ঢাকা থেকে কাঠমান্ডু (DAC–KTM) রিটার্ন ফ্লাইটের প্রাপ্যতা, ব্যাগেজ শর্ত ও মোট ভাড়া তুলনা করে নিন।",
     },
   },
 
@@ -1029,9 +1028,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
       { text: "নতুন পাসপোর্টে প্রথম বিদেশ ভ্রমণের ধাপ", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
     ],
     affiliateCTA: {
-      provider: "airalo",
-      headline: "মালে এয়ারপোর্টে নামার সাথে সাথেই ইন্টারনেট সংযোগ পান",
-      body: "আপনার স্পিডবোট অপারেটর ও Maafushi হোটেলের সাথে WhatsApp-এ যোগাযোগের জন্য আগেভাগেই Maldives eSIM ইনস্টল করে নিন।",
+      provider: "klook",
+      headline: "মালদ্বীপের ডে ট্যুর ও ট্রান্সফার অপশন দেখুন",
+      body: "মালে ফ্লাইটের আগে স্নরকেলিং ট্রিপ, ডে ট্যুর ও eSIM ডেটা প্যাকের অন্তর্ভুক্তি, মোট দাম ও বাতিলের শর্ত Klook-এ মিলিয়ে দেখুন।",
     },
   },
 
@@ -1070,9 +1069,9 @@ Maafushi-এর যেকোনো হোটেল থেকে মাত্র 
       { text: "নতুন পাসপোর্টে প্রথম বিদেশ ভ্রমণের ধাপ", path: "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia" },
     ],
     affiliateCTA: {
-      provider: "klook",
-      headline: "Gardens by the Bay ও Universal Studios-এর টিকিট বুক করুন",
-      body: "সিঙ্গাপুরের নির্বাচিত attraction-এর তারিখ, প্রবেশের নির্দেশনা, অন্তর্ভুক্তি, মোট দাম ও cancellation terms Klook listing ও attraction-এর তথ্যের সঙ্গে মিলিয়ে নিন।",
+      provider: "airalo",
+      headline: "চাঙ্গি বিমানবন্দরে নামার সাথে সাথেই অনলাইনে থাকুন",
+      body: "ঢাকা ছাড়ার আগেই একটি Singapore eSIM ইনস্টল করে নিন, যাতে চাঙ্গিতে নামামাত্রই SG Arrival Card কনফার্মেশন, Grab ও Google Maps কাজ করে।",
     },
   },
 

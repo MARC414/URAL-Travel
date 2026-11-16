@@ -90,6 +90,8 @@ internalLinksBn:
     path: /blog/uk-umrah-packages-atol-operator-checks
   - text: "মক্কা-মদিনায় হারামাইন ট্রেন, ভিআইপি বাস নাকি প্রাইভেট ভ্যান"
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
+  - text: "আগে মদিনা নাকি আগে জেদ্দা: তিন রুটের ভাড়া তুলনা"
+    path: /blog/madinah-first-uk-umrah-routings-open-jaw-stopover
   - text: "মক্কা ও মদিনায় কোথায় থাকবেন"
     path: /blog/hajj-umrah-accommodation-guide-makkah-madinah
   - text: "যুক্তরাজ্যের ডিপার্চার ও লাইভ ভাড়া মিলিয়ে দেখুন"

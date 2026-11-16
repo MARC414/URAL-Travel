@@ -301,3 +301,26 @@ These are local build/browser results. Search-engine processing and deployment s
 
 This verifies the bounded shared-presentation repair. The open editorial and remaining rendering findings above
 still define the work needed for full article parity.
+
+## Curated-link and primary-CTA parity resolution — 16 November 2026
+
+- Resolved the remaining curated-link discrepancies: removed the duplicate Bengali
+  `/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh` entry on `blog-11`
+  (`umrah-hajj-guide-bangladesh-nusuk-bdt-cost`, 15/15 exact ordered match) and added the missing 7th Bengali
+  `internalLinksBn` entry (`/blog/madinah-first-uk-umrah-routings-open-jaw-stopover`) on
+  `uk-to-saudi-flights-umrah-direct-or-connecting` (7/7 exact ordered match).
+- Aligned the four cross-locale primary `affiliateCTA` provider discrepancies in `src/data/bengaliContent.ts` with
+  localized Bengali copy: `blog-5` (`aviasales`), `blog-7` (`klook`), `blog-8` (`airalo`) and `blog-10` (`airalo`).
+- Codified full-corpus commercial-layer rules across all 65 published and 2 upcoming scheduled pairs (67 total):
+  62 pairs carry matched EN/BN `affiliateCTA` providers and campaigns, `blog-49` and `blog-50` carry no primary
+  `affiliateCTA` in either locale per `10-CONTENT-UPGRADE-STANDARD` §4.3 A2.1 and render `JourneyHelpPanel` in
+  both locales, and the three creator-economy articles (`blog-46` plus two scheduled creator posts) carry no
+  traveller `affiliateCTA` in either locale and render bilingual `TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS` blocks.
+- Added permanent regression guards (with negative controls) in `scripts/verify-build.ts` (**556 checks**, across
+  147 routes per locale), `scripts/scheduledPosts.ts`, `scripts/test-scheduled-posts.ts`,
+  `scripts/test-tawaf-sai-guide.ts` and `scripts/test-hajj-rites-guide.ts`.
+- `npx tsx scripts/audit-blog-parity.ts` reports `differentLinkCounts: 0`, `differentCanonicalLinkTargets: 0`,
+  `duplicateBengaliLinks: []`, `differentSuggestedArticles: 0`, `differentReferenceOrder: 0`, and
+  `differentCtaProviders: []` across all 65 live pairs. Purpose-written Bengali route SEO copy for the 48 static
+  articles and topic-by-topic Bengali prose/body review remain open editorial work.
+

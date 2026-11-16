@@ -117,6 +117,7 @@ import { COMMONLY_MISREAD } from "../src/data/visaFreeData";
 import { LANDING_DESTINATION_FAQS, LANDING_VISA_FAQS } from "../src/utils/faqSchema";
 import { collectionPageSchema } from "../src/utils/schema";
 import { blogPublicationTimestamp, sortBlogsNewestFirst } from "../src/utils/blogOrdering";
+import { articleLinkPath } from "../src/utils/blogPresentation";
 import { BANKING_CLUSTER_NODES } from "../src/data/bankingHubData";
 import { BANKING_HUB_FAQS } from "../src/data/bankingHubFaqs";
 import { HOME_FAQS } from "../src/data/homeFaqs";
@@ -8061,13 +8062,109 @@ const pendingFutureSlugs = new Set(
     .map((post) => post.slug),
 );
 const CONTENT_SLUGS = new Set(BLOG_DATA.map((post) => post.slug));
-const contentLinkIssues = auditPostLinks(BLOG_DATA, CONTENT_SLUGS, pendingFutureSlugs);
+const localizedBnBlogPosts = getLocalizedBlogs("bn");
+const contentLinkIssues = [
+  ...auditPostLinks(BLOG_DATA, CONTENT_SLUGS, pendingFutureSlugs),
+  ...auditPostLinks(
+    localizedBnBlogPosts.map((post) => ({ ...post, id: `bn:${post.id}` })),
+    CONTENT_SLUGS,
+    pendingFutureSlugs,
+  ),
+];
 check(
   contentLinkIssues.length === 0,
-  `content contract: every post has internal links that resolve, are unique and never self-referential [${
+  `content contract: every EN and BN post has internal links that resolve, are unique and never self-referential [${
     contentLinkIssues.slice(0, 3).join("; ")
   }]`
 );
+
+// EN/BN curated internal-link parity across all published AND scheduled/draft
+// Markdown posts: no duplicate targets after alias canonicalization, same link
+// count, and the exact same canonical destination set in both locales.
+{
+  const auditLinkPairParity = (
+    pairs: Array<{
+      id: string;
+      slug: string;
+      enLinks: { text: string; path: string }[];
+      bnLinks: { text: string; path: string }[];
+    }>,
+  ): string[] => {
+    const problems: string[] = [];
+    const canonicalize = (raw: string) => articleLinkPath(raw) ?? raw.trim();
+    for (const pair of pairs) {
+      const enCanon = pair.enLinks.map((link) => canonicalize(link.path));
+      const bnCanon = pair.bnLinks.map((link) => canonicalize(link.path));
+      const enDup = enCanon.filter((href, idx) => enCanon.indexOf(href) !== idx);
+      const bnDup = bnCanon.filter((href, idx) => bnCanon.indexOf(href) !== idx);
+      if (enDup.length > 0) problems.push(`${pair.id}: EN duplicate link(s) ${[...new Set(enDup)].join(", ")}`);
+      if (bnDup.length > 0) problems.push(`${pair.id}: BN duplicate link(s) ${[...new Set(bnDup)].join(", ")}`);
+      const enSet = new Set(enCanon);
+      const bnSet = new Set(bnCanon);
+      const missingInBn = [...enSet].filter((href) => !bnSet.has(href));
+      const extraInBn = [...bnSet].filter((href) => !enSet.has(href));
+      if (missingInBn.length > 0) {
+        problems.push(`${pair.id}: BN missing EN link(s) ${missingInBn.join(", ")}`);
+      }
+      if (extraInBn.length > 0) {
+        problems.push(`${pair.id}: BN has extra link(s) not in EN ${extraInBn.join(", ")}`);
+      }
+      if (enCanon.length !== bnCanon.length && enDup.length === 0 && bnDup.length === 0 && missingInBn.length === 0 && extraInBn.length === 0) {
+        problems.push(`${pair.id}: link count mismatch EN=${enCanon.length} BN=${bnCanon.length}`);
+      }
+    }
+    return problems;
+  };
+
+  const bnBySlug = new Map(localizedBnBlogPosts.map((post) => [post.slug, post]));
+  const publishedPairs = BLOG_DATA.map((enPost) => ({
+    id: enPost.id,
+    slug: enPost.slug,
+    enLinks: enPost.internalLinks ?? [],
+    bnLinks: bnBySlug.get(enPost.slug)?.internalLinks ?? [],
+  }));
+  const unpublishedDraftPairs = loadScheduledBlogPosts()
+    .filter((post) => !CONTENT_SLUGS.has(post.slug))
+    .map((post) => ({
+      id: `draft:${post.slug}`,
+      slug: post.slug,
+      enLinks: post.internalLinksEn,
+      bnLinks: post.internalLinksBn,
+    }));
+  const linkParityProblems = auditLinkPairParity([...publishedPairs, ...unpublishedDraftPairs]);
+  check(
+    linkParityProblems.length === 0,
+    linkParityProblems.length === 0
+      ? `all ${publishedPairs.length} published and ${unpublishedDraftPairs.length} upcoming blog pairs match EN/BN canonical internal-link targets with zero duplicates`
+      : `EN/BN blog internal-link parity failed: ${linkParityProblems.slice(0, 5).join("; ")}`
+  );
+
+  const syntheticLinkProblems = auditLinkPairParity([
+    {
+      id: "dup-bn",
+      slug: "dup-bn",
+      enLinks: [{ text: "A", path: "/umrah" }],
+      bnLinks: [
+        { text: "ক", path: "/umrah" },
+        { text: "খ", path: "/umrah" },
+      ],
+    },
+    {
+      id: "missing-bn",
+      slug: "missing-bn",
+      enLinks: [
+        { text: "A", path: "/flights" },
+        { text: "B", path: "/blog/madinah-first-uk-umrah-routings-open-jaw-stopover" },
+      ],
+      bnLinks: [{ text: "ক", path: "/flights" }],
+    },
+  ]);
+  check(
+    syntheticLinkProblems.some((msg) => msg.startsWith("dup-bn: BN duplicate")) &&
+      syntheticLinkProblems.some((msg) => msg.startsWith("missing-bn: BN missing")),
+    "EN/BN blog link-parity guard rejects duplicate and missing Bengali links (negative controls)"
+  );
+}
 
 // Negative control: the validator must still reject each failure mode. Without
 // this, a refactor that returns [] would leave a green check protecting nothing.
@@ -8128,6 +8225,173 @@ check(
     ? `affiliate-CTA exemptions all point at live posts (${CTA_EXEMPT_SLUGS.size})`
     : `stale affiliate-CTA exemption(s): ${staleCtaExemptions.join(", ")}`,
 );
+
+// Full-corpus EN/BN affiliate CTA parity & A2 commercial-layer guard:
+// - Non-exempt traveller articles must declare an explicit localized BN CTA
+//   matching EN's `provider` and `campaign` (no cross-locale partner switches,
+//   no silent English fallback copy).
+// - Religious-procedure pages (`CTA_EXEMPT_SLUGS`) must declare no primary CTA
+//   in either locale and must render `JourneyHelpPanel` in both saved pages.
+// - Creator-economy pages (`TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS`) without a
+//   traveller CTA must omit `affiliateCTA` in both locales and render their
+//   bilingual creator-referral callout in both saved pages.
+{
+  type CtaAuditEntry = {
+    id: string;
+    slug: string;
+    enCta?: { provider: string; headline: string; body: string; campaign?: string };
+    bnExplicitCta?: { provider: string; headline: string; body: string; campaign?: string };
+    bnEffectiveCta?: { provider: string; headline: string; body: string; campaign?: string };
+    isRiteExempt: boolean;
+    hasCreatorReferral: boolean;
+    checkSavedHtml: boolean;
+  };
+  const BENGALI_SCRIPT_RE = /[\u0980-\u09FF]/;
+  const auditBlogCtaParity = (entries: CtaAuditEntry[]): string[] => {
+    const problems: string[] = [];
+    for (const item of entries) {
+      if (item.isRiteExempt) {
+        if (item.enCta || item.bnEffectiveCta) {
+          problems.push(`${item.id}: A2 rite-exempt post must not carry a primary affiliateCTA`);
+        }
+        if (item.checkSavedHtml) {
+          for (const [loc, page] of [
+            ["EN", path.join(DIST_DIR, "blog", `${item.slug}.html`)],
+            ["BN", path.join(DIST_DIR, "bn", "blog", `${item.slug}.html`)],
+          ] as const) {
+            const html = read(page) ?? "";
+            if (!html.includes('data-affiliate-placement="journey_help"')) {
+              problems.push(`${item.id}: ${loc} rite-exempt page missing journey_help panel`);
+            }
+          }
+        }
+        continue;
+      }
+
+      if (item.hasCreatorReferral && !item.enCta && !item.bnEffectiveCta) {
+        if (item.checkSavedHtml) {
+          const referralUrl = buildTravelpayoutsReferralUrl(item.slug).replace(/&/g, "&amp;");
+          for (const [loc, page] of [
+            ["EN", path.join(DIST_DIR, "blog", `${item.slug}.html`)],
+            ["BN", path.join(DIST_DIR, "bn", "blog", `${item.slug}.html`)],
+          ] as const) {
+            const html = read(page) ?? "";
+            if (!html.includes(referralUrl)) {
+              problems.push(`${item.id}: ${loc} creator article missing Travelpayouts referral block`);
+            }
+          }
+        }
+        continue;
+      }
+
+      if (!item.enCta) {
+        problems.push(`${item.id}: missing EN affiliateCTA (not rite-exempt or creator-referral)`);
+        continue;
+      }
+      if (!item.bnExplicitCta || !item.bnEffectiveCta) {
+        problems.push(`${item.id}: missing explicit localized BN affiliateCTA`);
+        continue;
+      }
+      if (item.enCta.provider !== item.bnEffectiveCta.provider) {
+        problems.push(
+          `${item.id}: CTA provider mismatch EN="${item.enCta.provider}" vs BN="${item.bnEffectiveCta.provider}"`
+        );
+      }
+      if ((item.enCta.campaign ?? "") !== (item.bnEffectiveCta.campaign ?? "")) {
+        problems.push(
+          `${item.id}: CTA campaign mismatch EN="${item.enCta.campaign ?? "none"}" vs BN="${item.bnEffectiveCta.campaign ?? "none"}"`
+        );
+      }
+      if (
+        !BENGALI_SCRIPT_RE.test(item.bnExplicitCta.headline) ||
+        !BENGALI_SCRIPT_RE.test(item.bnExplicitCta.body)
+      ) {
+        problems.push(`${item.id}: BN affiliateCTA headline/body lacks Bengali copy`);
+      }
+    }
+    return problems;
+  };
+
+  const bnPostMap = new Map(localizedBnBlogPosts.map((post) => [post.slug, post]));
+  const publishedCtaEntries: CtaAuditEntry[] = BLOG_DATA.map((post) => ({
+    id: post.id,
+    slug: post.slug,
+    enCta: post.affiliateCTA ?? undefined,
+    bnExplicitCta: BENGALI_BLOG_OVERRIDES[post.slug]?.affiliateCTA ?? undefined,
+    bnEffectiveCta: bnPostMap.get(post.slug)?.affiliateCTA ?? undefined,
+    isRiteExempt: CTA_EXEMPT_SLUGS.has(post.slug),
+    hasCreatorReferral: Boolean(TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[post.slug]),
+    checkSavedHtml: true,
+  }));
+  const upcomingCtaEntries: CtaAuditEntry[] = loadScheduledBlogPosts()
+    .filter((post) => !CONTENT_SLUGS.has(post.slug))
+    .map((post) => ({
+      id: `draft:${post.slug}`,
+      slug: post.slug,
+      enCta: post.affiliateCta,
+      bnExplicitCta: post.affiliateCtaBn,
+      bnEffectiveCta: post.affiliateCtaBn,
+      isRiteExempt: CTA_EXEMPT_SLUGS.has(post.slug),
+      hasCreatorReferral: Boolean(TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[post.slug]),
+      checkSavedHtml: false,
+    }));
+  const ctaParityIssues = auditBlogCtaParity([...publishedCtaEntries, ...upcomingCtaEntries]);
+  check(
+    ctaParityIssues.length === 0,
+    ctaParityIssues.length === 0
+      ? `all ${publishedCtaEntries.length} published and ${upcomingCtaEntries.length} upcoming blog pairs match EN/BN affiliate CTA providers/campaigns and A2 commercial layers`
+      : `EN/BN blog affiliate CTA parity failed: ${ctaParityIssues.slice(0, 5).join("; ")}`
+  );
+
+  const syntheticCtaIssues = auditBlogCtaParity([
+    {
+      id: "provider-drift",
+      slug: "provider-drift",
+      enCta: { provider: "airalo", headline: "Stay connected", body: "Install eSIM." },
+      bnExplicitCta: { provider: "klook", headline: "টিকিট দেখুন", body: "পাস বুক করুন।" },
+      bnEffectiveCta: { provider: "klook", headline: "টিকিট দেখুন", body: "পাস বুক করুন।" },
+      isRiteExempt: false,
+      hasCreatorReferral: false,
+      checkSavedHtml: false,
+    },
+    {
+      id: "missing-bn-cta",
+      slug: "missing-bn-cta",
+      enCta: { provider: "aviasales", headline: "Check fares", body: "Compare dates." },
+      bnExplicitCta: undefined,
+      bnEffectiveCta: { provider: "aviasales", headline: "Check fares", body: "Compare dates." },
+      isRiteExempt: false,
+      hasCreatorReferral: false,
+      checkSavedHtml: false,
+    },
+    {
+      id: "unmonetized",
+      slug: "unmonetized",
+      enCta: undefined,
+      bnExplicitCta: undefined,
+      bnEffectiveCta: undefined,
+      isRiteExempt: false,
+      hasCreatorReferral: false,
+      checkSavedHtml: false,
+    },
+    {
+      id: "rite-cta-leak",
+      slug: "rite-cta-leak",
+      enCta: { provider: "klook", headline: "Tours", body: "Book now." },
+      bnExplicitCta: undefined,
+      bnEffectiveCta: undefined,
+      isRiteExempt: true,
+      hasCreatorReferral: false,
+      checkSavedHtml: false,
+    },
+  ]);
+  check(
+    ["provider-drift:", "missing-bn-cta:", "unmonetized:", "rite-cta-leak:"].every((prefix) =>
+      syntheticCtaIssues.some((msg) => msg.startsWith(prefix))
+    ),
+    "EN/BN blog CTA parity guard rejects provider drift, missing BN overrides, unmonetized posts and rite-page CTA leaks (negative controls)"
+  );
+}
 const flagshipIssues = flagshipPosts
   .map((post) => ({
     id: post.id,

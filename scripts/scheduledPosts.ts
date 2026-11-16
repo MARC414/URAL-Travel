@@ -308,6 +308,12 @@ export function resolveScheduledAffiliateCtaPair(
     required: false,
   });
 
+  if (affiliateCta && affiliateCtaBn && affiliateCta.provider !== affiliateCtaBn.provider) {
+    return fail(
+      file,
+      `affiliateCtaBnProvider ("${affiliateCtaBn.provider}") must match affiliateCtaProvider ("${affiliateCta.provider}")`
+    );
+  }
   if (affiliateCtaBn?.campaign && affiliateCta?.campaign !== affiliateCtaBn.campaign) {
     return fail(
       file,
