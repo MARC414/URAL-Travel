@@ -19,7 +19,7 @@ import {
 } from "../data/evisaProgram";
 import type { BlogPost } from "../types";
 import { getAffiliateCtaButtonLabel, sanitizeExpiredPromoText } from "./AffiliatePartners";
-import { evisaWidgetConsentFromEvent, hasEvisaWidgetConsent } from "../utils/evisaWidgetConsent";
+import { openConsentPreferences, useConsent } from "../utils/consent";
 
 const LINK_FOCUS = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-navy";
 
@@ -145,29 +145,11 @@ export function EvisaVisaPanel({ visaId, lang = "en" }: { visaId: string; lang?:
 
 /** One prominent homepage section. Remote content never loads in saved HTML. */
 export function EvisaHomeSection({ lang = "en" }: { lang?: EvisaLang }) {
-  const [allowed, setAllowed] = useState(false);
+  const allowed = useConsent("marketing");
   const [loaded, setLoaded] = useState(false);
   const [slow, setSlow] = useState(false);
   const href = evisasDestinationUrl();
   const copy = EVISAS_HOME_COPY[lang];
-
-  useEffect(() => {
-    const readConsent = () => {
-      try { setAllowed(hasEvisaWidgetConsent(window.localStorage)); }
-      catch { setAllowed(false); }
-    };
-    const consentChanged = (event: Event) => setAllowed(evisaWidgetConsentFromEvent((event as CustomEvent).detail));
-    const storageChanged = (event: StorageEvent) => {
-      if (event.key === null || event.key === "cookie-consent" || event.key === "cookie-consent-settings") readConsent();
-    };
-    readConsent();
-    window.addEventListener("ural:consent-updated", consentChanged);
-    window.addEventListener("storage", storageChanged);
-    return () => {
-      window.removeEventListener("ural:consent-updated", consentChanged);
-      window.removeEventListener("storage", storageChanged);
-    };
-  }, []);
 
   useEffect(() => {
     if (!allowed) { setLoaded(false); setSlow(false); return; }
@@ -199,6 +181,7 @@ export function EvisaHomeSection({ lang = "en" }: { lang?: EvisaLang }) {
                   loading="lazy"
                   title={EVISAS_WIDGET.title}
                   lang="en"
+                  data-ural-consent="marketing"
                   className="home-evisa-frame"
                   onLoad={() => setLoaded(true)}
                 />
@@ -209,8 +192,8 @@ export function EvisaHomeSection({ lang = "en" }: { lang?: EvisaLang }) {
                 <p className="max-w-md text-sm leading-relaxed text-slate-600">{copy.consent}</p>
                 <button
                   type="button"
-                  onClick={() => window.dispatchEvent(new CustomEvent("ural:open-cookie-banner"))}
-                  className={`inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-gold px-5 py-3 text-sm font-bold text-brand-navy hover:bg-brand-gold-dark active:bg-brand-gold-dark ${LINK_FOCUS}`}
+                  onClick={openConsentPreferences}
+                  className={`inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-gold px-5 py-3 text-sm font-bold text-brand-navy hover:bg-brand-gold-dark active:bg-brand-gold-dark cursor-pointer ${LINK_FOCUS}`}
                 >{copy.preferences}</button>
               </div>
             )}

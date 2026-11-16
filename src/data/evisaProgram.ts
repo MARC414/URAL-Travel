@@ -142,7 +142,7 @@ export const EVISAS_HOME_COPY = {
     hook: "Get help with the paperwork before you pack.",
     body: "eVisas is a private service that checks your documents and helps submit your visa application online. Use the checker to explore options for your passport and destination.",
     widgetHeading: "Check your visa options",
-    consent: "This checker is provided by eVisas. Allow marketing content in your cookie preferences to use it here, or open eVisas directly.",
+    consent: "This checker is provided by eVisas. Turn on “Marketing & Partner Tools” in Cookie preferences to load it here, or open eVisas directly.",
     preferences: "Cookie preferences",
     loading: "Loading the eVisas checker…",
     slow: "The checker is taking longer to load. You can open eVisas directly instead.",
@@ -155,7 +155,7 @@ export const EVISAS_HOME_COPY = {
     hook: "ব্যাগ গোছানোর আগে ভিসার কাগজপত্রে সহায়তা নিন।",
     body: "eVisas একটি বেসরকারি সার্ভিস। তারা আপনার নথি যাচাই করে অনলাইনে ভিসার আবেদন জমা দিতে সহায়তা করে। নিচের চেকারে আপনার পাসপোর্টের দেশ ও গন্তব্য বেছে সুযোগগুলো দেখুন।",
     widgetHeading: "আপনার ভিসার সুযোগ দেখুন",
-    consent: "এই চেকারটি eVisas-এর। এখানে ব্যবহার করতে কুকি পছন্দে marketing content চালু করুন, অথবা সরাসরি eVisas খুলুন।",
+    consent: "এই চেকারটি eVisas-এর। এখানে লোড করতে কুকি পছন্দে “মার্কেটিং ও পার্টনার টুলস” চালু করুন, অথবা সরাসরি eVisas খুলুন।",
     preferences: "কুকি পছন্দ বদলান",
     loading: "eVisas চেকার লোড হচ্ছে…",
     slow: "চেকারটি লোড হতে সময় নিচ্ছে। চাইলে সরাসরি eVisas খুলতে পারেন।",
@@ -168,12 +168,12 @@ export const EVISAS_HOME_COPY = {
 export const EVISAS_WIDGET_PRIVACY = {
   en: {
     heading: "Optional eVisas checker",
-    body: "The homepage’s embedded eVisas checker loads only after marketing consent. eVisas receives your IP address and browser information when it loads, and handles the selections you make in its tool. URAL does not collect the checker’s form fields. You can withdraw consent in cookie preferences or open eVisas directly instead.",
+    body: "The homepage’s embedded eVisas checker loads only after you enable “Marketing & Partner Tools” consent. When loaded, eVisas receives your IP address and browser information and handles the selections you make in its tool. URAL does not collect the checker’s form fields. You can withdraw consent at any time in Cookie preferences or open eVisas directly instead.",
     link: "Read eVisas’ privacy policy",
   },
   bn: {
     heading: "ঐচ্ছিক eVisas চেকার",
-    body: "marketing content-এর সম্মতি দেওয়ার পরই হোমপেজের eVisas চেকার লোড হয়। লোডের সময় eVisas আপনার IP address ও ব্রাউজারের তথ্য পায় এবং চেকারে আপনার বেছে নেওয়া তথ্য নিজে পরিচালনা করে। URAL চেকারের ফর্মের তথ্য সংগ্রহ করে না। কুকি পছন্দে সম্মতি প্রত্যাহার করতে পারেন, অথবা সরাসরি eVisas খুলতে পারেন।",
+    body: "কুকি পছন্দে “মার্কেটিং ও পার্টনার টুলস” চালু করার পরই হোমপেজের eVisas চেকার লোড হয়। লোডের সময় eVisas আপনার IP address ও ব্রাউজারের তথ্য পায় এবং চেকারে আপনার বেছে নেওয়া তথ্য নিজে পরিচালনা করে। URAL চেকারের ফর্মের তথ্য সংগ্রহ করে না। কুকি পছন্দে যেকোনো সময় সম্মতি প্রত্যাহার করতে পারেন, অথবা সরাসরি eVisas খুলতে পারেন।",
     link: "eVisas-এর গোপনীয়তা নীতি পড়ুন",
   },
 } as const;

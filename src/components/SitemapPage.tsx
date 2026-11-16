@@ -17,6 +17,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { SITE_ORIGIN } from "../utils/localeRoutes";
+import { readOptionalStorage, useConsent, writeOptionalStorage } from "../utils/consent";
 import { Language } from "../translations";
 import { BLOG_DATA } from "../constants";
 import type * as BengaliContentModule from "../data/bengaliContent";
@@ -338,15 +339,12 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
   const isPreDeparture = variant !== "sitemap";
   const isSitemapVariant = variant === "sitemap";
 
-  const [checkedIds, setCheckedIds] = useState<string[]>(() => {
-    if (typeof window === "undefined") return ["passport-6m", "return-ticket-hotel"];
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : ["passport-6m", "return-ticket-hotel"];
-    } catch {
-      return ["passport-6m", "return-ticket-hotel"];
-    }
-  });
+  const preferencesAllowed = useConsent("functionality");
+  const [checkedIds, setCheckedIds] = useState<string[]>([
+    "passport-6m",
+    "return-ticket-hotel",
+  ]);
+  const [hydratedSavedChecklist, setHydratedSavedChecklist] = useState(false);
 
   const [countrySearch, setCountrySearch] = useState("");
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
@@ -489,12 +487,24 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
   }, [uncheckedChecklistItems, countrySearch]);
 
   useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedIds));
-    } catch {
-      // ignore storage quota errors
+    if (!preferencesAllowed) return;
+    if (!hydratedSavedChecklist) {
+      setHydratedSavedChecklist(true);
+      try {
+        const saved = readOptionalStorage(STORAGE_KEY);
+        if (saved) {
+          const parsed: unknown = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.every((id) => typeof id === "string")) {
+            setCheckedIds(parsed);
+            return;
+          }
+        }
+      } catch {
+        // Ignore malformed storage and persist current state below.
+      }
     }
-  }, [checkedIds]);
+    writeOptionalStorage(STORAGE_KEY, JSON.stringify(checkedIds));
+  }, [checkedIds, preferencesAllowed, hydratedSavedChecklist]);
 
   const toggleItem = (id: string) => {
     setCheckedIds((prev) =>

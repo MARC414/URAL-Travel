@@ -357,18 +357,28 @@ const unwrapRenderedAnchors = (html: string) =>
  * positives twice — once from a `crossorigin` mention in markup, once from the
  * word "preconnect" in a comment).
  */
-function extractAffiliateLoader(html: string): string {
-  // Tolerate both names so a future re-install cannot silently empty this
-  // extraction (an empty string used to fail the behavioural block, but with a
-  // misleading "misbehaves" message).
-  const driveMarker = html.indexOf("function loadDrive");
-  const marker = driveMarker !== -1 ? driveMarker : html.indexOf("function loadEmerald");
+function extractInlineScriptContaining(html: string, anchor: string): string {
+  const marker = html.indexOf(anchor);
   if (marker === -1) return "";
   const open = html.lastIndexOf("<script", marker);
   const bodyStart = html.indexOf(">", open);
   const close = html.indexOf("</script>", marker);
   if (open === -1 || bodyStart === -1 || close === -1) return "";
   return html.slice(bodyStart + 1, close);
+}
+
+function extractAffiliateLoader(html: string): string {
+  // Tolerate both names so a future re-install cannot silently empty this
+  // extraction (an empty string used to fail the behavioural block, but with a
+  // misleading "misbehaves" message).
+  return (
+    extractInlineScriptContaining(html, "function loadDrive") ||
+    extractInlineScriptContaining(html, "function loadEmerald")
+  );
+}
+
+function extractGtmLoader(html: string): string {
+  return extractInlineScriptContaining(html, "function loadGTM");
 }
 
 // --- 1. Build output exists -------------------------------------------------
@@ -1803,48 +1813,44 @@ check(
 // script without `crossorigin`, and consent defaults remain enforced below.
 const gtmPreconnectProblems: string[] = [];
 let gtmPreconnectRoutes = 0;
+const THIRD_PARTY_TRACKER_HOST_RE =
+  /googletagmanager\.com|google-analytics\.com|emrld\.ltd|tpemd\.com|evisas\.com/i;
 for (const file of distHtmlFiles) {
   const html = fs.readFileSync(file, "utf8");
   if (!html.includes('id="root"')) continue;
   gtmPreconnectRoutes++;
-  const gtmPreconnects = [...html.matchAll(/<link\b[^>]*>/g)]
+  const trackerPreconnects = [...html.matchAll(/<link\b[^>]*>/g)]
     .map((match) => match[0])
     .filter(
       (tag) =>
-        /\brel="preconnect"/.test(tag) &&
-        /\bhref="https:\/\/www\.googletagmanager\.com"/.test(tag)
+        /\brel="(?:preconnect|dns-prefetch)"/i.test(tag) &&
+        THIRD_PARTY_TRACKER_HOST_RE.test(tag)
     );
-  if (gtmPreconnects.length !== 1 || /\bcrossorigin(?:\s|=|>)/i.test(gtmPreconnects[0] ?? "")) {
+  const unconsentedNoscriptTracker = /<noscript>[\s\S]*?googletagmanager\.com\/ns\.html/i.test(html);
+  if (trackerPreconnects.length > 0 || unconsentedNoscriptTracker) {
     gtmPreconnectProblems.push(path.relative(DIST_DIR, file));
   }
 }
 const shellForPreconnectOrder = distIndexHtml ?? "";
 const shellLcpPreloadIndex = shellForPreconnectOrder.indexOf('<link rel="preload" as="image"');
 const shellFontPreloadIndex = shellForPreconnectOrder.indexOf('href="/fonts/inter-400-v1.woff2"');
-const shellGtmPreconnectIndex = shellForPreconnectOrder.indexOf(
-  'href="https://www.googletagmanager.com"'
-);
-const gtmPreconnectAfterCriticalPreloads =
-  shellLcpPreloadIndex !== -1 &&
-  shellFontPreloadIndex > shellLcpPreloadIndex &&
-  shellGtmPreconnectIndex > shellFontPreloadIndex;
+const criticalPreloadsOrdered =
+  shellLcpPreloadIndex !== -1 && shellFontPreloadIndex > shellLcpPreloadIndex;
 check(
   gtmPreconnectRoutes === fontChecked &&
     gtmPreconnectRoutes > 0 &&
     gtmPreconnectProblems.length === 0 &&
-    gtmPreconnectAfterCriticalPreloads,
+    criticalPreloadsOrdered,
   gtmPreconnectProblems.length === 0 &&
     gtmPreconnectRoutes === fontChecked &&
-    gtmPreconnectAfterCriticalPreloads
-    ? `all ${gtmPreconnectRoutes} prerendered app routes carry one no-cors GTM preconnect after LCP/font preloads`
-    : `GTM preconnect missing/duplicated/mismatched on ${gtmPreconnectProblems.length} route(s), ` +
-        `wrong shell ordering, or route count differs (${gtmPreconnectRoutes} vs ${fontChecked} font-checked)`
+    criticalPreloadsOrdered
+    ? `all ${gtmPreconnectRoutes} prerendered app routes emit zero unconsented third-party preconnects or noscript GTM beacons, with LCP image before font preloads`
+    : `unconsented third-party preconnect/noscript found on ${gtmPreconnectProblems.length} route(s), ` +
+        `wrong critical preload order, or route count differs (${gtmPreconnectRoutes} vs ${fontChecked} font-checked)`
 );
 
-// (2) consent default precedes the GTM loader, and defaults to denied.
-//     Whitespace-tolerant: the head script has been rewritten once already
-//     (binary -> granular CMP), and the guard must survive formatting changes
-//     while still catching a reorder or a default that stops denying.
+// (2) consent default precedes the GTM loader, defaults every optional category
+//     to 'denied', and respects per-category 'custom' choices alongside 'accepted'.
 if (distIndexHtml !== null) {
   const consentMatch = distIndexHtml.match(/gtag\(\s*'consent'\s*,\s*'default'/);
   const consentIdx = consentMatch?.index ?? -1;
@@ -1859,9 +1865,20 @@ if (distIndexHtml !== null) {
           ? "Consent Mode v2 default state ships before the GTM loader"
           : "Consent Mode default block moved AFTER the GTM loader (GDPR risk)"
   );
+  const optionalSignals = [
+    "ad_storage",
+    "ad_user_data",
+    "ad_personalization",
+    "analytics_storage",
+    "functionality_storage",
+    "personalization_storage",
+  ];
+  const allSignalsDefaultDenied = optionalSignals.every((sig) =>
+    new RegExp(`'${sig}':[^,\\n]*'denied'`).test(distIndexHtml)
+  );
   check(
-    /analytics_storage':[^,\n]*'denied'/.test(distIndexHtml),
-    "analytics_storage can default to denied in shipped HTML"
+    allSignalsDefaultDenied && /stored\s*===\s*'custom'/.test(distIndexHtml),
+    "Consent Mode v2 defaults all 6 optional signals to denied and honours granular custom settings"
   );
 }
 
@@ -2380,11 +2397,12 @@ check(
 
 const shellHtml = read(path.join(ROOT_DIR, "index.html")) ?? "";
 const gatingChecks: Array<[string, RegExp]> = [
-  ["no region escape hatch", /^(?!.*data-consent-region)(?!.*consent_region)[\s\S]*$/],
-  ["checks the marketing category, not just the banner choice", /cookie-consent-settings[\s\S]{0,120}marketing/],
+  ["no region or URL-param escape hatch", /^(?!.*data-consent-region)(?!.*consent_region)(?!.*tpverify)[\s\S]*$/],
+  ["checks the marketing category, not just the banner choice", /cookie-consent-settings[\s\S]{0,180}marketing===true/],
+  ["checks the analytics category before loading GTM", /cookie-consent-settings[\s\S]{0,180}analytics===true/],
   ["reads the consent choice before loading", /localStorage\.getItem\('cookie-consent'\)/],
   ["still defers off the LCP path (idle callback with a ceiling)", /requestIdleCallback[\s\S]{0,80}timeout/],
-  ["reacts to consent granted later", /ural:consent-updated/],
+  ["reacts to consent granted or withdrawn later", /ural:consent-updated/],
 ];
 const gateProblems = gatingChecks
   .filter(([, pattern]) => !pattern.test(shellHtml))
@@ -2392,18 +2410,21 @@ const gateProblems = gatingChecks
 check(
   gateProblems.length === 0,
   gateProblems.length === 0
-    ? `affiliate-script gate intact for every visitor (${gatingChecks.length} properties: unconditional, marketing category, deferred load, consent event)`
+    ? `central shell gates intact for every visitor (${gatingChecks.length} properties: zero bypasses, analytics + marketing category checks, deferred load, live consent sync)`
     : `consent gate broken/missing: ${gateProblems.join("; ")}`
 );
 
 // ...and the same invariant in the SHELL THAT SHIPS. The checks above read the
 // source; this one reads dist/index.html, so a build step that reintroduces the
-// region stamp (or drops the loader) cannot pass unnoticed.
+// region stamp, tpverify bypass, or drops either loader cannot pass unnoticed.
 check(
   distIndexHtml !== null &&
     !distIndexHtml.includes("data-consent-region") &&
-    distIndexHtml.includes("function marketingAllowed()"),
-  "the shipped dist/index.html carries the unconditional gate and no region stamp"
+    !distIndexHtml.includes("tpverify") &&
+    !distIndexHtml.includes("googletagmanager.com/ns.html") &&
+    distIndexHtml.includes("function marketingAllowed(") &&
+    distIndexHtml.includes("function analyticsAllowed("),
+  "the shipped dist/index.html enforces unconditional central analytics + marketing gates with no region stamp or URL bypass"
 );
 
 // --- 2f. Behavioural tests ---------------------------------------------------
@@ -2493,92 +2514,320 @@ check(
 
 // --- the affiliate loader's actual consent decision -------------------------
 const loaderSource = extractAffiliateLoader(shellHtml);
+const gtmLoaderSource = extractGtmLoader(shellHtml);
 
-interface LoaderRun {
-  injected: string[];
-  fireConsentUpdate: () => void;
+interface ScriptNodeStub {
+  async: boolean | number;
+  onerror: unknown;
+  src: string;
+  attrs: Record<string, string>;
+  parentNode: { removeChild: (el: ScriptNodeStub) => void } | null;
+  setAttribute: (k: string, v: string) => void;
 }
 
-function runAffiliateLoader(storage: Record<string, string>): LoaderRun {
+interface ShellLoaderRun {
+  injected: string[];
+  activeScripts: ScriptNodeStub[];
+  dataLayer: Array<Record<string, unknown>>;
+  fireConsentUpdate: (detail?: unknown) => void;
+  fireInteraction: () => void;
+}
+
+function runShellLoader(
+  source: string,
+  storage: Record<string, string>,
+  opts: { search?: string; throwOnStorage?: boolean } = {}
+): ShellLoaderRun {
   const injected: string[] = [];
-  const listeners: Array<() => void> = [];
-  const fakeWindow: any = {
-    addEventListener: (name: string, callback: () => void) => {
-      if (name === "ural:consent-updated") listeners.push(callback);
+  const activeScripts: ScriptNodeStub[] = [];
+  const dataLayer: Array<Record<string, unknown>> = [];
+  const consentListeners: Array<(ev?: { detail?: unknown }) => void> = [];
+  const interactionListeners: Array<() => void> = [];
+  const head = {
+    appendChild: (element: ScriptNodeStub) => {
+      element.parentNode = head;
+      injected.push(element.src);
+      activeScripts.push(element);
     },
-    // The loader schedules its first decision on an idle callback (2.5s
-    // ceiling). Running it synchronously here keeps these six cases about the
-    // consent decision, not about timer plumbing.
+    removeChild: (element: ScriptNodeStub) => {
+      const idx = activeScripts.indexOf(element);
+      if (idx !== -1) activeScripts.splice(idx, 1);
+      element.parentNode = null;
+    },
+  };
+  const fakeWindow: any = {
+    dataLayer,
+    location: {
+      pathname: "/",
+      search: opts.search ?? "",
+      href: `https://uraltravel.co.uk/${opts.search ?? ""}`,
+    },
+    addEventListener: (name: string, callback: (ev?: { detail?: unknown }) => void) => {
+      if (name === "ural:consent-updated") consentListeners.push(callback);
+      else if (name === "mousedown" || name === "scroll") interactionListeners.push(() => callback());
+    },
     requestIdleCallback: (callback: () => void) => callback(),
   };
   const fakeDocument: any = {
+    readyState: "complete",
+    title: "URAL Travel",
     addEventListener: () => {},
     querySelector: () => null,
-    // setAttribute is part of the Drive snippet Travelpayouts ships
-    // (data-cmp-ab="2"); the stub has to accept it or every case throws.
-    createElement: () => ({ async: false, onerror: null, src: "", setAttribute: () => {} }),
-    head: {
-      appendChild: (element: { src: string }) => {
-        injected.push(element.src);
-      },
+    createElement: (): ScriptNodeStub => {
+      const attrs: Record<string, string> = {};
+      return {
+        async: false,
+        onerror: null,
+        src: "",
+        attrs,
+        parentNode: null,
+        setAttribute: (k: string, v: string) => {
+          attrs[k] = v;
+        },
+      };
     },
+    head,
   };
   const fakeLocalStorage = {
-    getItem: (key: string) => (key in storage ? storage[key] : null),
+    getItem: (key: string) => {
+      if (opts.throwOnStorage) throw new Error("SecurityError: storage disabled");
+      return key in storage ? storage[key] : null;
+    },
   };
-  // The stub's requestIdleCallback is synchronous, so the loader takes its
-  // deferred branch and calls attempt() immediately - which is exactly the
-  // decision under test. No `location` on the stub window either, which proves
-  // the ?tpverify=1 verification hatch is opt-in and never a default.
   // eslint-disable-next-line no-new-func
-  new Function("window", "document", "localStorage", "location", loaderSource)(
+  new Function("window", "document", "localStorage", "location", source)(
     fakeWindow,
     fakeDocument,
     fakeLocalStorage,
-    { search: "" }
+    fakeWindow.location
   );
-  return { injected, fireConsentUpdate: () => listeners.forEach((callback) => callback()) };
+  return {
+    injected,
+    activeScripts,
+    dataLayer,
+    fireConsentUpdate: (detail?: unknown) =>
+      consentListeners.forEach((callback) => callback({ detail })),
+    fireInteraction: () => interactionListeners.forEach((callback) => callback()),
+  };
 }
 
 const loaderFailures: string[] = [];
 const EMRldUrl = "https://emrld.ltd/";
 
-function loaderCase(label: string, storage: Record<string, string>, expectInjected: boolean, afterConsent?: Record<string, string>) {
+function loaderCase(
+  label: string,
+  storage: Record<string, string>,
+  expectInjected: boolean,
+  afterConsent?: Record<string, string>,
+  opts?: { search?: string }
+) {
   try {
-    // Same object reference on purpose: the "granted later" case mutates this
-    // storage after the loader has started, and localStorage is read live.
-    const run = runAffiliateLoader(storage);
+    const run = runShellLoader(loaderSource, storage, opts);
     if (expectInjected && !run.injected.some((url) => url.startsWith(EMRldUrl))) {
       throw new Error("script was NOT injected but should have been");
     }
     if (!expectInjected && run.injected.length > 0) {
       throw new Error(`script was injected without marketing consent (${run.injected[0]})`);
     }
+    if (expectInjected && run.activeScripts[0]?.attrs["data-ural-consent"] !== "marketing") {
+      throw new Error("injected Drive script missing data-ural-consent=\"marketing\"");
+    }
     if (afterConsent) {
       Object.assign(storage, afterConsent);
       run.fireConsentUpdate();
-      const injectedLater = run.injected.some((url) => url.startsWith(EMRldUrl));
-      if (!injectedLater) throw new Error("script did not start after ural:consent-updated");
+      if (!run.injected.some((url) => url.startsWith(EMRldUrl))) {
+        throw new Error("script did not start after ural:consent-updated");
+      }
       if (run.injected.length !== 1) throw new Error(`script injected ${run.injected.length} times`);
+      // Withdrawal must detach the injected script immediately.
+      storage["cookie-consent"] = "declined";
+      run.fireConsentUpdate({ status: "declined" });
+      if (run.activeScripts.length !== 0) {
+        throw new Error("Drive script remained attached after consent withdrawal");
+      }
     }
   } catch (error) {
     loaderFailures.push(`${label}: ${(error as Error).message}`);
   }
 }
 
-loaderCase("no consent recorded yet", {}, false, { "cookie-consent": "accepted" });
+loaderCase("no consent recorded yet -> grant -> withdraw", {}, false, { "cookie-consent": "accepted" });
 loaderCase("Accept all", { "cookie-consent": "accepted" }, true);
 loaderCase("custom with marketing on", { "cookie-consent": "custom", "cookie-consent-settings": '{"marketing":true}' }, true);
 loaderCase("custom with marketing off", { "cookie-consent": "custom", "cookie-consent-settings": '{"marketing":false}' }, false);
+loaderCase("custom with analytics-only", { "cookie-consent": "custom", "cookie-consent-settings": '{"analytics":true,"functionality":true,"marketing":false}' }, false);
 loaderCase("declined", { "cookie-consent": "declined" }, false);
 loaderCase("unreadable settings", { "cookie-consent": "custom", "cookie-consent-settings": "not json" }, false);
+loaderCase("?tpverify=1 cannot bypass missing consent", {}, false, undefined, { search: "?tpverify=1" });
+try {
+  const privateRun = runShellLoader(loaderSource, {}, { throwOnStorage: true });
+  if (privateRun.injected.length !== 0) throw new Error("loaded with blocked storage");
+  privateRun.fireConsentUpdate({ status: "custom", settings: { marketing: true, analytics: false } });
+  if (privateRun.activeScripts.length !== 1) throw new Error("event.detail grant failed in private mode");
+  privateRun.fireConsentUpdate({ status: "custom", settings: { marketing: false, analytics: true } });
+  if (privateRun.activeScripts.some(() => true)) throw new Error("event.detail withdrawal failed in private mode");
+} catch (error) {
+  loaderFailures.push(`private-mode detail sync: ${(error as Error).message}`);
+}
 
 check(
   loaderSource.length > 0 && loaderFailures.length === 0,
   loaderFailures.length === 0
-    ? "affiliate loader gates on marketing consent in all cases (6: none yet -> injected on grant, accept-all, custom+marketing, custom-without, declined, unreadable)"
+    ? "affiliate Drive loader strictly enforces marketing consent (9 cases: unset->grant->withdraw, accept-all, custom+marketing, custom-off, analytics-only, declined, corrupt JSON, no ?tpverify bypass, private-mode detail)"
     : `affiliate loader misbehaves: ${loaderFailures.join("; ")}`
 );
+
+// --- the GTM loader's actual consent decision -------------------------------
+const gtmFailures: string[] = [];
+const GTM_URL = "https://www.googletagmanager.com/gtm.js?id=GTM-TMPVL82B";
+
+function gtmCase(
+  label: string,
+  storage: Record<string, string>,
+  expectInjected: boolean,
+  testLifecycle = false
+) {
+  try {
+    const run = runShellLoader(gtmLoaderSource, storage);
+    run.fireInteraction();
+    if (expectInjected) {
+      if (run.injected.length !== 1 || run.injected[0] !== GTM_URL) {
+        throw new Error(`expected one GTM script, got ${JSON.stringify(run.injected)}`);
+      }
+      if (run.activeScripts[0]?.attrs["data-ural-consent"] !== "analytics") {
+        throw new Error("GTM script missing data-ural-consent=\"analytics\"");
+      }
+      if (run.dataLayer.filter((e) => e.event === "page_view").length !== 1) {
+        throw new Error("expected exactly one initial page_view when analytics allowed");
+      }
+    } else {
+      if (run.injected.length > 0) {
+        throw new Error(`GTM loaded without analytics consent (${run.injected[0]})`);
+      }
+      if (run.dataLayer.length > 0) {
+        throw new Error(`dataLayer pushed without analytics consent (${JSON.stringify(run.dataLayer)})`);
+      }
+    }
+    if (testLifecycle) {
+      storage["cookie-consent"] = "accepted";
+      run.fireConsentUpdate({ status: "accepted" });
+      if (run.activeScripts.length !== 1 || run.dataLayer.filter((e) => e.event === "page_view").length !== 1) {
+        throw new Error("GTM or initial page_view did not fire on analytics consent grant");
+      }
+      storage["cookie-consent"] = "declined";
+      run.fireConsentUpdate({ status: "declined" });
+      if (run.activeScripts.some(() => true)) {
+        throw new Error("GTM script remained attached after analytics consent withdrawal");
+      }
+    }
+  } catch (error) {
+    gtmFailures.push(`${label}: ${(error as Error).message}`);
+  }
+}
+
+gtmCase("unset -> interaction blocked -> grant loads -> withdraw detaches", {}, false, true);
+gtmCase("Accept all", { "cookie-consent": "accepted" }, true);
+gtmCase("custom with analytics on", { "cookie-consent": "custom", "cookie-consent-settings": '{"analytics":true,"marketing":false}' }, true);
+gtmCase("custom with marketing-only (analytics off)", { "cookie-consent": "custom", "cookie-consent-settings": '{"analytics":false,"marketing":true,"functionality":true}' }, false);
+gtmCase("declined", { "cookie-consent": "declined" }, false);
+gtmCase("corrupt custom JSON", { "cookie-consent": "custom", "cookie-consent-settings": "{broken" }, false);
+try {
+  const privateRun = runShellLoader(gtmLoaderSource, {}, { throwOnStorage: true });
+  privateRun.fireInteraction();
+  if (privateRun.injected.length !== 0) throw new Error("GTM loaded with blocked storage");
+  privateRun.fireConsentUpdate({ status: "custom", settings: { analytics: true, marketing: false } });
+  if (privateRun.activeScripts.length !== 1) throw new Error("GTM did not load from event.detail in private mode");
+  privateRun.fireConsentUpdate({ status: "declined" });
+  if (privateRun.activeScripts.some(() => true)) throw new Error("GTM did not detach in private mode");
+} catch (error) {
+  gtmFailures.push(`private-mode detail sync: ${(error as Error).message}`);
+}
+
+check(
+  gtmLoaderSource.length > 0 && gtmFailures.length === 0,
+  gtmFailures.length === 0
+    ? "GTM/GA4 loader strictly enforces analytics consent (7 cases: unset+interaction blocked->grant->withdraw, accept-all, analytics-only, marketing-only blocked, declined, corrupt JSON, private-mode detail)"
+    : `GTM loader misbehaves: ${gtmFailures.join("; ")}`
+);
+
+// --- 2f-bis. Sitewide centralized consent architecture guards ---------------
+{
+  const srcRoot = path.join(ROOT_DIR, "src");
+  const collectSrcFiles = (dir: string): string[] => {
+    const out: string[] = [];
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) out.push(...collectSrcFiles(full));
+      else if (/\.(ts|tsx)$/.test(entry.name)) out.push(full);
+    }
+    return out;
+  };
+  const allSrcFiles = collectSrcFiles(srcRoot);
+  const directStorageViolations: string[] = [];
+  const ungatedEmbedViolations: string[] = [];
+  // Only Cloudflare Turnstile (strictly necessary anti-bot form protection) and
+  // first-party JSON-LD (<script type="application/ld+json">, no src) may create
+  // a script/iframe outside a central `useConsent(...)` gate.
+  const STRICTLY_NECESSARY_SCRIPT_ALLOWLIST = new Set([
+    "src/components/TurnstileWidget.tsx",
+    "src/hooks/useSeoMeta.ts",
+  ]);
+  for (const file of allSrcFiles) {
+    const rel = path.relative(ROOT_DIR, file).replace(/\\/g, "/");
+    const raw = fs.readFileSync(file, "utf8");
+    const codeOnly = raw
+      .replace(/\/\*[\s\S]*?\*\//g, "")
+      .replace(/^\s*\/\/.*$/gm, "");
+    if (
+      rel !== "src/utils/consent.ts" &&
+      (/\blocalStorage\b/.test(codeOnly) || /\bdocument\.cookie\b/.test(codeOnly))
+    ) {
+      directStorageViolations.push(rel);
+    }
+    if (
+      !STRICTLY_NECESSARY_SCRIPT_ALLOWLIST.has(rel) &&
+      (/createElement\(\s*["']script["']\s*\)/.test(codeOnly) || /<iframe\b/.test(codeOnly))
+    ) {
+      const usesCentralConsent =
+        /\buseConsent\s*\(\s*["'](marketing|analytics|functionality)["']\s*\)/.test(codeOnly) &&
+        /data-ural-consent/.test(raw);
+      if (!usesCentralConsent) ungatedEmbedViolations.push(rel);
+    }
+    if (/\bfunction\s+ScriptWidget\b/.test(codeOnly)) {
+      ungatedEmbedViolations.push(`${rel} (legacy ungated ScriptWidget)`);
+    }
+  }
+  check(
+    directStorageViolations.length === 0,
+    directStorageViolations.length === 0
+      ? "zero direct localStorage calls outside src/utils/consent.ts (all consent & optional storage centralized)"
+      : `direct localStorage bypass outside src/utils/consent.ts: ${directStorageViolations.join(", ")}`
+  );
+  check(
+    ungatedEmbedViolations.length === 0,
+    ungatedEmbedViolations.length === 0
+      ? "every third-party script injector and iframe in src/ is gated by central useConsent() + data-ural-consent (allowlist: Turnstile anti-bot & local JSON-LD)"
+      : `ungated third-party script/iframe found: ${ungatedEmbedViolations.join(", ")}`
+  );
+
+  const bannerSrc = read(path.join(ROOT_DIR, "src", "components", "ConsentBanner.tsx")) ?? "";
+  const privacySrc = read(path.join(ROOT_DIR, "src", "components", "PrivacyPolicyPage.tsx")) ?? "";
+  const consentUiChecks: Array<[string, boolean]> = [
+    ["banner defaults to DEFAULT_CONSENT_SETTINGS (no pre-ticked optional toggles)", bannerSrc.includes("DEFAULT_CONSENT_SETTINGS") && !/analytics:\s*true,\s*marketing:\s*false/.test(bannerSrc)],
+    ["banner ships equal 1-click Reject All & Accept All (EN + BN)", bannerSrc.includes('"Reject All"') && bannerSrc.includes('"সব প্রত্যাখ্যান করুন"') && bannerSrc.includes('"Accept All"') && bannerSrc.includes('"সব গ্রহণ করুন"')],
+    ["banner syncs via subscribeConsent + readConsentState", bannerSrc.includes("subscribeConsent") && bannerSrc.includes("readConsentState") && bannerSrc.includes("writeConsentChoice")],
+    ["banner switches carry keyboard peer-focus-visible rings and accessible labels", bannerSrc.includes("peer-focus-visible:ring-2") && bannerSrc.includes('aria-labelledby="consent-label-marketing"') && bannerSrc.includes('aria-labelledby="consent-label-analytics"') && bannerSrc.includes('aria-labelledby="consent-label-functionality"')],
+    ["banner removes inaccurate BN 'no personal data' claim and discloses IP + partner tools", !bannerSrc.includes("কোনো ব্যক্তিগত তথ্য") && bannerSrc.includes("IP address") && bannerSrc.includes("eVisas") && bannerSrc.includes("Tiqets") && bannerSrc.includes("AirHelp") && bannerSrc.includes("Welcome Pickups")],
+    ["privacy control center syncs via central consent.ts with labelled focus-visible checkboxes", privacySrc.includes("subscribeConsent") && privacySrc.includes("writeConsentChoice") && privacySrc.includes("CONSENT_CATEGORY_LABELS.marketing") && privacySrc.includes('htmlFor="privacy-consent-marketing"') && privacySrc.includes('htmlFor="privacy-consent-analytics"') && privacySrc.includes('htmlFor="privacy-consent-functionality"') && privacySrc.includes("focus-visible:ring-2")],
+  ];
+  const consentUiFailures = consentUiChecks.filter(([, ok]) => !ok).map(([msg]) => msg);
+  check(
+    consentUiFailures.length === 0,
+    consentUiFailures.length === 0
+      ? "ConsentBanner and PrivacyPolicyPage share central consent state, equal Reject/Accept buttons, canonical EN/BN labels, honest IP disclosures, and keyboard focus/label accessibility"
+      : `consent UI regression: ${consentUiFailures.join("; ")}`
+  );
+}
 
 // --- 2g. Outbound click analytics: one event, one label key ------------------
 //
@@ -2688,13 +2937,28 @@ check(
     "creator-resource copy removes unsupported $100/80+ and unlisted WayAway claims, points to current official terms and leaves referral URLs in the disclosed callout"
   );
 
-  // (b), behaviourally: run the real listener against a stub DOM.
+  // (b), behaviourally: run the real listener against a stub DOM under both
+  // unconsented/declined/marketing-only states (must emit ZERO events) and
+  // analytics-consented states (must emit exact normalized payloads).
   const analytics = await import("../src/utils/analytics");
-  const fire = (href: string, text: string, rel: string, affiliatePlacement?: string, ariaLabel?: string) => {
+  const fire = (
+    href: string,
+    text: string,
+    rel: string,
+    affiliatePlacement?: string,
+    ariaLabel?: string,
+    storage: Record<string, string> = { "cookie-consent": "accepted" }
+  ) => {
     let handler: ((event: unknown) => void) | null = null;
     const previousWindow = (globalThis as any).window;
     const previousDocument = (globalThis as any).document;
-    (globalThis as any).window = { dataLayer: [], location: { pathname: "/blog/travel-creator-resources" } };
+    (globalThis as any).window = {
+      dataLayer: [],
+      location: { pathname: "/blog/travel-creator-resources" },
+      localStorage: {
+        getItem: (k: string) => (k in storage ? storage[k] : null),
+      },
+    };
     (globalThis as any).document = {
       addEventListener: (name: string, callback: (event: unknown) => void) => {
         if (name === "click") handler = callback;
@@ -2716,6 +2980,19 @@ check(
   };
 
   const clickFailures: string[] = [];
+  // Pre-consent, declined, and marketing-only states must emit ZERO analytics events.
+  for (const [stateName, store] of [
+    ["unset", {} as Record<string, string>],
+    ["declined", { "cookie-consent": "declined" } as Record<string, string>],
+    ["marketing-only", { "cookie-consent": "custom", "cookie-consent-settings": '{"marketing":true,"analytics":false}' } as Record<string, string>],
+  ] as const) {
+    if (fire("https://tiqets.tpo.li/abc123", "Book Tiqets tickets", "noopener noreferrer sponsored", undefined, undefined, store).length !== 0) {
+      clickFailures.push(`affiliate click leaked to dataLayer when consent=${stateName}`);
+    }
+    if (fire("https://wa.me/8801784385335", "WhatsApp desk", "", undefined, undefined, store).length !== 0) {
+      clickFailures.push(`whatsapp click leaked to dataLayer when consent=${stateName}`);
+    }
+  }
   const referralClicks = fire(buildTravelpayoutsReferralUrl("travel-creator-resources"), "Explore Travelpayouts", "noopener noreferrer sponsored");
   if (referralClicks.length !== 1) {
     clickFailures.push(`referral click produced ${referralClicks.length} events, expected 1`);

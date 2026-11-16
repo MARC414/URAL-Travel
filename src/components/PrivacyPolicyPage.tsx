@@ -21,8 +21,17 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Language } from "../translations";
-import { updateGoogleConsentMode, GranularConsentSettings } from "./ConsentBanner";
 import { EvisaWidgetPrivacyNote } from "./EvisaPanels";
+import {
+  CONSENT_CATEGORY_LABELS,
+  DEFAULT_CONSENT_SETTINGS,
+  openConsentPreferences,
+  readConsentState,
+  subscribeConsent,
+  writeConsentChoice,
+  type GranularConsentSettings,
+  type StoredConsentStatus,
+} from "../utils/consent";
 
 interface PrivacyPolicyPageProps {
   onNavigate: (path: string) => void;
@@ -31,78 +40,61 @@ interface PrivacyPolicyPageProps {
 
 export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPageProps) {
   const isBn = lang === "bn";
+  const locale = isBn ? "bn" : "en";
 
-  // Current consent status state for interactive control center
-  const [currentConsent, setCurrentConsent] = useState<string>("unknown");
+  // Live consent status synchronized with the central consent module
+  const [currentConsent, setCurrentConsent] = useState<StoredConsentStatus>("unset");
   const [currentSettings, setCurrentSettings] = useState<GranularConsentSettings>({
-    necessary: true,
-    analytics: false,
-    marketing: false,
-    functionality: false,
+    ...DEFAULT_CONSENT_SETTINGS,
   });
   const [savedNotification, setSavedNotification] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("cookie-consent");
-      if (stored) {
-        setCurrentConsent(stored);
-      } else {
-        setCurrentConsent("unspecified");
-      }
-      const settingsRaw = localStorage.getItem("cookie-consent-settings");
-      if (settingsRaw) {
-        setCurrentSettings(JSON.parse(settingsRaw));
-      }
-    } catch {
-      setCurrentConsent("unspecified");
-    }
+    const sync = () => {
+      const state = readConsentState();
+      setCurrentConsent(state.status);
+      setCurrentSettings(state.settings);
+    };
+    sync();
+    return subscribeConsent((next) => {
+      setCurrentConsent(next.status);
+      setCurrentSettings(next.settings);
+    });
   }, []);
 
-  const handleUpdatePreference = (type: "accept_all" | "decline_all" | "custom", customSettings?: GranularConsentSettings) => {
-    try {
-      if (type === "accept_all") {
-        const full: GranularConsentSettings = {
-          necessary: true,
-          analytics: true,
-          marketing: true,
-          functionality: true,
-        };
-        localStorage.setItem("cookie-consent", "accepted");
-        localStorage.setItem("cookie-consent-settings", JSON.stringify(full));
-        setCurrentConsent("accepted");
-        setCurrentSettings(full);
-        updateGoogleConsentMode(true);
-        setSavedNotification(isBn ? "সব কুকি সম্মতি সক্রিয় করা হয়েছে।" : "All cookies granted successfully.");
-      } else if (type === "decline_all") {
-        const minimal: GranularConsentSettings = {
-          necessary: true,
-          analytics: false,
-          marketing: false,
-          functionality: false,
-        };
-        localStorage.setItem("cookie-consent", "declined");
-        localStorage.setItem("cookie-consent-settings", JSON.stringify(minimal));
-        setCurrentConsent("declined");
-        setCurrentSettings(minimal);
-        updateGoogleConsentMode(false);
-        setSavedNotification(isBn ? "শুধু প্রয়োজনীয় কুকি ছাড়া বাকি সব বন্ধ করা হয়েছে।" : "Only strictly necessary cookies are active.");
-      } else if (type === "custom" && customSettings) {
-        localStorage.setItem("cookie-consent", "custom");
-        localStorage.setItem("cookie-consent-settings", JSON.stringify(customSettings));
-        setCurrentConsent("custom");
-        setCurrentSettings(customSettings);
-        updateGoogleConsentMode(customSettings);
-        setSavedNotification(isBn ? "আপনার কাস্টম পছন্দ সংরক্ষণ করা হয়েছে।" : "Custom preferences saved.");
-      }
-    } catch {
-      setSavedNotification(isBn ? "পছন্দ সংরক্ষণ করতে ব্রাউজার স্টোরেজ প্রয়োজন।" : "Browser storage required to save preferences.");
+  const handleUpdatePreference = (
+    type: "accept_all" | "decline_all" | "custom",
+    customSettings?: GranularConsentSettings,
+  ) => {
+    if (type === "accept_all") {
+      const next = writeConsentChoice("accepted");
+      setCurrentConsent(next.status);
+      setCurrentSettings(next.settings);
+      setSavedNotification(
+        isBn ? "সব কুকি সম্মতি সক্রিয় করা হয়েছে।" : "All consent categories enabled.",
+      );
+    } else if (type === "decline_all") {
+      const next = writeConsentChoice("declined");
+      setCurrentConsent(next.status);
+      setCurrentSettings(next.settings);
+      setSavedNotification(
+        isBn
+          ? "সব ঐচ্ছিক কুকি ও পার্টনার টুলস বন্ধ করা হয়েছে।"
+          : "All optional cookies and partner tools turned off.",
+      );
+    } else if (type === "custom" && customSettings) {
+      const next = writeConsentChoice(customSettings);
+      setCurrentConsent(next.status);
+      setCurrentSettings(next.settings);
+      setSavedNotification(
+        isBn ? "আপনার কাস্টম পছন্দ সংরক্ষণ করা হয়েছে।" : "Custom preferences saved.",
+      );
     }
-    setTimeout(() => setSavedNotification(null), 4000);
+    window.setTimeout(() => setSavedNotification(null), 4000);
   };
 
   const handleOpenBanner = () => {
-    window.dispatchEvent(new CustomEvent("ural:open-cookie-banner"));
+    openConsentPreferences();
   };
 
   return (
@@ -222,20 +214,28 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
                 ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                 : currentConsent === "declined"
                 ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
-                : "bg-blue-500/20 text-blue-300 border border-blue-500/30"
+                : currentConsent === "custom"
+                ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
+                : "bg-slate-700/60 text-slate-200 border border-slate-600"
             }`}>
               {currentConsent === "accepted"
                 ? isBn ? "সব সক্রিয় (Granted)" : "All Granted"
                 : currentConsent === "declined"
-                ? isBn ? "প্রয়োজনীয় মাত্র (Denied)" : "Denied / Essential"
-                : isBn ? "কাস্টম / অপশন খোলা" : "Custom / Default"}
+                ? isBn ? "সব ঐচ্ছিক বন্ধ (Rejected)" : "Essential Only"
+                : currentConsent === "custom"
+                ? isBn ? "কাস্টম পছন্দ" : "Custom"
+                : isBn ? "এখনো নির্ধারিত নয় (ডিফল্ট বন্ধ)" : "Not Set (Optional Off)"}
             </span>
           </div>
         </div>
 
         {savedNotification && (
-          <div className="p-3 bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 rounded-xl text-xs flex items-center gap-2 animate-fade-in">
-            <CheckCircle2 className="w-4 h-4 shrink-0" />
+          <div
+            role="status"
+            aria-live="polite"
+            className="p-3 bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 rounded-xl text-xs flex items-center gap-2 animate-fade-in"
+          >
+            <CheckCircle2 className="w-4 h-4 shrink-0" aria-hidden="true" />
             <span>{savedNotification}</span>
           </div>
         )}
@@ -244,79 +244,88 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
           {/* Strictly Necessary */}
           <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-white">{isBn ? "প্রয়োজনীয় কুকি" : "Strictly Necessary"}</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
-                {isBn ? "লকড" : "Locked"}
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-bold text-white">{CONSENT_CATEGORY_LABELS.necessary[locale]}</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold shrink-0">
+                {isBn ? "সর্বদা সক্রিয়" : "Always On"}
               </span>
             </div>
             <p className="text-slate-400 text-[11px] leading-relaxed">
               {isBn
-                ? "সাইট লোডিং, ভাষা এবং নিরাপত্তা সেশন নিশ্চিত করতে সবসময় সক্রিয়।"
-                : "Essential for site security, CDN edge routing, language and currency retention."}
+                ? "সাইট লোডিং, Cloudflare স্প্যাম সুরক্ষা এবং আপনার কুকি সিদ্ধান্ত সংরক্ষণে সবসময় সক্রিয়।"
+                : "Required for site delivery, CDN edge routing, Cloudflare form spam protection, and saving your cookie decision."}
             </p>
           </div>
 
-          {/* Analytics Storage */}
+          {/* Preferences (Functionality Storage) */}
           <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-white">{isBn ? "অ্যানালিটিক্স (GA4)" : "Analytics (GA4)"}</span>
+            <div className="flex items-center justify-between gap-2">
+              <label htmlFor="privacy-consent-functionality" className="font-bold text-white cursor-pointer">
+                {CONSENT_CATEGORY_LABELS.functionality[locale]}
+              </label>
               <input
-                type="checkbox"
-                checked={currentSettings.analytics}
-                onChange={(e) => {
-                  const updated = { ...currentSettings, analytics: e.target.checked };
-                  handleUpdatePreference("custom", updated);
-                }}
-                className="w-4 h-4 accent-[#F6B73C] cursor-pointer"
-              />
-            </div>
-            <p className="text-slate-400 text-[11px] leading-relaxed">
-              {isBn
-                ? "ভিজিটের সংখ্যা ও ট্রাভেল গাইডের উপযোগিতা পরিমাপ করে।"
-                : "Measures aggregate page views and popular route schedules anonymously."}
-            </p>
-          </div>
-
-          {/* Marketing / Ad Attribution */}
-          <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-white">{isBn ? "পার্টনার অ্যাট্রিবিউশন" : "Partner Attribution"}</span>
-              <input
-                type="checkbox"
-                checked={currentSettings.marketing}
-                onChange={(e) => {
-                  const updated = { ...currentSettings, marketing: e.target.checked };
-                  handleUpdatePreference("custom", updated);
-                }}
-                className="w-4 h-4 accent-[#F6B73C] cursor-pointer"
-              />
-            </div>
-            <p className="text-slate-400 text-[11px] leading-relaxed">
-              {isBn
-                ? "Travelpayouts ও Klook-এর ট্র্যাকিং টোকেন সক্রিয় করে।"
-                : "Attribution tokens for Aviasales, Travelpayouts and Klook referrals."}
-            </p>
-          </div>
-
-          {/* Functionality Storage */}
-          <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-white">{isBn ? "ফাংশনাল সুবিধা" : "Functionality"}</span>
-              <input
+                id="privacy-consent-functionality"
                 type="checkbox"
                 checked={currentSettings.functionality}
                 onChange={(e) => {
                   const updated = { ...currentSettings, functionality: e.target.checked };
                   handleUpdatePreference("custom", updated);
                 }}
-                className="w-4 h-4 accent-[#F6B73C] cursor-pointer"
+                className="w-4 h-4 accent-[#F6B73C] cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
               />
             </div>
             <p className="text-slate-400 text-[11px] leading-relaxed">
               {isBn
-                ? "টুলস ও ফিল্টারের ব্যক্তিগত পছন্দ স্মরণ রাখে।"
-                : "Preserves tool calculations, filter state, and widget preferences."}
+                ? "ভাষা নির্বাচন, প্রস্থানের চেকলিস্টের অগ্রগতি এবং সংরক্ষিত ভাড়া-সতর্কতার তালিকা ব্রাউজারে মনে রাখে।"
+                : "Remembers your language selection, checklist ticks, and saved fare-alert preferences in your browser."}
+            </p>
+          </div>
+
+          {/* Analytics Storage */}
+          <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <label htmlFor="privacy-consent-analytics" className="font-bold text-white cursor-pointer">
+                {CONSENT_CATEGORY_LABELS.analytics[locale]}
+              </label>
+              <input
+                id="privacy-consent-analytics"
+                type="checkbox"
+                checked={currentSettings.analytics}
+                onChange={(e) => {
+                  const updated = { ...currentSettings, analytics: e.target.checked };
+                  handleUpdatePreference("custom", updated);
+                }}
+                className="w-4 h-4 accent-[#F6B73C] cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+              />
+            </div>
+            <p className="text-slate-400 text-[11px] leading-relaxed">
+              {isBn
+                ? "Google Tag Manager ও GA4 লোড করে পেজ ভিজিট ও টুল ব্যবহারের সমষ্টিগত পরিসংখ্যান মাপে। বন্ধ থাকলে লোড হয় না।"
+                : "Loads Google Tag Manager and GA4 to measure aggregate page views and tool usage. Stays off until enabled."}
+            </p>
+          </div>
+
+          {/* Marketing & Partner Tools */}
+          <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <label htmlFor="privacy-consent-marketing" className="font-bold text-white cursor-pointer">
+                {CONSENT_CATEGORY_LABELS.marketing[locale]}
+              </label>
+              <input
+                id="privacy-consent-marketing"
+                type="checkbox"
+                checked={currentSettings.marketing}
+                onChange={(e) => {
+                  const updated = { ...currentSettings, marketing: e.target.checked };
+                  handleUpdatePreference("custom", updated);
+                }}
+                className="w-4 h-4 accent-[#F6B73C] cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+              />
+            </div>
+            <p className="text-slate-400 text-[11px] leading-relaxed">
+              {isBn
+                ? "Travelpayouts অ্যাফিলিয়েট ট্র্যাকিং ও এম্বেডেড পার্টনার টুলস (eVisas ভিসা চেকার, Tiqets, AirHelp, Welcome Pickups) চালু করে; চালু থাকলে ওই সেবাদাতারা আপনার IP address ও ব্রাউজারের তথ্য পায়।"
+                : "Enables Travelpayouts affiliate tracking and embedded partner tools (eVisas visa checker, Tiqets, AirHelp, Welcome Pickups); when enabled, those providers receive your IP address and browser details."}
             </p>
           </div>
         </div>
@@ -326,26 +335,26 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
           <button
             type="button"
             onClick={handleOpenBanner}
-            className="text-xs text-[#F6B73C] hover:underline font-mono inline-flex items-center gap-1.5 cursor-pointer"
+            className="min-h-11 px-2 text-xs text-[#F6B73C] hover:underline font-mono inline-flex items-center gap-1.5 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
           >
-            <RefreshCw className="w-3.5 h-3.5" />
+            <RefreshCw className="w-3.5 h-3.5" aria-hidden="true" />
             <span>{isBn ? "সম্মতি ব্যানার পুনরায় খুলুন" : "Re-open Floating Consent Banner"}</span>
           </button>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
               onClick={() => handleUpdatePreference("decline_all")}
-              className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+              className="min-h-11 px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-500 text-white transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
             >
-              {isBn ? "সব নন-এসেনশিয়াল বন্ধ করুন" : "Decline Non-Essential"}
+              {isBn ? "সব প্রত্যাখ্যান করুন" : "Reject All"}
             </button>
             <button
               type="button"
               onClick={() => handleUpdatePreference("accept_all")}
-              className="px-4 py-2 text-xs font-bold rounded-xl bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy shadow-md transition-colors cursor-pointer"
+              className="min-h-11 px-4 py-2.5 text-xs font-bold rounded-xl bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy shadow-md transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
             >
-              {isBn ? "সবগুলো সক্রিয় করুন" : "Accept All Cookies"}
+              {isBn ? "সব গ্রহণ করুন" : "Accept All"}
             </button>
           </div>
         </div>

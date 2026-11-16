@@ -5,15 +5,25 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { Window } from "happy-dom";
 import { AFFILIATE_OFFER_REGISTRY } from "../src/components/AffiliatePartners";
 import { EvisaArticleCta, EvisaBanner, EvisaBlogBanner, EvisaBlogContextLink, EvisaDestinationPlacement, EvisaHomeSection, EvisaVisaPanel, EvisaWidgetPrivacyNote } from "../src/components/EvisaPanels";
-import { EVISAS_BANNERS, EVISAS_BLOG_PLACEMENTS, EVISAS_HOME_COPY, EVISAS_WIDGET, evisasCampaignUrl, type EvisaLang } from "../src/data/evisaProgram";
+import { EVISAS_BANNERS, EVISAS_BLOG_PLACEMENTS, EVISAS_HOME_COPY, EVISAS_WIDGET, EVISAS_WIDGET_PRIVACY, evisasCampaignUrl, type EvisaLang } from "../src/data/evisaProgram";
 import { getLocalizedBlogs } from "../src/data/bengaliContent";
 import { resolveBlogAffiliateUrl } from "../src/utils/blogAffiliate";
 import type { EvisaCampaignKey } from "../src/types";
 import { evisaWidgetConsentFromEvent, hasEvisaWidgetConsent } from "../src/utils/evisaWidgetConsent";
+import {
+  CONSENT_CATEGORY_LABELS,
+  consentFromEvent,
+  hasConsent,
+  readConsentState,
+  readOptionalStorage,
+  subscribeConsent,
+  writeConsentChoice,
+  writeOptionalStorage,
+} from "../src/utils/consent";
 
 /** Exercise destination attribution and the static/client commercial contract. */
 export function checkEvisaIntegration(dist: string, check: (ok: boolean, label: string) => void) {
-  const window = new Window();
+  const window = new Window({ url: "https://uraltravel.co.uk/" });
   const parse = (html: string) => {
     const root = window.document.createElement("div");
     root.innerHTML = html;
@@ -114,20 +124,133 @@ export function checkEvisaIntegration(dist: string, check: (ok: boolean, label: 
   check((appSource.match(/<EvisaHomeSection\b/g) ?? []).length === 1 && !/EvisaHome(?:Card|Banner)/.test(appSource) && appSource.indexOf("<EvisaHomeSection") < appSource.indexOf('id="destinations-section"') && appSource.indexOf('id="airport-code-reference"') > appSource.indexOf('id="destinations-section"') && appSource.indexOf("<EvisaHomeSection") < appSource.indexOf('<TravelEssentials country='), "the homepage runs flight search, then eVisas, then the destination cards and the airport-code reference, then Travel Essentials");
 
   const consentFixtures = [
-    { status: null, settings: null, expected: false },
-    { status: "declined", settings: '{"marketing":true}', expected: false },
-    { status: "accepted", settings: null, expected: true },
-    { status: "custom", settings: '{"analytics":true,"functionality":true,"marketing":false}', expected: false },
-    { status: "custom", settings: '{"marketing":true}', expected: true },
-    { status: "custom", settings: '{"marketing":"true"}', expected: false },
-    { status: "custom", settings: "bad json", expected: false },
+    { status: null, settings: null, expected: false, analytics: false, functionality: false },
+    { status: "declined", settings: '{"marketing":true,"analytics":true,"functionality":true}', expected: false, analytics: false, functionality: false },
+    { status: "accepted", settings: null, expected: true, analytics: true, functionality: true },
+    { status: "custom", settings: '{"analytics":true,"functionality":true,"marketing":false}', expected: false, analytics: true, functionality: true },
+    { status: "custom", settings: '{"marketing":true}', expected: true, analytics: false, functionality: false },
+    { status: "custom", settings: '{"marketing":"true","analytics":1,"functionality":"yes"}', expected: false, analytics: false, functionality: false },
+    { status: "custom", settings: "bad json", expected: false, analytics: false, functionality: false },
+    { status: "unknown", settings: '{"marketing":true}', expected: false, analytics: false, functionality: false },
   ];
-  check(consentFixtures.every((fixture) => hasEvisaWidgetConsent({ getItem: (key) => key === "cookie-consent" ? fixture.status : fixture.settings }) === fixture.expected) &&
+  check(consentFixtures.every((fixture) => {
+    const store = { getItem: (key: string) => key === "cookie-consent" ? fixture.status : fixture.settings };
+    return (
+      hasEvisaWidgetConsent(store) === fixture.expected &&
+      hasConsent("marketing", store) === fixture.expected &&
+      hasConsent("analytics", store) === fixture.analytics &&
+      hasConsent("functionality", store) === fixture.functionality &&
+      hasConsent("necessary", store) === true
+    );
+  }) &&
+    readConsentState({ getItem: () => { throw new Error("Storage blocked"); } }).status === "unset" &&
     !hasEvisaWidgetConsent({ getItem: () => { throw new Error("Storage blocked"); } }) &&
     evisaWidgetConsentFromEvent({ payload: { ad_storage: "granted" } }) &&
     !evisaWidgetConsentFromEvent({ payload: { ad_storage: "denied" } }) &&
+    evisaWidgetConsentFromEvent({ status: "custom", settings: { marketing: true, analytics: false } }) &&
+    !evisaWidgetConsentFromEvent({ status: "custom", settings: { marketing: false, analytics: true } }) &&
+    consentFromEvent("analytics", { status: "custom", settings: { marketing: false, analytics: true } }) &&
+    !consentFromEvent("analytics", { status: "custom", settings: { marketing: true, analytics: false } }) &&
     !evisaWidgetConsentFromEvent(null),
-    "eVisas consent fails closed for declined/missing/malformed storage, ignores analytics-only consent and handles grant/withdrawal events");
+    "central & eVisas consent fails closed for unset/declined/malformed/blocked storage, isolates analytics vs marketing vs preferences, and handles grant/withdrawal events");
+  check(
+    EVISAS_HOME_COPY.en.consent.includes(CONSENT_CATEGORY_LABELS.marketing.en) &&
+      EVISAS_HOME_COPY.bn.consent.includes(CONSENT_CATEGORY_LABELS.marketing.bn) &&
+      EVISAS_WIDGET_PRIVACY.en.body.includes(CONSENT_CATEGORY_LABELS.marketing.en) &&
+      EVISAS_WIDGET_PRIVACY.bn.body.includes(CONSENT_CATEGORY_LABELS.marketing.bn),
+    "eVisas EN/BN homepage consent prompt and privacy note reference the exact canonical Marketing & Partner Tools label",
+  );
+  {
+    const prevWin = (globalThis as { window?: unknown }).window;
+    const prevDoc = (globalThis as { document?: unknown }).document;
+    const prevCustomEvent = (globalThis as { CustomEvent?: unknown }).CustomEvent;
+    let lifecycleOk = false;
+    try {
+      (globalThis as { window?: unknown }).window = window;
+      (globalThis as { document?: unknown }).document = window.document;
+      (globalThis as { CustomEvent?: unknown }).CustomEvent = window.CustomEvent;
+      window.localStorage.clear();
+      const observed: string[] = [];
+      const unsubscribe = subscribeConsent((state) => {
+        observed.push(`${state.status}:${state.settings.analytics}:${state.settings.marketing}:${state.settings.functionality}`);
+      });
+      // 1. Pre-consent: optional storage write is a no-op and all optional categories are false.
+      writeOptionalStorage("ural_lang", "bn");
+      const blockedBefore = window.localStorage.getItem("ural_lang") === null && readOptionalStorage("ural_lang") === null;
+      // 2. Grant all: zero-arg hasEvisaWidgetConsent() works, optional storage & first-party cookies set.
+      writeConsentChoice("accepted");
+      const zeroArgOk = hasEvisaWidgetConsent() === true;
+      writeOptionalStorage("ural_lang", "bn");
+      const storedAfterGrant = readOptionalStorage("ural_lang") === "bn" && window.localStorage.getItem("ural_lang") === "bn";
+      window.document.cookie = "_ga=GA1.1.123.456; path=/";
+      window.document.cookie = "_ga_2EWKHC1KE1=GS1.1.789; path=/";
+      window.document.cookie = "_gcl_au=1.1.999; path=/";
+      const mktScript = window.document.createElement("script");
+      mktScript.setAttribute("data-ural-consent", "marketing");
+      const anaScript = window.document.createElement("script");
+      anaScript.setAttribute("data-ural-consent", "analytics");
+      window.document.head.appendChild(mktScript);
+      window.document.head.appendChild(anaScript);
+      // 3. Partial withdraw (analytics kept on, marketing + functionality turned off):
+      //    marketing script detaches, _gcl_au expires, analytics script & _ga stay, optional storage purged.
+      writeConsentChoice({ analytics: true, marketing: false, functionality: false });
+      const partialOk =
+        mktScript.parentNode === null &&
+        anaScript.parentNode === window.document.head &&
+        !window.document.cookie.includes("_gcl_au=") &&
+        window.document.cookie.includes("_ga=") &&
+        window.localStorage.getItem("ural_lang") === null &&
+        hasConsent("analytics") &&
+        !hasConsent("marketing") &&
+        !hasEvisaWidgetConsent() &&
+        !hasConsent("functionality");
+      // 4. Full Reject All: analytics script detaches, _ga & _ga_* cookies expire, all optional false.
+      writeConsentChoice("declined");
+      const declinedOk =
+        anaScript.parentNode === null &&
+        !window.document.cookie.includes("_ga=") &&
+        !window.document.cookie.includes("_ga_2EWKHC1KE1=") &&
+        !hasConsent("analytics") &&
+        !hasConsent("marketing") &&
+        !hasConsent("functionality");
+      // 5. Clearing localStorage after an accepted choice must immediately revert to unset (no stale memory leak).
+      writeConsentChoice("accepted");
+      window.localStorage.clear();
+      const clearedOk =
+        readConsentState().status === "unset" &&
+        !hasConsent("analytics") &&
+        !hasConsent("marketing") &&
+        !hasEvisaWidgetConsent();
+      // 6. Array event payloads fail closed.
+      const arraySafe =
+        !evisaWidgetConsentFromEvent([]) &&
+        !evisaWidgetConsentFromEvent({ settings: [] }) &&
+        !evisaWidgetConsentFromEvent({ payload: [] });
+      unsubscribe();
+      lifecycleOk =
+        blockedBefore &&
+        zeroArgOk &&
+        storedAfterGrant &&
+        partialOk &&
+        declinedOk &&
+        clearedOk &&
+        arraySafe &&
+        observed.join("|") ===
+          "accepted:true:true:true|custom:true:false:false|declined:false:false:false|accepted:true:true:true";
+    } finally {
+      window.localStorage.clear();
+      if (prevWin === undefined) delete (globalThis as { window?: unknown }).window;
+      else (globalThis as { window?: unknown }).window = prevWin;
+      if (prevDoc === undefined) delete (globalThis as { document?: unknown }).document;
+      else (globalThis as { document?: unknown }).document = prevDoc;
+      if (prevCustomEvent === undefined) delete (globalThis as { CustomEvent?: unknown }).CustomEvent;
+      else (globalThis as { CustomEvent?: unknown }).CustomEvent = prevCustomEvent;
+    }
+    check(
+      lifecycleOk,
+      "central consent lifecycle blocks pre-consent storage, broadcasts granular updates, purges optional storage and detaches disallowed scripts on withdrawal",
+    );
+  }
   for (const lang of ["en", "bn"] as const) {
     const privacy = fs.readFileSync(path.join(dist, lang === "bn" ? "bn" : "", "privacy.html"), "utf8");
     check(privacy.includes(render(React.createElement(EvisaWidgetPrivacyNote, { lang }))), `${lang} privacy page discloses the consent-gated eVisas embed and links the provider's privacy policy`);

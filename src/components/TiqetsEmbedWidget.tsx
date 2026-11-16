@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { ExternalLink, ShieldCheck, RefreshCw, Ticket, CheckCircle2, AlertCircle } from "lucide-react";
 import { AFFILIATE_LINKS, resolvePartnerUrl } from "./AffiliatePartners";
 import { Language } from "../translations";
+import { openConsentPreferences, useConsent } from "../utils/consent";
 
 export interface TiqetsEmbedWidgetProps {
   lang?: Language;
@@ -44,6 +45,7 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
   showFallbackBadge = true,
 }) => {
   const isBn = lang === "bn";
+  const marketingAllowed = useConsent("marketing");
   const partnerUrl = resolvePartnerUrl(AFFILIATE_LINKS.tiqets);
   const containerRef = useRef<HTMLDivElement>(null);
   const [loadState, setLoadState] = useState<"loading" | "loaded" | "fallback">("loading");
@@ -57,10 +59,15 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
     const container = containerRef.current;
     if (!container) return;
 
-    setLoadState("loading");
     container.innerHTML = "";
+    if (!marketingAllowed) {
+      setLoadState("loading");
+      return;
+    }
 
-    // Build the canonical script with user's settings and affiliate tracking
+    setLoadState("loading");
+
+    // Build the canonical script with user's settings and affiliate tracking (runs only after marketing consent)
     const script = document.createElement("script");
     const scriptUrl = new URL("https://tpemd.com/content");
     scriptUrl.searchParams.set("currency", widgetCurrency);
@@ -76,6 +83,7 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
     script.src = scriptUrl.toString();
     script.async = true;
     script.charset = "utf-8";
+    script.setAttribute("data-ural-consent", "marketing");
 
     // Detect successful widget insertion
     const observer = new MutationObserver(() => {
@@ -101,8 +109,8 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
 
     // If script gets blocked by uBlock/ad-blocker or hangs past 3.5s, gracefully show high-converting fallback
     const fallbackTimer = setTimeout(() => {
-      if (isMounted && loadState === "loading") {
-        setLoadState("fallback");
+      if (isMounted) {
+        setLoadState((prev) => (prev === "loading" ? "fallback" : prev));
       }
     }, 3500);
 
@@ -112,11 +120,9 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
       isMounted = false;
       observer.disconnect();
       clearTimeout(fallbackTimer);
-      if (container) {
-        container.innerHTML = "";
-      }
+      container.innerHTML = "";
     };
-  }, [widgetCurrency, layout, product, isBn, reloadCounter]);
+  }, [marketingAllowed, widgetCurrency, layout, product, isBn, reloadCounter]);
 
   return (
     <div className="w-full bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden my-6 transition-all">
@@ -147,21 +153,23 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <button
-            type="button"
-            onClick={() => setReloadCounter((prev) => prev + 1)}
-            title={isBn ? "উইজেট রিফ্রেশ করুন" : "Refresh widget"}
-            className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 transition-colors text-xs font-mono flex items-center gap-1"
-          >
-            <RefreshCw size={13} className={loadState === "loading" ? "animate-spin text-[#F6B73C]" : ""} />
-            <span className="hidden sm:inline">{isBn ? "রিফ্রেশ" : "Sync"}</span>
-          </button>
+          {marketingAllowed && (
+            <button
+              type="button"
+              onClick={() => setReloadCounter((prev) => prev + 1)}
+              title={isBn ? "উইজেট রিফ্রেশ করুন" : "Refresh widget"}
+              className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 transition-colors text-xs font-mono flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+            >
+              <RefreshCw size={13} className={loadState === "loading" ? "animate-spin text-[#F6B73C]" : ""} />
+              <span className="hidden sm:inline">{isBn ? "রিফ্রেশ" : "Sync"}</span>
+            </button>
+          )}
 
           <a
             href={partnerUrl}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F6B73C] hover:bg-[#e0a430] text-brand-navy text-xs font-bold transition-all shadow hover:shadow-md cursor-pointer shrink-0"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F6B73C] hover:bg-[#e0a430] text-brand-navy text-xs font-bold transition-all shadow hover:shadow-md cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             <span>{isBn ? "Tiqets এ দেখুন" : "Open in Tiqets"}</span>
             <ExternalLink size={13} />
@@ -171,8 +179,51 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
 
       {/* Widget Mount & Live Container */}
       <div className="p-4 sm:p-5 relative min-h-[160px] bg-slate-50/50">
+        {!marketingAllowed && (
+          <div
+            data-consent-gate="marketing"
+            className="bg-white border border-slate-200 rounded-xl p-5 space-y-3 shadow-xs"
+          >
+            <div className="flex items-start gap-3">
+              <div className="p-2 rounded-lg bg-slate-100 text-brand-navy shrink-0">
+                <ShieldCheck size={18} aria-hidden="true" />
+              </div>
+              <div className="space-y-1 text-xs leading-relaxed text-slate-600">
+                <p className="font-semibold text-slate-900 text-sm">
+                  {isBn
+                    ? "Tiqets লাইভ উইজেট সম্মতির অপেক্ষায়"
+                    : "Tiqets live widget requires consent"}
+                </p>
+                <p>
+                  {isBn
+                    ? "এই এম্বেডটি Travelpayouts ও Tiqets-এর। এখানে লোড করতে কুকি পছন্দে “মার্কেটিং ও পার্টনার টুলস” চালু করুন (চালু করলে আপনার IP address ও ব্রাউজারের তথ্য পার্টনারের কাছে যাবে), অথবা সরাসরি Tiqets খুলুন।"
+                    : "This embed is delivered by Travelpayouts and Tiqets. Turn on “Marketing & Partner Tools” in Cookie preferences to load it here (which shares your IP address and browser details with those providers), or open Tiqets directly."}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
+              <button
+                type="button"
+                onClick={openConsentPreferences}
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-brand-navy hover:bg-slate-800 px-4 py-2.5 text-xs font-bold text-white transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2"
+              >
+                {isBn ? "কুকি পছন্দ বদলান" : "Cookie preferences"}
+              </button>
+              <a
+                href={partnerUrl}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-[#F6B73C] hover:bg-[#e0a430] px-4 py-2.5 text-xs font-bold text-brand-navy transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2"
+              >
+                <span>{isBn ? "সরাসরি Tiqets খুলুন" : "Open Tiqets directly"}</span>
+                <ExternalLink size={13} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        )}
+
         {/* Loading state indicator */}
-        {loadState === "loading" && (
+        {marketingAllowed && loadState === "loading" && (
           <div className="py-8 flex flex-col items-center justify-center gap-3 text-slate-500">
             <div className="w-8 h-8 rounded-full border-2 border-slate-300 border-t-[#0B192C] animate-spin" />
             <div className="text-xs font-mono font-medium">
@@ -187,12 +238,12 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
         <div
           ref={containerRef}
           className={`tiqets-embed-mount w-full overflow-x-auto ${
-            loadState === "fallback" ? "hidden" : "block"
+            !marketingAllowed || loadState === "fallback" ? "hidden" : "block"
           }`}
         />
 
         {/* Resilient fallback card if script is blocked or network delayed */}
-        {loadState === "fallback" && (
+        {marketingAllowed && loadState === "fallback" && (
           <div className="bg-white border border-amber-200 rounded-xl p-5 space-y-4 shadow-sm animate-fade-in">
             <div className="flex items-start gap-3">
               <div className="p-2 rounded-lg bg-amber-50 text-amber-700 shrink-0">

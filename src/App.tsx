@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { initGlobalClickTracking } from "./utils/analytics";
 import {
+  CONSENT_OPEN_EVENT,
+  applyConsentState,
+  openConsentPreferences,
+  readConsentState,
+  readOptionalStorage,
+  subscribeConsent,
+  writeOptionalStorage,
+} from "./utils/consent";
+import {
   Globe,
   Plane,
   Building,
@@ -69,10 +78,11 @@ import {
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
 } from "./components/AffiliatePartners";
-// Keep the partner module outside the guarded homepage entry graph.
+// Keep the partner module and deferred cookie dialog outside the guarded homepage entry graph.
 const EvisaHomeSection = React.lazy(() =>
   import("./components/EvisaPanels").then((m) => ({ default: m.EvisaHomeSection }))
 );
+const ConsentBanner = React.lazy(() => import("./components/ConsentBanner"));
 import {
   useSeoMeta,
   generateFAQSchema,
@@ -108,7 +118,6 @@ import {
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { TiqetsEmbedWidget } from "./components/TiqetsEmbedWidget";
-import { ConsentBanner } from "./components/ConsentBanner";
 import { generateBlogCoverAltText } from "./utils/imageAssets";
 import { ResponsiveImage } from "./components/ResponsiveImage";
 import { getRelatedBlogPosts } from "./utils/blogLinks";
@@ -660,7 +669,7 @@ const readSavedSubscriptionInterests = (): SubscriptionInterest[] => {
 
   try {
     const storedInterests: unknown = JSON.parse(
-      window.localStorage.getItem("ural_subscription_interests") || "[]",
+      readOptionalStorage("ural_subscription_interests") || "[]",
     );
     return Array.isArray(storedInterests)
       ? SUBSCRIPTION_INTERESTS.filter((interest) => storedInterests.includes(interest))
@@ -835,9 +844,7 @@ export default function App() {
   });
 
   const handleLangToggle = (newLang: Language) => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("ural_lang", newLang);
-    }
+    writeOptionalStorage("ural_lang", newLang);
     // Switching language navigates to the other locale's URL — /bn/* is the
     // crawlable Bengali surface, it is not just a client-side state flip.
     const current =
@@ -878,6 +885,29 @@ export default function App() {
     isBn && bnContent ? bnContent.getFeaturedGrowthTopics(lang) : ENGLISH_FEATURED_GROWTH_TOPICS;
   const [isPriceAlertOpen, setIsPriceAlertOpen] = useState(false);
   const [alertDestination, setAlertDestination] = useState("Bangkok (BKK)");
+  const [consentBannerMode, setConsentBannerMode] = useState<"idle" | "auto" | "customize">("idle");
+
+  useEffect(() => {
+    let timer: number | undefined;
+    const initial = readConsentState();
+    if (initial.status === "unset") {
+      timer = window.setTimeout(() => {
+        setConsentBannerMode((prev) => (prev === "idle" ? "auto" : prev));
+      }, 800);
+    } else {
+      applyConsentState(initial.status, initial.settings, false);
+    }
+    const handleOpenConsent = () => setConsentBannerMode("customize");
+    window.addEventListener(CONSENT_OPEN_EVENT, handleOpenConsent);
+    // Keep cross-tab Consent Mode updates, cookie expiry and storage cleanup active
+    // on every route even when the deferred ConsentBanner chunk has not been mounted.
+    const unsubscribeConsent = subscribeConsent(() => {});
+    return () => {
+      if (timer !== undefined) window.clearTimeout(timer);
+      window.removeEventListener(CONSENT_OPEN_EVENT, handleOpenConsent);
+      unsubscribeConsent();
+    };
+  }, []);
 
   const openPriceAlert = (dest?: string) => {
     if (dest) setAlertDestination(dest);
@@ -887,25 +917,16 @@ export default function App() {
   const [heroHotelCity, setHeroHotelCity] = useState("kathmandu-hotels");
   const [heroVisaCountry, setHeroVisaCountry] = useState("nepal-visa");
 
-  // Custom Interactive Home states
-  const [emailSubscribed, setEmailSubscribed] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      return Boolean(localStorage.getItem("ural_subscribed_email"));
-    }
-    return false;
-  });
-  const [userEmail, setUserEmail] = useState<string>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("ural_subscribed_email") || "";
-    }
-    return "";
-  });
-  const [subscriptionId, setSubscriptionId] = useState<string>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("ural_subscription_id") || "";
-    }
-    return "";
-  });
+  // Custom Interactive Home states (persisted only when preferences consent is granted)
+  const [emailSubscribed, setEmailSubscribed] = useState<boolean>(() =>
+    Boolean(readOptionalStorage("ural_subscribed_email")),
+  );
+  const [userEmail, setUserEmail] = useState<string>(
+    () => readOptionalStorage("ural_subscribed_email") || "",
+  );
+  const [subscriptionId, setSubscriptionId] = useState<string>(
+    () => readOptionalStorage("ural_subscription_id") || "",
+  );
   const [selectedSubscriptionInterests, setSelectedSubscriptionInterests] = useState<SubscriptionInterest[]>(
     readSavedSubscriptionInterests,
   );
@@ -1017,15 +1038,9 @@ export default function App() {
       setEmailSubmitting(false);
     }
 
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem("ural_subscribed_email", cleanEmail);
-        localStorage.setItem("ural_subscription_id", generatedSubId);
-        localStorage.setItem("ural_subscription_interests", JSON.stringify(selectedInterests));
-      } catch {
-        // ignore storage quota errors
-      }
-    }
+    writeOptionalStorage("ural_subscribed_email", cleanEmail);
+    writeOptionalStorage("ural_subscription_id", generatedSubId);
+    writeOptionalStorage("ural_subscription_interests", JSON.stringify(selectedInterests));
     setSubscriptionId(generatedSubId);
     setSelectedSubscriptionInterests(selectedInterests);
     setEmailSubscribed(true);
@@ -5275,10 +5290,8 @@ export default function App() {
                   per-category panel (see ConsentBanner.tsx). */}
               <button
                 type="button"
-                onClick={() =>
-                  window.dispatchEvent(new CustomEvent("ural:open-cookie-banner"))
-                }
-                className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+                onClick={openConsentPreferences}
+                className="min-h-11 px-1.5 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
               >
                 {isBn ? "কুকি সেটিংস" : "Cookie settings"}
               </button>
@@ -5324,8 +5337,16 @@ export default function App() {
         </React.Suspense>
       )}
 
-      {/* Google Consent Mode v2 Floating Cookie Consent Banner */}
-      <ConsentBanner onNavigate={navigateTo} lang={lang} />
+      {/* Google Consent Mode v2 Floating Cookie Consent Banner (code-split off LCP path) */}
+      {consentBannerMode !== "idle" && (
+        <React.Suspense fallback={null}>
+          <ConsentBanner
+            onNavigate={navigateTo}
+            lang={lang}
+            initialCustomize={consentBannerMode === "customize"}
+          />
+        </React.Suspense>
+      )}
 
       {/* Back-to-top floating button — appears after 600px scroll */}
       <button
