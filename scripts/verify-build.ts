@@ -36,6 +36,8 @@ import {
  *     self-maintaining rather than a magic number.
  */
 import { runOfficialSourcesChecks } from "./officialSourcesChecks";
+import { glossaryGuidePaths, runGlossaryChecks } from "./glossaryChecks";
+import { GLOSSARY_TERMS } from "../src/data/glossary";
 import { NON_OFFICIAL_HOSTS, OFFICIAL_HOSTS, getCommunitySources, getOfficialSources, officialSourceHost } from "../src/data/officialSources";
 import { OFFICIAL_RESOURCES_COPY } from "../src/utils/officialResourcesCopy";
 import fs from "node:fs";
@@ -9456,6 +9458,48 @@ check(
       hostedFiles.length > 0 &&
         hostedFiles.every((file) => /^\/downloads\/ural-/.test(file) && fs.existsSync(path.join(DIST_DIR, file))),
       `/resources (${locale}): every hosted download is a URAL-made file present in the build`
+    );
+  }
+}
+
+// --- Glossary (/glossary) ---------------------------------------------------
+// The data guards keep every term bilingual, sourced and free of fees. The HTML
+// guards prove the saved page (what a crawler reads) carries every term in both
+// languages and that each "URAL guide" link lands on a page the build wrote.
+{
+  for (const result of runGlossaryChecks()) check(result.ok, result.label);
+
+  const guidePaths = glossaryGuidePaths();
+  for (const [locale, prefix] of [
+    ["en", ""],
+    ["bn", "bn"],
+  ] as const) {
+    const html = read(path.join(DIST_DIR, prefix, "glossary.html"));
+    check(html !== null, `/glossary (${locale}): saved page exists`);
+    if (html === null) continue;
+    const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
+    const missingTerms = GLOSSARY_TERMS.filter((term) => !main.includes(`id="term-${term.id}"`)).map((term) => term.id);
+    check(
+      missingTerms.length === 0 && (main.match(/<dt id="term-/g) ?? []).length === GLOSSARY_TERMS.length,
+      `/glossary (${locale}): saved page lists all ${GLOSSARY_TERMS.length} terms once${missingTerms.length ? ` — missing ${missingTerms.slice(0, 3).join(", ")}` : ""}`
+    );
+    const deadGuides = guidePaths.filter(
+      (guide) =>
+        !main.includes(`href="${prefix ? `/${prefix}` : ""}${guide}"`) ||
+        !fs.existsSync(path.join(DIST_DIR, prefix, `${guide.slice(1)}.html`))
+    );
+    check(
+      deadGuides.length === 0,
+      `/glossary (${locale}): all ${guidePaths.length} URAL guide links point to saved ${locale} pages${deadGuides.length ? ` — ${deadGuides.slice(0, 3).join(", ")}` : ""}`
+    );
+    check(
+      (html.match(/"@type":\s*"DefinedTerm"/g) ?? []).length === GLOSSARY_TERMS.length &&
+        /"@type":\s*"DefinedTermSet"/.test(html),
+      `/glossary (${locale}): structured data defines every term`
+    );
+    check(
+      (main.match(/<h1[\s>]/g) ?? []).length === 1 && !/[£$€৳]\s?\d/.test(main.replace(/<script[\s\S]*?<\/script>/g, "")),
+      `/glossary (${locale}): one heading and no price figure`
     );
   }
 }

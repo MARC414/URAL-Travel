@@ -340,6 +340,8 @@ export function useSeoMeta({
       routePath = "/pre-departure";
     } else if (rootSection === "resources") {
       routePath = "/resources";
+    } else if (rootSection === "glossary") {
+      routePath = "/glossary";
     } else if (rootSection === "sitemap") {
       routePath = "/sitemap";
     } else if (rootSection === "tools") {

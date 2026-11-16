@@ -13,7 +13,6 @@ export { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH };
 export const OFFICIAL_RESOURCES_COPY = {
   en: {
     ...OFFICIAL_RESOURCES_META.en,
-    eyebrow: "Official sources directory",
     h1: "Official Travel Sources: Government, Visa, Hajj and Airline Websites",
     intro:
       "Every official website behind URAL's guides, in one place. Choose a topic or a country and go straight to the authority that decides the rule.",
@@ -69,7 +68,6 @@ export const OFFICIAL_RESOURCES_COPY = {
   },
   bn: {
     ...OFFICIAL_RESOURCES_META.bn,
-    eyebrow: "অফিসিয়াল সূত্রের তালিকা",
     h1: "সরকারি ভ্রমণ সূত্র: ভিসা, হজ ও এয়ারলাইনের অফিসিয়াল সাইট",
     intro:
       "URAL-এর গাইডগুলোর পেছনের সব অফিসিয়াল ওয়েবসাইট এক জায়গায়। বিষয় বা দেশ বেছে নিন, আর যে কর্তৃপক্ষ নিয়ম ঠিক করে তার সাইটে সরাসরি যান।",

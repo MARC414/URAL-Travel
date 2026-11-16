@@ -1,3 +1,4 @@
+import { GLOSSARY_META, GLOSSARY_PATH } from "./glossaryMeta";
 import { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH } from "./officialResourcesMeta";
 import { TOOL_PAGE_SEO } from "./toolRoutes";
 
@@ -282,6 +283,10 @@ export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     title: OFFICIAL_RESOURCES_META.en.seoTitle,
     description: OFFICIAL_RESOURCES_META.en.seoDescription,
   },
+  [GLOSSARY_PATH]: {
+    title: GLOSSARY_META.en.seoTitle,
+    description: GLOSSARY_META.en.seoDescription,
+  },
   "/sitemap": {
     title: "Complete URAL Travel Site Directory & Guide Index | URAL",
     description:
@@ -486,6 +491,10 @@ export const CORE_BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   [OFFICIAL_RESOURCES_PATH]: {
     title: OFFICIAL_RESOURCES_META.bn.seoTitle,
     description: OFFICIAL_RESOURCES_META.bn.seoDescription,
+  },
+  [GLOSSARY_PATH]: {
+    title: GLOSSARY_META.bn.seoTitle,
+    description: GLOSSARY_META.bn.seoDescription,
   },
   "/sitemap": {
     title: "URAL ভ্রমণ সাইট ডিরেক্টরি ও গাইড ইনডেক্স | URAL",

@@ -96,6 +96,7 @@ import { Language, translations } from "./translations";
 import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH } from "./utils/officialResourcesMeta";
+import { GLOSSARY_META, GLOSSARY_PATH } from "./utils/glossaryMeta";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import {
   getCoreBengaliSeoCopy as getBengaliSeoCopy,
@@ -143,6 +144,7 @@ const AboutRouteView = React.lazy(() => import("./routes/AboutRouteView"));
 const NotFoundRouteView = React.lazy(() => import("./routes/NotFoundRouteView"));
 const VisaFreeCountriesRouteView = React.lazy(() => import("./routes/VisaFreeCountriesRouteView"));
 const OfficialResourcesPage = React.lazy(() => import("./components/OfficialResourcesPage"));
+const GlossaryPage = React.lazy(() => import("./components/GlossaryPage"));
 const GlobalSiteSearch = React.lazy(() =>
   import("./components/GlobalSiteSearch").then((module) => ({ default: module.GlobalSiteSearch }))
 );
@@ -457,7 +459,7 @@ const singaporeDestImg = "/assets/images/singapore_destination_1790387270177-120
 const maldivesDestImg = "/assets/images/maldives_destination_1790387286896-1200.webp";
 const blogHeroBannerImg = "/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp";
 const umrahMakkahImg = "/assets/images/umrah_makkah_haram_guide_1790430007679-1200.webp";
-type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "resources" | "privacy" | "about" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "resources" | "glossary" | "privacy" | "about" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1204,6 +1206,10 @@ export default function App() {
       // Official sources directory: every official website URAL cites.
       section = "resources";
       isLanding = true;
+    } else if (root === "glossary" && segs.length === 1) {
+      // Glossary: plain meanings of Hajj, Umrah, visa, banking and flight terms.
+      section = "glossary";
+      isLanding = true;
     } else if (root === "pre-departure" && segs.length === 1) {
       // Standalone pre-departure hub (split out of the old combined /sitemap
       // page in 2026-10). /indexing stays an alias of the directory page.
@@ -1339,7 +1345,7 @@ export default function App() {
   const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
     if (sec === "destinations" || sec === "experiences" || sec === "attractions") return "destinations";
     if (sec === "blog" || sec === "costs") return "research";
-    if (sec === "tools" || sec === "sitemap" || sec === "preDeparture" || sec === "resources" || sec === "contact") return "tools";
+    if (sec === "tools" || sec === "sitemap" || sec === "preDeparture" || sec === "resources" || sec === "glossary" || sec === "contact") return "tools";
     return "booking";
   };
 
@@ -2102,6 +2108,14 @@ export default function App() {
       { name: "Home", url: siteUrl("/", lang) },
       { name: resourcesCopy.breadcrumb, url: resourcesUrl }
     ];
+  } else if (section === "glossary") {
+    const glossaryCopy = GLOSSARY_META[isBn ? "bn" : "en"];
+    seoTitle = glossaryCopy.seoTitle;
+    seoDescription = glossaryCopy.seoDescription;
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: glossaryCopy.breadcrumb, url: siteUrl(GLOSSARY_PATH, lang) }
+    ];
   } else if (section === "preDeparture") {
     const preDepartureUrl = siteUrl("/pre-departure", lang);
     seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist & Helplines | URAL";
@@ -2171,6 +2185,7 @@ export default function App() {
     if (section === "visaFree") return "/visa-free-countries";
     if (section === "preDeparture") return "/pre-departure";
     if (section === "resources") return OFFICIAL_RESOURCES_PATH;
+    if (section === "glossary") return GLOSSARY_PATH;
     if (section === "sitemap") return "/sitemap";
     if (section === "privacy") return "/privacy";
     if (section === "tools") {
@@ -3075,6 +3090,13 @@ export default function App() {
                         path: OFFICIAL_RESOURCES_PATH,
                       },
                       {
+                        id: "glossary",
+                        icon: BookOpen,
+                        label: GLOSSARY_META[isBn ? "bn" : "en"].navLabel,
+                        sub: GLOSSARY_META[isBn ? "bn" : "en"].navSub,
+                        path: GLOSSARY_PATH,
+                      },
+                      {
                         id: "airhelp",
                         icon: ShieldCheck,
                         label: isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)" : "Flight Disruption Check (AirHelp)",
@@ -3361,7 +3383,7 @@ export default function App() {
                       subtitle: isBn
                         ? "কারেন্সি কনভার্টার · দূতাবাস · ফ্লাইট-সমস্যার গাইড"
                         : "FX tool · DAC checklist · flight-disruption guide",
-                      isActiveGroup: ["tools", "sitemap", "preDeparture", "resources", "contact"].includes(section),
+                      isActiveGroup: ["tools", "sitemap", "preDeparture", "resources", "glossary", "contact"].includes(section),
                       primaryLinks: [
                         {
                           id: "tools",
@@ -3380,6 +3402,12 @@ export default function App() {
                           label: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navLabel,
                           meta: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navSub,
                           path: OFFICIAL_RESOURCES_PATH,
+                        },
+                        {
+                          id: "glossary",
+                          label: GLOSSARY_META[isBn ? "bn" : "en"].navLabel,
+                          meta: GLOSSARY_META[isBn ? "bn" : "en"].navSub,
+                          path: GLOSSARY_PATH,
                         },
                         {
                           id: "airhelp",
@@ -4572,6 +4600,13 @@ export default function App() {
         </React.Suspense>
       )}
 
+      {/* Glossary (/glossary): plain meanings of the terms used across URAL. */}
+      {section === "glossary" && (
+        <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+          <GlossaryPage lang={lang} onNavigate={navigateTo} />
+        </React.Suspense>
+      )}
+
       {/* -------------------------------------------------------------
           🔒 VIEW 11: PRIVACY & COOKIE POLICY HUB
       ------------------------------------------------------------- */}
@@ -5327,6 +5362,13 @@ export default function App() {
                   className="inline-block py-1 text-xs font-semibold text-[#F6B73C] hover:text-white hover:underline cursor-pointer"
                 >
                   {OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navLabel} →
+                </a>
+                <a
+                  href={getLocalizedRouteHref(GLOSSARY_PATH)}
+                  onClick={(event) => handleNavigationAnchorClick(event, GLOSSARY_PATH)}
+                  className="inline-block py-1 text-xs font-semibold text-[#F6B73C] hover:text-white hover:underline cursor-pointer"
+                >
+                  {GLOSSARY_META[isBn ? "bn" : "en"].navLabel} →
                 </a>
                 <a
                   href={getLocalizedRouteHref("/sitemap")}

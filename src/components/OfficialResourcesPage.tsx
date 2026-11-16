@@ -43,16 +43,6 @@ interface OfficialResourcesPageProps {
   onNavigate: (path: string) => void;
 }
 
-/** Emerald carries "verified authority" in this design system; gold-light is the standard badge. */
-const KIND_TONE: Record<OfficialSourceKind, string> = {
-  government: "bg-emerald-50 text-emerald-900 ring-emerald-600/20",
-  press: "bg-slate-100 text-slate-700 ring-slate-400/30",
-  international: "bg-emerald-50 text-emerald-900 ring-emerald-600/20",
-  portal: "bg-brand-gold-light text-brand-gold-ink ring-brand-gold-dark/30",
-  operator: "bg-slate-100 text-slate-700 ring-slate-400/30",
-  community: "bg-white text-slate-700 ring-slate-400/40",
-};
-
 const FOCUS_RING =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-emerald";
 
@@ -84,14 +74,19 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
 
   // A link to /resources#uk-hajj-umrah opens with the UK journey unfolded.
   useEffect(() => {
-    if (window.location.hash === `#${UK_PILGRIM_JOURNEY.id}`) setAudience("uk");
+    if (window.location.hash !== `#${UK_PILGRIM_JOURNEY.id}`) return;
+    pendingStep.current = UK_PILGRIM_JOURNEY.id;
+    setAudience("uk");
   }, []);
 
   // After the journey unfolds, bring the step the visitor chose into view.
   useEffect(() => {
     if (audience !== "uk" || !pendingStep.current) return;
-    document.getElementById(pendingStep.current)?.scrollIntoView({ block: "start" });
+    const id = pendingStep.current;
     pendingStep.current = null;
+    // One frame later, so the unfolded journey has its final position.
+    const frame = window.requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: "start" }));
+    return () => window.cancelAnimationFrame(frame);
   }, [audience]);
 
   // "Save as PDF": print one section. The print stylesheet hides everything
@@ -218,6 +213,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
 
   const renderLink = (source: OfficialSourceEntry) => {
     const meta = officialSourceMeta(source, locale);
+    const about = isBn ? source.aboutBn : source.aboutEn;
     return (
     <li
       key={source.url}
@@ -234,6 +230,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
           <ExternalLink className="size-3.5 shrink-0 text-text-muted group-hover:text-brand-emerald" aria-hidden="true" />
           <span className="sr-only">({copy.opensNewTab})</span>
         </a>
+        {about && <p className="-mt-1 pb-2 text-[13px] leading-snug text-text-secondary">{about}</p>}
         {meta.length > 0 && (
           <p className={`-mt-1 pb-2 text-xs text-text-muted ${isBn ? "font-sans" : ""}`}>{meta.join(" · ")}</p>
         )}
@@ -266,9 +263,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
       >
         <div className="flex items-start justify-between gap-3">
           <h4 className="ural-card-title min-w-0 text-base text-brand-navy">{organisation[locale]}</h4>
-          <span
-            className={`shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ${KIND_TONE[organisation.kind]}`}
-          >
+          <span className="shrink-0 whitespace-nowrap pt-0.5 text-xs font-semibold text-text-muted">
             {OFFICIAL_SOURCE_KINDS[organisation.kind][locale]}
           </span>
         </div>
@@ -304,12 +299,6 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
       <header data-resources-header className="ural-panel overflow-hidden border border-white/[0.08] bg-brand-navy p-6 text-white sm:p-8 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-12 lg:p-10">
         {/* Flex gap, not margins: the critical shell resets heading margins. */}
         <div className="flex flex-col items-start gap-4">
-          <p
-            className={`inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/15 px-3 py-1.5 text-xs font-semibold text-brand-gold ${labelCase}`}
-          >
-            <Landmark className="size-3.5" aria-hidden="true" />
-            {copy.eyebrow}
-          </p>
           <h1
             className={`ural-page-title max-w-[24ch] text-white ${isBn ? "!leading-[1.45] !tracking-normal" : ""}`}
           >
@@ -440,7 +429,12 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
                             <span className="block text-sm font-semibold leading-snug text-brand-navy [overflow-wrap:anywhere]">
                               {isBn ? source.titleBn : source.titleEn}
                             </span>
-                            <span className="mt-0.5 block text-xs text-text-muted">
+                            {(isBn ? source.aboutBn : source.aboutEn) && (
+                              <span className="mt-1 block text-[13px] leading-snug text-text-secondary">
+                                {isBn ? source.aboutBn : source.aboutEn}
+                              </span>
+                            )}
+                            <span className="mt-1 block text-xs text-text-muted">
                               {[
                                 source.host,
                                 OFFICIAL_SOURCE_KINDS[OFFICIAL_HOSTS[source.host].kind][locale],

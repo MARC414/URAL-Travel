@@ -52,11 +52,13 @@ export function renderOfficialResourcesStaticHtml(lang: OfficialResourcesLocale,
     const meta = officialSourceMeta(link, lang);
     if (withSite) meta.unshift(link.host, OFFICIAL_SOURCE_KINDS[OFFICIAL_HOSTS[link.host].kind][lang]);
     const note = meta.length > 0 ? ` <small>(${escapeHtml(meta.join(" · "))})</small>` : "";
+    const aboutText = lang === "bn" ? link.aboutBn : link.aboutEn;
+    const about = aboutText ? ` ${escapeHtml(aboutText)}` : "";
     const guide =
       !withSite && link.pages.length > 0
         ? ` · <a href="${escapeHtml(localPath(link.pages[0]))}">${escapeHtml(copy.guideLink)}</a>`
         : "";
-    return `<li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>${note}${guide}</li>`;
+    return `<li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>${about}${note}${guide}</li>`;
   };
 
   const journeySteps = resolveJourney(UK_PILGRIM_JOURNEY, sources)

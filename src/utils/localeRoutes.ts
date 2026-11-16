@@ -156,4 +156,5 @@ export const BN_BREADCRUMB_LABELS: Record<string, string> = {
   "Attractions & Passes": "অভিজ্ঞতা ও টিকিট",
   "Privacy & Cookie Policy": "গোপনীয়তা ও কুকি নীতিমালা",
   "Official Sources": "সরকারি সূত্র",
+  Glossary: "শব্দকোষ",
 };

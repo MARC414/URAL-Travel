@@ -81,6 +81,9 @@ export interface OfficialSourceEntry {
   pages: string[];
   /** ISO date the owner last checked the page by hand; absent when never checked by hand. */
   checked?: string;
+  /** One plain line on what the page covers; owner-checked links only. */
+  aboutEn?: string;
+  aboutBn?: string;
   /** The link opens a PDF file on the publisher's own site. */
   pdf: boolean;
 }
@@ -579,6 +582,9 @@ export function findOwnerSuppliedProblems(): string[] {
     else if (!cited.has(officialSourceUrlKey(supplied.url)) && (!supplied.en || !supplied.bn || !supplied.sector)) {
       problems.push(`${supplied.url} (title or section missing)`);
     }
+    if (Boolean(supplied.aboutEn) !== Boolean(supplied.aboutBn) || (supplied.aboutBn && !/[\u0980-\u09FF]/.test(supplied.aboutBn))) {
+      problems.push(`${supplied.url} ("what it covers" line needs both languages)`);
+    }
   }
   return problems;
 }
@@ -643,6 +649,8 @@ function buildSources(): OfficialSourceEntry[] {
     const existing = byUrl.get(key);
     if (existing) {
       existing.checked = supplied.checked;
+      existing.aboutEn = supplied.aboutEn;
+      existing.aboutBn = supplied.aboutBn;
       if (supplied.pdf) existing.pdf = true;
       continue;
     }
@@ -661,6 +669,8 @@ function buildSources(): OfficialSourceEntry[] {
       country: organisation.country,
       pages: [],
       checked: supplied.checked,
+      aboutEn: supplied.aboutEn,
+      aboutBn: supplied.aboutBn,
       pdf: supplied.pdf ?? isPdfUrl(supplied.url),
     });
   }

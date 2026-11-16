@@ -619,6 +619,11 @@ body > :not(#root):not(script):not(style) {
     display: inline !important;
   }
 
+  /* The step number is followed by a full stop and a space: "1. Book". */
+  body.ural-print-target [data-print-target] span[data-print-inline][aria-hidden="true"]::after {
+    content: ". ";
+  }
+
   body.ural-print-target [data-print-target] ol > li {
     padding-top: 10pt !important;
   }
