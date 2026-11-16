@@ -169,7 +169,10 @@ function generate(posts: ScheduledBlogPost[]): void {
   );
   writeIfChanged(
     path.join(OUTPUT_DIR, "scheduledBengaliBlogs.generated.ts"),
-    serializeModule("SCHEDULED_BENGALI_BLOG_OVERRIDES", bengaliOverrides, "Record<string, { title: string; summary: string; category: string; date: string; author: string; readTime: string; content: string; internalLinks: { text: string; path: string }[]; affiliateCTA?: { provider: string; headline: string; body: string } }>"),
+    [
+      'import type { EvisaCampaignKey } from "../types";',
+      serializeModule("SCHEDULED_BENGALI_BLOG_OVERRIDES", bengaliOverrides, "Record<string, { title: string; summary: string; category: string; date: string; author: string; readTime: string; content: string; internalLinks: { text: string; path: string }[]; affiliateCTA?: { provider: string; headline: string; body: string; campaign?: EvisaCampaignKey } }>"),
+    ].join("\n"),
   );
   writeIfChanged(
     path.join(OUTPUT_DIR, "scheduledBlogSeo.generated.ts"),

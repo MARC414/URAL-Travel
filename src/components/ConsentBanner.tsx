@@ -7,6 +7,7 @@ import {
   DEFAULT_CONSENT_SETTINGS,
   applyConsentState,
   readConsentState,
+  restoreConsentFocus,
   subscribeConsent,
   writeConsentChoice,
   type ConsentStatus,
@@ -25,14 +26,14 @@ interface ConsentBannerProps {
 const BTN_FOCUS =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
 const SWITCH_TRACK =
-  "w-9 h-5 bg-slate-700 rounded-full peer peer-focus-visible:ring-2 peer-focus-visible:ring-[#F6B73C] peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#F6B73C]";
+  "relative w-9 h-5 bg-slate-700 rounded-full peer peer-focus-visible:ring-2 peer-focus-visible:ring-[#F6B73C] peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#F6B73C]";
 
-/** Compatibility wrapper: applies a consent update through the central consent module. */
+/** Compatibility wrapper: persists and applies a consent update through the central consent module. */
 export function updateGoogleConsentMode(granted: boolean | GranularConsentSettings) {
   if (typeof granted === "boolean") {
-    applyConsentState(granted ? "accepted" : "declined", granted ? { necessary: true, analytics: true, marketing: true, functionality: true } : DEFAULT_CONSENT_SETTINGS, true);
+    writeConsentChoice(granted ? "accepted" : "declined");
   } else {
-    applyConsentState("custom", granted, true);
+    writeConsentChoice(granted);
   }
 }
 
@@ -45,6 +46,8 @@ export function ConsentBanner({
   const [showCustomize, setShowCustomize] = useState(initialCustomize);
   const [storedStatus, setStoredStatus] = useState<StoredConsentStatus>("unset");
   const [settings, setSettings] = useState<GranularConsentSettings>({ ...DEFAULT_CONSENT_SETTINGS });
+  const [focusHeadingTick, setFocusHeadingTick] = useState(initialCustomize ? 1 : 0);
+  const [restoreFocusTick, setRestoreFocusTick] = useState(0);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   const isBn = lang === "bn";
@@ -58,9 +61,7 @@ export function ConsentBanner({
     if (initialCustomize) {
       setVisible(true);
       setShowCustomize(true);
-      window.requestAnimationFrame(() => {
-        headingRef.current?.focus();
-      });
+      setFocusHeadingTick((n) => n + 1);
       return undefined;
     }
     if (initial.status === "unset") {
@@ -70,6 +71,19 @@ export function ConsentBanner({
     applyConsentState(initial.status, initial.settings, false);
     return undefined;
   }, [initialCustomize]);
+
+  // Run heading focus strictly after React commits the opened banner DOM.
+  useEffect(() => {
+    if (!visible || focusHeadingTick === 0) return;
+    headingRef.current?.focus({ preventScroll: true });
+  }, [visible, focusHeadingTick]);
+
+  // Restore focus strictly after React commits the banner dismissal and any
+  // sibling consent state transitions (e.g. unmounting a consent button for an iframe).
+  useEffect(() => {
+    if (visible || restoreFocusTick === 0) return;
+    restoreConsentFocus();
+  }, [visible, restoreFocusTick]);
 
   useEffect(() => {
     return subscribeConsent((next) => {
@@ -91,9 +105,7 @@ export function ConsentBanner({
       setSettings(current.settings);
       setVisible(true);
       setShowCustomize(true);
-      window.requestAnimationFrame(() => {
-        headingRef.current?.focus();
-      });
+      setFocusHeadingTick((n) => n + 1);
     };
     window.addEventListener(CONSENT_OPEN_EVENT, handleReopen);
     return () => window.removeEventListener(CONSENT_OPEN_EVENT, handleReopen);
@@ -105,6 +117,7 @@ export function ConsentBanner({
       if (event.key === "Escape") {
         setVisible(false);
         setShowCustomize(false);
+        setRestoreFocusTick((n) => n + 1);
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -117,6 +130,7 @@ export function ConsentBanner({
     setSettings(next.settings);
     setShowCustomize(false);
     setVisible(false);
+    setRestoreFocusTick((n) => n + 1);
   };
 
   const handleRejectAll = () => {
@@ -125,6 +139,7 @@ export function ConsentBanner({
     setSettings(next.settings);
     setShowCustomize(false);
     setVisible(false);
+    setRestoreFocusTick((n) => n + 1);
   };
 
   const handleSaveCustom = () => {
@@ -133,6 +148,7 @@ export function ConsentBanner({
     setSettings(next.settings);
     setShowCustomize(false);
     setVisible(false);
+    setRestoreFocusTick((n) => n + 1);
   };
 
   const handleToggleCustomize = () => {
@@ -161,7 +177,7 @@ export function ConsentBanner({
       role="region"
       aria-labelledby="ural-consent-heading"
       data-consent-banner
-      className="fixed bottom-0 inset-x-0 z-50 max-h-[85dvh] overflow-y-auto overscroll-contain p-3 sm:p-4 md:p-6 bg-slate-950/95 backdrop-blur-xl border-t border-[#F6B73C]/30 shadow-[0_-10px_35px_rgba(0,0,0,0.6)] text-slate-200 animate-fade-in font-sans"
+      className="fixed bottom-0 inset-x-0 z-[70] max-h-[85dvh] overflow-y-auto overscroll-contain p-3 sm:p-4 md:p-6 bg-slate-950/95 backdrop-blur-xl border-t border-[#F6B73C]/30 shadow-[0_-10px_35px_rgba(0,0,0,0.6)] text-slate-200 animate-fade-in font-sans"
     >
       <div className="max-w-7xl mx-auto space-y-4">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
@@ -276,7 +292,7 @@ export function ConsentBanner({
                   <Sliders className="w-3.5 h-3.5 text-emerald-300 shrink-0" aria-hidden="true" />
                   {CONSENT_CATEGORY_LABELS.functionality[locale]}
                 </span>
-                <label className="relative inline-flex items-center cursor-pointer shrink-0">
+                <label className="relative -my-2 inline-flex min-h-11 min-w-11 items-center justify-end cursor-pointer shrink-0">
                   <input
                     type="checkbox"
                     aria-labelledby="consent-label-functionality"
@@ -302,7 +318,7 @@ export function ConsentBanner({
                   <Cookie className="w-3.5 h-3.5 text-[#F6B73C] shrink-0" aria-hidden="true" />
                   {CONSENT_CATEGORY_LABELS.analytics[locale]}
                 </span>
-                <label className="relative inline-flex items-center cursor-pointer shrink-0">
+                <label className="relative -my-2 inline-flex min-h-11 min-w-11 items-center justify-end cursor-pointer shrink-0">
                   <input
                     type="checkbox"
                     aria-labelledby="consent-label-analytics"
@@ -328,7 +344,7 @@ export function ConsentBanner({
                   <Settings2 className="w-3.5 h-3.5 text-blue-400 shrink-0" aria-hidden="true" />
                   {CONSENT_CATEGORY_LABELS.marketing[locale]}
                 </span>
-                <label className="relative inline-flex items-center cursor-pointer shrink-0">
+                <label className="relative -my-2 inline-flex min-h-11 min-w-11 items-center justify-end cursor-pointer shrink-0">
                   <input
                     type="checkbox"
                     aria-labelledby="consent-label-marketing"
@@ -354,8 +370,9 @@ export function ConsentBanner({
                   onClick={() => {
                     setShowCustomize(false);
                     setVisible(false);
+                    setRestoreFocusTick((n) => n + 1);
                   }}
-                  className={`min-h-11 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-semibold text-xs transition-colors cursor-pointer ${BTN_FOCUS}`}
+                  className={`min-h-11 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-500 text-slate-200 font-semibold text-xs transition-colors cursor-pointer ${BTN_FOCUS}`}
                 >
                   {isBn ? "বাতিল" : "Cancel"}
                 </button>

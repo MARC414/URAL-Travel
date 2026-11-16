@@ -94,9 +94,10 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
 
     observer.observe(container, { childList: true, subtree: true });
 
+    let onloadTimer: ReturnType<typeof setTimeout> | undefined;
     script.onload = () => {
       // Check if widget rendered within 1.2s, else keep loaded or transition
-      setTimeout(() => {
+      onloadTimer = setTimeout(() => {
         if (isMounted && container.children.length > 1) {
           setLoadState("loaded");
         }
@@ -119,6 +120,7 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
     return () => {
       isMounted = false;
       observer.disconnect();
+      if (onloadTimer !== undefined) clearTimeout(onloadTimer);
       clearTimeout(fallbackTimer);
       container.innerHTML = "";
     };
@@ -157,10 +159,11 @@ export const TiqetsEmbedWidget: React.FC<TiqetsEmbedWidgetProps> = ({
             <button
               type="button"
               onClick={() => setReloadCounter((prev) => prev + 1)}
+              aria-label={isBn ? "উইজেট রিফ্রেশ করুন" : "Refresh widget"}
               title={isBn ? "উইজেট রিফ্রেশ করুন" : "Refresh widget"}
-              className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 transition-colors text-xs font-mono flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
+              className="min-h-11 min-w-11 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 transition-colors text-xs font-mono inline-flex items-center justify-center gap-1 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
             >
-              <RefreshCw size={13} className={loadState === "loading" ? "animate-spin text-[#F6B73C]" : ""} />
+              <RefreshCw size={13} aria-hidden="true" className={loadState === "loading" ? "animate-spin text-[#F6B73C]" : ""} />
               <span className="hidden sm:inline">{isBn ? "রিফ্রেশ" : "Sync"}</span>
             </button>
           )}

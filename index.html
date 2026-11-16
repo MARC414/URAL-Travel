@@ -331,7 +331,7 @@
           script.async=true;
           script.setAttribute('data-ural-consent','analytics');
           script.src='https://www.googletagmanager.com/gtm.js?id=GTM-TMPVL82B';
-          script.onerror=function(){};
+          script.onerror=function(){loaded=false;};
           gtmScript=script;
           document.head.appendChild(script);
         }
@@ -378,16 +378,18 @@
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
       (function(){
         var loaded=false;
+        var driveExecuted=false;
         var driveScript=null;
         function loadDrive(){
-          if(loaded)return;
+          if(loaded||driveExecuted)return;
           loaded=true;
           var script=document.createElement("script");
           script.async=1;
           script.setAttribute("data-cmp-ab","2");
           script.setAttribute("data-ural-consent","marketing");
           script.src="https://emrld.ltd/NTg5NTYx.js?t=589561";
-          script.onerror=function(){};
+          script.onload=function(){driveExecuted=true;};
+          script.onerror=function(){loaded=false;};
           driveScript=script;
           document.head.appendChild(script);
         }

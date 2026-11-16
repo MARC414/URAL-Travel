@@ -1,10 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
-import React from "react";
+import React, { act } from "react";
+import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Window } from "happy-dom";
 import { AFFILIATE_OFFER_REGISTRY } from "../src/components/AffiliatePartners";
-import { EvisaArticleCta, EvisaBanner, EvisaBlogBanner, EvisaBlogContextLink, EvisaDestinationPlacement, EvisaHomeSection, EvisaVisaPanel, EvisaWidgetPrivacyNote } from "../src/components/EvisaPanels";
+import { EVISAS_WIDGET_SLOW_MS, EvisaArticleCta, EvisaBanner, EvisaBlogBanner, EvisaBlogContextLink, EvisaDestinationPlacement, EvisaHomeSection, EvisaVisaPanel, EvisaWidgetPrivacyNote } from "../src/components/EvisaPanels";
 import { EVISAS_BANNERS, EVISAS_BLOG_PLACEMENTS, EVISAS_HOME_COPY, EVISAS_WIDGET, EVISAS_WIDGET_PRIVACY, evisasCampaignUrl, type EvisaLang } from "../src/data/evisaProgram";
 import { getLocalizedBlogs } from "../src/data/bengaliContent";
 import { resolveBlogAffiliateUrl } from "../src/utils/blogAffiliate";
@@ -101,7 +102,24 @@ export function checkEvisaIntegration(dist: string, check: (ok: boolean, label: 
   check(eligibilityIssues.length === 0, `Thailand keeps the official route first; Morocco retains its eligibility conditions in both languages [${eligibilityIssues.join("; ")}]`);
 
   const assetIssues = Object.values(EVISAS_BANNERS).filter((asset) => !fs.existsSync(path.join(dist, asset.src)));
-  check(assetIssues.length === 0 && Object.keys(EVISAS_BANNERS).length === 4, "all four supplied eVisas banner sizes have shipped WebP assets");
+  const evisaDistDir = path.join(dist, "assets", "partners", "evisas");
+  const strayPngs = fs.existsSync(evisaDistDir)
+    ? fs.readdirSync(evisaDistDir).filter((name) => name.toLowerCase().endsWith(".png"))
+    : [];
+  check(
+    assetIssues.length === 0 && Object.keys(EVISAS_BANNERS).length === 4 && strayPngs.length === 0,
+    "all four supplied eVisas banner sizes have shipped WebP assets with zero unreferenced PNG originals in dist/",
+  );
+  {
+    const dubaiEn = render(React.createElement(EvisaDestinationPlacement, { guideId: "dubai-guide", lang: "en" }));
+    const dubaiBn = render(React.createElement(EvisaDestinationPlacement, { guideId: "dubai-guide", lang: "bn" }));
+    check(
+      !active ||
+        (((dubaiEn.match(/commission/gi) ?? []).length === 1) &&
+          ((dubaiBn.match(/কমিশন/g) ?? []).length === 1)),
+      "Dubai destination placement emits a single commission disclosure across its paired square creative and context link (EN + BN)",
+    );
+  }
   const homeHtml = fs.readFileSync(path.join(dist, "index.html"), "utf8");
   const homeBnHtml = fs.readFileSync(path.join(dist, "bn", "index.html"), "utf8");
   const homeIssues: string[] = [];
@@ -117,11 +135,204 @@ export function checkEvisaIntegration(dist: string, check: (ok: boolean, label: 
     if ((section?.querySelector("figcaption")?.textContent ?? "") !== EVISAS_HOME_COPY[lang].bannerCaption) homeIssues.push(`${lang}: square caption is not the single ad label`);
     const partnerActions = section ? [...section.querySelectorAll('a[href^="https://evisas.com/"]')].filter((link) => !link.hasAttribute("data-evisa-creative")) : [];
     if (partnerActions.length !== 1 || !partnerActions[0]?.closest(".home-evisa-ad")) homeIssues.push(`${lang}: partner action is not the single button under the creative`);
+    const primaryCtaClass = section?.querySelector('a[data-affiliate-placement="evisas_home_banner_cta"]')?.getAttribute("class") ?? "";
+    const consentBtn = section?.querySelector("button[data-evisa-consent-trigger]");
+    const consentBtnClass = consentBtn?.getAttribute("class") ?? "";
+    if (!consentBtn || consentBtnClass.includes("bg-brand-gold") || !consentBtnClass.includes("min-h-11") || !primaryCtaClass.includes("bg-brand-gold") || !primaryCtaClass.includes("min-h-11")) {
+      homeIssues.push(`${lang}: consent trigger must stay a neutral >=44px secondary button while the direct partner link owns the primary gold style`);
+    }
     if (section?.querySelector("footer, .home-evisa-links") || section?.querySelector('a[href="/visa"], a[href="/bn/visa"]')) homeIssues.push(`${lang}: removed disclosure footer or guide button came back`);
   }
   check(homeIssues.length === 0, `both homepages contain one large-heading eVisas section, a short hook, square creative and consent-safe widget fallback [${homeIssues.join("; ")}]`);
-  const appSource = fs.readFileSync(path.join(dist, "..", "src", "App.tsx"), "utf8");
+  const repoRoot = path.join(dist, "..");
+  const appSource = fs.readFileSync(path.join(repoRoot, "src", "App.tsx"), "utf8");
   check((appSource.match(/<EvisaHomeSection\b/g) ?? []).length === 1 && !/EvisaHome(?:Card|Banner)/.test(appSource) && appSource.indexOf("<EvisaHomeSection") < appSource.indexOf('id="destinations-section"') && appSource.indexOf('id="airport-code-reference"') > appSource.indexOf('id="destinations-section"') && appSource.indexOf("<EvisaHomeSection") < appSource.indexOf('<TravelEssentials country='), "the homepage runs flight search, then eVisas, then the destination cards and the airport-code reference, then Travel Essentials");
+  const evisaSuspenseWindow = appSource.slice(Math.max(0, appSource.indexOf("<EvisaHomeSection") - 1800), appSource.indexOf("<EvisaHomeSection") + 120);
+  check(
+    !/fallback=\{\s*null\s*\}/.test(evisaSuspenseWindow) &&
+      evisaSuspenseWindow.includes("resolvePartnerUrl(AFFILIATE_LINKS.evisas)") &&
+      evisaSuspenseWindow.includes("data-evisa-skeleton") &&
+      evisaSuspenseWindow.includes('aria-hidden="true"') &&
+      evisaSuspenseWindow.includes("home-evisa-widget-slot--live") &&
+      evisaSuspenseWindow.includes("home-evisa-skeleton-square"),
+    "homepage EvisaHomeSection uses a pause-gated, aria-hidden, dimension-matched Suspense placeholder instead of fallback={null}",
+  );
+  const evisaCss = fs.readFileSync(path.join(repoRoot, "src", "styles", "evisa.css"), "utf8");
+  const consentBaseRule = evisaCss.match(/\.home-evisa-consent\s*\{([^}]*)\}/)?.[1] ?? "";
+  const consentMinHeight = Number(consentBaseRule.match(/min-height:\s*(\d+)px/)?.[1] ?? "0");
+  const containerRules = [...evisaCss.matchAll(/@container\s+evisa-widget[^{]*\{([\s\S]*?\n\})/g)].map((m) => m[1]).join("\n");
+  check(
+    consentMinHeight >= 200 &&
+      consentMinHeight < 300 &&
+      !/(?:^|[\s;])height\s*:/.test(consentBaseRule) &&
+      /@media\s*\(min-width:\s*1024px\)\s*\{[\s\S]*?\.home-evisa-consent\s*\{[^}]*min-height:\s*340px/.test(evisaCss) &&
+      containerRules.includes(".home-evisa-frame") &&
+      containerRules.includes(".home-evisa-widget-slot--live") &&
+      containerRules.includes("500px") &&
+      containerRules.includes("580px") &&
+      !containerRules.includes(".home-evisa-consent") &&
+      evisaCss.includes(".home-evisa-skeleton"),
+    "evisa.css keeps 500px/580px mobile height for the live iframe while keeping the unconsented fallback compact, zoom-safe (no fixed height) and 340px-balanced on desktop",
+  );
+  const evisaPanelSrc = fs.readFileSync(path.join(repoRoot, "src", "components", "EvisaPanels.tsx"), "utf8");
+  {
+    const prevWin = (globalThis as { window?: unknown }).window;
+    const prevDoc = (globalThis as { document?: unknown }).document;
+    const prevCustomEvent = (globalThis as { CustomEvent?: unknown }).CustomEvent;
+    const prevActEnv = (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT;
+    const winTyped = window as unknown as {
+      IntersectionObserver?: unknown;
+      setTimeout: typeof globalThis.setTimeout;
+      clearTimeout: typeof globalThis.clearTimeout;
+    };
+    const prevIO = winTyped.IntersectionObserver;
+    const prevSetTimeout = winTyped.setTimeout;
+    const prevClearTimeout = winTyped.clearTimeout;
+    let slowTimerOk = false;
+    try {
+      (globalThis as { window?: unknown }).window = window;
+      (globalThis as { document?: unknown }).document = window.document;
+      (globalThis as { CustomEvent?: unknown }).CustomEvent = window.CustomEvent;
+      (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
+
+      type ObserverCb = (entries: Array<{ isIntersecting: boolean; intersectionRatio: number }>) => void;
+      let latestCb: ObserverCb | null = null;
+      let disconnectedCount = 0;
+      class MockIO {
+        cb: ObserverCb;
+        constructor(cb: ObserverCb) {
+          this.cb = cb;
+          latestCb = cb;
+        }
+        observe() {}
+        unobserve() {}
+        disconnect() {
+          disconnectedCount++;
+        }
+      }
+      const pendingSlowTimers = new Map<number, () => void>();
+      let nextTimerId = 1;
+      winTyped.IntersectionObserver = MockIO;
+      winTyped.setTimeout = (((cb: () => void, ms?: number) => {
+        if (ms === EVISAS_WIDGET_SLOW_MS) {
+          const id = nextTimerId++;
+          pendingSlowTimers.set(id, cb);
+          return id as unknown as ReturnType<typeof setTimeout>;
+        }
+        return prevSetTimeout.call(window, cb, ms);
+      }) as unknown) as typeof globalThis.setTimeout;
+      winTyped.clearTimeout = (((id: number) => {
+        if (pendingSlowTimers.delete(id)) return;
+        prevClearTimeout.call(window, id);
+      }) as unknown) as typeof globalThis.clearTimeout;
+
+      window.localStorage.clear();
+      writeConsentChoice("accepted");
+      const host = window.document.createElement("div");
+      window.document.body.appendChild(host);
+      const root = createRoot(host as unknown as Element);
+      act(() => {
+        root.render(React.createElement(EvisaHomeSection, { lang: "en" }));
+      });
+      // 1. Consented mount while off-screen: iframe renders immediately (no consent flash),
+      //    status says "loading", and NO 12s slow-load timer has started yet.
+      const offscreenOk =
+        Boolean(host.querySelector(`iframe[src="${EVISAS_WIDGET.src}"]`)) &&
+        Boolean(host.querySelector(".home-evisa-widget-slot--live")) &&
+        Boolean(host.querySelector(".home-evisa-widget-slot--loading")) &&
+        host.querySelector('[role="status"]')?.textContent === EVISAS_HOME_COPY.en.loading &&
+        pendingSlowTimers.size === 0 &&
+        latestCb !== null;
+
+      // 2. Slot enters viewport: observer disconnects and 12s timer arms; status stays "loading" until timer fires.
+      act(() => {
+        latestCb?.([{ isIntersecting: true, intersectionRatio: 0.25 }]);
+      });
+      const armedOk =
+        disconnectedCount >= 1 &&
+        pendingSlowTimers.size === 1 &&
+        host.querySelector('[role="status"]')?.textContent === EVISAS_HOME_COPY.en.loading;
+
+      // 3. 12s elapses after entering viewport without iframe load -> switches to slow copy.
+      act(() => {
+        for (const [id, fn] of [...pendingSlowTimers.entries()]) {
+          pendingSlowTimers.delete(id);
+          fn();
+        }
+      });
+      const slowShownOk = host.querySelector('[role="status"]')?.textContent === EVISAS_HOME_COPY.en.slow;
+
+      // 4. Iframe finally finishes loading -> status banner clears completely.
+      act(() => {
+        host.querySelector("iframe")?.dispatchEvent(new window.Event("load"));
+      });
+      const clearedOnLoadOk =
+        host.querySelector('[role="status"]') === null &&
+        host.querySelector(".home-evisa-widget-slot--loading") === null;
+
+      // 5. Consent withdrawal resets state to compact consent card (no --live class, no iframe);
+      //    re-granting while off-screen returns to loading without prematurely scheduling slow timer.
+      latestCb = null;
+      act(() => {
+        writeConsentChoice("declined");
+      });
+      const withdrawnOk =
+        host.querySelector("iframe") === null &&
+        host.querySelector(".home-evisa-widget-slot--live") === null &&
+        Boolean(host.querySelector(".home-evisa-consent"));
+
+      act(() => {
+        writeConsentChoice("accepted");
+      });
+      const regrantedOffscreenOk =
+        Boolean(host.querySelector("iframe")) &&
+        host.querySelector('[role="status"]')?.textContent === EVISAS_HOME_COPY.en.loading &&
+        pendingSlowTimers.size === 0;
+
+      // 6. Environments without IntersectionObserver still arm the 12s fallback safely.
+      act(() => {
+        writeConsentChoice("declined");
+      });
+      winTyped.IntersectionObserver = undefined;
+      act(() => {
+        writeConsentChoice("accepted");
+      });
+      const fallbackIoOk = pendingSlowTimers.size === 1;
+
+      act(() => {
+        root.unmount();
+      });
+      const cleanupOnUnmountOk = pendingSlowTimers.size === 0;
+      host.remove();
+      slowTimerOk =
+        evisaPanelSrc.includes("IntersectionObserver") &&
+        offscreenOk &&
+        armedOk &&
+        slowShownOk &&
+        clearedOnLoadOk &&
+        withdrawnOk &&
+        regrantedOffscreenOk &&
+        fallbackIoOk &&
+        cleanupOnUnmountOk;
+    } finally {
+      window.localStorage.clear();
+      winTyped.IntersectionObserver = prevIO;
+      winTyped.setTimeout = prevSetTimeout;
+      winTyped.clearTimeout = prevClearTimeout;
+      if (prevActEnv === undefined) delete (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT;
+      else (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = prevActEnv;
+      if (prevWin === undefined) delete (globalThis as { window?: unknown }).window;
+      else (globalThis as { window?: unknown }).window = prevWin;
+      if (prevDoc === undefined) delete (globalThis as { document?: unknown }).document;
+      else (globalThis as { document?: unknown }).document = prevDoc;
+      if (prevCustomEvent === undefined) delete (globalThis as { CustomEvent?: unknown }).CustomEvent;
+      else (globalThis as { CustomEvent?: unknown }).CustomEvent = prevCustomEvent;
+    }
+    check(
+      slowTimerOk,
+      "homepage eVisas 12s slow-load notice stays disarmed off-screen, starts on viewport entry, clears on iframe load, resets on withdrawal and falls back cleanly without IntersectionObserver",
+    );
+  }
 
   const consentFixtures = [
     { status: null, settings: null, expected: false, analytics: false, functionality: false },
