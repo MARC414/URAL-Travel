@@ -155,6 +155,12 @@ jobs:
       - name: Verify flight route pages and links in built HTML
         run: npm run test:flight-routes
 
+      - name: Verify the official sources directory lists only filed official sites
+        run: npm run test:official-sources
+
+      - name: Verify glossary terms are bilingual, sourced and free of fees
+        run: npm run test:glossary
+
       # Determinism guard for the 2026-10-02 fix: a build must not rewrite the
       # committed sitemap/RSS unless content genuinely changed (which requires a
       # CONTENT_UPDATED bump, making the change expected and committed together).

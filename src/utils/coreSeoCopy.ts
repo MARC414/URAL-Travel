@@ -1,3 +1,5 @@
+import { GLOSSARY_META, GLOSSARY_PATH } from "./glossaryMeta";
+import { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH } from "./officialResourcesMeta";
 import { TOOL_PAGE_SEO } from "./toolRoutes";
 
 export interface SeoCopy {
@@ -277,6 +279,14 @@ export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Interactive pre-flight checklist for Bangladeshi travelers: passport endorsement, NOC/GO, digital arrival cards, cabin & Zamzam baggage rules and Bangladesh Embassy emergency numbers.",
   },
+  [OFFICIAL_RESOURCES_PATH]: {
+    title: OFFICIAL_RESOURCES_META.en.seoTitle,
+    description: OFFICIAL_RESOURCES_META.en.seoDescription,
+  },
+  [GLOSSARY_PATH]: {
+    title: GLOSSARY_META.en.seoTitle,
+    description: GLOSSARY_META.en.seoDescription,
+  },
   "/sitemap": {
     title: "Complete URAL Travel Site Directory & Guide Index | URAL",
     description:
@@ -477,6 +487,14 @@ export const CORE_BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     title: "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার চেকলিস্ট, লাগেজ নিয়ম ও দূতাবাস হেল্পলাইন | URAL",
     description:
       "বিমানবন্দরে রওনার আগের চেকলিস্ট: পাসপোর্ট এন্ডোর্সমেন্ট, NOC/GO, রিটার্ন টিকেট, ডিজিটাল অ্যারাইভাল কার্ড, কেবিন ও জমজম ব্যাগেজের নিয়ম এবং প্রবাসে বাংলাদেশ দূতাবাসের জরুরি নম্বর।",
+  },
+  [OFFICIAL_RESOURCES_PATH]: {
+    title: OFFICIAL_RESOURCES_META.bn.seoTitle,
+    description: OFFICIAL_RESOURCES_META.bn.seoDescription,
+  },
+  [GLOSSARY_PATH]: {
+    title: GLOSSARY_META.bn.seoTitle,
+    description: GLOSSARY_META.bn.seoDescription,
   },
   "/sitemap": {
     title: "URAL ভ্রমণ সাইট ডিরেক্টরি ও গাইড ইনডেক্স | URAL",

@@ -27,6 +27,8 @@
     "test:tool-analytics": "tsx scripts/test-tool-analytics.ts",
     "test:kkday-card": "tsx scripts/test-kkday-card-expiry.ts",
     "test:visa-claims": "tsx scripts/test-visa-claim-integrity.ts",
+    "test:glossary": "tsx scripts/test-glossary.ts",
+    "test:official-sources": "tsx scripts/test-official-sources.ts",
     "test:answer-desk": "tsx scripts/test-answer-desk.ts",
     "test:brand-mark": "tsx scripts/test-brand-mark.ts",
     "test:nusuk-guide": "tsx scripts/test-nusuk-guide.ts",

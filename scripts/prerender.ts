@@ -100,6 +100,12 @@ import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/util
 import { sortBlogsNewestFirst } from "../src/utils/blogOrdering";
 import { SITE_SEARCH_ALIASES } from "../src/data/siteSearchAliases";
 import type { SiteSearchEntry, SiteSearchKind } from "../src/utils/siteSearch";
+import {
+  OFFICIAL_RESOURCES_COPY,
+  OFFICIAL_RESOURCES_PATH,
+  renderOfficialResourcesStaticHtml,
+} from "../src/utils/officialSourcesPage";
+import { GLOSSARY_COPY, GLOSSARY_PATH, glossarySchema, renderGlossaryStaticHtml } from "../src/utils/glossaryPage";
 import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
 import { TIQETS_TOP_ATTRACTIONS, TIQETS_CITY_STACKS } from "../src/data/tiqetsAttractionsData";
 import {
@@ -2803,6 +2809,38 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
+  // 10b. Official sources directory (/resources) — every official website the
+  // guides cite, grouped by topic and country. Body shared with the React view.
+  routes.push({
+    routePath: OFFICIAL_RESOURCES_PATH,
+    canonicalUrl: `${BASE_URL}${OFFICIAL_RESOURCES_PATH}`,
+    title: OFFICIAL_RESOURCES_COPY.en.seoTitle,
+    description: OFFICIAL_RESOURCES_COPY.en.seoDescription,
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: OFFICIAL_RESOURCES_COPY.en.breadcrumb, url: `${BASE_URL}${OFFICIAL_RESOURCES_PATH}` },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: renderOfficialResourcesStaticHtml("en"),
+  });
+
+  // 10c. Glossary (/glossary) — plain meanings of the terms used across the
+  // site, each linked to a URAL guide and an official source.
+  routes.push({
+    routePath: GLOSSARY_PATH,
+    canonicalUrl: `${BASE_URL}${GLOSSARY_PATH}`,
+    title: GLOSSARY_COPY.en.seoTitle,
+    description: GLOSSARY_COPY.en.seoDescription,
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: GLOSSARY_COPY.en.breadcrumb, url: `${BASE_URL}${GLOSSARY_PATH}` },
+    ],
+    extraGraphNodes: [glossarySchema("en", `${BASE_URL}${GLOSSARY_PATH}`)],
+    bodyHtml: renderGlossaryStaticHtml("en"),
+  });
+
   // 11. Site Directory (/sitemap) — directory-only since the split; the
   // pre-departure FAQs moved to /pre-departure so the two URLs never compete.
   routes.push({
@@ -4137,6 +4175,16 @@ function buildBengaliBody(
     return `<article>${parts.join("")}</article>`;
   }
 
+  if (englishPath === OFFICIAL_RESOURCES_PATH) {
+    // Same registry and section order as the English page, Bengali labels.
+    return renderOfficialResourcesStaticHtml("bn", h1);
+  }
+
+  if (englishPath === GLOSSARY_PATH) {
+    // Same terms and order as the English page, Bengali names and definitions.
+    return renderGlossaryStaticHtml("bn", h1);
+  }
+
   if (englishPath === "/sitemap") {
     // The Bengali site directory: grouped hub links so the static twin works
     // as an actual index (and survives without JS), not just an intro + 6 hubs.
@@ -4672,6 +4720,8 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
         bnContactFaq["inLanguage"] = "bn-BD";
         extraGraphNodes.push(bnContactFaq);
       }
+    } else if (englishPath === GLOSSARY_PATH) {
+      extraGraphNodes.push(glossarySchema("bn", canonicalUrl));
     } else if (englishPath === "/privacy") {
       extraGraphNodes.push(
         webPageSchema({

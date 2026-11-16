@@ -35,3 +35,4 @@ src/data/scheduledBlogSeo.generated.ts
 /.video/master/
 /.video/out/
 __pycache__/
+/public/assistant/
