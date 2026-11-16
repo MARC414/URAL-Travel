@@ -639,6 +639,7 @@ function buildSources(): OfficialSourceEntry[] {
     const existing = byUrl.get(key);
     if (existing) {
       existing.checked = supplied.checked;
+      if (supplied.pdf) existing.pdf = true;
       continue;
     }
     // Without a title and a section the link cannot be shown; the build guard reports it.
@@ -656,7 +657,7 @@ function buildSources(): OfficialSourceEntry[] {
       country: organisation.country,
       pages: [],
       checked: supplied.checked,
-      pdf: isPdfUrl(supplied.url),
+      pdf: supplied.pdf ?? isPdfUrl(supplied.url),
     });
   }
   const sectorOrder = new Map(OFFICIAL_SOURCE_SECTORS.map((sector, index) => [sector.id, index]));

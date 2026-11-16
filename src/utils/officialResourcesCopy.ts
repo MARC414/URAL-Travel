@@ -39,6 +39,19 @@ export const OFFICIAL_RESOURCES_COPY = {
     historical: "Past announcement",
     pdf: "PDF",
     checked: "Checked {date}",
+    audienceLabel: "Travelling from",
+    journeyOpen: "Open the {count} steps",
+    journeyStep: "Step {count}",
+    savePdf: "Save as PDF",
+    savePdfLabel: "Print or save as PDF",
+    printedFrom: "uraltravel.co.uk/resources · printed {date}",
+    downloadsTitle: "Guides to keep",
+    downloadUral: "Download",
+    downloadOfficial: "Open on {host}",
+    uralMade: "Made by URAL",
+    pageCount: "{count} pages",
+    fileInEnglish: "In English",
+    communityTitle: "Community bodies, not official",
     showMore: "Show {count} more",
     linkCount: "{count} links",
     empty: "No official site matches these filters. Clear the filters to see the full list.",
@@ -46,7 +59,7 @@ export const OFFICIAL_RESOURCES_COPY = {
     how: [
       "A website is listed only when it belongs to the body that decides the rule or runs the service: a government department, an official state portal, an international organisation, or the airline, airport, rail or bus operator itself.",
       "News sites, travel agencies, booking platforms, blogs and encyclopaedias are not listed, even where a URAL guide quotes them. The one exception is the Saudi Press Agency, the state news agency that carries Saudi government announcements; its items are announcements, so read the date on the SPA page itself.",
-      "Every link comes from a URAL guide that cites it. Use the “URAL guide” link beside a source to see how it is used.",
+      "Every link is cited by a URAL guide, or was opened and checked by URAL on the date shown under it. Use the “URAL guide” link beside a source to see how it is used.",
       "URAL does not control these websites. Rules, fees and page addresses change, so read the date on the official page itself before you pay or travel.",
     ],
     reportTitle: "Found a broken link or a missing official site?",
@@ -82,6 +95,19 @@ export const OFFICIAL_RESOURCES_COPY = {
     historical: "পুরোনো ঘোষণা",
     pdf: "PDF",
     checked: "যাচাই {date}",
+    audienceLabel: "যেখান থেকে যাত্রা",
+    journeyOpen: "{count}টি ধাপ দেখুন",
+    journeyStep: "ধাপ {count}",
+    savePdf: "PDF সংরক্ষণ",
+    savePdfLabel: "প্রিন্ট করুন বা PDF হিসেবে সংরক্ষণ করুন",
+    printedFrom: "uraltravel.co.uk/bn/resources · প্রিন্ট {date}",
+    downloadsTitle: "রেখে দেওয়ার মতো গাইড",
+    downloadUral: "ডাউনলোড",
+    downloadOfficial: "{host}-এ খুলুন",
+    uralMade: "URAL-এর তৈরি",
+    pageCount: "{count} পৃষ্ঠা",
+    fileInEnglish: "ইংরেজিতে",
+    communityTitle: "কমিউনিটি সংস্থা, অফিসিয়াল নয়",
     showMore: "আরও {count}টি দেখুন",
     linkCount: "{count}টি লিংক",
     empty: "এই ফিল্টারের সঙ্গে কোনো অফিসিয়াল সাইট মেলেনি। পুরো তালিকা দেখতে ফিল্টার মুছুন।",
@@ -89,7 +115,7 @@ export const OFFICIAL_RESOURCES_COPY = {
     how: [
       "শুধু সেই ওয়েবসাইটই তালিকায় আছে, যা নিয়ম ঠিক করা বা সেবা পরিচালনা করা প্রতিষ্ঠানের নিজস্ব: সরকারি দপ্তর, রাষ্ট্রীয় অফিসিয়াল পোর্টাল, আন্তর্জাতিক সংস্থা, অথবা এয়ারলাইন, বিমানবন্দর, রেল বা বাস অপারেটর নিজে।",
       "সংবাদমাধ্যম, ট্রাভেল এজেন্সি, বুকিং প্ল্যাটফর্ম, ব্লগ ও বিশ্বকোষ এখানে নেই, যদিও URAL-এর কোনো গাইডে সেগুলোর উদ্ধৃতি থাকতে পারে। একমাত্র ব্যতিক্রম সৌদি প্রেস এজেন্সি — সৌদি সরকারের ঘোষণা প্রকাশকারী রাষ্ট্রীয় সংবাদ সংস্থা; এর লিংকগুলো ঘোষণা, তাই SPA-র পেজে দেওয়া তারিখটি দেখে নিন।",
-      "প্রতিটি লিংক URAL-এর কোনো গাইড থেকে নেওয়া। সূত্রটি কীভাবে ব্যবহার হয়েছে দেখতে পাশের “URAL গাইড” লিংকটি খুলুন।",
+      "প্রতিটি লিংক URAL-এর কোনো গাইডে উদ্ধৃত, অথবা লিংকের নিচে লেখা তারিখে URAL নিজে খুলে যাচাই করেছে। সূত্রটি কীভাবে ব্যবহার হয়েছে দেখতে পাশের “URAL গাইড” লিংকে যান।",
       "এই ওয়েবসাইটগুলো URAL নিয়ন্ত্রণ করে না। নিয়ম, ফি ও পেজের ঠিকানা বদলায়, তাই টাকা দেওয়া বা যাত্রার আগে অফিসিয়াল পেজের তারিখ নিজে দেখে নিন।",
     ],
     reportTitle: "কোনো লিংক কাজ করছে না, বা কোনো অফিসিয়াল সাইট বাদ পড়েছে?",
@@ -155,3 +181,8 @@ export function officialSourceMeta(
   if (source.checked) parts.push(copy.checked.replace("{date}", formatResourceDate(source.checked, locale)));
   return parts;
 }
+
+/** Id of the section that holds the downloads, used by the jump links. */
+export const OFFICIAL_DOWNLOADS_SECTION_ID = "sources-downloads";
+/** Id of the section that holds community bodies. */
+export const OFFICIAL_COMMUNITY_SECTION_ID = "sources-community";

@@ -4,15 +4,21 @@
  * copy as `OfficialResourcesPage.tsx`, so the saved HTML and the running page
  * list identical organisations and links.
  */
+import { UK_PILGRIM_JOURNEY, URAL_DOWNLOADS, resolveGuideDownloads, resolveJourney } from "../data/officialJourneys";
 import {
+  OFFICIAL_HOSTS,
   OFFICIAL_SOURCE_COUNTRIES,
   OFFICIAL_SOURCE_KINDS,
   countOfficialOrganisations,
+  getCommunitySources,
   getOfficialSources,
   groupOfficialSources,
+  type OfficialSourceEntry,
 } from "../data/officialSources";
 import { toBengaliPath } from "./localeRoutes";
 import {
+  OFFICIAL_COMMUNITY_SECTION_ID,
+  OFFICIAL_DOWNLOADS_SECTION_ID,
   OFFICIAL_RESOURCES_COPY,
   OFFICIAL_RESOURCES_PATH,
   fillResourceCopy,
@@ -40,6 +46,28 @@ export function renderOfficialResourcesStaticHtml(lang: OfficialResourcesLocale,
   const count = (value: number) => formatResourceCount(value, lang);
   const localPath = (path: string) => (lang === "bn" ? toBengaliPath(path) : path);
 
+  /** One outbound link with its quiet facts; `withSite` adds the website and the type of site. */
+  const linkItem = (link: OfficialSourceEntry, withSite: boolean): string => {
+    const title = lang === "bn" ? link.titleBn : link.titleEn;
+    const meta = officialSourceMeta(link, lang);
+    if (withSite) meta.unshift(link.host, OFFICIAL_SOURCE_KINDS[OFFICIAL_HOSTS[link.host].kind][lang]);
+    const note = meta.length > 0 ? ` <small>(${escapeHtml(meta.join(" · "))})</small>` : "";
+    const guide =
+      !withSite && link.pages.length > 0
+        ? ` · <a href="${escapeHtml(localPath(link.pages[0]))}">${escapeHtml(copy.guideLink)}</a>`
+        : "";
+    return `<li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>${note}${guide}</li>`;
+  };
+
+  const journeySteps = resolveJourney(UK_PILGRIM_JOURNEY, sources)
+    .map(({ stage, links }) => {
+      const guide = stage.guide
+        ? `<p><a href="${escapeHtml(localPath(stage.guide))}">${escapeHtml(copy.guideLink)}</a></p>`
+        : "";
+      return `<li><h3>${escapeHtml(stage[lang])}</h3><ul>${links.map((link) => linkItem(link, true)).join("")}</ul>${guide}</li>`;
+    })
+    .join("");
+
   const parts: string[] = [
     `<h1>${escapeHtml(h1Override || copy.h1)}</h1>`,
     `<p>${escapeHtml(copy.intro)}</p>`,
@@ -50,7 +78,8 @@ export function renderOfficialResourcesStaticHtml(lang: OfficialResourcesLocale,
         (group) =>
           `<li><a href="#${officialSourceSectionId(group.sector.id)}">${escapeHtml(group.sector[lang])} (${count(group.total)})</a></li>`
       )
-      .join("")}</ul></nav>`,
+      .join("")}<li><a href="#${OFFICIAL_DOWNLOADS_SECTION_ID}">${escapeHtml(copy.downloadsTitle)}</a></li></ul></nav>`,
+    `<section id="${UK_PILGRIM_JOURNEY.id}" data-journey="${UK_PILGRIM_JOURNEY.id}"><h2>${escapeHtml(UK_PILGRIM_JOURNEY[lang])}</h2><ol>${journeySteps}</ol></section>`,
   ];
 
   for (const group of groups) {
@@ -59,15 +88,7 @@ export function renderOfficialResourcesStaticHtml(lang: OfficialResourcesLocale,
         const cards = organisations
           .map(({ organisation, sources: links }) => {
             const hosts = [...new Set(links.map((link) => link.host))].join(", ");
-            const items = links
-              .map((link) => {
-                const title = lang === "bn" ? link.titleBn : link.titleEn;
-                const meta = officialSourceMeta(link, lang);
-                const note = meta.length > 0 ? ` <small>(${escapeHtml(meta.join(" · "))})</small>` : "";
-                const guide = link.pages.length > 0 ? ` · <a href="${escapeHtml(localPath(link.pages[0]))}">${escapeHtml(copy.guideLink)}</a>` : "";
-                return `<li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>${note}${guide}</li>`;
-              })
-              .join("");
+            const items = links.map((link) => linkItem(link, false)).join("");
             return `<h4>${escapeHtml(organisation[lang])}</h4><p><small>${escapeHtml(OFFICIAL_SOURCE_KINDS[organisation.kind][lang])} · ${escapeHtml(hosts)}</small></p><ul>${items}</ul>`;
           })
           .join("");
@@ -76,6 +97,32 @@ export function renderOfficialResourcesStaticHtml(lang: OfficialResourcesLocale,
       .join("");
     parts.push(
       `<section id="${officialSourceSectionId(group.sector.id)}"><h2>${escapeHtml(group.sector[lang])}</h2><p><small>${escapeHtml(fillResourceCopy(copy.linkCount, { count: group.total }, lang))}</small></p>${countryBlocks}</section>`
+    );
+  }
+
+  const uralDownloads = URAL_DOWNLOADS.map((download) => {
+    const facts = [copy.uralMade, copy.pdf, fillResourceCopy(copy.pageCount, { count: download.pages }, lang)];
+    if (lang === "bn" && download.fileLanguage === "en") facts.push(copy.fileInEnglish);
+    return `<li><a href="${escapeHtml(download.path)}" download>${escapeHtml(download[lang])}</a> <small>(${escapeHtml(facts.join(" · "))})</small></li>`;
+  }).join("");
+  const officialDownloads = resolveGuideDownloads(sources)
+    .map((link) => linkItem(link, true))
+    .join("");
+  parts.push(
+    `<section id="${OFFICIAL_DOWNLOADS_SECTION_ID}"><h2>${escapeHtml(copy.downloadsTitle)}</h2><ul>${uralDownloads}${officialDownloads}</ul></section>`
+  );
+
+  const community = getCommunitySources();
+  if (community.length > 0) {
+    const organisations = [...new Set(community.map((link) => link.org))]
+      .map((id) => {
+        const links = community.filter((link) => link.org === id);
+        const organisation = OFFICIAL_HOSTS[links[0].host];
+        return `<h3>${escapeHtml(organisation[lang])}</h3><p><small>${escapeHtml(OFFICIAL_SOURCE_KINDS[organisation.kind][lang])} · ${escapeHtml(links[0].host)}</small></p><ul>${links.map((link) => linkItem(link, false)).join("")}</ul>`;
+      })
+      .join("");
+    parts.push(
+      `<section id="${OFFICIAL_COMMUNITY_SECTION_ID}" data-community-sources><h2>${escapeHtml(copy.communityTitle)}</h2>${organisations}</section>`
     );
   }
 

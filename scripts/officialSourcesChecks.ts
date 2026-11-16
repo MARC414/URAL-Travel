@@ -6,6 +6,10 @@
  * non-official before the build passes, and nothing non-official can be listed.
  * Shared by `npm run test:official-sources` and `npm run verify:build`.
  */
+import { existsSync, readdirSync } from "node:fs";
+import path from "node:path";
+import { getLocalizedBlogs } from "../src/data/bengaliContent";
+import { OFFICIAL_GUIDE_DOWNLOADS, OFFICIAL_JOURNEYS, URAL_DOWNLOADS } from "../src/data/officialJourneys";
 import {
   NON_OFFICIAL_HOSTS,
   OFFICIAL_HOSTS,
@@ -82,6 +86,41 @@ export function runOfficialSourcesChecks(): OfficialSourcesCheck[] {
     seen.add(key);
   }
   add(duplicates, "official sources: no link is listed twice");
+
+  // Journeys and downloads only arrange links that are already official.
+  const officialByKey = new Map(official.map((source) => [officialSourceUrlKey(source.url), source]));
+  const publishedGuides = new Set(getLocalizedBlogs("en").map((post) => `/blog/${post.slug}`));
+  const bengaliGuides = new Set(getLocalizedBlogs("bn").map((post) => `/blog/${post.slug}`));
+  const journeyProblems: string[] = [];
+  for (const journey of OFFICIAL_JOURNEYS) {
+    for (const stage of journey.stages) {
+      if (stage.links.length === 0 || stage.links.length > 4) journeyProblems.push(`${journey.id}/${stage.id} (1 to 4 links)`);
+      if (!stage.en.trim() || !stage.bn.trim()) journeyProblems.push(`${journey.id}/${stage.id} (name)`);
+      for (const url of stage.links) {
+        if (!officialByKey.has(officialSourceUrlKey(url))) journeyProblems.push(`${journey.id}/${stage.id}: ${url}`);
+      }
+      if (stage.guide && (!publishedGuides.has(stage.guide) || !bengaliGuides.has(stage.guide))) {
+        journeyProblems.push(`${journey.id}/${stage.id}: guide ${stage.guide}`);
+      }
+    }
+  }
+  add(journeyProblems, "official sources: every journey step uses official links and published guides");
+  add(
+    OFFICIAL_GUIDE_DOWNLOADS.filter((url) => !officialByKey.get(officialSourceUrlKey(url))?.pdf),
+    "official sources: every listed handbook is an official link marked PDF"
+  );
+  add(
+    URAL_DOWNLOADS.filter(
+      (download) =>
+        !download.path.startsWith("/downloads/ural-") || !existsSync(path.join(process.cwd(), "public", download.path))
+    ).map((download) => download.path),
+    "official sources: every hosted download is a URAL-made file that exists"
+  );
+  const downloadsDir = path.join(process.cwd(), "public", "downloads");
+  add(
+    existsSync(downloadsDir) ? readdirSync(downloadsDir).filter((name) => !name.startsWith("ural-")) : [],
+    "official sources: public/downloads holds URAL-made files only, never a copy of an official file"
+  );
 
   return results;
 }

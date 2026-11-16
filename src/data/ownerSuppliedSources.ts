@@ -22,6 +22,8 @@ export interface OwnerSuppliedSource {
   en?: string;
   bn?: string;
   sector?: OfficialSourceSector;
+  /** The page exists to hand over a PDF file, although its address does not end in .pdf. */
+  pdf?: boolean;
 }
 
 const UK_HAJJ_UMRAH_CHECKED = "2026-11-16";
@@ -37,7 +39,7 @@ export const OWNER_SUPPLIED_SOURCES: readonly OwnerSuppliedSource[] = [
   { url: "https://www.gov.uk/guidance/foreign-travel-insurance", checked: UK_HAJJ_UMRAH_CHECKED, en: "Foreign travel insurance", bn: "বিদেশ ভ্রমণ বিমা", sector: "consumer" },
   { url: "https://www.gov.uk/government/publications/air-passenger-travel-guide/air-passenger-travel-guide", checked: UK_HAJJ_UMRAH_CHECKED, en: "Air passenger travel guide", bn: "বিমানযাত্রীর ভ্রমণ নির্দেশিকা", sector: "consumer" },
   { url: "https://www.gov.uk/government/publications/air-passenger-travel-guide/air-passenger-travel-guide-summary-of-passenger-rights", checked: UK_HAJJ_UMRAH_CHECKED, en: "Air passenger travel guide: summary of passenger rights", bn: "বিমানযাত্রীর ভ্রমণ নির্দেশিকা: যাত্রী অধিকারের সারসংক্ষেপ", sector: "consumer" },
-  { url: "https://haj.gov.sa/en/Awareness-Center/Awareness-Guides/Hajj-Guide-Uk", checked: UK_HAJJ_UMRAH_CHECKED, en: "Hajj handbook for UK pilgrims", bn: "যুক্তরাজ্যের হাজিদের জন্য হজ হ্যান্ডবুক", sector: "pilgrimage" },
+  { url: "https://haj.gov.sa/en/Awareness-Center/Awareness-Guides/Hajj-Guide-Uk", checked: UK_HAJJ_UMRAH_CHECKED, en: "Hajj handbook for UK pilgrims", bn: "যুক্তরাজ্যের হাজিদের জন্য হজ হ্যান্ডবুক", sector: "pilgrimage", pdf: true },
   { url: "https://haj.gov.sa/en/Awareness-Center/Awareness-Guides/Umrah-and-Visit-Guide", checked: UK_HAJJ_UMRAH_CHECKED, en: "Umrah and Visit Guide", bn: "ওমরাহ ও জিয়ারত গাইড", sector: "pilgrimage" },
   { url: "https://haj.gov.sa/en/Umrah/Umrah-Requirements", checked: UK_HAJJ_UMRAH_CHECKED, en: "Umrah requirements", bn: "ওমরাহর শর্তাবলি", sector: "pilgrimage" },
   { url: "https://haj.gov.sa/-/media/Project/HAJJ/PDF-and-FILES/Awareness-Guides/General-Hajj-Guide/en-hajj-guid.pdf", checked: UK_HAJJ_UMRAH_CHECKED, en: "General Hajj Guide", bn: "সাধারণ হজ গাইড", sector: "pilgrimage" },
