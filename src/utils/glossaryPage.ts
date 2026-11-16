@@ -26,7 +26,9 @@ function escapeHtml(value: string): string {
 
 /** The term's name in the page language first, then in the other language. */
 export function glossaryTermNames(term: GlossaryTerm, lang: GlossaryLocale): { primary: string; secondary: string } {
-  return lang === "bn" ? { primary: term.bn, secondary: term.en } : { primary: term.en, secondary: term.bn };
+  const [primary, other] = lang === "bn" ? [term.bn, term.en] : [term.en, term.bn];
+  // Brand and legal names (UK261, MDAC) are written the same way in both languages.
+  return { primary, secondary: other === primary ? "" : other };
 }
 
 export function renderGlossaryStaticHtml(lang: GlossaryLocale, h1Override?: string): string {
@@ -60,7 +62,7 @@ export function renderGlossaryStaticHtml(lang: GlossaryLocale, h1Override?: stri
         ]
           .filter(Boolean)
           .join(" · ");
-        return `<dt id="${glossaryTermAnchor(term.id)}">${escapeHtml(names.primary)} <span lang="${otherLang}">(${escapeHtml(names.secondary)})</span></dt><dd>${escapeHtml(lang === "bn" ? term.defBn : term.defEn)}${also}${links ? ` ${links}` : ""}</dd>`;
+        return `<dt id="${glossaryTermAnchor(term.id)}">${escapeHtml(names.primary)}${names.secondary ? ` <span lang="${otherLang}">(${escapeHtml(names.secondary)})</span>` : ""}</dt><dd>${escapeHtml(lang === "bn" ? term.defBn : term.defEn)}${also}${links ? ` ${links}` : ""}</dd>`;
       })
       .join("");
     parts.push(
@@ -91,7 +93,7 @@ export function glossarySchema(lang: GlossaryLocale, canonicalUrl: string): Reco
         "@type": "DefinedTerm",
         "@id": `${canonicalUrl}#${glossaryTermAnchor(term.id)}`,
         name: names.primary,
-        alternateName: [names.secondary, ...(term.aka ?? [])],
+        alternateName: [names.secondary, ...(term.aka ?? [])].filter(Boolean),
         description: lang === "bn" ? term.defBn : term.defEn,
         url: `${canonicalUrl}#${glossaryTermAnchor(term.id)}`,
         inDefinedTermSet: { "@id": `${canonicalUrl}#glossary` },

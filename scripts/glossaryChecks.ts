@@ -88,8 +88,8 @@ export function runGlossaryChecks(): GlossaryCheck[] {
   );
 
   add(
-    GLOSSARY_TERMS.filter((term) => /উমরাহ|হজ্জ/.test(`${term.bn} ${term.defBn}`)).map((term) => term.id),
-    "Bengali text uses the site spellings ওমরাহ and হজ"
+    GLOSSARY_TERMS.filter((term) => /উমরাহ|হজ্জ|রওজা|কোরবানি/.test(`${term.bn} ${term.defBn}`)).map((term) => term.id),
+    "Bengali text uses the site spellings ওমরাহ, হজ, রওদা and কুরবানি"
   );
 
   add(

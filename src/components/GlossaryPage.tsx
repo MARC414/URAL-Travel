@@ -81,9 +81,11 @@ export default function GlossaryPage({ lang, onNavigate }: GlossaryPageProps) {
       >
         <h3 className="ural-card-title flex flex-wrap items-baseline gap-x-2.5 gap-y-0.5 text-lg text-brand-navy">
           {primary}
-          <span lang={isBn ? "en" : "bn"} className="text-sm font-semibold text-brand-emerald">
-            {secondary}
-          </span>
+          {secondary !== primary && (
+            <span lang={isBn ? "en" : "bn"} className="text-sm font-semibold text-brand-emerald">
+              {secondary}
+            </span>
+          )}
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-text-secondary sm:text-[15px]">{isBn ? term.defBn : term.defEn}</p>
         {term.aka && term.aka.length > 0 && (

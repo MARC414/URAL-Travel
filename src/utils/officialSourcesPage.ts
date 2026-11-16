@@ -15,6 +15,7 @@ import {
   groupOfficialSources,
   type OfficialSourceEntry,
 } from "../data/officialSources";
+import { GLOSSARY_META, GLOSSARY_PATH } from "./glossaryMeta";
 import { toBengaliPath } from "./localeRoutes";
 import {
   OFFICIAL_COMMUNITY_SECTION_ID,
@@ -130,7 +131,8 @@ export function renderOfficialResourcesStaticHtml(lang: OfficialResourcesLocale,
 
   parts.push(
     `<section><h2>${escapeHtml(copy.howTitle)}</h2><ul>${copy.how.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}</ul></section>`,
-    `<section><h2>${escapeHtml(copy.reportTitle)}</h2><p>${escapeHtml(copy.reportBody)}</p><p><a href="${escapeHtml(localPath("/contact"))}">${escapeHtml(copy.reportCta)}</a></p></section>`
+    `<section><h2>${escapeHtml(copy.reportTitle)}</h2><p>${escapeHtml(copy.reportBody)}</p><p><a href="${escapeHtml(localPath("/contact"))}">${escapeHtml(copy.reportCta)}</a></p></section>`,
+    `<p><a href="${escapeHtml(localPath(GLOSSARY_PATH))}">${escapeHtml(GLOSSARY_META[lang].navLabel)}</a></p>`
   );
   return `<article>${parts.join("")}</article>`;
 }

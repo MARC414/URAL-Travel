@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, ChevronDown, Download, ExternalLink, FileDown, FileText, Landmark, Search, X } from "lucide-react";
+import { ArrowRight, BookOpen, ChevronDown, Download, ExternalLink, FileDown, FileText, Search, X } from "lucide-react";
 
+import { GLOSSARY_META, GLOSSARY_PATH } from "../utils/glossaryMeta";
 import {
   OFFICIAL_AUDIENCES,
   UK_PILGRIM_JOURNEY,
@@ -767,6 +768,18 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
           <ArrowRight className="size-4" aria-hidden="true" />
         </a>
       </section>
+
+      {/* The words used in these sources, explained. */}
+      <a
+        href={localPath(GLOSSARY_PATH)}
+        onClick={(event) => followInternalLink(event, GLOSSARY_PATH)}
+        data-print-hide
+        className={`inline-flex min-h-11 items-center gap-2 self-start rounded-md text-sm font-semibold text-brand-emerald underline-offset-4 hover:underline ${FOCUS_RING}`}
+      >
+        <BookOpen className="size-4" aria-hidden="true" />
+        {GLOSSARY_META[locale].navLabel}
+        <ArrowRight className="size-3.5" aria-hidden="true" />
+      </a>
     </div>
   );
 }
