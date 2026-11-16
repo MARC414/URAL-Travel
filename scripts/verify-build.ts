@@ -203,6 +203,7 @@ check(
     welcomeTransferEn.includes("not a confirmed booking") && welcomeTransferBn.includes("নিশ্চিত বুকিং") &&
     welcomeTransferEn.includes("drafts a message to URAL") && welcomeTransferBn.includes("খসড়া বার্তা তৈরি করে") &&
     welcomePickupSource.includes(WELCOME_PICKUPS_PARTNER_URL) &&
+    AFFILIATE_LINKS.welcomePickups === WELCOME_PICKUPS_PARTNER_URL &&
     welcomePickupSource.includes('data-affiliate-placement="travel_essentials_welcome_pickups_transfer"') &&
     welcomePickupSource.includes('rel="noopener noreferrer sponsored"') &&
     welcomePickupSource.includes("may earn a commission on qualifying bookings"),
@@ -2818,7 +2819,8 @@ check(
     ["banner syncs via subscribeConsent + readConsentState", bannerSrc.includes("subscribeConsent") && bannerSrc.includes("readConsentState") && bannerSrc.includes("writeConsentChoice")],
     ["banner switches carry keyboard peer-focus-visible rings and accessible labels", bannerSrc.includes("peer-focus-visible:ring-2") && bannerSrc.includes('aria-labelledby="consent-label-marketing"') && bannerSrc.includes('aria-labelledby="consent-label-analytics"') && bannerSrc.includes('aria-labelledby="consent-label-functionality"')],
     ["banner removes inaccurate BN 'no personal data' claim and discloses IP + partner tools", !bannerSrc.includes("কোনো ব্যক্তিগত তথ্য") && bannerSrc.includes("IP address") && bannerSrc.includes("eVisas") && bannerSrc.includes("Tiqets") && bannerSrc.includes("AirHelp") && bannerSrc.includes("Welcome Pickups")],
-    ["privacy control center syncs via central consent.ts with labelled focus-visible checkboxes", privacySrc.includes("subscribeConsent") && privacySrc.includes("writeConsentChoice") && privacySrc.includes("CONSENT_CATEGORY_LABELS.marketing") && privacySrc.includes('htmlFor="privacy-consent-marketing"') && privacySrc.includes('htmlFor="privacy-consent-analytics"') && privacySrc.includes('htmlFor="privacy-consent-functionality"') && privacySrc.includes("focus-visible:ring-2")],
+    ["banner sits above z-50 floating widgets, gives 44px touch targets and restores focus on close", bannerSrc.includes("z-[70]") && bannerSrc.includes("restoreConsentFocus") && bannerSrc.includes("min-h-11 min-w-11")],
+    ["privacy control center syncs via central consent.ts with labelled focus-visible checkboxes and accurate cookie/storage keys", privacySrc.includes("subscribeConsent") && privacySrc.includes("writeConsentChoice") && privacySrc.includes("CONSENT_CATEGORY_LABELS.marketing") && privacySrc.includes('htmlFor="privacy-consent-marketing"') && privacySrc.includes('htmlFor="privacy-consent-analytics"') && privacySrc.includes('htmlFor="privacy-consent-functionality"') && privacySrc.includes("focus-visible:ring-2") && privacySrc.includes("cookie-consent-settings") && privacySrc.includes("ural_lang") && privacySrc.includes("ural_dac_predeparture_checked_v1") && !privacySrc.includes("ural-lang") && !privacySrc.includes("ural-currency")],
   ];
   const consentUiFailures = consentUiChecks.filter(([, ok]) => !ok).map(([msg]) => msg);
   check(

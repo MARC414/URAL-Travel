@@ -1,6 +1,6 @@
 # eVisas integration
 
-**Lifecycle: current implementation reference · 15 November 2026**
+**Lifecycle: current implementation reference · updated 16 November 2026**
 
 Scope: the owner's request for prominent, contextual eVisas placements on the
 homepage and related guides, varied banner formats, supplied destination campaigns
@@ -104,8 +104,9 @@ live eligibility checker.
 
 ## Asset sizes
 
-WebP outputs measured on disk on 15 November 2026; original PNGs are retained in
-`public/assets/partners/evisas/`.
+WebP outputs measured on disk on 15 November 2026; only the four shipped WebP
+files live in `public/assets/partners/evisas/` so unreferenced PNG originals are
+not copied into `dist/`.
 
 | Creative | PNG bytes | Shipped WebP bytes |
 |---|---:|---:|
@@ -124,9 +125,16 @@ the title `eVisas visa checker`. The container stylesheet gives the unmodified
 partner form more vertical room on narrow panels; its documents and script are
 not copied, intercepted or rewritten. Browser measurements found the provider
 form needed 476px at a 316px-wide panel and 561px at 246px. Container queries
-reserve 500px and 580px respectively, avoiding clipped controls. Wider frames
-retain the supplied 340px height. These are layout measurements, not processing
-times.
+reserve 500px and 580px respectively on the live frame slot
+(`.home-evisa-frame`, `.home-evisa-widget-slot--live`), avoiding clipped
+controls while keeping the unconsented fallback card (`.home-evisa-consent`)
+compact on stacked mobile/tablet viewports, free of any fixed height so zoomed
+or Bengali text expands naturally, and balanced at `min-height: 340px` beside
+the square creative at `>= 1024px`. Wider frames retain the supplied 340px
+height. On the client homepage, a pause-gated, `aria-hidden`, dimension-matched
+`React.Suspense` skeleton reserves the section's footprint while the lazy
+`EvisaPanels` chunk loads so downstream sections do not shift. These are layout
+measurements, not processing times.
 
 The public widget returned HTTP 200 with `frame-ancestors *` on 15 November 2026.
 Its observed data endpoint returned 16 destinations for Bangladesh, excluding
@@ -135,12 +143,19 @@ URLs carry `ref=uraltravel` and `w=wgt_4c9e559a2739a9d02b62f257`; these are not 
 separate destination-campaign `sid` links. Neither an HTTP response nor an encoded
 referral parameter establishes dashboard receipt or a completed application.
 
-`src/utils/evisaWidgetConsent.ts` requires marketing consent. Missing, declined,
+`src/utils/consent.ts` (re-exported via `src/utils/evisaWidgetConsent.ts`)
+requires `Marketing & Partner Tools` (`marketing`) consent. Missing, declined,
 invalid or analytics-only choices leave the native explanation and direct link
-visible, without requesting the remote frame. A cookie-preferences button opens
-the existing consent controls. Grant and withdrawal events mount/remove the
-frame, including when browser storage is unavailable. Stored preferences are
-also synchronized when another tab changes them.
+visible, without requesting the remote frame. A neutral secondary
+cookie-preferences button opens the central consent controls while preserving
+the direct link under the square creative as the section's sole primary gold
+action. Grant and withdrawal events mount/remove the frame immediately without
+a client consent flash (`useSyncExternalStore` with a fail-closed server
+snapshot), including when browser storage is unavailable, and synchronize across
+tabs. The 12-second slow-load notice arms via `IntersectionObserver` only once
+the widget slot enters the visible viewport (falling back immediately if
+`IntersectionObserver` is unavailable), preventing premature slow-load messages
+while a `loading="lazy"` iframe remains below the fold.
 
 The direct partner link remains usable while the checker is loading, unavailable
 or consent-blocked, and it is the section's only action: one button placed under

@@ -3,8 +3,6 @@ import { ExternalLink } from "lucide-react";
 import { KlookEmbed } from "./KlookEmbed";
 import { KiwitaxiEmbed } from "./KiwitaxiEmbed";
 import { AiraloEmbed } from "./AiraloEmbed";
-import { QeeqEmbed } from "./QeeqEmbed";
-import { WelcomePickupsEmbed, WELCOME_PICKUPS_PARTNER_URL } from "./WelcomePickupsEmbed";
 
 /* Single source of truth for the plain outbound URLs (used by
    PartnerLinkButton and any inline <a> tags). Do not edit these values. */
@@ -19,7 +17,8 @@ export const AFFILIATE_LINKS = {
   kkdayHotels: "https://kkday.tpo.li/fyAFi2IO",
   kkday: "https://kkday.tpo.li/3Ecyxris",
   kiwitaxi: "https://kiwitaxi.tpo.li/GIhvhrtF",
-  welcomePickups: WELCOME_PICKUPS_PARTNER_URL,
+  welcomePickups:
+    "https://tp.media/r?marker=675992&trs=589561&p=8951&u=https%3A%2F%2Fwww.welcomepickups.com&campaign_id=627",
   airalo: "https://airalo.tpo.li/mV2QXsXK",
   qeeq: "https://qeeq.tpo.li/nooi5oSG",
   radicalStorage: "https://radicalstorage.tpo.li/7I3EWiUg",
@@ -591,19 +590,9 @@ export function KiwitaxiTransferWidget() {
   return <KiwitaxiEmbed />;
 }
 
-/* 04b. Welcome Pickups — Arrival Gate Meet-and-Greet Airport Transfers widget */
-export function WelcomePickupsWidget({ defaultCountry }: { defaultCountry?: string }) {
-  return <WelcomePickupsEmbed defaultCountry={defaultCountry} />;
-}
-
 /* 05. Airalo — eSIM / connectivity widget */
 export function AiraloEsimWidget({ lang = "en" }: { lang?: "en" | "bn" }) {
   return <AiraloEmbed lang={lang} />;
-}
-
-/* 06. QEEQ — Car Rental widget */
-export function QeeqCarRentalWidget() {
-  return <QeeqEmbed />;
 }
 
 

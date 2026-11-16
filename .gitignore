@@ -13,6 +13,7 @@ bun.lockb
 # Generated during the build from content/blog/*.md. Do not commit preview or
 # publication-specific modules; normal npm scripts regenerate these on demand.
 src/data/scheduledBlogIndex.generated.ts
+src/data/scheduledBlogAeoPanels.generated.ts
 src/data/scheduledBlogPosts.generated.ts
 src/data/scheduledBlogBodies.generated.ts
 src/data/scheduledBengaliBlogs.generated.ts

@@ -4,6 +4,7 @@ import {
   CONSENT_OPEN_EVENT,
   applyConsentState,
   openConsentPreferences,
+  hasConsent,
   readConsentState,
   readOptionalStorage,
   subscribeConsent,
@@ -63,15 +64,6 @@ import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
 import { TravelIntelligence } from "./components/AeoInspector";
 import { AscentMark } from "./components/AscentMark";
 import {
-  KiwitaxiTransferWidget,
-  WelcomePickupsWidget,
-  AiraloEsimWidget,
-  KlookActivitiesWidget,
-  QeeqCarRentalWidget,
-  PartnerLinkButton,
-  RadicalStorageContextualCallout,
-  MultiPartnerBlogCallout,
-  TravelpayoutsReferralCallout,
   AFFILIATE_LINKS,
   KKDAY_PROMO,
   isPromoActive,
@@ -101,7 +93,6 @@ import { Language, translations } from "./translations";
 import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
-import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
 import { getBengaliSeoCopy, getSeoCopy } from "./utils/seoCopy";
 import {
   isToolSlug,
@@ -3877,10 +3868,40 @@ export default function App() {
 
               {/* eVisas now sits directly below the flight search. The quick
                   airport-code reference moved under the "Where Are You Flying
-                  Next?" cards below. */}
-              <React.Suspense fallback={null}>
-                <EvisaHomeSection lang={isBn ? "bn" : "en"} />
-              </React.Suspense>
+                  Next?" cards below. A dimension-matched Suspense placeholder
+                  keeps downstream sections stable while the lazy chunk loads. */}
+              {Boolean(resolvePartnerUrl(AFFILIATE_LINKS.evisas)) && (
+                <React.Suspense
+                  fallback={
+                    <div aria-hidden="true" data-evisa-skeleton="" className="home-evisa home-evisa-skeleton">
+                      <div className="home-evisa-intro">
+                        <div className="home-evisa-skeleton-block home-evisa-skeleton-title" />
+                        <div className="home-evisa-skeleton-block home-evisa-skeleton-hook" />
+                        <div className="home-evisa-skeleton-block home-evisa-skeleton-body" />
+                      </div>
+                      <div className="home-evisa-layout">
+                        <div className="home-evisa-widget">
+                          {isBn && <div className="home-evisa-skeleton-block home-evisa-skeleton-note" />}
+                          <div
+                            className={
+                              hasConsent("marketing")
+                                ? "home-evisa-widget-slot home-evisa-widget-slot--live home-evisa-skeleton-block"
+                                : "home-evisa-consent"
+                            }
+                          />
+                        </div>
+                        <div className="home-evisa-ad">
+                          <div className="home-evisa-skeleton-block home-evisa-skeleton-square" />
+                          <div className="home-evisa-skeleton-block home-evisa-skeleton-caption" />
+                          <div className="home-evisa-skeleton-block home-evisa-skeleton-cta" />
+                        </div>
+                      </div>
+                    </div>
+                  }
+                >
+                  <EvisaHomeSection lang={isBn ? "bn" : "en"} />
+                </React.Suspense>
+              )}
             </div>
 
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}

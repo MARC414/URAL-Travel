@@ -3,6 +3,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
 import { AFFILIATE_LINKS } from "../src/components/AffiliatePartners";
+import type { EvisaCampaignKey } from "../src/types";
+
+export const EVISAS_CAMPAIGN_KEYS = ["uae", "morocco", "thailand"] as const satisfies readonly EvisaCampaignKey[];
 
 export const PUBLISH_TIME_ZONE = "Asia/Dhaka";
 export const DEFAULT_PUBLISH_HOUR = 9;
@@ -34,6 +37,7 @@ export interface ScheduledBlogAffiliateCta {
   provider: string;
   headline: string;
   body: string;
+  campaign?: EvisaCampaignKey;
 }
 
 /**
@@ -240,9 +244,16 @@ function parseAffiliateCta(
   const provider = optionalString(data, `${prefix}Provider`, file);
   const headline = optionalString(data, `${prefix}Headline`, file);
   const body = optionalString(data, `${prefix}Body`, file);
+  const campaign = optionalEnum(data, `${prefix}Campaign`, file, EVISAS_CAMPAIGN_KEYS);
   const supplied = [provider, headline, body].filter(Boolean).length;
 
   if (supplied === 0) {
+    if (campaign) {
+      return fail(
+        file,
+        `frontmatter field "${prefix}Campaign" requires ${prefix}Provider: "evisas", ${prefix}Headline and ${prefix}Body`
+      );
+    }
     if (required) {
       return fail(
         file,
@@ -263,7 +274,57 @@ function parseAffiliateCta(
       `frontmatter field "${prefix}Provider" must be a known partner (${partnerKeys.join(", ")})`
     );
   }
-  return { provider: provider as string, headline: headline as string, body: body as string };
+  if (campaign && provider !== "evisas") {
+    return fail(
+      file,
+      `frontmatter field "${prefix}Campaign" is supported only when ${prefix}Provider is "evisas" (got "${provider}")`
+    );
+  }
+  return {
+    provider: provider as string,
+    headline: headline as string,
+    body: body as string,
+    ...(campaign ? { campaign } : {}),
+  };
+}
+
+/** Validates the EN/BN affiliate CTA pair so an eVisas destination campaign cannot drift across locales. */
+export function resolveScheduledAffiliateCtaPair(
+  data: Record<string, unknown>,
+  file: string,
+  partnerKeys: string[] = Object.keys(AFFILIATE_LINKS)
+): {
+  affiliateCta?: ScheduledBlogAffiliateCta;
+  affiliateCtaBn?: ScheduledBlogAffiliateCta;
+} {
+  const affiliateCta = parseAffiliateCta(data, file, {
+    prefix: "affiliateCta",
+    partnerKeys,
+    required: false,
+  });
+  let affiliateCtaBn = parseAffiliateCta(data, file, {
+    prefix: "affiliateCtaBn",
+    partnerKeys,
+    required: false,
+  });
+
+  if (affiliateCtaBn?.campaign && affiliateCta?.campaign !== affiliateCtaBn.campaign) {
+    return fail(
+      file,
+      `affiliateCtaBnCampaign ("${affiliateCtaBn.campaign}") must match affiliateCtaCampaign ("${affiliateCta?.campaign ?? "unset"}")`
+    );
+  }
+  if (affiliateCta?.campaign && affiliateCtaBn) {
+    if (affiliateCtaBn.provider !== "evisas") {
+      return fail(
+        file,
+        `affiliateCtaBnProvider ("${affiliateCtaBn.provider}") must match affiliateCtaProvider ("evisas") when affiliateCtaCampaign is set`
+      );
+    }
+    affiliateCtaBn = { ...affiliateCtaBn, campaign: affiliateCta.campaign };
+  }
+
+  return { affiliateCta, affiliateCtaBn };
 }
 
 /**
@@ -499,16 +560,7 @@ function parsePost(file: string): ScheduledBlogPost {
     internalLinksEn: parseLinks(data.internalLinksEn, "internalLinksEn", file),
     internalLinksBn: parseLinks(data.internalLinksBn, "internalLinksBn", file),
     journeyStage: optionalEnum(data, "journeyStage", file, JOURNEY_STAGES),
-    affiliateCta: parseAffiliateCta(data, file, {
-      prefix: "affiliateCta",
-      partnerKeys,
-      required: false,
-    }),
-    affiliateCtaBn: parseAffiliateCta(data, file, {
-      prefix: "affiliateCtaBn",
-      partnerKeys,
-      required: false,
-    }),
+    ...resolveScheduledAffiliateCtaPair(data, file, partnerKeys),
     ...aeo,
     englishBody,
     bengaliBody,

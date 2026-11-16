@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 export type ConsentStatus = "accepted" | "declined" | "custom";
 export type StoredConsentStatus = ConsentStatus | "unset";
@@ -61,6 +61,10 @@ export const ACCEPTED_CONSENT_SETTINGS: Readonly<GranularConsentSettings> = Obje
 type ConsentWindow = Window & {
   /** Session-only fallback used exclusively when localStorage is unavailable or throws. */
   __uralConsent?: ConsentState;
+  /** Last interactive trigger that opened cookie preferences, used to restore keyboard focus. */
+  __uralConsentTrigger?: HTMLElement | null;
+  /** Closest landmark heading fallback if the trigger unmounts after consent changes. */
+  __uralConsentFallbackFocus?: HTMLElement | null;
   dataLayer?: unknown[];
   gtag?: (...args: unknown[]) => void;
 };
@@ -244,7 +248,7 @@ function clearDisallowedCookies(settings: GranularConsentSettings): void {
       const name = entry.split("=")[0]?.trim();
       if (!name) continue;
       const isAnalyticsCookie = /^(_ga($|_)|_gid$|_gat($|_))/i.test(name);
-      const isMarketingCookie = /^(_gcl_|_fbp$|_fbc$|tp_)/i.test(name);
+      const isMarketingCookie = /^(_gcl_|_gac_|_fbp$|_fbc$|tp_|emrld)/i.test(name);
       if ((!settings.analytics && isAnalyticsCookie) || (!settings.marketing && isMarketingCookie)) {
         for (const domain of domains) {
           const domainAttr = domain ? `; domain=${domain}` : "";
@@ -377,7 +381,55 @@ export function writeConsentChoice(
 /** Opens the sitewide cookie-preferences dialog from any page or gated widget. */
 export function openConsentPreferences(): void {
   if (typeof window === "undefined" || typeof window.dispatchEvent !== "function") return;
-  window.dispatchEvent(new CustomEvent(CONSENT_OPEN_EVENT));
+  const win = window as ConsentWindow;
+  try {
+    const active = typeof document !== "undefined" ? document.activeElement : null;
+    if (
+      active &&
+      typeof (active as HTMLElement).focus === "function" &&
+      active !== document.body &&
+      !(active as HTMLElement).closest?.("[data-consent-banner]")
+    ) {
+      const el = active as HTMLElement;
+      win.__uralConsentTrigger = el;
+      const section = el.closest?.("section");
+      win.__uralConsentFallbackFocus =
+        (section?.querySelector("h2, h3, h4") as HTMLElement | null) ?? null;
+    }
+  } catch {
+    // Ignore in restricted DOM environments.
+  }
+  win.dispatchEvent(new CustomEvent(CONSENT_OPEN_EVENT));
+}
+
+/** Restores keyboard focus to the control that opened cookie preferences (if any). */
+export function restoreConsentFocus(): void {
+  if (typeof window === "undefined") return;
+  const win = window as ConsentWindow;
+  const trigger = win.__uralConsentTrigger;
+  const fallback = win.__uralConsentFallbackFocus;
+  win.__uralConsentTrigger = null;
+  win.__uralConsentFallbackFocus = null;
+  if (!trigger && !fallback) return;
+  const run = () => {
+    try {
+      if (trigger?.isConnected) {
+        trigger.focus({ preventScroll: true });
+        return;
+      }
+      if (fallback?.isConnected) {
+        if (!fallback.hasAttribute("tabindex")) fallback.setAttribute("tabindex", "-1");
+        fallback.focus({ preventScroll: true });
+      }
+    } catch {
+      // Ignore focus failures in restricted environments.
+    }
+  };
+  if (typeof window.requestAnimationFrame === "function") {
+    window.requestAnimationFrame(run);
+  } else {
+    run();
+  }
 }
 
 /** Subscribes to same-tab and cross-tab consent updates. */
@@ -433,21 +485,25 @@ export function writeOptionalStorage(key: OptionalStorageKey, value: string): vo
   }
 }
 
+const NOOP_UNSUBSCRIBE = () => {};
+
 /**
  * React hook for consent-gated components.
- * Starts `false` during SSR/prerender so saved HTML never ships an optional third-party embed.
+ * Uses `getServerSnapshot` -> `false` for optional categories so prerendered HTML
+ * never ships a third-party embed, while client mounts read live consent without a
+ * single-frame flash or height bounce.
  */
 export function useConsent(category: ConsentCategory): boolean {
-  const [allowed, setAllowed] = useState<boolean>(category === "necessary");
+  const subscribe = useCallback(
+    (onStoreChange: () => void) =>
+      category === "necessary" ? NOOP_UNSUBSCRIBE : subscribeConsent(onStoreChange),
+    [category],
+  );
+  const getSnapshot = useCallback(
+    () => (category === "necessary" ? true : hasConsent(category)),
+    [category],
+  );
+  const getServerSnapshot = useCallback(() => category === "necessary", [category]);
 
-  useEffect(() => {
-    if (category === "necessary") {
-      setAllowed(true);
-      return;
-    }
-    setAllowed(hasConsent(category));
-    return subscribeConsent((state) => setAllowed(state.settings[category] === true));
-  }, [category]);
-
-  return allowed;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

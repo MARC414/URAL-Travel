@@ -34,7 +34,8 @@ import JourneyHelpPanel from "../components/JourneyHelpPanel";
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
 
 import { resolveBookingCtaUrl } from "../utils/bookingCta";
-import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, MULTI_PARTNER_BLOG_PLACEMENTS, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, QeeqCarRentalWidget, getAffiliateCtaButtonLabel, BLOG_AFFILIATE_CTA_DISCLOSURE } from "../components/AffiliatePartners";
+import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, MULTI_PARTNER_BLOG_PLACEMENTS, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, getAffiliateCtaButtonLabel, BLOG_AFFILIATE_CTA_DISCLOSURE } from "../components/AffiliatePartners";
+import { QeeqEmbed } from "../components/QeeqEmbed";
 import { KlookHotelBlogCallout } from "../components/KlookHotelOffers";
 import { EvisaArticleCta, EvisaBlogBanner, EvisaBlogContextLink } from "../components/EvisaPanels";
 import { EVISAS_BLOG_PLACEMENTS } from "../data/evisaProgram";
@@ -1896,7 +1897,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                           ) : activePost.affiliateCTA.provider === "qeeq" ? (
 
-                            <QeeqCarRentalWidget />
+                            <QeeqEmbed />
 
                           ) : (
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ExternalLink } from "lucide-react";
 import {
   EVISAS_BANNERS,
@@ -143,20 +143,52 @@ export function EvisaVisaPanel({ visaId, lang = "en" }: { visaId: string; lang?:
   return <EvisaBlockShell block={block} headingId="visa-evisas-next-step" lang={lang} placement={`evisas_visa_${visaId}`} banner={visaId === "dubai-visa" ? "vertical" : undefined} campaign={visaId === "dubai-visa" ? "uae" : "thailand"} />;
 }
 
+export const EVISAS_WIDGET_SLOW_MS = 12_000;
+
 /** One prominent homepage section. Remote content never loads in saved HTML. */
 export function EvisaHomeSection({ lang = "en" }: { lang?: EvisaLang }) {
   const allowed = useConsent("marketing");
   const [loaded, setLoaded] = useState(false);
   const [slow, setSlow] = useState(false);
+  const [inView, setInView] = useState(false);
+  const slotRef = useRef<HTMLDivElement | null>(null);
   const href = evisasDestinationUrl();
   const copy = EVISAS_HOME_COPY[lang];
 
+  // Start the slow-load countdown only once the widget slot actually enters the
+  // visible viewport, so visitors using flight search or reading above a
+  // `loading="lazy"` iframe never see a premature slow-load notice.
   useEffect(() => {
-    if (!allowed) { setLoaded(false); setSlow(false); return; }
-    if (loaded || !href) return;
-    const timer = window.setTimeout(() => setSlow(true), 12000);
+    if (!allowed) {
+      setLoaded(false);
+      setSlow(false);
+      setInView(false);
+      return;
+    }
+    if (loaded || inView || !href) return;
+    const node = slotRef.current;
+    if (!node || typeof window === "undefined" || typeof window.IntersectionObserver !== "function") {
+      setInView(true);
+      return;
+    }
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting || entry.intersectionRatio > 0)) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px", threshold: 0.05 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [allowed, loaded, inView, href]);
+
+  useEffect(() => {
+    if (!allowed || !inView || loaded || !href) return;
+    const timer = window.setTimeout(() => setSlow(true), EVISAS_WIDGET_SLOW_MS);
     return () => window.clearTimeout(timer);
-  }, [allowed, loaded, href]);
+  }, [allowed, inView, loaded, href]);
 
   if (!href) return null;
   return (
@@ -169,7 +201,10 @@ export function EvisaHomeSection({ lang = "en" }: { lang?: EvisaLang }) {
       <div className="home-evisa-layout">
         <div className="home-evisa-widget" data-evisa-widget-src={EVISAS_WIDGET.src}>
           {copy.languageNote && <p className="mb-3 text-sm leading-relaxed text-slate-600">{copy.languageNote}</p>}
-          <div className="home-evisa-widget-slot">
+          <div
+            ref={slotRef}
+            className={`home-evisa-widget-slot${allowed ? " home-evisa-widget-slot--live" : ""}${allowed && !loaded ? " home-evisa-widget-slot--loading" : ""}`}
+          >
             {allowed ? (
               <>
                 {!loaded && <p role="status" className="home-evisa-loading">{slow ? copy.slow : copy.loading}</p>}
@@ -183,17 +218,21 @@ export function EvisaHomeSection({ lang = "en" }: { lang?: EvisaLang }) {
                   lang="en"
                   data-ural-consent="marketing"
                   className="home-evisa-frame"
-                  onLoad={() => setLoaded(true)}
+                  onLoad={() => {
+                    setLoaded(true);
+                    setSlow(false);
+                  }}
                 />
               </>
             ) : (
               <div className="home-evisa-consent">
-                <h4 className="text-xl font-bold text-brand-navy">{copy.widgetHeading}</h4>
+                <h4 className="text-lg font-bold leading-snug text-brand-navy sm:text-xl">{copy.widgetHeading}</h4>
                 <p className="max-w-md text-sm leading-relaxed text-slate-600">{copy.consent}</p>
                 <button
                   type="button"
                   onClick={openConsentPreferences}
-                  className={`inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-gold px-5 py-3 text-sm font-bold text-brand-navy hover:bg-brand-gold-dark active:bg-brand-gold-dark cursor-pointer ${LINK_FOCUS}`}
+                  data-evisa-consent-trigger=""
+                  className={`inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-500 bg-white px-5 py-2.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-navy hover:bg-slate-100 active:bg-slate-200 cursor-pointer ${LINK_FOCUS}`}
                 >{copy.preferences}</button>
               </div>
             )}
@@ -217,19 +256,32 @@ export function EvisaHomeSection({ lang = "en" }: { lang?: EvisaLang }) {
 
 export function EvisaWidgetPrivacyNote({ lang }: { lang: EvisaLang }) {
   const copy = EVISAS_WIDGET_PRIVACY[lang];
-  return <section data-evisa-widget-privacy className="space-y-3">
-    <h3 className="text-lg font-bold">{copy.heading}</h3>
-    <p>{copy.body}</p>
-    <p><a href="https://evisas.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{copy.link}</a></p>
-  </section>;
+  return (
+    <section data-evisa-widget-privacy className="space-y-3">
+      <h3 className="text-lg font-bold">{copy.heading}</h3>
+      <p>{copy.body}</p>
+      <p>
+        <a
+          href="https://evisas.com/privacy-policy"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+        >
+          {copy.link}
+          <span className="sr-only">{lang === "bn" ? " (নতুন ট্যাবে খুলবে)" : " (opens in a new tab)"}</span>
+        </a>
+      </p>
+    </section>
+  );
 }
 
 /** One ad per placement; Bengali uses localized native copy, not English art. */
-export function EvisaBanner({ size, campaign, lang = "en", placement }: {
+export function EvisaBanner({ size, campaign, lang = "en", placement, omitCommissionLine = false }: {
   size: EvisaBannerSize;
   campaign?: EvisaCampaignKey;
   lang?: EvisaLang;
   placement: string;
+  omitCommissionLine?: boolean;
 }) {
   if (!evisasDestinationUrl(campaign)) return null;
   return (
@@ -237,7 +289,9 @@ export function EvisaBanner({ size, campaign, lang = "en", placement }: {
       <EvisaCreative size={size} campaign={campaign} lang={lang} placement={placement} />
       <figcaption className="mt-3 space-y-1 text-center text-xs leading-relaxed text-slate-600">
         <p className="font-semibold">{lang === "bn" ? "বিজ্ঞাপন · বেসরকারি পেইড ভিসা সার্ভিস" : "Advertisement · Private, paid visa service"}</p>
-        <p>{lang === "bn" ? "এই লিংকের মাধ্যমে আবেদন করলে URAL কমিশন পেতে পারে।" : "URAL may earn a commission if you apply through this link."}</p>
+        {!omitCommissionLine && (
+          <p>{lang === "bn" ? "এই লিংকের মাধ্যমে আবেদন করলে URAL কমিশন পেতে পারে।" : "URAL may earn a commission if you apply through this link."}</p>
+        )}
       </figcaption>
     </figure>
   );
@@ -267,7 +321,15 @@ export function EvisaDestinationPlacement({ guideId, lang }: { guideId: string; 
   if (!campaign || !evisasDestinationUrl(campaign)) return null;
   return (
     <div className="space-y-5">
-      {campaign === "uae" && <EvisaBanner size="square" campaign={campaign} lang={lang} placement={`evisas_destination_${guideId}_banner`} />}
+      {campaign === "uae" && (
+        <EvisaBanner
+          size="square"
+          campaign={campaign}
+          lang={lang}
+          placement={`evisas_destination_${guideId}_banner`}
+          omitCommissionLine
+        />
+      )}
       <EvisaContextLink campaign={campaign} lang={lang} placement={`evisas_destination_${guideId}_text`} />
     </div>
   );
