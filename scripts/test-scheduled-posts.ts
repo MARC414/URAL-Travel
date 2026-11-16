@@ -359,6 +359,21 @@ console.log("Scheduled blog live-sitemap self-heal (check once, publish only the
   assert.throws(
     () =>
       resolveScheduledAffiliateCtaPair(
+        {
+          affiliateCtaProvider: "airalo",
+          affiliateCtaHeadline: "Stay connected",
+          affiliateCtaBody: "Install an eSIM before boarding.",
+          affiliateCtaBnProvider: "klook",
+          affiliateCtaBnHeadline: "ভিন্ন পার্টনার",
+          affiliateCtaBnBody: "বাংলা সংস্করণে আলাদা পার্টনার দেওয়া যাবে না।",
+        },
+        "fixture.md",
+      ),
+    /must match affiliateCtaProvider/,
+  );
+  assert.throws(
+    () =>
+      resolveScheduledAffiliateCtaPair(
         { affiliateCtaCampaign: "thailand" },
         "fixture.md",
       ),
