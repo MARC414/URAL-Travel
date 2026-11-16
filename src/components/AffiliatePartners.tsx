@@ -1,8 +1,9 @@
 import React from "react";
-import { ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { KlookEmbed } from "./KlookEmbed";
 import { KiwitaxiEmbed } from "./KiwitaxiEmbed";
 import { AiraloEmbed } from "./AiraloEmbed";
+import { SITE_ORIGIN } from "../utils/localeRoutes";
 
 /* Single source of truth for the plain outbound URLs (used by
    PartnerLinkButton and any inline <a> tags). Do not edit these values. */
@@ -463,6 +464,21 @@ export function getAffiliateCtaButtonLabel(provider: string, lang: "en" | "bn" =
 }
 
 /**
+ * True when a resolved CTA target stays on URAL's own origin (such as
+ * `/flights?fsrc=post_...#flight-search`). Same-origin pages are never marked
+ * `rel="sponsored"` or forced into `target="_blank"`; external partner domains
+ * (including the partner-hosted `flights.uraltravel.co.uk` subdomain) return
+ * false and keep full `target="_blank" rel="noopener noreferrer sponsored"`.
+ */
+export function isSameOriginCtaHref(href: string): boolean {
+  if (!href) return false;
+  if (href.startsWith("/") && !href.startsWith("//") && !href.startsWith("/\\")) {
+    return true;
+  }
+  return href === SITE_ORIGIN || href.startsWith(`${SITE_ORIGIN}/`);
+}
+
+/**
  * Evergreen commission disclosure for an article-level affiliate next step.
  *
  * States that URAL may earn a commission and that the reader's price does not
@@ -474,6 +490,21 @@ export const BLOG_AFFILIATE_CTA_DISCLOSURE = {
   en: "Affiliate link: URAL may earn a commission if you book through this link. You pay the partner's price, not a marked-up one.",
   bn: "অ্যাফিলিয়েট লিংক: এই লিংক দিয়ে বুক করলে URAL কমিশন পেতে পারে। আপনি পার্টনারের দামই দেন, বাড়তি কিছু নয়।",
 };
+
+/**
+ * First-party disclosure when an article CTA opens URAL's own `/flights` page
+ * rather than an external partner URL directly.
+ */
+export const BLOG_FLIGHTS_PAGE_CTA_NOTE = {
+  en: "Opens URAL's flight search page. Fare checks there continue to a partner-powered search, where URAL may earn a commission on qualifying bookings at no extra cost to you.",
+  bn: "এটি URAL-এর নিজস্ব ফ্লাইট সার্চ পাতা খোলে। সেখান থেকে পার্টনার-চালিত ভাড়া অনুসন্ধানে গিয়ে যোগ্য বুকিং করলে আপনার অতিরিক্ত খরচ ছাড়াই URAL কমিশন পেতে পারে।",
+};
+
+export function getBlogCtaDisclosure(href: string, lang: "en" | "bn" = "en"): string {
+  return isSameOriginCtaHref(href)
+    ? BLOG_FLIGHTS_PAGE_CTA_NOTE[lang]
+    : BLOG_AFFILIATE_CTA_DISCLOSURE[lang];
+}
 
 export interface RadicalStorageBlogPlacement {
   badgeEn: string;
@@ -609,6 +640,7 @@ export function PartnerLinkButton({
   variant?: "light" | "dark";
 }) {
   const resolvedHref = resolvePartnerUrl(href);
+  const sameOrigin = isSameOriginCtaHref(resolvedHref);
 
   // Development-only console trace. The dataLayer push that used to live here was
   // REMOVED on 2026-10-24: the delegated listener in src/utils/analytics.ts
@@ -626,8 +658,8 @@ export function PartnerLinkButton({
   return (
     <a
       href={resolvedHref}
-      target="_blank"
-      rel="noopener noreferrer sponsored"
+      target={sameOrigin ? undefined : "_blank"}
+      rel={sameOrigin ? undefined : "noopener noreferrer sponsored"}
       onClick={handleClick}
       className={
         variant === "dark"
@@ -635,7 +667,7 @@ export function PartnerLinkButton({
           : "inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] text-brand-navy font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
       }
     >
-      {label} <ExternalLink size={12} />
+      {label} {sameOrigin ? <ArrowRight size={12} /> : <ExternalLink size={12} />}
     </a>
   );
 }
@@ -749,13 +781,13 @@ export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlace
     headlineEn: "Card Endorsed and Activated? Put It to Work on Your First Bookings",
     headlineBn: "কার্ড এনডোর্স ও চালু হয়েছে? এবার প্রথম বুকিংগুলো করুন",
     bodyBeforeAnchorEn:
-      "Once your foreign-currency and e-commerce part is open, compare live flight fares from Dhaka on ",
-    anchorTextEn: "our white-label flight search",
+      "Once your foreign-currency and e-commerce part is open, compare live flight fares from Dhaka via ",
+    anchorTextEn: "our flight search page",
     bodyAfterAnchorEn:
       " and pay with your endorsed dual-currency card. A travel eSIM for your destination is another small first purchase that proves the card works before you travel — check coverage and price before buying.",
     bodyBeforeAnchorBn:
       "Foreign-currency ও e-commerce অংশ চালু হলে ঢাকা থেকে লাইভ ফ্লাইট ভাড়া তুলনা করুন ",
-    anchorTextBn: "আমাদের ফ্লাইট সার্চে",
+    anchorTextBn: "আমাদের ফ্লাইট সার্চ পাতায়",
     bodyAfterAnchorBn:
       " এবং এনডোর্স করা dual-currency card দিয়ে পেমেন্ট করুন। গন্তব্যের travel eSIM আরেকটি ছোট প্রথম কেনাকাটা, যা ভ্রমণের আগেই কার্ড কাজ করছে কিনা যাচাই করে — কেনার আগে coverage ও দাম দেখে নিন।",
     primaryButtonEn: "Compare Live Flight Fares",
@@ -946,13 +978,22 @@ export function MultiPartnerBlogCallout({
   const isBn = lang === "bn";
   const primaryHref =
     primaryHrefOverride || resolvePartnerUrl(AFFILIATE_LINKS[placement.primaryPartner]);
+  const primaryIsSameOrigin = isSameOriginCtaHref(primaryHref);
   const secondaryHref = placement.secondaryPartner
     ? resolvePartnerUrl(AFFILIATE_LINKS[placement.secondaryPartner])
     : undefined;
 
   return (
     <aside
-      aria-label={isBn ? "পার্টনার ট্রাভেল টুলস ও ডিসকাউন্ট" : "Recommended Partner Travel Tools"}
+      aria-label={
+        primaryIsSameOrigin
+          ? isBn
+            ? "ফ্লাইট সার্চ ও পার্টনার ট্রাভেল টুলস"
+            : "Flight Search & Partner Travel Tools"
+          : isBn
+            ? "পার্টনার ট্রাভেল টুলস ও ডিসকাউন্ট"
+            : "Recommended Partner Travel Tools"
+      }
       className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-5 sm:p-6 space-y-3 text-left"
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -960,7 +1001,13 @@ export function MultiPartnerBlogCallout({
           {isBn ? placement.badgeBn : placement.badgeEn}
         </span>
         <span className="text-[11px] font-mono text-slate-500">
-          {isBn ? "ভেরিফায়েড অফিশিয়াল পার্টনার · ডুয়াল-কারেন্সি কার্ড সাপোর্টেড" : "Verified Official Partner · Instant Online Confirmation"}
+          {primaryIsSameOrigin
+            ? isBn
+              ? "URAL ফ্লাইট সার্চ · ভেরিফায়েড পার্টনার টুলস"
+              : "URAL Flight Search · Verified Partner Tools"
+            : isBn
+              ? "ভেরিফায়েড অফিশিয়াল পার্টনার · ডুয়াল-কারেন্সি কার্ড সাপোর্টেড"
+              : "Verified Official Partner · Instant Online Confirmation"}
         </span>
       </div>
 
@@ -972,8 +1019,8 @@ export function MultiPartnerBlogCallout({
         {isBn ? placement.bodyBeforeAnchorBn : placement.bodyBeforeAnchorEn}
         <a
           href={primaryHref}
-          target="_blank"
-          rel="noopener noreferrer sponsored"
+          target={primaryIsSameOrigin ? undefined : "_blank"}
+          rel={primaryIsSameOrigin ? undefined : "noopener noreferrer sponsored"}
           className="font-semibold text-brand-navy underline decoration-[#F6B73C] decoration-2 underline-offset-2 hover:text-emerald-800"
         >
           {isBn ? placement.anchorTextBn : placement.anchorTextEn}
@@ -983,7 +1030,7 @@ export function MultiPartnerBlogCallout({
 
       <div className="pt-1 flex flex-wrap items-center gap-2.5">
         <PartnerLinkButton
-          href={AFFILIATE_LINKS[placement.primaryPartner]}
+          href={primaryHref}
           label={isBn ? placement.primaryButtonBn : placement.primaryButtonEn}
           variant="dark"
         />

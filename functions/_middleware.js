@@ -8,6 +8,7 @@ const LEGACY_QUERY_ROUTES = {
   "/costs": { parameter: "country", prefix: "/costs" },
   "/blog": { parameter: "slug", prefix: "/blog" },
   "/tools": { parameter: "tab", prefix: "/tools" },
+  "/bn/tools": { parameter: "tab", prefix: "/bn/tools" },
 };
 
 // Legacy /tools?tab= values (including the pre-tab-list alias "currency") →
@@ -82,16 +83,16 @@ export async function onRequest(context) {
     });
   }
 
-  // --- Legacy /experiences?region= → clean static paths (301) ---
-  if (url.pathname === "/experiences") {
+  // --- Legacy /experiences?region= & /bn/experiences?region= → clean static paths (301) ---
+  if (url.pathname === "/experiences" || url.pathname === "/bn/experiences") {
     const region = url.searchParams.get("region");
-    if (region === "west") {
-      url.pathname = "/experiences/europe";
+    if (region === "west" || region === "europe") {
+      url.pathname = `${url.pathname}/europe`;
       url.searchParams.delete("region");
       return Response.redirect(url.toString(), 301);
     }
     if (region === "asia") {
-      url.pathname = "/experiences/asia";
+      url.pathname = `${url.pathname}/asia`;
       url.searchParams.delete("region");
       return Response.redirect(url.toString(), 301);
     }
@@ -103,11 +104,12 @@ export async function onRequest(context) {
     const legacyId = url.searchParams.get(legacyRoute.parameter);
     if (legacyId) {
       if (legacyRoute.parameter === "tab") {
-        // Every known ?tab= value converges on its /tools/<slug> page; an
-        // unknown tab still lands on the hub instead of a 404 sub-path.
-        // Only the mapped param is dropped — utm/fbclid etc. must survive.
+        // Every known ?tab= value converges on its /tools/<slug> (or
+        // /bn/tools/<slug>) page; an unknown tab still lands on the locale's
+        // hub instead of a 404 sub-path. Only the mapped param is dropped —
+        // utm/fbclid etc. must survive.
         const slug = LEGACY_TOOL_TAB_SLUGS[legacyId];
-        url.pathname = slug ? `/tools/${slug}` : "/tools";
+        url.pathname = slug ? `${legacyRoute.prefix}/${slug}` : legacyRoute.prefix;
         url.searchParams.delete("tab");
         return Response.redirect(url.toString(), 301);
       }

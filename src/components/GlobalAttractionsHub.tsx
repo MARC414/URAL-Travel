@@ -868,8 +868,9 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
         </div>
         <div className="flex flex-wrap gap-2 sm:gap-3">
           <a
-            href="/experiences/europe"
+            href={isBn ? "/bn/experiences/europe" : "/experiences/europe"}
             onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
               e.preventDefault();
               onNavigate("/experiences/europe");
             }}
@@ -879,8 +880,9 @@ export const GlobalAttractionsHub: React.FC<GlobalAttractionsHubProps> = ({
             <ArrowRight size={12} />
           </a>
           <a
-            href="/experiences/asia"
+            href={isBn ? "/bn/experiences/asia" : "/experiences/asia"}
             onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
               e.preventDefault();
               onNavigate("/experiences/asia");
             }}

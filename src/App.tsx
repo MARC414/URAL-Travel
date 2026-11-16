@@ -1183,11 +1183,16 @@ export default function App() {
       parameterId = countryParam || "nepal-costs";
       isLanding = !countryParam;
     } else if (root === "experiences" && segs.length <= 2) {
-      section = "experiences";
-      isLanding = true;
-      // Clean static region paths: /experiences/europe (west) and /experiences/asia
-      if (segs.length === 2 && (segs[1] === "europe" || segs[1] === "asia")) {
-        parameterId = segs[1];
+      // Clean static region paths: /experiences/europe (west) and /experiences/asia.
+      // An unknown second segment falls through to notFound (noindex) so mistyped
+      // sub-paths cannot be indexed as duplicates of /experiences.
+      if (!subSegment) {
+        section = "experiences";
+        isLanding = true;
+      } else if (subSegment === "europe" || subSegment === "asia") {
+        section = "experiences";
+        parameterId = subSegment;
+        isLanding = false;
       }
     } else if (root === "attractions" && segs.length <= 2) {
       section = "attractions";
@@ -1978,23 +1983,27 @@ export default function App() {
     ];
   } else if (section === "experiences") {
     const region = parameterId === "europe" ? "europe" : parameterId === "asia" ? "asia" : "all";
-    const experiencesUrl = siteUrl(parameterId ? `/experiences/${parameterId}` : "/experiences", lang);
-    if (region === "europe") {
-      seoTitle = "European Attraction Passes & Skip-the-Line Tickets (Tiqets) | URAL";
-      seoDescription = "Skip the line in Paris, London, Rome, Milan, and Venice with official Tiqets passes. Louvre, Eiffel Tower, Colosseum, Duomo, and more for Bangladeshi Schengen visa travelers.";
-    } else if (region === "asia") {
-      seoTitle = "Asian Attraction Passes & Tours (Klook) | URAL";
-      seoDescription = "Browse Klook activity listings in Dubai, Bangkok, Singapore, and Kuala Lumpur. Compare dates, inclusions, checkout totals, and booking terms before choosing.";
-    } else {
-      seoTitle = "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL";
-      seoDescription = "Compare official Tiqets attraction listings in Europe and New York with Klook activity listings in Dubai, Bangkok, Singapore, and Kuala Lumpur; check current dates and terms.";
-    }
-    // URAL refers travelers to partner booking sites; it does not sell these products.
-    // Do not emit Product/Offer data that presents URAL as the merchant.
-    seoBreadcrumbs = [
-      { name: "Home", url: siteUrl("/", lang) },
-      { name: "Attractions & Passes", url: experiencesUrl }
-    ];
+    const experiencesHubUrl = siteUrl("/experiences", lang);
+    const experiencesUrl = siteUrl(region === "all" ? "/experiences" : `/experiences/${region}`, lang);
+    // Exact EN & BN title/description come from PRIORITY_SEO_COPY / BENGALI_SEO_COPY
+    // below via seoRoutePath ("/experiences", "/experiences/europe", "/experiences/asia").
+    seoBreadcrumbs =
+      region === "all"
+        ? [
+            { name: "Home", url: siteUrl("/", lang) },
+            { name: "Attractions & Passes", url: experiencesUrl },
+          ]
+        : [
+            { name: "Home", url: siteUrl("/", lang) },
+            { name: "Attractions & Passes", url: experiencesHubUrl },
+            {
+              name:
+                region === "europe"
+                  ? "Europe, UK & US Attraction Passes"
+                  : "Asia & Dubai Attraction Passes",
+              url: experiencesUrl,
+            },
+          ];
   } else if (section === "attractions") {
     const attractionsUrl = siteUrl("/attractions", lang);
     if (!parameterId) {
@@ -2241,19 +2250,35 @@ export default function App() {
       const u = new URL(rawPath, SITE_ORIGIN);
       const p = u.pathname;
       const sp = u.searchParams;
-      if (p === "/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/experiences?region=asia";
-      if (p === "/bn/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/bn/experiences?region=asia";
+      if (p === "/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/experiences/asia";
+      if (p === "/bn/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/bn/experiences/asia";
       if (p === "/flights" && sp.get("route")) return `/flights/${sp.get("route")}`;
       if (p === "/hotels" && sp.get("city")) return `/hotels/${sp.get("city")}`;
       if (p === "/visa" && sp.get("country")) return `/visa/${sp.get("country")}`;
       if (p === "/destinations" && sp.get("country")) return `/destinations/${sp.get("country")}`;
       if (p === "/costs" && sp.get("country")) return `/costs/${sp.get("country")}`;
       if (p === "/blog" && sp.get("slug")) return `/blog/${sp.get("slug")}`;
-      if (p === "/tools") {
+      if (p === "/experiences" || p === "/bn/experiences") {
+        // Legacy ?region=west|asia links converge on /experiences/europe|asia
+        // while keeping ?city= filtering and any fragment intact.
+        const region = sp.get("region");
+        if (region === "west" || region === "europe" || region === "asia") {
+          const slug = region === "asia" ? "asia" : "europe";
+          sp.delete("region");
+          const q = sp.toString();
+          return `${p}/${slug}${q ? `?${q}` : ""}${u.hash}`;
+        }
+      }
+      if (p === "/tools" || p === "/bn/tools") {
         // Legacy ?tab= deep links converge on the canonical tool paths in-app
         // (functions/_middleware.js 301s the same hop at the edge).
         const toolPath = toolPathForTab(sp.get("tab"));
-        if (toolPath) return toolPath;
+        if (toolPath) {
+          sp.delete("tab");
+          const q = sp.toString();
+          const target = p.startsWith("/bn/") ? `/bn${toolPath}` : toolPath;
+          return `${target}${q ? `?${q}` : ""}${u.hash}`;
+        }
       }
       if (p === "/indexing") return "/sitemap";
       return u.pathname + u.search + u.hash;

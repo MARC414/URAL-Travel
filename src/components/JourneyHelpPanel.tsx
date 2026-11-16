@@ -1,5 +1,5 @@
 import React from "react";
-import { AFFILIATE_LINKS, resolvePartnerUrl } from "./AffiliatePartners";
+import { AFFILIATE_LINKS, isSameOriginCtaHref, resolvePartnerUrl } from "./AffiliatePartners";
 import { getJourneyHelp, type JourneyStage } from "../utils/journeyHelp";
 import { resolveBookingCtaUrl } from "../utils/bookingCta";
 
@@ -72,6 +72,7 @@ export default function JourneyHelpPanel({
             link.partner === "aviasales"
               ? resolveBookingCtaUrl("aviasales", { slug, locale: isBn ? "bn" : "en" })
               : resolvePartnerUrl(AFFILIATE_LINKS[link.partner]);
+          const sameOrigin = isSameOriginCtaHref(href);
           const label = isBn ? link.labelBn : link.labelEn;
           const reason = isBn ? link.reasonBn : link.reasonEn;
           return (
@@ -82,10 +83,10 @@ export default function JourneyHelpPanel({
               <p className="text-sm leading-relaxed text-slate-700">{reason}</p>
               <a
                 href={href}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                data-affiliate-placement={JOURNEY_HELP_PLACEMENT}
-                data-affiliate-partner={link.partner}
+                target={sameOrigin ? undefined : "_blank"}
+                rel={sameOrigin ? undefined : "noopener noreferrer sponsored"}
+                data-affiliate-placement={sameOrigin ? undefined : JOURNEY_HELP_PLACEMENT}
+                data-affiliate-partner={sameOrigin ? undefined : link.partner}
                 className="mt-2.5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 underline-offset-4 hover:underline"
               >
                 {label}
@@ -97,9 +98,13 @@ export default function JourneyHelpPanel({
       </ul>
 
       <p className="mt-4 text-[11px] leading-relaxed text-slate-500">
-        {isBn
-          ? "এই লিংকগুলো affiliate অংশীদার — আপনি সেখান থেকে কিছু কিনলে URAL একটি কমিশন পেতে পারে, আপনার দাম একই থাকে। এগুলো কোনো সরকারি সেবা নয় এবং ভিসা, পারমিট বা অনুমোদনের নিশ্চয়তা দেয় না।"
-          : "These are affiliate partner links. URAL may earn a commission if you buy through them, at no extra cost to you. They are not official services and do not guarantee a visa, permit or approval."}
+        {config.links.some((link) => link.partner === "aviasales")
+          ? isBn
+            ? "ফ্লাইট যাচাইয়ের লিংকটি URAL-এর নিজস্ব ফ্লাইট সার্চ পাতা খোলে (সেখান থেকে পার্টনার-চালিত ভাড়া অনুসন্ধান চলে), আর বাইরের লিংকগুলো affiliate অংশীদার—যোগ্য বুকিংয়ে আপনার অতিরিক্ত খরচ ছাড়াই URAL কমিশন পেতে পারে। এগুলো কোনো সরকারি সেবা নয় এবং ভিসা, পারমিট বা অনুমোদনের নিশ্চয়তা দেয় না।"
+            : "Flight fare links open URAL's flight search page first (which hands off to a partner-powered fare search), and external links go to affiliate partners—URAL may earn a commission on qualifying bookings at no extra cost to you. They are not official services and do not guarantee a visa, permit or approval."
+          : isBn
+            ? "এই লিংকগুলো affiliate অংশীদার — আপনি সেখান থেকে কিছু কিনলে URAL একটি কমিশন পেতে পারে, আপনার দাম একই থাকে। এগুলো কোনো সরকারি সেবা নয় এবং ভিসা, পারমিট বা অনুমোদনের নিশ্চয়তা দেয় না।"
+            : "These are affiliate partner links. URAL may earn a commission if you buy through them, at no extra cost to you. They are not official services and do not guarantee a visa, permit or approval."}
       </p>
     </section>
   );

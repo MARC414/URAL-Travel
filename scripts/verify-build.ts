@@ -55,7 +55,12 @@ import {
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
   TRAVELPAYOUTS_REFERRAL_SUB_IDS,
   TRAVELPAYOUTS_REFERRAL_URL,
+  BLOG_AFFILIATE_CTA_DISCLOSURE,
+  BLOG_FLIGHTS_PAGE_CTA_NOTE,
+  MultiPartnerBlogCallout,
+  PartnerLinkButton,
   buildTravelpayoutsReferralUrl,
+  isSameOriginCtaHref,
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
 } from "../src/components/AffiliatePartners";
@@ -749,8 +754,8 @@ const retiredKkdayCampaignClean =
   !BLOG_SLUGS.includes(retiredKkdayCampaignSlug as (typeof BLOG_SLUGS)[number]) &&
   !BLOG_DATA.some((post) => post.slug === retiredKkdayCampaignSlug) &&
   !(retiredKkdayCampaignSlug in BLOG_BODY) &&
-  retiredKkdayRedirects.includes(`/blog/${retiredKkdayCampaignSlug}  /experiences?region=asia  301`) &&
-  retiredKkdayRedirects.includes(`/bn/blog/${retiredKkdayCampaignSlug}  /bn/experiences?region=asia  301`) &&
+  retiredKkdayRedirects.includes(`/blog/${retiredKkdayCampaignSlug}  /experiences/asia  301`) &&
+  retiredKkdayRedirects.includes(`/bn/blog/${retiredKkdayCampaignSlug}  /bn/experiences/asia  301`) &&
   !retiredKkdaySitemap.includes(retiredKkdayCampaignSlug) &&
   !retiredKkdayFeed.includes(retiredKkdayCampaignSlug);
 check(
@@ -3464,8 +3469,8 @@ if (sitemap) {
   );
   check(
     !!londonEnHtml && !!londonBnHtml &&
-      londonEnHtml.includes("/experiences?region=west&amp;city=london") &&
-      londonBnHtml.includes("/bn/experiences?region=west&amp;city=london") &&
+      londonEnHtml.includes("/experiences/europe?city=london") &&
+      londonBnHtml.includes("/bn/experiences/europe?city=london") &&
       londonBnHtml.includes('"inLanguage":"bn-BD"') &&
       londonBnHtml.includes("আপনার পছন্দের লন্ডন দর্শনীয় স্থান") &&
       !londonEnHtml.includes('"@type":"Offer"') &&
@@ -3497,8 +3502,8 @@ if (sitemap) {
   );
   check(
     !!italyEnHtml && !!italyBnHtml &&
-      italyEnHtml.includes("/experiences?region=west&amp;city=rome-italy") &&
-      italyBnHtml.includes("/bn/experiences?region=west&amp;city=rome-italy") &&
+      italyEnHtml.includes("/experiences/europe?city=rome-italy") &&
+      italyBnHtml.includes("/bn/experiences/europe?city=rome-italy") &&
       italyBnHtml.includes('"inLanguage":"bn-BD"') &&
       !italyEnHtml.includes('"@type":"Offer"') &&
       !italyBnHtml.includes('"@type":"Offer"'),
@@ -3529,8 +3534,8 @@ if (sitemap) {
   );
   check(
     !!parisEnHtml && !!parisBnHtml &&
-      parisEnHtml.includes("/experiences?region=west&amp;city=paris") &&
-      parisBnHtml.includes("/bn/experiences?region=west&amp;city=paris") &&
+      parisEnHtml.includes("/experiences/europe?city=paris") &&
+      parisBnHtml.includes("/bn/experiences/europe?city=paris") &&
       parisBnHtml.includes('"inLanguage":"bn-BD"') &&
       !parisEnHtml.includes('"@type":"Offer"') &&
       !parisBnHtml.includes('"@type":"Offer"'),
@@ -3561,8 +3566,8 @@ if (sitemap) {
   );
   check(
     !!newYorkEnHtml && !!newYorkBnHtml &&
-      newYorkEnHtml.includes("/experiences?region=west&amp;city=new-york") &&
-      newYorkBnHtml.includes("/bn/experiences?region=west&amp;city=new-york") &&
+      newYorkEnHtml.includes("/experiences/europe?city=new-york") &&
+      newYorkBnHtml.includes("/bn/experiences/europe?city=new-york") &&
       newYorkBnHtml.includes('"inLanguage":"bn-BD"') &&
       !newYorkEnHtml.includes('"@type":"Offer"') &&
       !newYorkBnHtml.includes('"@type":"Offer"'),
@@ -3970,17 +3975,28 @@ if (sitemap) {
   const umrahCostBn = BENGALI_BLOG_OVERRIDES[umrahCostSlug];
   const umrahCostEnHtml = read(path.join(DIST_DIR, "blog", `${umrahCostSlug}.html`)) ?? "";
   const umrahCostBnHtml = read(path.join(DIST_DIR, "bn", "blog", `${umrahCostSlug}.html`)) ?? "";
+  const umrahCostEnFlightTag = umrahCostEnHtml.match(
+    /<a\b[^>]*href="\/flights\?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost[^"]*"[^>]*>/
+  )?.[0];
+  const umrahCostBnFlightTag = umrahCostBnHtml.match(
+    /<a\b[^>]*href="\/bn\/flights\?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost[^"]*"[^>]*>/
+  )?.[0];
+  const escapeAttrOrText = (value: string) =>
+    value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   const umrahCostOk =
     umrahCostEn?.affiliateCTA?.provider === "aviasales" &&
     umrahCostBn?.affiliateCTA?.provider === "aviasales" &&
     umrahCostEnHtml.includes(umrahCostEn.affiliateCTA?.headline ?? "—missing—") &&
-    umrahCostEnHtml.includes("/flights?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost") &&
+    !!umrahCostEnFlightTag &&
+    !/\brel="[^"]*sponsored|\btarget="_blank"/.test(umrahCostEnFlightTag) &&
+    umrahCostEnHtml.includes(escapeAttrOrText(BLOG_FLIGHTS_PAGE_CTA_NOTE.en)) &&
     umrahCostBnHtml.includes(umrahCostBn.affiliateCTA?.headline ?? "—missing—") &&
-    umrahCostBnHtml.includes("/bn/flights?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost") &&
-    umrahCostBnHtml.includes('rel="noopener noreferrer sponsored"');
+    !!umrahCostBnFlightTag &&
+    !/\brel="[^"]*sponsored|\btarget="_blank"/.test(umrahCostBnFlightTag) &&
+    umrahCostBnHtml.includes(escapeAttrOrText(BLOG_FLIGHTS_PAGE_CTA_NOTE.bn));
   check(
     umrahCostOk,
-    "the Umrah Cost guide carries its matched live-fare next step (aviasales affiliateCTA) to our own /flights page, with the per-article placement id, in EN and BN"
+    "the Umrah Cost guide carries its matched first-party live-fare next step to /flights (with placement id, no rel=sponsored/target=_blank, and first-party disclosure) in EN and BN"
   );
 
   // The article CTA now stops on our own /flights page. That page only earns
@@ -8100,14 +8116,45 @@ for (const post of BLOG_DATA) {
     }
     // HTML attributes carry `&amp;`; compare the URL the way it is emitted.
     const expectedInHtml = expected.replace(/&/g, "&amp;");
-    const sponsored = new RegExp(
-      `<a[^>]*href="${expectedInHtml.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[^>]*rel="[^"]*sponsored`
-    );
-    if (!sponsored.test(html)) {
+    const escapedHref = expectedInHtml.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const sameOriginExpected = isSameOriginCtaHref(expected);
+    const matchingTags = [
+      ...html.matchAll(new RegExp(`<a\\b[^>]*href="${escapedHref}"[^>]*>`, "g")),
+    ].map((m) => m[0]);
+    if (matchingTags.length === 0) {
       affiliateRenderIssues.push(
-        `${post.id}: ${locale} static page has no sponsored link to ${bnCta ? "its" : "the"} declared partner`
+        `${post.id}: ${locale} static page is missing the declared CTA link (${expected})`
       );
       continue;
+    }
+    if (sameOriginExpected) {
+      if (matchingTags.some((tag) => /\brel="[^"]*sponsored|\btarget="_blank"/.test(tag))) {
+        affiliateRenderIssues.push(
+          `${post.id}: ${locale} same-origin CTA (${expected}) must not carry rel="sponsored" or target="_blank"`
+        );
+        continue;
+      }
+      const noteKey = locale === "BN" ? "bn" : "en";
+      const expectedNote = BLOG_FLIGHTS_PAGE_CTA_NOTE[noteKey]
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+      if (!html.includes(expectedNote)) {
+        affiliateRenderIssues.push(
+          `${post.id}: ${locale} same-origin /flights CTA is missing the first-party flight-page disclosure`
+        );
+        continue;
+      }
+    } else {
+      const hasExternalSponsored = matchingTags.some(
+        (tag) => /\btarget="_blank"/.test(tag) && /\brel="[^"]*sponsored/.test(tag)
+      );
+      if (!hasExternalSponsored) {
+        affiliateRenderIssues.push(
+          `${post.id}: ${locale} static page has no target="_blank" sponsored link to ${bnCta ? "its" : "the"} declared partner`
+        );
+        continue;
+      }
     }
     if (locale === "EN") affiliateRenderedSlugs.add(post.slug);
   }
@@ -8124,6 +8171,272 @@ check(
 );
 
 checkArticlePresentation(DIST_DIR, check);
+
+// ---------------------------------------------------------------------------
+// Batch 3 SEO & Link-Integrity Guards:
+//   1. Regional /experiences/europe and /experiences/asia routes exist in EN
+//      and BN with localized BN SEO copy, self-canonicals, reciprocal hreflang,
+//      sitemap registration and clean Klook claim hygiene.
+//   2. Every internal <a href> across dist/**/*.html resolves to a shipped
+//      file or prerendered route (exempting only future scheduled post slugs).
+//   3. Zero legacy query-string links (?tab=, ?region=, ?slug=, ?route=,
+//      ?country=, /hotels?city=) remain in dist/**/*.html or public/_redirects,
+//      while edge redirects in _routes.json + _middleware.js cover both EN & BN.
+//   4. Zero same-origin links carry rel="sponsored" (and zero /flights?fsrc=
+//      links carry target="_blank"), while external partner buttons retain
+//      target="_blank" rel="noopener noreferrer sponsored".
+// ---------------------------------------------------------------------------
+{
+  const distSitemapXml = read(path.join(DIST_DIR, "sitemap.xml")) ?? "";
+  const distSitemapTxt = new Set(
+    (read(path.join(DIST_DIR, "sitemap.txt")) ?? "")
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+  );
+  const regionalPairs = [
+    {
+      slug: "europe",
+      enFile: "experiences/europe.html",
+      bnFile: "bn/experiences/europe.html",
+      enUrl: `${SITE_ORIGIN}/experiences/europe`,
+      bnUrl: `${SITE_ORIGIN}/bn/experiences/europe`,
+    },
+    {
+      slug: "asia",
+      enFile: "experiences/asia.html",
+      bnFile: "bn/experiences/asia.html",
+      enUrl: `${SITE_ORIGIN}/experiences/asia`,
+      bnUrl: `${SITE_ORIGIN}/bn/experiences/asia`,
+    },
+  ] as const;
+
+  const regionalIssues: string[] = [];
+  for (const pair of regionalPairs) {
+    const enHtml = read(path.join(DIST_DIR, pair.enFile));
+    const bnHtml = read(path.join(DIST_DIR, pair.bnFile));
+    if (!enHtml) {
+      regionalIssues.push(`${pair.enFile}: missing`);
+      continue;
+    }
+    if (!bnHtml) {
+      regionalIssues.push(`${pair.bnFile}: missing`);
+      continue;
+    }
+    if (!enHtml.includes(`rel="canonical" href="${pair.enUrl}"`)) {
+      regionalIssues.push(`${pair.enFile}: missing self-canonical`);
+    }
+    if (!bnHtml.includes(`rel="canonical" href="${pair.bnUrl}"`)) {
+      regionalIssues.push(`${pair.bnFile}: missing self-canonical`);
+    }
+    for (const [label, html] of [
+      [pair.enFile, enHtml],
+      [pair.bnFile, bnHtml],
+    ] as const) {
+      if (
+        !html.includes(`hreflang="en-bd" href="${pair.enUrl}"`) ||
+        !html.includes(`hreflang="bn-bd" href="${pair.bnUrl}"`) ||
+        !html.includes(`hreflang="x-default" href="${pair.enUrl}"`)
+      ) {
+        regionalIssues.push(`${label}: incomplete reciprocal hreflang cluster`);
+      }
+      if (/discounted Klook tours|Klook.*(?:save|saving|savings|discount|cheaper|lowest|\d{1,2}\s*%)/i.test(html)) {
+        regionalIssues.push(`${label}: contains unsupported Klook discount/price claim`);
+      }
+    }
+    const bnTitle = bnHtml.match(/<title>([^<]+)<\/title>/)?.[1] ?? "";
+    const bnDesc = bnHtml.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? "";
+    if (!/[\u0980-\u09FF]/.test(bnTitle) || !/[\u0980-\u09FF]/.test(bnDesc)) {
+      regionalIssues.push(`${pair.bnFile}: title or meta description is not localized into Bengali`);
+    }
+    for (const url of [pair.enUrl, pair.bnUrl]) {
+      if (!distSitemapXml.includes(`<loc>${url}</loc>`) || !distSitemapTxt.has(url)) {
+        regionalIssues.push(`${url}: missing from sitemap.xml or sitemap.txt`);
+      }
+    }
+  }
+  check(
+    regionalIssues.length === 0,
+    regionalIssues.length === 0
+      ? "regional /experiences/europe and /experiences/asia pages are prerendered in EN and BN with localized BN SEO, reciprocal hreflang and sitemap entries"
+      : `regional /experiences verification failed: ${regionalIssues.join("; ")}`
+  );
+
+  const futureScheduledPaths = new Set<string>();
+  const allScheduled = loadScheduledBlogPosts();
+  const liveSlugs = new Set(BLOG_SLUGS as readonly string[]);
+  for (const scheduled of allScheduled) {
+    if (!liveSlugs.has(scheduled.slug)) {
+      futureScheduledPaths.add(`/blog/${scheduled.slug}`);
+      futureScheduledPaths.add(`/bn/blog/${scheduled.slug}`);
+    }
+  }
+
+  const walkHtmlFiles = (dir: string, acc: string[] = []): string[] => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walkHtmlFiles(full, acc);
+      else if (entry.name.endsWith(".html")) acc.push(full);
+    }
+    return acc;
+  };
+
+  const distTargetExists = (pathname: string): boolean => {
+    const norm = pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+    if (futureScheduledPaths.has(norm)) return true;
+    const rel = norm === "/" ? "index.html" : norm.slice(1);
+    const direct = path.join(DIST_DIR, rel);
+    return (
+      (fs.existsSync(direct) && fs.statSync(direct).isFile()) ||
+      fs.existsSync(path.join(DIST_DIR, `${rel}.html`)) ||
+      fs.existsSync(path.join(DIST_DIR, rel, "index.html"))
+    );
+  };
+
+  const isLegacyInternalQuery = (pathname: string, params: URLSearchParams): boolean => {
+    if (params.has("tab") || params.has("region") || params.has("slug") || params.has("route") || params.has("country")) {
+      return true;
+    }
+    if ((pathname === "/hotels" || pathname === "/bn/hotels") && params.has("city")) {
+      return true;
+    }
+    return false;
+  };
+
+  const brokenInternalLinks: string[] = [];
+  const legacyQueryLinks: string[] = [];
+  const internalSponsoredLinks: string[] = [];
+  const internalFlightBlankLinks: string[] = [];
+
+  for (const htmlFile of walkHtmlFiles(DIST_DIR)) {
+    const relFile = path.relative(DIST_DIR, htmlFile).replace(/\\/g, "/");
+    const html = read(htmlFile) ?? "";
+    for (const match of html.matchAll(/<a\b[^>]*>/gi)) {
+      const tag = match[0];
+      const rawHref = tag.match(/\bhref="([^"]*)"/i)?.[1]?.replace(/&amp;/g, "&");
+      if (!rawHref) continue;
+      const isRootRel = rawHref.startsWith("/") && !rawHref.startsWith("//");
+      const isOwnAbs = rawHref === SITE_ORIGIN || rawHref.startsWith(`${SITE_ORIGIN}/`);
+      if (!isRootRel && !isOwnAbs) continue;
+
+      let parsed: URL;
+      try {
+        parsed = new URL(rawHref, SITE_ORIGIN);
+      } catch {
+        brokenInternalLinks.push(`${relFile} -> ${rawHref}`);
+        continue;
+      }
+      if (parsed.origin !== SITE_ORIGIN) continue;
+      const pathname = decodeURIComponent(parsed.pathname);
+      if (!distTargetExists(pathname)) {
+        brokenInternalLinks.push(`${relFile} -> ${pathname}`);
+      }
+      if (parsed.search && isLegacyInternalQuery(pathname, parsed.searchParams)) {
+        legacyQueryLinks.push(`${relFile} -> ${pathname}${parsed.search}`);
+      }
+      const relAttr = tag.match(/\brel="([^"]*)"/i)?.[1] ?? "";
+      const targetAttr = tag.match(/\btarget="([^"]*)"/i)?.[1] ?? "";
+      if (/\bsponsored\b/i.test(relAttr)) {
+        internalSponsoredLinks.push(`${relFile} -> ${rawHref} (rel="${relAttr}")`);
+      }
+      if (
+        (pathname === "/flights" || pathname === "/bn/flights") &&
+        parsed.searchParams.has("fsrc") &&
+        targetAttr === "_blank"
+      ) {
+        internalFlightBlankLinks.push(`${relFile} -> ${rawHref}`);
+      }
+    }
+  }
+
+  check(
+    brokenInternalLinks.length === 0 &&
+      !distTargetExists("/experiences/non-existent-region") &&
+      distTargetExists("/experiences/europe") &&
+      distTargetExists("/bn/experiences/asia"),
+    brokenInternalLinks.length === 0
+      ? "every same-origin <a href> across dist/ resolves to a shipped page or asset (with negative control)"
+      : `broken internal <a href> targets in dist/: ${brokenInternalLinks.slice(0, 6).join("; ")}`
+  );
+
+  const deployedRoutesCfg = JSON.parse(read(path.join(DIST_DIR, "_routes.json")) ?? "{}") as {
+    include?: string[];
+  };
+  const deployedRedirectsTxt = read(path.join(DIST_DIR, "_redirects")) ?? "";
+  const middlewareSrc = read(path.join(ROOT_DIR, "functions", "_middleware.js")) ?? "";
+  const edgeLegacyWiringOk =
+    ["/experiences", "/bn/experiences", "/tools", "/bn/tools"].every((entry) =>
+      deployedRoutesCfg.include?.includes(entry)
+    ) &&
+    middlewareSrc.includes('url.pathname === "/bn/experiences"') &&
+    middlewareSrc.includes('"/bn/tools"') &&
+    !/\?(?:region|tab)=/.test(deployedRedirectsTxt);
+
+  check(
+    legacyQueryLinks.length === 0 &&
+      edgeLegacyWiringOk &&
+      isLegacyInternalQuery("/tools", new URLSearchParams("tab=currency")) &&
+      isLegacyInternalQuery("/experiences", new URLSearchParams("region=west&city=london")) &&
+      !isLegacyInternalQuery("/experiences/europe", new URLSearchParams("city=london")) &&
+      !isLegacyInternalQuery("/flights", new URLSearchParams("fsrc=post_test")),
+    legacyQueryLinks.length === 0 && edgeLegacyWiringOk
+      ? "zero legacy query links (?tab=, ?region=, ?slug=, ?route=, ?country=) ship in dist/ or _redirects, while ?city= filtering and EN/BN edge 301s stay active"
+      : `legacy query link/redirect issues: ${legacyQueryLinks.slice(0, 6).join("; ")} (edgeWiring=${edgeLegacyWiringOk})`
+  );
+
+  const internalPartnerBtn = renderToStaticMarkup(
+    React.createElement(PartnerLinkButton, {
+      href: "/flights?fsrc=post_guard#flight-search",
+      label: "Compare Live Flight Fares",
+      variant: "dark",
+    })
+  );
+  const externalPartnerBtn = renderToStaticMarkup(
+    React.createElement(PartnerLinkButton, {
+      href: AFFILIATE_LINKS.klook,
+      label: "Compare Tour & Attraction Passes",
+      variant: "dark",
+    })
+  );
+  const dualCardCalloutHtml = renderToStaticMarkup(
+    React.createElement(MultiPartnerBlogCallout, {
+      slug: "dual-currency-card-endorsement-bangladesh",
+      lang: "en",
+      primaryHrefOverride: "/flights?fsrc=post_dual_currency_card_endorsement_bangladesh#flight-search",
+    })
+  );
+  const dualCardFlightAnchors = [
+    ...dualCardCalloutHtml.matchAll(/<a\b[^>]*href="\/flights\?fsrc=[^"]*"[^>]*>/g),
+  ].map((m) => m[0]);
+  const dualCardExternalAnchors = [
+    ...dualCardCalloutHtml.matchAll(/<a\b[^>]*href="https:\/\/[^"]*"[^>]*>/g),
+  ].map((m) => m[0]);
+
+  const reactCtaAttrsOk =
+    !/\brel="[^"]*sponsored|\btarget="_blank"/.test(internalPartnerBtn) &&
+    externalPartnerBtn.includes('target="_blank"') &&
+    externalPartnerBtn.includes('rel="noopener noreferrer sponsored"') &&
+    BLOG_AFFILIATE_CTA_DISCLOSURE.en.includes("Affiliate link") &&
+    !BLOG_FLIGHTS_PAGE_CTA_NOTE.en.startsWith("Affiliate link") &&
+    dualCardFlightAnchors.length === 2 &&
+    dualCardFlightAnchors.every((tag) => !/\brel="[^"]*sponsored|\btarget="_blank"/.test(tag)) &&
+    dualCardExternalAnchors.length === 1 &&
+    dualCardExternalAnchors[0].includes('target="_blank"') &&
+    dualCardExternalAnchors[0].includes('rel="noopener noreferrer sponsored"') &&
+    isSameOriginCtaHref("/flights?fsrc=post_x#flight-search") &&
+    isSameOriginCtaHref("/bn/flights?fsrc=post_x#flight-search") &&
+    !isSameOriginCtaHref("https://flights.uraltravel.co.uk/?locale=en&currency=BDT") &&
+    !isSameOriginCtaHref(AFFILIATE_LINKS.tiqets);
+
+  check(
+    internalSponsoredLinks.length === 0 &&
+      internalFlightBlankLinks.length === 0 &&
+      reactCtaAttrsOk,
+    internalSponsoredLinks.length === 0 && internalFlightBlankLinks.length === 0 && reactCtaAttrsOk
+      ? "zero same-origin links carry rel=\"sponsored\" or force target=\"_blank\" on /flights?fsrc= CTAs, while all external affiliate links retain full sponsored attributes"
+      : `same-origin CTA attribute issues: sponsored=[${internalSponsoredLinks.slice(0, 4).join("; ")}] blank=[${internalFlightBlankLinks.slice(0, 4).join("; ")}] reactOk=${reactCtaAttrsOk}`
+  );
+}
 
 // Non-blocking debt report. Printed on every run so the numbers in §10 of the
 // standard are reproducible, but never counted as a pass.

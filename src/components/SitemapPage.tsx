@@ -1125,8 +1125,9 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
               🕋 {isBn ? "ওমরাহ ও হজ প্ল্যানার ২০২৬" : "Umrah & Hajj Hub 2026"}
             </a>
             <a
-              href="/experiences"
+              href={isBn ? "/bn/experiences" : "/experiences"}
               onClick={(e) => {
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
                 e.preventDefault();
                 onNavigate("/experiences");
               }}
@@ -1325,6 +1326,8 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
               { path: "/destinations", en: "Destination Itineraries", bn: "গন্তব্য ভ্রমণ গাইড" },
               { path: "/costs", en: "Trip Cost Calculators", bn: "ভ্রমণ খরচ ক্যালকুলেটর" },
               { path: "/experiences", en: "Attractions & Passes", bn: "আকর্ষণ ও টিকিট" },
+              { path: "/experiences/europe", en: "Europe, UK & US Passes", bn: "ইউরোপ, UK ও USA পাস" },
+              { path: "/experiences/asia", en: "Asia & Dubai Passes", bn: "এশিয়া ও দুবাই পাস" },
               { path: "/umrah", en: "DIY Umrah & Hajj Hub", bn: "উমরাহ ও হজ হাব" },
               { path: "/tools", en: "Interactive Travel Tools", bn: "ইন্টারেক্টিভ ট্রাভেল টুলস" },
               { path: "/contact", en: "Contact & WhatsApp Desk", bn: "যোগাযোগ ও হোয়াটসঅ্যাপ" },
@@ -1332,8 +1335,9 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
             ].map((hub) => (
               <a
                 key={hub.path}
-                href={hub.path}
+                href={isBn ? (hub.path === "/" ? "/bn" : `/bn${hub.path}`) : hub.path}
                 onClick={(e) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
                   e.preventDefault();
                   onNavigate(hub.path);
                 }}

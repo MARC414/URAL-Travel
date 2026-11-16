@@ -35,10 +35,10 @@ const DestinationFlightSearch = React.lazy(() =>
 );
 
 const EXPERIENCE_PATHS: Record<string, string> = {
-  "london-guide": "/experiences?region=west&city=london",
-  "italy-guide": "/experiences?region=west&city=rome-italy",
-  "paris-guide": "/experiences?region=west&city=paris",
-  "new-york-guide": "/experiences?region=west&city=new-york",
+  "london-guide": "/experiences/europe?city=london",
+  "italy-guide": "/experiences/europe?city=rome-italy",
+  "paris-guide": "/experiences/europe?city=paris",
+  "new-york-guide": "/experiences/europe?city=new-york",
 };
 
 const ACTIVITY_DESTINATION_NAMES: Record<string, { en: string; bn: string }> = {

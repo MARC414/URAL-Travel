@@ -258,6 +258,16 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Plan activities and attraction visits abroad with practical links and guides for travelers departing from Bangladesh.",
   },
+  "/experiences/europe": {
+    title: "Europe, UK & US Attraction Passes: Tiqets Guides | URAL",
+    description:
+      "Plan timed-entry museum, landmark and river-cruise tickets in Paris, London, Rome, Milan, Venice and New York. Check current slots and terms before booking.",
+  },
+  "/experiences/asia": {
+    title: "Asia & Dubai Attraction Passes & Activity Guides | URAL",
+    description:
+      "Browse Klook and partner activity listings in Dubai, Abu Dhabi, Bangkok, Singapore and Kuala Lumpur. Compare dates, inclusions, totals and booking terms.",
+  },
   "/tools": {
     title: "Travel Tools: Trip Cost Estimator, Currency & Checklists | URAL",
     description:
@@ -607,6 +617,16 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     title: "বাংলাদেশি ভ্রমণকারীদের জন্য অ্যাক্টিভিটি গাইড | URAL",
     description:
       "বিদেশে অ্যাক্টিভিটি ও দর্শনীয় স্থান পরিকল্পনা করুন — বাংলাদেশ থেকে যাত্রা করা ভ্রমণকারীদের জন্য ব্যবহারিক লিংক ও গাইডসহ।",
+  },
+  "/experiences/europe": {
+    title: "ইউরোপ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের আকর্ষণ পাস গাইড | URAL",
+    description:
+      "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস ও নিউ ইয়র্কে Tiqets-এর নির্ধারিত সময়ের টিকিট ও পাস পরিকল্পনা করুন। বুকিংয়ের আগে সময়সূচি, মূল্য ও বাতিলের শর্ত দেখুন।",
+  },
+  "/experiences/asia": {
+    title: "এশিয়া ও দুবাই আকর্ষণ পাস ও অ্যাক্টিভিটি গাইড | URAL",
+    description:
+      "দুবাই, আবুধাবি, ব্যাংকক, সিঙ্গাপুর ও কুয়ালালামপুরে Klook ও পার্টনার অ্যাক্টিভিটি তালিকা দেখুন। বুকিংয়ের আগে তারিখ, অন্তর্ভুক্তি, মোট দাম ও শর্ত মিলিয়ে নিন।",
   },
   "/flights": {
     title: "ঢাকা থেকে ফ্লাইট: রুট, ভাড়া ও এয়ারলাইন্স | URAL",

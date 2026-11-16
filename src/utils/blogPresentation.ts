@@ -33,6 +33,16 @@ export function articleLinkPath(rawPath: string): string | null {
       url.searchParams.delete("tab");
     }
   }
+  if (url.pathname === "/experiences") {
+    const region = url.searchParams.get("region");
+    if (region === "west" || region === "europe") {
+      url.pathname = "/experiences/europe";
+      url.searchParams.delete("region");
+    } else if (region === "asia") {
+      url.pathname = "/experiences/asia";
+      url.searchParams.delete("region");
+    }
+  }
   if (url.pathname === "/indexing") url.pathname = "/sitemap";
   return `${url.pathname}${url.search}${url.hash}`;
 }

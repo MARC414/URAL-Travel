@@ -34,7 +34,7 @@ import JourneyHelpPanel from "../components/JourneyHelpPanel";
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
 
 import { resolveBookingCtaUrl } from "../utils/bookingCta";
-import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, MULTI_PARTNER_BLOG_PLACEMENTS, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, getAffiliateCtaButtonLabel, BLOG_AFFILIATE_CTA_DISCLOSURE } from "../components/AffiliatePartners";
+import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, MULTI_PARTNER_BLOG_PLACEMENTS, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, getAffiliateCtaButtonLabel, getBlogCtaDisclosure } from "../components/AffiliatePartners";
 import { QeeqEmbed } from "../components/QeeqEmbed";
 import { KlookHotelBlogCallout } from "../components/KlookHotelOffers";
 import { EvisaArticleCta, EvisaBlogBanner, EvisaBlogContextLink } from "../components/EvisaPanels";
@@ -1806,10 +1806,14 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                       <MultiPartnerBlogCallout
                         slug={activePost.slug}
                         lang={lang}
-                        primaryHrefOverride={resolveBookingCtaUrl(
-                          MULTI_PARTNER_BLOG_PLACEMENTS[activePost.slug]?.primaryPartner ?? "aviasales",
-                          { slug: activePost.slug, locale: isBn ? "bn" : "en" }
-                        )}
+                        primaryHrefOverride={
+                          MULTI_PARTNER_BLOG_PLACEMENTS[activePost.slug]
+                            ? resolveBookingCtaUrl(
+                                MULTI_PARTNER_BLOG_PLACEMENTS[activePost.slug].primaryPartner,
+                                { slug: activePost.slug, locale: isBn ? "bn" : "en" }
+                              )
+                            : undefined
+                        }
                       />
 
 
@@ -1917,7 +1921,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                           )}
 
                           <p className="text-[11px] leading-relaxed text-slate-500">
-                            {BLOG_AFFILIATE_CTA_DISCLOSURE[isBn ? "bn" : "en"]}
+                            {getBlogCtaDisclosure(affiliateCtaHref, isBn ? "bn" : "en")}
                           </p>
 
                         </div>
