@@ -57,32 +57,32 @@ export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   "/flights/dhaka-kathmandu": {
     title: "Dhaka to Kathmandu Flights: Price & Route Guide | URAL",
     description:
-      "Compare Dhaka to Kathmandu fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
+      "Compare DAC–KTM fares across dates: nonstop and connecting options, baggage per segment, and the SAARC gratis visa check for eligible passports.",
   },
   "/flights/dhaka-bangkok": {
     title: "Dhaka to Bangkok Flights: Fares, Airlines & Tips | URAL",
     description:
-      "Compare Dhaka to Bangkok fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
+      "Compare DAC–BKK fares across dates: nonstop and connecting options, baggage, and Thailand's e-Visa (thaievisa.go.th) requirements before booking.",
   },
   "/flights/dhaka-kuala-lumpur": {
     title: "Dhaka to Kuala Lumpur Flights: Price & Airlines | URAL",
     description:
-      "Compare Dhaka to Kuala Lumpur fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
+      "Compare DAC–KUL fares across dates: nonstop and connecting options, baggage, and Malaysia's visa and arrival declaration checks before booking.",
   },
   "/flights/dhaka-dubai": {
     title: "Dhaka to Dubai Flights: BDT Fares & Airlines | URAL",
     description:
-      "Compare Dhaka to Dubai fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
+      "Compare DAC–DXB fares across dates: nonstop and connecting options, baggage per segment, and UAE entry checks for your passport before booking.",
   },
   "/flights/dhaka-singapore": {
     title: "Dhaka to Singapore Flights: Airlines & BDT Fares | URAL",
     description:
-      "Compare Dhaka to Singapore fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
+      "Compare DAC–SIN fares across dates: nonstop and connecting options, baggage, and Singapore ICA's visa and SG Arrival Card steps before you book.",
   },
   "/flights/dhaka-maldives": {
     title: "Dhaka to Maldives Flights: Direct & Transit Fares | URAL",
     description:
-      "Compare Dhaka to Malé fares and journey times for your dates. Check airports, baggage, transit and entry requirements before booking.",
+      "Compare DAC–MLE fares across dates: nonstop and connecting options, baggage, and Maldives IMUGA declaration steps before departure.",
   },
   "/flights/ktm-dhaka": {
     title: "Kathmandu to Dhaka Flights: Price & Route Guide | URAL",
@@ -375,7 +375,7 @@ export const CORE_BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/costs/nepal-costs": {
     title: "বাংলাদেশ থেকে নেপাল ভ্রমণ খরচ: টাকায় বাজেট | URAL",
     description:
-      "বাংলাদেশ থেকে নেপাল ভ্রমণের বাজেট টাকায় হিসাব করুন। ইটিনেরারি সাজানোর আগে ফ্লাইট, থাকা, যাতায়াত ও দৈনিক খরচের ক্যাটাগরি দেখুন।",
+      "৫ দিনের নেপাল ভ্রমণে জনপ্রতি খরচ ৪০,০০০–৫৪,০০০ টাকা (জুন ২০২৬ হিসাবে): রাউন্ডট্রিপ ফ্লাইট, হোটেল, কাঠমান্ডু–পোখারা যাতায়াত ও দৈনিক খরচ আলাদা করে হিসাব করুন।",
   },
   "/costs/singapore-costs": {
     title: "বাংলাদেশ থেকে সিঙ্গাপুর ভ্রমণ খরচ: টাকায় বাজেট | URAL",
@@ -415,27 +415,27 @@ export const CORE_BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/flights/dhaka-bangkok": {
     title: "ঢাকা টু ব্যাংকক ফ্লাইট: ভাড়া, এয়ারলাইন ও টিপস | URAL",
     description:
-      "ঢাকা থেকে ব্যাংকক ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
+      "DAC–BKK রুটে একাধিক তারিখের মোট ভাড়া তুলনা করুন: সরাসরি ও সংযোগী ফ্লাইট, প্রতি সেগমেন্টের ব্যাগেজ এবং বুকিংয়ের আগে Thailand e-Visa (thaievisa.go.th) শর্ত যাচাই।",
   },
   "/flights/dhaka-dubai": {
     title: "ঢাকা টু দুবাই ফ্লাইট: টাকায় ভাড়া ও এয়ারলাইন | URAL",
     description:
-      "ঢাকা থেকে দুবাই ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
+      "DAC–DXB রুটে একাধিক তারিখের মোট ভাড়া তুলনা করুন: সরাসরি ও সংযোগী ফ্লাইট, প্রতি সেগমেন্টের ব্যাগেজ এবং নিজের পাসপোর্টের জন্য UAE প্রবেশের নিয়ম যাচাই।",
   },
   "/flights/dhaka-kathmandu": {
     title: "ঢাকা টু কাঠমান্ডু ফ্লাইট: ভাড়া ও রুট গাইড | URAL",
     description:
-      "ঢাকা থেকে কাঠমান্ডু ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
+      "DAC–KTM রুটে একাধিক তারিখের মোট ভাড়া তুলনা করুন: সরাসরি ও সংযোগী ফ্লাইট, প্রতি সেগমেন্টের ব্যাগেজ এবং যোগ্য পাসপোর্টে SAARC gratis visa যাচাই।",
   },
   "/flights/dhaka-kuala-lumpur": {
     title: "ঢাকা টু কুয়ালালামপুর ফ্লাইট: ভাড়া ও এয়ারলাইন | URAL",
     description:
-      "ঢাকা থেকে কুয়ালালামপুর ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
+      "DAC–KUL রুটে একাধিক তারিখের মোট ভাড়া তুলনা করুন: সরাসরি ও সংযোগী ফ্লাইট, ব্যাগেজ এবং বুকিংয়ের আগে মালয়েশিয়ার ভিসা ও arrival declaration যাচাই।",
   },
   "/flights/dhaka-maldives": {
     title: "ঢাকা টু মালদ্বীপ ফ্লাইট: সরাসরি ও ট্রানজিট ভাড়া | URAL",
     description:
-      "ঢাকা থেকে মালে ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
+      "DAC–MLE রুটে একাধিক তারিখের মোট ভাড়া তুলনা করুন: সরাসরি ও সংযোগী ফ্লাইট, ব্যাগেজ এবং রওনার আগে Maldives IMUGA declaration যাচাই।",
   },
   "/flights/ktm-dhaka": {
     title: "কাঠমান্ডু টু ঢাকা ফ্লাইট: ভাড়া ও রুট গাইড | URAL",
@@ -446,7 +446,7 @@ export const CORE_BENGALI_SEO_COPY: Record<string, SeoCopy> = {
   "/flights/dhaka-singapore": {
     title: "ঢাকা টু সিঙ্গাপুর ফ্লাইট: এয়ারলাইন ও টাকায় ভাড়া | URAL",
     description:
-      "ঢাকা থেকে সিঙ্গাপুর ফ্লাইটের মোট ভাড়া ও যাত্রার সময় তুলনা করুন। বুকিংয়ের আগে বিমানবন্দর, ব্যাগেজ, ট্রানজিট ও প্রবেশের নিয়ম যাচাই করুন।",
+      "DAC–SIN রুটে একাধিক তারিখের মোট ভাড়া তুলনা করুন: সরাসরি ও সংযোগী ফ্লাইট, ব্যাগেজ এবং বুকিংয়ের আগে Singapore ICA-এর ভিসা ও SG Arrival Card ধাপ যাচাই।",
   },
   "/hotels": {
     title: "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড | URAL",
