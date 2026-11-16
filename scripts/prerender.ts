@@ -116,7 +116,8 @@ import {
   sanitizeExpiredPromoText,
   AFFILIATE_LINKS,
   getAffiliateCtaButtonLabel,
-  BLOG_AFFILIATE_CTA_DISCLOSURE,
+  getBlogCtaDisclosure,
+  isSameOriginCtaHref,
 } from "../src/components/AffiliatePartners";
 import { EvisaArticleCta, EvisaBanner, EvisaBlogBanner, EvisaBlogContextLink, EvisaDestinationPlacement, EvisaHomeSection, EvisaVisaPanel, EvisaWidgetPrivacyNote } from "../src/components/EvisaPanels";
 import type { EvisaBannerSize, EvisaCampaignKey } from "../src/data/evisaProgram";
@@ -657,13 +658,16 @@ function renderBlogAffiliateCtaHtml(
   const href = resolveBookingCtaUrl(cta.provider, { slug, locale });
   if (!href) return "";
   const label = getAffiliateCtaButtonLabel(cta.provider, locale);
+  const linkAttrs = isSameOriginCtaHref(href)
+    ? ""
+    : ' target="_blank" rel="noopener noreferrer sponsored"';
   return `<section aria-labelledby="article-affiliate-cta"><h2 id="article-affiliate-cta">${escapeHtml(
     sanitizeExpiredPromoText(cta.headline)
   )}</h2><p>${escapeHtml(sanitizeExpiredPromoText(cta.body))}</p><p><a href="${escapeHtml(
     href
-  )}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(
+  )}"${linkAttrs}>${escapeHtml(
     label
-  )}</a></p><p><em>${escapeHtml(BLOG_AFFILIATE_CTA_DISCLOSURE[locale])}</em></p></section>`;
+  )}</a></p><p><em>${escapeHtml(getBlogCtaDisclosure(href, locale))}</em></p></section>`;
 }
 
 function renderCoxsBazarAuthorBioHtml(locale: "en" | "bn"): string {
@@ -802,12 +806,31 @@ const STANDALONE_PAGE_LINKS: Record<string, InternalLinkItem[]> = {
     },
   ],
   "/experiences": [
+    { href: "/experiences/europe", text: "Europe, UK and US attraction passes and timed-entry guides" },
+    { href: "/experiences/asia", text: "Asia and Dubai attraction passes and activity guides" },
     { href: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide", text: "Europe, UK and USA attraction passes for Bangladeshi travelers" },
     { href: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide", text: "Abu Dhabi day trip from Dubai: mosque and attraction guide" },
     { href: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide", text: "Umrah and Dubai multi-city itinerary from Dhaka" },
     { href: "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide", text: "Singapore family itinerary with Sentosa and halal food" },
     { href: "/destinations/dubai-guide", text: "Plan a Dubai itinerary from Bangladesh" },
     { href: "/destinations/singapore-guide", text: "Explore the Singapore destination guide" },
+  ],
+  "/experiences/europe": [
+    { href: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide", text: "Europe, UK and USA sightseeing and pass planning guide" },
+    { href: "/attractions", text: "Browse the European attraction guide directory" },
+    { href: "/destinations/london-guide", text: "London itinerary and landmark guide from Bangladesh" },
+    { href: "/destinations/paris-guide", text: "Paris itinerary and timed-entry planning from Bangladesh" },
+    { href: "/destinations/italy-guide", text: "Italy itinerary covering Rome, Milan and Venice" },
+    { href: "/destinations/new-york-guide", text: "New York City itinerary and landmark guide" },
+  ],
+  "/experiences/asia": [
+    { href: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide", text: "Abu Dhabi day trip from Dubai: mosque and attraction guide" },
+    { href: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide", text: "Umrah and Dubai multi-city itinerary from Dhaka" },
+    { href: "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide", text: "Singapore family itinerary with Sentosa and halal food" },
+    { href: "/destinations/dubai-guide", text: "Plan a Dubai itinerary from Bangladesh" },
+    { href: "/destinations/thailand-guide", text: "Plan a Thailand and Bangkok itinerary from Bangladesh" },
+    { href: "/destinations/singapore-guide", text: "Explore the Singapore destination guide" },
+    { href: "/destinations/malaysia-guide", text: "Plan a Malaysia family itinerary from Bangladesh" },
   ],
   "/tools": [
     { href: "/tools/budget-calculator", text: "Trip Cost Estimator: Quotes, Travellers & Hotel Nights" },
@@ -1094,7 +1117,7 @@ function addInternalLinkSections(
                   ? "Related Umrah and Hajj guides"
                   : route.routePath === "/banking"
                     ? "Related money, card and NOC guides"
-                    : route.routePath === "/experiences"
+                    : route.routePath.startsWith("/experiences")
                       ? "Related attraction and destination guides"
                       : route.routePath.startsWith("/tools")
                         ? "Guides for using travel tools"
@@ -1119,11 +1142,16 @@ function addInternalLinkSections(
       const parentHubPath =
         CATEGORY_HUB_LINKS.map((link) => link.href).find((hubPath) =>
           route.routePath.startsWith(`${hubPath}/`)
-        ) ?? (route.routePath.startsWith("/tools/") ? "/tools" : undefined);
+        ) ??
+        (route.routePath.startsWith("/tools/")
+          ? "/tools"
+          : route.routePath.startsWith("/experiences/")
+            ? "/experiences"
+            : undefined);
       const ownHubLink = !parentHubPath
         ? undefined
-        : parentHubPath === "/tools"
-          ? { href: "/tools", text: stripBrandSuffix(getSeoCopy("/tools", "", "").title) }
+        : parentHubPath === "/tools" || parentHubPath === "/experiences"
+          ? { href: parentHubPath, text: stripBrandSuffix(getSeoCopy(parentHubPath, "", "").title) }
           : CATEGORY_HUB_LINKS.find((link) => link.href === parentHubPath);
       const sitewideHubLinks = [
         ...(ownHubLink ? [ownHubLink] : []),
@@ -2377,7 +2405,7 @@ function buildAllRoutes(): PrerenderRoute[] {
           <p><strong>Budget planning note:</strong> ${escapeHtml(d.budgetBdt)}. Review international flights and current entry rules separately.</p>
           ${renderToStaticMarkup(React.createElement(EvisaDestinationPlacement, { guideId: d.id, lang: "en" }))}
           ${renderDestinationOfficialSources(d.id, "en")}
-          ${d.id === "london-guide" ? '<p><a href="/experiences?region=west&amp;city=london">Explore London activities and experiences</a></p>' : d.id === "italy-guide" ? '<p><a href="/experiences?region=west&amp;city=rome-italy">Explore Italy activities and experiences</a></p>' : d.id === "paris-guide" ? '<p><a href="/experiences?region=west&amp;city=paris">Explore Paris activities and experiences</a></p>' : d.id === "new-york-guide" ? '<p><a href="/experiences?region=west&amp;city=new-york">Explore New York City activities and experiences</a></p>' : ""}
+          ${d.id === "london-guide" ? '<p><a href="/experiences/europe?city=london">Explore London activities and experiences</a></p>' : d.id === "italy-guide" ? '<p><a href="/experiences/europe?city=rome-italy">Explore Italy activities and experiences</a></p>' : d.id === "paris-guide" ? '<p><a href="/experiences/europe?city=paris">Explore Paris activities and experiences</a></p>' : d.id === "new-york-guide" ? '<p><a href="/experiences/europe?city=new-york">Explore New York City activities and experiences</a></p>' : ""}
           <section>
             <h2>${escapeHtml(d.country)} key facts for travelers from Bangladesh</h2>
             <ul>${d.keyFacts.map((fact) => `<li><strong>${escapeHtml(fact.label)}:</strong> ${escapeHtml(fact.value)}</li>`).join("")}</ul>
@@ -2444,7 +2472,10 @@ function buildAllRoutes(): PrerenderRoute[] {
     });
   }
 
-  // 8. Experiences Hub (/experiences)
+  // 8. Experiences Hub (/experiences) + Regional Pages (/experiences/europe, /experiences/asia)
+  const klookExpActive = AFFILIATE_OFFER_REGISTRY.klook.status === "active";
+  const klookHotelsExpActive =
+    klookExpActive && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active";
   routes.push({
     routePath: "/experiences",
     canonicalUrl: `${BASE_URL}/experiences`,
@@ -2461,12 +2492,92 @@ function buildAllRoutes(): PrerenderRoute[] {
       <article>
         <h1>Europe, UK, USA &amp; Asian Attraction Passes (Tiqets &amp; Klook Hub)</h1>
         <p>Browse attraction and activity listings for Europe, the UK, the USA and Asia. Before booking, compare the specific dates, inclusions, checkout totals, entry instructions and cancellation terms shown by the relevant operator.</p>
+        <section aria-labelledby="experiences-region-directory">
+          <h2 id="experiences-region-directory">Browse attraction and activity guides by region</h2>
+          <ul>
+            <li><a href="/experiences/europe">Europe, UK &amp; US attraction passes (Paris, London, Rome, Milan, Venice &amp; New York)</a></li>
+            <li><a href="/experiences/asia">Asia &amp; Dubai attraction passes and activity guides (Dubai, Abu Dhabi, Bangkok, Singapore &amp; Kuala Lumpur)</a></li>
+            <li><a href="/attractions">European attraction guide directory</a></li>
+          </ul>
+        </section>
         <section aria-labelledby="luggage-storage-tip">
           <h2 id="luggage-storage-tip">Museum Bag-Ban Rule, Go City All-Inclusive &amp; Explorer Passes &amp; Luggage Storage</h2>
           <p>Major European, UK, and US attractions (Louvre, Eiffel Tower, Colosseum, Vatican, British Museum, and Statue of Liberty) strictly prohibit suitcases and large backpacks inside security. Store your bags for ~€5/day per bag (with €3,000 security guarantee) at verified hotels and shops near major stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage luggage storage network</a>, bundle 3 to 10+ city landmarks with <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City All-Inclusive &amp; Explorer Passes</a>, browse Klook's curated hotel collection via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">Klook Global Hotels</a>, or book sightseeing tours on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Klook Activities</a>.</p>
         </section>
       </article>
     `,
+    lastmod: CONTENT_DATA_LASTMOD,
+  });
+
+  routes.push({
+    routePath: "/experiences/europe",
+    canonicalUrl: `${BASE_URL}/experiences/europe`,
+    title: "Europe, UK & US Attraction Passes: Tiqets Guides | URAL",
+    description:
+      "Plan timed-entry museum, landmark and river-cruise tickets in Paris, London, Rome, Milan, Venice and New York. Check current slots and terms before booking.",
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "Attractions & Passes", url: `${BASE_URL}/experiences` },
+      { name: "Europe, UK & US Attraction Passes", url: `${BASE_URL}/experiences/europe` },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: `
+      <article>
+        <h1>Europe, UK &amp; US Attraction Passes &amp; Timed-Entry Guides</h1>
+        <p>Plan timed-entry museum, landmark, observation-deck and river-cruise tickets in Paris, London, Rome, Milan, Venice and New York before departing from Bangladesh. High-demand venues enforce mandatory arrival windows, so confirm available time slots, included areas, checkout totals, entry rules and cancellation policies on the provider page before booking.</p>
+        <section aria-labelledby="europe-city-coverage">
+          <h2 id="europe-city-coverage">Covered European, UK and US cities</h2>
+          <ul>
+            <li><strong>Paris:</strong> Louvre Museum timed entry, Eiffel Tower lift access and Seine river cruises — pair with the <a href="/destinations/paris-guide">Paris destination guide</a>.</li>
+            <li><strong>London:</strong> London Eye, Tower of London, Westminster highlights and Thames river trips — pair with the <a href="/destinations/london-guide">London destination guide</a>.</li>
+            <li><strong>Rome, Milan &amp; Venice:</strong> Colosseum and Roman Forum, Vatican Museums, Duomo di Milano and Venice canal passes — pair with the <a href="/destinations/italy-guide">Italy destination guide</a>.</li>
+            <li><strong>New York City:</strong> Statue of Liberty ferry access, Manhattan observation decks and museum passes — pair with the <a href="/destinations/new-york-guide">New York City destination guide</a>.</li>
+          </ul>
+        </section>
+        <section aria-labelledby="europe-partner-options">
+          <h2 id="europe-partner-options">Ticket, multi-attraction pass and bag-storage options</h2>
+          <p>Compare single-attraction timed-entry tickets on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.tiqets))}" target="_blank" rel="noopener noreferrer sponsored">Tiqets</a>, check multi-attraction city pass inclusions on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City</a>, and review short-term bag drop locations near stations via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage</a> when museums restrict cabin suitcases or large backpacks. URAL may earn a commission on qualifying partner bookings at no extra cost to you.</p>
+          <p>Looking for Asia or Middle East trips instead? <a href="/experiences/asia">Browse Asia and Dubai attraction passes</a> or return to the <a href="/experiences">all-regions experiences hub</a>.</p>
+        </section>
+      </article>
+    `,
+    lastmod: CONTENT_DATA_LASTMOD,
+  });
+
+  routes.push({
+    routePath: "/experiences/asia",
+    canonicalUrl: `${BASE_URL}/experiences/asia`,
+    title: "Asia & Dubai Attraction Passes & Activity Guides | URAL",
+    description:
+      "Browse Klook and partner activity listings in Dubai, Abu Dhabi, Bangkok, Singapore and Kuala Lumpur. Compare dates, inclusions, totals and booking terms.",
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "Attractions & Passes", url: `${BASE_URL}/experiences` },
+      { name: "Asia & Dubai Attraction Passes", url: `${BASE_URL}/experiences/asia` },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: `
+      <article>
+        <h1>Asia &amp; Dubai Attraction Passes &amp; Activity Guides</h1>
+        <p>Plan attraction entries, day tours, airport rail transfers and family activities across Dubai, Abu Dhabi, Bangkok, Singapore and Kuala Lumpur. Before paying with an endorsed dual-currency card, check the exact travel date, pickup window, included admissions, checkout currency total and cancellation rules on the listing page.</p>
+        <section aria-labelledby="asia-city-coverage">
+          <h2 id="asia-city-coverage">Covered Middle East and Asian hubs</h2>
+          <ul>
+            <li><strong>Dubai &amp; Abu Dhabi:</strong> Burj Khalifa observation decks, desert safari excursions, Museum of the Future and Abu Dhabi day tours — pair with the <a href="/destinations/dubai-guide">Dubai destination guide</a>.</li>
+            <li><strong>Bangkok &amp; Thailand:</strong> Chao Phraya river cruises, Safari World, city temple tours and airport rail links — pair with the <a href="/destinations/thailand-guide">Thailand destination guide</a>.</li>
+            <li><strong>Singapore &amp; Kuala Lumpur:</strong> Gardens by the Bay, Sentosa attractions, KLIA Ekspres transfers and Genting day trips — pair with the <a href="/destinations/singapore-guide">Singapore guide</a> and <a href="/destinations/malaysia-guide">Malaysia guide</a>.</li>
+          </ul>
+        </section>
+        <section aria-labelledby="asia-partner-options">
+          <h2 id="asia-partner-options">Activity and booking options</h2>
+          <p>Review current dates, inclusions and cancellation terms${klookExpActive ? ` on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Klook Activities</a>` : ""}${klookHotelsExpActive ? `, compare property stays via <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klookHotels))}" target="_blank" rel="noopener noreferrer sponsored">Klook Hotels</a>` : ""}${klookExpActive ? "," : ""} or compare regional tours and rail passes on <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.kkday))}" target="_blank" rel="noopener noreferrer sponsored">KKday</a>. URAL may earn a commission on qualifying partner bookings; confirm the final total and operator conditions before checkout.</p>
+          <p>Planning a Schengen, UK or US itinerary? <a href="/experiences/europe">Browse Europe, UK and US attraction passes</a> or return to the <a href="/experiences">all-regions experiences hub</a>.</p>
+        </section>
+      </article>
+    `,
+    lastmod: CONTENT_DATA_LASTMOD,
   });
 
   // 8a. Attractions Hub (/attractions) — static directory over the editorial
@@ -2981,8 +3092,14 @@ function buildAllRoutes(): PrerenderRoute[] {
 
     const radicalStorageHtml = renderBlogLuggagePlacementHtml(post.slug, "en");
     const multiPlacement = MULTI_PARTNER_BLOG_PLACEMENTS[post.slug];
+    const multiPrimaryRaw = multiPlacement
+      ? resolveBookingCtaUrl(multiPlacement.primaryPartner, { slug: post.slug, locale: "en" })
+      : "";
+    const multiPrimaryAttrs = isSameOriginCtaHref(multiPrimaryRaw)
+      ? ""
+      : ' target="_blank" rel="noopener noreferrer sponsored"';
     const multiPartnerHtml = multiPlacement
-      ? `<section aria-labelledby="partner-travel-tools"><h2 id="partner-travel-tools">${escapeHtml(multiPlacement.headlineEn)}</h2><p>${escapeHtml(multiPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(resolveBookingCtaUrl(multiPlacement.primaryPartner, { slug: post.slug, locale: "en" }))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.anchorTextEn)}</a>${escapeHtml(multiPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(resolveBookingCtaUrl(multiPlacement.primaryPartner, { slug: post.slug, locale: "en" }))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.primaryButtonEn)}</a>${
+      ? `<section aria-labelledby="partner-travel-tools"><h2 id="partner-travel-tools">${escapeHtml(multiPlacement.headlineEn)}</h2><p>${escapeHtml(multiPlacement.bodyBeforeAnchorEn)}<a href="${escapeHtml(multiPrimaryRaw)}"${multiPrimaryAttrs}>${escapeHtml(multiPlacement.anchorTextEn)}</a>${escapeHtml(multiPlacement.bodyAfterAnchorEn)} <a href="${escapeHtml(multiPrimaryRaw)}"${multiPrimaryAttrs}>${escapeHtml(multiPlacement.primaryButtonEn)}</a>${
           multiPlacement.secondaryPartner && multiPlacement.secondaryButtonEn
             ? ` · <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacement.secondaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacement.secondaryButtonEn)}</a>`
             : ""
@@ -3432,7 +3549,11 @@ function buildBengaliBody(
         // same partner next step as /blog/<slug>, using the placement's own
         // Bengali copy (the React callout already renders it after hydration;
         // without this block the crawlable BN page silently had none).
-        const multiUrlBn = escapeHtml(resolveBookingCtaUrl(multiPlacementBn.primaryPartner, { slug: id, locale: "bn" }));
+        const multiRawBn = resolveBookingCtaUrl(multiPlacementBn.primaryPartner, { slug: id, locale: "bn" });
+        const multiUrlBn = escapeHtml(multiRawBn);
+        const multiAttrsBn = isSameOriginCtaHref(multiRawBn)
+          ? ""
+          : ' target="_blank" rel="noopener noreferrer sponsored"';
         const multiSecondaryBn =
           multiPlacementBn.secondaryPartner && multiPlacementBn.secondaryButtonBn
             ? ` · <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS[multiPlacementBn.secondaryPartner]))}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacementBn.secondaryButtonBn)}</a>`
@@ -3440,7 +3561,7 @@ function buildBengaliBody(
         parts.push(
           bnSection(
             multiPlacementBn.headlineBn,
-            `<p>${escapeHtml(multiPlacementBn.bodyBeforeAnchorBn)}<a href="${multiUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacementBn.anchorTextBn)}</a>${escapeHtml(multiPlacementBn.bodyAfterAnchorBn)} <a href="${multiUrlBn}" target="_blank" rel="noopener noreferrer sponsored">${escapeHtml(multiPlacementBn.primaryButtonBn)}</a>${multiSecondaryBn}.</p>`
+            `<p>${escapeHtml(multiPlacementBn.bodyBeforeAnchorBn)}<a href="${multiUrlBn}"${multiAttrsBn}>${escapeHtml(multiPlacementBn.anchorTextBn)}</a>${escapeHtml(multiPlacementBn.bodyAfterAnchorBn)} <a href="${multiUrlBn}"${multiAttrsBn}>${escapeHtml(multiPlacementBn.primaryButtonBn)}</a>${multiSecondaryBn}.</p>`
           )
         );
       }
@@ -3768,28 +3889,28 @@ function buildBengaliBody(
           parts.push(
             bnSection(
               "লন্ডনের আকর্ষণ ও কার্যক্রম",
-              '<p><a href="/bn/experiences?region=west&amp;city=london">লন্ডনের কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
+              '<p><a href="/bn/experiences/europe?city=london">লন্ডনের কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
             )
           );
         } else if (id === "italy-guide") {
           parts.push(
             bnSection(
               "ইতালির আকর্ষণ ও কার্যক্রম",
-              '<p><a href="/bn/experiences?region=west&amp;city=rome-italy">ইতালির কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
+              '<p><a href="/bn/experiences/europe?city=rome-italy">ইতালির কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
             )
           );
         } else if (id === "paris-guide") {
           parts.push(
             bnSection(
               "প্যারিসের আকর্ষণ ও কার্যক্রম",
-              '<p><a href="/bn/experiences?region=west&amp;city=paris">প্যারিসের কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
+              '<p><a href="/bn/experiences/europe?city=paris">প্যারিসের কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
             )
           );
         } else if (id === "new-york-guide") {
           parts.push(
             bnSection(
               "নিউ ইয়র্ক সিটির আকর্ষণ ও কার্যক্রম",
-              '<p><a href="/bn/experiences?region=west&amp;city=new-york">নিউ ইয়র্ক সিটির কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
+              '<p><a href="/bn/experiences/europe?city=new-york">নিউ ইয়র্ক সিটির কার্যক্রম ও অভিজ্ঞতা দেখুন</a></p>'
             )
           );
         }
@@ -4037,9 +4158,64 @@ function buildBengaliBody(
     parts.push(
       bnLinkList("পড়ার জায়গা", [
         { label: "সব বাংলা ট্রাভেল ব্লগ", path: "/blog" },
-        { label: "এক্সপিরিয়েন্স ও টিকট", path: "/experiences" },
+        { label: "এক্সপিরিয়েন্স ও টিকিট হাব", path: "/experiences" },
+        { label: "ইউরোপ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের আকর্ষণ পাস", path: "/experiences/europe" },
+        { label: "এশিয়া ও দুবাই আকর্ষণ পাস ও অ্যাক্টিভিটি", path: "/experiences/asia" },
         { label: "আমাদের সম্পর্কে", path: "/about" },
         { label: "যোগাযোগ", path: "/contact" },
+      ])
+    );
+    return `<article>${parts.join("")}</article>`;
+  }
+
+  if (group === "experiences") {
+    const klookBnActive = AFFILIATE_OFFER_REGISTRY.klook.status === "active";
+    if (id === "europe") {
+      parts.push(
+        bnSection(
+          "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস ও নিউ ইয়র্কের নির্ধারিত সময়ের টিকিট",
+          `<p>ইউরোপ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের জনপ্রিয় জাদুঘর, প্রাসাদ ও ভিউপয়েন্টে প্রবেশের জন্য প্রায়ই আগে থেকে নির্ধারিত সময়ের (timed-entry) টিকিট প্রয়োজন হয়। ঢাকা থেকে রওনা হওয়ার আগে <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.tiqets))}" target="_blank" rel="noopener noreferrer sponsored">Tiqets</a> ও <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.goCity))}" target="_blank" rel="noopener noreferrer sponsored">Go City</a>-তে আপনার পছন্দের তারিখ, অন্তর্ভুক্ত সুবিধা, মোট মূল্য ও বাতিলের শর্ত মিলিয়ে নিন। বড় ব্যাগ নিয়ে জাদুঘরে প্রবেশ নিষিদ্ধ থাকলে স্টেশনের কাছে <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.radicalStorage))}" target="_blank" rel="noopener noreferrer sponsored">Radical Storage</a>-এর শর্ত দেখে নিতে পারেন। যোগ্য পার্টনার বুকিংয়ে আপনার অতিরিক্ত খরচ ছাড়াই URAL কমিশন পেতে পারে।</p>`
+        ),
+        bnLinkList("শহরভিত্তিক গন্তব্য গাইড ও সম্পর্কিত পাতা", [
+          { label: "সব অঞ্চলের অ্যাক্টিভিটি ও আকর্ষণ হাব", path: "/experiences" },
+          { label: "এশিয়া ও দুবাই আকর্ষণ পাস ও অ্যাক্টিভিটি গাইড", path: "/experiences/asia" },
+          { label: "ইউরোপীয় আকর্ষণ ডিরেক্টরি (Tiqets)", path: "/attractions" },
+          { label: "লন্ডন ভ্রমণ পরিকল্পনা গাইড", path: "/destinations/london-guide" },
+          { label: "প্যারিস ভ্রমণ পরিকল্পনা গাইড", path: "/destinations/paris-guide" },
+          { label: "ইতালি (রোম, মিলান ও ভেনিস) ভ্রমণ গাইড", path: "/destinations/italy-guide" },
+          { label: "নিউ ইয়র্ক সিটি ভ্রমণ পরিকল্পনা গাইড", path: "/destinations/new-york-guide" },
+          { label: "ইউরোপ, UK ও USA দর্শনীয় স্থান ও পাস গাইড", path: "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide" },
+        ])
+      );
+      return `<article>${parts.join("")}</article>`;
+    }
+    if (id === "asia") {
+      parts.push(
+        bnSection(
+          "দুবাই, আবুধাবি, ব্যাংকক, সিঙ্গাপুর ও কুয়ালালামপুরের অ্যাক্টিভিটি পরিকল্পনা",
+          `<p>দুবাইয়ের বুর্জ খলিফা ও ডেজার্ট সাফারি, আবুধাবি ডে-ট্রিপ, ব্যাংকক রিভার ক্রুজ, সিঙ্গাপুরের গার্ডেনস বাই দ্য বে ও সেন্তোসা এবং কুয়ালালামপুরের KLIA Ekspres বা গেন্টিং ভ্রমণের আগে${klookBnActive ? ` <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.klook))}" target="_blank" rel="noopener noreferrer sponsored">Klook</a> ও` : ""} <a href="${escapeHtml(resolvePartnerUrl(AFFILIATE_LINKS.kkday))}" target="_blank" rel="noopener noreferrer sponsored">KKday</a>-তে তারিখ, পিকআপ সময়, কী অন্তর্ভুক্ত, চূড়ান্ত মূল্য ও বাতিলের নিয়ম যাচাই করুন। যোগ্য পার্টনার বুকিংয়ে আপনার অতিরিক্ত খরচ ছাড়াই URAL কমিশন পেতে পারে।</p>`
+        ),
+        bnLinkList("শহরভিত্তিক গন্তব্য গাইড ও সম্পর্কিত পাতা", [
+          { label: "সব অঞ্চলের অ্যাক্টিভিটি ও আকর্ষণ হাব", path: "/experiences" },
+          { label: "ইউরোপ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের আকর্ষণ পাস গাইড", path: "/experiences/europe" },
+          { label: "দুবাই ভ্রমণ পরিকল্পনা গাইড", path: "/destinations/dubai-guide" },
+          { label: "থাইল্যান্ড ও ব্যাংকক ভ্রমণ গাইড", path: "/destinations/thailand-guide" },
+          { label: "সিঙ্গাপুর ভ্রমণ পরিকল্পনা গাইড", path: "/destinations/singapore-guide" },
+          { label: "মালয়েশিয়া পারিবারিক ভ্রমণ গাইড", path: "/destinations/malaysia-guide" },
+          { label: "দুবাই থেকে আবুধাবি শেখ জায়েদ মসজিদ ডে-ট্রিপ গাইড", path: "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide" },
+          { label: "ওমরাহ ও দুবাই ১০ দিনের মাল্টি-সিটি গাইড", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
+        ])
+      );
+      return `<article>${parts.join("")}</article>`;
+    }
+    parts.push(
+      bnLinkList("অঞ্চলভিত্তিক আকর্ষণ ও অ্যাক্টিভিটি গাইড", [
+        { label: "ইউরোপ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের আকর্ষণ পাস গাইড", path: "/experiences/europe" },
+        { label: "এশিয়া ও দুবাই আকর্ষণ পাস ও অ্যাক্টিভিটি গাইড", path: "/experiences/asia" },
+        { label: "ইউরোপীয় আকর্ষণ ডিরেক্টরি (Tiqets)", path: "/attractions" },
+        { label: "দুবাই ভ্রমণ পরিকল্পনা গাইড", path: "/destinations/dubai-guide" },
+        { label: "সিঙ্গাপুর ভ্রমণ পরিকল্পনা গাইড", path: "/destinations/singapore-guide" },
+        { label: "সব বাংলা ট্রাভেল গাইড", path: "/blog" },
       ])
     );
     return `<article>${parts.join("")}</article>`;
@@ -5281,7 +5457,7 @@ function searchKindForPath(routePath: string): SiteSearchKind {
   if (pathOnly.startsWith("/blog/")) return "article";
   if (pathOnly.startsWith("/tools/")) return "tool";
   if (pathOnly === "/tools") return "hub";
-  if (["/", "/umrah", "/banking", "/experiences", "/attractions"].includes(pathOnly)) return "hub";
+  if (["/", "/umrah", "/banking", "/experiences", "/experiences/europe", "/experiences/asia", "/attractions"].includes(pathOnly)) return "hub";
   return "other";
 }
 

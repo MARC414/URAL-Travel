@@ -93,9 +93,39 @@ for (const suffix of bookmarks) {
   }
 }
 const routes = JSON.parse(fs.readFileSync(new URL("../public/_routes.json", import.meta.url), "utf8"));
-assert.ok(routes.include.includes("/travelpayouts-wl.html") && routes.include.includes("/travelpayouts-wl"));
-const legacyTool = await onRequest({ request: new Request("https://uraltravel.co.uk/tools?tab=currency&utm_source=test"), next: () => new Response("asset") });
-assert.equal(legacyTool.headers.get("Location"), "https://uraltravel.co.uk/tools/currency-converter?utm_source=test");
+for (const requiredRoute of [
+  "/travelpayouts-wl.html",
+  "/travelpayouts-wl",
+  "/tools",
+  "/bn/tools",
+  "/experiences",
+  "/bn/experiences",
+]) {
+  assert.ok(routes.include.includes(requiredRoute), `_routes.json must include ${requiredRoute}`);
+}
+for (const [from, to] of [
+  ["https://uraltravel.co.uk/tools?tab=currency&utm_source=test", "https://uraltravel.co.uk/tools/currency-converter?utm_source=test"],
+  ["https://uraltravel.co.uk/bn/tools?tab=currency&utm_source=test", "https://uraltravel.co.uk/bn/tools/currency-converter?utm_source=test"],
+  ["https://uraltravel.co.uk/bn/tools?tab=unknown-tab", "https://uraltravel.co.uk/bn/tools"],
+  ["https://uraltravel.co.uk/experiences?region=west&city=london", "https://uraltravel.co.uk/experiences/europe?city=london"],
+  ["https://uraltravel.co.uk/bn/experiences?region=west&city=london", "https://uraltravel.co.uk/bn/experiences/europe?city=london"],
+  ["https://uraltravel.co.uk/experiences?region=europe", "https://uraltravel.co.uk/experiences/europe"],
+  ["https://uraltravel.co.uk/experiences?region=asia&city=dubai-klook", "https://uraltravel.co.uk/experiences/asia?city=dubai-klook"],
+  ["https://uraltravel.co.uk/bn/experiences?region=asia&city=dubai-klook&utm_source=test#top", "https://uraltravel.co.uk/bn/experiences/asia?city=dubai-klook&utm_source=test#top"],
+] as const) {
+  const res = await onRequest({ request: new Request(from), next: () => new Response("asset") });
+  assert.equal(res.status, 301, `${from} should 301`);
+  assert.equal(res.headers.get("Location"), to);
+}
+for (const passthrough of [
+  "https://uraltravel.co.uk/experiences",
+  "https://uraltravel.co.uk/bn/experiences",
+  "https://uraltravel.co.uk/experiences?city=paris",
+  "https://uraltravel.co.uk/bn/tools",
+]) {
+  const res = await onRequest({ request: new Request(passthrough), next: () => new Response("asset") });
+  assert.equal(await res.text(), "asset", `${passthrough} should pass through to static asset`);
+}
 
 for (const lang of ["en", "bn"] as const) {
   for (const showInlineResults of [false, true]) {

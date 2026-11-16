@@ -138,7 +138,9 @@ export function checkArticlePresentation(dist: string, check: Check): void {
   const pathFixtures = [
     ["/tools?tab=currency&amount=500#result", "/tools/currency-converter?amount=500#result"],
     ["/bn/tools?tab=converter#result", "/tools/currency-converter#result"],
-    ["/experiences?region=asia&city=bangkok#tickets", "/experiences?region=asia&city=bangkok#tickets"],
+    ["/experiences?region=asia&city=bangkok#tickets", "/experiences/asia?city=bangkok#tickets"],
+    ["/bn/experiences?region=west&city=london#passes", "/experiences/europe?city=london#passes"],
+    ["/experiences/asia?city=dubai-klook", "/experiences/asia?city=dubai-klook"],
     ["/indexing#guides", "/sitemap#guides"],
     ["/blog/example#source-1", "/blog/example#source-1"],
   ];

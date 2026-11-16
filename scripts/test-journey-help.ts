@@ -241,13 +241,20 @@ test("the travel stage never sends a reader to the Aviasales-branded site", () =
     );
     assert.ok(!html.includes("aviasales.tpo.li"), "journey panel leaked the branded short link");
     assert.ok(!html.includes("www.aviasales.com"), "journey panel leaked the branded site");
-    const flight = html.match(/href="(\/(?:bn\/)?flights[^"]*)"/);
-    assert.ok(flight, "journey panel has no flight stop link");
+    const flightAnchor = html.match(/<a\b[^>]*href="(\/(?:bn\/)?flights[^"]*)"[^>]*>/);
+    assert.ok(flightAnchor, "journey panel has no flight stop link");
     assert.ok(
-      flight![1].includes("fsrc=post_uk_umrah_packages_atol_operator_checks"),
-      `flight stop lost its placement id: ${flight![1]}`,
+      flightAnchor![1].includes("fsrc=post_uk_umrah_packages_atol_operator_checks"),
+      `flight stop lost its placement id: ${flightAnchor![1]}`,
     );
-    if (isBn) assert.ok(flight![1].startsWith("/bn/flights"), "Bengali flight stop must stay Bengali");
+    assert.ok(!/rel="[^"]*sponsored/.test(flightAnchor![0]), "same-origin /flights stop must not carry rel=sponsored");
+    assert.ok(!/target="_blank"/.test(flightAnchor![0]), "same-origin /flights stop must not force target=_blank");
+    if (isBn) assert.ok(flightAnchor![1].startsWith("/bn/flights"), "Bengali flight stop must stay Bengali");
+    const externalAnchors = (html.match(/<a\b[^>]*href="https:\/\/[^"]*"[^>]*>/g) ?? []);
+    assert.ok(externalAnchors.length >= 1, "travel stage should still retain external partner options");
+    for (const ext of externalAnchors) {
+      assert.ok(ext.includes('target="_blank"') && ext.includes('rel="noopener noreferrer sponsored"'), `external partner lost sponsored/new-tab attrs: ${ext}`);
+    }
   }
 });
 

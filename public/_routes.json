@@ -10,7 +10,10 @@
     "/destinations",
     "/costs",
     "/blog",
-    "/tools"
+    "/tools",
+    "/bn/tools",
+    "/experiences",
+    "/bn/experiences"
   ],
   "exclude": []
 }

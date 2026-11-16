@@ -352,8 +352,34 @@ export function useSeoMeta({
           routePath = "/tools";
         }
       }
-    } else if (rootSection === "attractions" || rootSection === "experiences") {
-      routePath = "/experiences";
+    } else if (rootSection === "experiences") {
+      // /experiences, /experiences/europe and /experiences/asia are each
+      // self-canonical; legacy ?region=west|asia upgrades in place while
+      // keeping ?city= filtering intact for the interactive UI.
+      if (subSegment === "europe" || subSegment === "asia") {
+        routePath = `/experiences/${subSegment}`;
+      } else {
+        const rawRegion = searchParams.get("region");
+        const mappedRegion =
+          rawRegion === "west" || rawRegion === "europe"
+            ? "europe"
+            : rawRegion === "asia"
+              ? "asia"
+              : null;
+        if (mappedRegion) {
+          routePath = `/experiences/${mappedRegion}`;
+          const rest = new URLSearchParams(searchParams);
+          rest.delete("region");
+          const query = rest.toString();
+          cleanPathTarget = query
+            ? `/experiences/${mappedRegion}?${query}`
+            : `/experiences/${mappedRegion}`;
+        } else {
+          routePath = "/experiences";
+        }
+      }
+    } else if (rootSection === "attractions") {
+      routePath = subSegment ? `/attractions/${subSegment}` : "/attractions";
     } else if (rootSection === "hajj" || rootSection === "umrah") {
       routePath = "/umrah";
     } else if (rootSection) {
