@@ -78,9 +78,11 @@ test("en: no agency domain ever enters the reference list", () => {
   }
 });
 
-test("en: a religious-procedure page carries no commercial CTA and no fee", () => {
+test("en/bn: a religious-procedure page carries no commercial CTA and no fee", () => {
   const entry = BLOG_DATA.find((item) => item.slug === slug)!;
-  assert.equal(entry.affiliateCTA, undefined, "A2: no partner CTA on this page");
+  const bnEntry = getLocalizedBlogs("bn").find((item) => item.slug === slug)!;
+  assert.equal(entry.affiliateCTA, undefined, "A2: no partner CTA on EN page");
+  assert.equal(bnEntry.affiliateCTA, undefined, "A2: no partner CTA on BN page");
   const body = BLOG_BODY[slug];
   assert.ok(!/BDT|SAR\s?\d|USD\s?\d|\bfee\b/i.test(body), "no money claim on a rite page");
 });

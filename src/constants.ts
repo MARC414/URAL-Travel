@@ -1204,7 +1204,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dubai & UAE Tourist Visa Checklist", path: "/visa/dubai-visa" },
       { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
       { text: "Where to Stay in Dubai: Metro & Marina Hotels", path: "/hotels/dubai-hotels" },
-      { text: "Dubai Desert Safari & Burj Khalifa Passes", path: "/experiences?region=asia&city=dubai-klook" }
+      { text: "Dubai Desert Safari & Burj Khalifa Passes", path: "/experiences/asia?city=dubai-klook" }
     ],
     affiliateCTA: { provider: "kiwitaxi", headline: "Agree the transfer price before you land", body: "A pre-booked private transfer is quoted and confirmed before you travel, so the fare is known in advance; a street taxi is metered at arrival instead. Compare the quoted total for your own arrival time, terminal and luggage, and check what the provider does if your flight is delayed." }
   },
@@ -2356,7 +2356,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
       { text: "Where to Stay in Dubai: Metro & Marina Hotels", path: "/hotels/dubai-hotels" },
       { text: "Dubai 5-Day Trip Cost Calculator in BDT", path: "/costs/dubai-costs" },
-      { text: "Dubai Desert Safari & Burj Khalifa Passes", path: "/experiences?region=asia&city=dubai-klook" }
+      { text: "Dubai Desert Safari & Burj Khalifa Passes", path: "/experiences/asia?city=dubai-klook" }
     ],
     affiliateCTA: { provider: "klook", headline: "Compare Dubai Desert Safari, Burj Khalifa & Museum of the Future listings", body: "Check the selected date, total price, inclusions, ticket delivery and cancellation terms on Klook; compare with the attraction or operator before booking." }
   },
@@ -2371,7 +2371,7 @@ export const BLOG_DATA: BlogPost[] = [
     readTime: "7 min read",
     internalLinks: [
       { text: "Umrah + Dubai 10-Day Multi-City Combo Guide from Dhaka", path: "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide" },
-      { text: "Dubai Safari, Burj Khalifa & Abu Dhabi Passes Hub", path: "/experiences?region=asia&city=dubai-klook" },
+      { text: "Dubai Safari, Burj Khalifa & Abu Dhabi Passes Hub", path: "/experiences/asia?city=dubai-klook" },
       { text: "Compare Hotel Areas and Booking Terms in Bangkok, Kuala Lumpur & Dubai", path: "/blog/hotel-savings-guide-bangkok-kl-dubai" },
       { text: "Dubai & UAE Tourist Visa Checklist", path: "/visa/dubai-visa" },
       { text: "Dhaka to Dubai Flight Schedule & Fares", path: "/flights/dhaka-dubai" },
@@ -2412,7 +2412,7 @@ export const BLOG_DATA: BlogPost[] = [
     readTime: "7 min read",
     internalLinks: [
       { text: "Saudi visa routes and sources", path: "/visa/saudi-arabia-visa" },
-      { text: "Browse Official Europe, UK & USA Skip-the-Line Passes (Tiqets Hub)", path: "/experiences?region=west" },
+      { text: "Browse Official Europe, UK & USA Skip-the-Line Passes (Tiqets Hub)", path: "/experiences/europe" },
       { text: "Saudi Stopover Visa: eligibility and Umrah planning", path: "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah" },
       { text: "Dual-Currency Card Endorsement ($18,000 Quota Guide)", path: "/blog/dual-currency-card-endorsement-bangladesh" }
     ],
@@ -3044,7 +3044,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Global Flight Search & Fare Benchmark", path: "/flights" },
       { text: "Flight Delay Compensation Checker (EUR 600)", path: "/tools/flight-delay-claim" }
     ],
-    affiliateCTA: { provider: "aviasales", headline: "Comparing fares to Morocco?", body: "Search multi-city routings from Dhaka via Istanbul, Dubai or Doha to Casablanca or Tangier and watch how fares move before you lock your dates." }
+    affiliateCTA: { provider: "evisas", campaign: "morocco", headline: "Check your Morocco eVisa route", body: "Morocco eVisa eligibility depends on your passport and, for some applicants, a qualifying residence permit or existing visa. Check your category on the official Accès Maroc portal before using eVisas’ paid application assistance. Confirm the supporting documents and full fee before paying." }
   },
   {
     id: "blog-46",

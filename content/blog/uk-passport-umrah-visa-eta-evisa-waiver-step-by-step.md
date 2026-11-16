@@ -15,7 +15,7 @@ readTimeBn: ৮ মিনিট পঠন
 updatedAt: "2026-11-14"
 publishDate: "2026-11-15"
 coverImage: uk_umrah_visa_20261114
-coverAltEn: "A navy passport booklet, a blank vaccination record card, reading glasses and a pen laid out on a sunlit wooden desk beside an open travel folder."
+coverAltEn: "A navy passport, a blank vaccination card, glasses and a pen on a sunlit wooden desk beside an open travel folder."
 coverAltBn: "রোদ পড়া কাঠের টেবিলে নীল পাসপোর্ট, ফাঁকা টিকা-রেকর্ড কার্ড, চশমা ও কলম রাখা, পাশে খোলা একটি ট্রাভেল ফোল্ডার।"
 seoTitle: "Umrah Visa for UK Passports (2026): ETA vs e-Visa vs Waiver"
 seoDescription: "Which Saudi entry route a British passport should use for Umrah, the 730-day and 90-day limits, the six-month passport rule, the 10-day MenACWY clock and the cases that get refused."

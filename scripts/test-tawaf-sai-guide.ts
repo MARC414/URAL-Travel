@@ -43,10 +43,12 @@ test("en: metadata, date and the three primary sources", () => {
   }
 });
 
-test("en: no commercial CTA on a religious-procedure page", () => {
+test("en/bn: no commercial CTA on a religious-procedure page", () => {
   const entry = BLOG_DATA.find((item) => item.slug === slug)!;
+  const bnEntry = getLocalizedBlogs("bn").find((item) => item.slug === slug)!;
   // 10-CONTENT-UPGRADE-STANDARD A2: no airfare or attraction partner block here.
   assert.equal(entry.affiliateCTA, undefined);
+  assert.equal(bnEntry.affiliateCTA, undefined);
 });
 
 for (const locale of ["en", "bn"] as const) {

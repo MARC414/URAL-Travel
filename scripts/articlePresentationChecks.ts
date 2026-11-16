@@ -118,10 +118,29 @@ export function checkArticlePresentation(dist: string, check: Check): void {
   }
   check(luggageProblems.length === 0, `contextual luggage-storage actions render with localized copy and sponsored links on both surfaces [${luggageProblems.join(", ")}]`);
 
+  // Inspect the full route, not only the new panel: the legacy mid-article CTA
+  // once added an unqualified account URL labelled as a flight-fare action.
+  const evisaProblems: string[] = [];
+  const evisaLinks = (html: string) => anchors(html)
+    .filter((link) => link.href.startsWith("https://evisas.com/"))
+    .map((link) => ({ href: link.href, placement: link.attributes.match(/data-affiliate-placement="([^"]+)"/)?.[1] ?? "" }));
+  for (const locale of ["en", "bn"] as const) {
+    for (const post of BLOG_DATA) {
+      const saved = evisaLinks(pages.get(`${locale}:static:${post.slug}`) ?? "");
+      const interactive = evisaLinks(pages.get(`${locale}:react:${post.slug}`) ?? "");
+      if (!equal(saved, interactive) || [...saved, ...interactive].some((link) => !link.placement)) {
+        evisaProblems.push(`${locale}/${post.slug}`);
+      }
+    }
+  }
+  check(evisaProblems.length === 0, `complete article routes retain the same scoped eVisas actions as saved HTML without a legacy generic-link duplicate [${evisaProblems.join(", ")}]`);
+
   const pathFixtures = [
     ["/tools?tab=currency&amount=500#result", "/tools/currency-converter?amount=500#result"],
     ["/bn/tools?tab=converter#result", "/tools/currency-converter#result"],
-    ["/experiences?region=asia&city=bangkok#tickets", "/experiences?region=asia&city=bangkok#tickets"],
+    ["/experiences?region=asia&city=bangkok#tickets", "/experiences/asia?city=bangkok#tickets"],
+    ["/bn/experiences?region=west&city=london#passes", "/experiences/europe?city=london#passes"],
+    ["/experiences/asia?city=dubai-klook", "/experiences/asia?city=dubai-klook"],
     ["/indexing#guides", "/sitemap#guides"],
     ["/blog/example#source-1", "/blog/example#source-1"],
   ];

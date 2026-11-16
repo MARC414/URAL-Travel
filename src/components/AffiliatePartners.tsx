@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
-import { ExternalLink } from "lucide-react";
+import React from "react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { KlookEmbed } from "./KlookEmbed";
 import { KiwitaxiEmbed } from "./KiwitaxiEmbed";
 import { AiraloEmbed } from "./AiraloEmbed";
-import { QeeqEmbed } from "./QeeqEmbed";
-import { WelcomePickupsEmbed, WELCOME_PICKUPS_PARTNER_URL } from "./WelcomePickupsEmbed";
+import { SITE_ORIGIN } from "../utils/localeRoutes";
 
 /* Single source of truth for the plain outbound URLs (used by
    PartnerLinkButton and any inline <a> tags). Do not edit these values. */
@@ -19,14 +18,20 @@ export const AFFILIATE_LINKS = {
   kkdayHotels: "https://kkday.tpo.li/fyAFi2IO",
   kkday: "https://kkday.tpo.li/3Ecyxris",
   kiwitaxi: "https://kiwitaxi.tpo.li/GIhvhrtF",
-  welcomePickups: WELCOME_PICKUPS_PARTNER_URL,
+  welcomePickups:
+    "https://tp.media/r?marker=675992&trs=589561&p=8951&u=https%3A%2F%2Fwww.welcomepickups.com&campaign_id=627",
   airalo: "https://airalo.tpo.li/mV2QXsXK",
   qeeq: "https://qeeq.tpo.li/nooi5oSG",
   radicalStorage: "https://radicalstorage.tpo.li/7I3EWiUg",
   yesim: "https://yesim.tpo.li/O8Zvqr73",
   kiwi: "https://kiwi.tpo.li/9isVGzpF",
   getTransfer: "https://gettransfer.tpo.li/sekWRAM1",
-  goCity: "https://gocity.tpo.li/rpHETE4N"
+  goCity: "https://gocity.tpo.li/rpHETE4N",
+  // eVisas (operated by TravelRox, Inc.) — a PAID visa-application service, not a
+  // government portal. This is the account-level link: it attributes every click
+  // to the `uraltravel` partner code and lands on eVisas' destination chooser.
+  // Destination campaigns live in src/data/evisaProgram.ts.
+  evisas: "https://evisas.com/?ref=uraltravel"
 };
 
 export type AffiliatePartnerKey = keyof typeof AFFILIATE_LINKS;
@@ -334,6 +339,19 @@ export const AFFILIATE_OFFER_REGISTRY: Record<AffiliatePartnerKey, AffiliateOffe
     expiresAt: GO_CITY_PROMO.expiresAt,
     activeNote: `Boosted 8.5% Commission on All-Inclusive & Explorer Passes through ${GO_CITY_PROMO.validUntil} · 90-day cookie`,
     expiredFallbackBehavior: "Keeps permanent Go City All-Inclusive & Explorer Pass link live after Dec 31, 2026; falls back to Tiqets if ever paused"
+  },
+  evisas: {
+    id: "evisas",
+    partnerName: "eVisas (TravelRox, Inc.) Visa Application Service",
+    status: "active",
+    offerType: "evergreen",
+    url: AFFILIATE_LINKS.evisas,
+    // No equivalent visa-service fallback. The cycle resolves to "" on pause.
+    fallbackPartner: "evisas",
+    activeNote:
+      "Private, paid visa application assistance. Check eligibility for your passport and residence on eVisas.",
+    expiredFallbackBehavior:
+      "Removes eVisas placements; each guide retains its separate official-source links"
   }
 };
 
@@ -430,6 +448,9 @@ const AFFILIATE_CTA_LABELS: Record<string, { en: string; bn: string }> = {
   qeeq: { en: "Compare Car Rental Rates", bn: "গাড়ি ভাড়ার দাম তুলনা করুন" },
   klookHotels: { en: "Compare Hotel Rates & Availability", bn: "হোটেলের ভাড়া ও রুমের Availability দেখুন" },
   kkdayHotels: { en: "Compare Hotel Rates & Availability", bn: "হোটেলের ভাড়া ও রুমের Availability দেখুন" },
+  // No price in the label: the destination page decides what it shows, and the
+  // widget's filtering is unverified. Promise the check, not the number.
+  evisas: { en: "Check Visa Eligibility", bn: "ভিসার যোগ্যতা যাচাই করুন" },
 };
 
 const AFFILIATE_CTA_FALLBACK_LABEL = {
@@ -440,6 +461,21 @@ const AFFILIATE_CTA_FALLBACK_LABEL = {
 export function getAffiliateCtaButtonLabel(provider: string, lang: "en" | "bn" = "en"): string {
   const entry = AFFILIATE_CTA_LABELS[provider];
   return entry ? entry[lang] : AFFILIATE_CTA_FALLBACK_LABEL[lang];
+}
+
+/**
+ * True when a resolved CTA target stays on URAL's own origin (such as
+ * `/flights?fsrc=post_...#flight-search`). Same-origin pages are never marked
+ * `rel="sponsored"` or forced into `target="_blank"`; external partner domains
+ * (including the partner-hosted `flights.uraltravel.co.uk` subdomain) return
+ * false and keep full `target="_blank" rel="noopener noreferrer sponsored"`.
+ */
+export function isSameOriginCtaHref(href: string): boolean {
+  if (!href) return false;
+  if (href.startsWith("/") && !href.startsWith("//") && !href.startsWith("/\\")) {
+    return true;
+  }
+  return href === SITE_ORIGIN || href.startsWith(`${SITE_ORIGIN}/`);
 }
 
 /**
@@ -454,6 +490,21 @@ export const BLOG_AFFILIATE_CTA_DISCLOSURE = {
   en: "Affiliate link: URAL may earn a commission if you book through this link. You pay the partner's price, not a marked-up one.",
   bn: "অ্যাফিলিয়েট লিংক: এই লিংক দিয়ে বুক করলে URAL কমিশন পেতে পারে। আপনি পার্টনারের দামই দেন, বাড়তি কিছু নয়।",
 };
+
+/**
+ * First-party disclosure when an article CTA opens URAL's own `/flights` page
+ * rather than an external partner URL directly.
+ */
+export const BLOG_FLIGHTS_PAGE_CTA_NOTE = {
+  en: "Opens URAL's flight search page. Fare checks there continue to a partner-powered search, where URAL may earn a commission on qualifying bookings at no extra cost to you.",
+  bn: "এটি URAL-এর নিজস্ব ফ্লাইট সার্চ পাতা খোলে। সেখান থেকে পার্টনার-চালিত ভাড়া অনুসন্ধানে গিয়ে যোগ্য বুকিং করলে আপনার অতিরিক্ত খরচ ছাড়াই URAL কমিশন পেতে পারে।",
+};
+
+export function getBlogCtaDisclosure(href: string, lang: "en" | "bn" = "en"): string {
+  return isSameOriginCtaHref(href)
+    ? BLOG_FLIGHTS_PAGE_CTA_NOTE[lang]
+    : BLOG_AFFILIATE_CTA_DISCLOSURE[lang];
+}
 
 export interface RadicalStorageBlogPlacement {
   badgeEn: string;
@@ -560,78 +611,6 @@ export function LoadingSkeleton({ minHeight = 220, label }: { minHeight?: number
   );
 }
 
-/* Generic script-injecting widget shell — mirrors the existing
-   TravelpayoutsEmbed.tsx pattern already used for Aviasales in this project. */
-function ScriptWidget({
-  src,
-  minHeight = 220,
-  loadingLabel,
-  fallbackUrl,
-  fallbackText
-}: {
-  src: string;
-  minHeight?: number;
-  loadingLabel: string;
-  fallbackUrl: string;
-  fallbackText: string;
-}) {
-  const [status, setStatus] = useState<"loading" | "loaded" | "failed">("loading");
-  const scriptContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!scriptContainerRef.current) return;
-    scriptContainerRef.current.innerHTML = "";
-    
-    const script = document.createElement("script");
-    script.src = src;
-    script.charset = "utf-8";
-    script.async = true;
-    
-    script.onload = () => setStatus("loaded");
-    script.onerror = () => setStatus("failed");
-    
-    const timer = setTimeout(() => {
-      setStatus(prev => prev === "loading" ? "failed" : prev);
-    }, 4500);
-
-    scriptContainerRef.current.appendChild(script);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [src]);
-
-  return (
-    <div
-      className="w-full bg-white rounded-lg p-2 overflow-hidden"
-      style={{ minHeight }}
-    >
-      {status === "failed" && (
-        <div className="flex flex-col items-center justify-center py-6 px-4 text-center space-y-3">
-          <span className="text-xs text-slate-500 font-mono">This interactive tool is taking longer than expected to load.</span>
-          <a
-            href={fallbackUrl}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="inline-flex items-center gap-1.5 bg-[#F6B73C] text-brand-navy hover:bg-[#ffc654] font-bold text-xs px-5 py-2.5 rounded-lg transition-colors cursor-pointer"
-          >
-            {fallbackText} <ExternalLink size={12} />
-          </a>
-        </div>
-      )}
-
-      {status === "loading" && (
-        <LoadingSkeleton minHeight={minHeight - 20} label={loadingLabel} />
-      )}
-
-      <div 
-        ref={scriptContainerRef} 
-        style={{ display: status === "loaded" ? "block" : "none" }}
-      />
-    </div>
-  );
-}
-
 /* 02. Klook — Activities & Things To Do widget */
 export function KlookActivitiesWidget() {
   return <KlookEmbed />;
@@ -642,19 +621,9 @@ export function KiwitaxiTransferWidget() {
   return <KiwitaxiEmbed />;
 }
 
-/* 04b. Welcome Pickups — Arrival Gate Meet-and-Greet Airport Transfers widget */
-export function WelcomePickupsWidget({ defaultCountry }: { defaultCountry?: string }) {
-  return <WelcomePickupsEmbed defaultCountry={defaultCountry} />;
-}
-
 /* 05. Airalo — eSIM / connectivity widget */
 export function AiraloEsimWidget({ lang = "en" }: { lang?: "en" | "bn" }) {
   return <AiraloEmbed lang={lang} />;
-}
-
-/* 06. QEEQ — Car Rental widget */
-export function QeeqCarRentalWidget() {
-  return <QeeqEmbed />;
 }
 
 
@@ -671,6 +640,7 @@ export function PartnerLinkButton({
   variant?: "light" | "dark";
 }) {
   const resolvedHref = resolvePartnerUrl(href);
+  const sameOrigin = isSameOriginCtaHref(resolvedHref);
 
   // Development-only console trace. The dataLayer push that used to live here was
   // REMOVED on 2026-10-24: the delegated listener in src/utils/analytics.ts
@@ -688,8 +658,8 @@ export function PartnerLinkButton({
   return (
     <a
       href={resolvedHref}
-      target="_blank"
-      rel="noopener noreferrer sponsored"
+      target={sameOrigin ? undefined : "_blank"}
+      rel={sameOrigin ? undefined : "noopener noreferrer sponsored"}
       onClick={handleClick}
       className={
         variant === "dark"
@@ -697,7 +667,7 @@ export function PartnerLinkButton({
           : "inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#F6B73C] text-brand-navy font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
       }
     >
-      {label} <ExternalLink size={12} />
+      {label} {sameOrigin ? <ArrowRight size={12} /> : <ExternalLink size={12} />}
     </a>
   );
 }
@@ -811,13 +781,13 @@ export const MULTI_PARTNER_BLOG_PLACEMENTS: Record<string, MultiPartnerBlogPlace
     headlineEn: "Card Endorsed and Activated? Put It to Work on Your First Bookings",
     headlineBn: "কার্ড এনডোর্স ও চালু হয়েছে? এবার প্রথম বুকিংগুলো করুন",
     bodyBeforeAnchorEn:
-      "Once your foreign-currency and e-commerce part is open, compare live flight fares from Dhaka on ",
-    anchorTextEn: "our white-label flight search",
+      "Once your foreign-currency and e-commerce part is open, compare live flight fares from Dhaka via ",
+    anchorTextEn: "our flight search page",
     bodyAfterAnchorEn:
       " and pay with your endorsed dual-currency card. A travel eSIM for your destination is another small first purchase that proves the card works before you travel — check coverage and price before buying.",
     bodyBeforeAnchorBn:
       "Foreign-currency ও e-commerce অংশ চালু হলে ঢাকা থেকে লাইভ ফ্লাইট ভাড়া তুলনা করুন ",
-    anchorTextBn: "আমাদের ফ্লাইট সার্চে",
+    anchorTextBn: "আমাদের ফ্লাইট সার্চ পাতায়",
     bodyAfterAnchorBn:
       " এবং এনডোর্স করা dual-currency card দিয়ে পেমেন্ট করুন। গন্তব্যের travel eSIM আরেকটি ছোট প্রথম কেনাকাটা, যা ভ্রমণের আগেই কার্ড কাজ করছে কিনা যাচাই করে — কেনার আগে coverage ও দাম দেখে নিন।",
     primaryButtonEn: "Compare Live Flight Fares",
@@ -1008,13 +978,22 @@ export function MultiPartnerBlogCallout({
   const isBn = lang === "bn";
   const primaryHref =
     primaryHrefOverride || resolvePartnerUrl(AFFILIATE_LINKS[placement.primaryPartner]);
+  const primaryIsSameOrigin = isSameOriginCtaHref(primaryHref);
   const secondaryHref = placement.secondaryPartner
     ? resolvePartnerUrl(AFFILIATE_LINKS[placement.secondaryPartner])
     : undefined;
 
   return (
     <aside
-      aria-label={isBn ? "পার্টনার ট্রাভেল টুলস ও ডিসকাউন্ট" : "Recommended Partner Travel Tools"}
+      aria-label={
+        primaryIsSameOrigin
+          ? isBn
+            ? "ফ্লাইট সার্চ ও পার্টনার ট্রাভেল টুলস"
+            : "Flight Search & Partner Travel Tools"
+          : isBn
+            ? "পার্টনার ট্রাভেল টুলস ও ডিসকাউন্ট"
+            : "Recommended Partner Travel Tools"
+      }
       className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-5 sm:p-6 space-y-3 text-left"
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -1022,7 +1001,13 @@ export function MultiPartnerBlogCallout({
           {isBn ? placement.badgeBn : placement.badgeEn}
         </span>
         <span className="text-[11px] font-mono text-slate-500">
-          {isBn ? "ভেরিফায়েড অফিশিয়াল পার্টনার · ডুয়াল-কারেন্সি কার্ড সাপোর্টেড" : "Verified Official Partner · Instant Online Confirmation"}
+          {primaryIsSameOrigin
+            ? isBn
+              ? "URAL ফ্লাইট সার্চ · ভেরিফায়েড পার্টনার টুলস"
+              : "URAL Flight Search · Verified Partner Tools"
+            : isBn
+              ? "ভেরিফায়েড অফিশিয়াল পার্টনার · ডুয়াল-কারেন্সি কার্ড সাপোর্টেড"
+              : "Verified Official Partner · Instant Online Confirmation"}
         </span>
       </div>
 
@@ -1034,8 +1019,8 @@ export function MultiPartnerBlogCallout({
         {isBn ? placement.bodyBeforeAnchorBn : placement.bodyBeforeAnchorEn}
         <a
           href={primaryHref}
-          target="_blank"
-          rel="noopener noreferrer sponsored"
+          target={primaryIsSameOrigin ? undefined : "_blank"}
+          rel={primaryIsSameOrigin ? undefined : "noopener noreferrer sponsored"}
           className="font-semibold text-brand-navy underline decoration-[#F6B73C] decoration-2 underline-offset-2 hover:text-emerald-800"
         >
           {isBn ? placement.anchorTextBn : placement.anchorTextEn}
@@ -1045,7 +1030,7 @@ export function MultiPartnerBlogCallout({
 
       <div className="pt-1 flex flex-wrap items-center gap-2.5">
         <PartnerLinkButton
-          href={AFFILIATE_LINKS[placement.primaryPartner]}
+          href={primaryHref}
           label={isBn ? placement.primaryButtonBn : placement.primaryButtonEn}
           variant="dark"
         />
@@ -1215,4 +1200,3 @@ export function TravelpayoutsReferralCallout({
     </aside>
   );
 }
-

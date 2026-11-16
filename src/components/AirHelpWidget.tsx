@@ -7,6 +7,7 @@ import {
 } from "./AffiliatePartners";
 import { PromoCard } from "./PromoCard";
 import { Language } from "../translations";
+import { openConsentPreferences, useConsent } from "../utils/consent";
 
 interface AirHelpWidgetProps {
   lang?: Language;
@@ -20,6 +21,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
   compact = false,
 }) => {
   const isBn = lang === "bn";
+  const marketingAllowed = useConsent("marketing");
   const partnerHref = resolvePartnerUrl(AFFILIATE_LINKS.airhelp);
   const [activeMode, setActiveMode] = useState<"claim" | "plus" | "live-form">("claim");
   const [delayHours, setDelayHours] = useState<"under3" | "3to4" | "over4" | "cancelled">("over4");
@@ -28,27 +30,44 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
   const scriptContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (activeMode !== "live-form" || !scriptContainerRef.current) return;
+    const container = scriptContainerRef.current;
+    if (!container) return;
+    container.innerHTML = "";
+    if (activeMode !== "live-form" || !marketingAllowed) {
+      setEmbedStatus("idle");
+      return;
+    }
 
+    let cancelled = false;
     setEmbedStatus("loading");
-    scriptContainerRef.current.innerHTML = "";
 
     const script = document.createElement("script");
     script.src = AIRHELP_PROMO.scriptSrc;
     script.async = true;
     script.charset = "utf-8";
+    script.setAttribute("data-ural-consent", "marketing");
 
-    script.onload = () => setEmbedStatus("loaded");
-    script.onerror = () => setEmbedStatus("fallback");
+    script.onload = () => {
+      if (!cancelled) setEmbedStatus("loaded");
+    };
+    script.onerror = () => {
+      if (!cancelled) setEmbedStatus("fallback");
+    };
 
     const fallbackTimer = setTimeout(() => {
-      setEmbedStatus((prev) => (prev === "loading" ? "fallback" : prev));
+      if (!cancelled) {
+        setEmbedStatus((prev) => (prev === "loading" ? "fallback" : prev));
+      }
     }, 4000);
 
-    scriptContainerRef.current.appendChild(script);
+    container.appendChild(script);
 
-    return () => clearTimeout(fallbackTimer);
-  }, [activeMode]);
+    return () => {
+      cancelled = true;
+      clearTimeout(fallbackTimer);
+      container.innerHTML = "";
+    };
+  }, [activeMode, marketingAllowed]);
 
   const getEligibilityChecklist = () => {
     if (flightRegion === "eu-uk") {
@@ -347,17 +366,45 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
 
       <PromoCard partner="airhelp" lang={lang} />
 
-      {/* MODE 3: OFFICIAL TRAVELPAYOUTS AIRHELP SCRIPT WIDGET */}
+      {/* MODE 3: OFFICIAL TRAVELPAYOUTS AIRHELP SCRIPT WIDGET (marketing consent gated) */}
       {activeMode === "live-form" && (
         <div className="space-y-4">
           <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
             <div
               ref={scriptContainerRef}
               className="min-h-[160px]"
-              style={{ display: embedStatus === "loaded" ? "block" : "none" }}
+              style={{ display: marketingAllowed && embedStatus === "loaded" ? "block" : "none" }}
             />
 
-            {embedStatus === "loading" && (
+            {!marketingAllowed && (
+              <div data-consent-gate="marketing" className="py-6 px-4 text-center space-y-3">
+                <p className="text-xs text-slate-600 max-w-lg mx-auto leading-relaxed">
+                  {isBn
+                    ? "এই এম্বেড ফর্মটি Travelpayouts ও AirHelp-এর। এখানে লোড করতে কুকি পছন্দে “মার্কেটিং ও পার্টনার টুলস” চালু করুন (চালু করলে আপনার IP address ও ব্রাউজারের তথ্য পার্টনারের কাছে যাবে), অথবা সরাসরি AirHelp পোর্টালে ফ্লাইটের তথ্য যাচাই করুন।"
+                    : "This embedded form is provided by Travelpayouts and AirHelp. Turn on “Marketing & Partner Tools” in Cookie preferences to load it here (which shares your IP address and browser details with those providers), or open the AirHelp portal directly."}
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={openConsentPreferences}
+                    className="inline-flex min-h-11 items-center justify-center bg-brand-navy hover:bg-slate-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2"
+                  >
+                    {isBn ? "কুকি পছন্দ বদলান" : "Cookie preferences"}
+                  </button>
+                  <a
+                    href={partnerHref}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex min-h-11 items-center gap-1.5 bg-[#F6B73C] hover:bg-[#ffc654] text-brand-navy font-bold text-xs px-5 py-2.5 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2"
+                  >
+                    <span>{isBn ? "AirHelp অফিসিয়াল পোর্টাল খুলুন" : "Open AirHelp Official Portal"}</span>
+                    <ExternalLink size={13} />
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {marketingAllowed && embedStatus === "loading" && (
               <div className="py-10 text-center space-y-2">
                 <div className="w-5 h-5 border-2 border-slate-300 border-t-brand-navy rounded-full animate-spin mx-auto" />
                 <p className="text-xs text-slate-500 font-mono">
@@ -366,7 +413,7 @@ export const AirHelpWidget: React.FC<AirHelpWidgetProps> = ({
               </div>
             )}
 
-            {embedStatus === "fallback" && (
+            {marketingAllowed && embedStatus === "fallback" && (
               <div className="py-6 px-4 text-center space-y-3">
                 <p className="text-xs text-slate-600 max-w-lg mx-auto">
                   {isBn

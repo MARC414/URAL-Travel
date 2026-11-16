@@ -39,6 +39,7 @@ export interface SeoMetaProps {
   imageUrl?: string;
   inLanguage?: string;
   noindex?: boolean;
+  defer?: boolean;
 }
 
 /**
@@ -270,6 +271,7 @@ export function useSeoMeta({
   imageUrl,
   inLanguage = "en-BD",
   noindex = false,
+  defer = false,
 }: SeoMetaProps) {
   const schemaStr = safeStringify(schema);
   const breadcrumbsStr = safeStringify(breadcrumbs);
@@ -354,8 +356,34 @@ export function useSeoMeta({
           routePath = "/tools";
         }
       }
-    } else if (rootSection === "attractions" || rootSection === "experiences") {
-      routePath = "/experiences";
+    } else if (rootSection === "experiences") {
+      // /experiences, /experiences/europe and /experiences/asia are each
+      // self-canonical; legacy ?region=west|asia upgrades in place while
+      // keeping ?city= filtering intact for the interactive UI.
+      if (subSegment === "europe" || subSegment === "asia") {
+        routePath = `/experiences/${subSegment}`;
+      } else {
+        const rawRegion = searchParams.get("region");
+        const mappedRegion =
+          rawRegion === "west" || rawRegion === "europe"
+            ? "europe"
+            : rawRegion === "asia"
+              ? "asia"
+              : null;
+        if (mappedRegion) {
+          routePath = `/experiences/${mappedRegion}`;
+          const rest = new URLSearchParams(searchParams);
+          rest.delete("region");
+          const query = rest.toString();
+          cleanPathTarget = query
+            ? `/experiences/${mappedRegion}?${query}`
+            : `/experiences/${mappedRegion}`;
+        } else {
+          routePath = "/experiences";
+        }
+      }
+    } else if (rootSection === "attractions") {
+      routePath = subSegment ? `/attractions/${subSegment}` : "/attractions";
     } else if (rootSection === "hajj" || rootSection === "umrah") {
       routePath = "/umrah";
     } else if (rootSection) {
@@ -375,6 +403,12 @@ export function useSeoMeta({
     // 0. Upgrade legacy query-string URLs (?slug=, ?route=, etc.) to clean path URLs in place
     if (typeof window !== "undefined" && cleanPathTarget) {
       window.history.replaceState({}, "", cleanPathTarget);
+    }
+
+    // Keep prerendered head metadata and JSON-LD untouched while a blog
+    // article's lazy SEO/structured-data module finishes resolving.
+    if (defer) {
+      return;
     }
 
     // 1. Update Title & Meta Description
@@ -632,6 +666,7 @@ export function useSeoMeta({
     imageUrl,
     inLanguage,
     noindex,
+    defer,
   ]);
 }
 

@@ -1,3 +1,5 @@
+// PAUSED (owner decision, November 2026): not wired into the build or the site.
+// Nothing here is published until the owner approves the assistant plan.
 /**
  * Builds the site assistant's knowledge files from the prerendered pages.
  *

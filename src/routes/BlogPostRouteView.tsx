@@ -32,10 +32,16 @@ import { getArticleRelatedPosts } from "../utils/blogPresentation";
 import JourneyHelpPanel from "../components/JourneyHelpPanel";
 
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
+import { getBlogCoverImage as defaultGetBlogCoverImage } from "../utils/blogCoverImages";
+import { getBlogAeoSnippet50Words as defaultGetBlogAeoSnippet50Words } from "../utils/blogSnippets";
 
 import { resolveBookingCtaUrl } from "../utils/bookingCta";
-import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, MULTI_PARTNER_BLOG_PLACEMENTS, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, QeeqCarRentalWidget, getAffiliateCtaButtonLabel, BLOG_AFFILIATE_CTA_DISCLOSURE } from "../components/AffiliatePartners";
+import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, MULTI_PARTNER_BLOG_PLACEMENTS, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, getAffiliateCtaButtonLabel, getBlogCtaDisclosure } from "../components/AffiliatePartners";
+import { QeeqEmbed } from "../components/QeeqEmbed";
 import { KlookHotelBlogCallout } from "../components/KlookHotelOffers";
+import { EvisaArticleCta, EvisaBlogBanner, EvisaBlogContextLink } from "../components/EvisaPanels";
+import { EVISAS_BLOG_PLACEMENTS } from "../data/evisaProgram";
+import { resolveBlogAffiliateUrl } from "../utils/blogAffiliate";
 
 
 
@@ -195,7 +201,7 @@ function parseMarkdownTableBlock(block: string): { header: string[]; rows: strin
 
 export default function BlogPostRouteView({ context }: RouteViewProps) {
 
-  const { AuthorBioCard, blogBodies, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, parameterId, section, setAffiliateToast } = context;
+  const { AuthorBioCard, blogBodies, getBlogAeoSnippet50Words = defaultGetBlogAeoSnippet50Words, getBlogCoverImage = defaultGetBlogCoverImage, getLocalizedRouteHref, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, parameterId, section, setAffiliateToast } = context;
 
   return (
 
@@ -204,6 +210,12 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
             {(() => {
 
               const activePost = localizedBlogs.find((p) => p.slug === parameterId) || localizedBlogs[0];
+
+              const affiliateCtaHref = resolveBlogAffiliateUrl(activePost.affiliateCTA, {
+                slug: activePost.slug,
+                locale: isBn ? "bn" : "en",
+              });
+              const evisaPlacement = EVISAS_BLOG_PLACEMENTS[activePost.slug];
 
               const isCoxsBazarFlightGuide =
                 activePost.slug === "kathmandu-to-coxs-bazar-flights-route-status-booking";
@@ -1555,6 +1567,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
+                                  {activePost.affiliateCTA?.provider !== "evisas" && (
                                   <div className="flex flex-wrap items-center justify-between gap-3 pt-0.5">
 
                                     <div className="text-xs text-slate-700 max-w-xl">
@@ -1651,6 +1664,7 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                                     </div>
 
                                   </div>
+                                  )}
 
                                 </div>
 
@@ -1781,6 +1795,8 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
+                      <EvisaBlogContextLink slug={activePost.slug} lang={isBn ? "bn" : "en"} />
+
                       {/* Contextual Luggage Storage Offer Callout (Radical Storage on matching travel guides) */}
 
                       <RadicalStorageContextualCallout slug={activePost.slug} lang={lang} />
@@ -1792,10 +1808,14 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                       <MultiPartnerBlogCallout
                         slug={activePost.slug}
                         lang={lang}
-                        primaryHrefOverride={resolveBookingCtaUrl(
-                          MULTI_PARTNER_BLOG_PLACEMENTS[activePost.slug]?.primaryPartner ?? "aviasales",
-                          { slug: activePost.slug, locale: isBn ? "bn" : "en" }
-                        )}
+                        primaryHrefOverride={
+                          MULTI_PARTNER_BLOG_PLACEMENTS[activePost.slug]
+                            ? resolveBookingCtaUrl(
+                                MULTI_PARTNER_BLOG_PLACEMENTS[activePost.slug].primaryPartner,
+                                { slug: activePost.slug, locale: isBn ? "bn" : "en" }
+                              )
+                            : undefined
+                        }
                       />
 
 
@@ -1817,7 +1837,9 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                       {/* Contextual Affiliate Widget */}
 
-                      {activePost.affiliateCTA && (
+                      {activePost.affiliateCTA && affiliateCtaHref && (activePost.affiliateCTA.provider === "evisas" ? (
+                        <EvisaArticleCta cta={activePost.affiliateCTA} lang={isBn ? "bn" : "en"} />
+                      ) : (
 
                         <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3 text-left">
 
@@ -1881,13 +1903,13 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
                           ) : activePost.affiliateCTA.provider === "qeeq" ? (
 
-                            <QeeqCarRentalWidget />
+                            <QeeqEmbed />
 
                           ) : (
 
                             <PartnerLinkButton
 
-                              href={AFFILIATE_LINKS[activePost.affiliateCTA.provider]}
+                              href={affiliateCtaHref}
 
                               label={getAffiliateCtaButtonLabel(
                                 activePost.affiliateCTA.provider,
@@ -1901,12 +1923,12 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
                           )}
 
                           <p className="text-[11px] leading-relaxed text-slate-500">
-                            {BLOG_AFFILIATE_CTA_DISCLOSURE[isBn ? "bn" : "en"]}
+                            {getBlogCtaDisclosure(affiliateCtaHref, isBn ? "bn" : "en")}
                           </p>
 
                         </div>
 
-                      )}
+                      ))}
 
 
 
@@ -2003,9 +2025,10 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
+                      <EvisaBlogBanner slug={activePost.slug} lang={isBn ? "bn" : "en"} />
                       {/* Saudi eSIM offers are hidden on this Nepal–Bangladesh route guide. */}
 
-                      {!isCoxsBazarFlightGuide && (
+                      {!isCoxsBazarFlightGuide && !evisaPlacement && activePost.affiliateCTA?.provider !== "evisas" && (
                         <div className="bg-brand-navy text-white rounded-2xl p-5 space-y-3.5 shadow-sm">
 
                         <div className="text-[11px] font-bold uppercase tracking-wider text-[#F6B73C]">

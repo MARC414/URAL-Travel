@@ -269,6 +269,7 @@ export const OFFICIAL_ORGANISATIONS: readonly OfficialOrganisation[] = [
   org("gb-caa", "UK Civil Aviation Authority (CAA)", "যুক্তরাজ্য সিভিল এভিয়েশন অথরিটি (CAA)", "government", "GB", "consumer", ["caa.co.uk"]),
   org("gb-atol", "ATOL (UK package-holiday protection scheme)", "এটিওএল (যুক্তরাজ্যের প্যাকেজ-হলিডে সুরক্ষা স্কিম)", "portal", "GB", "consumer", ["atol.org"]),
   org("gb-legislation", "UK Legislation (legislation.gov.uk)", "যুক্তরাজ্যের আইন (legislation.gov.uk)", "government", "GB", "consumer", ["legislation.gov.uk"]),
+  org("gb-city-police", "City of London Police (UK national lead force for fraud)", "সিটি অব লন্ডন পুলিশ (যুক্তরাজ্যে প্রতারণা তদন্তের জাতীয় প্রধান বাহিনী)", "government", "GB", "consumer", ["cityoflondon.police.uk"]),
   org("gb-british-airways", "British Airways", "ব্রিটিশ এয়ারওয়েজ", "operator", "GB", "airlines", ["britishairways.com"]),
   org("gb-tfl", "Transport for London (TfL)", "Transport for London (TfL)", "government", "GB", "transport", ["tfl.gov.uk"]),
   // European Union and member states
@@ -320,6 +321,8 @@ export const NON_OFFICIAL_HOSTS: readonly string[] = [
   "webook.com", "yesim.app", "ziyarago.com", "thefabryk.com", "toptravelsights.com",
   // encyclopaedias and app-store listings
   "en.wikipedia.org", "saudipedia.com", "play.google.com",
+  // private prayer-time and calendar sites
+  "assabile.com",
   // religious reference and fatwa sites
   "aliftaa.jo", "binbaz.org.sa", "islamqa.info", "sunnah.com",
   // official or corporate, but not about planning a trip

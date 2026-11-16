@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   dhakaCalendarDate,
   formatBengaliPublishDate,
@@ -6,6 +9,7 @@ import {
   getPostsDueForPublishing,
   isPostIncludedInBuild,
   loadScheduledBlogPosts,
+  resolveScheduledAffiliateCtaPair,
 } from "./scheduledPosts";
 
 const nowAtDhakaEarlyMorning = new Date("2026-10-14T21:01:00.000Z");
@@ -281,3 +285,112 @@ function sitemapFor(posts: { slug: string; present: boolean }[], outage = false)
 }
 
 console.log("Scheduled blog live-sitemap self-heal (check once, publish only the missing, no repeat rebuilds) all pass.");
+
+// Scheduled eVisas destination-campaign validation and generated-module ignore guard.
+{
+  const paired = resolveScheduledAffiliateCtaPair(
+    {
+      affiliateCtaProvider: "evisas",
+      affiliateCtaHeadline: "Check UAE tourist eVisa options",
+      affiliateCtaBody: "Review eligibility and official terms before applying.",
+      affiliateCtaCampaign: "uae",
+      affiliateCtaBnProvider: "evisas",
+      affiliateCtaBnHeadline: "UAE ট্যুরিস্ট ই-ভিসার সুযোগ দেখুন",
+      affiliateCtaBnBody: "আবেদনের আগে যোগ্যতা ও সরকারি শর্ত যাচাই করুন।",
+    },
+    "fixture.md",
+  );
+  assert.equal(paired.affiliateCta?.campaign, "uae");
+  assert.equal(paired.affiliateCtaBn?.campaign, "uae", "BN inherits EN eVisas campaign automatically");
+
+  const accountLevel = resolveScheduledAffiliateCtaPair(
+    {
+      affiliateCtaProvider: "evisas",
+      affiliateCtaHeadline: "Check visa options",
+      affiliateCtaBody: "Verify official conditions first.",
+    },
+    "fixture.md",
+  );
+  assert.equal(accountLevel.affiliateCta?.campaign, undefined);
+
+  assert.throws(
+    () =>
+      resolveScheduledAffiliateCtaPair(
+        {
+          affiliateCtaProvider: "klook",
+          affiliateCtaHeadline: "Klook headline",
+          affiliateCtaBody: "Klook body",
+          affiliateCtaCampaign: "uae",
+        },
+        "fixture.md",
+      ),
+    /only when affiliateCtaProvider is "evisas"/,
+  );
+  assert.throws(
+    () =>
+      resolveScheduledAffiliateCtaPair(
+        {
+          affiliateCtaProvider: "evisas",
+          affiliateCtaHeadline: "eVisas headline",
+          affiliateCtaBody: "eVisas body",
+          affiliateCtaCampaign: "mars",
+        },
+        "fixture.md",
+      ),
+    /uae, morocco, thailand/,
+  );
+  assert.throws(
+    () =>
+      resolveScheduledAffiliateCtaPair(
+        {
+          affiliateCtaProvider: "evisas",
+          affiliateCtaHeadline: "UAE headline",
+          affiliateCtaBody: "UAE body",
+          affiliateCtaCampaign: "uae",
+          affiliateCtaBnProvider: "evisas",
+          affiliateCtaBnHeadline: "মরক্কো শিরোনাম",
+          affiliateCtaBnBody: "মরক্কো বিবরণ",
+          affiliateCtaBnCampaign: "morocco",
+        },
+        "fixture.md",
+      ),
+    /must match affiliateCtaCampaign/,
+  );
+  assert.throws(
+    () =>
+      resolveScheduledAffiliateCtaPair(
+        {
+          affiliateCtaProvider: "airalo",
+          affiliateCtaHeadline: "Stay connected",
+          affiliateCtaBody: "Install an eSIM before boarding.",
+          affiliateCtaBnProvider: "klook",
+          affiliateCtaBnHeadline: "ভিন্ন পার্টনার",
+          affiliateCtaBnBody: "বাংলা সংস্করণে আলাদা পার্টনার দেওয়া যাবে না।",
+        },
+        "fixture.md",
+      ),
+    /must match affiliateCtaProvider/,
+  );
+  assert.throws(
+    () =>
+      resolveScheduledAffiliateCtaPair(
+        { affiliateCtaCampaign: "thailand" },
+        "fixture.md",
+      ),
+    /requires affiliateCtaProvider/,
+  );
+
+  const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const gitignore = fs.readFileSync(path.join(rootDir, ".gitignore"), "utf8");
+  for (const generated of [
+    "src/data/scheduledBlogIndex.generated.ts",
+    "src/data/scheduledBlogAeoPanels.generated.ts",
+    "src/data/scheduledBlogPosts.generated.ts",
+    "src/data/scheduledBlogBodies.generated.ts",
+    "src/data/scheduledBengaliBlogs.generated.ts",
+    "src/data/scheduledBlogSeo.generated.ts",
+  ]) {
+    assert.ok(gitignore.includes(generated), `.gitignore must ignore ${generated}`);
+  }
+}
+console.log("Scheduled eVisas campaign frontmatter & generated-module .gitignore guards pass.");

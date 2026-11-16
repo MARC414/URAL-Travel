@@ -6,7 +6,9 @@ import { ResponsiveImage } from "../components/ResponsiveImage";
 
 import { TravelIntelligence } from "../components/AeoInspector";
 
-import { generateBlogCoverAltText } from "../utils/imageAssets";
+import { generateBlogCoverAltText } from "../utils/blogAltText";
+import { getBlogCoverImage as defaultGetBlogCoverImage } from "../utils/blogCoverImages";
+import { getBlogAeoSnippet50Words as defaultGetBlogAeoSnippet50Words } from "../utils/blogSnippets";
 import { sortBlogsNewestFirst } from "../utils/blogOrdering";
 import { BLOG_CATEGORY_TABS, matchesBlogCategoryFilter } from "../utils/blogCategories";
 
@@ -28,7 +30,7 @@ function formatPageNumber(num: number, isBn: boolean): string {
 
 export default function BlogIndexRouteView({ context }: RouteViewProps) {
 
-  const { BLOG_DATA = [], TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, section, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery } = context;
+  const { BLOG_DATA = [], TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, getBlogAeoSnippet50Words = defaultGetBlogAeoSnippet50Words, getBlogCoverImage = defaultGetBlogCoverImage, getLocalizedRouteHref, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, section, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery } = context;
 
   const [currentPage, setCurrentPage] = React.useState(1);
 

@@ -1,4 +1,4 @@
-import { SCHEDULED_BLOG_COVER_IMAGES } from "../data/scheduledBlogIndex.generated";
+import { SCHEDULED_BLOG_COVER_IMAGES } from "../data/scheduledBlogSeo.generated";
 
 /** Article and card photographs. Social JPEG derivatives have a separate build map. */
 const BLOG_COVER_IMAGES: Record<string, string> = {

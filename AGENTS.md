@@ -46,13 +46,15 @@ The canonical registry for Travelpayouts partner links and promotional campaigns
 the rules below are the required convention, not a claim that every existing call site complies.
 
 ### Single Source of Truth
-- **`AFFILIATE_LINKS`**: Canonical dictionary of partner `.tpo.li` and short URLs (`aviasales`, `klook`, `tiqets`, `airhelp`, `kkday`, `kiwitaxi`, `welcomePickups`, `airalo`, `qeeq`, `radicalStorage`, `yesim`, `kiwi`, `getTransfer`, `goCity`). **Never hardcode raw `.tpo.li` URLs in UI components**—always import `AFFILIATE_LINKS` and resolve through `resolvePartnerUrl(...)` or `<PartnerLinkButton />`.
+- **`AFFILIATE_LINKS`**: Canonical dictionary of partner `.tpo.li` and destination URLs (`aviasales`, `klook`, `klookHotels`, `tiqets`, `airhelp`, `kkday`, `kkdayHotels`, `kiwitaxi`, `welcomePickups`, `airalo`, `qeeq`, `radicalStorage`, `yesim`, `kiwi`, `getTransfer`, `goCity`, `evisas`). **Never hardcode raw `.tpo.li` URLs in UI components**—always import `AFFILIATE_LINKS` and resolve through `resolvePartnerUrl(...)` or `<PartnerLinkButton />`.
 - **`AFFILIATE_OFFER_REGISTRY`**: Maps every partner key to its `status` (`"active" | "paused"`), `offerType` (`"evergreen" | "commission-boost" | "customer-promo"`), `fallbackPartner`, and optional `expiresAt` (`YYYY-MM-DD` evaluated in Bangladesh Standard Time `UTC+06:00`).
 - **Automatic Fallback Behavior (`resolvePartnerUrl`)**: If a partner program is paused (`status: "paused"`), registry-based callers of `resolvePartnerUrl()` receive the active `fallbackPartner` URL. Hardcoded links bypass that behavior.
 - **Automatic Promo Expiry (`isPromoActive` & `sanitizeExpiredPromoText`)**:
   - Time-limited customer promos (such as `KKDAY_PROMO` or `AIRHELP_PROMO`) must always be gated by `isPromoActive(PROMO.expiresAt)`.
   - Blog post body text and CTA headlines must pass through `sanitizeExpiredPromoText(text)` in both `src/App.tsx` and `scripts/prerender.ts` so expired coupon codes or sale dates never appear in live or prerendered HTML.
 - **Required Link Attributes**: Every outbound affiliate `<a>` element must include `target="_blank" rel="noopener noreferrer sponsored"`.
+- **eVisas destination campaigns**: Resolve the owner-supplied links through `evisasDestinationUrl(...)` in `src/data/evisaProgram.ts`; article CTAs use `resolveBlogAffiliateUrl(...)` (scheduled Markdown posts may declare `affiliateCtaCampaign: uae | morocco | thailand` alongside `affiliateCtaProvider: evisas`). Do not derive embed URLs or invent campaign IDs. The owner-supplied `EVISAS_WIDGET` URL is gated on `Marketing & Partner Tools` consent via `src/utils/consent.ts`. [The eVisas reference](docs/04-monetization/EVISAS.md) records the placement map, passport qualifications, Bengali treatment and widget behavior.
+- **Centralized GDPR/ePrivacy consent (`src/utils/consent.ts`)**: Single source of truth for consent storage (`cookie-consent`, `cookie-consent-settings`), events (`ural:consent-updated`, `ural:open-cookie-banner`), canonical EN/BN category labels (`CONSENT_CATEGORY_LABELS`), optional `localStorage` (`readOptionalStorage` / `writeOptionalStorage`), withdrawal cookie/script cleanup, and `useConsent(category)`. Direct `localStorage` / `document.cookie` calls and ungated third-party scripts/iframes fail `npm run verify:build`.
 
 ---
 
@@ -133,7 +135,7 @@ date as a supplier price-check date. Details and test commands: [travel-tool con
 
 ## 5. Build, Verification & Prerendering Commands
 
-- `npm run lint` — Runs `tsc --noEmit` to verify TypeScript types across `src/`.
+- `npm run lint` — Regenerates scheduled-blog modules (`npm run generate:scheduled`) and runs `tsc --noEmit` to verify TypeScript types.
 - `npm run build` — Runs `vite build` followed by `tsx scripts/prerender.ts` to generate static route HTML and sitemaps in `dist/`.
 - `npm run verify:build` — Runs the post-build assertions against `dist/` (metadata, sitemap `lastmod`, schema,
   rendered content, and the content-linking contract). It must exit 0 before a change is reported as shipped.

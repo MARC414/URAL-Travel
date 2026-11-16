@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Calendar, ExternalLink, MapPin, MessageCircle, Plane, ShieldCheck, Users } from "lucide-react";
+import { openConsentPreferences, useConsent } from "../utils/consent";
 
 const WELCOME_PICKUPS_SCRIPT_SRC =
   "https://tpemd.com/content?promo_id=8951&campaign_id=627&powered_by=true&show_header=true&locale=en&shmarker=675992&trs=589561";
@@ -18,6 +19,7 @@ export function WelcomePickupsEmbed({
   lang = "en",
 }: WelcomePickupsEmbedProps) {
   const isBn = lang === "bn";
+  const marketingAllowed = useConsent("marketing");
   const [arrivalAirport, setArrivalAirport] = useState("");
   const [destinationAddress, setDestinationAddress] = useState("");
   const [flightNumber, setFlightNumber] = useState("");
@@ -27,14 +29,20 @@ export function WelcomePickupsEmbed({
   const scriptContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!showOfficialWidget || !scriptContainerRef.current) return;
-    scriptContainerRef.current.innerHTML = "";
+    const container = scriptContainerRef.current;
+    if (!container) return;
+    container.innerHTML = "";
+    if (!showOfficialWidget || !marketingAllowed) return;
     const script = document.createElement("script");
     script.src = WELCOME_PICKUPS_SCRIPT_SRC;
     script.async = true;
     script.charset = "utf-8";
-    scriptContainerRef.current.appendChild(script);
-  }, [showOfficialWidget]);
+    script.setAttribute("data-ural-consent", "marketing");
+    container.appendChild(script);
+    return () => {
+      container.innerHTML = "";
+    };
+  }, [showOfficialWidget, marketingAllowed]);
 
   const whatsappMessage = [
     "Hi URAL desk — I have a question about arranging an airport transfer.",
@@ -195,7 +203,29 @@ export function WelcomePickupsEmbed({
               ? "উইজেটের তথ্য পার্টনারের নিয়ন্ত্রণে। সার্চের আগে রুট ও তারিখ যাচাই করুন এবং পেমেন্টের আগে চূড়ান্ত দাম ও শর্ত পড়ুন।"
               : "The widget is controlled by the partner. Confirm the route and date in its search, then review the final price and terms before paying."}
           </p>
-          <div ref={scriptContainerRef} className="min-h-[120px] w-full overflow-x-auto" />
+          {!marketingAllowed && (
+            <div
+              data-consent-gate="marketing"
+              className="rounded-lg border border-slate-200 bg-white p-3.5 space-y-2.5 text-xs text-slate-600"
+            >
+              <p className="leading-relaxed">
+                {isBn
+                  ? "এই উইজেটটি Travelpayouts ও Welcome Pickups-এর। এখানে লোড করতে কুকি পছন্দে “মার্কেটিং ও পার্টনার টুলস” চালু করুন (চালু করলে আপনার IP address ও ব্রাউজারের তথ্য পার্টনারের কাছে যাবে), অথবা সরাসরি পার্টনার সাইট খুলুন।"
+                  : "This widget is provided by Travelpayouts and Welcome Pickups. Turn on “Marketing & Partner Tools” in Cookie preferences to load it here (which shares your IP address and browser details with those providers), or open the partner site directly."}
+              </p>
+              <button
+                type="button"
+                onClick={openConsentPreferences}
+                className="inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-navy px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-slate-800 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2"
+              >
+                {isBn ? "কুকি পছন্দ বদলান" : "Cookie preferences"}
+              </button>
+            </div>
+          )}
+          <div
+            ref={scriptContainerRef}
+            className={`min-h-[120px] w-full overflow-x-auto ${marketingAllowed ? "block" : "hidden"}`}
+          />
         </div>
       )}
     </section>

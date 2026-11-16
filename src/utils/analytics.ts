@@ -1,19 +1,21 @@
 /**
  * URAL Travel Intelligence — Analytics & Event Tracking Engine
  * Dispatches structured events to window.dataLayer for Google Tag Manager (GTM-TMPVL82B)
- * and Google Analytics 4 (GA4).
+ * and Google Analytics 4 (GA4), strictly gated on central `analytics` consent.
  */
+
+import { hasConsent } from "./consent";
 
 declare global {
   interface Window {
-    dataLayer?: Record<string, unknown>[];
+    dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
   }
 }
 
-/** Push a clean event to GTM dataLayer */
+/** Push a clean event to GTM dataLayer only when central analytics consent is active. */
 export function pushDataLayerEvent(event: string, data: Record<string, unknown> = {}) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || !hasConsent("analytics")) return;
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event,
@@ -22,8 +24,9 @@ export function pushDataLayerEvent(event: string, data: Record<string, unknown> 
   });
 }
 
-/** Track virtual pageview for SPA route transitions */
+/** Track virtual pageview for SPA route transitions (only when analytics consent is active). */
 export function trackPageView(pagePath: string, pageTitle: string, canonicalUrl: string) {
+  if (typeof window === "undefined" || !hasConsent("analytics")) return;
   pushDataLayerEvent("virtual_page_view", {
     page_path: pagePath,
     page_title: pageTitle,
@@ -31,7 +34,7 @@ export function trackPageView(pagePath: string, pageTitle: string, canonicalUrl:
   });
 
   // Keep compatibility if gtag is shimmed in GTM or loaded elsewhere
-  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+  if (typeof window.gtag === "function") {
     try {
       window.gtag("event", "page_view", {
         page_path: pagePath,
@@ -105,6 +108,12 @@ const PARTNER_DOMAINS: Array<[string, string]> = [
 /** Known partner identification from URL */
 export function identifyPartnerFromUrl(url: string): string {
   const lower = url.toLowerCase();
+  try {
+    const host = new URL(url).hostname.toLowerCase();
+    if (host === "evisas.com" || host === "www.evisas.com") return "eVisas";
+  } catch {
+    // Relative editorial links are handled by the existing same-origin filter.
+  }
   if (isTravelpayoutsReferralUrl(url)) return "Travelpayouts (creator referral)";
   for (const [token, name] of PARTNER_DOMAINS) {
     if (lower.includes(token)) return name;
@@ -171,7 +180,7 @@ export function initGlobalClickTracking(): () => void {
 
     const href = target.getAttribute("href") || "";
     const rel = target.getAttribute("rel") || "";
-    const text = (target.textContent || "").trim().slice(0, 100);
+    const text = ((target.textContent || "").trim() || target.getAttribute("aria-label") || "").slice(0, 100);
     // Stable first-party link placement. This scopes our click event only; it is
     // not appended to the partner URL and does not establish partner-side attribution.
     const affiliatePlacement = target.dataset?.affiliatePlacement || "";

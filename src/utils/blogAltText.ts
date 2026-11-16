@@ -6,7 +6,7 @@
  * English and Bengali by slug; a concise destination/category fallback is used
  * for new or unmapped posts.
  */
-import { SCHEDULED_BLOG_ALT_TEXT } from "../data/scheduledBlogIndex.generated";
+import { SCHEDULED_BLOG_ALT_TEXT } from "../data/scheduledBlogSeo.generated";
 
 export interface BlogCoverAltTextInput {
   /** The article title in English or Bengali. */

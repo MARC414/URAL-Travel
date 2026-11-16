@@ -1,6 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { initGlobalClickTracking } from "./utils/analytics";
 import {
+  CONSENT_OPEN_EVENT,
+  applyConsentState,
+  openConsentPreferences,
+  hasConsent,
+  readConsentState,
+  readOptionalStorage,
+  subscribeConsent,
+  writeOptionalStorage,
+} from "./utils/consent";
+import {
   Globe,
   Plane,
   Building,
@@ -46,8 +56,10 @@ import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, Blo
 
 // Database Constants
 import { BLOG_SLUGS } from "./data/blogIndex";
-import { getBlogCoverImage } from "./utils/blogCoverImages";
-import { getBlogAeoSnippet50Words } from "./utils/blogSnippets";
+import {
+  ENGLISH_FEATURED_GROWTH_TOPICS,
+  HOME_FEATURED_BLOG_META,
+} from "./data/homeFeaturedBlogMeta";
 import type { BankingFaq } from "./data/bankingHubFaqs";
 import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
 
@@ -55,21 +67,17 @@ import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
 import { TravelIntelligence } from "./components/AeoInspector";
 import { AscentMark } from "./components/AscentMark";
 import {
-  KiwitaxiTransferWidget,
-  WelcomePickupsWidget,
-  AiraloEsimWidget,
-  KlookActivitiesWidget,
-  QeeqCarRentalWidget,
-  PartnerLinkButton,
-  RadicalStorageContextualCallout,
-  MultiPartnerBlogCallout,
-  TravelpayoutsReferralCallout,
   AFFILIATE_LINKS,
   KKDAY_PROMO,
   isPromoActive,
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
 } from "./components/AffiliatePartners";
+// Keep the partner module and deferred cookie dialog outside the guarded homepage entry graph.
+const EvisaHomeSection = React.lazy(() =>
+  import("./components/EvisaPanels").then((m) => ({ default: m.EvisaHomeSection }))
+);
+const ConsentBanner = React.lazy(() => import("./components/ConsentBanner"));
 import {
   useSeoMeta,
   generateFAQSchema,
@@ -89,8 +97,11 @@ import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH } from "./utils/officialResourcesMeta";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
-import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
-import { getBengaliSeoCopy, getSeoCopy } from "./utils/seoCopy";
+import {
+  getCoreBengaliSeoCopy as getBengaliSeoCopy,
+  getCoreSeoCopy as getSeoCopy,
+} from "./utils/coreSeoCopy";
+import type * as BlogRouteMetaModule from "./utils/blogRouteMeta";
 import {
   isToolSlug,
   toolPathForTab,
@@ -106,10 +117,7 @@ import {
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { TiqetsEmbedWidget } from "./components/TiqetsEmbedWidget";
-import { ConsentBanner } from "./components/ConsentBanner";
-import { generateBlogCoverAltText } from "./utils/imageAssets";
 import { ResponsiveImage } from "./components/ResponsiveImage";
-import { getRelatedBlogPosts } from "./utils/blogLinks";
 import {
   faqPageNodeSchema,
   howToSchema,
@@ -118,51 +126,8 @@ import {
   URAL_WIKIDATA_ENTITY_URL,
 } from "./utils/schema";
 import { getAuthorProfile } from "./data/authorProfiles";
-import {
-  getVisibleBlogFaqSection,
-  getVisibleBlogHowTos,
-} from "./utils/blogStructuredData";
 
 const BRAND_TAGLINE = "A Travel Intelligence Ecosystem";
-
-const ENGLISH_FEATURED_GROWTH_TOPICS = [
-  {
-    id: "trend-umrah-hajj",
-    category: "Religious Travel · 12 min",
-    searchQuery: "“DIY Umrah cost & Nusuk guide Bangladesh”",
-    title: "DIY Umrah from Bangladesh: Visa Routes, Nusuk Steps & Budget Checks",
-    excerpt:
-      "Conditional Umrah visa routes, application-to-permit steps and the limits of the historical budget. Use your own quotes for current totals; Hajj is a separate process.",
-    slug: "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
-  },
-  {
-    id: "trend-endorsement",
-    category: "Banking & FX · 7 min",
-    searchQuery: "“How to get dual-currency card endorsement”",
-    title: "How to Get Dual-Currency Card Endorsement (2026 Passport Dollar Quota Guide)",
-    excerpt:
-      "Step-by-step guide to the $18,000 annual passport endorsement quota (Bangladesh Bank FEPD-1 Circular No. 33), endorsement and card activation, the $300 online-payment rule, and RFCD vs. travel-quota cards.",
-    slug: "dual-currency-card-endorsement-bangladesh",
-  },
-  {
-    id: "trend-family-budget",
-    category: "Family & Budget · 7 min",
-    searchQuery: "“Top budget-friendly family destinations from Dhaka”",
-    title: "Top 6 Budget-Friendly Family Destinations from Dhaka (Ranked by 5-Day BDT Cost)",
-    excerpt:
-      "Compare Nepal (from ৳42k), Malaysia (from ৳68k), Thailand, Maldives Local Islands, Singapore, and Dubai by total family BDT cost, visa speed, and Halal dining.",
-    slug: "top-budget-family-destinations-from-dhaka",
-  },
-  {
-    id: "trend-dac-immigration",
-    category: "Outbound Rules · 6 min",
-    searchQuery: "“Dhaka airport immigration documents checklist”",
-    title: "Dhaka Airport (DAC) Outbound Immigration Checklist: NOC, GO & First-Time Rules",
-    excerpt:
-      "Exact document folder checklist to clear Hazrat Shahjalal Airport emigration in under 2 minutes for job holders (NOC), govt staff (GO), business owners, and fresh passports.",
-    slug: "dhaka-airport-outbound-immigration-checklist-noc-go",
-  },
-];
 
 // Non-critical route & modal components loaded on demand to reduce initial JS parse/compile cost
 const FlightsRouteView = React.lazy(() => import("./routes/FlightsRouteView"));
@@ -356,25 +321,14 @@ export function TravelpayoutsWidgetSkeleton({
       onFocus={onInteract}
       className="w-full overflow-hidden rounded-xl bg-white shadow-sm border border-slate-200/90 text-slate-900 select-none"
     >
-      {/* 1. Popular Routes Bar Skeleton */}
-      <div className="bg-slate-50 border-b border-slate-200/80 px-3 sm:px-5 py-2.5 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex flex-wrap items-center gap-1.5">
-          <div className="h-3.5 w-20 rounded bg-slate-200 animate-pulse mr-1" />
-          {[1, 2, 3, 4, 5].map((pill) => (
-            <div
-              key={pill}
-              className="h-7 w-28 rounded-lg bg-slate-200/90 animate-pulse"
-            />
-          ))}
-        </div>
-        <div className="flex items-center gap-2 text-[11px] font-mono text-slate-600">
-          <span className="w-2 h-2 rounded-full bg-[#07C369]" />
-          <span>
-            {isBn
-              ? "লাইভ এয়ারলাইন ভাড়া লোড হচ্ছে..."
-              : "Initializing Travelpayouts live fares..."}
-          </span>
-        </div>
+      {/* 1. Status bar — the popular-route chips row was removed from the widget. */}
+      <div className="bg-slate-50 border-b border-slate-200/80 px-3 sm:px-5 py-2.5 flex items-center justify-end gap-2 text-[11px] font-mono text-slate-600">
+        <span className="w-2 h-2 rounded-full bg-[#07C369]" />
+        <span>
+          {isBn
+            ? "লাইভ এয়ারলাইন ভাড়া লোড হচ্ছে..."
+            : "Initializing Travelpayouts live fares..."}
+        </span>
       </div>
 
       {/* 2. Main Interactive Search Form Skeleton */}
@@ -670,7 +624,7 @@ const readSavedSubscriptionInterests = (): SubscriptionInterest[] => {
 
   try {
     const storedInterests: unknown = JSON.parse(
-      window.localStorage.getItem("ural_subscription_interests") || "[]",
+      readOptionalStorage("ural_subscription_interests") || "[]",
     );
     return Array.isArray(storedInterests)
       ? SUBSCRIPTION_INTERESTS.filter((interest) => storedInterests.includes(interest))
@@ -845,9 +799,7 @@ export default function App() {
   });
 
   const handleLangToggle = (newLang: Language) => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("ural_lang", newLang);
-    }
+    writeOptionalStorage("ural_lang", newLang);
     // Switching language navigates to the other locale's URL — /bn/* is the
     // crawlable Bengali surface, it is not just a client-side state flip.
     const current =
@@ -888,6 +840,29 @@ export default function App() {
     isBn && bnContent ? bnContent.getFeaturedGrowthTopics(lang) : ENGLISH_FEATURED_GROWTH_TOPICS;
   const [isPriceAlertOpen, setIsPriceAlertOpen] = useState(false);
   const [alertDestination, setAlertDestination] = useState("Bangkok (BKK)");
+  const [consentBannerMode, setConsentBannerMode] = useState<"idle" | "auto" | "customize">("idle");
+
+  useEffect(() => {
+    let timer: number | undefined;
+    const initial = readConsentState();
+    if (initial.status === "unset") {
+      timer = window.setTimeout(() => {
+        setConsentBannerMode((prev) => (prev === "idle" ? "auto" : prev));
+      }, 800);
+    } else {
+      applyConsentState(initial.status, initial.settings, false);
+    }
+    const handleOpenConsent = () => setConsentBannerMode("customize");
+    window.addEventListener(CONSENT_OPEN_EVENT, handleOpenConsent);
+    // Keep cross-tab Consent Mode updates, cookie expiry and storage cleanup active
+    // on every route even when the deferred ConsentBanner chunk has not been mounted.
+    const unsubscribeConsent = subscribeConsent(() => {});
+    return () => {
+      if (timer !== undefined) window.clearTimeout(timer);
+      window.removeEventListener(CONSENT_OPEN_EVENT, handleOpenConsent);
+      unsubscribeConsent();
+    };
+  }, []);
 
   const openPriceAlert = (dest?: string) => {
     if (dest) setAlertDestination(dest);
@@ -897,25 +872,16 @@ export default function App() {
   const [heroHotelCity, setHeroHotelCity] = useState("kathmandu-hotels");
   const [heroVisaCountry, setHeroVisaCountry] = useState("nepal-visa");
 
-  // Custom Interactive Home states
-  const [emailSubscribed, setEmailSubscribed] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      return Boolean(localStorage.getItem("ural_subscribed_email"));
-    }
-    return false;
-  });
-  const [userEmail, setUserEmail] = useState<string>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("ural_subscribed_email") || "";
-    }
-    return "";
-  });
-  const [subscriptionId, setSubscriptionId] = useState<string>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("ural_subscription_id") || "";
-    }
-    return "";
-  });
+  // Custom Interactive Home states (persisted only when preferences consent is granted)
+  const [emailSubscribed, setEmailSubscribed] = useState<boolean>(() =>
+    Boolean(readOptionalStorage("ural_subscribed_email")),
+  );
+  const [userEmail, setUserEmail] = useState<string>(
+    () => readOptionalStorage("ural_subscribed_email") || "",
+  );
+  const [subscriptionId, setSubscriptionId] = useState<string>(
+    () => readOptionalStorage("ural_subscription_id") || "",
+  );
   const [selectedSubscriptionInterests, setSelectedSubscriptionInterests] = useState<SubscriptionInterest[]>(
     readSavedSubscriptionInterests,
   );
@@ -1027,15 +993,9 @@ export default function App() {
       setEmailSubmitting(false);
     }
 
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem("ural_subscribed_email", cleanEmail);
-        localStorage.setItem("ural_subscription_id", generatedSubId);
-        localStorage.setItem("ural_subscription_interests", JSON.stringify(selectedInterests));
-      } catch {
-        // ignore storage quota errors
-      }
-    }
+    writeOptionalStorage("ural_subscribed_email", cleanEmail);
+    writeOptionalStorage("ural_subscription_id", generatedSubId);
+    writeOptionalStorage("ural_subscription_interests", JSON.stringify(selectedInterests));
     setSubscriptionId(generatedSubId);
     setSelectedSubscriptionInterests(selectedInterests);
     setEmailSubscribed(true);
@@ -1187,11 +1147,16 @@ export default function App() {
       parameterId = countryParam || "nepal-costs";
       isLanding = !countryParam;
     } else if (root === "experiences" && segs.length <= 2) {
-      section = "experiences";
-      isLanding = true;
-      // Clean static region paths: /experiences/europe (west) and /experiences/asia
-      if (segs.length === 2 && (segs[1] === "europe" || segs[1] === "asia")) {
-        parameterId = segs[1];
+      // Clean static region paths: /experiences/europe (west) and /experiences/asia.
+      // An unknown second segment falls through to notFound (noindex) so mistyped
+      // sub-paths cannot be indexed as duplicates of /experiences.
+      if (!subSegment) {
+        section = "experiences";
+        isLanding = true;
+      } else if (subSegment === "europe" || subSegment === "asia") {
+        section = "experiences";
+        parameterId = subSegment;
+        isLanding = false;
       }
     } else if (root === "attractions" && segs.length <= 2) {
       section = "attractions";
@@ -1330,6 +1295,18 @@ export default function App() {
   // 122 routes. Idle scheduling keeps the fetch out of the critical path; the
   // fallback timer guarantees it still happens on browsers without
   // requestIdleCallback. Mirrors how ./data/bengaliContent is loaded for /bn/*.
+  const [blogRouteMeta, setBlogRouteMeta] = useState<typeof BlogRouteMetaModule | null>(null);
+  useEffect(() => {
+    if (section !== "blog" || blogRouteMeta) return;
+    let cancelled = false;
+    import("./utils/blogRouteMeta").then((mod) => {
+      if (!cancelled) setBlogRouteMeta(mod);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [section, blogRouteMeta]);
+
   const [blogBodies, setBlogBodies] = useState<Readonly<Record<string, string>> | null>(null);
   useEffect(() => {
     if (section !== "blog" || locale === "bn" || blogBodies) return;
@@ -1860,16 +1837,26 @@ export default function App() {
       seoDescription = bnPostSeo?.description || activePost.summary;
       seoImageUrl = postImgUrl;
 
+      const articleHeadline = bnPostSeo?.h1 || activePost.title;
+      const articleSectionLabel = activePost.category || "Bangladesh Outbound Travel Guides";
       const articleNode = articleSchema({
         url: postUrl,
-        headline: bnPostSeo?.h1 || activePost.title,
+        headline: articleHeadline,
         description: bnPostSeo?.description || activePost.summary,
         slug: activePost.slug,
         datePublished: canonicalPost.date,
         dateModified: canonicalPost.updatedAt || canonicalPost.date,
         authorRaw: canonicalPost.author,
-        articleSection: activePost.category,
+        articleSection: articleSectionLabel,
         imageUrl: postImgUrl,
+        imageCaption: blogRouteMeta
+          ? blogRouteMeta.generateBlogCoverAltText({
+              title: articleHeadline,
+              category: articleSectionLabel,
+              slug: activePost.slug,
+              lang: isBn ? "bn" : "en",
+            })
+          : articleHeadline,
         inLanguage: pageLanguage,
       });
 
@@ -1877,11 +1864,13 @@ export default function App() {
         ? activePost.content || ""
         : blogBodies?.[activePost.slug] || activePost.content || "";
       const structuredDataLocale = isBn ? "bn" : "en";
-      const visibleFaqSection = getVisibleBlogFaqSection(
-        activePost.slug,
-        articleBodyForSchema,
-        structuredDataLocale
-      );
+      const visibleFaqSection = blogRouteMeta
+        ? blogRouteMeta.getVisibleBlogFaqSection(
+            activePost.slug,
+            articleBodyForSchema,
+            structuredDataLocale
+          )
+        : null;
       const pageSchemaNodes: Record<string, unknown>[] = [articleNode];
 
       if (visibleFaqSection) {
@@ -1894,11 +1883,14 @@ export default function App() {
         );
       }
 
-      for (const howTo of getVisibleBlogHowTos(
-        activePost.slug,
-        articleBodyForSchema,
-        structuredDataLocale
-      )) {
+      const visibleHowTos = blogRouteMeta
+        ? blogRouteMeta.getVisibleBlogHowTos(
+            activePost.slug,
+            articleBodyForSchema,
+            structuredDataLocale
+          )
+        : [];
+      for (const howTo of visibleHowTos) {
         pageSchemaNodes.push(
           howToSchema({
             url: postUrl,
@@ -1986,23 +1978,27 @@ export default function App() {
     ];
   } else if (section === "experiences") {
     const region = parameterId === "europe" ? "europe" : parameterId === "asia" ? "asia" : "all";
-    const experiencesUrl = siteUrl(parameterId ? `/experiences/${parameterId}` : "/experiences", lang);
-    if (region === "europe") {
-      seoTitle = "European Attraction Passes & Skip-the-Line Tickets (Tiqets) | URAL";
-      seoDescription = "Skip the line in Paris, London, Rome, Milan, and Venice with official Tiqets passes. Louvre, Eiffel Tower, Colosseum, Duomo, and more for Bangladeshi Schengen visa travelers.";
-    } else if (region === "asia") {
-      seoTitle = "Asian Attraction Passes & Tours (Klook) | URAL";
-      seoDescription = "Browse Klook activity listings in Dubai, Bangkok, Singapore, and Kuala Lumpur. Compare dates, inclusions, checkout totals, and booking terms before choosing.";
-    } else {
-      seoTitle = "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub) | URAL";
-      seoDescription = "Compare official Tiqets attraction listings in Europe and New York with Klook activity listings in Dubai, Bangkok, Singapore, and Kuala Lumpur; check current dates and terms.";
-    }
-    // URAL refers travelers to partner booking sites; it does not sell these products.
-    // Do not emit Product/Offer data that presents URAL as the merchant.
-    seoBreadcrumbs = [
-      { name: "Home", url: siteUrl("/", lang) },
-      { name: "Attractions & Passes", url: experiencesUrl }
-    ];
+    const experiencesHubUrl = siteUrl("/experiences", lang);
+    const experiencesUrl = siteUrl(region === "all" ? "/experiences" : `/experiences/${region}`, lang);
+    // Exact EN & BN title/description come from PRIORITY_SEO_COPY / BENGALI_SEO_COPY
+    // below via seoRoutePath ("/experiences", "/experiences/europe", "/experiences/asia").
+    seoBreadcrumbs =
+      region === "all"
+        ? [
+            { name: "Home", url: siteUrl("/", lang) },
+            { name: "Attractions & Passes", url: experiencesUrl },
+          ]
+        : [
+            { name: "Home", url: siteUrl("/", lang) },
+            { name: "Attractions & Passes", url: experiencesHubUrl },
+            {
+              name:
+                region === "europe"
+                  ? "Europe, UK & US Attraction Passes"
+                  : "Asia & Dubai Attraction Passes",
+              url: experiencesUrl,
+            },
+          ];
   } else if (section === "attractions") {
     const attractionsUrl = siteUrl("/attractions", lang);
     if (!parameterId) {
@@ -2187,21 +2183,23 @@ export default function App() {
   // Bengali pages must never fall back to the English copy tables: prefer the
   // hand-written BENGALI_SEO_COPY, then the generated /bn metadata from
   // bengaliContent (loaded lazily on /bn routes), then a compact fallback.
+  const resolveBengaliSeo = blogRouteMeta ? blogRouteMeta.getBengaliSeoCopy : getBengaliSeoCopy;
+  const resolveSeoCopy = blogRouteMeta ? blogRouteMeta.getSeoCopy : getSeoCopy;
   const sharedSeoCopy = isBn
     ? (() => {
         // Same precedence as scripts/prerender.ts: hand-written Bengali SERP
         // copy, then copy generated from the Bengali data, then a compact
         // fallback. Keeping the order identical is what guarantees the client
         // renders the same <title> the crawler already saw.
-        const bnHandWritten = getBengaliSeoCopy(seoRoutePath);
+        const bnHandWritten = resolveBengaliSeo(seoRoutePath);
         if (bnHandWritten) return bnHandWritten;
         const bnGenerated = bnContent?.getBengaliRouteSeo(seoRoutePath);
         if (bnGenerated) {
           return { title: bnGenerated.title, description: bnGenerated.description };
         }
-        return getSeoCopy(seoRoutePath, seoTitle, seoDescription, "bn");
+        return resolveSeoCopy(seoRoutePath, seoTitle, seoDescription, "bn");
       })()
-    : getSeoCopy(seoRoutePath, seoTitle, seoDescription);
+    : resolveSeoCopy(seoRoutePath, seoTitle, seoDescription);
   seoTitle = sharedSeoCopy.title;
   seoDescription = sharedSeoCopy.description;
 
@@ -2243,6 +2241,8 @@ export default function App() {
   }
 
   // Call the hook at the top level
+  const isBlogArticleMetaPending =
+    section === "blog" && !isLanding && (!blogRouteMeta || (isBn && !bnContent));
   useSeoMeta({
     title: seoTitle,
     description: seoDescription,
@@ -2251,6 +2251,7 @@ export default function App() {
     imageUrl: seoImageUrl,
     inLanguage: pageLanguage,
     noindex: section === "notFound",
+    defer: isBlogArticleMetaPending,
   });
 
   // Helper that normalizes legacy query-string paths to clean path-based routes
@@ -2259,19 +2260,35 @@ export default function App() {
       const u = new URL(rawPath, SITE_ORIGIN);
       const p = u.pathname;
       const sp = u.searchParams;
-      if (p === "/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/experiences?region=asia";
-      if (p === "/bn/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/bn/experiences?region=asia";
+      if (p === "/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/experiences/asia";
+      if (p === "/bn/blog/kkday-10-10-winter-sale-japan-tours-passes-guide") return "/bn/experiences/asia";
       if (p === "/flights" && sp.get("route")) return `/flights/${sp.get("route")}`;
       if (p === "/hotels" && sp.get("city")) return `/hotels/${sp.get("city")}`;
       if (p === "/visa" && sp.get("country")) return `/visa/${sp.get("country")}`;
       if (p === "/destinations" && sp.get("country")) return `/destinations/${sp.get("country")}`;
       if (p === "/costs" && sp.get("country")) return `/costs/${sp.get("country")}`;
       if (p === "/blog" && sp.get("slug")) return `/blog/${sp.get("slug")}`;
-      if (p === "/tools") {
+      if (p === "/experiences" || p === "/bn/experiences") {
+        // Legacy ?region=west|asia links converge on /experiences/europe|asia
+        // while keeping ?city= filtering and any fragment intact.
+        const region = sp.get("region");
+        if (region === "west" || region === "europe" || region === "asia") {
+          const slug = region === "asia" ? "asia" : "europe";
+          sp.delete("region");
+          const q = sp.toString();
+          return `${p}/${slug}${q ? `?${q}` : ""}${u.hash}`;
+        }
+      }
+      if (p === "/tools" || p === "/bn/tools") {
         // Legacy ?tab= deep links converge on the canonical tool paths in-app
         // (functions/_middleware.js 301s the same hop at the edge).
         const toolPath = toolPathForTab(sp.get("tab"));
-        if (toolPath) return toolPath;
+        if (toolPath) {
+          sp.delete("tab");
+          const q = sp.toString();
+          const target = p.startsWith("/bn/") ? `/bn${toolPath}` : toolPath;
+          return `${target}${q ? `?${q}` : ""}${u.hash}`;
+        }
       }
       if (p === "/indexing") return "/sitemap";
       return u.pathname + u.search + u.hash;
@@ -2412,7 +2429,7 @@ export default function App() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const routeViewContext: Record<string, any> = { BLOG_DATA, AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactError, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactError, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
+  const routeViewContext: Record<string, any> = { BLOG_DATA, AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactError, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactError, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
 
   return (
     // `overflow-x-clip`, not `overflow-x-hidden`: the full-bleed (100vw) heroes
@@ -3895,71 +3912,44 @@ export default function App() {
                   </button>
                 </div>
 
-              <section
-                id="airport-code-reference"
-                aria-labelledby="quick-airport-codes-title"
-                className="rounded-3xl border border-slate-200/90 bg-white p-4 shadow-sm sm:p-6"
-              >
-                <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-                  <div className="space-y-2">
-                    <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-brand-emerald">
-                        <Plane size={14} aria-hidden="true" />
-                      </span>
-                      <span>{isBn ? "দ্রুত IATA রেফারেন্স" : "Quick IATA reference"}</span>
-                    </div>
-                    <h3
-                      id="quick-airport-codes-title"
-                      className="ural-card-title font-serif text-lg font-black tracking-tight text-slate-900 sm:text-xl"
-                    >
-                      {isBn ? "এয়ারপোর্ট কোড এক নজরে" : "Quick Airport Code Reference"}
-                    </h3>
-                    <p className="max-w-2xl text-xs leading-relaxed text-slate-600">
-                      {isBn
-                        ? "ফ্লাইট খোঁজার সময় এই তিন-অক্ষরের IATA কোডগুলো ব্যবহার করুন।"
-                        : "Use these three-letter IATA codes when searching for your route."}
-                    </p>
-                  </div>
-                  <a
-                    href="/tools/airport-codes"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigateTo("/tools/airport-codes");
-                    }}
-                    className="inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-semibold text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] md:w-auto"
-                  >
-                    <span>
-                      {isBn
-                        ? "সম্পূর্ণ এয়ারপোর্ট ডিরেক্টরি ও অনুসন্ধান টুল খুলুন"
-                        : "Open Full Airport Directory & Tool"}
-                    </span>
-                    <ArrowRight size={14} aria-hidden="true" />
-                  </a>
-                </div>
-                <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
-                  {[
-                    { code: "DAC", en: "Dhaka", bn: "ঢাকা" },
-                    { code: "CGP", en: "Chattogram", bn: "চট্টগ্রাম" },
-                    { code: "ZYL", en: "Sylhet", bn: "সিলেট" },
-                    { code: "CXB", en: "Cox's Bazar", bn: "কক্সবাজার" },
-                    { code: "DXB", en: "Dubai", bn: "দুবাই" },
-                    { code: "JED", en: "Jeddah", bn: "জেদ্দা" },
-                  ].map((airport) => (
-                    <div
-                      key={airport.code}
-                      className="flex min-h-[68px] flex-col justify-center rounded-xl border border-slate-200/90 bg-slate-50/80 px-3 py-2.5"
-                    >
-                      <span className="font-mono text-base font-black tracking-wide text-brand-navy">
-                        {airport.code}
-                      </span>
-                      <span className="text-xs font-medium text-slate-600">
-                        {isBn ? airport.bn : airport.en}
-                      </span>
-                    </div>
-                  ))}
-                </div>
               </section>
-              </section>
+
+              {/* eVisas now sits directly below the flight search. The quick
+                  airport-code reference moved under the "Where Are You Flying
+                  Next?" cards below. A dimension-matched Suspense placeholder
+                  keeps downstream sections stable while the lazy chunk loads. */}
+              {Boolean(resolvePartnerUrl(AFFILIATE_LINKS.evisas)) && (
+                <React.Suspense
+                  fallback={
+                    <div aria-hidden="true" data-evisa-skeleton="" className="home-evisa home-evisa-skeleton">
+                      <div className="home-evisa-intro">
+                        <div className="home-evisa-skeleton-block home-evisa-skeleton-title" />
+                        <div className="home-evisa-skeleton-block home-evisa-skeleton-hook" />
+                        <div className="home-evisa-skeleton-block home-evisa-skeleton-body" />
+                      </div>
+                      <div className="home-evisa-layout">
+                        <div className="home-evisa-widget">
+                          {isBn && <div className="home-evisa-skeleton-block home-evisa-skeleton-note" />}
+                          <div
+                            className={
+                              hasConsent("marketing")
+                                ? "home-evisa-widget-slot home-evisa-widget-slot--live home-evisa-skeleton-block"
+                                : "home-evisa-consent"
+                            }
+                          />
+                        </div>
+                        <div className="home-evisa-ad">
+                          <div className="home-evisa-skeleton-block home-evisa-skeleton-square" />
+                          <div className="home-evisa-skeleton-block home-evisa-skeleton-caption" />
+                          <div className="home-evisa-skeleton-block home-evisa-skeleton-cta" />
+                        </div>
+                      </div>
+                    </div>
+                  }
+                >
+                  <EvisaHomeSection lang={isBn ? "bn" : "en"} />
+                </React.Suspense>
+              )}
             </div>
 
             {/* 🟦 SECTION 2: QUICK DESTINATION ENTRY */}
@@ -4087,6 +4077,72 @@ export default function App() {
                 ))}
               </div>
             </div>
+
+            {/* Quick airport-code reference now follows the destination cards. */}
+            <section
+              id="airport-code-reference"
+              aria-labelledby="quick-airport-codes-title"
+              className="rounded-3xl border border-slate-200/90 bg-white p-4 shadow-sm sm:p-6"
+            >
+              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div className="space-y-2">
+                  <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-brand-emerald">
+                      <Plane size={14} aria-hidden="true" />
+                    </span>
+                    <span>{isBn ? "দ্রুত IATA রেফারেন্স" : "Quick IATA reference"}</span>
+                  </div>
+                  <h3
+                    id="quick-airport-codes-title"
+                    className="ural-card-title font-serif text-lg font-black tracking-tight text-slate-900 sm:text-xl"
+                  >
+                    {isBn ? "এয়ারপোর্ট কোড এক নজরে" : "Quick Airport Code Reference"}
+                  </h3>
+                  <p className="max-w-2xl text-xs leading-relaxed text-slate-600">
+                    {isBn
+                      ? "ফ্লাইট খোঁজার সময় এই তিন-অক্ষরের IATA কোডগুলো ব্যবহার করুন।"
+                      : "Use these three-letter IATA codes when searching for your route."}
+                  </p>
+                </div>
+                <a
+                  href="/tools/airport-codes"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo("/tools/airport-codes");
+                  }}
+                  className="inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-semibold text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] md:w-auto"
+                >
+                  <span>
+                    {isBn
+                      ? "সম্পূর্ণ এয়ারপোর্ট ডিরেক্টরি ও অনুসন্ধান টুল খুলুন"
+                      : "Open Full Airport Directory & Tool"}
+                  </span>
+                  <ArrowRight size={14} aria-hidden="true" />
+                </a>
+              </div>
+              <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                {[
+                  { code: "DAC", en: "Dhaka", bn: "ঢাকা" },
+                  { code: "CGP", en: "Chattogram", bn: "চট্টগ্রাম" },
+                  { code: "ZYL", en: "Sylhet", bn: "সিলেট" },
+                  { code: "CXB", en: "Cox's Bazar", bn: "কক্সবাজার" },
+                  { code: "DXB", en: "Dubai", bn: "দুবাই" },
+                  { code: "JED", en: "Jeddah", bn: "জেদ্দা" },
+                ].map((airport) => (
+                  <div
+                    key={airport.code}
+                    className="flex min-h-[68px] flex-col justify-center rounded-xl border border-slate-200/90 bg-slate-50/80 px-3 py-2.5"
+                  >
+                    <span className="font-mono text-base font-black tracking-wide text-brand-navy">
+                      {airport.code}
+                    </span>
+                    <span className="text-xs font-medium text-slate-600">
+                      {isBn ? airport.bn : airport.en}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
 
             {/* 🟦 SECTION 3: “PLAN YOUR TRIP” PATHWAY */}
             <div className="ural-panel bg-slate-50 p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
@@ -4582,7 +4638,20 @@ export default function App() {
           {/* Strictly 4 Featured Blog Topics in a Single Row on Desktop (With Unique Image + 50-Word AEO Snippet + Read Full Blog Button) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {featuredGrowthTopics.map((topic) => {
-              const cardSnippet = getBlogAeoSnippet50Words(topic.slug, isBn, topic.excerpt);
+              const cardMeta = HOME_FEATURED_BLOG_META[topic.slug];
+              const cardSnippet = cardMeta
+                ? isBn
+                  ? cardMeta.snippetBn
+                  : cardMeta.snippetEn
+                : topic.excerpt;
+              const cardCover =
+                cardMeta?.coverImage ??
+                "/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp";
+              const cardAlt = cardMeta
+                ? isBn
+                  ? cardMeta.altBn
+                  : cardMeta.altEn
+                : topic.title;
               return (
                 <article
                   key={topic.id}
@@ -4592,14 +4661,9 @@ export default function App() {
                   <div>
                     <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
                       <ResponsiveImage
-                        src={getBlogCoverImage(topic.slug)}
+                        src={cardCover}
                         sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
-                        alt={generateBlogCoverAltText({
-                          title: topic.title,
-                          category: topic.category,
-                          slug: topic.slug,
-                          lang: isBn ? "bn" : "en",
-                        })}
+                        alt={cardAlt}
                         loading="lazy"
                         fetchPriority="low"
                         decoding="async"
@@ -5319,10 +5383,8 @@ export default function App() {
                   per-category panel (see ConsentBanner.tsx). */}
               <button
                 type="button"
-                onClick={() =>
-                  window.dispatchEvent(new CustomEvent("ural:open-cookie-banner"))
-                }
-                className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
+                onClick={openConsentPreferences}
+                className="min-h-11 px-1.5 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
               >
                 {isBn ? "কুকি সেটিংস" : "Cookie settings"}
               </button>
@@ -5368,8 +5430,16 @@ export default function App() {
         </React.Suspense>
       )}
 
-      {/* Google Consent Mode v2 Floating Cookie Consent Banner */}
-      <ConsentBanner onNavigate={navigateTo} lang={lang} />
+      {/* Google Consent Mode v2 Floating Cookie Consent Banner (code-split off LCP path) */}
+      {consentBannerMode !== "idle" && (
+        <React.Suspense fallback={null}>
+          <ConsentBanner
+            onNavigate={navigateTo}
+            lang={lang}
+            initialCustomize={consentBannerMode === "customize"}
+          />
+        </React.Suspense>
+      )}
 
       {/* Back-to-top floating button — appears after 600px scroll */}
       <button

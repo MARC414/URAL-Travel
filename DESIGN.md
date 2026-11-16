@@ -394,6 +394,35 @@ establish new hotel facts.
   exemption is one named line in `scripts/verify-build.ts` with its reason, never
   inferred from a missing field.
 
+### eVisas assistance and advertising
+
+- `EvisaPanels.tsx` and `styles/evisa.css` use the existing navy, gold, type and
+  spacing conventions. eVisas is labelled as a private paid application service.
+- The homepage uses one prominent `EvisaHomeSection` directly below the flight
+  search: a 28–46px serif H2, a short hook and introduction, then the supplied
+  widget on the left and a native-size square creative on the right, with the
+  section's single partner button under that creative. Below 1024px they stack.
+  The quick airport-code reference moved below the destination cards; the old
+  horizontal ad and lower handoff card are removed.
+- One visual eVisas creative per selected page. Horizontal placements switch to
+  square below 768px; skyscrapers switch to square below 1024px. The 120×240
+  vertical belongs beside native assistance copy. Supplied artwork is not cropped
+  or stretched beyond its native dimensions.
+- Bengali placements use localized native copy with the same commercial action,
+  rather than embedding the untranslated English artwork. Programme pause hides
+  eVisas promotions while each guide's official-source section remains available.
+- Link emphasis follows its role, independently of `sponsored`: the official
+  Thai portal is primary and the passport-qualified eVisas alternative is a text
+  link. Every ad is labelled beside the creative ("Advertisement · Private, paid
+  visa service"); the commission statement lives in the sitewide footer and the
+  privacy policy rather than being repeated in each block.
+- The prerenderer uses the same components, including the homepage handoff.
+  The remote widget is marketing-consent gated, with a direct link retained in
+  the initial HTML. Bengali introduces the same English partner widget with
+  localized instructions; its square promotion uses Bengali native copy.
+  Placement scope and verification evidence live in
+  [the eVisas reference](docs/04-monetization/EVISAS.md).
+
 ### Article header and reading navigation
 
 - **Shared rendering:** `BlogArticleHeader.tsx` supplies the byline, canonical

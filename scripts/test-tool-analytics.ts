@@ -16,17 +16,25 @@ function test(name: string, run: () => void) {
 }
 
 /**
- * Minimal browser shim: the analytics layer only needs `window.dataLayer`.
- * Every event the helpers emit lands here so it can be inspected.
+ * Minimal browser shim: analytics pushes are gated on central `analytics`
+ * consent (`src/utils/consent.ts`), so `withWindow` defaults to consented
+ * storage for payload tests and accepts custom storage for consent-gate tests.
  */
 type Pushed = Record<string, unknown>;
-function withWindow<T>(run: (events: Pushed[]) => T): T {
+function withWindow<T>(
+  run: (events: Pushed[]) => T,
+  opts: { pathname?: string; storage?: Record<string, string> } = {}
+): T {
   const events: Pushed[] = [];
+  const storage = opts.storage ?? { "cookie-consent": "accepted" };
   const g = globalThis as unknown as { window?: unknown };
   const previous = g.window;
   g.window = {
     dataLayer: { push: (e: Pushed) => events.push(e) } as unknown as Pushed[],
-    location: { pathname: "/tools/currency-converter" },
+    location: { pathname: opts.pathname ?? "/tools/currency-converter" },
+    localStorage: {
+      getItem: (key: string) => (key in storage ? storage[key] : null),
+    },
   };
   try {
     return run(events);
@@ -35,6 +43,33 @@ function withWindow<T>(run: (events: Pushed[]) => T): T {
     else g.window = previous;
   }
 }
+
+test("CONSENT: tool analytics emit zero events when analytics consent is unset, declined, or marketing-only", () => {
+  const deniedStates: Array<Record<string, string>> = [
+    {},
+    { "cookie-consent": "declined" },
+    { "cookie-consent": "custom", "cookie-consent-settings": '{"marketing":true,"functionality":true,"analytics":false}' },
+  ];
+  for (const storage of deniedStates) {
+    withWindow(
+      (events) => {
+        trackToolOpen("budget-estimator");
+        trackToolResult("currency-converter", { currency: "BDT" });
+        trackToolLimitShown("budget-estimator", "daily_neuron_cap");
+        assert.equal(events.length, 0, `leaked analytics event under ${JSON.stringify(storage)}`);
+      },
+      { storage }
+    );
+  }
+  // Custom analytics-only consent (marketing off) MUST allow tool analytics.
+  withWindow(
+    (events) => {
+      trackToolOpen("budget-estimator");
+      assert.equal(events.length, 1);
+    },
+    { storage: { "cookie-consent": "custom", "cookie-consent-settings": '{"analytics":true,"marketing":false}' } }
+  );
+});
 
 test("party size is coarsened, never an exact count", () => {
   assert.equal(partySizeBand(1), "1");
@@ -78,15 +113,13 @@ test("tool_open carries a name, a locale and a path — and nothing else", () =>
 });
 
 test("Bengali routes are reported as bn", () => {
-  const g = globalThis as unknown as { window?: { location: { pathname: string } } };
-  const events: Pushed[] = [];
-  g.window = {
-    dataLayer: { push: (e: Pushed) => events.push(e) } as unknown as Pushed[],
-    location: { pathname: "/bn/tools/currency-converter" },
-  } as unknown as { location: { pathname: string } };
-  trackToolOpen("currency-converter");
-  assert.equal(events[0].locale, "bn");
-  delete g.window;
+  withWindow(
+    (events) => {
+      trackToolOpen("currency-converter");
+      assert.equal(events[0].locale, "bn");
+    },
+    { pathname: "/bn/tools/currency-converter" }
+  );
 });
 
 test("tool_result sends only the allowed coarse fields", () => {

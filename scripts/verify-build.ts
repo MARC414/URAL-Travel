@@ -2,6 +2,8 @@ import { getTravellerCheck } from "../src/utils/travellerChecks";
 import { FLIGHT_WHITE_LABEL } from "../src/utils/flightSearch";
 import { resolveBookingCtaUrl } from "../src/utils/bookingCta";
 import { checkArticlePresentation } from "./articlePresentationChecks";
+import { checkEvisaIntegration } from "./evisaChecks";
+import { resolveBlogAffiliateUrl } from "../src/utils/blogAffiliate";
 import { prepareSiteSearchIndex, searchSite, type SiteSearchEntry } from "../src/utils/siteSearch";
 import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
 import { DESTINATION_HERO_IMAGES } from "../src/data/destinationHeroImages";
@@ -56,7 +58,12 @@ import {
   TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS,
   TRAVELPAYOUTS_REFERRAL_SUB_IDS,
   TRAVELPAYOUTS_REFERRAL_URL,
+  BLOG_AFFILIATE_CTA_DISCLOSURE,
+  BLOG_FLIGHTS_PAGE_CTA_NOTE,
+  MultiPartnerBlogCallout,
+  PartnerLinkButton,
   buildTravelpayoutsReferralUrl,
+  isSameOriginCtaHref,
   resolvePartnerUrl,
   sanitizeExpiredPromoText,
 } from "../src/components/AffiliatePartners";
@@ -82,12 +89,13 @@ import {
   DESTINATION_RELATED_BLOG_SLUGS,
 } from "../src/data/destinationResources";
 import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
-import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogIndex.generated";
+import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogSeo.generated";
 import { BLOG_BODY } from "../src/data/blogContent";
 import { blogCategoryFilterIds } from "../src/utils/blogCategories";
 import { dhakaCalendarDate, isPublicationTimeReached, loadScheduledBlogPosts } from "./scheduledPosts";
 import {
   BENGALI_BLOG_OVERRIDES,
+  getFeaturedGrowthTopics,
   getLocalizedBlogs,
   getLocalizedCosts,
   getLocalizedDestinations,
@@ -96,6 +104,13 @@ import {
   getLocalizedHotels,
   getLocalizedVisas,
 } from "../src/data/bengaliContent";
+import {
+  ENGLISH_FEATURED_GROWTH_TOPICS,
+  HOME_FEATURED_BLOG_META,
+} from "../src/data/homeFeaturedBlogMeta";
+import { getBlogCoverImage } from "../src/utils/blogCoverImages";
+import { getBlogAeoSnippet50Words } from "../src/utils/blogSnippets";
+import { PRIORITY_SEO_COPY } from "../src/utils/seoCopy";
 import { EDITOR_PROFILE } from "../src/data/authorProfiles";
 import {
   getVisibleBlogFaqSection,
@@ -105,6 +120,7 @@ import { COMMONLY_MISREAD } from "../src/data/visaFreeData";
 import { LANDING_DESTINATION_FAQS, LANDING_VISA_FAQS } from "../src/utils/faqSchema";
 import { collectionPageSchema } from "../src/utils/schema";
 import { blogPublicationTimestamp, sortBlogsNewestFirst } from "../src/utils/blogOrdering";
+import { articleLinkPath } from "../src/utils/blogPresentation";
 import { BANKING_CLUSTER_NODES } from "../src/data/bankingHubData";
 import { BANKING_HUB_FAQS } from "../src/data/bankingHubFaqs";
 import { HOME_FAQS } from "../src/data/homeFaqs";
@@ -204,6 +220,7 @@ check(
     welcomeTransferEn.includes("not a confirmed booking") && welcomeTransferBn.includes("নিশ্চিত বুকিং") &&
     welcomeTransferEn.includes("drafts a message to URAL") && welcomeTransferBn.includes("খসড়া বার্তা তৈরি করে") &&
     welcomePickupSource.includes(WELCOME_PICKUPS_PARTNER_URL) &&
+    AFFILIATE_LINKS.welcomePickups === WELCOME_PICKUPS_PARTNER_URL &&
     welcomePickupSource.includes('data-affiliate-placement="travel_essentials_welcome_pickups_transfer"') &&
     welcomePickupSource.includes('rel="noopener noreferrer sponsored"') &&
     welcomePickupSource.includes("may earn a commission on qualifying bookings"),
@@ -358,18 +375,28 @@ const unwrapRenderedAnchors = (html: string) =>
  * positives twice — once from a `crossorigin` mention in markup, once from the
  * word "preconnect" in a comment).
  */
-function extractAffiliateLoader(html: string): string {
-  // Tolerate both names so a future re-install cannot silently empty this
-  // extraction (an empty string used to fail the behavioural block, but with a
-  // misleading "misbehaves" message).
-  const driveMarker = html.indexOf("function loadDrive");
-  const marker = driveMarker !== -1 ? driveMarker : html.indexOf("function loadEmerald");
+function extractInlineScriptContaining(html: string, anchor: string): string {
+  const marker = html.indexOf(anchor);
   if (marker === -1) return "";
   const open = html.lastIndexOf("<script", marker);
   const bodyStart = html.indexOf(">", open);
   const close = html.indexOf("</script>", marker);
   if (open === -1 || bodyStart === -1 || close === -1) return "";
   return html.slice(bodyStart + 1, close);
+}
+
+function extractAffiliateLoader(html: string): string {
+  // Tolerate both names so a future re-install cannot silently empty this
+  // extraction (an empty string used to fail the behavioural block, but with a
+  // misleading "misbehaves" message).
+  return (
+    extractInlineScriptContaining(html, "function loadDrive") ||
+    extractInlineScriptContaining(html, "function loadEmerald")
+  );
+}
+
+function extractGtmLoader(html: string): string {
+  return extractInlineScriptContaining(html, "function loadGTM");
 }
 
 // --- 1. Build output exists -------------------------------------------------
@@ -739,8 +766,8 @@ const retiredKkdayCampaignClean =
   !BLOG_SLUGS.includes(retiredKkdayCampaignSlug as (typeof BLOG_SLUGS)[number]) &&
   !BLOG_DATA.some((post) => post.slug === retiredKkdayCampaignSlug) &&
   !(retiredKkdayCampaignSlug in BLOG_BODY) &&
-  retiredKkdayRedirects.includes(`/blog/${retiredKkdayCampaignSlug}  /experiences?region=asia  301`) &&
-  retiredKkdayRedirects.includes(`/bn/blog/${retiredKkdayCampaignSlug}  /bn/experiences?region=asia  301`) &&
+  retiredKkdayRedirects.includes(`/blog/${retiredKkdayCampaignSlug}  /experiences/asia  301`) &&
+  retiredKkdayRedirects.includes(`/bn/blog/${retiredKkdayCampaignSlug}  /bn/experiences/asia  301`) &&
   !retiredKkdaySitemap.includes(retiredKkdayCampaignSlug) &&
   !retiredKkdayFeed.includes(retiredKkdayCampaignSlug);
 check(
@@ -1804,48 +1831,44 @@ check(
 // script without `crossorigin`, and consent defaults remain enforced below.
 const gtmPreconnectProblems: string[] = [];
 let gtmPreconnectRoutes = 0;
+const THIRD_PARTY_TRACKER_HOST_RE =
+  /googletagmanager\.com|google-analytics\.com|emrld\.ltd|tpemd\.com|evisas\.com/i;
 for (const file of distHtmlFiles) {
   const html = fs.readFileSync(file, "utf8");
   if (!html.includes('id="root"')) continue;
   gtmPreconnectRoutes++;
-  const gtmPreconnects = [...html.matchAll(/<link\b[^>]*>/g)]
+  const trackerPreconnects = [...html.matchAll(/<link\b[^>]*>/g)]
     .map((match) => match[0])
     .filter(
       (tag) =>
-        /\brel="preconnect"/.test(tag) &&
-        /\bhref="https:\/\/www\.googletagmanager\.com"/.test(tag)
+        /\brel="(?:preconnect|dns-prefetch)"/i.test(tag) &&
+        THIRD_PARTY_TRACKER_HOST_RE.test(tag)
     );
-  if (gtmPreconnects.length !== 1 || /\bcrossorigin(?:\s|=|>)/i.test(gtmPreconnects[0] ?? "")) {
+  const unconsentedNoscriptTracker = /<noscript>[\s\S]*?googletagmanager\.com\/ns\.html/i.test(html);
+  if (trackerPreconnects.length > 0 || unconsentedNoscriptTracker) {
     gtmPreconnectProblems.push(path.relative(DIST_DIR, file));
   }
 }
 const shellForPreconnectOrder = distIndexHtml ?? "";
 const shellLcpPreloadIndex = shellForPreconnectOrder.indexOf('<link rel="preload" as="image"');
 const shellFontPreloadIndex = shellForPreconnectOrder.indexOf('href="/fonts/inter-400-v1.woff2"');
-const shellGtmPreconnectIndex = shellForPreconnectOrder.indexOf(
-  'href="https://www.googletagmanager.com"'
-);
-const gtmPreconnectAfterCriticalPreloads =
-  shellLcpPreloadIndex !== -1 &&
-  shellFontPreloadIndex > shellLcpPreloadIndex &&
-  shellGtmPreconnectIndex > shellFontPreloadIndex;
+const criticalPreloadsOrdered =
+  shellLcpPreloadIndex !== -1 && shellFontPreloadIndex > shellLcpPreloadIndex;
 check(
   gtmPreconnectRoutes === fontChecked &&
     gtmPreconnectRoutes > 0 &&
     gtmPreconnectProblems.length === 0 &&
-    gtmPreconnectAfterCriticalPreloads,
+    criticalPreloadsOrdered,
   gtmPreconnectProblems.length === 0 &&
     gtmPreconnectRoutes === fontChecked &&
-    gtmPreconnectAfterCriticalPreloads
-    ? `all ${gtmPreconnectRoutes} prerendered app routes carry one no-cors GTM preconnect after LCP/font preloads`
-    : `GTM preconnect missing/duplicated/mismatched on ${gtmPreconnectProblems.length} route(s), ` +
-        `wrong shell ordering, or route count differs (${gtmPreconnectRoutes} vs ${fontChecked} font-checked)`
+    criticalPreloadsOrdered
+    ? `all ${gtmPreconnectRoutes} prerendered app routes emit zero unconsented third-party preconnects or noscript GTM beacons, with LCP image before font preloads`
+    : `unconsented third-party preconnect/noscript found on ${gtmPreconnectProblems.length} route(s), ` +
+        `wrong critical preload order, or route count differs (${gtmPreconnectRoutes} vs ${fontChecked} font-checked)`
 );
 
-// (2) consent default precedes the GTM loader, and defaults to denied.
-//     Whitespace-tolerant: the head script has been rewritten once already
-//     (binary -> granular CMP), and the guard must survive formatting changes
-//     while still catching a reorder or a default that stops denying.
+// (2) consent default precedes the GTM loader, defaults every optional category
+//     to 'denied', and respects per-category 'custom' choices alongside 'accepted'.
 if (distIndexHtml !== null) {
   const consentMatch = distIndexHtml.match(/gtag\(\s*'consent'\s*,\s*'default'/);
   const consentIdx = consentMatch?.index ?? -1;
@@ -1860,9 +1883,20 @@ if (distIndexHtml !== null) {
           ? "Consent Mode v2 default state ships before the GTM loader"
           : "Consent Mode default block moved AFTER the GTM loader (GDPR risk)"
   );
+  const optionalSignals = [
+    "ad_storage",
+    "ad_user_data",
+    "ad_personalization",
+    "analytics_storage",
+    "functionality_storage",
+    "personalization_storage",
+  ];
+  const allSignalsDefaultDenied = optionalSignals.every((sig) =>
+    new RegExp(`'${sig}':[^,\\n]*'denied'`).test(distIndexHtml)
+  );
   check(
-    /analytics_storage':[^,\n]*'denied'/.test(distIndexHtml),
-    "analytics_storage can default to denied in shipped HTML"
+    allSignalsDefaultDenied && /stored\s*===\s*'custom'/.test(distIndexHtml),
+    "Consent Mode v2 defaults all 6 optional signals to denied and honours granular custom settings"
   );
 }
 
@@ -2381,11 +2415,12 @@ check(
 
 const shellHtml = read(path.join(ROOT_DIR, "index.html")) ?? "";
 const gatingChecks: Array<[string, RegExp]> = [
-  ["no region escape hatch", /^(?!.*data-consent-region)(?!.*consent_region)[\s\S]*$/],
-  ["checks the marketing category, not just the banner choice", /cookie-consent-settings[\s\S]{0,120}marketing/],
+  ["no region or URL-param escape hatch", /^(?!.*data-consent-region)(?!.*consent_region)(?!.*tpverify)[\s\S]*$/],
+  ["checks the marketing category, not just the banner choice", /cookie-consent-settings[\s\S]{0,180}marketing===true/],
+  ["checks the analytics category before loading GTM", /cookie-consent-settings[\s\S]{0,180}analytics===true/],
   ["reads the consent choice before loading", /localStorage\.getItem\('cookie-consent'\)/],
   ["still defers off the LCP path (idle callback with a ceiling)", /requestIdleCallback[\s\S]{0,80}timeout/],
-  ["reacts to consent granted later", /ural:consent-updated/],
+  ["reacts to consent granted or withdrawn later", /ural:consent-updated/],
 ];
 const gateProblems = gatingChecks
   .filter(([, pattern]) => !pattern.test(shellHtml))
@@ -2393,18 +2428,21 @@ const gateProblems = gatingChecks
 check(
   gateProblems.length === 0,
   gateProblems.length === 0
-    ? `affiliate-script gate intact for every visitor (${gatingChecks.length} properties: unconditional, marketing category, deferred load, consent event)`
+    ? `central shell gates intact for every visitor (${gatingChecks.length} properties: zero bypasses, analytics + marketing category checks, deferred load, live consent sync)`
     : `consent gate broken/missing: ${gateProblems.join("; ")}`
 );
 
 // ...and the same invariant in the SHELL THAT SHIPS. The checks above read the
 // source; this one reads dist/index.html, so a build step that reintroduces the
-// region stamp (or drops the loader) cannot pass unnoticed.
+// region stamp, tpverify bypass, or drops either loader cannot pass unnoticed.
 check(
   distIndexHtml !== null &&
     !distIndexHtml.includes("data-consent-region") &&
-    distIndexHtml.includes("function marketingAllowed()"),
-  "the shipped dist/index.html carries the unconditional gate and no region stamp"
+    !distIndexHtml.includes("tpverify") &&
+    !distIndexHtml.includes("googletagmanager.com/ns.html") &&
+    distIndexHtml.includes("function marketingAllowed(") &&
+    distIndexHtml.includes("function analyticsAllowed("),
+  "the shipped dist/index.html enforces unconditional central analytics + marketing gates with no region stamp or URL bypass"
 );
 
 // --- 2f. Behavioural tests ---------------------------------------------------
@@ -2494,92 +2532,321 @@ check(
 
 // --- the affiliate loader's actual consent decision -------------------------
 const loaderSource = extractAffiliateLoader(shellHtml);
+const gtmLoaderSource = extractGtmLoader(shellHtml);
 
-interface LoaderRun {
-  injected: string[];
-  fireConsentUpdate: () => void;
+interface ScriptNodeStub {
+  async: boolean | number;
+  onerror: unknown;
+  src: string;
+  attrs: Record<string, string>;
+  parentNode: { removeChild: (el: ScriptNodeStub) => void } | null;
+  setAttribute: (k: string, v: string) => void;
 }
 
-function runAffiliateLoader(storage: Record<string, string>): LoaderRun {
+interface ShellLoaderRun {
+  injected: string[];
+  activeScripts: ScriptNodeStub[];
+  dataLayer: Array<Record<string, unknown>>;
+  fireConsentUpdate: (detail?: unknown) => void;
+  fireInteraction: () => void;
+}
+
+function runShellLoader(
+  source: string,
+  storage: Record<string, string>,
+  opts: { search?: string; throwOnStorage?: boolean } = {}
+): ShellLoaderRun {
   const injected: string[] = [];
-  const listeners: Array<() => void> = [];
-  const fakeWindow: any = {
-    addEventListener: (name: string, callback: () => void) => {
-      if (name === "ural:consent-updated") listeners.push(callback);
+  const activeScripts: ScriptNodeStub[] = [];
+  const dataLayer: Array<Record<string, unknown>> = [];
+  const consentListeners: Array<(ev?: { detail?: unknown }) => void> = [];
+  const interactionListeners: Array<() => void> = [];
+  const head = {
+    appendChild: (element: ScriptNodeStub) => {
+      element.parentNode = head;
+      injected.push(element.src);
+      activeScripts.push(element);
     },
-    // The loader schedules its first decision on an idle callback (2.5s
-    // ceiling). Running it synchronously here keeps these six cases about the
-    // consent decision, not about timer plumbing.
+    removeChild: (element: ScriptNodeStub) => {
+      const idx = activeScripts.indexOf(element);
+      if (idx !== -1) activeScripts.splice(idx, 1);
+      element.parentNode = null;
+    },
+  };
+  const fakeWindow: any = {
+    dataLayer,
+    location: {
+      pathname: "/",
+      search: opts.search ?? "",
+      href: `https://uraltravel.co.uk/${opts.search ?? ""}`,
+    },
+    addEventListener: (name: string, callback: (ev?: { detail?: unknown }) => void) => {
+      if (name === "ural:consent-updated") consentListeners.push(callback);
+      else if (name === "mousedown" || name === "scroll") interactionListeners.push(() => callback());
+    },
     requestIdleCallback: (callback: () => void) => callback(),
   };
   const fakeDocument: any = {
+    readyState: "complete",
+    title: "URAL Travel",
     addEventListener: () => {},
     querySelector: () => null,
-    // setAttribute is part of the Drive snippet Travelpayouts ships
-    // (data-cmp-ab="2"); the stub has to accept it or every case throws.
-    createElement: () => ({ async: false, onerror: null, src: "", setAttribute: () => {} }),
-    head: {
-      appendChild: (element: { src: string }) => {
-        injected.push(element.src);
-      },
+    createElement: (): ScriptNodeStub => {
+      const attrs: Record<string, string> = {};
+      return {
+        async: false,
+        onerror: null,
+        src: "",
+        attrs,
+        parentNode: null,
+        setAttribute: (k: string, v: string) => {
+          attrs[k] = v;
+        },
+      };
     },
+    head,
   };
   const fakeLocalStorage = {
-    getItem: (key: string) => (key in storage ? storage[key] : null),
+    getItem: (key: string) => {
+      if (opts.throwOnStorage) throw new Error("SecurityError: storage disabled");
+      return key in storage ? storage[key] : null;
+    },
   };
-  // The stub's requestIdleCallback is synchronous, so the loader takes its
-  // deferred branch and calls attempt() immediately - which is exactly the
-  // decision under test. No `location` on the stub window either, which proves
-  // the ?tpverify=1 verification hatch is opt-in and never a default.
   // eslint-disable-next-line no-new-func
-  new Function("window", "document", "localStorage", "location", loaderSource)(
+  new Function("window", "document", "localStorage", "location", source)(
     fakeWindow,
     fakeDocument,
     fakeLocalStorage,
-    { search: "" }
+    fakeWindow.location
   );
-  return { injected, fireConsentUpdate: () => listeners.forEach((callback) => callback()) };
+  return {
+    injected,
+    activeScripts,
+    dataLayer,
+    fireConsentUpdate: (detail?: unknown) =>
+      consentListeners.forEach((callback) => callback({ detail })),
+    fireInteraction: () => interactionListeners.forEach((callback) => callback()),
+  };
 }
 
 const loaderFailures: string[] = [];
 const EMRldUrl = "https://emrld.ltd/";
 
-function loaderCase(label: string, storage: Record<string, string>, expectInjected: boolean, afterConsent?: Record<string, string>) {
+function loaderCase(
+  label: string,
+  storage: Record<string, string>,
+  expectInjected: boolean,
+  afterConsent?: Record<string, string>,
+  opts?: { search?: string }
+) {
   try {
-    // Same object reference on purpose: the "granted later" case mutates this
-    // storage after the loader has started, and localStorage is read live.
-    const run = runAffiliateLoader(storage);
+    const run = runShellLoader(loaderSource, storage, opts);
     if (expectInjected && !run.injected.some((url) => url.startsWith(EMRldUrl))) {
       throw new Error("script was NOT injected but should have been");
     }
     if (!expectInjected && run.injected.length > 0) {
       throw new Error(`script was injected without marketing consent (${run.injected[0]})`);
     }
+    if (expectInjected && run.activeScripts[0]?.attrs["data-ural-consent"] !== "marketing") {
+      throw new Error("injected Drive script missing data-ural-consent=\"marketing\"");
+    }
     if (afterConsent) {
       Object.assign(storage, afterConsent);
       run.fireConsentUpdate();
-      const injectedLater = run.injected.some((url) => url.startsWith(EMRldUrl));
-      if (!injectedLater) throw new Error("script did not start after ural:consent-updated");
+      if (!run.injected.some((url) => url.startsWith(EMRldUrl))) {
+        throw new Error("script did not start after ural:consent-updated");
+      }
       if (run.injected.length !== 1) throw new Error(`script injected ${run.injected.length} times`);
+      // Withdrawal must detach the injected script immediately.
+      storage["cookie-consent"] = "declined";
+      run.fireConsentUpdate({ status: "declined" });
+      if (run.activeScripts.length !== 0) {
+        throw new Error("Drive script remained attached after consent withdrawal");
+      }
     }
   } catch (error) {
     loaderFailures.push(`${label}: ${(error as Error).message}`);
   }
 }
 
-loaderCase("no consent recorded yet", {}, false, { "cookie-consent": "accepted" });
+loaderCase("no consent recorded yet -> grant -> withdraw", {}, false, { "cookie-consent": "accepted" });
 loaderCase("Accept all", { "cookie-consent": "accepted" }, true);
 loaderCase("custom with marketing on", { "cookie-consent": "custom", "cookie-consent-settings": '{"marketing":true}' }, true);
 loaderCase("custom with marketing off", { "cookie-consent": "custom", "cookie-consent-settings": '{"marketing":false}' }, false);
+loaderCase("custom with analytics-only", { "cookie-consent": "custom", "cookie-consent-settings": '{"analytics":true,"functionality":true,"marketing":false}' }, false);
 loaderCase("declined", { "cookie-consent": "declined" }, false);
 loaderCase("unreadable settings", { "cookie-consent": "custom", "cookie-consent-settings": "not json" }, false);
+loaderCase("?tpverify=1 cannot bypass missing consent", {}, false, undefined, { search: "?tpverify=1" });
+try {
+  const privateRun = runShellLoader(loaderSource, {}, { throwOnStorage: true });
+  if (privateRun.injected.length !== 0) throw new Error("loaded with blocked storage");
+  privateRun.fireConsentUpdate({ status: "custom", settings: { marketing: true, analytics: false } });
+  if (privateRun.activeScripts.length !== 1) throw new Error("event.detail grant failed in private mode");
+  privateRun.fireConsentUpdate({ status: "custom", settings: { marketing: false, analytics: true } });
+  if (privateRun.activeScripts.some(() => true)) throw new Error("event.detail withdrawal failed in private mode");
+} catch (error) {
+  loaderFailures.push(`private-mode detail sync: ${(error as Error).message}`);
+}
 
 check(
   loaderSource.length > 0 && loaderFailures.length === 0,
   loaderFailures.length === 0
-    ? "affiliate loader gates on marketing consent in all cases (6: none yet -> injected on grant, accept-all, custom+marketing, custom-without, declined, unreadable)"
+    ? "affiliate Drive loader strictly enforces marketing consent (9 cases: unset->grant->withdraw, accept-all, custom+marketing, custom-off, analytics-only, declined, corrupt JSON, no ?tpverify bypass, private-mode detail)"
     : `affiliate loader misbehaves: ${loaderFailures.join("; ")}`
 );
+
+// --- the GTM loader's actual consent decision -------------------------------
+const gtmFailures: string[] = [];
+const GTM_URL = "https://www.googletagmanager.com/gtm.js?id=GTM-TMPVL82B";
+
+function gtmCase(
+  label: string,
+  storage: Record<string, string>,
+  expectInjected: boolean,
+  testLifecycle = false
+) {
+  try {
+    const run = runShellLoader(gtmLoaderSource, storage);
+    run.fireInteraction();
+    if (expectInjected) {
+      if (run.injected.length !== 1 || run.injected[0] !== GTM_URL) {
+        throw new Error(`expected one GTM script, got ${JSON.stringify(run.injected)}`);
+      }
+      if (run.activeScripts[0]?.attrs["data-ural-consent"] !== "analytics") {
+        throw new Error("GTM script missing data-ural-consent=\"analytics\"");
+      }
+      if (run.dataLayer.filter((e) => e.event === "page_view").length !== 1) {
+        throw new Error("expected exactly one initial page_view when analytics allowed");
+      }
+    } else {
+      if (run.injected.length > 0) {
+        throw new Error(`GTM loaded without analytics consent (${run.injected[0]})`);
+      }
+      if (run.dataLayer.length > 0) {
+        throw new Error(`dataLayer pushed without analytics consent (${JSON.stringify(run.dataLayer)})`);
+      }
+    }
+    if (testLifecycle) {
+      storage["cookie-consent"] = "accepted";
+      run.fireConsentUpdate({ status: "accepted" });
+      if (run.activeScripts.length !== 1 || run.dataLayer.filter((e) => e.event === "page_view").length !== 1) {
+        throw new Error("GTM or initial page_view did not fire on analytics consent grant");
+      }
+      storage["cookie-consent"] = "declined";
+      run.fireConsentUpdate({ status: "declined" });
+      if (run.activeScripts.some(() => true)) {
+        throw new Error("GTM script remained attached after analytics consent withdrawal");
+      }
+    }
+  } catch (error) {
+    gtmFailures.push(`${label}: ${(error as Error).message}`);
+  }
+}
+
+gtmCase("unset -> interaction blocked -> grant loads -> withdraw detaches", {}, false, true);
+gtmCase("Accept all", { "cookie-consent": "accepted" }, true);
+gtmCase("custom with analytics on", { "cookie-consent": "custom", "cookie-consent-settings": '{"analytics":true,"marketing":false}' }, true);
+gtmCase("custom with marketing-only (analytics off)", { "cookie-consent": "custom", "cookie-consent-settings": '{"analytics":false,"marketing":true,"functionality":true}' }, false);
+gtmCase("declined", { "cookie-consent": "declined" }, false);
+gtmCase("corrupt custom JSON", { "cookie-consent": "custom", "cookie-consent-settings": "{broken" }, false);
+try {
+  const privateRun = runShellLoader(gtmLoaderSource, {}, { throwOnStorage: true });
+  privateRun.fireInteraction();
+  if (privateRun.injected.length !== 0) throw new Error("GTM loaded with blocked storage");
+  privateRun.fireConsentUpdate({ status: "custom", settings: { analytics: true, marketing: false } });
+  if (privateRun.activeScripts.length !== 1) throw new Error("GTM did not load from event.detail in private mode");
+  privateRun.fireConsentUpdate({ status: "declined" });
+  if (privateRun.activeScripts.some(() => true)) throw new Error("GTM did not detach in private mode");
+} catch (error) {
+  gtmFailures.push(`private-mode detail sync: ${(error as Error).message}`);
+}
+
+check(
+  gtmLoaderSource.length > 0 && gtmFailures.length === 0,
+  gtmFailures.length === 0
+    ? "GTM/GA4 loader strictly enforces analytics consent (7 cases: unset+interaction blocked->grant->withdraw, accept-all, analytics-only, marketing-only blocked, declined, corrupt JSON, private-mode detail)"
+    : `GTM loader misbehaves: ${gtmFailures.join("; ")}`
+);
+
+// --- 2f-bis. Sitewide centralized consent architecture guards ---------------
+{
+  const srcRoot = path.join(ROOT_DIR, "src");
+  const collectSrcFiles = (dir: string): string[] => {
+    const out: string[] = [];
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) out.push(...collectSrcFiles(full));
+      else if (/\.(ts|tsx)$/.test(entry.name)) out.push(full);
+    }
+    return out;
+  };
+  const allSrcFiles = collectSrcFiles(srcRoot);
+  const directStorageViolations: string[] = [];
+  const ungatedEmbedViolations: string[] = [];
+  // Only Cloudflare Turnstile (strictly necessary anti-bot form protection) and
+  // first-party JSON-LD (<script type="application/ld+json">, no src) may create
+  // a script/iframe outside a central `useConsent(...)` gate.
+  const STRICTLY_NECESSARY_SCRIPT_ALLOWLIST = new Set([
+    "src/components/TurnstileWidget.tsx",
+    "src/hooks/useSeoMeta.ts",
+  ]);
+  for (const file of allSrcFiles) {
+    const rel = path.relative(ROOT_DIR, file).replace(/\\/g, "/");
+    const raw = fs.readFileSync(file, "utf8");
+    const codeOnly = raw
+      .replace(/\/\*[\s\S]*?\*\//g, "")
+      .replace(/^\s*\/\/.*$/gm, "");
+    if (
+      rel !== "src/utils/consent.ts" &&
+      (/\blocalStorage\b/.test(codeOnly) || /\bdocument\.cookie\b/.test(codeOnly))
+    ) {
+      directStorageViolations.push(rel);
+    }
+    if (
+      !STRICTLY_NECESSARY_SCRIPT_ALLOWLIST.has(rel) &&
+      (/createElement\(\s*["']script["']\s*\)/.test(codeOnly) || /<iframe\b/.test(codeOnly))
+    ) {
+      const usesCentralConsent =
+        /\buseConsent\s*\(\s*["'](marketing|analytics|functionality)["']\s*\)/.test(codeOnly) &&
+        /data-ural-consent/.test(raw);
+      if (!usesCentralConsent) ungatedEmbedViolations.push(rel);
+    }
+    if (/\bfunction\s+ScriptWidget\b/.test(codeOnly)) {
+      ungatedEmbedViolations.push(`${rel} (legacy ungated ScriptWidget)`);
+    }
+  }
+  check(
+    directStorageViolations.length === 0,
+    directStorageViolations.length === 0
+      ? "zero direct localStorage calls outside src/utils/consent.ts (all consent & optional storage centralized)"
+      : `direct localStorage bypass outside src/utils/consent.ts: ${directStorageViolations.join(", ")}`
+  );
+  check(
+    ungatedEmbedViolations.length === 0,
+    ungatedEmbedViolations.length === 0
+      ? "every third-party script injector and iframe in src/ is gated by central useConsent() + data-ural-consent (allowlist: Turnstile anti-bot & local JSON-LD)"
+      : `ungated third-party script/iframe found: ${ungatedEmbedViolations.join(", ")}`
+  );
+
+  const bannerSrc = read(path.join(ROOT_DIR, "src", "components", "ConsentBanner.tsx")) ?? "";
+  const privacySrc = read(path.join(ROOT_DIR, "src", "components", "PrivacyPolicyPage.tsx")) ?? "";
+  const consentUiChecks: Array<[string, boolean]> = [
+    ["banner defaults to DEFAULT_CONSENT_SETTINGS (no pre-ticked optional toggles)", bannerSrc.includes("DEFAULT_CONSENT_SETTINGS") && !/analytics:\s*true,\s*marketing:\s*false/.test(bannerSrc)],
+    ["banner ships equal 1-click Reject All & Accept All (EN + BN)", bannerSrc.includes('"Reject All"') && bannerSrc.includes('"সব প্রত্যাখ্যান করুন"') && bannerSrc.includes('"Accept All"') && bannerSrc.includes('"সব গ্রহণ করুন"')],
+    ["banner syncs via subscribeConsent + readConsentState", bannerSrc.includes("subscribeConsent") && bannerSrc.includes("readConsentState") && bannerSrc.includes("writeConsentChoice")],
+    ["banner switches carry keyboard peer-focus-visible rings and accessible labels", bannerSrc.includes("peer-focus-visible:ring-2") && bannerSrc.includes('aria-labelledby="consent-label-marketing"') && bannerSrc.includes('aria-labelledby="consent-label-analytics"') && bannerSrc.includes('aria-labelledby="consent-label-functionality"')],
+    ["banner removes inaccurate BN 'no personal data' claim and discloses IP + partner tools", !bannerSrc.includes("কোনো ব্যক্তিগত তথ্য") && bannerSrc.includes("IP address") && bannerSrc.includes("eVisas") && bannerSrc.includes("Tiqets") && bannerSrc.includes("AirHelp") && bannerSrc.includes("Welcome Pickups")],
+    ["banner sits above z-50 floating widgets, gives 44px touch targets and restores focus on close", bannerSrc.includes("z-[70]") && bannerSrc.includes("restoreConsentFocus") && bannerSrc.includes("min-h-11 min-w-11")],
+    ["privacy control center syncs via central consent.ts with labelled focus-visible checkboxes and accurate cookie/storage keys", privacySrc.includes("subscribeConsent") && privacySrc.includes("writeConsentChoice") && privacySrc.includes("CONSENT_CATEGORY_LABELS.marketing") && privacySrc.includes('htmlFor="privacy-consent-marketing"') && privacySrc.includes('htmlFor="privacy-consent-analytics"') && privacySrc.includes('htmlFor="privacy-consent-functionality"') && privacySrc.includes("focus-visible:ring-2") && privacySrc.includes("cookie-consent-settings") && privacySrc.includes("ural_lang") && privacySrc.includes("ural_dac_predeparture_checked_v1") && !privacySrc.includes("ural-lang") && !privacySrc.includes("ural-currency")],
+  ];
+  const consentUiFailures = consentUiChecks.filter(([, ok]) => !ok).map(([msg]) => msg);
+  check(
+    consentUiFailures.length === 0,
+    consentUiFailures.length === 0
+      ? "ConsentBanner and PrivacyPolicyPage share central consent state, equal Reject/Accept buttons, canonical EN/BN labels, honest IP disclosures, and keyboard focus/label accessibility"
+      : `consent UI regression: ${consentUiFailures.join("; ")}`
+  );
+}
 
 // --- 2g. Outbound click analytics: one event, one label key ------------------
 //
@@ -2689,13 +2956,28 @@ check(
     "creator-resource copy removes unsupported $100/80+ and unlisted WayAway claims, points to current official terms and leaves referral URLs in the disclosed callout"
   );
 
-  // (b), behaviourally: run the real listener against a stub DOM.
+  // (b), behaviourally: run the real listener against a stub DOM under both
+  // unconsented/declined/marketing-only states (must emit ZERO events) and
+  // analytics-consented states (must emit exact normalized payloads).
   const analytics = await import("../src/utils/analytics");
-  const fire = (href: string, text: string, rel: string, affiliatePlacement?: string) => {
+  const fire = (
+    href: string,
+    text: string,
+    rel: string,
+    affiliatePlacement?: string,
+    ariaLabel?: string,
+    storage: Record<string, string> = { "cookie-consent": "accepted" }
+  ) => {
     let handler: ((event: unknown) => void) | null = null;
     const previousWindow = (globalThis as any).window;
     const previousDocument = (globalThis as any).document;
-    (globalThis as any).window = { dataLayer: [], location: { pathname: "/blog/travel-creator-resources" } };
+    (globalThis as any).window = {
+      dataLayer: [],
+      location: { pathname: "/blog/travel-creator-resources" },
+      localStorage: {
+        getItem: (k: string) => (k in storage ? storage[k] : null),
+      },
+    };
     (globalThis as any).document = {
       addEventListener: (name: string, callback: (event: unknown) => void) => {
         if (name === "click") handler = callback;
@@ -2705,7 +2987,7 @@ check(
     try {
       analytics.initGlobalClickTracking();
       (handler as unknown as (event: unknown) => void)({
-        target: { closest: () => ({ dataset: affiliatePlacement ? { affiliatePlacement } : undefined, getAttribute: (key: string) => (key === "href" ? href : key === "rel" ? rel : null), textContent: text }) },
+        target: { closest: () => ({ dataset: affiliatePlacement ? { affiliatePlacement } : undefined, getAttribute: (key: string) => (key === "href" ? href : key === "rel" ? rel : key === "aria-label" ? ariaLabel : null), textContent: text }) },
       });
       return ((globalThis as any).window.dataLayer as Record<string, unknown>[]).filter(
         (entry) => typeof entry.event === "string"
@@ -2717,6 +2999,19 @@ check(
   };
 
   const clickFailures: string[] = [];
+  // Pre-consent, declined, and marketing-only states must emit ZERO analytics events.
+  for (const [stateName, store] of [
+    ["unset", {} as Record<string, string>],
+    ["declined", { "cookie-consent": "declined" } as Record<string, string>],
+    ["marketing-only", { "cookie-consent": "custom", "cookie-consent-settings": '{"marketing":true,"analytics":false}' } as Record<string, string>],
+  ] as const) {
+    if (fire("https://tiqets.tpo.li/abc123", "Book Tiqets tickets", "noopener noreferrer sponsored", undefined, undefined, store).length !== 0) {
+      clickFailures.push(`affiliate click leaked to dataLayer when consent=${stateName}`);
+    }
+    if (fire("https://wa.me/8801784385335", "WhatsApp desk", "", undefined, undefined, store).length !== 0) {
+      clickFailures.push(`whatsapp click leaked to dataLayer when consent=${stateName}`);
+    }
+  }
   const referralClicks = fire(buildTravelpayoutsReferralUrl("travel-creator-resources"), "Explore Travelpayouts", "noopener noreferrer sponsored");
   if (referralClicks.length !== 1) {
     clickFailures.push(`referral click produced ${referralClicks.length} events, expected 1`);
@@ -2744,6 +3039,13 @@ check(
   if (placementClicks.length !== 1 || placementClicks[0].affiliate_placement !== "hotel_guide_bangkok_klook_collection") {
     clickFailures.push("affiliate click lost first-party placement scope");
   }
+  const evisaClicks = fire("https://evisas.com/?ref=uraltravel&sid=dubai", "", "noopener noreferrer sponsored", "evisas_home_banner", "Check UAE visa options");
+  if (evisaClicks.length !== 1 || evisaClicks[0].partner_name !== "eVisas" || evisaClicks[0].link_label !== "Check UAE visa options" || evisaClicks[0].affiliate_placement !== "evisas_home_banner") {
+    clickFailures.push("eVisas image click lost its partner, accessible label or placement, or fired twice");
+  }
+  if (fire("https://evisas.com/affiliate", "Programme source", "noopener noreferrer").length !== 0) {
+    clickFailures.push("an editorial eVisas source was counted as a sponsored referral");
+  }
   const whatsappClicks = fire("https://wa.me/8801784385335", "WhatsApp desk", "");
   if (whatsappClicks.length !== 1 || whatsappClicks[0].link_label !== "WhatsApp desk") {
     clickFailures.push("whatsapp click lost link_label");
@@ -2762,7 +3064,7 @@ check(
   check(
     clickFailures.length === 0,
     clickFailures.length === 0
-      ? "outbound clicks dispatch one event each with the right name, referral SubID and optional first-party placement, while internal links emit zero affiliate events (8 cases)"
+      ? "outbound clicks dispatch one event each with the right name, referral SubID and placement; eVisas image links retain their label and editorial/internal links emit zero affiliate events"
       : `outbound click analytics misbehaves: ${clickFailures.join("; ")}`
   );
 }
@@ -3179,8 +3481,8 @@ if (sitemap) {
   );
   check(
     !!londonEnHtml && !!londonBnHtml &&
-      londonEnHtml.includes("/experiences?region=west&amp;city=london") &&
-      londonBnHtml.includes("/bn/experiences?region=west&amp;city=london") &&
+      londonEnHtml.includes("/experiences/europe?city=london") &&
+      londonBnHtml.includes("/bn/experiences/europe?city=london") &&
       londonBnHtml.includes('"inLanguage":"bn-BD"') &&
       londonBnHtml.includes("আপনার পছন্দের লন্ডন দর্শনীয় স্থান") &&
       !londonEnHtml.includes('"@type":"Offer"') &&
@@ -3212,8 +3514,8 @@ if (sitemap) {
   );
   check(
     !!italyEnHtml && !!italyBnHtml &&
-      italyEnHtml.includes("/experiences?region=west&amp;city=rome-italy") &&
-      italyBnHtml.includes("/bn/experiences?region=west&amp;city=rome-italy") &&
+      italyEnHtml.includes("/experiences/europe?city=rome-italy") &&
+      italyBnHtml.includes("/bn/experiences/europe?city=rome-italy") &&
       italyBnHtml.includes('"inLanguage":"bn-BD"') &&
       !italyEnHtml.includes('"@type":"Offer"') &&
       !italyBnHtml.includes('"@type":"Offer"'),
@@ -3244,8 +3546,8 @@ if (sitemap) {
   );
   check(
     !!parisEnHtml && !!parisBnHtml &&
-      parisEnHtml.includes("/experiences?region=west&amp;city=paris") &&
-      parisBnHtml.includes("/bn/experiences?region=west&amp;city=paris") &&
+      parisEnHtml.includes("/experiences/europe?city=paris") &&
+      parisBnHtml.includes("/bn/experiences/europe?city=paris") &&
       parisBnHtml.includes('"inLanguage":"bn-BD"') &&
       !parisEnHtml.includes('"@type":"Offer"') &&
       !parisBnHtml.includes('"@type":"Offer"'),
@@ -3276,8 +3578,8 @@ if (sitemap) {
   );
   check(
     !!newYorkEnHtml && !!newYorkBnHtml &&
-      newYorkEnHtml.includes("/experiences?region=west&amp;city=new-york") &&
-      newYorkBnHtml.includes("/bn/experiences?region=west&amp;city=new-york") &&
+      newYorkEnHtml.includes("/experiences/europe?city=new-york") &&
+      newYorkBnHtml.includes("/bn/experiences/europe?city=new-york") &&
       newYorkBnHtml.includes('"inLanguage":"bn-BD"') &&
       !newYorkEnHtml.includes('"@type":"Offer"') &&
       !newYorkBnHtml.includes('"@type":"Offer"'),
@@ -3685,17 +3987,28 @@ if (sitemap) {
   const umrahCostBn = BENGALI_BLOG_OVERRIDES[umrahCostSlug];
   const umrahCostEnHtml = read(path.join(DIST_DIR, "blog", `${umrahCostSlug}.html`)) ?? "";
   const umrahCostBnHtml = read(path.join(DIST_DIR, "bn", "blog", `${umrahCostSlug}.html`)) ?? "";
+  const umrahCostEnFlightTag = umrahCostEnHtml.match(
+    /<a\b[^>]*href="\/flights\?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost[^"]*"[^>]*>/
+  )?.[0];
+  const umrahCostBnFlightTag = umrahCostBnHtml.match(
+    /<a\b[^>]*href="\/bn\/flights\?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost[^"]*"[^>]*>/
+  )?.[0];
+  const escapeAttrOrText = (value: string) =>
+    value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   const umrahCostOk =
     umrahCostEn?.affiliateCTA?.provider === "aviasales" &&
     umrahCostBn?.affiliateCTA?.provider === "aviasales" &&
     umrahCostEnHtml.includes(umrahCostEn.affiliateCTA?.headline ?? "—missing—") &&
-    umrahCostEnHtml.includes("/flights?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost") &&
+    !!umrahCostEnFlightTag &&
+    !/\brel="[^"]*sponsored|\btarget="_blank"/.test(umrahCostEnFlightTag) &&
+    umrahCostEnHtml.includes(escapeAttrOrText(BLOG_FLIGHTS_PAGE_CTA_NOTE.en)) &&
     umrahCostBnHtml.includes(umrahCostBn.affiliateCTA?.headline ?? "—missing—") &&
-    umrahCostBnHtml.includes("/bn/flights?fsrc=post_umrah_hajj_guide_bangladesh_nusuk_bdt_cost") &&
-    umrahCostBnHtml.includes('rel="noopener noreferrer sponsored"');
+    !!umrahCostBnFlightTag &&
+    !/\brel="[^"]*sponsored|\btarget="_blank"/.test(umrahCostBnFlightTag) &&
+    umrahCostBnHtml.includes(escapeAttrOrText(BLOG_FLIGHTS_PAGE_CTA_NOTE.bn));
   check(
     umrahCostOk,
-    "the Umrah Cost guide carries its matched live-fare next step (aviasales affiliateCTA) to our own /flights page, with the per-article placement id, in EN and BN"
+    "the Umrah Cost guide carries its matched first-party live-fare next step to /flights (with placement id, no rel=sponsored/target=_blank, and first-party disclosure) in EN and BN"
   );
 
   // The article CTA now stops on our own /flights page. That page only earns
@@ -4402,7 +4715,7 @@ if (rss) {
       : `blog body text stays out of the ${new Set([...eagerScripts, ...eagerPreloads]).size} eager chunk(s) on non-blog pages`
   );
 
-  // Homepage budget: keep the complete entry graph below 205 KB gzip. The
+  // Homepage budget: keep the complete entry graph below the ceiling below. The
   // large content-data module must stay route-triggered, not appear in the
   // module's static script or preload list.
   //
@@ -4419,13 +4732,12 @@ if (rss) {
   // curated planning links to the generated post data, which the homepage blog
   // index imports eagerly (measured 210.6 KB gzip). Follow-up worth doing:
   // move scheduled-post metadata behind the lazy route-data chunk.
-  // 212 KB was the ceiling through 2026-11-12. The 2026-11-13 scheduled post
-  // crossed it at HEAD (212.7 KB measured on a clean checkout of 672d8a2 with no
-  // working-tree changes), so the ceiling moved to 215 KB rather than leaving the
-  // gate permanently red. The white-label change adds 0.2 KB on top of that. The
-  // real fix is to stop paying for blog metadata in the entry graph; until then
-  // this number is the tripwire, and it should come back down when that lands.
-  const EAGER_JS_BUDGET_KB = 215;
+  // Lowered from 215 KB back to 185 KB on 16 November 2026 after decoupling
+  // blog-only SEO copy, AEO snippets, cover images, cover alt text, FAQ/HowTo
+  // extractors and generated scheduled-blog metadata into lazy blog-only chunks
+  // (measured 166.5 KB gzip today and 166.5 KB with --include-unpublished; the
+  // entry graph now only grows by ~18 bytes gzip of slug text per new post).
+  const EAGER_JS_BUDGET_KB = 185;
   const contentDataIsEager = [...new Set([...eagerScripts, ...eagerPreloads])].some((url) =>
     /content-data/i.test(url)
   );
@@ -4446,14 +4758,66 @@ if (rss) {
     !klookModuleIsEager,
     "Klook deep-link helpers and hotel-pick data stay out of the homepage's eager script/preload graph"
   );
-  const globalSearchDialogIsEager = eagerAssetUrls.some((url) => /GlobalSiteSearch/i.test(url));
-  const searchIndexIsEager = (read(path.join(DIST_DIR, "index.html")) ?? "").includes("site-search-index.json");
-  check(
-    !globalSearchDialogIsEager && !searchIndexIsEager,
-    "the search dialog chunk and bilingual index stay out of the homepage's eager download graph"
+  const LAZY_BLOG_ONLY_SOURCE_SUFFIXES = [
+    "/src/utils/blogRouteMeta.ts",
+    "/src/utils/seoCopy.ts",
+    "/src/utils/blogAltText.ts",
+    "/src/utils/blogSnippets.ts",
+    "/src/utils/blogStructuredData.ts",
+    "/src/utils/blogCoverImages.ts",
+    "/src/utils/blogAeoPanel.ts",
+    "/src/data/blogAeoStaticPanels.ts",
+    "/src/data/scheduledBlogSeo.generated.ts",
+    "/src/data/scheduledBlogAeoPanels.generated.ts",
+    "/src/data/scheduledBlogPosts.generated.ts",
+    "/src/data/scheduledBlogBodies.generated.ts",
+    "/src/data/scheduledBengaliBlogs.generated.ts",
+  ];
+  const findLazyBlogModulesInSources = (sources: string[]): string[] =>
+    LAZY_BLOG_ONLY_SOURCE_SUFFIXES.filter((suffix) =>
+      sources.some((source) => source.replace(/\\/g, "/").endsWith(suffix))
+    );
+  const eagerSourcesList = eagerAssetUrls.flatMap((url) => {
+    const sourceMap = read(path.join(DIST_DIR, `${url.replace(/^\//, "")}.map`));
+    if (!sourceMap) return LAZY_BLOG_ONLY_SOURCE_SUFFIXES;
+    return (JSON.parse(sourceMap).sources ?? []) as string[];
+  });
+  const leakedBlogMetaModules = findLazyBlogModulesInSources(eagerSourcesList);
+  const featuredSlugSet = new Set(Object.keys(HOME_FEATURED_BLOG_META));
+  const nonFeaturedProbeSlug =
+    BLOG_DATA.find((post) => !featuredSlugSet.has(post.slug) && PRIORITY_SEO_COPY[`/blog/${post.slug}`])
+      ?.slug ?? "";
+  const scheduledAltProbe = Object.entries(SCHEDULED_BLOG_ALT_TEXT).find(
+    ([slug, entry]) => !featuredSlugSet.has(slug) && (entry.en?.length ?? 0) >= 35
   );
-  const contentDataFile = jsChunks.find((file) => /^content-data-.*\.js$/.test(file));
-  const contentDataHref = contentDataFile ? `/assets/${contentDataFile}` : null;
+  const blogDataProbes: Array<[string, string]> = [
+    [
+      "blog SEO description",
+      nonFeaturedProbeSlug ? PRIORITY_SEO_COPY[`/blog/${nonFeaturedProbeSlug}`]?.description ?? "" : "",
+    ],
+    [
+      "blog AEO snippet",
+      nonFeaturedProbeSlug ? getBlogAeoSnippet50Words(nonFeaturedProbeSlug, false, "") : "",
+    ],
+    [
+      "blog cover alt text",
+      nonFeaturedProbeSlug ? CURATED_BLOG_SCENES[nonFeaturedProbeSlug]?.en ?? "" : "",
+    ],
+    ["scheduled blog cover alt text", scheduledAltProbe?.[1].en ?? ""],
+  ];
+  const leakedBlogDataProbes = blogDataProbes
+    .filter(([, probe]) => probe.length >= 30 && eagerCode.includes(probe))
+    .map(([label]) => label);
+  check(
+    leakedBlogMetaModules.length === 0 && leakedBlogDataProbes.length === 0,
+    leakedBlogMetaModules.length === 0 && leakedBlogDataProbes.length === 0
+      ? "blog-only SEO, snippet, cover-image, cover-alt, FAQ/HowTo and AEO modules stay out of the eager download graph"
+      : `blog-only modules/data leaked into eager chunks: modules=[${leakedBlogMetaModules.join(", ")}] probes=[${leakedBlogDataProbes.join(", ")}]`
+  );
+  check(
+    findLazyBlogModulesInSources(["../../src/utils/seoCopy.ts", "../../src/utils/blogSnippets.ts"]).length === 2,
+    "blog-metadata eager-bundle guard catches reintroduced blog-only modules (negative control)"
+  );
   const routePathFromHtmlFile = (file: string): string => {
     const segments = path.relative(DIST_DIR, file).split(path.sep);
     if (segments[0] === "bn") segments.shift();
@@ -4463,6 +4827,81 @@ if (rss) {
     }
     return `/${segments.filter(Boolean).join("/")}`;
   };
+  const blogMetaFile = jsChunks.find((file) => /^blogRouteMeta-.*\.js$/.test(file));
+  const blogMetaHref = blogMetaFile ? `/assets/${blogMetaFile}` : null;
+  const blogRouteHtmlFiles = distHtmlFiles.filter((file) =>
+    /^\/blog(?:\/|$)/.test(routePathFromHtmlFile(file))
+  );
+  const missingBlogMetaPreloads = blogMetaHref
+    ? blogRouteHtmlFiles.filter(
+        (file) => !(read(file) ?? "").includes(`rel="modulepreload" crossorigin href="${blogMetaHref}"`)
+      )
+    : blogRouteHtmlFiles;
+  const homePreloadsBlogMeta = blogMetaHref ? indexHtml.includes(blogMetaHref) : false;
+  check(
+    blogMetaHref !== null &&
+      !homePreloadsBlogMeta &&
+      blogRouteHtmlFiles.length > 0 &&
+      missingBlogMetaPreloads.length === 0,
+    blogMetaHref !== null && !homePreloadsBlogMeta && missingBlogMetaPreloads.length === 0
+      ? `all ${blogRouteHtmlFiles.length} EN/BN blog routes modulepreload blogRouteMeta while homepage omits it`
+      : `blogRouteMeta preload mismatch: href=${blogMetaHref ?? "missing"} homePreload=${homePreloadsBlogMeta} missingOn=${missingBlogMetaPreloads.length}`
+  );
+  // Keep the 4 homepage featured-card lookups byte-identical to the lazy blog registries.
+  const bnFeaturedTopics = getFeaturedGrowthTopics("bn");
+  const featuredParityErrors: string[] = [];
+  for (const enTopic of ENGLISH_FEATURED_GROWTH_TOPICS) {
+    const meta = HOME_FEATURED_BLOG_META[enTopic.slug];
+    const bnTopic = bnFeaturedTopics.find((item) => item.slug === enTopic.slug);
+    if (!meta) {
+      featuredParityErrors.push(`${enTopic.slug}: missing HOME_FEATURED_BLOG_META entry`);
+      continue;
+    }
+    if (!bnTopic) {
+      featuredParityErrors.push(`${enTopic.slug}: missing Bengali featured topic`);
+      continue;
+    }
+    const expectedCover = getBlogCoverImage(enTopic.slug);
+    const expectedAltEn = generateBlogCoverAltText({
+      title: enTopic.title,
+      category: enTopic.category,
+      slug: enTopic.slug,
+      lang: "en",
+    });
+    const expectedAltBn = generateBlogCoverAltText({
+      title: bnTopic.title,
+      category: bnTopic.category,
+      slug: bnTopic.slug,
+      lang: "bn",
+    });
+    const expectedSnippetEn = getBlogAeoSnippet50Words(enTopic.slug, false, enTopic.excerpt);
+    const expectedSnippetBn = getBlogAeoSnippet50Words(bnTopic.slug, true, bnTopic.excerpt);
+    if (meta.coverImage !== expectedCover) featuredParityErrors.push(`${enTopic.slug}: coverImage drift`);
+    if (meta.altEn !== expectedAltEn) featuredParityErrors.push(`${enTopic.slug}: altEn drift`);
+    if (meta.altBn !== expectedAltBn) featuredParityErrors.push(`${enTopic.slug}: altBn drift`);
+    if (meta.snippetEn !== expectedSnippetEn) featuredParityErrors.push(`${enTopic.slug}: snippetEn drift`);
+    if (meta.snippetBn !== expectedSnippetBn) featuredParityErrors.push(`${enTopic.slug}: snippetBn drift`);
+  }
+  const orphanFeaturedSlugs = Object.keys(HOME_FEATURED_BLOG_META).filter(
+    (slug) => !ENGLISH_FEATURED_GROWTH_TOPICS.some((topic) => topic.slug === slug)
+  );
+  for (const slug of orphanFeaturedSlugs) {
+    featuredParityErrors.push(`${slug}: unused HOME_FEATURED_BLOG_META entry`);
+  }
+  check(
+    featuredParityErrors.length === 0,
+    featuredParityErrors.length === 0
+      ? `all ${ENGLISH_FEATURED_GROWTH_TOPICS.length} featured blog cards match canonical EN/BN cover, alt text, and AEO snippet registries`
+      : `HOME_FEATURED_BLOG_META drift: ${featuredParityErrors.join("; ")}`
+  );
+  const globalSearchDialogIsEager = eagerAssetUrls.some((url) => /GlobalSiteSearch/i.test(url));
+  const searchIndexIsEager = (read(path.join(DIST_DIR, "index.html")) ?? "").includes("site-search-index.json");
+  check(
+    !globalSearchDialogIsEager && !searchIndexIsEager,
+    "the search dialog chunk and bilingual index stay out of the homepage's eager download graph"
+  );
+  const contentDataFile = jsChunks.find((file) => /^content-data-.*\.js$/.test(file));
+  const contentDataHref = contentDataFile ? `/assets/${contentDataFile}` : null;
   const dataRouteHtmlFiles = distHtmlFiles.filter((file) =>
     /^\/(?:flights|hotels|visa|destinations|costs|blog)(?:\/|$)/.test(routePathFromHtmlFile(file))
   );
@@ -7626,13 +8065,109 @@ const pendingFutureSlugs = new Set(
     .map((post) => post.slug),
 );
 const CONTENT_SLUGS = new Set(BLOG_DATA.map((post) => post.slug));
-const contentLinkIssues = auditPostLinks(BLOG_DATA, CONTENT_SLUGS, pendingFutureSlugs);
+const localizedBnBlogPosts = getLocalizedBlogs("bn");
+const contentLinkIssues = [
+  ...auditPostLinks(BLOG_DATA, CONTENT_SLUGS, pendingFutureSlugs),
+  ...auditPostLinks(
+    localizedBnBlogPosts.map((post) => ({ ...post, id: `bn:${post.id}` })),
+    CONTENT_SLUGS,
+    pendingFutureSlugs,
+  ),
+];
 check(
   contentLinkIssues.length === 0,
-  `content contract: every post has internal links that resolve, are unique and never self-referential [${
+  `content contract: every EN and BN post has internal links that resolve, are unique and never self-referential [${
     contentLinkIssues.slice(0, 3).join("; ")
   }]`
 );
+
+// EN/BN curated internal-link parity across all published AND scheduled/draft
+// Markdown posts: no duplicate targets after alias canonicalization, same link
+// count, and the exact same canonical destination set in both locales.
+{
+  const auditLinkPairParity = (
+    pairs: Array<{
+      id: string;
+      slug: string;
+      enLinks: { text: string; path: string }[];
+      bnLinks: { text: string; path: string }[];
+    }>,
+  ): string[] => {
+    const problems: string[] = [];
+    const canonicalize = (raw: string) => articleLinkPath(raw) ?? raw.trim();
+    for (const pair of pairs) {
+      const enCanon = pair.enLinks.map((link) => canonicalize(link.path));
+      const bnCanon = pair.bnLinks.map((link) => canonicalize(link.path));
+      const enDup = enCanon.filter((href, idx) => enCanon.indexOf(href) !== idx);
+      const bnDup = bnCanon.filter((href, idx) => bnCanon.indexOf(href) !== idx);
+      if (enDup.length > 0) problems.push(`${pair.id}: EN duplicate link(s) ${[...new Set(enDup)].join(", ")}`);
+      if (bnDup.length > 0) problems.push(`${pair.id}: BN duplicate link(s) ${[...new Set(bnDup)].join(", ")}`);
+      const enSet = new Set(enCanon);
+      const bnSet = new Set(bnCanon);
+      const missingInBn = [...enSet].filter((href) => !bnSet.has(href));
+      const extraInBn = [...bnSet].filter((href) => !enSet.has(href));
+      if (missingInBn.length > 0) {
+        problems.push(`${pair.id}: BN missing EN link(s) ${missingInBn.join(", ")}`);
+      }
+      if (extraInBn.length > 0) {
+        problems.push(`${pair.id}: BN has extra link(s) not in EN ${extraInBn.join(", ")}`);
+      }
+      if (enCanon.length !== bnCanon.length && enDup.length === 0 && bnDup.length === 0 && missingInBn.length === 0 && extraInBn.length === 0) {
+        problems.push(`${pair.id}: link count mismatch EN=${enCanon.length} BN=${bnCanon.length}`);
+      }
+    }
+    return problems;
+  };
+
+  const bnBySlug = new Map(localizedBnBlogPosts.map((post) => [post.slug, post]));
+  const publishedPairs = BLOG_DATA.map((enPost) => ({
+    id: enPost.id,
+    slug: enPost.slug,
+    enLinks: enPost.internalLinks ?? [],
+    bnLinks: bnBySlug.get(enPost.slug)?.internalLinks ?? [],
+  }));
+  const unpublishedDraftPairs = loadScheduledBlogPosts()
+    .filter((post) => !CONTENT_SLUGS.has(post.slug))
+    .map((post) => ({
+      id: `draft:${post.slug}`,
+      slug: post.slug,
+      enLinks: post.internalLinksEn,
+      bnLinks: post.internalLinksBn,
+    }));
+  const linkParityProblems = auditLinkPairParity([...publishedPairs, ...unpublishedDraftPairs]);
+  check(
+    linkParityProblems.length === 0,
+    linkParityProblems.length === 0
+      ? `all ${publishedPairs.length} published and ${unpublishedDraftPairs.length} upcoming blog pairs match EN/BN canonical internal-link targets with zero duplicates`
+      : `EN/BN blog internal-link parity failed: ${linkParityProblems.slice(0, 5).join("; ")}`
+  );
+
+  const syntheticLinkProblems = auditLinkPairParity([
+    {
+      id: "dup-bn",
+      slug: "dup-bn",
+      enLinks: [{ text: "A", path: "/umrah" }],
+      bnLinks: [
+        { text: "ক", path: "/umrah" },
+        { text: "খ", path: "/umrah" },
+      ],
+    },
+    {
+      id: "missing-bn",
+      slug: "missing-bn",
+      enLinks: [
+        { text: "A", path: "/flights" },
+        { text: "B", path: "/blog/madinah-first-uk-umrah-routings-open-jaw-stopover" },
+      ],
+      bnLinks: [{ text: "ক", path: "/flights" }],
+    },
+  ]);
+  check(
+    syntheticLinkProblems.some((msg) => msg.startsWith("dup-bn: BN duplicate")) &&
+      syntheticLinkProblems.some((msg) => msg.startsWith("missing-bn: BN missing")),
+    "EN/BN blog link-parity guard rejects duplicate and missing Bengali links (negative controls)"
+  );
+}
 
 // Negative control: the validator must still reject each failure mode. Without
 // this, a refactor that returns [] would leave a green check protecting nothing.
@@ -7693,6 +8228,173 @@ check(
     ? `affiliate-CTA exemptions all point at live posts (${CTA_EXEMPT_SLUGS.size})`
     : `stale affiliate-CTA exemption(s): ${staleCtaExemptions.join(", ")}`,
 );
+
+// Full-corpus EN/BN affiliate CTA parity & A2 commercial-layer guard:
+// - Non-exempt traveller articles must declare an explicit localized BN CTA
+//   matching EN's `provider` and `campaign` (no cross-locale partner switches,
+//   no silent English fallback copy).
+// - Religious-procedure pages (`CTA_EXEMPT_SLUGS`) must declare no primary CTA
+//   in either locale and must render `JourneyHelpPanel` in both saved pages.
+// - Creator-economy pages (`TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS`) without a
+//   traveller CTA must omit `affiliateCTA` in both locales and render their
+//   bilingual creator-referral callout in both saved pages.
+{
+  type CtaAuditEntry = {
+    id: string;
+    slug: string;
+    enCta?: { provider: string; headline: string; body: string; campaign?: string };
+    bnExplicitCta?: { provider: string; headline: string; body: string; campaign?: string };
+    bnEffectiveCta?: { provider: string; headline: string; body: string; campaign?: string };
+    isRiteExempt: boolean;
+    hasCreatorReferral: boolean;
+    checkSavedHtml: boolean;
+  };
+  const BENGALI_SCRIPT_RE = /[\u0980-\u09FF]/;
+  const auditBlogCtaParity = (entries: CtaAuditEntry[]): string[] => {
+    const problems: string[] = [];
+    for (const item of entries) {
+      if (item.isRiteExempt) {
+        if (item.enCta || item.bnEffectiveCta) {
+          problems.push(`${item.id}: A2 rite-exempt post must not carry a primary affiliateCTA`);
+        }
+        if (item.checkSavedHtml) {
+          for (const [loc, page] of [
+            ["EN", path.join(DIST_DIR, "blog", `${item.slug}.html`)],
+            ["BN", path.join(DIST_DIR, "bn", "blog", `${item.slug}.html`)],
+          ] as const) {
+            const html = read(page) ?? "";
+            if (!html.includes('data-affiliate-placement="journey_help"')) {
+              problems.push(`${item.id}: ${loc} rite-exempt page missing journey_help panel`);
+            }
+          }
+        }
+        continue;
+      }
+
+      if (item.hasCreatorReferral && !item.enCta && !item.bnEffectiveCta) {
+        if (item.checkSavedHtml) {
+          const referralUrl = buildTravelpayoutsReferralUrl(item.slug).replace(/&/g, "&amp;");
+          for (const [loc, page] of [
+            ["EN", path.join(DIST_DIR, "blog", `${item.slug}.html`)],
+            ["BN", path.join(DIST_DIR, "bn", "blog", `${item.slug}.html`)],
+          ] as const) {
+            const html = read(page) ?? "";
+            if (!html.includes(referralUrl)) {
+              problems.push(`${item.id}: ${loc} creator article missing Travelpayouts referral block`);
+            }
+          }
+        }
+        continue;
+      }
+
+      if (!item.enCta) {
+        problems.push(`${item.id}: missing EN affiliateCTA (not rite-exempt or creator-referral)`);
+        continue;
+      }
+      if (!item.bnExplicitCta || !item.bnEffectiveCta) {
+        problems.push(`${item.id}: missing explicit localized BN affiliateCTA`);
+        continue;
+      }
+      if (item.enCta.provider !== item.bnEffectiveCta.provider) {
+        problems.push(
+          `${item.id}: CTA provider mismatch EN="${item.enCta.provider}" vs BN="${item.bnEffectiveCta.provider}"`
+        );
+      }
+      if ((item.enCta.campaign ?? "") !== (item.bnEffectiveCta.campaign ?? "")) {
+        problems.push(
+          `${item.id}: CTA campaign mismatch EN="${item.enCta.campaign ?? "none"}" vs BN="${item.bnEffectiveCta.campaign ?? "none"}"`
+        );
+      }
+      if (
+        !BENGALI_SCRIPT_RE.test(item.bnExplicitCta.headline) ||
+        !BENGALI_SCRIPT_RE.test(item.bnExplicitCta.body)
+      ) {
+        problems.push(`${item.id}: BN affiliateCTA headline/body lacks Bengali copy`);
+      }
+    }
+    return problems;
+  };
+
+  const bnPostMap = new Map(localizedBnBlogPosts.map((post) => [post.slug, post]));
+  const publishedCtaEntries: CtaAuditEntry[] = BLOG_DATA.map((post) => ({
+    id: post.id,
+    slug: post.slug,
+    enCta: post.affiliateCTA ?? undefined,
+    bnExplicitCta: BENGALI_BLOG_OVERRIDES[post.slug]?.affiliateCTA ?? undefined,
+    bnEffectiveCta: bnPostMap.get(post.slug)?.affiliateCTA ?? undefined,
+    isRiteExempt: CTA_EXEMPT_SLUGS.has(post.slug),
+    hasCreatorReferral: Boolean(TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[post.slug]),
+    checkSavedHtml: true,
+  }));
+  const upcomingCtaEntries: CtaAuditEntry[] = loadScheduledBlogPosts()
+    .filter((post) => !CONTENT_SLUGS.has(post.slug))
+    .map((post) => ({
+      id: `draft:${post.slug}`,
+      slug: post.slug,
+      enCta: post.affiliateCta,
+      bnExplicitCta: post.affiliateCtaBn,
+      bnEffectiveCta: post.affiliateCtaBn,
+      isRiteExempt: CTA_EXEMPT_SLUGS.has(post.slug),
+      hasCreatorReferral: Boolean(TRAVELPAYOUTS_REFERRAL_BLOG_PLACEMENTS[post.slug]),
+      checkSavedHtml: false,
+    }));
+  const ctaParityIssues = auditBlogCtaParity([...publishedCtaEntries, ...upcomingCtaEntries]);
+  check(
+    ctaParityIssues.length === 0,
+    ctaParityIssues.length === 0
+      ? `all ${publishedCtaEntries.length} published and ${upcomingCtaEntries.length} upcoming blog pairs match EN/BN affiliate CTA providers/campaigns and A2 commercial layers`
+      : `EN/BN blog affiliate CTA parity failed: ${ctaParityIssues.slice(0, 5).join("; ")}`
+  );
+
+  const syntheticCtaIssues = auditBlogCtaParity([
+    {
+      id: "provider-drift",
+      slug: "provider-drift",
+      enCta: { provider: "airalo", headline: "Stay connected", body: "Install eSIM." },
+      bnExplicitCta: { provider: "klook", headline: "টিকিট দেখুন", body: "পাস বুক করুন।" },
+      bnEffectiveCta: { provider: "klook", headline: "টিকিট দেখুন", body: "পাস বুক করুন।" },
+      isRiteExempt: false,
+      hasCreatorReferral: false,
+      checkSavedHtml: false,
+    },
+    {
+      id: "missing-bn-cta",
+      slug: "missing-bn-cta",
+      enCta: { provider: "aviasales", headline: "Check fares", body: "Compare dates." },
+      bnExplicitCta: undefined,
+      bnEffectiveCta: { provider: "aviasales", headline: "Check fares", body: "Compare dates." },
+      isRiteExempt: false,
+      hasCreatorReferral: false,
+      checkSavedHtml: false,
+    },
+    {
+      id: "unmonetized",
+      slug: "unmonetized",
+      enCta: undefined,
+      bnExplicitCta: undefined,
+      bnEffectiveCta: undefined,
+      isRiteExempt: false,
+      hasCreatorReferral: false,
+      checkSavedHtml: false,
+    },
+    {
+      id: "rite-cta-leak",
+      slug: "rite-cta-leak",
+      enCta: { provider: "klook", headline: "Tours", body: "Book now." },
+      bnExplicitCta: undefined,
+      bnEffectiveCta: undefined,
+      isRiteExempt: true,
+      hasCreatorReferral: false,
+      checkSavedHtml: false,
+    },
+  ]);
+  check(
+    ["provider-drift:", "missing-bn-cta:", "unmonetized:", "rite-cta-leak:"].every((prefix) =>
+      syntheticCtaIssues.some((msg) => msg.startsWith(prefix))
+    ),
+    "EN/BN blog CTA parity guard rejects provider drift, missing BN overrides, unmonetized posts and rite-page CTA leaks (negative controls)"
+  );
+}
 const flagshipIssues = flagshipPosts
   .map((post) => ({
     id: post.id,
@@ -7787,10 +8489,15 @@ const bnEffectiveCta = new Map(
 );
 for (const post of BLOG_DATA) {
   if (!post.affiliateCTA) continue;
-  const enExpected = resolveBookingCtaUrl(post.affiliateCTA.provider, { slug: post.slug, locale: "en" });
+  const enExpected = resolveBlogAffiliateUrl(post.affiliateCTA, {
+    slug: post.slug,
+    locale: "en",
+  });
   if (!enExpected) continue; // paused with no live fallback: nothing to render
   const bnCta = bnEffectiveCta.get(post.id);
-  const bnExpected = bnCta ? resolveBookingCtaUrl(bnCta.provider, { slug: post.slug, locale: "bn" }) : "";
+  const bnExpected = bnCta
+    ? resolveBlogAffiliateUrl(bnCta, { slug: post.slug, locale: "bn" })
+    : "";
   for (const [locale, expected, page] of [
     ["EN", enExpected, path.join(DIST_DIR, "blog", `${post.slug}.html`)],
     [
@@ -7807,14 +8514,45 @@ for (const post of BLOG_DATA) {
     }
     // HTML attributes carry `&amp;`; compare the URL the way it is emitted.
     const expectedInHtml = expected.replace(/&/g, "&amp;");
-    const sponsored = new RegExp(
-      `<a[^>]*href="${expectedInHtml.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[^>]*rel="[^"]*sponsored`
-    );
-    if (!sponsored.test(html)) {
+    const escapedHref = expectedInHtml.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const sameOriginExpected = isSameOriginCtaHref(expected);
+    const matchingTags = [
+      ...html.matchAll(new RegExp(`<a\\b[^>]*href="${escapedHref}"[^>]*>`, "g")),
+    ].map((m) => m[0]);
+    if (matchingTags.length === 0) {
       affiliateRenderIssues.push(
-        `${post.id}: ${locale} static page has no sponsored link to ${bnCta ? "its" : "the"} declared partner`
+        `${post.id}: ${locale} static page is missing the declared CTA link (${expected})`
       );
       continue;
+    }
+    if (sameOriginExpected) {
+      if (matchingTags.some((tag) => /\brel="[^"]*sponsored|\btarget="_blank"/.test(tag))) {
+        affiliateRenderIssues.push(
+          `${post.id}: ${locale} same-origin CTA (${expected}) must not carry rel="sponsored" or target="_blank"`
+        );
+        continue;
+      }
+      const noteKey = locale === "BN" ? "bn" : "en";
+      const expectedNote = BLOG_FLIGHTS_PAGE_CTA_NOTE[noteKey]
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+      if (!html.includes(expectedNote)) {
+        affiliateRenderIssues.push(
+          `${post.id}: ${locale} same-origin /flights CTA is missing the first-party flight-page disclosure`
+        );
+        continue;
+      }
+    } else {
+      const hasExternalSponsored = matchingTags.some(
+        (tag) => /\btarget="_blank"/.test(tag) && /\brel="[^"]*sponsored/.test(tag)
+      );
+      if (!hasExternalSponsored) {
+        affiliateRenderIssues.push(
+          `${post.id}: ${locale} static page has no target="_blank" sponsored link to ${bnCta ? "its" : "the"} declared partner`
+        );
+        continue;
+      }
     }
     if (locale === "EN") affiliateRenderedSlugs.add(post.slug);
   }
@@ -7831,6 +8569,272 @@ check(
 );
 
 checkArticlePresentation(DIST_DIR, check);
+
+// ---------------------------------------------------------------------------
+// Batch 3 SEO & Link-Integrity Guards:
+//   1. Regional /experiences/europe and /experiences/asia routes exist in EN
+//      and BN with localized BN SEO copy, self-canonicals, reciprocal hreflang,
+//      sitemap registration and clean Klook claim hygiene.
+//   2. Every internal <a href> across dist/**/*.html resolves to a shipped
+//      file or prerendered route (exempting only future scheduled post slugs).
+//   3. Zero legacy query-string links (?tab=, ?region=, ?slug=, ?route=,
+//      ?country=, /hotels?city=) remain in dist/**/*.html or public/_redirects,
+//      while edge redirects in _routes.json + _middleware.js cover both EN & BN.
+//   4. Zero same-origin links carry rel="sponsored" (and zero /flights?fsrc=
+//      links carry target="_blank"), while external partner buttons retain
+//      target="_blank" rel="noopener noreferrer sponsored".
+// ---------------------------------------------------------------------------
+{
+  const distSitemapXml = read(path.join(DIST_DIR, "sitemap.xml")) ?? "";
+  const distSitemapTxt = new Set(
+    (read(path.join(DIST_DIR, "sitemap.txt")) ?? "")
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+  );
+  const regionalPairs = [
+    {
+      slug: "europe",
+      enFile: "experiences/europe.html",
+      bnFile: "bn/experiences/europe.html",
+      enUrl: `${SITE_ORIGIN}/experiences/europe`,
+      bnUrl: `${SITE_ORIGIN}/bn/experiences/europe`,
+    },
+    {
+      slug: "asia",
+      enFile: "experiences/asia.html",
+      bnFile: "bn/experiences/asia.html",
+      enUrl: `${SITE_ORIGIN}/experiences/asia`,
+      bnUrl: `${SITE_ORIGIN}/bn/experiences/asia`,
+    },
+  ] as const;
+
+  const regionalIssues: string[] = [];
+  for (const pair of regionalPairs) {
+    const enHtml = read(path.join(DIST_DIR, pair.enFile));
+    const bnHtml = read(path.join(DIST_DIR, pair.bnFile));
+    if (!enHtml) {
+      regionalIssues.push(`${pair.enFile}: missing`);
+      continue;
+    }
+    if (!bnHtml) {
+      regionalIssues.push(`${pair.bnFile}: missing`);
+      continue;
+    }
+    if (!enHtml.includes(`rel="canonical" href="${pair.enUrl}"`)) {
+      regionalIssues.push(`${pair.enFile}: missing self-canonical`);
+    }
+    if (!bnHtml.includes(`rel="canonical" href="${pair.bnUrl}"`)) {
+      regionalIssues.push(`${pair.bnFile}: missing self-canonical`);
+    }
+    for (const [label, html] of [
+      [pair.enFile, enHtml],
+      [pair.bnFile, bnHtml],
+    ] as const) {
+      if (
+        !html.includes(`hreflang="en-bd" href="${pair.enUrl}"`) ||
+        !html.includes(`hreflang="bn-bd" href="${pair.bnUrl}"`) ||
+        !html.includes(`hreflang="x-default" href="${pair.enUrl}"`)
+      ) {
+        regionalIssues.push(`${label}: incomplete reciprocal hreflang cluster`);
+      }
+      if (/discounted Klook tours|Klook.*(?:save|saving|savings|discount|cheaper|lowest|\d{1,2}\s*%)/i.test(html)) {
+        regionalIssues.push(`${label}: contains unsupported Klook discount/price claim`);
+      }
+    }
+    const bnTitle = bnHtml.match(/<title>([^<]+)<\/title>/)?.[1] ?? "";
+    const bnDesc = bnHtml.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? "";
+    if (!/[\u0980-\u09FF]/.test(bnTitle) || !/[\u0980-\u09FF]/.test(bnDesc)) {
+      regionalIssues.push(`${pair.bnFile}: title or meta description is not localized into Bengali`);
+    }
+    for (const url of [pair.enUrl, pair.bnUrl]) {
+      if (!distSitemapXml.includes(`<loc>${url}</loc>`) || !distSitemapTxt.has(url)) {
+        regionalIssues.push(`${url}: missing from sitemap.xml or sitemap.txt`);
+      }
+    }
+  }
+  check(
+    regionalIssues.length === 0,
+    regionalIssues.length === 0
+      ? "regional /experiences/europe and /experiences/asia pages are prerendered in EN and BN with localized BN SEO, reciprocal hreflang and sitemap entries"
+      : `regional /experiences verification failed: ${regionalIssues.join("; ")}`
+  );
+
+  const futureScheduledPaths = new Set<string>();
+  const allScheduled = loadScheduledBlogPosts();
+  const liveSlugs = new Set(BLOG_SLUGS as readonly string[]);
+  for (const scheduled of allScheduled) {
+    if (!liveSlugs.has(scheduled.slug)) {
+      futureScheduledPaths.add(`/blog/${scheduled.slug}`);
+      futureScheduledPaths.add(`/bn/blog/${scheduled.slug}`);
+    }
+  }
+
+  const walkHtmlFiles = (dir: string, acc: string[] = []): string[] => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walkHtmlFiles(full, acc);
+      else if (entry.name.endsWith(".html")) acc.push(full);
+    }
+    return acc;
+  };
+
+  const distTargetExists = (pathname: string): boolean => {
+    const norm = pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+    if (futureScheduledPaths.has(norm)) return true;
+    const rel = norm === "/" ? "index.html" : norm.slice(1);
+    const direct = path.join(DIST_DIR, rel);
+    return (
+      (fs.existsSync(direct) && fs.statSync(direct).isFile()) ||
+      fs.existsSync(path.join(DIST_DIR, `${rel}.html`)) ||
+      fs.existsSync(path.join(DIST_DIR, rel, "index.html"))
+    );
+  };
+
+  const isLegacyInternalQuery = (pathname: string, params: URLSearchParams): boolean => {
+    if (params.has("tab") || params.has("region") || params.has("slug") || params.has("route") || params.has("country")) {
+      return true;
+    }
+    if ((pathname === "/hotels" || pathname === "/bn/hotels") && params.has("city")) {
+      return true;
+    }
+    return false;
+  };
+
+  const brokenInternalLinks: string[] = [];
+  const legacyQueryLinks: string[] = [];
+  const internalSponsoredLinks: string[] = [];
+  const internalFlightBlankLinks: string[] = [];
+
+  for (const htmlFile of walkHtmlFiles(DIST_DIR)) {
+    const relFile = path.relative(DIST_DIR, htmlFile).replace(/\\/g, "/");
+    const html = read(htmlFile) ?? "";
+    for (const match of html.matchAll(/<a\b[^>]*>/gi)) {
+      const tag = match[0];
+      const rawHref = tag.match(/\bhref="([^"]*)"/i)?.[1]?.replace(/&amp;/g, "&");
+      if (!rawHref) continue;
+      const isRootRel = rawHref.startsWith("/") && !rawHref.startsWith("//");
+      const isOwnAbs = rawHref === SITE_ORIGIN || rawHref.startsWith(`${SITE_ORIGIN}/`);
+      if (!isRootRel && !isOwnAbs) continue;
+
+      let parsed: URL;
+      try {
+        parsed = new URL(rawHref, SITE_ORIGIN);
+      } catch {
+        brokenInternalLinks.push(`${relFile} -> ${rawHref}`);
+        continue;
+      }
+      if (parsed.origin !== SITE_ORIGIN) continue;
+      const pathname = decodeURIComponent(parsed.pathname);
+      if (!distTargetExists(pathname)) {
+        brokenInternalLinks.push(`${relFile} -> ${pathname}`);
+      }
+      if (parsed.search && isLegacyInternalQuery(pathname, parsed.searchParams)) {
+        legacyQueryLinks.push(`${relFile} -> ${pathname}${parsed.search}`);
+      }
+      const relAttr = tag.match(/\brel="([^"]*)"/i)?.[1] ?? "";
+      const targetAttr = tag.match(/\btarget="([^"]*)"/i)?.[1] ?? "";
+      if (/\bsponsored\b/i.test(relAttr)) {
+        internalSponsoredLinks.push(`${relFile} -> ${rawHref} (rel="${relAttr}")`);
+      }
+      if (
+        (pathname === "/flights" || pathname === "/bn/flights") &&
+        parsed.searchParams.has("fsrc") &&
+        targetAttr === "_blank"
+      ) {
+        internalFlightBlankLinks.push(`${relFile} -> ${rawHref}`);
+      }
+    }
+  }
+
+  check(
+    brokenInternalLinks.length === 0 &&
+      !distTargetExists("/experiences/non-existent-region") &&
+      distTargetExists("/experiences/europe") &&
+      distTargetExists("/bn/experiences/asia"),
+    brokenInternalLinks.length === 0
+      ? "every same-origin <a href> across dist/ resolves to a shipped page or asset (with negative control)"
+      : `broken internal <a href> targets in dist/: ${brokenInternalLinks.slice(0, 6).join("; ")}`
+  );
+
+  const deployedRoutesCfg = JSON.parse(read(path.join(DIST_DIR, "_routes.json")) ?? "{}") as {
+    include?: string[];
+  };
+  const deployedRedirectsTxt = read(path.join(DIST_DIR, "_redirects")) ?? "";
+  const middlewareSrc = read(path.join(ROOT_DIR, "functions", "_middleware.js")) ?? "";
+  const edgeLegacyWiringOk =
+    ["/experiences", "/bn/experiences", "/tools", "/bn/tools"].every((entry) =>
+      deployedRoutesCfg.include?.includes(entry)
+    ) &&
+    middlewareSrc.includes('url.pathname === "/bn/experiences"') &&
+    middlewareSrc.includes('"/bn/tools"') &&
+    !/\?(?:region|tab)=/.test(deployedRedirectsTxt);
+
+  check(
+    legacyQueryLinks.length === 0 &&
+      edgeLegacyWiringOk &&
+      isLegacyInternalQuery("/tools", new URLSearchParams("tab=currency")) &&
+      isLegacyInternalQuery("/experiences", new URLSearchParams("region=west&city=london")) &&
+      !isLegacyInternalQuery("/experiences/europe", new URLSearchParams("city=london")) &&
+      !isLegacyInternalQuery("/flights", new URLSearchParams("fsrc=post_test")),
+    legacyQueryLinks.length === 0 && edgeLegacyWiringOk
+      ? "zero legacy query links (?tab=, ?region=, ?slug=, ?route=, ?country=) ship in dist/ or _redirects, while ?city= filtering and EN/BN edge 301s stay active"
+      : `legacy query link/redirect issues: ${legacyQueryLinks.slice(0, 6).join("; ")} (edgeWiring=${edgeLegacyWiringOk})`
+  );
+
+  const internalPartnerBtn = renderToStaticMarkup(
+    React.createElement(PartnerLinkButton, {
+      href: "/flights?fsrc=post_guard#flight-search",
+      label: "Compare Live Flight Fares",
+      variant: "dark",
+    })
+  );
+  const externalPartnerBtn = renderToStaticMarkup(
+    React.createElement(PartnerLinkButton, {
+      href: AFFILIATE_LINKS.klook,
+      label: "Compare Tour & Attraction Passes",
+      variant: "dark",
+    })
+  );
+  const dualCardCalloutHtml = renderToStaticMarkup(
+    React.createElement(MultiPartnerBlogCallout, {
+      slug: "dual-currency-card-endorsement-bangladesh",
+      lang: "en",
+      primaryHrefOverride: "/flights?fsrc=post_dual_currency_card_endorsement_bangladesh#flight-search",
+    })
+  );
+  const dualCardFlightAnchors = [
+    ...dualCardCalloutHtml.matchAll(/<a\b[^>]*href="\/flights\?fsrc=[^"]*"[^>]*>/g),
+  ].map((m) => m[0]);
+  const dualCardExternalAnchors = [
+    ...dualCardCalloutHtml.matchAll(/<a\b[^>]*href="https:\/\/[^"]*"[^>]*>/g),
+  ].map((m) => m[0]);
+
+  const reactCtaAttrsOk =
+    !/\brel="[^"]*sponsored|\btarget="_blank"/.test(internalPartnerBtn) &&
+    externalPartnerBtn.includes('target="_blank"') &&
+    externalPartnerBtn.includes('rel="noopener noreferrer sponsored"') &&
+    BLOG_AFFILIATE_CTA_DISCLOSURE.en.includes("Affiliate link") &&
+    !BLOG_FLIGHTS_PAGE_CTA_NOTE.en.startsWith("Affiliate link") &&
+    dualCardFlightAnchors.length === 2 &&
+    dualCardFlightAnchors.every((tag) => !/\brel="[^"]*sponsored|\btarget="_blank"/.test(tag)) &&
+    dualCardExternalAnchors.length === 1 &&
+    dualCardExternalAnchors[0].includes('target="_blank"') &&
+    dualCardExternalAnchors[0].includes('rel="noopener noreferrer sponsored"') &&
+    isSameOriginCtaHref("/flights?fsrc=post_x#flight-search") &&
+    isSameOriginCtaHref("/bn/flights?fsrc=post_x#flight-search") &&
+    !isSameOriginCtaHref("https://flights.uraltravel.co.uk/?locale=en&currency=BDT") &&
+    !isSameOriginCtaHref(AFFILIATE_LINKS.tiqets);
+
+  check(
+    internalSponsoredLinks.length === 0 &&
+      internalFlightBlankLinks.length === 0 &&
+      reactCtaAttrsOk,
+    internalSponsoredLinks.length === 0 && internalFlightBlankLinks.length === 0 && reactCtaAttrsOk
+      ? "zero same-origin links carry rel=\"sponsored\" or force target=\"_blank\" on /flights?fsrc= CTAs, while all external affiliate links retain full sponsored attributes"
+      : `same-origin CTA attribute issues: sponsored=[${internalSponsoredLinks.slice(0, 4).join("; ")}] blank=[${internalFlightBlankLinks.slice(0, 4).join("; ")}] reactOk=${reactCtaAttrsOk}`
+  );
+}
 
 // Non-blocking debt report. Printed on every run so the numbers in §10 of the
 // standard are reproducible, but never counted as a pass.
@@ -8434,6 +9438,106 @@ check(
       `/resources (${locale}): saved page carries the directory heading`
     );
   }
+}
+
+checkEvisaIntegration(DIST_DIR, check);
+
+// --- CI test-suite completeness, build-phase order & off-peak schedule ------
+{
+  const pkgJson = JSON.parse(read(path.join(ROOT_DIR, "package.json")) ?? "{}") as {
+    scripts?: Record<string, string>;
+  };
+  const ciWorkflow = read(path.join(ROOT_DIR, ".github", "workflows", "ci.yml")) ?? "";
+  const testScripts = Object.entries(pkgJson.scripts ?? {}).filter(([name]) =>
+    name.startsWith("test:")
+  );
+
+  const scriptReadsDist = (source: string): boolean =>
+    source
+      .split(/\r?\n/)
+      .some((line) => {
+        const trimmed = line.trim();
+        if (trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*")) {
+          return false;
+        }
+        return /["'`/]dist(?:["'`/])/.test(trimmed);
+      });
+
+  const auditCiTestWiring = (
+    entries: Array<[string, string]>,
+    workflowYaml: string,
+    distReaderOverride?: Set<string>
+  ): { missing: string[]; beforeBuild: string[] } => {
+    const buildMatch = /^\s*(?:-\s*)?run:\s*npm\s+run\s+build\s*$/m.exec(workflowYaml);
+    const buildPos = buildMatch ? buildMatch.index : -1;
+    const missing: string[] = [];
+    const beforeBuild: string[] = [];
+
+    for (const [name, command] of entries) {
+      const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const stepRe = new RegExp(`^\\s*(?:-\\s*)?run:\\s*npm\\s+run\\s+${escaped}\\s*$`, "m");
+      const stepMatch = stepRe.exec(workflowYaml);
+      if (!stepMatch) {
+        missing.push(name);
+        continue;
+      }
+      let readsDist = distReaderOverride?.has(name) ?? false;
+      if (!distReaderOverride) {
+        const scriptRel = command.match(/scripts\/[^\s"']+\.(?:ts|mjs|js)/)?.[0];
+        if (scriptRel) {
+          readsDist = scriptReadsDist(read(path.join(ROOT_DIR, scriptRel)) ?? "");
+        }
+      }
+      if (readsDist && (buildPos < 0 || stepMatch.index < buildPos)) {
+        beforeBuild.push(name);
+      }
+    }
+    return { missing, beforeBuild };
+  };
+
+  const ciAudit = auditCiTestWiring(testScripts, ciWorkflow);
+  check(
+    testScripts.length > 0 && ciAudit.missing.length === 0 && ciAudit.beforeBuild.length === 0,
+    ciAudit.missing.length === 0 && ciAudit.beforeBuild.length === 0
+      ? `CI executes all ${testScripts.length} package.json test:* suites with every dist/-reading suite placed after npm run build`
+      : `CI test:* wiring error: missing=[${ciAudit.missing.join(", ")}] preBuildDistReaders=[${ciAudit.beforeBuild.join(", ")}]`
+  );
+  const syntheticCiAudit = auditCiTestWiring(
+    [
+      ["test:unwired-suite", "tsx scripts/test-unwired.ts"],
+      ["test:prebuild-dist-suite", "tsx scripts/test-dist.ts"],
+    ],
+    "      - run: npm run test:prebuild-dist-suite\n      - run: npm run build\n",
+    new Set(["test:prebuild-dist-suite"])
+  );
+  check(
+    syntheticCiAudit.missing.includes("test:unwired-suite") &&
+      syntheticCiAudit.beforeBuild.includes("test:prebuild-dist-suite"),
+    "CI test:* guard catches both missing suites and dist/-reading suites ordered before build (negative control)"
+  );
+
+  const scheduledWorkflow =
+    read(path.join(ROOT_DIR, ".github", "workflows", "scheduled-publish.yml")) ?? "";
+  const blogReadme = read(path.join(ROOT_DIR, "content", "blog", "README.md")) ?? "";
+  const cronMatch = scheduledWorkflow.match(/^\s*-\s*cron:\s*["'](\d{1,2})\s+(\d{1,2})\s+\*\s+\*\s+\*["']/m);
+  const cronMinute = cronMatch ? Number(cronMatch[1]) : NaN;
+  const cronHour = cronMatch ? Number(cronMatch[2]) : NaN;
+  const expectedUtcLabel =
+    Number.isInteger(cronMinute) && Number.isInteger(cronHour)
+      ? `${String(cronHour).padStart(2, "0")}:${String(cronMinute).padStart(2, "0")} UTC`
+      : "";
+  const cronValid =
+    Number.isInteger(cronMinute) &&
+    cronMinute > 0 &&
+    cronMinute < 60 &&
+    cronHour === 3 &&
+    blogReadme.includes(expectedUtcLabel);
+  check(
+    cronValid,
+    cronValid
+      ? `scheduled-publish.yml runs off the top-of-hour spike (${expectedUtcLabel}) and matches content/blog/README.md`
+      : `scheduled-publish.yml cron must run at 03:<01-59> UTC and match content/blog/README.md (saw cron="${cronMatch?.[0]?.trim() ?? "missing"}")`
+  );
 }
 
 // --- Report ----------------------------------------------------------------

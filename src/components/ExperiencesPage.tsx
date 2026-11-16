@@ -478,48 +478,52 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
   const klookAvailable = AFFILIATE_OFFER_REGISTRY.klook.status === "active";
   const klookHotelsAvailable = klookAvailable && AFFILIATE_OFFER_REGISTRY.klookHotels.status === "active";
   // Map clean static route region to internal filter: "europe" → "west", "asia" → "asia"
-  const initialRegion = region === "europe" ? "west" : region === "asia" ? "asia" : "all";
-  const [regionFilter, setRegionFilter] = useState<"all" | "west" | "asia">(() => {
+  const resolveRegionFromUrl = (): "all" | "west" | "asia" => {
+    if (region === "europe") return "west";
+    if (region === "asia") return "asia";
     if (typeof window !== "undefined") {
-      // Respect clean static route prop first; fall back to query string for legacy links
-      if (region === "europe" || region === "asia") return initialRegion;
-      const params = new URLSearchParams(window.location.search);
-      const r = params.get("region");
-      if (r === "west" || r === "asia") return r;
-    }
-    return initialRegion;
-  });
-  const [selectedCityId, setSelectedCityId] = useState<string>(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const c = params.get("city");
-      if (c && CITY_HUBS.some((h) => h.id === c)) return c;
+      const r = new URLSearchParams(window.location.search).get("region");
+      if (r === "west" || r === "europe") return "west";
+      if (r === "asia") return "asia";
     }
     return "all";
-  });
+  };
+  const resolveCityFromUrl = (activeRegion: "all" | "west" | "asia"): string => {
+    if (typeof window === "undefined") return "all";
+    const c = new URLSearchParams(window.location.search).get("city");
+    if (
+      c &&
+      CITY_HUBS.some((h) => h.id === c && (activeRegion === "all" || h.region === activeRegion))
+    ) {
+      return c;
+    }
+    return "all";
+  };
+  const [regionFilter, setRegionFilter] = useState<"all" | "west" | "asia">(resolveRegionFromUrl);
+  const [selectedCityId, setSelectedCityId] = useState<string>(() =>
+    resolveCityFromUrl(resolveRegionFromUrl())
+  );
   const [ticketCount, setTicketCount] = useState<number>(2);
-  const [calcCityId, setCalcCityId] = useState<string>("paris");
+  const [calcCityId, setCalcCityId] = useState<string>(() => {
+    const initialReg = resolveRegionFromUrl();
+    const initialCity = resolveCityFromUrl(initialReg);
+    if (initialCity !== "all") return initialCity;
+    return initialReg === "asia" ? "dubai-klook" : "paris";
+  });
   const [travelDate, setTravelDate] = useState<string>("2026-11-15");
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     const syncFromUrl = () => {
-      // If a clean static route prop is set, never let query string override it
-      if (region === "europe" || region === "asia") return;
-      const params = new URLSearchParams(window.location.search);
-      const r = params.get("region");
-      const c = params.get("city");
-      if (r === "west" || r === "asia" || r === "all") {
-        setRegionFilter(r);
-      } else {
-        setRegionFilter("all");
-      }
-      if (c && CITY_HUBS.some((h) => h.id === c)) {
-        setSelectedCityId(c);
-        setCalcCityId(c);
-      } else {
-        setSelectedCityId("all");
-      }
+      // Static route region ("/experiences/europe" | "/experiences/asia") always
+      // governs regionFilter, while ?city= filtering continues to apply cleanly.
+      const nextRegion = resolveRegionFromUrl();
+      const nextCity = resolveCityFromUrl(nextRegion);
+      setRegionFilter(nextRegion);
+      setSelectedCityId(nextCity);
+      setCalcCityId(
+        nextCity !== "all" ? nextCity : nextRegion === "asia" ? "dubai-klook" : "paris"
+      );
     };
     syncFromUrl();
     window.addEventListener("popstate", syncFromUrl);
@@ -560,15 +564,31 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
               className="ural-page-title font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight"
               style={{ textWrap: "balance" }}
             >
-              {isBn
-                ? "ইউরোপ, যুক্তরাজ্য, আমেরিকা ও এশিয়ার সেরা দর্শনীয় স্থানের টিকিট ও ডে-ট্যুর (গাইড)"
-                : "Europe, UK, USA & Asian Attraction Passes — Skip the Line"}
+              {region === "europe"
+                ? isBn
+                  ? "ইউরোপ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের আকর্ষণ পাস ও নির্ধারিত সময়ের টিকিট"
+                  : "Europe, UK & US Attraction Passes & Timed-Entry Guides"
+                : region === "asia"
+                  ? isBn
+                    ? "এশিয়া ও দুবাই আকর্ষণ পাস ও অ্যাক্টিভিটি গাইড"
+                    : "Asia & Dubai Attraction Passes & Activity Guides"
+                  : isBn
+                    ? "ইউরোপ, যুক্তরাজ্য, আমেরিকা ও এশিয়ার সেরা দর্শনীয় স্থানের টিকিট ও ডে-ট্যুর (গাইড)"
+                    : "Europe, UK, USA & Asian Attraction Passes — Skip the Line"}
             </h1>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-              {isBn
-                ? "লন্ডন, প্যারিস, রোম ও নিউ ইয়র্কের মিউজিয়াম এবং ভিউপয়েন্টে ঘণ্টার পর ঘণ্টা লাইনে না দাঁড়িয়ে Tiqets-এ বুক করুন। আর দুবাই, ব্যাংকক, সিঙ্গাপুর ও কুয়ালালামপুরের থিম পার্ক ও ডেজার্ট সাফারিতে Klook-এর মাধ্যমে পান বিশেষ ডিসকাউন্ট।"
-                : "Pre-book timed-entry passes for Paris, London, Rome, Milan, Venice, and New York via Tiqets, or unlock Klook's best-selling theme parks, desert safaris, and halal dinner cruises across Dubai, Bangkok, Singapore, and Kuala Lumpur."}
+              {region === "europe"
+                ? isBn
+                  ? "প্যারিস, লন্ডন, রোম, মিলান, ভেনিস ও নিউ ইয়র্কের জাদুঘর, প্রাসাদ ও ভিউপয়েন্টে Tiqets ও Go City-এর নির্ধারিত সময়ের টিকিট পরিকল্পনা করুন। বুকিংয়ের আগে স্লট, মূল্য ও বাতিলের শর্ত দেখুন।"
+                  : "Plan timed-entry tickets for Paris, London, Rome, Milan, Venice, and New York via Tiqets and Go City. Compare available time slots, inclusions, checkout totals, and cancellation terms before booking."
+                : region === "asia"
+                  ? isBn
+                    ? "দুবাই, আবুধাবি, ব্যাংকক, সিঙ্গাপুর ও কুয়ালালামপুরে Klook ও পার্টনার অ্যাক্টিভিটি তালিকা দেখুন। বুকিংয়ের আগে তারিখ, অন্তর্ভুক্তি, মোট দাম ও বাতিলের শর্ত মিলিয়ে নিন।"
+                    : "Browse Klook and partner activity options across Dubai, Abu Dhabi, Bangkok, Singapore, and Kuala Lumpur. Compare available dates, inclusions, checkout totals, and cancellation terms before booking."
+                  : isBn
+                    ? "লন্ডন, প্যারিস, রোম ও নিউ ইয়র্কের মিউজিয়াম এবং ভিউপয়েন্টে Tiqets-এর নির্ধারিত সময়ের টিকিট দেখুন, অথবা দুবাই, ব্যাংকক, সিঙ্গাপুর ও কুয়ালালামপুরের থিম পার্ক, ডেজার্ট সাফারি ও ডিনার ক্রুজের জন্য Klook-এর তালিকা তুলনা করুন।"
+                    : "Pre-book timed-entry passes for Paris, London, Rome, Milan, Venice, and New York via Tiqets, or compare Klook activity listings for theme parks, desert safaris, and dinner cruises across Dubai, Bangkok, Singapore, and Kuala Lumpur."}
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -785,38 +805,49 @@ export const ExperiencesPage: React.FC<ExperiencesPageProps> = ({ lang, onNaviga
           <div className="flex items-center gap-1.5 p-1.5 bg-slate-200/75 rounded-xl overflow-x-auto">
             {[
               {
-                id: "all",
+                id: "all" as const,
+                path: "/experiences",
                 label: isBn ? "সব গ্লোবাল হাব (7 শহর)" : "All Global Hubs (7 Cities)",
               },
               {
-                id: "west",
+                id: "west" as const,
+                path: "/experiences/europe",
                 label: isBn
                   ? "Europe, UK ও USA — Tiqets (4)"
                   : "Europe, UK & USA — Tiqets (4)",
               },
               {
-                id: "asia",
+                id: "asia" as const,
+                path: "/experiences/asia",
                 label: isBn
                   ? "Asia ও Middle East — Klook + KKday (3)"
                   : "Asia & Middle East — Klook + KKday (3)",
               },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => {
-                  setRegionFilter(tab.id as any);
-                  setSelectedCityId("all");
-                }}
-                className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                  regionFilter === tab.id
-                    ? "bg-brand-navy text-white shadow-xs"
-                    : "text-slate-700 hover:text-slate-900"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+            ].map((tab) => {
+              const localizedHref = isBn ? `/bn${tab.path}` : tab.path;
+              const isActive = regionFilter === tab.id;
+              return (
+                <a
+                  key={tab.id}
+                  href={localizedHref}
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={(e) => {
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                    e.preventDefault();
+                    setRegionFilter(tab.id);
+                    setSelectedCityId("all");
+                    onNavigate(tab.path);
+                  }}
+                  className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap cursor-pointer ${
+                    isActive
+                      ? "bg-brand-navy text-white shadow-xs"
+                      : "text-slate-700 hover:text-slate-900"
+                  }`}
+                >
+                  {tab.label}
+                </a>
+              );
+            })}
           </div>
 
           {/* City Quick Selector */}

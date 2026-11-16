@@ -17,6 +17,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { SITE_ORIGIN } from "../utils/localeRoutes";
+import { readOptionalStorage, useConsent, writeOptionalStorage } from "../utils/consent";
 import { Language } from "../translations";
 import { BLOG_DATA } from "../constants";
 import type * as BengaliContentModule from "../data/bengaliContent";
@@ -338,15 +339,12 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
   const isPreDeparture = variant !== "sitemap";
   const isSitemapVariant = variant === "sitemap";
 
-  const [checkedIds, setCheckedIds] = useState<string[]>(() => {
-    if (typeof window === "undefined") return ["passport-6m", "return-ticket-hotel"];
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : ["passport-6m", "return-ticket-hotel"];
-    } catch {
-      return ["passport-6m", "return-ticket-hotel"];
-    }
-  });
+  const preferencesAllowed = useConsent("functionality");
+  const [checkedIds, setCheckedIds] = useState<string[]>([
+    "passport-6m",
+    "return-ticket-hotel",
+  ]);
+  const [hydratedSavedChecklist, setHydratedSavedChecklist] = useState(false);
 
   const [countrySearch, setCountrySearch] = useState("");
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
@@ -489,12 +487,24 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
   }, [uncheckedChecklistItems, countrySearch]);
 
   useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedIds));
-    } catch {
-      // ignore storage quota errors
+    if (!preferencesAllowed) return;
+    if (!hydratedSavedChecklist) {
+      setHydratedSavedChecklist(true);
+      try {
+        const saved = readOptionalStorage(STORAGE_KEY);
+        if (saved) {
+          const parsed: unknown = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.every((id) => typeof id === "string")) {
+            setCheckedIds(parsed);
+            return;
+          }
+        }
+      } catch {
+        // Ignore malformed storage and persist current state below.
+      }
     }
-  }, [checkedIds]);
+    writeOptionalStorage(STORAGE_KEY, JSON.stringify(checkedIds));
+  }, [checkedIds, preferencesAllowed, hydratedSavedChecklist]);
 
   const toggleItem = (id: string) => {
     setCheckedIds((prev) =>
@@ -1115,8 +1125,9 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
               🕋 {isBn ? "ওমরাহ ও হজ প্ল্যানার ২০২৬" : "Umrah & Hajj Hub 2026"}
             </a>
             <a
-              href="/experiences"
+              href={isBn ? "/bn/experiences" : "/experiences"}
               onClick={(e) => {
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
                 e.preventDefault();
                 onNavigate("/experiences");
               }}
@@ -1315,6 +1326,8 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
               { path: "/destinations", en: "Destination Itineraries", bn: "গন্তব্য ভ্রমণ গাইড" },
               { path: "/costs", en: "Trip Cost Calculators", bn: "ভ্রমণ খরচ ক্যালকুলেটর" },
               { path: "/experiences", en: "Attractions & Passes", bn: "আকর্ষণ ও টিকিট" },
+              { path: "/experiences/europe", en: "Europe, UK & US Passes", bn: "ইউরোপ, UK ও USA পাস" },
+              { path: "/experiences/asia", en: "Asia & Dubai Passes", bn: "এশিয়া ও দুবাই পাস" },
               { path: "/umrah", en: "DIY Umrah & Hajj Hub", bn: "উমরাহ ও হজ হাব" },
               { path: "/tools", en: "Interactive Travel Tools", bn: "ইন্টারেক্টিভ ট্রাভেল টুলস" },
               { path: "/resources", en: "Official Sources Directory", bn: "সরকারি সূত্রের তালিকা" },
@@ -1323,8 +1336,9 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
             ].map((hub) => (
               <a
                 key={hub.path}
-                href={hub.path}
+                href={isBn ? (hub.path === "/" ? "/bn" : `/bn${hub.path}`) : hub.path}
                 onClick={(e) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
                   e.preventDefault();
                   onNavigate(hub.path);
                 }}

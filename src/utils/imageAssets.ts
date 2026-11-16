@@ -1,10 +1,3 @@
-export {
-  cleanBlogTitleForAlt,
-  generateBlogCoverAltText,
-  getBlogImageAltText,
-  type BlogCoverAltTextInput,
-} from "./blogAltText";
-
 /**
  * Shared image metadata for optimized responsive site photography.
  *

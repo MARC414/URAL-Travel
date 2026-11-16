@@ -1,185 +1,173 @@
-import React, { useState, useEffect } from "react";
-import { ShieldCheck, Cookie, Settings2, Check, X, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { ShieldCheck, Cookie, Settings2, ChevronDown, ChevronUp, Sliders } from "lucide-react";
 import { Language } from "../translations";
+import {
+  CONSENT_CATEGORY_LABELS,
+  CONSENT_OPEN_EVENT,
+  DEFAULT_CONSENT_SETTINGS,
+  applyConsentState,
+  readConsentState,
+  restoreConsentFocus,
+  subscribeConsent,
+  writeConsentChoice,
+  type ConsentStatus,
+  type GranularConsentSettings,
+  type StoredConsentStatus,
+} from "../utils/consent";
+
+export type { ConsentStatus, GranularConsentSettings };
 
 interface ConsentBannerProps {
   onNavigate?: (path: string) => void;
   lang?: Language;
+  initialCustomize?: boolean;
 }
 
-export type ConsentStatus = "accepted" | "declined" | "custom";
+const BTN_FOCUS =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
+const SWITCH_TRACK =
+  "relative w-9 h-5 bg-slate-700 rounded-full peer peer-focus-visible:ring-2 peer-focus-visible:ring-[#F6B73C] peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-900 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#F6B73C]";
 
-export interface GranularConsentSettings {
-  necessary: boolean; // Always true
-  analytics: boolean;
-  marketing: boolean;
-  functionality: boolean;
-}
-
-const DEFAULT_GRANULAR: GranularConsentSettings = {
-  necessary: true,
-  analytics: true,
-  marketing: false,
-  functionality: true,
-};
-
+/** Compatibility wrapper: persists and applies a consent update through the central consent module. */
 export function updateGoogleConsentMode(granted: boolean | GranularConsentSettings) {
-  if (typeof window === "undefined") return;
-
-  window.dataLayer = window.dataLayer || [];
-  if (typeof window.gtag !== "function") {
-    window.gtag = function (...args: unknown[]) {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(args as unknown as Record<string, unknown>);
-    };
-  }
-
-  let analyticsGranted = false;
-  let marketingGranted = false;
-  let funcGranted = true;
-
   if (typeof granted === "boolean") {
-    analyticsGranted = granted;
-    marketingGranted = granted;
-    funcGranted = granted;
+    writeConsentChoice(granted ? "accepted" : "declined");
   } else {
-    analyticsGranted = Boolean(granted.analytics);
-    marketingGranted = Boolean(granted.marketing);
-    funcGranted = Boolean(granted.functionality);
+    writeConsentChoice(granted);
   }
-
-  const consentPayload = {
-    ad_storage: marketingGranted ? "granted" : "denied",
-    ad_user_data: marketingGranted ? "granted" : "denied",
-    ad_personalization: marketingGranted ? "granted" : "denied",
-    analytics_storage: analyticsGranted ? "granted" : "denied",
-    functionality_storage: funcGranted ? "granted" : "denied",
-    personalization_storage: funcGranted ? "granted" : "denied",
-    security_storage: "granted", // Always granted for site security & spam prevention
-  };
-
-  window.gtag("consent", "update", consentPayload);
-
-  window.dataLayer.push({
-    event: "consent_update",
-    consent_status: typeof granted === "boolean" ? (granted ? "accepted" : "declined") : "custom",
-    consent_details: consentPayload,
-  });
-
-  window.dispatchEvent(
-    new CustomEvent("ural:consent-updated", {
-      detail: {
-        status: typeof granted === "boolean" ? (granted ? "accepted" : "declined") : "custom",
-        payload: consentPayload,
-      },
-    })
-  );
 }
 
-export function ConsentBanner({ onNavigate, lang = "en" }: ConsentBannerProps) {
-  const [visible, setVisible] = useState(false);
-  const [showCustomize, setShowCustomize] = useState(false);
-  const [settings, setSettings] = useState<GranularConsentSettings>(DEFAULT_GRANULAR);
+export function ConsentBanner({
+  onNavigate,
+  lang = "en",
+  initialCustomize = false,
+}: ConsentBannerProps) {
+  const [visible, setVisible] = useState(initialCustomize);
+  const [showCustomize, setShowCustomize] = useState(initialCustomize);
+  const [storedStatus, setStoredStatus] = useState<StoredConsentStatus>("unset");
+  const [settings, setSettings] = useState<GranularConsentSettings>({ ...DEFAULT_CONSENT_SETTINGS });
+  const [focusHeadingTick, setFocusHeadingTick] = useState(initialCustomize ? 1 : 0);
+  const [restoreFocusTick, setRestoreFocusTick] = useState(0);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   const isBn = lang === "bn";
+  const locale = isBn ? "bn" : "en";
   const privacyPath = isBn ? "/bn/privacy" : "/privacy";
 
   useEffect(() => {
-    // Check if user has already stored consent
-    try {
-      const stored = localStorage.getItem("cookie-consent");
-      if (!stored) {
-        // Small delay so page renders first without layout jank
-        const timer = setTimeout(() => setVisible(true), 800);
-        return () => clearTimeout(timer);
-      } else {
-        // Apply existing choice to GTM on mount
-        if (stored === "accepted") {
-          updateGoogleConsentMode(true);
-        } else if (stored === "declined") {
-          updateGoogleConsentMode(false);
-        } else {
-          try {
-            const parsed = JSON.parse(localStorage.getItem("cookie-consent-settings") || "{}");
-            updateGoogleConsentMode(parsed);
-          } catch {
-            updateGoogleConsentMode(false);
-          }
-        }
-      }
-    } catch {
-      setVisible(true);
-    }
-  }, []);
-
-  // Listen for global reopen requests (e.g. from Privacy Policy page "Change Preferences" button)
-  useEffect(() => {
-    const handleReopen = () => {
+    const initial = readConsentState();
+    setStoredStatus(initial.status);
+    setSettings(initial.settings);
+    if (initialCustomize) {
       setVisible(true);
       setShowCustomize(true);
-    };
-    window.addEventListener("ural:open-cookie-banner", handleReopen);
-    return () => {
-      window.removeEventListener("ural:open-cookie-banner", handleReopen);
-    };
+      setFocusHeadingTick((n) => n + 1);
+      return undefined;
+    }
+    if (initial.status === "unset") {
+      setVisible(true);
+      return undefined;
+    }
+    applyConsentState(initial.status, initial.settings, false);
+    return undefined;
+  }, [initialCustomize]);
+
+  // Run heading focus strictly after React commits the opened banner DOM.
+  useEffect(() => {
+    if (!visible || focusHeadingTick === 0) return;
+    headingRef.current?.focus({ preventScroll: true });
+  }, [visible, focusHeadingTick]);
+
+  // Restore focus strictly after React commits the banner dismissal and any
+  // sibling consent state transitions (e.g. unmounting a consent button for an iframe).
+  useEffect(() => {
+    if (visible || restoreFocusTick === 0) return;
+    restoreConsentFocus();
+  }, [visible, restoreFocusTick]);
+
+  useEffect(() => {
+    return subscribeConsent((next) => {
+      setStoredStatus(next.status);
+      setSettings(next.settings);
+      // If consent was recorded/updated elsewhere (e.g. /privacy control center
+      // or another tab), dismiss the floating banner so it never stays stuck open.
+      if (next.status !== "unset") {
+        setVisible(false);
+        setShowCustomize(false);
+      }
+    });
   }, []);
 
+  useEffect(() => {
+    const handleReopen = () => {
+      const current = readConsentState();
+      setStoredStatus(current.status);
+      setSettings(current.settings);
+      setVisible(true);
+      setShowCustomize(true);
+      setFocusHeadingTick((n) => n + 1);
+    };
+    window.addEventListener(CONSENT_OPEN_EVENT, handleReopen);
+    return () => window.removeEventListener(CONSENT_OPEN_EVENT, handleReopen);
+  }, []);
+
+  useEffect(() => {
+    if (!visible || storedStatus === "unset") return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setVisible(false);
+        setShowCustomize(false);
+        setRestoreFocusTick((n) => n + 1);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [visible, storedStatus]);
+
   const handleAcceptAll = () => {
-    try {
-      localStorage.setItem("cookie-consent", "accepted");
-      localStorage.setItem(
-        "cookie-consent-settings",
-        JSON.stringify({
-          necessary: true,
-          analytics: true,
-          marketing: true,
-          functionality: true,
-        })
-      );
-    } catch {
-      // storage unavailable in strict private mode
-    }
-    updateGoogleConsentMode(true);
+    const next = writeConsentChoice("accepted");
+    setStoredStatus(next.status);
+    setSettings(next.settings);
+    setShowCustomize(false);
     setVisible(false);
+    setRestoreFocusTick((n) => n + 1);
   };
 
-  const handleDeclineNonEssential = () => {
-    try {
-      localStorage.setItem("cookie-consent", "declined");
-      localStorage.setItem(
-        "cookie-consent-settings",
-        JSON.stringify({
-          necessary: true,
-          analytics: false,
-          marketing: false,
-          functionality: false,
-        })
-      );
-    } catch {
-      // storage unavailable
-    }
-    updateGoogleConsentMode(false);
+  const handleRejectAll = () => {
+    const next = writeConsentChoice("declined");
+    setStoredStatus(next.status);
+    setSettings(next.settings);
+    setShowCustomize(false);
     setVisible(false);
+    setRestoreFocusTick((n) => n + 1);
   };
 
   const handleSaveCustom = () => {
-    try {
-      localStorage.setItem("cookie-consent", "custom");
-      localStorage.setItem("cookie-consent-settings", JSON.stringify(settings));
-    } catch {
-      // storage unavailable
-    }
-    updateGoogleConsentMode(settings);
+    const next = writeConsentChoice(settings);
+    setStoredStatus(next.status);
+    setSettings(next.settings);
+    setShowCustomize(false);
     setVisible(false);
+    setRestoreFocusTick((n) => n + 1);
+  };
+
+  const handleToggleCustomize = () => {
+    if (!showCustomize) {
+      const current = readConsentState();
+      setStoredStatus(current.status);
+      setSettings(current.settings);
+    }
+    setShowCustomize((prev) => !prev);
   };
 
   const handlePrivacyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    if (onNavigate) {
-      onNavigate(privacyPath);
-    } else {
-      window.location.href = privacyPath;
+    setShowCustomize(false);
+    if (storedStatus !== "unset") {
+      setVisible(false);
     }
+    if (onNavigate) onNavigate(privacyPath);
+    else window.location.href = privacyPath;
   };
 
   if (!visible) return null;
@@ -187,50 +175,47 @@ export function ConsentBanner({ onNavigate, lang = "en" }: ConsentBannerProps) {
   return (
     <aside
       role="region"
-      aria-label={isBn ? "কুকি ও গোপনীয়তা সম্মতি ব্যানার" : "Cookie and Privacy Consent Banner"}
-      className="fixed bottom-0 inset-x-0 z-50 p-3 sm:p-4 md:p-6 bg-slate-950/95 backdrop-blur-xl border-t border-[#F6B73C]/30 shadow-[0_-10px_35px_rgba(0,0,0,0.6)] text-slate-200 animate-fade-in font-sans"
+      aria-labelledby="ural-consent-heading"
+      data-consent-banner
+      className="fixed bottom-0 inset-x-0 z-[70] max-h-[85dvh] overflow-y-auto overscroll-contain p-3 sm:p-4 md:p-6 bg-slate-950/95 backdrop-blur-xl border-t border-[#F6B73C]/30 shadow-[0_-10px_35px_rgba(0,0,0,0.6)] text-slate-200 animate-fade-in font-sans"
     >
       <div className="max-w-7xl mx-auto space-y-4">
-        {/* Main Banner Bar */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-          {/* Icon & Message */}
-          <div className="flex items-start gap-3.5 max-w-4xl">
+          <div className="flex items-start gap-3.5 max-w-3xl">
             <div className="p-2.5 bg-[#F6B73C]/10 border border-[#F6B73C]/30 text-[#F6B73C] rounded-xl shrink-0 mt-0.5">
-              <ShieldCheck className="w-5 h-5" />
+              <ShieldCheck className="w-5 h-5" aria-hidden="true" />
             </div>
             <div className="space-y-1 text-xs leading-relaxed">
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-bold text-white text-sm">
-                  {isBn ? "আপনার গোপনীয়তা ও নিরাপদ ভ্রমণ" : "Your Privacy & Travel Safety"}
-                </span>
-                <span className="text-[10px] font-mono uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-semibold">
-                  Google Consent Mode v2
-                </span>
-              </div>
+              <h2
+                id="ural-consent-heading"
+                ref={headingRef}
+                tabIndex={-1}
+                className="font-bold text-white text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] rounded"
+              >
+                {isBn ? "কুকি ও গোপনীয়তা পছন্দ" : "Cookie & Privacy Preferences"}
+              </h2>
               <p className="text-slate-300">
                 {isBn ? (
                   <>
-                    URAL Travel Intelligence প্ল্যাটফর্মের নিরাপত্তা বজায় রাখতে এবং আপনার পছন্দের মুদ্রা ও ভাষা মনে রাখতে প্রয়োজনীয় কুকি ব্যবহার করে। আপনার সম্মতি অনুযায়ী আমরা অ্যানালিটিক্স (GA4 ও GTM) ব্যবহার করি যাতে বিমান ভাড়া ও ভিসা গাইডের নির্ভুলতা উন্নত করা যায়। আমরা কখনই কোনো ব্যক্তিগত ডেটা বা ক্রেডিট কার্ড তথ্য বিক্রি বা শেয়ার করি না। বিস্তারিত জানতে আমাদের{" "}
+                    আমরা সাইটের নিরাপত্তার জন্য শুধু প্রয়োজনীয় কুকি চালু রাখি। আপনার স্পষ্ট সম্মতি ছাড়া অ্যানালিটিক্স (GA4/GTM), অ্যাফিলিয়েট ট্র্যাকিং বা এম্বেডেড পার্টনার টুলস (যেমন eVisas চেকার) লোড হয় না। যেকোনো সময় পছন্দ বদলাতে বা প্রত্যাহার করতে পারবেন। বিস্তারিত{" "}
                     <a
                       href={privacyPath}
                       onClick={handlePrivacyClick}
-                      className="text-[#F6B73C] font-semibold underline underline-offset-2 hover:text-[#ffd26a] inline-flex items-center gap-0.5 transition-colors cursor-pointer"
+                      className={`text-[#F6B73C] font-semibold underline underline-offset-2 hover:text-[#ffd26a] rounded ${BTN_FOCUS}`}
                     >
-                      গোপনীয়তা ও কুকি নীতিমালা
-                      <ExternalLink className="w-3 h-3 inline ml-0.5" />
-                    </a>{" "}
-                    পড়ুন।
+                      গোপনীয়তা ও কুকি নীতিমালায়
+                    </a>
+                    ।
                   </>
                 ) : (
                   <>
-                    URAL Travel Intelligence uses essential cookies to ensure secure platform operation and remember your currency &amp; language preferences. With your consent, we use privacy-conscious analytics (Google Analytics 4 &amp; GTM Consent Mode v2) to refine our flight benchmark schedules and visa guides. We never sell your personal data or store payment credentials. For full details, review our{" "}
+                    We keep only strictly necessary security controls active by default. Optional analytics (GA4/GTM), affiliate tracking and embedded partner tools (such as the eVisas checker) stay off unless you allow them, and you can withdraw consent at any time. Read our{" "}
                     <a
                       href={privacyPath}
                       onClick={handlePrivacyClick}
-                      className="text-[#F6B73C] font-semibold underline underline-offset-2 hover:text-[#ffd26a] inline-flex items-center gap-0.5 transition-colors cursor-pointer"
+                      className={`text-[#F6B73C] font-semibold underline underline-offset-2 hover:text-[#ffd26a] rounded ${BTN_FOCUS}`}
                     >
                       Privacy &amp; Cookie Policy
-                      <ExternalLink className="w-3 h-3 inline ml-0.5" />
                     </a>
                     .
                   </>
@@ -239,120 +224,164 @@ export function ConsentBanner({ onNavigate, lang = "en" }: ConsentBannerProps) {
             </div>
           </div>
 
-          {/* Action Button Strip */}
-          <div className="flex items-center gap-2 w-full lg:w-auto shrink-0 flex-wrap sm:flex-nowrap justify-end">
+          {/* Equal single-click Reject All and Accept All, plus Customize */}
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full lg:w-auto shrink-0">
             <button
               type="button"
-              onClick={() => setShowCustomize(!showCustomize)}
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white transition-all cursor-pointer"
+              onClick={handleToggleCustomize}
+              aria-expanded={showCustomize}
+              aria-controls="ural-consent-categories"
+              className={`col-span-2 sm:col-span-1 min-h-11 inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold rounded-xl bg-slate-900 border border-slate-500 hover:border-slate-300 text-slate-100 hover:text-white transition-colors cursor-pointer ${BTN_FOCUS}`}
             >
-              <Settings2 className="w-3.5 h-3.5" />
-              <span>{isBn ? "পছন্দ কাস্টমাইজ" : "Customize"}</span>
+              <Settings2 className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>{isBn ? "কাস্টমাইজ" : "Customize"}</span>
               {showCustomize ? (
-                <ChevronUp className="w-3.5 h-3.5 ml-0.5" />
+                <ChevronUp className="w-3.5 h-3.5" aria-hidden="true" />
               ) : (
-                <ChevronDown className="w-3.5 h-3.5 ml-0.5" />
+                <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />
               )}
             </button>
 
             <button
               type="button"
-              onClick={handleDeclineNonEssential}
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer"
+              onClick={handleRejectAll}
+              data-consent-action="reject-all"
+              className={`min-h-11 inline-flex items-center justify-center px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-400 text-white transition-colors cursor-pointer ${BTN_FOCUS}`}
             >
-              {isBn ? "প্রয়োজনীয় ছাড়া প্রত্যাখ্যান" : "Essential Only"}
+              {isBn ? "সব প্রত্যাখ্যান করুন" : "Reject All"}
             </button>
 
             <button
               type="button"
               onClick={handleAcceptAll}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy shadow-md hover:shadow-lg transition-all cursor-pointer"
+              data-consent-action="accept-all"
+              className={`min-h-11 inline-flex items-center justify-center px-4 py-2.5 text-xs font-bold rounded-xl bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy transition-colors cursor-pointer ${BTN_FOCUS}`}
             >
-              <Check className="w-3.5 h-3.5 stroke-[3]" />
-              <span>{isBn ? "সব গ্রহণ করুন" : "Accept All"}</span>
+              {isBn ? "সব গ্রহণ করুন" : "Accept All"}
             </button>
           </div>
         </div>
 
-        {/* Expandable Granular Consent Customization Panel */}
         {showCustomize && (
-          <div className="pt-4 mt-2 border-t border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-3 animate-fade-in text-xs">
-            {/* 1. Necessary (Always Active) */}
+          <div
+            id="ural-consent-categories"
+            className="pt-4 mt-2 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 animate-fade-in text-xs"
+          >
+            {/* 1. Strictly Necessary */}
             <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-2">
                 <span className="font-bold text-white flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  {isBn ? "প্রয়োজনীয় কুকি (আবশ্যক)" : "Strictly Necessary"}
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" aria-hidden="true" />
+                  {CONSENT_CATEGORY_LABELS.necessary[locale]}
                 </span>
-                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
-                  {isBn ? "সর্বদা সক্রিয়" : "Always Active"}
+                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold shrink-0">
+                  {isBn ? "সর্বদা সক্রিয়" : "Always On"}
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 leading-snug">
                 {isBn
-                  ? "প্ল্যাটফর্ম নিরাপত্তা, ক্লাউডফ্লেয়ার ডিফেন্স, ভাষা ও মুদ্রা সিলেকশন বজায় রাখার জন্য আবশ্যক।"
-                  : "Required for core security, Cloudflare edge shielding, CSRF token handling, and language/currency settings."}
+                  ? "সাইটের মূল কার্যকারিতা, Cloudflare স্প্যাম সুরক্ষা এবং আপনার কুকি সিদ্ধান্ত মনে রাখতে আবশ্যক।"
+                  : "Required for core page delivery, Cloudflare spam protection on forms, and saving your cookie choice."}
               </p>
             </div>
 
-            {/* 2. Analytics & Performance */}
+            {/* 2. Preferences (Functionality) */}
             <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-white flex items-center gap-1.5">
-                  <Cookie className="w-3.5 h-3.5 text-[#F6B73C]" />
-                  {isBn ? "অ্যানালিটিক্স ও পারফরম্যান্স" : "Analytics & Performance"}
+              <div className="flex items-center justify-between gap-2">
+                <span id="consent-label-functionality" className="font-bold text-white flex items-center gap-1.5">
+                  <Sliders className="w-3.5 h-3.5 text-emerald-300 shrink-0" aria-hidden="true" />
+                  {CONSENT_CATEGORY_LABELS.functionality[locale]}
                 </span>
-                <label className="relative inline-flex items-center cursor-pointer">
+                <label className="relative -my-2 inline-flex min-h-11 min-w-11 items-center justify-end cursor-pointer shrink-0">
                   <input
                     type="checkbox"
+                    aria-labelledby="consent-label-functionality"
+                    data-consent-toggle="functionality"
+                    checked={settings.functionality}
+                    onChange={(e) => setSettings({ ...settings, functionality: e.target.checked })}
+                    className="sr-only peer"
+                  />
+                  <div className={SWITCH_TRACK} />
+                </label>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-snug">
+                {isBn
+                  ? "ভাষা, প্রস্থানের চেকলিস্টের অগ্রগতি এবং সংরক্ষিত ভাড়া-সতর্কতার তালিকা আপনার ব্রাউজারে মনে রাখে।"
+                  : "Remembers your language choice, saved checklist ticks, and local alert preferences in this browser."}
+              </p>
+            </div>
+
+            {/* 3. Analytics */}
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+              <div className="flex items-center justify-between gap-2">
+                <span id="consent-label-analytics" className="font-bold text-white flex items-center gap-1.5">
+                  <Cookie className="w-3.5 h-3.5 text-[#F6B73C] shrink-0" aria-hidden="true" />
+                  {CONSENT_CATEGORY_LABELS.analytics[locale]}
+                </span>
+                <label className="relative -my-2 inline-flex min-h-11 min-w-11 items-center justify-end cursor-pointer shrink-0">
+                  <input
+                    type="checkbox"
+                    aria-labelledby="consent-label-analytics"
+                    data-consent-toggle="analytics"
                     checked={settings.analytics}
-                    onChange={(e) =>
-                      setSettings({ ...settings, analytics: e.target.checked })
-                    }
+                    onChange={(e) => setSettings({ ...settings, analytics: e.target.checked })}
                     className="sr-only peer"
                   />
-                  <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#F6B73C]"></div>
+                  <div className={SWITCH_TRACK} />
                 </label>
               </div>
               <p className="text-[11px] text-slate-400 leading-snug">
                 {isBn
-                  ? "গুগল অ্যানালিটিক্স ৪ ও ট্যাগ ম্যানেজার দ্বারা ভিজিট সংখ্যা ও জনপ্রিয় ট্রাভেল গাইডের পারফরম্যান্স পরিমাপ করা হয়।"
-                  : "Google Analytics 4 & GTM anonymous telemetry to measure route popularity and optimize flight schedules."}
+                  ? "Google Tag Manager ও GA4 লোড করে পেজ ভিজিট ও টুল ব্যবহারের সমষ্টিগত পরিসংখ্যান মাপে। বন্ধ থাকলে কোনো ডেটা যায় না।"
+                  : "Loads Google Tag Manager and GA4 to measure aggregate page views and tool usage. Off means no analytics script or events load."}
               </p>
             </div>
 
-            {/* 3. Marketing & Partner Personalization */}
+            {/* 4. Marketing & Partner Tools */}
             <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-white flex items-center gap-1.5">
-                  <Settings2 className="w-3.5 h-3.5 text-blue-400" />
-                  {isBn ? "পার্টনার রেফারেল ও অফার" : "Partner Referral & Offers"}
+              <div className="flex items-center justify-between gap-2">
+                <span id="consent-label-marketing" className="font-bold text-white flex items-center gap-1.5">
+                  <Settings2 className="w-3.5 h-3.5 text-blue-400 shrink-0" aria-hidden="true" />
+                  {CONSENT_CATEGORY_LABELS.marketing[locale]}
                 </span>
-                <label className="relative inline-flex items-center cursor-pointer">
+                <label className="relative -my-2 inline-flex min-h-11 min-w-11 items-center justify-end cursor-pointer shrink-0">
                   <input
                     type="checkbox"
+                    aria-labelledby="consent-label-marketing"
+                    data-consent-toggle="marketing"
                     checked={settings.marketing}
-                    onChange={(e) =>
-                      setSettings({ ...settings, marketing: e.target.checked })
-                    }
+                    onChange={(e) => setSettings({ ...settings, marketing: e.target.checked })}
                     className="sr-only peer"
                   />
-                  <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#F6B73C]"></div>
+                  <div className={SWITCH_TRACK} />
                 </label>
               </div>
               <p className="text-[11px] text-slate-400 leading-snug">
                 {isBn
-                  ? "Travelpayouts, Aviasales, Klook ও Airalo-র বুকিং রেফারেল ট্র্যাকিং সক্ষম করে। কোনো ব্যক্তিগত তথ্য থাকে না।"
-                  : "Enables secure partner attribution with Travelpayouts, Aviasales & Klook for booking referrals."}
+                  ? "Travelpayouts অ্যাফিলিয়েট ট্র্যাকিং এবং ঐচ্ছিক এম্বেডেড পার্টনার টুলস (eVisas ভিসা চেকার, Tiqets, AirHelp, Welcome Pickups) চালু করে। চালু থাকলে ওই সেবাদাতারা আপনার IP address, ব্রাউজারের তথ্য ও টুলের ইনপুট পায়।"
+                  : "Enables Travelpayouts affiliate tracking and optional embedded partner tools (eVisas visa checker, Tiqets, AirHelp, Welcome Pickups). When enabled, those providers receive your IP address, browser details, and inputs inside their tools."}
               </p>
             </div>
 
-            {/* Save Preferences Button */}
-            <div className="md:col-span-3 flex justify-end gap-2 pt-2">
+            <div className="sm:col-span-2 lg:col-span-4 flex flex-wrap justify-end gap-2 pt-2">
+              {storedStatus !== "unset" && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowCustomize(false);
+                    setVisible(false);
+                    setRestoreFocusTick((n) => n + 1);
+                  }}
+                  className={`min-h-11 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-500 text-slate-200 font-semibold text-xs transition-colors cursor-pointer ${BTN_FOCUS}`}
+                >
+                  {isBn ? "বাতিল" : "Cancel"}
+                </button>
+              )}
               <button
                 type="button"
                 onClick={handleSaveCustom}
-                className="px-4 py-1.5 rounded-xl bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-bold text-xs shadow transition-all cursor-pointer"
+                data-consent-action="save-custom"
+                className={`min-h-11 px-5 py-2 rounded-xl bg-[#F6B73C] hover:bg-[#e5a832] text-brand-navy font-bold text-xs transition-colors cursor-pointer ${BTN_FOCUS}`}
               >
                 {isBn ? "পছন্দ সংরক্ষণ করুন" : "Save Preferences"}
               </button>
@@ -363,4 +392,5 @@ export function ConsentBanner({ onNavigate, lang = "en" }: ConsentBannerProps) {
     </aside>
   );
 }
+
 export default ConsentBanner;

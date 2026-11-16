@@ -11,6 +11,7 @@ import { TravelIntelligence } from "../components/AeoInspector";
 
 import { HotelHero as ImageOverlayHero } from "../components/HotelHero";
 import { VisaDirectoryCards, getVisaCountryLabel } from "../components/VisaDirectoryCards";
+import { EvisaBanner, EvisaVisaPanel } from "../components/EvisaPanels";
 import { VISA_OFFICIAL_SOURCES } from "../data/visaOfficialSources";
 import { LANDING_VISA_FAQS } from "../utils/faqSchema";
 import { BN_LANDING_VISA_FAQS } from "../utils/bn-faq-schema";
@@ -48,6 +49,7 @@ export default function VisaRouteView({ context }: RouteViewProps) {
           </div>
           <VisaDirectoryCards guides={localizedVisas} isBn={isBn} />
         </section>
+        <EvisaBanner size="horizontal" lang={isBn ? "bn" : "en"} placement="evisas_visa_hub_banner" />
         <section className="max-w-4xl space-y-4 border-t border-slate-200 pt-9">
           <h2 className="ural-section-title text-2xl text-brand-navy sm:text-3xl">{isBn ? "আবেদনের আগে সরকারি নিয়ম দেখুন" : "Before you apply"}</h2>
           <p className="text-sm leading-relaxed text-slate-600 sm:text-base">{isBn ? "ভ্রমণের উদ্দেশ্য ও পাসপোর্ট অনুযায়ী ভিসার ধরন বেছে নিন। সরকারি পোর্টাল বা দূতাবাসে বর্তমান নথি, ফি, পেমেন্ট ও প্রসেসিং নির্দেশনা যাচাই করুন। অনুমোদন নিশ্চিত নয়; অফেরতযোগ্য বুকিংয়ের আগে শর্ত বুঝে নিন।" : "Choose the route that fits your passport and purpose of travel. Check the current documents, fees, payment and processing instructions with the official portal or embassy. Approval is not guaranteed; understand the terms before making non-refundable bookings."}</p>
@@ -216,6 +218,12 @@ export default function VisaRouteView({ context }: RouteViewProps) {
                     </div>
 
 
+
+                    {/* eVisas next step. After the checklist (the reader's answer) and
+                        before the official sources, so the official route is reinforced
+                        rather than displaced. Renders only for destinations with a
+                        verified placement — see src/data/evisaProgram.ts. */}
+                    <EvisaVisaPanel visaId={activeVisa.id} lang={isBn ? "bn" : "en"} />
 
                     <section id="official-visa-sources" className="ural-guide-jump-target space-y-4 border-t border-slate-200 pt-8">
                       <h2 className="ural-section-title text-2xl text-brand-navy sm:text-3xl">{isBn ? "বর্তমান নিয়ম যাচাইয়ের সরকারি সূত্র" : "Official sources to verify current requirements"}</h2>

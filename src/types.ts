@@ -115,6 +115,8 @@ export interface TripCostData {
   references: { name: string; nameBn: string; url: string }[];
 }
 
+export type EvisaCampaignKey = "uae" | "morocco" | "thailand";
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -157,7 +159,13 @@ export interface BlogPost {
    */
   journeyStage?: "prepare" | "travel" | "perform" | "return";
   internalLinks: { text: string; path: string }[];
-  affiliateCTA?: { provider: "aviasales" | "klook" | "klookHotels" | "kkday" | "kkdayHotels" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "yesim" | "kiwi" | "getTransfer" | "goCity"; headline: string; body: string };
+  affiliateCTA?: {
+    provider: "aviasales" | "klook" | "klookHotels" | "kkday" | "kkdayHotels" | "kiwitaxi" | "welcomePickups" | "airalo" | "qeeq" | "tiqets" | "airhelp" | "radicalStorage" | "yesim" | "kiwi" | "getTransfer" | "goCity" | "evisas";
+    headline: string;
+    body: string;
+    /** Optional eVisas destination campaign, copied from the partner dashboard. */
+    campaign?: EvisaCampaignKey;
+  };
   /**
    * In-article callout boxes injected at specific paragraph positions.
    * blockIdx = the index in the \n\n-split body array where the callout renders.

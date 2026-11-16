@@ -364,7 +364,7 @@ export const BANKING_RELATED_HUBS = [
     labelBn: "বাংলাদেশ থেকে ওমরাহ খরচ ও ভিসা পরিকল্পনা",
   },
   {
-    path: "/tools?tab=currency",
+    path: "/tools/currency-converter",
     label: "Dual-currency card fee and markup calculator",
     labelBn: "ডুয়েল কারেন্সি কার্ড fee ও markup ক্যালকুলেটর",
   },
