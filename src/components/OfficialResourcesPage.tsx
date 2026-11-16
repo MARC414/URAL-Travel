@@ -671,7 +671,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
             const facts: string[] = [copy.uralMade, copy.pdf, fillResourceCopy(copy.pageCount, { count: download.pages }, locale)];
             if (isBn && download.fileLanguage === "en") facts.push(copy.fileInEnglish);
             return (
-              <li key={download.path} className="ural-card flex flex-col gap-4 border border-brand-gold-dark/40 bg-brand-ivory p-5">
+              <li key={download.path} className="ural-card flex flex-col gap-4 bg-white p-5 ring-1 ring-inset ring-brand-gold-dark/60">
                 <div className="flex items-start gap-3">
                   <FileText className="mt-0.5 size-7 shrink-0 text-brand-gold-ink" aria-hidden="true" />
                   <div className="min-w-0">
@@ -705,7 +705,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
                 href={source.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-auto inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-brand-navy px-4 text-sm font-bold text-brand-navy transition-colors hover:bg-brand-navy hover:text-white active:bg-brand-navy active:text-white ${FOCUS_RING}`}
+                className={`mt-auto inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-4 text-sm font-bold text-brand-navy ring-1 ring-inset ring-brand-navy/70 transition-colors hover:bg-brand-navy hover:text-white active:bg-brand-navy active:text-white ${FOCUS_RING}`}
               >
                 {copy.downloadOfficial.replace("{host}", source.host)}
                 <ExternalLink className="size-4" aria-hidden="true" />
@@ -722,7 +722,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
           id={OFFICIAL_COMMUNITY_SECTION_ID}
           data-community-sources
           aria-labelledby={`${OFFICIAL_COMMUNITY_SECTION_ID}-title`}
-          className="ural-panel scroll-mt-40 border border-dashed border-slate-300 bg-surface-soft p-5 sm:p-6 lg:scroll-mt-32"
+          className="ural-panel scroll-mt-40 bg-surface-soft p-5 sm:p-6 lg:scroll-mt-32"
         >
           <h2
             id={`${OFFICIAL_COMMUNITY_SECTION_ID}-title`}
