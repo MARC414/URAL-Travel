@@ -55,8 +55,10 @@ import { FlightRoute, HotelGuide, VisaGuide, DestinationGuide, TripCostData, Blo
 
 // Database Constants
 import { BLOG_SLUGS } from "./data/blogIndex";
-import { getBlogCoverImage } from "./utils/blogCoverImages";
-import { getBlogAeoSnippet50Words } from "./utils/blogSnippets";
+import {
+  ENGLISH_FEATURED_GROWTH_TOPICS,
+  HOME_FEATURED_BLOG_META,
+} from "./data/homeFeaturedBlogMeta";
 import type { BankingFaq } from "./data/bankingHubFaqs";
 import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
 
@@ -93,7 +95,11 @@ import { Language, translations } from "./translations";
 import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
-import { getBengaliSeoCopy, getSeoCopy } from "./utils/seoCopy";
+import {
+  getCoreBengaliSeoCopy as getBengaliSeoCopy,
+  getCoreSeoCopy as getSeoCopy,
+} from "./utils/coreSeoCopy";
+import type * as BlogRouteMetaModule from "./utils/blogRouteMeta";
 import {
   isToolSlug,
   toolPathForTab,
@@ -109,9 +115,7 @@ import {
 } from "./utils/localeRoutes";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { TiqetsEmbedWidget } from "./components/TiqetsEmbedWidget";
-import { generateBlogCoverAltText } from "./utils/imageAssets";
 import { ResponsiveImage } from "./components/ResponsiveImage";
-import { getRelatedBlogPosts } from "./utils/blogLinks";
 import {
   faqPageNodeSchema,
   howToSchema,
@@ -120,51 +124,8 @@ import {
   URAL_WIKIDATA_ENTITY_URL,
 } from "./utils/schema";
 import { getAuthorProfile } from "./data/authorProfiles";
-import {
-  getVisibleBlogFaqSection,
-  getVisibleBlogHowTos,
-} from "./utils/blogStructuredData";
 
 const BRAND_TAGLINE = "A Travel Intelligence Ecosystem";
-
-const ENGLISH_FEATURED_GROWTH_TOPICS = [
-  {
-    id: "trend-umrah-hajj",
-    category: "Religious Travel · 12 min",
-    searchQuery: "“DIY Umrah cost & Nusuk guide Bangladesh”",
-    title: "DIY Umrah from Bangladesh: Visa Routes, Nusuk Steps & Budget Checks",
-    excerpt:
-      "Conditional Umrah visa routes, application-to-permit steps and the limits of the historical budget. Use your own quotes for current totals; Hajj is a separate process.",
-    slug: "umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
-  },
-  {
-    id: "trend-endorsement",
-    category: "Banking & FX · 7 min",
-    searchQuery: "“How to get dual-currency card endorsement”",
-    title: "How to Get Dual-Currency Card Endorsement (2026 Passport Dollar Quota Guide)",
-    excerpt:
-      "Step-by-step guide to the $18,000 annual passport endorsement quota (Bangladesh Bank FEPD-1 Circular No. 33), endorsement and card activation, the $300 online-payment rule, and RFCD vs. travel-quota cards.",
-    slug: "dual-currency-card-endorsement-bangladesh",
-  },
-  {
-    id: "trend-family-budget",
-    category: "Family & Budget · 7 min",
-    searchQuery: "“Top budget-friendly family destinations from Dhaka”",
-    title: "Top 6 Budget-Friendly Family Destinations from Dhaka (Ranked by 5-Day BDT Cost)",
-    excerpt:
-      "Compare Nepal (from ৳42k), Malaysia (from ৳68k), Thailand, Maldives Local Islands, Singapore, and Dubai by total family BDT cost, visa speed, and Halal dining.",
-    slug: "top-budget-family-destinations-from-dhaka",
-  },
-  {
-    id: "trend-dac-immigration",
-    category: "Outbound Rules · 6 min",
-    searchQuery: "“Dhaka airport immigration documents checklist”",
-    title: "Dhaka Airport (DAC) Outbound Immigration Checklist: NOC, GO & First-Time Rules",
-    excerpt:
-      "Exact document folder checklist to clear Hazrat Shahjalal Airport emigration in under 2 minutes for job holders (NOC), govt staff (GO), business owners, and fresh passports.",
-    slug: "dhaka-airport-outbound-immigration-checklist-noc-go",
-  },
-];
 
 // Non-critical route & modal components loaded on demand to reduce initial JS parse/compile cost
 const FlightsRouteView = React.lazy(() => import("./routes/FlightsRouteView"));
@@ -1327,6 +1288,18 @@ export default function App() {
   // 122 routes. Idle scheduling keeps the fetch out of the critical path; the
   // fallback timer guarantees it still happens on browsers without
   // requestIdleCallback. Mirrors how ./data/bengaliContent is loaded for /bn/*.
+  const [blogRouteMeta, setBlogRouteMeta] = useState<typeof BlogRouteMetaModule | null>(null);
+  useEffect(() => {
+    if (section !== "blog" || blogRouteMeta) return;
+    let cancelled = false;
+    import("./utils/blogRouteMeta").then((mod) => {
+      if (!cancelled) setBlogRouteMeta(mod);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [section, blogRouteMeta]);
+
   const [blogBodies, setBlogBodies] = useState<Readonly<Record<string, string>> | null>(null);
   useEffect(() => {
     if (section !== "blog" || locale === "bn" || blogBodies) return;
@@ -1857,16 +1830,26 @@ export default function App() {
       seoDescription = bnPostSeo?.description || activePost.summary;
       seoImageUrl = postImgUrl;
 
+      const articleHeadline = bnPostSeo?.h1 || activePost.title;
+      const articleSectionLabel = activePost.category || "Bangladesh Outbound Travel Guides";
       const articleNode = articleSchema({
         url: postUrl,
-        headline: bnPostSeo?.h1 || activePost.title,
+        headline: articleHeadline,
         description: bnPostSeo?.description || activePost.summary,
         slug: activePost.slug,
         datePublished: canonicalPost.date,
         dateModified: canonicalPost.updatedAt || canonicalPost.date,
         authorRaw: canonicalPost.author,
-        articleSection: activePost.category,
+        articleSection: articleSectionLabel,
         imageUrl: postImgUrl,
+        imageCaption: blogRouteMeta
+          ? blogRouteMeta.generateBlogCoverAltText({
+              title: articleHeadline,
+              category: articleSectionLabel,
+              slug: activePost.slug,
+              lang: isBn ? "bn" : "en",
+            })
+          : articleHeadline,
         inLanguage: pageLanguage,
       });
 
@@ -1874,11 +1857,13 @@ export default function App() {
         ? activePost.content || ""
         : blogBodies?.[activePost.slug] || activePost.content || "";
       const structuredDataLocale = isBn ? "bn" : "en";
-      const visibleFaqSection = getVisibleBlogFaqSection(
-        activePost.slug,
-        articleBodyForSchema,
-        structuredDataLocale
-      );
+      const visibleFaqSection = blogRouteMeta
+        ? blogRouteMeta.getVisibleBlogFaqSection(
+            activePost.slug,
+            articleBodyForSchema,
+            structuredDataLocale
+          )
+        : null;
       const pageSchemaNodes: Record<string, unknown>[] = [articleNode];
 
       if (visibleFaqSection) {
@@ -1891,11 +1876,14 @@ export default function App() {
         );
       }
 
-      for (const howTo of getVisibleBlogHowTos(
-        activePost.slug,
-        articleBodyForSchema,
-        structuredDataLocale
-      )) {
+      const visibleHowTos = blogRouteMeta
+        ? blogRouteMeta.getVisibleBlogHowTos(
+            activePost.slug,
+            articleBodyForSchema,
+            structuredDataLocale
+          )
+        : [];
+      for (const howTo of visibleHowTos) {
         pageSchemaNodes.push(
           howToSchema({
             url: postUrl,
@@ -2178,21 +2166,23 @@ export default function App() {
   // Bengali pages must never fall back to the English copy tables: prefer the
   // hand-written BENGALI_SEO_COPY, then the generated /bn metadata from
   // bengaliContent (loaded lazily on /bn routes), then a compact fallback.
+  const resolveBengaliSeo = blogRouteMeta ? blogRouteMeta.getBengaliSeoCopy : getBengaliSeoCopy;
+  const resolveSeoCopy = blogRouteMeta ? blogRouteMeta.getSeoCopy : getSeoCopy;
   const sharedSeoCopy = isBn
     ? (() => {
         // Same precedence as scripts/prerender.ts: hand-written Bengali SERP
         // copy, then copy generated from the Bengali data, then a compact
         // fallback. Keeping the order identical is what guarantees the client
         // renders the same <title> the crawler already saw.
-        const bnHandWritten = getBengaliSeoCopy(seoRoutePath);
+        const bnHandWritten = resolveBengaliSeo(seoRoutePath);
         if (bnHandWritten) return bnHandWritten;
         const bnGenerated = bnContent?.getBengaliRouteSeo(seoRoutePath);
         if (bnGenerated) {
           return { title: bnGenerated.title, description: bnGenerated.description };
         }
-        return getSeoCopy(seoRoutePath, seoTitle, seoDescription, "bn");
+        return resolveSeoCopy(seoRoutePath, seoTitle, seoDescription, "bn");
       })()
-    : getSeoCopy(seoRoutePath, seoTitle, seoDescription);
+    : resolveSeoCopy(seoRoutePath, seoTitle, seoDescription);
   seoTitle = sharedSeoCopy.title;
   seoDescription = sharedSeoCopy.description;
 
@@ -2234,6 +2224,8 @@ export default function App() {
   }
 
   // Call the hook at the top level
+  const isBlogArticleMetaPending =
+    section === "blog" && !isLanding && (!blogRouteMeta || (isBn && !bnContent));
   useSeoMeta({
     title: seoTitle,
     description: seoDescription,
@@ -2242,6 +2234,7 @@ export default function App() {
     imageUrl: seoImageUrl,
     inLanguage: pageLanguage,
     noindex: section === "notFound",
+    defer: isBlogArticleMetaPending,
   });
 
   // Helper that normalizes legacy query-string paths to clean path-based routes
@@ -2419,7 +2412,7 @@ export default function App() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const routeViewContext: Record<string, any> = { BLOG_DATA, AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactError, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactError, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
+  const routeViewContext: Record<string, any> = { BLOG_DATA, AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactError, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactError, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
 
   return (
     // `overflow-x-clip`, not `overflow-x-hidden`: the full-bleed (100vw) heroes
@@ -4606,7 +4599,20 @@ export default function App() {
           {/* Strictly 4 Featured Blog Topics in a Single Row on Desktop (With Unique Image + 50-Word AEO Snippet + Read Full Blog Button) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {featuredGrowthTopics.map((topic) => {
-              const cardSnippet = getBlogAeoSnippet50Words(topic.slug, isBn, topic.excerpt);
+              const cardMeta = HOME_FEATURED_BLOG_META[topic.slug];
+              const cardSnippet = cardMeta
+                ? isBn
+                  ? cardMeta.snippetBn
+                  : cardMeta.snippetEn
+                : topic.excerpt;
+              const cardCover =
+                cardMeta?.coverImage ??
+                "/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp";
+              const cardAlt = cardMeta
+                ? isBn
+                  ? cardMeta.altBn
+                  : cardMeta.altEn
+                : topic.title;
               return (
                 <article
                   key={topic.id}
@@ -4616,14 +4622,9 @@ export default function App() {
                   <div>
                     <div className="relative aspect-[16/10] w-full bg-slate-900 overflow-hidden">
                       <ResponsiveImage
-                        src={getBlogCoverImage(topic.slug)}
+                        src={cardCover}
                         sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
-                        alt={generateBlogCoverAltText({
-                          title: topic.title,
-                          category: topic.category,
-                          slug: topic.slug,
-                          lang: isBn ? "bn" : "en",
-                        })}
+                        alt={cardAlt}
                         loading="lazy"
                         fetchPriority="low"
                         decoding="async"

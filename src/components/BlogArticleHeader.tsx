@@ -2,7 +2,7 @@ import { CalendarDays } from "lucide-react";
 import type { BlogPost } from "../types";
 import type { ArticleLocale } from "../utils/blogPresentation";
 import { toIsoDate } from "../utils/schema";
-import { generateBlogCoverAltText } from "../utils/imageAssets";
+import { generateBlogCoverAltText } from "../utils/blogAltText";
 import { QuickAnswer } from "./QuickAnswer";
 import { ResponsiveImage } from "./ResponsiveImage";
 

@@ -39,6 +39,7 @@ export interface SeoMetaProps {
   imageUrl?: string;
   inLanguage?: string;
   noindex?: boolean;
+  defer?: boolean;
 }
 
 /**
@@ -270,6 +271,7 @@ export function useSeoMeta({
   imageUrl,
   inLanguage = "en-BD",
   noindex = false,
+  defer = false,
 }: SeoMetaProps) {
   const schemaStr = safeStringify(schema);
   const breadcrumbsStr = safeStringify(breadcrumbs);
@@ -399,6 +401,12 @@ export function useSeoMeta({
     // 0. Upgrade legacy query-string URLs (?slug=, ?route=, etc.) to clean path URLs in place
     if (typeof window !== "undefined" && cleanPathTarget) {
       window.history.replaceState({}, "", cleanPathTarget);
+    }
+
+    // Keep prerendered head metadata and JSON-LD untouched while a blog
+    // article's lazy SEO/structured-data module finishes resolving.
+    if (defer) {
+      return;
     }
 
     // 1. Update Title & Meta Description
@@ -656,6 +664,7 @@ export function useSeoMeta({
     imageUrl,
     inLanguage,
     noindex,
+    defer,
   ]);
 }
 

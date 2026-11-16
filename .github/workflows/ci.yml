@@ -66,10 +66,24 @@ jobs:
       - name: Verify tool-usage events exist and cannot carry reader data
         run: npm run test:tool-analytics
 
+      - name: Verify Trip Cost Estimator quote logic and totals
+        run: npm run test:trip-estimator
+
+      - name: Verify dated exchange-rate snapshots and converter rules
+        run: npm run test:rates
+
       - name: Verify the expired KKday menu card cannot render
         run: npm run test:kkday-card
-      - name: Visa-claim integrity
-        run: npm run test:visa-claims
+
+      - name: Verify promotional card rules and disclosures
+        run: npm run test:promo-cards
+
+      - name: Verify hotel destination routing and handoffs
+        run: npm run test:hotel-routing
+
+      - name: Verify stage-based Journey Help panel routing
+        run: npm run test:journey-help
+
       - name: WhatsApp answer-desk manual
         run: npm run test:answer-desk
       - name: Brand mark integrity
@@ -93,9 +107,6 @@ jobs:
       - name: Verify women-specific Umrah source boundaries and locale parity
         run: npm run test:women-umrah-guide
 
-      - name: Verify older-traveller assistance, Haram mobility and clinical boundaries
-        run: npm run test:elderly-umrah-guide
-
       - name: Verify Ihram and Miqat source boundaries and locale parity
         run: npm run test:ihram-miqat-guide
 
@@ -111,6 +122,12 @@ jobs:
       - name: Verify the Ziyarah pair against district, SPA, Visit Saudi and operator sources
         run: npm run test:ziyarah-guide
 
+      - name: Verify Tawaf and Sa'i guide ritual boundaries and locale parity
+        run: npm run test:tawaf-sai-guide
+
+      - name: Verify Hajj rites guide boundaries and locale parity
+        run: npm run test:hajj-rites
+
       - name: Type-check
         run: npm run lint
 
@@ -119,6 +136,24 @@ jobs:
 
       - name: Verify prerendered output
         run: npm run verify:build
+
+      - name: Visa-claim and built-HTML affiliate-disclosure integrity
+        run: npm run test:visa-claims
+
+      - name: Verify older-traveller assistance, Haram mobility and built HTML
+        run: npm run test:elderly-umrah-guide
+
+      - name: Verify share captions and inline citations in built output
+        run: npm run test:sharing-citations
+
+      - name: Verify Saudi Arabia visa page sources and built HTML
+        run: npm run test:visa-saudi-arabia
+
+      - name: Verify visa hub and country routing in built HTML
+        run: npm run test:visa-routing
+
+      - name: Verify flight route pages and links in built HTML
+        run: npm run test:flight-routes
 
       # Determinism guard for the 2026-10-02 fix: a build must not rewrite the
       # committed sitemap/RSS unless content genuinely changed (which requires a

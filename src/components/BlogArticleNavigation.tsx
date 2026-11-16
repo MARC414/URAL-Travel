@@ -4,7 +4,7 @@ import type { BlogPost } from "../types";
 import {
   ARTICLE_PLANNING_HUBS, articleLinkHref, getArticlePlanningLinks, type ArticleLocale,
 } from "../utils/blogPresentation";
-import { generateBlogCoverAltText } from "../utils/imageAssets";
+import { generateBlogCoverAltText } from "../utils/blogAltText";
 import { ResponsiveImage } from "./ResponsiveImage";
 
 type Navigate = (path: string) => void;
