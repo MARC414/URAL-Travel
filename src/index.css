@@ -555,6 +555,79 @@ body > :not(#root):not(script):not(style) {
   }
 }
 
+/* "Save as PDF" on /resources: print one section only. The page marks the
+   section with data-print-target and puts .ural-print-target on <body>; every
+   element that is not the section, inside it, or an ancestor of it is dropped. */
+[data-print-only] {
+  display: none;
+}
+
+@media print {
+  body.ural-print-target *:not([data-print-target]):not([data-print-target] *):not(:has([data-print-target])) {
+    display: none !important;
+  }
+
+  body.ural-print-target [data-print-target] [data-print-hide] {
+    display: none !important;
+  }
+
+  body.ural-print-target [data-print-target] [data-print-only] {
+    display: block !important;
+  }
+
+  body.ural-print-target [data-print-target] * {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* One plain column: title, then the full address on its own line. */
+  body.ural-print-target [data-print-target] .grid,
+  body.ural-print-target [data-print-target] .flex,
+  body.ural-print-target [data-print-target] a {
+    display: block !important;
+  }
+
+  body.ural-print-target [data-print-target] a[href]::after {
+    display: block;
+    font-weight: 400;
+    overflow-wrap: anywhere;
+  }
+
+  body.ural-print-target [data-print-target] svg {
+    display: none !important;
+  }
+
+  body.ural-print-target [data-print-target] :is(li, article, a, div, ol, ul, h2, h3, h4, p) {
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  body.ural-print-target [data-print-target] :is(h2, h3, h4) {
+    margin-top: 10pt !important;
+  }
+
+  body.ural-print-target [data-print-target] li {
+    padding: 3pt 0 !important;
+    break-inside: avoid;
+  }
+
+  /* Step number and step name share one line. */
+  body.ural-print-target [data-print-target] [data-print-inline] {
+    display: inline !important;
+  }
+
+  body.ural-print-target [data-print-target] ol > li {
+    padding-top: 10pt !important;
+  }
+
+  body.ural-print-target [data-print-target] details > summary {
+    display: none !important;
+  }
+}
+
 /* ==========================================================================
    WCAG 2.3.3 — REDUCE ALL MOTION WHEN USER PREFERS
    ========================================================================== */

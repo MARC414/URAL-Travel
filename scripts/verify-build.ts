@@ -36,7 +36,7 @@ import {
  *     self-maintaining rather than a magic number.
  */
 import { runOfficialSourcesChecks } from "./officialSourcesChecks";
-import { NON_OFFICIAL_HOSTS, OFFICIAL_HOSTS, getOfficialSources, officialSourceHost } from "../src/data/officialSources";
+import { NON_OFFICIAL_HOSTS, OFFICIAL_HOSTS, getCommunitySources, getOfficialSources, officialSourceHost } from "../src/data/officialSources";
 import { OFFICIAL_RESOURCES_COPY } from "../src/utils/officialResourcesCopy";
 import fs from "node:fs";
 import zlib from "node:zlib";
@@ -9436,6 +9436,26 @@ check(
     check(
       html.includes(`<h1>${OFFICIAL_RESOURCES_COPY[locale].h1}</h1>`) || html.includes(OFFICIAL_RESOURCES_COPY[locale].h1),
       `/resources (${locale}): saved page carries the directory heading`
+    );
+    const journeyStart = main.indexOf('data-journey="uk-hajj-umrah"');
+    const journeyHtml = journeyStart === -1 ? "" : main.slice(journeyStart, main.indexOf("</section>", journeyStart));
+    check(
+      (journeyHtml.match(/<h3>/g) ?? []).length === 7 && !/cbhuk\.org/.test(journeyHtml),
+      `/resources (${locale}): saved page carries the seven-step UK Hajj and Umrah journey, official links only`
+    );
+    const communityStart = main.indexOf("data-community-sources");
+    const communityHrefs = getCommunitySources().map((source) => source.url);
+    check(
+      communityStart !== -1 &&
+        communityHrefs.every((href) => main.indexOf(`href="${href}"`) > communityStart) &&
+        communityHrefs.every((href) => !main.slice(0, communityStart).includes(`href="${href}"`)),
+      `/resources (${locale}): community bodies appear only in their own labelled section`
+    );
+    const hostedFiles = [...main.matchAll(/href="(\/downloads\/[^"]+)"/g)].map((match) => match[1]);
+    check(
+      hostedFiles.length > 0 &&
+        hostedFiles.every((file) => /^\/downloads\/ural-/.test(file) && fs.existsSync(path.join(DIST_DIR, file))),
+      `/resources (${locale}): every hosted download is a URAL-made file present in the build`
     );
   }
 }

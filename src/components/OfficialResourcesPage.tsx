@@ -1,10 +1,21 @@
-import React, { useMemo, useState } from "react";
-import { ArrowRight, ChevronDown, ExternalLink, Landmark, Search, X } from "lucide-react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowRight, ChevronDown, Download, ExternalLink, FileDown, FileText, Landmark, Search, X } from "lucide-react";
 
 import {
+  OFFICIAL_AUDIENCES,
+  UK_PILGRIM_JOURNEY,
+  URAL_DOWNLOADS,
+  audienceIncludesCountry,
+  resolveGuideDownloads,
+  resolveJourney,
+  type OfficialAudience,
+} from "../data/officialJourneys";
+import {
+  OFFICIAL_HOSTS,
   OFFICIAL_SOURCE_COUNTRIES,
   OFFICIAL_SOURCE_KINDS,
   countOfficialOrganisations,
+  getCommunitySources,
   getOfficialSources,
   groupOfficialSources,
   type OfficialOrganisation,
@@ -15,10 +26,13 @@ import {
 import type { Language } from "../translations";
 import { toBengaliPath } from "../utils/localeRoutes";
 import {
+  OFFICIAL_COMMUNITY_SECTION_ID,
+  OFFICIAL_DOWNLOADS_SECTION_ID,
   OFFICIAL_RESOURCES_COPY,
   OFFICIAL_RESOURCES_VISIBLE_LINKS,
   fillResourceCopy,
   formatResourceCount,
+  formatResourceDate,
   officialSourceMeta,
   officialSourceSectionId,
 } from "../utils/officialResourcesCopy";
@@ -58,8 +72,42 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
   const [query, setQuery] = useState("");
   const [country, setCountry] = useState<OfficialSourceCountry | "all">("all");
   const [kind, setKind] = useState<OfficialSourceKind | "all">("all");
+  const [audience, setAudience] = useState<OfficialAudience>("all");
+  /** Id of the section being sent to the printer; null when nothing is printing. */
+  const [printTarget, setPrintTarget] = useState<string | null>(null);
+  const pendingStep = useRef<string | null>(null);
 
   const allSources = useMemo(() => getOfficialSources(), []);
+  const communitySources = useMemo(() => getCommunitySources(), []);
+  const journey = useMemo(() => resolveJourney(UK_PILGRIM_JOURNEY, allSources), [allSources]);
+  const guideDownloads = useMemo(() => resolveGuideDownloads(allSources), [allSources]);
+
+  // A link to /resources#uk-hajj-umrah opens with the UK journey unfolded.
+  useEffect(() => {
+    if (window.location.hash === `#${UK_PILGRIM_JOURNEY.id}`) setAudience("uk");
+  }, []);
+
+  // After the journey unfolds, bring the step the visitor chose into view.
+  useEffect(() => {
+    if (audience !== "uk" || !pendingStep.current) return;
+    document.getElementById(pendingStep.current)?.scrollIntoView({ block: "start" });
+    pendingStep.current = null;
+  }, [audience]);
+
+  // "Save as PDF": print one section. The print stylesheet hides everything
+  // outside the element that carries `data-print-target`.
+  useEffect(() => {
+    if (!printTarget) return;
+    const done = () => setPrintTarget(null);
+    document.body.classList.add("ural-print-target");
+    window.addEventListener("afterprint", done);
+    const frame = window.requestAnimationFrame(() => window.print());
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("afterprint", done);
+      document.body.classList.remove("ural-print-target");
+    };
+  }, [printTarget]);
   const organisationById = useMemo(() => {
     const map = new Map<string, OfficialOrganisation>();
     for (const group of groupOfficialSources(allSources)) {
@@ -76,6 +124,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
       ),
     [allSources]
   );
+  const countryChoices = countriesInUse.filter((code) => audienceIncludesCountry(audience, code));
   const kindsInUse = useMemo(
     () =>
       (Object.keys(OFFICIAL_SOURCE_KINDS) as OfficialSourceKind[]).filter((value) =>
@@ -89,6 +138,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
   const filtered = useMemo(() => {
     const words = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
     return allSources.filter((source) => {
+      if (!audienceIncludesCountry(audience, source.country)) return false;
       if (country !== "all" && source.country !== country) return false;
       const organisation = organisationById.get(source.org);
       if (kind !== "all" && organisation?.kind !== kind) return false;
@@ -108,7 +158,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
         .toLocaleLowerCase();
       return words.every((word) => haystack.includes(word));
     });
-  }, [allSources, country, kind, organisationById, query]);
+  }, [allSources, audience, country, kind, organisationById, query]);
 
   const groups = useMemo(() => groupOfficialSources(filtered), [filtered]);
   const count = (value: number) => formatResourceCount(value, locale);
@@ -123,6 +173,42 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
     event.preventDefault();
     onNavigate(path);
   };
+
+  const chooseAudience = (value: OfficialAudience) => {
+    setAudience(value);
+    // The country list changes with the starting point, so a stale choice is dropped.
+    setCountry("all");
+  };
+
+  const openJourney = (stepId?: string) => {
+    pendingStep.current = stepId ?? null;
+    chooseAudience("uk");
+  };
+
+  const printHeader = (title: string) => {
+    const now = new Date();
+    const iso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    return (
+      <p data-print-only className="mb-3 text-sm text-black">
+        <strong>URAL Travel · {title}</strong>
+        <br />
+        {copy.printedFrom.replace("{date}", formatResourceDate(iso, locale))}
+      </p>
+    );
+  };
+
+  const pdfButton = (target: string, title: string, onDark = false) => (
+    <button
+      type="button"
+      data-print-hide
+      onClick={() => setPrintTarget(target)}
+      aria-label={`${copy.savePdfLabel}: ${title}`}
+      className={`inline-flex min-h-11 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-1 text-xs font-semibold underline-offset-4 hover:underline ${onDark ? "text-brand-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold" : `text-brand-emerald ${FOCUS_RING}`}`}
+    >
+      <FileDown className="size-4" aria-hidden="true" />
+      {copy.savePdf}
+    </button>
+  );
 
   const clearFilters = () => {
     setQuery("");
@@ -157,6 +243,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
           href={localPath(source.pages[0])}
           onClick={(event) => followInternalLink(event, source.pages[0])}
           aria-label={`${copy.guideLinkLabel}: ${isBn ? source.titleBn : source.titleEn}`}
+          data-print-hide
           className={`inline-flex min-h-11 shrink-0 items-center gap-1 whitespace-nowrap rounded-md text-xs font-semibold text-brand-emerald underline-offset-4 hover:underline active:text-brand-navy ${FOCUS_RING}`}
         >
           {copy.guideLink}
@@ -164,6 +251,50 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
         </a>
       )}
     </li>
+    );
+  };
+
+  const renderCard = (organisation: OfficialOrganisation, sources: OfficialSourceEntry[], printing = false) => {
+    const hosts = [...new Set(sources.map((source) => source.host))];
+    const fold = !isFiltered && !printing && sources.length > OFFICIAL_RESOURCES_VISIBLE_LINKS;
+    const visible = fold ? sources.slice(0, OFFICIAL_RESOURCES_VISIBLE_LINKS) : sources;
+    const folded = fold ? sources.slice(OFFICIAL_RESOURCES_VISIBLE_LINKS) : [];
+    return (
+      <article
+        key={organisation.id}
+        className="ural-card flex flex-col border border-border-subtle bg-white p-5"
+      >
+        <div className="flex items-start justify-between gap-3">
+          <h4 className="ural-card-title min-w-0 text-base text-brand-navy">{organisation[locale]}</h4>
+          <span
+            className={`shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ${KIND_TONE[organisation.kind]}`}
+          >
+            {OFFICIAL_SOURCE_KINDS[organisation.kind][locale]}
+          </span>
+        </div>
+        <p className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 font-mono text-xs text-text-muted">
+          {hosts.map((host) => (
+            <span key={host} className="break-all">
+          {host}{" "}
+        </span>
+          ))}
+        </p>
+        <ul className="mt-3 border-t border-border-subtle">{visible.map(renderLink)}</ul>
+        {folded.length > 0 && (
+          <details className="group/more border-t border-border-faint">
+            <summary
+              className={`flex min-h-11 cursor-pointer list-none items-center gap-1.5 rounded-md text-sm font-semibold text-brand-emerald hover:underline [&::-webkit-details-marker]:hidden ${FOCUS_RING}`}
+            >
+              <ChevronDown
+                className="size-4 transition-transform group-open/more:rotate-180 motion-reduce:transition-none"
+                aria-hidden="true"
+              />
+              {fillResourceCopy(copy.showMore, { count: folded.length }, locale)}
+            </summary>
+            <ul className="border-t border-border-faint">{folded.map(renderLink)}</ul>
+          </details>
+        )}
+      </article>
     );
   };
 
@@ -206,6 +337,153 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
         {copy.quickBody}
       </QuickAnswer>
 
+      {/* ── Starting point: the whole page adapts to it ──────────────────── */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <p id="official-sources-audience" className={`text-xs font-semibold text-text-secondary ${labelCase}`}>
+          {copy.audienceLabel}
+        </p>
+        <div
+          role="group"
+          aria-labelledby="official-sources-audience"
+          className="inline-flex max-w-full rounded-full border border-border-default bg-white p-1"
+        >
+          {(Object.keys(OFFICIAL_AUDIENCES) as OfficialAudience[]).map((value) => (
+            <button
+              key={value}
+              type="button"
+              aria-pressed={audience === value}
+              onClick={() => chooseAudience(value)}
+              className={`min-h-11 rounded-full px-4 text-sm font-semibold transition-colors ${FOCUS_RING} ${audience === value ? "bg-brand-navy text-white" : "text-brand-navy hover:bg-surface-soft"}`}
+            >
+              {OFFICIAL_AUDIENCES[value][locale]}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ── UK Hajj and Umrah: the official page for each step of the trip ── */}
+      {audience !== "bd" && (
+        <section
+          id={UK_PILGRIM_JOURNEY.id}
+          data-journey={UK_PILGRIM_JOURNEY.id}
+          aria-labelledby={`${UK_PILGRIM_JOURNEY.id}-title`}
+          data-print-target={printTarget === UK_PILGRIM_JOURNEY.id ? "" : undefined}
+          className="ural-panel scroll-mt-40 overflow-hidden border border-border-subtle bg-white lg:scroll-mt-32"
+        >
+          {printTarget === UK_PILGRIM_JOURNEY.id && printHeader(UK_PILGRIM_JOURNEY[locale])}
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 bg-brand-navy px-5 py-3 sm:px-6">
+            <h2
+              id={`${UK_PILGRIM_JOURNEY.id}-title`}
+              className="ural-section-title font-serif text-xl text-white sm:text-2xl"
+            >
+              {UK_PILGRIM_JOURNEY[locale]}
+            </h2>
+            {audience === "uk" ? (
+              pdfButton(UK_PILGRIM_JOURNEY.id, UK_PILGRIM_JOURNEY[locale], true)
+            ) : (
+              <button
+                type="button"
+                onClick={() => openJourney()}
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-brand-gold px-4 text-sm font-black text-brand-navy transition-colors hover:bg-brand-gold-dark active:bg-brand-gold-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              >
+                {fillResourceCopy(copy.journeyOpen, { count: journey.length }, locale)}
+                <ChevronDown className="size-4" aria-hidden="true" />
+              </button>
+            )}
+          </div>
+
+          {audience === "uk" ? (
+            <ol className="divide-y divide-border-subtle">
+              {journey.map(({ stage, links }, index) => (
+                <li
+                  key={stage.id}
+                  id={`${UK_PILGRIM_JOURNEY.id}-${stage.id}`}
+                  className="grid scroll-mt-40 gap-3 px-5 py-5 sm:px-6 lg:scroll-mt-32 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-6"
+                >
+                  <div className="flex items-center gap-3 lg:items-start">
+                    <span
+                      aria-hidden="true"
+                      data-print-inline
+                      className={`${numberFont} grid size-9 shrink-0 place-items-center rounded-full bg-brand-navy text-sm font-bold text-brand-gold`}
+                    >
+                      {count(index + 1)}
+                    </span>
+                    <div data-print-inline className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-x-3 lg:block">
+                      <h3 data-print-inline className="ural-card-title text-base text-brand-navy lg:pt-1.5">
+                        <span className="sr-only">{fillResourceCopy(copy.journeyStep, { count: index + 1 }, locale)}: </span>
+                        {stage[locale]}
+                      </h3>
+                      {stage.guide && (
+                        <a
+                          href={localPath(stage.guide)}
+                          onClick={(event) => followInternalLink(event, stage.guide as string)}
+                          aria-label={`${copy.guideLink}: ${stage[locale]}`}
+                          data-print-hide
+                          className={`inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-md text-xs font-semibold text-brand-emerald underline-offset-4 hover:underline ${FOCUS_RING}`}
+                        >
+                          {copy.guideLink}
+                          <ArrowRight className="size-3" aria-hidden="true" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                  <ul className="grid gap-2 sm:grid-cols-2">
+                    {links.map((source) => (
+                      <li key={source.url}>
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`group flex h-full min-h-14 items-center justify-between gap-3 rounded-xl border border-border-subtle bg-surface-soft px-4 py-3 transition-colors hover:border-brand-gold-dark hover:bg-brand-ivory active:bg-brand-ivory ${FOCUS_RING}`}
+                        >
+                          <span className="min-w-0">
+                            <span className="block text-sm font-semibold leading-snug text-brand-navy [overflow-wrap:anywhere]">
+                              {isBn ? source.titleBn : source.titleEn}
+                            </span>
+                            <span className="mt-0.5 block text-xs text-text-muted">
+                              {[
+                                source.host,
+                                OFFICIAL_SOURCE_KINDS[OFFICIAL_HOSTS[source.host].kind][locale],
+                                ...(source.pdf ? [copy.pdf] : []),
+                              ].join(" · ")}
+                            </span>
+                          </span>
+                          <ExternalLink
+                            className="size-4 shrink-0 text-text-muted group-hover:text-brand-emerald"
+                            aria-hidden="true"
+                          />
+                          <span className="sr-only">({copy.opensNewTab})</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <ol className="flex flex-wrap gap-2 px-5 py-4 sm:px-6">
+              {journey.map(({ stage }, index) => (
+                <li key={stage.id}>
+                  <button
+                    type="button"
+                    onClick={() => openJourney(`${UK_PILGRIM_JOURNEY.id}-${stage.id}`)}
+                    className={`inline-flex min-h-11 items-center gap-2 rounded-full border border-border-default bg-white py-1 pl-1.5 pr-3.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-gold-dark hover:bg-brand-ivory active:bg-brand-ivory ${FOCUS_RING}`}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`${numberFont} grid size-7 place-items-center rounded-full bg-brand-navy text-xs font-bold text-brand-gold`}
+                    >
+                      {count(index + 1)}
+                    </span>
+                    {stage[locale]}
+                  </button>
+                </li>
+              ))}
+            </ol>
+          )}
+        </section>
+      )}
+
       {/* ── Finder ───────────────────────────────────────────────────────── */}
       <section
         aria-labelledby="official-sources-finder"
@@ -239,7 +517,7 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
               className={FIELD_CLASS}
             >
               <option value="all">{copy.allCountries}</option>
-              {countriesInUse.map((code) => (
+              {countryChoices.map((code) => (
                 <option key={code} value={code}>
                   {OFFICIAL_SOURCE_COUNTRIES[code][locale]}
                 </option>
@@ -302,6 +580,15 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href={`#${OFFICIAL_DOWNLOADS_SECTION_ID}`}
+                  className={`inline-flex min-h-11 items-center gap-2 rounded-full border border-brand-gold-dark/40 bg-brand-ivory px-3.5 text-xs font-semibold text-brand-navy transition-colors hover:border-brand-gold-dark ${FOCUS_RING}`}
+                >
+                  <FileText className="size-3.5 text-brand-gold-ink" aria-hidden="true" />
+                  {copy.downloadsTitle}
+                </a>
+              </li>
             </ul>
           </nav>
         )}
@@ -321,13 +608,17 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
       )}
 
       {/* ── Topic → country → organisation → pages ──────────────────────── */}
-      {groups.map((group) => (
+      {groups.map((group) => {
+        const sectionId = officialSourceSectionId(group.sector.id);
+        return (
         <section
           key={group.sector.id}
-          id={officialSourceSectionId(group.sector.id)}
-          aria-labelledby={`${officialSourceSectionId(group.sector.id)}-title`}
+          id={sectionId}
+          aria-labelledby={`${sectionId}-title`}
+          data-print-target={printTarget === sectionId ? "" : undefined}
           className="scroll-mt-40 lg:scroll-mt-32"
         >
+          {printTarget === sectionId && printHeader(group.sector[locale])}
           <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-1 border-b border-border-subtle pb-3">
             <h2
               id={`${officialSourceSectionId(group.sector.id)}-title`}
@@ -335,9 +626,12 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
             >
               {group.sector[locale]}
             </h2>
-            <p className={`${numberFont} text-xs font-bold tabular-nums text-text-muted`}>
-              {fillResourceCopy(copy.linkCount, { count: group.total }, locale)}
-            </p>
+            <div className="flex items-center gap-4">
+              <p className={`${numberFont} text-xs font-bold tabular-nums text-text-muted`}>
+                {fillResourceCopy(copy.linkCount, { count: group.total }, locale)}
+              </p>
+              {pdfButton(sectionId, group.sector[locale])}
+            </div>
           </div>
 
           <div className="mt-5 space-y-7">
@@ -347,55 +641,103 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
                   {OFFICIAL_SOURCE_COUNTRIES[code][locale]}
                 </h3>
                 <div className="mt-3 grid gap-4 md:grid-cols-2">
-                  {organisations.map(({ organisation, sources }) => {
-                    const hosts = [...new Set(sources.map((source) => source.host))];
-                    const fold = !isFiltered && sources.length > OFFICIAL_RESOURCES_VISIBLE_LINKS;
-                    const visible = fold ? sources.slice(0, OFFICIAL_RESOURCES_VISIBLE_LINKS) : sources;
-                    const folded = fold ? sources.slice(OFFICIAL_RESOURCES_VISIBLE_LINKS) : [];
-                    return (
-                      <article
-                        key={organisation.id}
-                        className="ural-card flex flex-col border border-border-subtle bg-white p-5"
-                      >
-                        <div className="flex items-start justify-between gap-3">
-                          <h4 className="ural-card-title min-w-0 text-base text-brand-navy">{organisation[locale]}</h4>
-                          <span
-                            className={`shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ${KIND_TONE[organisation.kind]}`}
-                          >
-                            {OFFICIAL_SOURCE_KINDS[organisation.kind][locale]}
-                          </span>
-                        </div>
-                        <p className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 font-mono text-xs text-text-muted">
-                          {hosts.map((host) => (
-                            <span key={host} className="break-all">
-                              {host}
-                            </span>
-                          ))}
-                        </p>
-                        <ul className="mt-3 border-t border-border-subtle">{visible.map(renderLink)}</ul>
-                        {folded.length > 0 && (
-                          <details className="group/more border-t border-border-faint">
-                            <summary
-                              className={`flex min-h-11 cursor-pointer list-none items-center gap-1.5 rounded-md text-sm font-semibold text-brand-emerald hover:underline [&::-webkit-details-marker]:hidden ${FOCUS_RING}`}
-                            >
-                              <ChevronDown
-                                className="size-4 transition-transform group-open/more:rotate-180 motion-reduce:transition-none"
-                                aria-hidden="true"
-                              />
-                              {fillResourceCopy(copy.showMore, { count: folded.length }, locale)}
-                            </summary>
-                            <ul className="border-t border-border-faint">{folded.map(renderLink)}</ul>
-                          </details>
-                        )}
-                      </article>
-                    );
-                  })}
+                  {organisations.map(({ organisation, sources }) =>
+                    renderCard(organisation, sources, printTarget === sectionId)
+                  )}
                 </div>
               </div>
             ))}
           </div>
         </section>
-      ))}
+        );
+      })}
+
+      {/* ── Guides to keep: URAL files are hosted, official files stay on their own site ── */}
+      <section
+        id={OFFICIAL_DOWNLOADS_SECTION_ID}
+        aria-labelledby={`${OFFICIAL_DOWNLOADS_SECTION_ID}-title`}
+        className="scroll-mt-40 lg:scroll-mt-32"
+      >
+        <div className="border-b border-border-subtle pb-3">
+          <h2
+            id={`${OFFICIAL_DOWNLOADS_SECTION_ID}-title`}
+            className="ural-section-title font-serif text-2xl text-brand-navy sm:text-3xl"
+          >
+            {copy.downloadsTitle}
+          </h2>
+        </div>
+        <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {URAL_DOWNLOADS.map((download) => {
+            const facts: string[] = [copy.uralMade, copy.pdf, fillResourceCopy(copy.pageCount, { count: download.pages }, locale)];
+            if (isBn && download.fileLanguage === "en") facts.push(copy.fileInEnglish);
+            return (
+              <li key={download.path} className="ural-card flex flex-col gap-4 border border-brand-gold-dark/40 bg-brand-ivory p-5">
+                <div className="flex items-start gap-3">
+                  <FileText className="mt-0.5 size-7 shrink-0 text-brand-gold-ink" aria-hidden="true" />
+                  <div className="min-w-0">
+                    <h3 className="ural-card-title text-base text-brand-navy">{download[locale]}</h3>
+                    <p className={`mt-1 text-xs text-text-secondary ${isBn ? "font-sans" : ""}`}>{facts.join(" · ")}</p>
+                  </div>
+                </div>
+                <a
+                  href={download.path}
+                  download
+                  className={`mt-auto inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-navy px-4 text-sm font-bold text-white transition-colors hover:bg-brand-emerald active:bg-brand-emerald ${FOCUS_RING}`}
+                >
+                  <Download className="size-4" aria-hidden="true" />
+                  {copy.downloadUral}
+                </a>
+              </li>
+            );
+          })}
+          {guideDownloads.map((source) => (
+            <li key={source.url} className="ural-card flex flex-col gap-4 border border-border-subtle bg-white p-5">
+              <div className="flex items-start gap-3">
+                <FileText className="mt-0.5 size-7 shrink-0 text-brand-emerald" aria-hidden="true" />
+                <div className="min-w-0">
+                  <h3 className="ural-card-title text-base text-brand-navy">{isBn ? source.titleBn : source.titleEn}</h3>
+                  <p className="mt-1 text-xs text-text-secondary">
+                    {[OFFICIAL_HOSTS[source.host][locale], copy.pdf].join(" · ")}
+                  </p>
+                </div>
+              </div>
+              <a
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-auto inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-brand-navy px-4 text-sm font-bold text-brand-navy transition-colors hover:bg-brand-navy hover:text-white active:bg-brand-navy active:text-white ${FOCUS_RING}`}
+              >
+                {copy.downloadOfficial.replace("{host}", source.host)}
+                <ExternalLink className="size-4" aria-hidden="true" />
+                <span className="sr-only">({copy.opensNewTab})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ── Community bodies: useful, kept apart, never counted as official ── */}
+      {communitySources.length > 0 && audience !== "bd" && (
+        <section
+          id={OFFICIAL_COMMUNITY_SECTION_ID}
+          data-community-sources
+          aria-labelledby={`${OFFICIAL_COMMUNITY_SECTION_ID}-title`}
+          className="ural-panel scroll-mt-40 border border-dashed border-slate-300 bg-surface-soft p-5 sm:p-6 lg:scroll-mt-32"
+        >
+          <h2
+            id={`${OFFICIAL_COMMUNITY_SECTION_ID}-title`}
+            className="ural-section-title font-serif text-xl text-brand-navy sm:text-2xl"
+          >
+            {copy.communityTitle}
+          </h2>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {[...new Set(communitySources.map((source) => source.org))].map((orgId) => {
+              const sources = communitySources.filter((source) => source.org === orgId);
+              return renderCard(OFFICIAL_HOSTS[sources[0].host], sources);
+            })}
+          </div>
+        </section>
+      )}
 
       {/* ── Method and correction route ─────────────────────────────────── */}
       <section

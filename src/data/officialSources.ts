@@ -491,7 +491,7 @@ const TITLE_OVERRIDES: Readonly<Record<string, { en: string; bn: string }>> = {
   "flynas.com": { en: "Booking site", bn: "বুকিং সাইট" },
   "flynas.com/en/media-center/news-updates/stopover-visa": { en: "Stopover visa launch announcement", bn: "স্টপওভার ভিসা চালুর ঘোষণা" },
   "saudia.com/book/travel-information/branded-fares": { en: "Branded fare comparison", bn: "Branded fare তুলনা" },
-  "sar.hhr.sa": { en: "Timetable and booking portal", bn: "সময়সূচি ও বুকিং পোর্টাল" },
+  "sar.hhr.sa": { en: "Haramain train timetable and booking", bn: "হারামাইন ট্রেনের সময়সূচি ও বুকিং" },
   "sar.com.sa": { en: "Saudi Arabia Railways official site", bn: "সৌদি আরব রেলওয়ের অফিসিয়াল সাইট" },
   "sar.hhr.sa/travel/fares": { en: "Official fare table", bn: "অফিসিয়াল ভাড়ার তালিকা" },
   "sar.hhr.sa/travel/travel-tips": { en: "Travel tips", bn: "ভ্রমণ পরামর্শ" },
