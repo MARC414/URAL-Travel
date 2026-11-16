@@ -19,6 +19,7 @@ import {
   OFFICIAL_RESOURCES_VISIBLE_LINKS,
   fillResourceCopy,
   formatResourceCount,
+  officialSourceMeta,
   officialSourceSectionId,
 } from "../utils/officialResourcesCopy";
 import { QuickAnswer } from "./QuickAnswer";
@@ -35,6 +36,7 @@ const KIND_TONE: Record<OfficialSourceKind, string> = {
   international: "bg-emerald-50 text-emerald-900 ring-emerald-600/20",
   portal: "bg-brand-gold-light text-brand-gold-ink ring-brand-gold-dark/30",
   operator: "bg-slate-100 text-slate-700 ring-slate-400/30",
+  community: "bg-white text-slate-700 ring-slate-400/40",
 };
 
 const FOCUS_RING =
@@ -128,7 +130,9 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
     setKind("all");
   };
 
-  const renderLink = (source: OfficialSourceEntry) => (
+  const renderLink = (source: OfficialSourceEntry) => {
+    const meta = officialSourceMeta(source, locale);
+    return (
     <li
       key={source.url}
       className="flex items-center justify-between gap-3 border-t border-border-faint first:border-t-0 sm:gap-4"
@@ -144,25 +148,24 @@ export default function OfficialResourcesPage({ lang, onNavigate }: OfficialReso
           <ExternalLink className="size-3.5 shrink-0 text-text-muted group-hover:text-brand-emerald" aria-hidden="true" />
           <span className="sr-only">({copy.opensNewTab})</span>
         </a>
-        {source.historical && (
-          <p className="-mt-1 pb-2">
-            <span className="inline-block rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-bold text-slate-700 ring-1 ring-slate-400/30">
-              {copy.historical}
-            </span>
-          </p>
+        {meta.length > 0 && (
+          <p className={`-mt-1 pb-2 text-xs text-text-muted ${isBn ? "font-sans" : ""}`}>{meta.join(" · ")}</p>
         )}
       </div>
-      <a
-        href={localPath(source.pages[0])}
-        onClick={(event) => followInternalLink(event, source.pages[0])}
-        aria-label={`${copy.guideLinkLabel}: ${isBn ? source.titleBn : source.titleEn}`}
-        className={`inline-flex min-h-11 shrink-0 items-center gap-1 whitespace-nowrap rounded-md text-xs font-semibold text-brand-emerald underline-offset-4 hover:underline active:text-brand-navy ${FOCUS_RING}`}
-      >
-        {copy.guideLink}
-        <ArrowRight className="size-3" aria-hidden="true" />
-      </a>
+      {source.pages.length > 0 && (
+        <a
+          href={localPath(source.pages[0])}
+          onClick={(event) => followInternalLink(event, source.pages[0])}
+          aria-label={`${copy.guideLinkLabel}: ${isBn ? source.titleBn : source.titleEn}`}
+          className={`inline-flex min-h-11 shrink-0 items-center gap-1 whitespace-nowrap rounded-md text-xs font-semibold text-brand-emerald underline-offset-4 hover:underline active:text-brand-navy ${FOCUS_RING}`}
+        >
+          {copy.guideLink}
+          <ArrowRight className="size-3" aria-hidden="true" />
+        </a>
+      )}
     </li>
-  );
+    );
+  };
 
   return (
     <div className="ural-route-stack mx-auto max-w-5xl">

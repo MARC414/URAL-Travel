@@ -10,8 +10,11 @@ import {
   NON_OFFICIAL_HOSTS,
   OFFICIAL_HOSTS,
   OFFICIAL_ORGANISATIONS,
+  findOwnerSuppliedProblems,
   findUnclassifiedCitationHosts,
+  getCommunitySources,
   getOfficialSources,
+  isOfficialKind,
   officialSourceUrlKey,
 } from "../src/data/officialSources";
 
@@ -21,7 +24,9 @@ export interface OfficialSourcesCheck {
 }
 
 export function runOfficialSourcesChecks(): OfficialSourcesCheck[] {
-  const sources = getOfficialSources();
+  const official = getOfficialSources();
+  const community = getCommunitySources();
+  const sources = [...official, ...community];
   const excluded = new Set(NON_OFFICIAL_HOSTS);
   const results: OfficialSourcesCheck[] = [];
   const add = (problems: string[], label: string) =>
@@ -37,7 +42,9 @@ export function runOfficialSourcesChecks(): OfficialSourcesCheck[] {
     "official sources: no website is in both the official and the non-official list"
   );
   add(
-    sources.filter((source) => excluded.has(source.host) || !OFFICIAL_HOSTS[source.host]).map((source) => source.url),
+    official
+      .filter((source) => excluded.has(source.host) || !OFFICIAL_HOSTS[source.host] || !isOfficialKind(OFFICIAL_HOSTS[source.host].kind))
+      .map((source) => source.url),
     "official sources: every listed link belongs to a named official organisation"
   );
   add(
@@ -57,8 +64,15 @@ export function runOfficialSourcesChecks(): OfficialSourcesCheck[] {
     "official sources: every organisation has a name in both languages"
   );
   add(
-    sources.filter((source) => source.pages.length === 0).map((source) => source.url),
-    "official sources: every link names the URAL guide that cites it"
+    sources.filter((source) => source.pages.length === 0 && !source.checked).map((source) => source.url),
+    "official sources: every link names the URAL guide that cites it, or carries the date the owner checked it"
+  );
+  add(findOwnerSuppliedProblems(), "official sources: every owner-supplied link is filed, dated and titled");
+  add(
+    community
+      .filter((source) => !source.checked || isOfficialKind(OFFICIAL_HOSTS[source.host]?.kind ?? "government"))
+      .map((source) => source.url),
+    "official sources: a community body is listed apart, and only through an owner-checked link"
   );
   const seen = new Set<string>();
   const duplicates: string[] = [];

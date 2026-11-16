@@ -37,6 +37,8 @@ export const OFFICIAL_RESOURCES_COPY = {
     guideLinkLabel: "URAL guide that cites this source",
     opensNewTab: "opens in a new tab",
     historical: "Past announcement",
+    pdf: "PDF",
+    checked: "Checked {date}",
     showMore: "Show {count} more",
     linkCount: "{count} links",
     empty: "No official site matches these filters. Clear the filters to see the full list.",
@@ -78,6 +80,8 @@ export const OFFICIAL_RESOURCES_COPY = {
     guideLinkLabel: "এই সূত্র ব্যবহার করা URAL গাইড",
     opensNewTab: "নতুন ট্যাবে খুলবে",
     historical: "পুরোনো ঘোষণা",
+    pdf: "PDF",
+    checked: "যাচাই {date}",
     showMore: "আরও {count}টি দেখুন",
     linkCount: "{count}টি লিংক",
     empty: "এই ফিল্টারের সঙ্গে কোনো অফিসিয়াল সাইট মেলেনি। পুরো তালিকা দেখতে ফিল্টার মুছুন।",
@@ -122,3 +126,32 @@ export function fillResourceCopy(
 
 /** Cards with more links than this fold the rest behind "Show more". */
 export const OFFICIAL_RESOURCES_VISIBLE_LINKS = 5;
+
+const MONTHS = {
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  bn: ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"],
+} as const;
+
+/** "2026-11-16" -> "16 Nov 2026" / "১৬ নভেম্বর ২০২৬". No Date object, so no time-zone drift. */
+export function formatResourceDate(isoDate: string, locale: OfficialResourcesLocale): string {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  const monthName = MONTHS[locale][month - 1] ?? "";
+  return `${formatResourceCount(day, locale)} ${monthName} ${formatResourceCount(year, locale)}`;
+}
+
+/**
+ * The quiet facts shown under a link title, in display order: past
+ * announcement, PDF, and the date the owner checked the page. Shared by the
+ * React view and the prerender so the two can never disagree.
+ */
+export function officialSourceMeta(
+  source: { historical: boolean; pdf: boolean; checked?: string },
+  locale: OfficialResourcesLocale
+): string[] {
+  const copy = OFFICIAL_RESOURCES_COPY[locale];
+  const parts: string[] = [];
+  if (source.historical) parts.push(copy.historical);
+  if (source.pdf) parts.push(copy.pdf);
+  if (source.checked) parts.push(copy.checked.replace("{date}", formatResourceDate(source.checked, locale)));
+  return parts;
+}

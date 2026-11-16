@@ -2,11 +2,12 @@
  * Official sources registry — one categorised list of every official website
  * URAL already cites.
  *
- * Nothing in this file invents a link. The list is DERIVED from the three places
- * the site already records its sources:
+ * Nothing in this file invents a link. The list comes from the three places
+ * the site already records its sources, plus the links the owner checked by hand:
  *   - article references        (`references` on each published blog post)
  *   - visa guide official links (`VISA_OFFICIAL_SOURCES`)
  *   - destination guide links   (`DESTINATION_OFFICIAL_SOURCES`)
+ *   - owner-supplied links      (`OWNER_SUPPLIED_SOURCES`, each with a checked date)
  *
  * A link is listed only when its host belongs to an organisation named in
  * `OFFICIAL_ORGANISATIONS` below: a government body, an official state portal,
@@ -17,12 +18,15 @@
  * unclassified — `npm run test:official-sources` (also run inside
  * `verify:build`) fails until it is placed in one list or the other.
  *
- * Consumers: the public `/resources` page (React + prerender), and the site
- * assistant groundwork, which reads links from here instead of asking a model
- * to recall a URL.
+ * One exception is labelled as such: a `community` organisation is a
+ * recognised community body, not an official source. Its links appear only when
+ * the owner supplies them, and the page shows them apart from the official list.
+ *
+ * Consumers: the public `/resources` page (React + prerender).
  */
 import { getLocalizedBlogs } from "./bengaliContent";
 import { DESTINATION_OFFICIAL_SOURCES } from "./destinationOfficialSources";
+import { OWNER_SUPPLIED_SOURCES } from "./ownerSuppliedSources";
 import { VISA_OFFICIAL_SOURCES } from "./visaOfficialSources";
 
 export type OfficialSourceSector =
@@ -42,7 +46,7 @@ export type OfficialSourceCountry =
   | "GB" | "EU" | "DE" | "FR" | "IT" | "TR" | "US" | "INTL";
 
 /** Who publishes the website. Shown as the badge on each organisation card. */
-export type OfficialSourceKind = "government" | "press" | "international" | "portal" | "operator";
+export type OfficialSourceKind = "government" | "press" | "international" | "portal" | "operator" | "community";
 
 export const OFFICIAL_SOURCE_KINDS: Readonly<Record<OfficialSourceKind, { en: string; bn: string }>> = {
   government: { en: "Government", bn: "সরকারি" },
@@ -50,7 +54,13 @@ export const OFFICIAL_SOURCE_KINDS: Readonly<Record<OfficialSourceKind, { en: st
   international: { en: "International body", bn: "আন্তর্জাতিক সংস্থা" },
   portal: { en: "Official portal", bn: "অফিসিয়াল পোর্টাল" },
   operator: { en: "Official operator", bn: "অফিসিয়াল অপারেটর" },
+  community: { en: "Community body, not official", bn: "কমিউনিটি সংস্থা, অফিসিয়াল নয়" },
 };
+
+/** False only for a community body, which the page lists apart from the official sources. */
+export function isOfficialKind(kind: OfficialSourceKind): boolean {
+  return kind !== "community";
+}
 
 export interface OfficialSourceEntry {
   url: string;
@@ -69,6 +79,10 @@ export interface OfficialSourceEntry {
   country: OfficialSourceCountry;
   /** English paths of the URAL pages that cite this link, in first-seen order. */
   pages: string[];
+  /** ISO date the owner last checked the page by hand; absent when never checked by hand. */
+  checked?: string;
+  /** The link opens a PDF file on the publisher's own site. */
+  pdf: boolean;
 }
 
 /** Display order and labels. The order is the order of the page sections. */
@@ -265,13 +279,15 @@ export const OFFICIAL_ORGANISATIONS: readonly OfficialOrganisation[] = [
   org("in-railways", "Indian Railways", "ভারতীয় রেলওয়ে", "government", "IN", "transport", ["indianrailways.gov.in"]),
   org("in-land-ports", "Land Ports Authority of India (LPAI)", "ল্যান্ড পোর্টস অথরিটি অব ইন্ডিয়া (LPAI)", "government", "IN", "transport", ["lpai.gov.in"]),
   // United Kingdom
-  org("gb-gov-uk", "GOV.UK (UK Government)", "GOV.UK (যুক্তরাজ্য সরকার)", "government", "GB", "government", ["gov.uk"], true),
+  org("gb-gov-uk", "GOV.UK (UK Government)", "GOV.UK (যুক্তরাজ্য সরকার)", "government", "GB", "government", ["gov.uk", "assets.publishing.service.gov.uk"], true),
   org("gb-caa", "UK Civil Aviation Authority (CAA)", "যুক্তরাজ্য সিভিল এভিয়েশন অথরিটি (CAA)", "government", "GB", "consumer", ["caa.co.uk"]),
   org("gb-atol", "ATOL (UK package-holiday protection scheme)", "এটিওএল (যুক্তরাজ্যের প্যাকেজ-হলিডে সুরক্ষা স্কিম)", "portal", "GB", "consumer", ["atol.org"]),
   org("gb-legislation", "UK Legislation (legislation.gov.uk)", "যুক্তরাজ্যের আইন (legislation.gov.uk)", "government", "GB", "consumer", ["legislation.gov.uk"]),
+  org("gb-travelhealthpro", "TravelHealthPro (UK National Travel Health Network and Centre)", "TravelHealthPro (যুক্তরাজ্যের ন্যাশনাল ট্রাভেল হেলথ নেটওয়ার্ক অ্যান্ড সেন্টার)", "government", "GB", "health", ["travelhealthpro.org.uk"]),
   org("gb-city-police", "City of London Police (UK national lead force for fraud)", "সিটি অব লন্ডন পুলিশ (যুক্তরাজ্যে প্রতারণা তদন্তের জাতীয় প্রধান বাহিনী)", "government", "GB", "consumer", ["cityoflondon.police.uk"]),
   org("gb-british-airways", "British Airways", "ব্রিটিশ এয়ারওয়েজ", "operator", "GB", "airlines", ["britishairways.com"]),
   org("gb-tfl", "Transport for London (TfL)", "Transport for London (TfL)", "government", "GB", "transport", ["tfl.gov.uk"]),
+  org("gb-cbh", "Council of British Hajjis (CBHUK)", "কাউন্সিল অব ব্রিটিশ হাজিস (CBHUK)", "community", "GB", "pilgrimage", ["cbhuk.org"]),
   // European Union and member states
   org("eu-commission", "European Commission", "ইউরোপীয় কমিশন", "international", "EU", "visa", ["home-affairs.ec.europa.eu"]),
   org("eu-eur-lex", "EUR-Lex (European Union law)", "EUR-Lex (ইউরোপীয় ইউনিয়নের আইন)", "international", "EU", "consumer", ["eur-lex.europa.eu"], true),
@@ -324,7 +340,9 @@ export const NON_OFFICIAL_HOSTS: readonly string[] = [
   // private prayer-time and calendar sites
   "assabile.com",
   // religious reference and fatwa sites
-  "aliftaa.jo", "binbaz.org.sa", "islamqa.info", "sunnah.com",
+  "aliftaa.jo", "binbaz.org.sa", "dar-alifta.org", "islamqa.info", "sunnah.com",
+  // charities (useful reading, not an official source)
+  "islamic-relief.org.uk",
   // official or corporate, but not about planning a trip
   "developers.google.com", "ftc.gov", "support.apple.com", "support.travelpayouts.com",
 ];
@@ -541,20 +559,54 @@ export function collectSiteCitations(): RawCitation[] {
   return citations;
 }
 
+/** A link that opens a PDF file rather than a web page. */
+function isPdfUrl(url: string): boolean {
+  return /\.pdf(?:$|[?#])/i.test(url.trim());
+}
+
+/** Owner-supplied links that cannot be listed: unknown website, bad date, or no title for an uncited link. */
+export function findOwnerSuppliedProblems(): string[] {
+  const cited = new Set(collectSiteCitations().map((citation) => officialSourceUrlKey(citation.url)));
+  const problems: string[] = [];
+  for (const supplied of OWNER_SUPPLIED_SOURCES) {
+    const organisation = OFFICIAL_HOSTS[officialSourceHost(supplied.url)];
+    if (!organisation) problems.push(`${supplied.url} (website not filed)`);
+    else if (!/^\d{4}-\d{2}-\d{2}$/.test(supplied.checked)) problems.push(`${supplied.url} (checked date)`);
+    else if (!cited.has(officialSourceUrlKey(supplied.url)) && (!supplied.en || !supplied.bn || !supplied.sector)) {
+      problems.push(`${supplied.url} (title or section missing)`);
+    }
+  }
+  return problems;
+}
+
 function pathDepth(url: string): number {
   return officialSourceUrlKey(url).length;
 }
 
 let cachedSources: OfficialSourceEntry[] | null = null;
+let cachedOfficial: OfficialSourceEntry[] | null = null;
+let cachedCommunity: OfficialSourceEntry[] | null = null;
 
-/** The deduplicated official list: by section, country, organisation, then homepage-first. */
+/** The official list only: by section, country, organisation, then homepage-first. */
 export function getOfficialSources(): OfficialSourceEntry[] {
+  cachedOfficial ??= buildSources().filter((source) => isOfficialKind(OFFICIAL_HOSTS[source.host].kind));
+  return cachedOfficial;
+}
+
+/** Owner-checked links from community bodies. Never counted or shown as official. */
+export function getCommunitySources(): OfficialSourceEntry[] {
+  cachedCommunity ??= buildSources().filter((source) => !isOfficialKind(OFFICIAL_HOSTS[source.host].kind));
+  return cachedCommunity;
+}
+
+function buildSources(): OfficialSourceEntry[] {
   if (cachedSources) return cachedSources;
   const byUrl = new Map<string, OfficialSourceEntry>();
   for (const citation of collectSiteCitations()) {
     const host = officialSourceHost(citation.url);
     const organisation = OFFICIAL_HOSTS[host];
-    if (!organisation) continue;
+    // A community body is listed only through an owner-supplied link (below).
+    if (!organisation || !isOfficialKind(organisation.kind)) continue;
     const key = officialSourceUrlKey(citation.url);
     const existing = byUrl.get(key);
     if (existing) {
@@ -576,6 +628,35 @@ export function getOfficialSources(): OfficialSourceEntry[] {
       sector: refineSector(organisation, nameEn),
       country: organisation.country,
       pages: [citation.page],
+      pdf: isPdfUrl(citation.url),
+    });
+  }
+  for (const supplied of OWNER_SUPPLIED_SOURCES) {
+    const host = officialSourceHost(supplied.url);
+    const organisation = OFFICIAL_HOSTS[host];
+    if (!organisation) continue;
+    const key = officialSourceUrlKey(supplied.url);
+    const existing = byUrl.get(key);
+    if (existing) {
+      existing.checked = supplied.checked;
+      continue;
+    }
+    // Without a title and a section the link cannot be shown; the build guard reports it.
+    if (!supplied.en || !supplied.bn || !supplied.sector) continue;
+    byUrl.set(key, {
+      url: supplied.url.trim(),
+      host,
+      org: organisation.id,
+      titleEn: supplied.en,
+      titleBn: supplied.bn,
+      nameEn: `${organisation.en} — ${supplied.en}`,
+      nameBn: `${organisation.bn} — ${supplied.bn}`,
+      historical: false,
+      sector: supplied.sector,
+      country: organisation.country,
+      pages: [],
+      checked: supplied.checked,
+      pdf: isPdfUrl(supplied.url),
     });
   }
   const sectorOrder = new Map(OFFICIAL_SOURCE_SECTORS.map((sector, index) => [sector.id, index]));

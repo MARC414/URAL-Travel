@@ -17,6 +17,7 @@ import {
   OFFICIAL_RESOURCES_PATH,
   fillResourceCopy,
   formatResourceCount,
+  officialSourceMeta,
   officialSourceSectionId,
   type OfficialResourcesLocale,
 } from "./officialResourcesCopy";
@@ -61,8 +62,10 @@ export function renderOfficialResourcesStaticHtml(lang: OfficialResourcesLocale,
             const items = links
               .map((link) => {
                 const title = lang === "bn" ? link.titleBn : link.titleEn;
-                const note = link.historical ? ` <small>(${escapeHtml(copy.historical)})</small>` : "";
-                return `<li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>${note} · <a href="${escapeHtml(localPath(link.pages[0]))}">${escapeHtml(copy.guideLink)}</a></li>`;
+                const meta = officialSourceMeta(link, lang);
+                const note = meta.length > 0 ? ` <small>(${escapeHtml(meta.join(" · "))})</small>` : "";
+                const guide = link.pages.length > 0 ? ` · <a href="${escapeHtml(localPath(link.pages[0]))}">${escapeHtml(copy.guideLink)}</a>` : "";
+                return `<li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>${note}${guide}</li>`;
               })
               .join("");
             return `<h4>${escapeHtml(organisation[lang])}</h4><p><small>${escapeHtml(OFFICIAL_SOURCE_KINDS[organisation.kind][lang])} · ${escapeHtml(hosts)}</small></p><ul>${items}</ul>`;
