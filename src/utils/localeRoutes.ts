@@ -155,4 +155,5 @@ export const BN_BREADCRUMB_LABELS: Record<string, string> = {
   "Contact Us": "যোগাযোগ",
   "Attractions & Passes": "অভিজ্ঞতা ও টিকিট",
   "Privacy & Cookie Policy": "গোপনীয়তা ও কুকি নীতিমালা",
+  "Official Sources": "সরকারি সূত্র",
 };

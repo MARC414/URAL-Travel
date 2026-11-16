@@ -180,6 +180,12 @@ html {
   letter-spacing: normal;
 }
 
+/* /resources header: same reason as the article header above. */
+[data-resources-header] .ural-page-title {
+  font-size: clamp(1.625rem, 1.25rem + 1.6vw, 2.5rem);
+  line-height: 1.18;
+}
+
 .ural-section-title {
   font-family: var(--font-serif);
   font-weight: var(--fw-extrabold);

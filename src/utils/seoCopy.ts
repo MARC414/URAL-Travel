@@ -1,4 +1,5 @@
 import { SCHEDULED_BLOG_SEO_COPY } from "../data/scheduledBlogSeo.generated";
+import { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH } from "./officialResourcesMeta";
 import { TOOL_PAGE_SEO } from "./toolRoutes";
 
 export interface SeoCopy {
@@ -262,6 +263,10 @@ export const PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     title: "Travel Tools: Trip Cost Estimator, Currency & Checklists | URAL",
     description:
       "Use the Trip Cost Estimator, dated BDT currency conversion, airport-code lookup, packing checklist and flight-disruption guidance.",
+  },
+  [OFFICIAL_RESOURCES_PATH]: {
+    title: OFFICIAL_RESOURCES_META.en.seoTitle,
+    description: OFFICIAL_RESOURCES_META.en.seoDescription,
   },
   "/pre-departure": {
     title: "Dhaka Airport (DAC) Pre-Departure Checklist & Helplines | URAL",
@@ -683,6 +688,10 @@ export const BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     title: "সিঙ্গাপুরে কোথায় থাকবেন: এলাকা ও বুকিং চেক | URAL",
     description:
       "যাতায়াত, খাবার ও কার্যক্রম ধরে Little India, Bugis ও Marina Bay তুলনা করুন। বর্তমান রুমের বিবরণ, মোট দাম ও বাতিলের শর্ত দেখুন।",
+  },
+  [OFFICIAL_RESOURCES_PATH]: {
+    title: OFFICIAL_RESOURCES_META.bn.seoTitle,
+    description: OFFICIAL_RESOURCES_META.bn.seoDescription,
   },
   "/pre-departure": {
     title: "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার চেকলিস্ট, লাগেজ নিয়ম ও দূতাবাস হেল্পলাইন | URAL",

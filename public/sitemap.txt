@@ -73,6 +73,7 @@ https://uraltravel.co.uk/tools/packing-checklist
 https://uraltravel.co.uk/tools/flight-delay-claim
 https://uraltravel.co.uk/tools/airport-codes
 https://uraltravel.co.uk/pre-departure
+https://uraltravel.co.uk/resources
 https://uraltravel.co.uk/sitemap
 https://uraltravel.co.uk/contact
 https://uraltravel.co.uk/about
@@ -201,6 +202,7 @@ https://uraltravel.co.uk/bn/tools/packing-checklist
 https://uraltravel.co.uk/bn/tools/flight-delay-claim
 https://uraltravel.co.uk/bn/tools/airport-codes
 https://uraltravel.co.uk/bn/pre-departure
+https://uraltravel.co.uk/bn/resources
 https://uraltravel.co.uk/bn/sitemap
 https://uraltravel.co.uk/bn/contact
 https://uraltravel.co.uk/bn/about

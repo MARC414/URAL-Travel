@@ -676,6 +676,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/pre-departure" />
   </url>
   <url>
+    <loc>https://uraltravel.co.uk/resources</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/resources" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/resources" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/resources" />
+  </url>
+  <url>
     <loc>https://uraltravel.co.uk/sitemap</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
@@ -1826,6 +1835,15 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/pre-departure" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/pre-departure" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/pre-departure" />
+  </url>
+  <url>
+    <loc>https://uraltravel.co.uk/bn/resources</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/resources" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/resources" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/resources" />
   </url>
   <url>
     <loc>https://uraltravel.co.uk/bn/sitemap</loc>

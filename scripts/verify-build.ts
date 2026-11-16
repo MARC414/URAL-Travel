@@ -33,6 +33,9 @@ import {
  *   - Blog image count is asserted against BLOG_DATA.length, so it is
  *     self-maintaining rather than a magic number.
  */
+import { runOfficialSourcesChecks } from "./officialSourcesChecks";
+import { NON_OFFICIAL_HOSTS, OFFICIAL_HOSTS, getOfficialSources, officialSourceHost } from "../src/data/officialSources";
+import { OFFICIAL_RESOURCES_COPY } from "../src/utils/officialResourcesCopy";
 import fs from "node:fs";
 import zlib from "node:zlib";
 import path from "node:path";
@@ -8393,6 +8396,45 @@ check(
   pricedVisaSchema.length === 0,
   `visa schema publishes no unsourced MonetaryAmount prices [${pricedVisaSchema.map((visa) => visa.id).join(", ")}]`
 );
+
+// --- Official sources directory (/resources) --------------------------------
+// The page promises official sites only. The registry guards keep a newly cited
+// website from slipping in unfiled; the HTML guards prove the saved page (what
+// a crawler reads) lists every registry link in both languages and nothing else.
+{
+  for (const result of runOfficialSourcesChecks()) check(result.ok, result.label);
+
+  const registryLinks = getOfficialSources();
+  const nonOfficialHosts = new Set(NON_OFFICIAL_HOSTS);
+  for (const [locale, file] of [
+    ["en", "resources.html"],
+    ["bn", path.join("bn", "resources.html")],
+  ] as const) {
+    const html = read(path.join(DIST_DIR, file));
+    check(html !== null, `/resources (${locale}): saved page exists`);
+    if (html === null) continue;
+    const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
+    const hrefs = [...main.matchAll(/href="(https?:\/\/[^"]+)"/g)].map((match) => match[1].replace(/&amp;/g, "&"));
+    const hrefSet = new Set(hrefs);
+    const missing = registryLinks.filter((source) => !hrefSet.has(source.url)).map((source) => source.url);
+    check(
+      missing.length === 0,
+      `/resources (${locale}): saved page lists every registry link${missing.length ? ` — missing ${missing.slice(0, 3).join(", ")}` : ""}`
+    );
+    const strays = hrefs.filter((href) => {
+      if (href.startsWith(SITE_ORIGIN)) return false;
+      return nonOfficialHosts.has(officialSourceHost(href)) || !OFFICIAL_HOSTS[officialSourceHost(href)];
+    });
+    check(
+      strays.length === 0,
+      `/resources (${locale}): saved page links to official websites only${strays.length ? ` — found ${strays.slice(0, 3).join(", ")}` : ""}`
+    );
+    check(
+      html.includes(`<h1>${OFFICIAL_RESOURCES_COPY[locale].h1}</h1>`) || html.includes(OFFICIAL_RESOURCES_COPY[locale].h1),
+      `/resources (${locale}): saved page carries the directory heading`
+    );
+  }
+}
 
 // --- Report ----------------------------------------------------------------
 // Keep this block LAST. The checks above only count if it runs after them; when

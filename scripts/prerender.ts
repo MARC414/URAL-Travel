@@ -100,6 +100,12 @@ import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/util
 import { sortBlogsNewestFirst } from "../src/utils/blogOrdering";
 import { SITE_SEARCH_ALIASES } from "../src/data/siteSearchAliases";
 import type { SiteSearchEntry, SiteSearchKind } from "../src/utils/siteSearch";
+import { generateAssistantIndex } from "./assistantIndex";
+import {
+  OFFICIAL_RESOURCES_COPY,
+  OFFICIAL_RESOURCES_PATH,
+  renderOfficialResourcesStaticHtml,
+} from "../src/utils/officialSourcesPage";
 import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
 import { TIQETS_TOP_ATTRACTIONS, TIQETS_CITY_STACKS } from "../src/data/tiqetsAttractionsData";
 import {
@@ -2666,6 +2672,22 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
+  // 10b. Official sources directory (/resources) — every official website the
+  // guides cite, grouped by topic and country. Body shared with the React view.
+  routes.push({
+    routePath: OFFICIAL_RESOURCES_PATH,
+    canonicalUrl: `${BASE_URL}${OFFICIAL_RESOURCES_PATH}`,
+    title: OFFICIAL_RESOURCES_COPY.en.seoTitle,
+    description: OFFICIAL_RESOURCES_COPY.en.seoDescription,
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: OFFICIAL_RESOURCES_COPY.en.breadcrumb, url: `${BASE_URL}${OFFICIAL_RESOURCES_PATH}` },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: renderOfficialResourcesStaticHtml("en"),
+  });
+
   // 11. Site Directory (/sitemap) — directory-only since the split; the
   // pre-departure FAQs moved to /pre-departure so the two URLs never compete.
   routes.push({
@@ -3968,6 +3990,11 @@ function buildBengaliBody(
               : [];
     if (related.length) parts.push(bnLinkList("সম্পর্কিত পরিকল্পনা", related));
     return `<article>${parts.join("")}</article>`;
+  }
+
+  if (englishPath === OFFICIAL_RESOURCES_PATH) {
+    // Same registry and section order as the English page, Bengali labels.
+    return renderOfficialResourcesStaticHtml("bn", h1);
   }
 
   if (englishPath === "/sitemap") {
@@ -5359,6 +5386,9 @@ async function main() {
   applySharedSeoCopy(enRoutes, "en");
   applySharedSeoCopy(bnRoutes, "bn");
   generateSiteSearchIndex(enRoutes, bnRoutes);
+  // The assistant's knowledge files come from the same published bodies as the
+  // search index, so it cannot quote anything a visitor cannot read on a page.
+  generateAssistantIndex(enRoutes, bnRoutes, SEARCH_INDEX_ONLY ? PUBLIC_DIR : DIST_DIR, CONTENT_DATA_LASTMOD);
   if (SEARCH_INDEX_ONLY) return;
   warnIfContentDateStale();
   generateSitemaps(routes);

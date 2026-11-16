@@ -26,6 +26,7 @@ import {
   BarChart3,
   Calculator,
   ShieldCheck,
+  Landmark,
   MessageSquare,
   Ticket,
   CreditCard,
@@ -86,6 +87,7 @@ import {
 import { Language, translations } from "./translations";
 import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
+import { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH } from "./utils/officialResourcesMeta";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { KKdayPromoBanner } from "./components/KKdayPromoBanner";
 import { getBengaliSeoCopy, getSeoCopy } from "./utils/seoCopy";
@@ -175,6 +177,7 @@ const ContactRouteView = React.lazy(() => import("./routes/ContactRouteView"));
 const AboutRouteView = React.lazy(() => import("./routes/AboutRouteView"));
 const NotFoundRouteView = React.lazy(() => import("./routes/NotFoundRouteView"));
 const VisaFreeCountriesRouteView = React.lazy(() => import("./routes/VisaFreeCountriesRouteView"));
+const OfficialResourcesPage = React.lazy(() => import("./components/OfficialResourcesPage"));
 const GlobalSiteSearch = React.lazy(() =>
   import("./components/GlobalSiteSearch").then((module) => ({ default: module.GlobalSiteSearch }))
 );
@@ -500,7 +503,7 @@ const singaporeDestImg = "/assets/images/singapore_destination_1790387270177-120
 const maldivesDestImg = "/assets/images/maldives_destination_1790387286896-1200.webp";
 const blogHeroBannerImg = "/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp";
 const umrahMakkahImg = "/assets/images/umrah_makkah_haram_guide_1790430007679-1200.webp";
-type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "privacy" | "about" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "resources" | "privacy" | "about" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1232,6 +1235,10 @@ export default function App() {
     } else if (root === "about" && segs.length === 1) {
       section = "about";
       isLanding = true;
+    } else if (root === "resources" && segs.length === 1) {
+      // Official sources directory: every official website URAL cites.
+      section = "resources";
+      isLanding = true;
     } else if (root === "pre-departure" && segs.length === 1) {
       // Standalone pre-departure hub (split out of the old combined /sitemap
       // page in 2026-10). /indexing stays an alias of the directory page.
@@ -1355,7 +1362,7 @@ export default function App() {
   const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
     if (sec === "destinations" || sec === "experiences" || sec === "attractions") return "destinations";
     if (sec === "blog" || sec === "costs") return "research";
-    if (sec === "tools" || sec === "sitemap" || sec === "preDeparture" || sec === "contact") return "tools";
+    if (sec === "tools" || sec === "sitemap" || sec === "preDeparture" || sec === "resources" || sec === "contact") return "tools";
     return "booking";
   };
 
@@ -2090,6 +2097,15 @@ export default function App() {
       { name: "Home", url: siteUrl("/", lang) },
       { name: "Money & Banking Hub", url: bankingUrl }
     ];
+  } else if (section === "resources") {
+    const resourcesUrl = siteUrl(OFFICIAL_RESOURCES_PATH, lang);
+    const resourcesCopy = OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"];
+    seoTitle = resourcesCopy.seoTitle;
+    seoDescription = resourcesCopy.seoDescription;
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: resourcesCopy.breadcrumb, url: resourcesUrl }
+    ];
   } else if (section === "preDeparture") {
     const preDepartureUrl = siteUrl("/pre-departure", lang);
     seoTitle = "Dhaka Airport (DAC) Pre-Departure Checklist & Helplines | URAL";
@@ -2158,6 +2174,7 @@ export default function App() {
     if (section === "kkdayHotels") return "/kkday-hotels";
     if (section === "visaFree") return "/visa-free-countries";
     if (section === "preDeparture") return "/pre-departure";
+    if (section === "resources") return OFFICIAL_RESOURCES_PATH;
     if (section === "sitemap") return "/sitemap";
     if (section === "privacy") return "/privacy";
     if (section === "tools") {
@@ -3034,6 +3051,13 @@ export default function App() {
                         path: "/pre-departure",
                       },
                       {
+                        id: "resources",
+                        icon: Landmark,
+                        label: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navLabel,
+                        sub: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navSub,
+                        path: OFFICIAL_RESOURCES_PATH,
+                      },
+                      {
                         id: "airhelp",
                         icon: ShieldCheck,
                         label: isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)" : "Flight Disruption Check (AirHelp)",
@@ -3320,7 +3344,7 @@ export default function App() {
                       subtitle: isBn
                         ? "কারেন্সি কনভার্টার · দূতাবাস · ফ্লাইট-সমস্যার গাইড"
                         : "FX tool · DAC checklist · flight-disruption guide",
-                      isActiveGroup: ["tools", "sitemap", "preDeparture", "contact"].includes(section),
+                      isActiveGroup: ["tools", "sitemap", "preDeparture", "resources", "contact"].includes(section),
                       primaryLinks: [
                         {
                           id: "tools",
@@ -3333,6 +3357,12 @@ export default function App() {
                           label: isBn ? "ঢাকা এয়ারপোর্ট (DAC) ও দূতাবাস হাব" : "Pre-Departure & Embassy Hub",
                           meta: isBn ? "লাগেজ নিয়ম, জমজম ও জরুরি নাম্বার" : "Baggage rules, Zamzam & embassies",
                           path: "/pre-departure",
+                        },
+                        {
+                          id: "resources",
+                          label: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navLabel,
+                          meta: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navSub,
+                          path: OFFICIAL_RESOURCES_PATH,
                         },
                         {
                           id: "airhelp",
@@ -4478,6 +4508,15 @@ export default function App() {
       )}
 
       {/* -------------------------------------------------------------
+          🏛️ OFFICIAL SOURCES DIRECTORY (/resources)
+      ------------------------------------------------------------- */}
+      {section === "resources" && (
+        <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+          <OfficialResourcesPage lang={lang} onNavigate={navigateTo} />
+        </React.Suspense>
+      )}
+
+      {/* -------------------------------------------------------------
           🔒 VIEW 11: PRIVACY & COOKIE POLICY HUB
       ------------------------------------------------------------- */}
       {section === "privacy" && (
@@ -5217,6 +5256,13 @@ export default function App() {
                   {isBn
                     ? "ঢাকা এয়ারপোর্ট (DAC) প্রি-ডিপার্চার চেকলিস্ট →"
                     : "Dhaka Airport (DAC) Pre-Departure Checklist →"}
+                </a>
+                <a
+                  href={getLocalizedRouteHref(OFFICIAL_RESOURCES_PATH)}
+                  onClick={(event) => handleNavigationAnchorClick(event, OFFICIAL_RESOURCES_PATH)}
+                  className="inline-block py-1 text-xs font-semibold text-[#F6B73C] hover:text-white hover:underline cursor-pointer"
+                >
+                  {OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navLabel} →
                 </a>
                 <a
                   href={getLocalizedRouteHref("/sitemap")}
