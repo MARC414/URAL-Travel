@@ -86,12 +86,13 @@ import {
   DESTINATION_RELATED_BLOG_SLUGS,
 } from "../src/data/destinationResources";
 import { BLOG_POST_COUNT, BLOG_SLUGS } from "../src/data/blogIndex";
-import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogIndex.generated";
+import { SCHEDULED_BLOG_ALT_TEXT } from "../src/data/scheduledBlogSeo.generated";
 import { BLOG_BODY } from "../src/data/blogContent";
 import { blogCategoryFilterIds } from "../src/utils/blogCategories";
 import { dhakaCalendarDate, isPublicationTimeReached, loadScheduledBlogPosts } from "./scheduledPosts";
 import {
   BENGALI_BLOG_OVERRIDES,
+  getFeaturedGrowthTopics,
   getLocalizedBlogs,
   getLocalizedCosts,
   getLocalizedDestinations,
@@ -100,6 +101,13 @@ import {
   getLocalizedHotels,
   getLocalizedVisas,
 } from "../src/data/bengaliContent";
+import {
+  ENGLISH_FEATURED_GROWTH_TOPICS,
+  HOME_FEATURED_BLOG_META,
+} from "../src/data/homeFeaturedBlogMeta";
+import { getBlogCoverImage } from "../src/utils/blogCoverImages";
+import { getBlogAeoSnippet50Words } from "../src/utils/blogSnippets";
+import { PRIORITY_SEO_COPY } from "../src/utils/seoCopy";
 import { EDITOR_PROFILE } from "../src/data/authorProfiles";
 import {
   getVisibleBlogFaqSection,
@@ -4720,16 +4728,12 @@ if (rss) {
   // curated planning links to the generated post data, which the homepage blog
   // index imports eagerly (measured 210.6 KB gzip). Follow-up worth doing:
   // move scheduled-post metadata behind the lazy route-data chunk.
-  // 212 KB was the ceiling through 2026-11-12. The 2026-11-13 scheduled post
-  // crossed it at HEAD (212.7 KB measured on a clean checkout of 672d8a2 with no
-  // working-tree changes), so the ceiling moved to 215 KB rather than leaving the
-  // gate permanently red. The white-label change adds 0.2 KB on top of that. The
-  // eVisas placements keep their panel, campaign constants and widget loader in a
-  // lazy chunk, so the entry graph pays only for the consent helper and the
-  // homepage marker. The real fix is to stop paying for blog metadata in the
-  // entry graph; until then this number is the tripwire, and it should come back
-  // down when that lands.
-  const EAGER_JS_BUDGET_KB = 215;
+  // Lowered from 215 KB back to 185 KB on 16 November 2026 after decoupling
+  // blog-only SEO copy, AEO snippets, cover images, cover alt text, FAQ/HowTo
+  // extractors and generated scheduled-blog metadata into lazy blog-only chunks
+  // (measured 166.5 KB gzip today and 166.5 KB with --include-unpublished; the
+  // entry graph now only grows by ~18 bytes gzip of slug text per new post).
+  const EAGER_JS_BUDGET_KB = 185;
   const contentDataIsEager = [...new Set([...eagerScripts, ...eagerPreloads])].some((url) =>
     /content-data/i.test(url)
   );
@@ -4750,14 +4754,66 @@ if (rss) {
     !klookModuleIsEager,
     "Klook deep-link helpers and hotel-pick data stay out of the homepage's eager script/preload graph"
   );
-  const globalSearchDialogIsEager = eagerAssetUrls.some((url) => /GlobalSiteSearch/i.test(url));
-  const searchIndexIsEager = (read(path.join(DIST_DIR, "index.html")) ?? "").includes("site-search-index.json");
-  check(
-    !globalSearchDialogIsEager && !searchIndexIsEager,
-    "the search dialog chunk and bilingual index stay out of the homepage's eager download graph"
+  const LAZY_BLOG_ONLY_SOURCE_SUFFIXES = [
+    "/src/utils/blogRouteMeta.ts",
+    "/src/utils/seoCopy.ts",
+    "/src/utils/blogAltText.ts",
+    "/src/utils/blogSnippets.ts",
+    "/src/utils/blogStructuredData.ts",
+    "/src/utils/blogCoverImages.ts",
+    "/src/utils/blogAeoPanel.ts",
+    "/src/data/blogAeoStaticPanels.ts",
+    "/src/data/scheduledBlogSeo.generated.ts",
+    "/src/data/scheduledBlogAeoPanels.generated.ts",
+    "/src/data/scheduledBlogPosts.generated.ts",
+    "/src/data/scheduledBlogBodies.generated.ts",
+    "/src/data/scheduledBengaliBlogs.generated.ts",
+  ];
+  const findLazyBlogModulesInSources = (sources: string[]): string[] =>
+    LAZY_BLOG_ONLY_SOURCE_SUFFIXES.filter((suffix) =>
+      sources.some((source) => source.replace(/\\/g, "/").endsWith(suffix))
+    );
+  const eagerSourcesList = eagerAssetUrls.flatMap((url) => {
+    const sourceMap = read(path.join(DIST_DIR, `${url.replace(/^\//, "")}.map`));
+    if (!sourceMap) return LAZY_BLOG_ONLY_SOURCE_SUFFIXES;
+    return (JSON.parse(sourceMap).sources ?? []) as string[];
+  });
+  const leakedBlogMetaModules = findLazyBlogModulesInSources(eagerSourcesList);
+  const featuredSlugSet = new Set(Object.keys(HOME_FEATURED_BLOG_META));
+  const nonFeaturedProbeSlug =
+    BLOG_DATA.find((post) => !featuredSlugSet.has(post.slug) && PRIORITY_SEO_COPY[`/blog/${post.slug}`])
+      ?.slug ?? "";
+  const scheduledAltProbe = Object.entries(SCHEDULED_BLOG_ALT_TEXT).find(
+    ([slug, entry]) => !featuredSlugSet.has(slug) && (entry.en?.length ?? 0) >= 35
   );
-  const contentDataFile = jsChunks.find((file) => /^content-data-.*\.js$/.test(file));
-  const contentDataHref = contentDataFile ? `/assets/${contentDataFile}` : null;
+  const blogDataProbes: Array<[string, string]> = [
+    [
+      "blog SEO description",
+      nonFeaturedProbeSlug ? PRIORITY_SEO_COPY[`/blog/${nonFeaturedProbeSlug}`]?.description ?? "" : "",
+    ],
+    [
+      "blog AEO snippet",
+      nonFeaturedProbeSlug ? getBlogAeoSnippet50Words(nonFeaturedProbeSlug, false, "") : "",
+    ],
+    [
+      "blog cover alt text",
+      nonFeaturedProbeSlug ? CURATED_BLOG_SCENES[nonFeaturedProbeSlug]?.en ?? "" : "",
+    ],
+    ["scheduled blog cover alt text", scheduledAltProbe?.[1].en ?? ""],
+  ];
+  const leakedBlogDataProbes = blogDataProbes
+    .filter(([, probe]) => probe.length >= 30 && eagerCode.includes(probe))
+    .map(([label]) => label);
+  check(
+    leakedBlogMetaModules.length === 0 && leakedBlogDataProbes.length === 0,
+    leakedBlogMetaModules.length === 0 && leakedBlogDataProbes.length === 0
+      ? "blog-only SEO, snippet, cover-image, cover-alt, FAQ/HowTo and AEO modules stay out of the eager download graph"
+      : `blog-only modules/data leaked into eager chunks: modules=[${leakedBlogMetaModules.join(", ")}] probes=[${leakedBlogDataProbes.join(", ")}]`
+  );
+  check(
+    findLazyBlogModulesInSources(["../../src/utils/seoCopy.ts", "../../src/utils/blogSnippets.ts"]).length === 2,
+    "blog-metadata eager-bundle guard catches reintroduced blog-only modules (negative control)"
+  );
   const routePathFromHtmlFile = (file: string): string => {
     const segments = path.relative(DIST_DIR, file).split(path.sep);
     if (segments[0] === "bn") segments.shift();
@@ -4767,6 +4823,81 @@ if (rss) {
     }
     return `/${segments.filter(Boolean).join("/")}`;
   };
+  const blogMetaFile = jsChunks.find((file) => /^blogRouteMeta-.*\.js$/.test(file));
+  const blogMetaHref = blogMetaFile ? `/assets/${blogMetaFile}` : null;
+  const blogRouteHtmlFiles = distHtmlFiles.filter((file) =>
+    /^\/blog(?:\/|$)/.test(routePathFromHtmlFile(file))
+  );
+  const missingBlogMetaPreloads = blogMetaHref
+    ? blogRouteHtmlFiles.filter(
+        (file) => !(read(file) ?? "").includes(`rel="modulepreload" crossorigin href="${blogMetaHref}"`)
+      )
+    : blogRouteHtmlFiles;
+  const homePreloadsBlogMeta = blogMetaHref ? indexHtml.includes(blogMetaHref) : false;
+  check(
+    blogMetaHref !== null &&
+      !homePreloadsBlogMeta &&
+      blogRouteHtmlFiles.length > 0 &&
+      missingBlogMetaPreloads.length === 0,
+    blogMetaHref !== null && !homePreloadsBlogMeta && missingBlogMetaPreloads.length === 0
+      ? `all ${blogRouteHtmlFiles.length} EN/BN blog routes modulepreload blogRouteMeta while homepage omits it`
+      : `blogRouteMeta preload mismatch: href=${blogMetaHref ?? "missing"} homePreload=${homePreloadsBlogMeta} missingOn=${missingBlogMetaPreloads.length}`
+  );
+  // Keep the 4 homepage featured-card lookups byte-identical to the lazy blog registries.
+  const bnFeaturedTopics = getFeaturedGrowthTopics("bn");
+  const featuredParityErrors: string[] = [];
+  for (const enTopic of ENGLISH_FEATURED_GROWTH_TOPICS) {
+    const meta = HOME_FEATURED_BLOG_META[enTopic.slug];
+    const bnTopic = bnFeaturedTopics.find((item) => item.slug === enTopic.slug);
+    if (!meta) {
+      featuredParityErrors.push(`${enTopic.slug}: missing HOME_FEATURED_BLOG_META entry`);
+      continue;
+    }
+    if (!bnTopic) {
+      featuredParityErrors.push(`${enTopic.slug}: missing Bengali featured topic`);
+      continue;
+    }
+    const expectedCover = getBlogCoverImage(enTopic.slug);
+    const expectedAltEn = generateBlogCoverAltText({
+      title: enTopic.title,
+      category: enTopic.category,
+      slug: enTopic.slug,
+      lang: "en",
+    });
+    const expectedAltBn = generateBlogCoverAltText({
+      title: bnTopic.title,
+      category: bnTopic.category,
+      slug: bnTopic.slug,
+      lang: "bn",
+    });
+    const expectedSnippetEn = getBlogAeoSnippet50Words(enTopic.slug, false, enTopic.excerpt);
+    const expectedSnippetBn = getBlogAeoSnippet50Words(bnTopic.slug, true, bnTopic.excerpt);
+    if (meta.coverImage !== expectedCover) featuredParityErrors.push(`${enTopic.slug}: coverImage drift`);
+    if (meta.altEn !== expectedAltEn) featuredParityErrors.push(`${enTopic.slug}: altEn drift`);
+    if (meta.altBn !== expectedAltBn) featuredParityErrors.push(`${enTopic.slug}: altBn drift`);
+    if (meta.snippetEn !== expectedSnippetEn) featuredParityErrors.push(`${enTopic.slug}: snippetEn drift`);
+    if (meta.snippetBn !== expectedSnippetBn) featuredParityErrors.push(`${enTopic.slug}: snippetBn drift`);
+  }
+  const orphanFeaturedSlugs = Object.keys(HOME_FEATURED_BLOG_META).filter(
+    (slug) => !ENGLISH_FEATURED_GROWTH_TOPICS.some((topic) => topic.slug === slug)
+  );
+  for (const slug of orphanFeaturedSlugs) {
+    featuredParityErrors.push(`${slug}: unused HOME_FEATURED_BLOG_META entry`);
+  }
+  check(
+    featuredParityErrors.length === 0,
+    featuredParityErrors.length === 0
+      ? `all ${ENGLISH_FEATURED_GROWTH_TOPICS.length} featured blog cards match canonical EN/BN cover, alt text, and AEO snippet registries`
+      : `HOME_FEATURED_BLOG_META drift: ${featuredParityErrors.join("; ")}`
+  );
+  const globalSearchDialogIsEager = eagerAssetUrls.some((url) => /GlobalSiteSearch/i.test(url));
+  const searchIndexIsEager = (read(path.join(DIST_DIR, "index.html")) ?? "").includes("site-search-index.json");
+  check(
+    !globalSearchDialogIsEager && !searchIndexIsEager,
+    "the search dialog chunk and bilingual index stay out of the homepage's eager download graph"
+  );
+  const contentDataFile = jsChunks.find((file) => /^content-data-.*\.js$/.test(file));
+  const contentDataHref = contentDataFile ? `/assets/${contentDataFile}` : null;
   const dataRouteHtmlFiles = distHtmlFiles.filter((file) =>
     /^\/(?:flights|hotels|visa|destinations|costs|blog)(?:\/|$)/.test(routePathFromHtmlFile(file))
   );
@@ -9004,6 +9135,104 @@ check(
 );
 
 checkEvisaIntegration(DIST_DIR, check);
+
+// --- CI test-suite completeness, build-phase order & off-peak schedule ------
+{
+  const pkgJson = JSON.parse(read(path.join(ROOT_DIR, "package.json")) ?? "{}") as {
+    scripts?: Record<string, string>;
+  };
+  const ciWorkflow = read(path.join(ROOT_DIR, ".github", "workflows", "ci.yml")) ?? "";
+  const testScripts = Object.entries(pkgJson.scripts ?? {}).filter(([name]) =>
+    name.startsWith("test:")
+  );
+
+  const scriptReadsDist = (source: string): boolean =>
+    source
+      .split(/\r?\n/)
+      .some((line) => {
+        const trimmed = line.trim();
+        if (trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*")) {
+          return false;
+        }
+        return /["'`/]dist(?:["'`/])/.test(trimmed);
+      });
+
+  const auditCiTestWiring = (
+    entries: Array<[string, string]>,
+    workflowYaml: string,
+    distReaderOverride?: Set<string>
+  ): { missing: string[]; beforeBuild: string[] } => {
+    const buildMatch = /^\s*(?:-\s*)?run:\s*npm\s+run\s+build\s*$/m.exec(workflowYaml);
+    const buildPos = buildMatch ? buildMatch.index : -1;
+    const missing: string[] = [];
+    const beforeBuild: string[] = [];
+
+    for (const [name, command] of entries) {
+      const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const stepRe = new RegExp(`^\\s*(?:-\\s*)?run:\\s*npm\\s+run\\s+${escaped}\\s*$`, "m");
+      const stepMatch = stepRe.exec(workflowYaml);
+      if (!stepMatch) {
+        missing.push(name);
+        continue;
+      }
+      let readsDist = distReaderOverride?.has(name) ?? false;
+      if (!distReaderOverride) {
+        const scriptRel = command.match(/scripts\/[^\s"']+\.(?:ts|mjs|js)/)?.[0];
+        if (scriptRel) {
+          readsDist = scriptReadsDist(read(path.join(ROOT_DIR, scriptRel)) ?? "");
+        }
+      }
+      if (readsDist && (buildPos < 0 || stepMatch.index < buildPos)) {
+        beforeBuild.push(name);
+      }
+    }
+    return { missing, beforeBuild };
+  };
+
+  const ciAudit = auditCiTestWiring(testScripts, ciWorkflow);
+  check(
+    testScripts.length > 0 && ciAudit.missing.length === 0 && ciAudit.beforeBuild.length === 0,
+    ciAudit.missing.length === 0 && ciAudit.beforeBuild.length === 0
+      ? `CI executes all ${testScripts.length} package.json test:* suites with every dist/-reading suite placed after npm run build`
+      : `CI test:* wiring error: missing=[${ciAudit.missing.join(", ")}] preBuildDistReaders=[${ciAudit.beforeBuild.join(", ")}]`
+  );
+  const syntheticCiAudit = auditCiTestWiring(
+    [
+      ["test:unwired-suite", "tsx scripts/test-unwired.ts"],
+      ["test:prebuild-dist-suite", "tsx scripts/test-dist.ts"],
+    ],
+    "      - run: npm run test:prebuild-dist-suite\n      - run: npm run build\n",
+    new Set(["test:prebuild-dist-suite"])
+  );
+  check(
+    syntheticCiAudit.missing.includes("test:unwired-suite") &&
+      syntheticCiAudit.beforeBuild.includes("test:prebuild-dist-suite"),
+    "CI test:* guard catches both missing suites and dist/-reading suites ordered before build (negative control)"
+  );
+
+  const scheduledWorkflow =
+    read(path.join(ROOT_DIR, ".github", "workflows", "scheduled-publish.yml")) ?? "";
+  const blogReadme = read(path.join(ROOT_DIR, "content", "blog", "README.md")) ?? "";
+  const cronMatch = scheduledWorkflow.match(/^\s*-\s*cron:\s*["'](\d{1,2})\s+(\d{1,2})\s+\*\s+\*\s+\*["']/m);
+  const cronMinute = cronMatch ? Number(cronMatch[1]) : NaN;
+  const cronHour = cronMatch ? Number(cronMatch[2]) : NaN;
+  const expectedUtcLabel =
+    Number.isInteger(cronMinute) && Number.isInteger(cronHour)
+      ? `${String(cronHour).padStart(2, "0")}:${String(cronMinute).padStart(2, "0")} UTC`
+      : "";
+  const cronValid =
+    Number.isInteger(cronMinute) &&
+    cronMinute > 0 &&
+    cronMinute < 60 &&
+    cronHour === 3 &&
+    blogReadme.includes(expectedUtcLabel);
+  check(
+    cronValid,
+    cronValid
+      ? `scheduled-publish.yml runs off the top-of-hour spike (${expectedUtcLabel}) and matches content/blog/README.md`
+      : `scheduled-publish.yml cron must run at 03:<01-59> UTC and match content/blog/README.md (saw cron="${cronMatch?.[0]?.trim() ?? "missing"}")`
+  );
+}
 
 // --- Report ----------------------------------------------------------------
 // Keep this block LAST. The checks above only count if it runs after them; when

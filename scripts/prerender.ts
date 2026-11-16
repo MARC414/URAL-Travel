@@ -3056,6 +3056,12 @@ function buildAllRoutes(): PrerenderRoute[] {
         authorRaw: post.author,
         articleSection: post.category,
         imageUrl: postImgUrl,
+        imageCaption: generateBlogCoverAltText({
+          title: post.title,
+          category: post.category,
+          slug: post.slug,
+          lang: "en",
+        }),
       }),
     ];
 
@@ -4415,6 +4421,7 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
         (item) => item.slug === segments[1]
       );
       const sourcePost = BLOG_DATA.find((item) => item.slug === segments[1]);
+        const bnArticleSection = localizedPost?.category || "Bangladesh Outbound Travel Guides";
       extraGraphNodes.push(
         articleSchema({
           url: canonicalUrl,
@@ -4424,7 +4431,13 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
           datePublished: sourcePost?.date,
           dateModified: sourcePost?.updatedAt || sourcePost?.date,
           authorRaw: sourcePost?.author,
-          articleSection: localizedPost?.category,
+          articleSection: bnArticleSection,
+          imageCaption: generateBlogCoverAltText({
+            title: copy.h1,
+            category: bnArticleSection,
+            slug: segments[1],
+            lang: "bn",
+          }),
           inLanguage: "bn-BD",
         })
       );
@@ -5069,6 +5082,33 @@ function getBlogBodyChunkPath(): string | null {
 }
 
 /**
+ * Blog SEO copy, cover-alt, snippet, cover-image, and structured-data helpers
+ * live in the lazy `blog-meta` chunk so non-blog routes never download them.
+ * Preload on EN/BN blog routes so cold loads start the fetch during HTML parse.
+ */
+function getBlogMetaChunkPath(): string | null {
+  try {
+    const manifestPath = path.join(DIST_DIR, ".vite", "manifest.json");
+    if (!fs.existsSync(manifestPath)) return null;
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8")) as Record<
+      string,
+      { file?: string }
+    >;
+    for (const [key, entry] of Object.entries(manifest)) {
+      if (
+        entry.file &&
+        (key.includes("utils/blogRouteMeta") || /^assets\/blog-meta-[^/]+\.js$/.test(entry.file))
+      ) {
+        return `/${entry.file}`;
+      }
+    }
+  } catch (err) {
+    console.warn("  ! could not read the build manifest for the blog-meta preload:", err);
+  }
+  return null;
+}
+
+/**
  * Attraction data chunk path — preloaded on /attractions routes so the
  * Tiqets data starts downloading during HTML parse instead of waiting for
  * React.lazy to discover it on click.
@@ -5122,6 +5162,11 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     console.log(`  preloading blog body chunk on blog routes: ${blogBodyChunk}`);
   }
   let blogPreloadCount = 0;
+  const blogMetaChunk = getBlogMetaChunkPath();
+  if (blogMetaChunk) {
+    console.log(`  preloading blog metadata chunk on blog routes: ${blogMetaChunk}`);
+  }
+  let blogMetaPreloadCount = 0;
   const attractionDataChunk = getAttractionDataChunkPath();
   if (attractionDataChunk) {
     console.log(`  preloading attraction data chunk on /attractions routes: ${attractionDataChunk}`);
@@ -5317,6 +5362,20 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       blogPreloadCount++;
     }
 
+    // Preload lazy blog metadata (SEO copy, cover-alt, snippets, structured data)
+    // on both English and Bengali blog routes; kept out of all non-blog pages.
+    if (
+      blogMetaChunk &&
+      /(^|\/)blog(\/|$)/.test(r.routePath) &&
+      pageHtml.includes("</head>")
+    ) {
+      pageHtml = pageHtml.replace(
+        "</head>",
+        `  <link rel="modulepreload" crossorigin href="${blogMetaChunk}" />\n  </head>`
+      );
+      blogMetaPreloadCount++;
+    }
+
     // Preload attraction data chunk on /attractions routes so Tiqets entries
     // start downloading during HTML parse instead of waiting for React.lazy.
     if (
@@ -5398,10 +5457,13 @@ function staticAffiliateDisclosure(isBn: boolean): string {
   if (blogBodyChunk) {
     console.log(`  modulepreload added to ${blogPreloadCount} blog pages`);
   }
+  if (blogMetaChunk) {
+    console.log(`  blog-meta modulepreload added to ${blogMetaPreloadCount} blog pages`);
+  }
   if (attractionDataChunk) {
     console.log(`  attraction-data modulepreload added to ${attractionDataPreloadCount} pages`);
   }
-  if (contentDataChunk || blogBodyChunk || attractionDataChunk) {
+  if (contentDataChunk || blogBodyChunk || blogMetaChunk || attractionDataChunk) {
     // Read once, then drop it: the manifest is a build-time artifact and nothing
     // in the deployed site or the verify pass needs it.
     try {

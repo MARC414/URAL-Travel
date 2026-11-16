@@ -1,20 +1,20 @@
 name: Scheduled blog publishing
 
 on:
-  # 03:00 UTC is 09:00 Asia/Dhaka. GitHub may queue scheduled workflows a few
-  # minutes late; the article remains hidden until the Cloudflare rebuild lands.
+  # 03:17 UTC is 09:17 Asia/Dhaka — intentionally offset from the 03:00
+  # top-of-hour Actions queue spike while staying just past the 09:00 Dhaka
+  # publication cutoff. GitHub may still queue scheduled workflows briefly;
+  # the article remains hidden until the Cloudflare rebuild lands.
   schedule:
-    - cron: "0 3 * * *"
+    - cron: "17 3 * * *"
   workflow_dispatch:
     inputs:
       include_overdue:
         description: Include scheduled articles whose publish date has passed
         required: false
-        # Default true: the nightly job uses strict date equality, so a post the
-        # schedule missed on its own day is otherwise missed forever. The build
-        # itself (isPostIncludedInBuild) is time-based and always includes
-        # overdue posts; this input only gates whether the nightly *checker*
-        # notices them and fires the Cloudflare rebuild hook.
+        # Default true: catch any article whose publish date already passed and
+        # is still missing from the live production sitemap, without firing
+        # repeat rebuilds for posts already published (see scripts/publishPlan.ts).
         default: true
         type: boolean
 

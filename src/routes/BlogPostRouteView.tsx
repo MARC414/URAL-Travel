@@ -32,6 +32,8 @@ import { getArticleRelatedPosts } from "../utils/blogPresentation";
 import JourneyHelpPanel from "../components/JourneyHelpPanel";
 
 import { getVisibleBlogFaqSection } from "../utils/blogStructuredData";
+import { getBlogCoverImage as defaultGetBlogCoverImage } from "../utils/blogCoverImages";
+import { getBlogAeoSnippet50Words as defaultGetBlogAeoSnippet50Words } from "../utils/blogSnippets";
 
 import { resolveBookingCtaUrl } from "../utils/bookingCta";
 import { sanitizeExpiredPromoText, PartnerLinkButton, AFFILIATE_LINKS, RadicalStorageContextualCallout, MultiPartnerBlogCallout, MULTI_PARTNER_BLOG_PLACEMENTS, TravelpayoutsReferralCallout, KlookActivitiesWidget, KiwitaxiTransferWidget, AiraloEsimWidget, getAffiliateCtaButtonLabel, getBlogCtaDisclosure } from "../components/AffiliatePartners";
@@ -199,7 +201,7 @@ function parseMarkdownTableBlock(block: string): { header: string[]; rows: strin
 
 export default function BlogPostRouteView({ context }: RouteViewProps) {
 
-  const { AuthorBioCard, blogBodies, getBlogAeoSnippet50Words, getBlogCoverImage, getLocalizedRouteHref, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, parameterId, section, setAffiliateToast } = context;
+  const { AuthorBioCard, blogBodies, getBlogAeoSnippet50Words = defaultGetBlogAeoSnippet50Words, getBlogCoverImage = defaultGetBlogCoverImage, getLocalizedRouteHref, isBn, isLanding, lang, localizedBlogs, localizedHajjFaqs, navigateTo, parameterId, section, setAffiliateToast } = context;
 
   return (
 

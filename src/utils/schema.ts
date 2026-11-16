@@ -1,4 +1,3 @@
-import { generateBlogCoverAltText } from "./blogAltText";
 import { getAuthorProfile } from "../data/authorProfiles";
 import { SITE_ORIGIN } from "./localeRoutes";
 
@@ -280,6 +279,7 @@ export function articleSchema(options: {
   authorRaw?: string;
   articleSection?: string;
   imageUrl?: string;
+  imageCaption?: string;
   inLanguage?: string;
 }) {
   const {
@@ -292,6 +292,7 @@ export function articleSchema(options: {
     authorRaw,
     articleSection = "Bangladesh Outbound Travel Guides",
     imageUrl = `${BASE_URL}/img/blog/${slug}.jpg`,
+    imageCaption,
     inLanguage = "en-BD",
   } = options;
 
@@ -310,12 +311,7 @@ export function articleSchema(options: {
       url: imageUrl,
       width: 1200,
       height: 630,
-      caption: generateBlogCoverAltText({
-        title: headline,
-        category: articleSection,
-        slug,
-        lang: inLanguage?.startsWith("bn") ? "bn" : "en",
-      }),
+      caption: imageCaption || headline,
     },
     datePublished: isoPub,
     dateModified: isoMod,

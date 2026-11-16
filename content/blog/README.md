@@ -24,7 +24,7 @@ This review gate keeps source documents, unverified claims, and drafts out of th
 ## Status and publish time
 
 - `status: draft` — never included in a normal site build, regardless of its date.
-- `status: scheduled` plus `publishDate: "YYYY-MM-DD"` — automatically included in the first production build at or after **9:00 AM on that Dhaka date**. The daily GitHub Action runs at **03:00 UTC (about 9:00 AM Asia/Dhaka)**. The checker includes due and overdue posts by default and uses the live sitemap to avoid rebuilding posts already published.
+- `status: scheduled` plus `publishDate: "YYYY-MM-DD"` — automatically included in the first production build at or after **9:00 AM on that Dhaka date**. The daily GitHub Action runs at **03:17 UTC (9:17 AM Asia/Dhaka, offset from the top-of-hour queue spike)**. The checker includes due and overdue posts by default and uses the live sitemap to avoid rebuilding posts already published.
 - A date without a time means **9:00 AM Dhaka time**. Do not add a timezone offset or a time to the date.
 - Keep the post in the repository before its scheduled date. The Cloudflare deploy-hook URL is stored as the private GitHub Actions secret `CLOUDFLARE_PAGES_DEPLOY_HOOK`; never add it to an article or commit it.
 - If GitHub Actions misses a date, the default overdue-inclusive checker can recover it on a later run. **Run workflow** also defaults `include_overdue` to true; explicitly setting it false restricts the check. See `scripts/check-scheduled-posts.ts` and `scripts/publishPlan.ts`; the current behavior supersedes old date-equality comments and plans.
