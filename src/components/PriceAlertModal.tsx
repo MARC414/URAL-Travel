@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Bell, X, CheckCircle, ExternalLink, ShieldCheck, Plane, ArrowRight, MessageCircle } from "lucide-react";
 import { Language } from "../translations";
+import { readOptionalStorage, writeOptionalStorage } from "../utils/consent";
 
 interface PriceAlertModalProps {
   isOpen: boolean;
@@ -70,17 +71,15 @@ export function PriceAlertModal({ isOpen, onClose, lang, defaultDestination = "B
 
     const waUrl = `https://wa.me/8801784385335?text=${encodeURIComponent(waText)}`;
 
-    // Save to local storage for persistent badge
+    // Save to local storage only when central preferences consent is granted
     try {
-      if (typeof window !== "undefined") {
-        const existing = JSON.parse(localStorage.getItem("ural_active_alerts") || "[]");
-        const newAlert = {
-          route: `DAC ➔ ${targetDest}`,
-          date: new Date().toLocaleDateString(),
-          window: travelWindow
-        };
-        localStorage.setItem("ural_active_alerts", JSON.stringify([newAlert, ...existing.slice(0, 4)]));
-      }
+      const existing = JSON.parse(readOptionalStorage("ural_active_alerts") || "[]");
+      const newAlert = {
+        route: `DAC ➔ ${targetDest}`,
+        date: new Date().toLocaleDateString(),
+        window: travelWindow
+      };
+      writeOptionalStorage("ural_active_alerts", JSON.stringify([newAlert, ...existing.slice(0, 4)]));
     } catch {
       // Graceful fallback
     }

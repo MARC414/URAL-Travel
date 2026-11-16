@@ -8,10 +8,10 @@
         2. viewport — needed before layout so mobile CLS is measured correctly.
         3. LCP preload — issued before any third-party request so the hero image
            is not queued behind analytics on a cold connection.
-        4. Warm the deferred GTM origin only after the first-party LCP/font
-           preloads; this opens a connection but does not fetch or execute GTM.
-        5. Analytics/affiliate scripts load last, so they never contend with the
-           LCP image for the first few connections.
+        4. Critical self-hosted font preloads — no unconsented third-party
+           connections are opened before explicit visitor consent.
+        5. Analytics and affiliate scripts load last and only after their
+           matching central consent category is granted.
     -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,10 +30,6 @@
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-v1.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600-v1.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-700-v1.woff2" crossorigin />
-    <!-- Warm the origin for the deferred classic-script GTM loader below.
-         No GTM script is fetched here, and Consent Mode's default-denied block
-         still executes before the deferred loader can inject gtm.js. -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
     <style>
       /* Critical font-face with size-adjust to prevent FOUT layout shift */
       @font-face{font-family:'Inter';src:url('/fonts/inter-400-v1.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;size-adjust:100.5%;ascent-override:90%;descent-override:22%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+0259,U+02C6,U+02DA,U+02DC,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -240,134 +236,191 @@
       }
     </script>
 
-    <!-- Google Consent Mode v2 - Default State before GTM loads -->
+    <!-- Google Consent Mode v2 - Default State before GTM loads.
+         All optional categories default to 'denied' and read the exact same
+         central storage schema ('cookie-consent' + 'cookie-consent-settings')
+         as src/utils/consent.ts. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       (function(){
-        var stored = null;
-        try { stored = localStorage.getItem('cookie-consent'); } catch(e){}
-        var isGranted = stored === 'accepted';
+        var analytics = false, marketing = false, functionality = false;
+        try {
+          var stored = localStorage.getItem('cookie-consent');
+          if (stored === 'accepted') {
+            analytics = true;
+            marketing = true;
+            functionality = true;
+          } else if (stored === 'custom') {
+            var s = JSON.parse(localStorage.getItem('cookie-consent-settings') || '{}');
+            if (s && typeof s === 'object' && !Array.isArray(s)) {
+              analytics = s.analytics === true;
+              marketing = s.marketing === true;
+              functionality = s.functionality === true;
+            }
+          }
+        } catch(e){}
         gtag('consent', 'default', {
-          'ad_storage': isGranted ? 'granted' : 'denied',
-          'ad_user_data': isGranted ? 'granted' : 'denied',
-          'ad_personalization': isGranted ? 'granted' : 'denied',
-          'analytics_storage': isGranted ? 'granted' : 'denied',
-          'functionality_storage': isGranted ? 'granted' : 'denied',
-          'personalization_storage': isGranted ? 'granted' : 'denied',
+          'ad_storage': marketing ? 'granted' : 'denied',
+          'ad_user_data': marketing ? 'granted' : 'denied',
+          'ad_personalization': marketing ? 'granted' : 'denied',
+          'analytics_storage': analytics ? 'granted' : 'denied',
+          'functionality_storage': functionality ? 'granted' : 'denied',
+          'personalization_storage': functionality ? 'granted' : 'denied',
           'security_storage': 'granted',
           'wait_for_update': 500
         });
       })();
     </script>
 
-    <!-- Initial pageview — queued before GTM loads (GTM is deferred below).
-         Tiny inline push: no DOM writes, no network, no async. Placed after the
-         LCP/font preloads and critical CSS so it cannot delay first paint. -->
-    <script>
-      (function(){
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'page_view',
-          page_path: window.location.pathname + window.location.search,
-          page_title: document.title,
-          page_location: window.location.href,
-        });
-      })();
-    </script>
-
-    <!-- Google Tag Manager - Deferred to user interaction or idle callback -->
+    <!-- Google Tag Manager (GTM-TMPVL82B) - Strictly gated on central analytics
+         consent ('accepted', or 'custom' with analytics===true). Zero network
+         connection or page_view event occurs when consent is unset or declined;
+         loads immediately on 'ural:consent-updated' grant and detaches on
+         withdrawal. -->
     <script>
       (function(){
         var loaded=false;
+        var initialPageViewSent=false;
+        var gtmScript=null;
+        function analyticsFromDetail(detail){
+          if(!detail||typeof detail!=='object'||Array.isArray(detail))return null;
+          if(detail.status==='accepted'||detail.accepted===true)return true;
+          if(detail.status==='declined'||detail.accepted===false)return false;
+          if(typeof detail.analytics==='boolean')return detail.analytics;
+          var s=detail.settings;
+          if(s&&typeof s==='object'&&!Array.isArray(s)&&typeof s.analytics==='boolean')return s.analytics;
+          var p=detail.payload;
+          if(p&&typeof p==='object'&&!Array.isArray(p)&&typeof p.analytics_storage==='string')return p.analytics_storage==='granted';
+          return null;
+        }
+        function analyticsAllowed(detail){
+          var fromEvent=analyticsFromDetail(detail);
+          if(fromEvent!==null)return fromEvent;
+          try{
+            var choice=localStorage.getItem('cookie-consent');
+            if(choice==='accepted')return true;
+            if(choice==='custom'){
+              var settings=JSON.parse(localStorage.getItem('cookie-consent-settings')||'{}');
+              return !!(settings&&typeof settings==='object'&&!Array.isArray(settings)&&settings.analytics===true);
+            }
+          }catch(e){}
+          return false;
+        }
+        function pushInitialPageView(){
+          if(initialPageViewSent)return;
+          initialPageViewSent=true;
+          window.dataLayer=window.dataLayer||[];
+          window.dataLayer.push({
+            event:'page_view',
+            page_path:window.location.pathname+window.location.search,
+            page_title:document.title,
+            page_location:window.location.href
+          });
+        }
         function loadGTM(){
           if(loaded)return;
           loaded=true;
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-          var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-          j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-          f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TMPVL82B');
+          pushInitialPageView();
+          // If GTM already initialized in this JS heap before a withdrawal/re-grant,
+          // Consent Mode 'update' reactivates it without duplicating container listeners.
+          if(window.google_tag_manager&&window.google_tag_manager['GTM-TMPVL82B'])return;
+          window.dataLayer=window.dataLayer||[];
+          window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+          var script=document.createElement('script');
+          script.async=true;
+          script.setAttribute('data-ural-consent','analytics');
+          script.src='https://www.googletagmanager.com/gtm.js?id=GTM-TMPVL82B';
+          script.onerror=function(){};
+          gtmScript=script;
+          document.head.appendChild(script);
         }
+        function detachGTM(){
+          if(gtmScript&&gtmScript.parentNode){gtmScript.parentNode.removeChild(gtmScript);}
+          gtmScript=null;
+          loaded=false;
+        }
+        function attemptGTM(){if(!loaded&&analyticsAllowed())loadGTM();}
         var events=['mousedown','touchstart','keydown','wheel','scroll'];
-        events.forEach(function(e){window.addEventListener(e,loadGTM,{once:true,passive:true});});
+        events.forEach(function(e){window.addEventListener(e,attemptGTM,{once:true,passive:true});});
         function scheduleGTM(){
-          if('requestIdleCallback' in window){
-            requestIdleCallback(function(){ loadGTM(); }, {timeout: 3500});
-          } else {
-            setTimeout(loadGTM, 3500);
+          if('requestIdleCallback'in window){
+            window.requestIdleCallback(attemptGTM,{timeout:3500});
+          }else{
+            setTimeout(attemptGTM,3500);
           }
         }
         if(document.readyState==='complete'){
           scheduleGTM();
-        } else {
-          window.addEventListener('load', scheduleGTM, {once:true});
+        }else{
+          window.addEventListener('load',scheduleGTM,{once:true});
         }
+        window.addEventListener('ural:consent-updated',function(ev){
+          if(analyticsAllowed(ev&&ev.detail)){
+            loadGTM();
+          }else{
+            detachGTM();
+          }
+        });
+        window.addEventListener('storage',function(ev){
+          if(ev&&ev.key!==null&&ev.key!=='cookie-consent'&&ev.key!=='cookie-consent-settings')return;
+          if(analyticsAllowed()){loadGTM();}else{detachGTM();}
+        });
       })();
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Travelpayouts DRIVE - project 589561 (uraltravel.co.uk) - gated on
-         marketing consent for every visitor, loaded early-but-not-blocking.
-
-         Why the id changed: Drive's code is generated PER PROJECT (the filename
-         is base64 of the project id: NTg5NTYx -> 589561). The previous tag was
-         issued for the project that was deleted during the domain move, so it was
-         replaced with this one from the new project's "Manual installation" tab.
-         Do not paste 589561 on any other domain, and do not run an old and a new
-         Drive tag together - two instances rewrite the same links.
-
-         The affiliate script sets marketing cookies and is listed as a marketing
-         processor in our own privacy policy, and the consent banner is shown to
-         everyone, so the gate does not depend on the visitor's country: the
-         script is injected only after marketing consent is granted (Accept all,
-         or marketing toggled on in the customize panel), and a later
-         `ural:consent-updated` starts it immediately.
-
-         Timing: Drive's job is rewriting travel links and collecting content
-         analytics, so waiting for the footer to scroll into view meant most
-         sessions never loaded it. It now runs on the first idle slot after
-         DOMContentLoaded (2.5 s ceiling) - the same deferral pattern the GTM
-         loader above uses - so it costs nothing on the LCP path.
-         Nothing in functions/_middleware.js gates this any more - the decision is
-         entirely client-side in marketingAllowed() below.
-
-         QA: load with a fresh profile -> the script must NOT be in the network
-         log; click "Accept all" -> it must appear. Drive's own "Verify
-         installation" crawler does not click cookie banners, so append
-         `?tpverify=1` to the URL once to allow a verification-only load. -->
+    <!-- Travelpayouts DRIVE - project 589561 (uraltravel.co.uk) - strictly gated
+         on central marketing consent for every visitor, with zero URL bypasses.
+         Reads the same storage keys ('cookie-consent' + 'cookie-consent-settings')
+         and 'ural:consent-updated' events as src/utils/consent.ts, starts
+         immediately on grant, and detaches on withdrawal. -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
       (function(){
         var loaded=false;
+        var driveScript=null;
         function loadDrive(){
           if(loaded)return;
           loaded=true;
           var script=document.createElement("script");
           script.async=1;
           script.setAttribute("data-cmp-ab","2");
+          script.setAttribute("data-ural-consent","marketing");
           script.src="https://emrld.ltd/NTg5NTYx.js?t=589561";
           script.onerror=function(){};
+          driveScript=script;
           document.head.appendChild(script);
         }
-        function marketingAllowed(){
-          // Same storage keys the consent banner and the privacy page write:
-          // "accepted" means Accept all; "custom" carries per-category flags.
-          // "declined", a missing value, or unreadable storage => no marketing.
+        function detachDrive(){
+          if(driveScript&&driveScript.parentNode){driveScript.parentNode.removeChild(driveScript);}
+          driveScript=null;
+          loaded=false;
+        }
+        function marketingFromDetail(detail){
+          if(!detail||typeof detail!=='object'||Array.isArray(detail))return null;
+          if(detail.status==='accepted'||detail.accepted===true)return true;
+          if(detail.status==='declined'||detail.accepted===false)return false;
+          if(typeof detail.marketing==='boolean')return detail.marketing;
+          var s=detail.settings;
+          if(s&&typeof s==='object'&&!Array.isArray(s)&&typeof s.marketing==='boolean')return s.marketing;
+          var p=detail.payload;
+          if(p&&typeof p==='object'&&!Array.isArray(p)&&typeof p.ad_storage==='string')return p.ad_storage==='granted';
+          return null;
+        }
+        function marketingAllowed(detail){
+          var fromEvent=marketingFromDetail(detail);
+          if(fromEvent!==null)return fromEvent;
           try{
             var choice=localStorage.getItem('cookie-consent');
             if(choice==='accepted')return true;
             if(choice==='custom'){
               var settings=JSON.parse(localStorage.getItem('cookie-consent-settings')||'{}');
-              return !!(settings&&settings.marketing===true);
+              return !!(settings&&typeof settings==='object'&&!Array.isArray(settings)&&settings.marketing===true);
             }
           }catch(e){}
           return false;
         }
-        function verificationBypass(){
-          // One-shot hook for Travelpayouts' "Verify installation" crawler,
-          // which never clicks a cookie banner. Marketing-only, no other effect.
-          try{return /[?&]tpverify=1(&|$)/.test(window.location.search);}catch(e){return false;}
-        }
-        function attempt(){if(!loaded&&(marketingAllowed()||verificationBypass()))loadDrive();}
+        function attempt(){if(!loaded&&marketingAllowed())loadDrive();}
         function schedule(){
           if('requestIdleCallback'in window){
             window.requestIdleCallback(attempt,{timeout:2500});
@@ -380,17 +433,21 @@
         }else{
           schedule();
         }
-        // Consent granted after this loader ran (Accept all, or marketing toggled
-        // on in the customize panel) must still start the script.
-        window.addEventListener('ural:consent-updated',attempt);
+        window.addEventListener('ural:consent-updated',function(ev){
+          if(marketingAllowed(ev&&ev.detail)){
+            loadDrive();
+          }else{
+            detachDrive();
+          }
+        });
+        window.addEventListener('storage',function(ev){
+          if(ev&&ev.key!==null&&ev.key!=='cookie-consent'&&ev.key!=='cookie-consent-settings')return;
+          if(marketingAllowed()){loadDrive();}else{detachDrive();}
+        });
       })();
     </script>
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMPVL82B"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <div id="root">
       <!-- First-paint hero shell. React replaces it after the app chunk mounts. -->
       <section class="hero-bg pre-hydration-hero" data-pre-hydration-hero aria-label="Travel planning for Bangladeshi travelers">
