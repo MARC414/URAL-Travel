@@ -222,7 +222,7 @@ export const VISA_ASSISTANCE_COPY: Record<VisaAssistanceLocale, VisaAssistanceCo
 
     howHeading: "eVisas কীভাবে কাজ করে",
     howIntro:
-      "চারটি ধাপ, eVisas-এর নিজের About পাতা অনুযায়ী (১৭ নভেম্বর ২০২৬ চেক করা)। জমা দেওয়ার আগে প্রতিটি আবেদন একজন প্রশিক্ষিত consultant পর্যালোচনা করেন।",
+      "চারটি ধাপ, eVisas-এর নিজের পরিচিতি পাতা অনুযায়ী (১৭ নভেম্বর ২০২৬ চেক করা)। জমা দেওয়ার আগে প্রতিটি আবেদন একজন প্রশিক্ষিত consultant পর্যালোচনা করেন।",
     steps: [
       {
         title: "যোগ্যতা দেখে নিন",
