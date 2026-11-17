@@ -4,10 +4,10 @@ import {
   BadgeCheck,
   Info,
   MessageSquare,
-  Plane,
   ShieldCheck,
   Stamp,
 } from "lucide-react";
+import { HotelHero as ImageOverlayHero } from "../components/HotelHero";
 import {
   PARTNERS_COPY,
   partnerHref,
@@ -42,16 +42,17 @@ export default function PartnersPage({ lang, onNavigate }: PartnersPageProps) {
   return (
     <div className="ural-route-stack animate-fade-in font-sans max-w-4xl mx-auto px-6 sm:px-0">
       {/* Page Header */}
-      <header className="bg-brand-navy rounded-3xl p-8 sm:p-12 text-center space-y-4">
-        <span className="inline-flex items-center gap-2 text-brand-gold text-xs font-semibold uppercase tracking-widest">
-          <Plane className="w-3.5 h-3.5" aria-hidden="true" strokeWidth={2.2} />
-          {copy.eyebrow}
-        </span>
-        <h1 className="ural-page-title text-3xl sm:text-4xl font-bold text-white font-serif leading-tight">
-          {copy.h1}
-        </h1>
-        <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">{copy.intro}</p>
-      </header>
+      <ImageOverlayHero
+        eyebrow={copy.eyebrow}
+        title={copy.h1}
+        description={copy.intro}
+        imageSrc="/assets/images/partners_hero_20261117-1200.webp"
+        imageAlt={
+          isBn
+            ? "ট্রাভেল পার্টনারশিপ প্ল্যাটফর্মের কাজের দৃশ্য"
+            : "A travel partnerships platform at work"
+        }
+      />
 
       {/* Quick answer */}
       <div className="ural-panel bg-white border border-border-subtle p-5 sm:p-6 flex gap-3">

@@ -78,6 +78,13 @@ ${group.rows
     .join("\n");
 
   return `      <article>
+        <figure>
+          <img src="/assets/images/partners_hero_20261117-1200.webp" width="1200" height="675" loading="eager" decoding="async" fetchpriority="high" alt="${escapeHtml(
+            locale === "bn"
+              ? "ট্রাভেল পার্টনারশিপ প্ল্যাটফর্মের কাজের দৃশ্য"
+              : "A travel partnerships platform at work",
+          )}" />
+        </figure>
         <header>
           <p>${escapeHtml(copy.eyebrow)}</p>
           <h1>${h1}</h1>
