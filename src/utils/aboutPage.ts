@@ -17,6 +17,9 @@ export const ABOUT_MID_IMAGE_WIDTH = 1200;
 export const ABOUT_MID_IMAGE_HEIGHT = 896;
 
 const IMAGE_SRC = "/assets/images/about_mid_desk_20261117-1200.webp";
+const HERO_IMAGE_SRC = "/assets/images/about_hero_concourse_20261117-1200.webp";
+const HERO_IMAGE_WIDTH = 1200;
+const HERO_IMAGE_HEIGHT = 670;
 
 function escapeHtml(value: string): string {
   return value
@@ -67,6 +70,13 @@ export function renderAboutStaticHtml(
     .join("\n");
 
   return `      <article>
+        <figure>
+          <img src="${HERO_IMAGE_SRC}" width="${HERO_IMAGE_WIDTH}" height="${HERO_IMAGE_HEIGHT}" loading="eager" decoding="async" fetchpriority="high" alt="${escapeHtml(
+            locale === "bn"
+              ? "সকালের আলোয় বিমানবন্দরের কনকোর্স, ভ্রমণকারীরা দূরে"
+              : "An airport concourse in morning light, travellers in the distance",
+          )}" />
+        </figure>
         <header>
           <p>${escapeHtml(copy.eyebrow)}</p>
           <h1>${h1}</h1>

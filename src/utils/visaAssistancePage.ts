@@ -91,6 +91,13 @@ export function renderVisaAssistanceStaticHtml(
   ).join("\n");
 
   return `      <article>
+        <figure>
+          <img src="/assets/images/visas_hero_20261117-1200.webp" width="1200" height="675" loading="eager" decoding="async" fetchpriority="high" alt="${escapeHtml(
+            locale === "bn"
+              ? "পাসপোর্ট, বোর্ডিং পাস ও ভিসার স্ট্যাম্প একটি ডেস্কে"
+              : "A passport, boarding pass and visa stamps on a desk",
+          )}" />
+        </figure>
         <header>
           <p>${escapeHtml(copy.eyebrow)}</p>
           <h1>${h1}</h1>

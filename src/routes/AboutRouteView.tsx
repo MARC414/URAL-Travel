@@ -13,6 +13,7 @@ import {
   Stamp,
   Wallet,
 } from "lucide-react";
+import { HotelHero as ImageOverlayHero } from "../components/HotelHero";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import {
   ABOUT_COPY,
@@ -57,15 +58,17 @@ export default function AboutRouteView({ context }: RouteViewProps) {
   return (
     <div className="ural-route-stack animate-fade-in font-sans max-w-4xl mx-auto">
       {/* Page Header */}
-      <header className="bg-brand-navy rounded-3xl p-8 sm:p-12 text-center space-y-4">
-        <span className="inline-flex items-center gap-2 text-[#F6B73C] text-xs font-mono font-bold uppercase tracking-widest">
-          {copy.eyebrow}
-        </span>
-        <h1 className="ural-page-title text-3xl sm:text-4xl font-bold text-white font-serif leading-tight">
-          {copy.h1}
-        </h1>
-        <p className="text-slate-300 text-sm max-w-2xl mx-auto leading-relaxed">{copy.intro}</p>
-      </header>
+      <ImageOverlayHero
+        eyebrow={copy.eyebrow}
+        title={copy.h1}
+        description={copy.intro}
+        imageSrc="/assets/images/about_hero_concourse_20261117-1200.webp"
+        imageAlt={
+          isBn
+            ? "সকালের আলোয় বিমানবন্দরের কনকোর্স, ভ্রমণকারীরা দূরে"
+            : "An airport concourse in morning light, travellers in the distance"
+        }
+      />
 
       {/* What URAL does */}
       <section className="space-y-3">
