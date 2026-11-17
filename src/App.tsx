@@ -69,6 +69,7 @@ import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
 import { AscentMark } from "./components/AscentMark";
+import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
 import {
   AFFILIATE_LINKS,
   KKDAY_PROMO,
@@ -4019,6 +4020,10 @@ export default function App() {
         {isBn ? "মূল বিষয়বস্তুতে যান" : "Skip to main content"}
       </a>
       <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        {/* A failed route chunk must not blank the page or take the navigation
+            with it: this keeps the shell and shows a reload prompt. `resetKey`
+            is the current path, so leaving the broken route clears the error. */}
+        <RouteErrorBoundary lang={lang} resetKey={currentPath}>
 
         {/* -------------------------------------------------------------
             🏠 VIEW 1: HOME PAGE (CONVERSION HUB)
@@ -4938,6 +4943,7 @@ export default function App() {
         </section>
       )}
 
+        </RouteErrorBoundary>
       </main>
 
       {/* Shared sitewide subscription card: one email field, with distinct optional interests. */}

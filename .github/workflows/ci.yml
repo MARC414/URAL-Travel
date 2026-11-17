@@ -82,6 +82,12 @@ jobs:
       - name: Verify /api/subscribe carries the same transport rules and honeypot
         run: npm run test:subscribe-endpoint
 
+      # The boundary only renders when something has already failed, so it is
+      # never exercised by hand. This renders it in happy-dom and asserts the
+      # fallback appears, is localised, and clears on navigation.
+      - name: Verify a failed route chunk shows a message, not a blank page
+        run: npm run test:error-boundary
+
       - name: Verify the expired KKday menu card cannot render
         run: npm run test:kkday-card
 
