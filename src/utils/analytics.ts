@@ -62,6 +62,17 @@ export function trackPageView(pagePath: string, pageTitle: string, canonicalUrl:
  * `*.tpo.li`, `tp.media`, `tpemd.com` and the brands' own domains, while every
  * referral surface is on `travelpayouts.com` itself (docs, brands directory,
  * program landing pages) plus `?marker=` for attribution.
+ *
+ * WHY `travelpayouts` IS NOT IN `PARTNER_DOMAINS`
+ * ----------------------------------------------
+ * It used to be, on the reasoning that anything on the platform is commercial.
+ * That made every *editorial citation* of the platform commercial too: `/partners`
+ * cites the company's own about page and its published terms as the evidence
+ * behind the dated facts it prints, and those clicks were reported as
+ * `affiliate_partner_click` — "a reader read our sources" counted as "a reader
+ * booked a trip" (00-URAL-CURRENT-AUDIT.md §B.2, which records this exact
+ * misclassification). The platform's own pages are now editorial unless they
+ * carry `marker=` (referral, handled above) or `rel="sponsored"`.
  */
 export function isTravelpayoutsReferralUrl(url: string): boolean {
   if (!url) return false;
@@ -102,7 +113,6 @@ const PARTNER_DOMAINS: Array<[string, string]> = [
   ["welcomepickups", "Welcome Pickups"],
   ["tpo.li", "Travelpayouts Partner"],
   ["tp.media", "Travelpayouts Partner"],
-  ["travelpayouts", "Travelpayouts Partner"],
 ];
 
 /** Known partner identification from URL */

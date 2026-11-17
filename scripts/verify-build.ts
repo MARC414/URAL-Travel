@@ -3052,6 +3052,23 @@ check(
   if (whatsappClicks.length !== 1 || whatsappClicks[0].link_label !== "WhatsApp desk") {
     clickFailures.push("whatsapp click lost link_label");
   }
+  // An editorial citation of a partner's own site is not a commercial click.
+  // `/partners` cites Travelpayouts' company page and its published terms as
+  // evidence, with no `sponsored` rel and no `marker=`; counting those as
+  // `affiliate_partner_click` would report "a reader read our sources" as
+  // "a reader booked a trip" (00-URAL-CURRENT-AUDIT.md §B.2).
+  for (const editorialHref of [
+    "https://www.travelpayouts.com/about",
+    "https://support.travelpayouts.com/hc/en-us/articles/360004162111",
+  ]) {
+    if (fire(editorialHref, "Travelpayouts company page", "noopener noreferrer").length !== 0) {
+      clickFailures.push(`editorial Travelpayouts citation ${editorialHref} was counted as a sponsored click`);
+    }
+  }
+  // The creator-referral link is still commercial and must still be counted once.
+  if (fire("https://www.travelpayouts.com/?marker=675992", "Explore Travelpayouts", "noopener noreferrer sponsored").length !== 1) {
+    clickFailures.push("the tagged Travelpayouts referral link stopped being counted as one referral click");
+  }
   const internalNavTargets = [
     "#hotel-klook-check",
     "/kkday-hotels",
