@@ -92,6 +92,7 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "visa_changi_immigration_20261101": 670,
   "visa_directory_hero_20261112": 500,
   "partners_hero_20261117": 675,
+  "visas_hero_20261117": 675,
   "zamzam_ajwa_dates_1790484440926": 896,
 };
 
