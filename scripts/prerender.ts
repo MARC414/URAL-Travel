@@ -5011,11 +5011,24 @@ function generateSitemaps(routes: PrerenderRoute[]) {
  * breaks the build or blocks deployment; IndexNow is a notification channel,
  * not a prerequisite for going live.
  *
+ * OPT-IN, OFF BY DEFAULT — because it used to run on *every* build. That meant
+ * every pull-request and preview build announced unmerged URLs to four search
+ * engines, and every local/CI build made an outbound request it could not
+ * complete (in restricted CI it only ever logged "fetch failed"). A notification
+ * channel belongs to a production deploy, so it now runs only when the build is
+ * explicitly allowed to: `INDEXNOW_SUBMIT=1` in the production environment.
+ *
  * The key file `public/uralindexnow2026bangladesh83pages.txt` holds the opaque
  * credential. Its contents MUST equal the `key` value sent to the API — never
  * rename the file or "fix" the number in it (it is not a page count).
  */
 async function submitIndexNow(urls: string[]): Promise<void> {
+  if (process.env.INDEXNOW_SUBMIT !== "1") {
+    console.log(
+      "[IndexNow] skipped — set INDEXNOW_SUBMIT=1 to notify Bing, Yandex, Seznam and Naver (production deploys only)."
+    );
+    return;
+  }
   const keyFile = path.join(PUBLIC_DIR, "uralindexnow2026bangladesh83pages.txt");
   let key: string;
   try {
@@ -5710,7 +5723,9 @@ async function main() {
   warnIfContentDateStale();
   generateSitemaps(routes);
   // Notify IndexNow (Bing, Yandex, Seznam, Naver) about all canonical URLs so
-  // they recrawl promptly after every deploy. Best-effort — never blocks deploy.
+  // they recrawl promptly after a *production* deploy. Skipped unless
+  // INDEXNOW_SUBMIT=1, so pull-request and preview builds stay silent. The
+  // function itself is best-effort and never blocks a deploy.
   await submitIndexNow(routes.map((r) => r.canonicalUrl));
   generateRssXml();
   prerenderDistHtmlFiles(routes);
