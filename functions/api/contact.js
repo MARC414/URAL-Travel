@@ -24,12 +24,18 @@
  * domain) and the only one that was ever proven to work in production.
  *
  * ── Abuse controls ─────────────────────────────────────────────────────────
- * `_honey` honeypot (cheap bots), body-size cap, per-field length caps,
- * a per-IP sliding-window rate limit, and — when `TURNSTILE_SECRET_KEY` is set
- * — Cloudflare Turnstile verification. The in-memory limiter is per-isolate
+ * An origin gate (a browser request from anywhere but this site is refused with
+ * 403) and a JSON-only rule (415), both checked before any work happens; then
+ * `_honey` honeypot (cheap bots), a measured body-size cap, per-field length
+ * caps, a per-IP sliding-window rate limit, and — when `TURNSTILE_SECRET_KEY` is
+ * set — Cloudflare Turnstile verification. The in-memory limiter is per-isolate
  * best-effort: it stops a single hammering client, not a distributed one. The
  * real control is a Cloudflare WAF rate-limiting rule on `/api/*`; see
  * `docs/growth/20-FORM-AND-MAIL-HARDENING-2026-10-25.md`.
+ *
+ * CORS is answered per request for the browser's benefit, but it is NOT the
+ * gate: `Access-Control-Allow-Origin` hides a response, it does not stop the
+ * mail from being sent. The origin check above is what actually refuses.
  */
 
 const PUBLIC_SUPPORT_EMAIL = "support@uraltravel.co.uk";
@@ -172,9 +178,16 @@ async function verifyTurnstile(secret, token, ip) {
       reason: Array.isArray(result["error-codes"]) ? result["error-codes"].join(",") : "",
     };
   } catch (err) {
-    // A network failure must not silently drop a real inquiry: fail closed only
-    // when Turnstile explicitly rejects the token.
-    return { enforced: true, ok: false, reason: `verification-error:${err instanceof Error ? err.message : "unknown"}` };
+    // Fails OPEN on a transport error. Turnstile is a spam control, not an
+    // authorisation gate: when Cloudflare cannot reach the verification service,
+    // the right outcome is to deliver a real inquiry (and log it) rather than to
+    // tell every visitor "we could not verify that you are a person" for the
+    // duration of the outage. Only an explicit rejection fails closed.
+    console.error(
+      "[ural contact] Turnstile verification unavailable:",
+      err instanceof Error ? err.message : String(err)
+    );
+    return { enforced: true, ok: true, reason: "verification-unavailable" };
   }
 }
 
@@ -189,8 +202,37 @@ export async function onRequestPost(context) {
   const origin = context.request.headers.get("Origin");
   const now = Date.now();
 
-  const contentLength = Number(context.request.headers.get("content-length") || 0);
-  if (contentLength > MAX_BODY_BYTES) {
+  // ── Who may drive this endpoint ───────────────────────────────────────────
+  // CORS is not a gate on its own. It stops a foreign page from READING the
+  // response; the email is sent either way, because the side effect happens
+  // server-side. Worse, `application/json` would trigger a preflight, but a
+  // "simple" content type such as `text/plain` does not — and this handler used
+  // to accept one, because it never inspected Content-Type before calling
+  // `request.json()`. So both are refused outright, before any work is done.
+  // Requests with NO Origin (curl, server-to-server, uptime checks) stay
+  // allowed on purpose, but must still declare JSON.
+  if (origin && !isAllowedOrigin(origin)) {
+    return jsonResponse(
+      { ok: false, code: "origin_not_allowed", error: "This form can only be submitted from the URAL website." },
+      403,
+      origin
+    );
+  }
+  const contentType = (context.request.headers.get("content-type") || "").toLowerCase();
+  if (!contentType.startsWith("application/json")) {
+    return jsonResponse(
+      { ok: false, code: "unsupported_media_type", error: "This form must be submitted as JSON." },
+      415,
+      origin
+    );
+  }
+
+  // The declared length is a fast path, not the enforcement point: a request
+  // may omit `content-length` entirely (chunked encoding, HTTP/2), in which case
+  // it used to read 0 and every size passed the cap. The real check is on the
+  // bytes actually received, below.
+  const declaredLength = Number(context.request.headers.get("content-length") || 0);
+  if (declaredLength > MAX_BODY_BYTES) {
     return jsonResponse({ ok: false, code: "payload_too_large", error: "That message is too long to send." }, 413, origin);
   }
 
@@ -209,9 +251,21 @@ export async function onRequestPost(context) {
     );
   }
 
+  let rawBody;
+  try {
+    rawBody = await context.request.text();
+  } catch {
+    return jsonResponse({ ok: false, code: "invalid_request", error: "Unable to read the submitted form." }, 400, origin);
+  }
+  // Measured, not declared. Rejects an oversized body even when the request
+  // omitted `content-length`, and refuses it before it is parsed or mailed.
+  if (new TextEncoder().encode(rawBody).byteLength > MAX_BODY_BYTES) {
+    return jsonResponse({ ok: false, code: "payload_too_large", error: "That message is too long to send." }, 413, origin);
+  }
+
   let body;
   try {
-    body = await context.request.json();
+    body = JSON.parse(rawBody);
   } catch {
     return jsonResponse({ ok: false, code: "invalid_json", error: "Unable to read the submitted form." }, 400, origin);
   }
@@ -258,12 +312,14 @@ export async function onRequestPost(context) {
     ip
   );
   if (!turnstile.ok) {
+    // The reason stays in the server log. Error codes are operator information,
+    // not something to hand back to whoever is probing the endpoint.
+    console.warn("[ural contact] Turnstile rejected a submission:", turnstile.reason || "no-reason");
     return jsonResponse(
       {
         ok: false,
         code: "turnstile_failed",
         error: "We could not verify that this form was submitted by a person. Please reload the page and try again.",
-        reason: turnstile.reason,
       },
       403,
       origin

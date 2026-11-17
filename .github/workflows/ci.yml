@@ -72,6 +72,13 @@ jobs:
       - name: Verify dated exchange-rate snapshots and converter rules
         run: npm run test:rates
 
+      # Runs the endpoint itself with a stubbed fetch: who may post, the JSON-only
+      # rule, the measured body cap, the honeypot, and Turnstile failing open.
+      # verify-build.ts only reads these files as text, which is how the origin,
+      # honeypot, size-cap and fail-open defects survived review.
+      - name: Verify /api/contact refuses foreign, non-JSON and oversized submissions
+        run: npm run test:contact-endpoint
+
       - name: Verify the expired KKday menu card cannot render
         run: npm run test:kkday-card
 

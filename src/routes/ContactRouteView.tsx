@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { SERVICE_CONTACT_FAQS } from "../hooks/useSeoMeta";
 import { BN_SERVICE_CONTACT_FAQS } from "../utils/bn-faq-schema";
@@ -27,6 +27,12 @@ export default function ContactRouteView({ context }: RouteViewProps) {
   // Cloudflare Turnstile token. Empty when the widget is not configured or the
   // token has expired; the API treats it as optional unless a secret is set.
   const [turnstileToken, setTurnstileToken] = useState("");
+  // Turnstile tokens are single-use. Clearing the token after an attempt is not
+  // enough: the widget stays "solved" on screen while React holds "", so a retry
+  // sends no token and the server answers 403 — the visitor's only way out was a
+  // full page reload. Bumping this signal asks the widget for a fresh challenge.
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   return (
 
@@ -278,6 +284,8 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                           pageUrl: typeof window !== "undefined" ? window.location.href : "https://uraltravel.co.uk/contact",
 
+                          _honey: honeypotRef.current?.value ?? "",
+
                         }),
 
                       }).catch(() => null);
@@ -297,6 +305,10 @@ export default function ContactRouteView({ context }: RouteViewProps) {
                           (result && typeof result.error === "string" && result.error) || fallbackMessage
 
                         );
+
+                        // The token was consumed by the attempt that just failed.
+                        // Ask for a fresh challenge so "try again" can work.
+                        setTurnstileResetSignal((attempt) => attempt + 1);
 
                         return;
 
@@ -320,6 +332,9 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                       );
 
+                      // Same reason as above: the challenge is spent either way.
+                      setTurnstileResetSignal((attempt) => attempt + 1);
+
                     } finally {
 
                       setContactLoading(false);
@@ -333,6 +348,23 @@ export default function ContactRouteView({ context }: RouteViewProps) {
                   className="space-y-4 text-xs"
 
                 >
+
+                  {/* Honeypot. Invisible to a person (display:none, unfocusable,
+                      hidden from assistive tech), so any non-empty value means a
+                      bot filled every input it could find. `_honey` is checked
+                      server-side, which answers with an ordinary-looking 200 and
+                      sends nothing. This input is what made the server-side check
+                      live: without it the field was never sent, so the trap never
+                      armed. Keep the name in step with functions/api/contact.js. */}
+                  <input
+                    ref={honeypotRef}
+                    type="text"
+                    name="_honey"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hidden"
+                  />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
@@ -572,7 +604,11 @@ export default function ContactRouteView({ context }: RouteViewProps) {
 
                   )}
 
-                  <TurnstileWidget onToken={setTurnstileToken} lang={isBn ? "bn" : "en"} />
+                  <TurnstileWidget
+                    onToken={setTurnstileToken}
+                    lang={isBn ? "bn" : "en"}
+                    resetSignal={turnstileResetSignal}
+                  />
 
                   <button
 

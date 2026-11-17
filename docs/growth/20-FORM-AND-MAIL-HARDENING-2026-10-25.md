@@ -32,7 +32,7 @@ Function called FormSubmit *and then* Resend.
 
 | File | Change |
 | --- | --- |
-| `functions/api/contact.js` | **Rewritten.** Single transport (Resend). FormSubmit removed. Adds: per-IP sliding-window rate limit (5 / 10 min), body-size cap (16 KB), per-field length caps, origin allowlist for CORS, server-side Turnstile verification when `TURNSTILE_SECRET_KEY` is set, and an honest `503 mail_transport_not_configured` when no key exists. |
+| `functions/api/contact.js` | **Rewritten.** Single transport (Resend). FormSubmit removed. Adds: per-IP sliding-window rate limit (5 / 10 min), body-size cap (16 KB), per-field length caps, an origin allowlist for CORS, server-side Turnstile verification when `TURNSTILE_SECRET_KEY` is set, and an honest `503 mail_transport_not_configured` when no key exists. **Superseded in part on 17 November 2026 — see §5: the allowlist only shaped CORS headers and did not refuse a request.** |
 | `functions/api/subscribe.js` | **Rewritten.** Single transport (Resend). FormSubmit removed. Rate limit (3 / 10 min), 8 KB body cap, field caps, origin allowlist. |
 | `src/components/TurnstileWidget.tsx` | **New.** Lazy-loads Turnstile *on the contact form only*; renders nothing when `VITE_TURNSTILE_SITE_KEY` is absent, so a partially-configured deployment never locks visitors out. |
 | `src/routes/ContactRouteView.tsx` | Browser-side FormSubmit call deleted. One `POST /api/contact`, real error handling (`contactError`, `role="alert"`), Turnstile token included, token cleared after each attempt. |
@@ -93,3 +93,34 @@ it re-opens the unauthenticated relay.
 | Central DPA/SCC text for each processor | The policy now names processors and the safeguard class; full contract text lives with the providers. |
 | Form-relay cleanup on the *deployed* site | Verify after deploy that no page still posts to a relay; the guard covers the repo, not the running build. |
 | `contact.js` / `subscribe.js` still share ~60 lines of helpers | A shared module would have to live outside `functions/` (anything inside becomes a route). Not worth the routing risk for this PR. |
+
+---
+
+## 5. Update — 17 November 2026: the contact endpoint's own gates
+
+Four defects in `POST /api/contact` were found by executing the handler rather than
+reading it. All four are fixed, and `npm run test:contact-endpoint` now asserts the
+behaviour, so they cannot return.
+
+| Defect | What actually happened | Now |
+| --- | --- | --- |
+| **The origin allowlist was not a gate** | `Access-Control-Allow-Origin` was emitted per request, but a request from any other site was still *processed*. CORS hides a response; it does not stop the mail. A `text/plain` body needed no preflight, so a foreign page could make the endpoint send mail, and the response was simply unreadable to it. | A browser request whose `Origin` is not this site is refused with `403 origin_not_allowed` before any work. A body that does not declare `application/json` is refused with `415`. Requests with no `Origin` (curl, server-to-server, uptime checks) remain allowed, on purpose. |
+| **The honeypot never armed** | The handler checked `_honey`, but no form ever sent the field, so the trap had nothing to catch. | The contact form posts a hidden, unfocusable `_honey` input. A filled value returns an ordinary-looking `200 {status:"filtered"}` and sends nothing. |
+| **The body cap trusted a header** | The 16 KB check read `content-length`; a chunked request omits it, which read as `0`, so a 2 MB body was accepted. | The declared length is a fast path; the bytes actually received are measured before the body is parsed or mailed. |
+| **Turnstile failed closed on a transport error** | The comment promised to fail closed only on an explicit rejection, but the `catch` returned `ok: false`. During any outage at the verifier, every genuine visitor was told "we could not verify that you are a person". | A transport error logs and fails **open** — the inquiry is delivered. Only an explicit `success: false` fails closed. Operator error codes stay in the log instead of being echoed to the caller. |
+
+Related repair in the browser: Turnstile tokens are single-use, and the form cleared
+its token after a failed attempt without resetting the widget. The widget still
+*looked* solved while React held an empty string, so "try again" posted no token and
+the server answered `403`. `TurnstileWidget` now accepts a `resetSignal` and re-runs
+the challenge after a failure.
+
+**Why this was missed:** `scripts/verify-build.ts` validates both mail endpoints by
+reading their source as text and matching patterns in it. A regex cannot see that a
+header is emitted but not enforced. `/api/contact` is now covered by a suite that
+imports the handler and stubs `fetch` — the same approach `test-rates.ts` already
+used for `/api/rates`.
+
+**Still open here:** `functions/api/subscribe.js` carries the same origin, honeypot
+and body-cap defects. It is unchanged by this update and should get the same
+treatment, together with the double opt-in and unsubscribe work.
