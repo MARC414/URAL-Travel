@@ -38,6 +38,16 @@ type TurnstileWidgetProps = {
   onToken: (token: string) => void;
   lang?: "en" | "bn";
   className?: string;
+  /**
+   * Bump this to force a new challenge.
+   *
+   * Turnstile tokens are single-use: after a submission is rejected for any
+   * reason (rate limit, a transport hiccup, a network error) the token is spent
+   * while the widget still *looks* solved. Without a reset the retry posts an
+   * empty token and the server answers 403 — so the visitor's "try again" could
+   * never succeed without reloading the page.
+   */
+  resetSignal?: number;
 };
 
 /** Minimal shape of the parts of `window.turnstile` this component uses. */
@@ -51,7 +61,7 @@ function getTurnstile(): TurnstileApi | undefined {
   return (window as unknown as { turnstile?: TurnstileApi }).turnstile;
 }
 
-export function TurnstileWidget({ onToken, lang = "en", className = "" }: TurnstileWidgetProps) {
+export function TurnstileWidget({ onToken, lang = "en", className = "", resetSignal = 0 }: TurnstileWidgetProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const widgetIdRef = useRef<string | null>(null);
   // Keep the latest callback without re-rendering the widget: `onToken` is often
@@ -62,6 +72,20 @@ export function TurnstileWidget({ onToken, lang = "en", className = "" }: Turnst
   useEffect(() => {
     onTokenRef.current = onToken;
   }, [onToken]);
+
+  // A spent token must be replaced by a fresh challenge, not just cleared in
+  // React state. `reset` re-runs the widget and repopulates the token through
+  // the callback; the parent clears the old value at the same time.
+  useEffect(() => {
+    if (!resetSignal) return;
+    const turnstile = getTurnstile();
+    if (!turnstile || !widgetIdRef.current) return;
+    try {
+      turnstile.reset(widgetIdRef.current);
+    } catch {
+      // Widget already removed; the next mount renders a fresh one.
+    }
+  }, [resetSignal]);
 
   useEffect(() => {
     if (!SITE_KEY) return;
