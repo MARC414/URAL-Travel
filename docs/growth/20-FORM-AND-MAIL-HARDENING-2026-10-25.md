@@ -121,6 +121,15 @@ header is emitted but not enforced. `/api/contact` is now covered by a suite tha
 imports the handler and stubs `fetch` — the same approach `test-rates.ts` already
 used for `/api/rates`.
 
-**Still open here:** `functions/api/subscribe.js` carries the same origin, honeypot
-and body-cap defects. It is unchanged by this update and should get the same
-treatment, together with the double opt-in and unsubscribe work.
+**Signup endpoint, same repair (17 November 2026):** `functions/api/subscribe.js`
+carried the same three defects and now has the same treatment — origin gate, JSON-only
+rule, measured body cap, and a honeypot the form actually sends. It is covered by
+`npm run test:subscribe-endpoint` (12 behaviours).
+
+**Still open — and it is the substantive half:** `/api/subscribe` is *not* a
+subscriber list. A signup produces one notification to the desk; nothing is stored,
+no confirmation is required, and no unsubscribe link is sent, so there is no list to
+mail and no record of consent. The traffic rules above stop the endpoint being abused;
+they do not make the page's "you're subscribed" claim true. Closing that needs a
+storage decision (hosted list vs Cloudflare storage), a double opt-in confirmation
+email, and an unsubscribe path — plus new EN/BN copy for the two-step signup.
