@@ -1332,6 +1332,9 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({
               { path: "/tools", en: "Interactive Travel Tools", bn: "ইন্টারেক্টিভ ট্রাভেল টুলস" },
               { path: "/resources", en: "Official Sources Directory", bn: "সরকারি সূত্রের তালিকা" },
               { path: "/glossary", en: "Travel & Umrah Glossary", bn: "ভ্রমণ ও ওমরাহ শব্দকোষ" },
+              { path: "/about", en: "About URAL", bn: "URAL সম্পর্কে" },
+              { path: "/partners", en: "Our Partners", bn: "আমাদের পার্টনাররা" },
+              { path: "/visa-assistance", en: "Visa Assistance (eVisas)", bn: "ভিসা সহায়তা (eVisas)" },
               { path: "/contact", en: "Contact & WhatsApp Desk", bn: "যোগাযোগ ও হোয়াটসঅ্যাপ" },
               { path: "/privacy", en: "Privacy & Cookie Policy (গোপনীয়তা ও কুকি নীতিমালা)", bn: "গোপনীয়তা ও কুকি নীতিমালা (Privacy & Cookie Policy)" },
             ].map((hub) => (

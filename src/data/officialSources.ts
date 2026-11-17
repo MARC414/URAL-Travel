@@ -341,7 +341,7 @@ export const NON_OFFICIAL_HOSTS: readonly string[] = [
   // encyclopaedias and app-store listings
   "en.wikipedia.org", "saudipedia.com", "play.google.com",
   // private prayer-time and calendar sites
-  "assabile.com",
+  "assabile.com", "ummalquracalendar.org",
   // religious reference and fatwa sites
   "aliftaa.jo", "binbaz.org.sa", "dar-alifta.org", "islamqa.info", "sunnah.com",
   // charities (useful reading, not an official source)

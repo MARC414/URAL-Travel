@@ -730,6 +730,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/contact" />
   </url>
   <url>
+    <loc>https://uraltravel.co.uk/partners</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/partners" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/partners" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/partners" />
+  </url>
+  <url>
+    <loc>https://uraltravel.co.uk/visa-assistance</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/visa-assistance" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/visa-assistance" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/visa-assistance" />
+  </url>
+  <url>
     <loc>https://uraltravel.co.uk/about</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
@@ -1916,6 +1934,24 @@
     <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/contact" />
     <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/contact" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/contact" />
+  </url>
+  <url>
+    <loc>https://uraltravel.co.uk/bn/partners</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/partners" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/partners" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/partners" />
+  </url>
+  <url>
+    <loc>https://uraltravel.co.uk/bn/visa-assistance</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-bd" href="https://uraltravel.co.uk/visa-assistance" />
+    <xhtml:link rel="alternate" hreflang="bn-bd" href="https://uraltravel.co.uk/bn/visa-assistance" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/visa-assistance" />
   </url>
   <url>
     <loc>https://uraltravel.co.uk/bn/about</loc>

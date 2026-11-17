@@ -106,6 +106,14 @@ import {
   renderOfficialResourcesStaticHtml,
 } from "../src/utils/officialSourcesPage";
 import { GLOSSARY_COPY, GLOSSARY_PATH, glossarySchema, renderGlossaryStaticHtml } from "../src/utils/glossaryPage";
+import { renderAboutStaticHtml } from "../src/utils/aboutPage";
+import { renderPartnersStaticHtml } from "../src/utils/partnersPage";
+import { PARTNERS_META, PARTNERS_PATH } from "../src/utils/partnersMeta";
+import { renderVisaAssistanceStaticHtml } from "../src/utils/visaAssistancePage";
+import {
+  VISA_ASSISTANCE_META,
+  VISA_ASSISTANCE_PATH,
+} from "../src/utils/visaAssistanceMeta";
 import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
 import { TIQETS_TOP_ATTRACTIONS, TIQETS_CITY_STACKS } from "../src/data/tiqetsAttractionsData";
 import {
@@ -2913,15 +2921,52 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
+  // 11a-iv. Our Partners (/partners) — who URAL links to, and why.
+  // The body is not written here: it is rendered from PARTNERS_COPY so the
+  // prerendered page and the React view cannot drift (see partnersPage.ts).
+  routes.push({
+    routePath: PARTNERS_PATH,
+    canonicalUrl: `${BASE_URL}${PARTNERS_PATH}`,
+    title: PARTNERS_META.en.seoTitle,
+    description: PARTNERS_META.en.seoDescription,
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: PARTNERS_META.en.breadcrumb, url: `${BASE_URL}${PARTNERS_PATH}` },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: renderPartnersStaticHtml("en"),
+  });
+
+  // 11a-v. Visa Assistance (/visa-assistance) — what eVisas is, and where URAL stops.
+  // The body is rendered from VISA_ASSISTANCE_COPY; the apply link comes from the
+  // eVisas programme module, which is also what removes it when paused.
+  routes.push({
+    routePath: VISA_ASSISTANCE_PATH,
+    canonicalUrl: `${BASE_URL}${VISA_ASSISTANCE_PATH}`,
+    title: VISA_ASSISTANCE_META.en.seoTitle,
+    description: VISA_ASSISTANCE_META.en.seoDescription,
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      {
+        name: VISA_ASSISTANCE_META.en.breadcrumb,
+        url: `${BASE_URL}${VISA_ASSISTANCE_PATH}`,
+      },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: renderVisaAssistanceStaticHtml("en"),
+  });
+
   // 11b. About / Editorial Standards (/about)
   //
   // This route existed in the app but was never prerendered, which meant the
   // page holding the founder profile, the Organization and Person entities and
   // the editorial-policy story was invisible to search engines — and 404'd for
   // anyone who refreshed it or opened a shared link, because no about.html was
-  // written. The body below is written prose rather than a summary stub: it is
-  // the crawlable half of the page, and the thing an answer engine reads when
-  // asked who publishes this site.
+  // written. It was later prerendered from an inline template literal here,
+  // which drifted from the React view and left the Bengali twin with nothing.
+  // Both halves now read ABOUT_COPY through renderAboutStaticHtml / AboutRouteView.
   routes.push({
     routePath: "/about",
     canonicalUrl: `${BASE_URL}/about`,
@@ -2934,58 +2979,7 @@ function buildAllRoutes(): PrerenderRoute[] {
       { name: "About", url: `${BASE_URL}/about` },
     ],
     extraGraphNodes: [],
-    bodyHtml: `
-      <article>
-        <h1>About URAL: Travel Intelligence, Not a Travel Agency</h1>
-        <p>URAL is an independent outbound-travel publisher in Dhaka: flight-fare guidance in Bangladeshi Taka, visa checklists built from official sources, Umrah and Hajj planning material, and trip budgets a family in Bangladesh can compare against its own income. It links the official portal or the affiliate partner for each service, and answers questions on WhatsApp or through the contact form.</p>
-
-        <section>
-          <h2>Who writes it</h2>
-          <p>Every guide on this site is written and edited by <strong>Farhan Momen</strong>, founder and travel editor. URAL is a single-editor publication, not a content farm: the same person researches the visa rule, prices the flights in BDT, and answers the WhatsApp messages when a reader disagrees with something on the page. That is unusual for a travel site, and it is the main reason the information here is dated and sourced rather than endlessly reworded from somewhere else.</p>
-        </section>
-
-        <section>
-          <h2>How the guides are researched</h2>
-          <p>Each guide starts with the authority that actually decides the question — an immigration department, an embassy, an airline's own baggage policy, or a government portal — and works backwards to the traveller. Where the official position is unclear, the page says so instead of choosing an answer that sounds confident. Where sources disagree, both are given with their dates.</p>
-          <p>Visa and fee pages carry the date they were last checked, because these rules change without notice and a page that hides its age cannot be trusted on a topic this volatile. The <a href="/visa-free-countries">visa-free countries guide for Bangladeshi passports</a> is the clearest example of the approach: it separates the destinations a Bangladeshi passport can genuinely use from the much longer list that only looks usable, because reaching those places requires transiting a country that requires a visa.</p>
-          <p>Prices are published as planning estimates in BDT, not as quotes. Fares, hotel rates and fees move constantly, and the pages say so rather than presenting a snapshot as a promise.</p>
-        </section>
-
-        <section>
-          <h2>How the site stays independent</h2>
-          <p>Some outbound links are affiliate partner links, and they are marked where they appear. The partner sets the price, the terms and the cancellation policy on its own site. A guide's recommendation is never sold or sponsored: no airline, hotel or booking platform can pay to change what a page says, and the arrangement is disclosed in the footer of every page and in the <a href="/privacy">privacy and cookie policy</a>.</p>
-          <p>Each guide also names the official source it relies on and the date it was last checked, so a reader can verify a rule at the source instead of trusting the summary here. Questions and consultation go to the WhatsApp line or the contact form, and the reply explains the options with the official or partner link that completes the step.</p>
-        </section>
-
-        <section>
-          <h2>Correcting mistakes</h2>
-          <p>Travel rules are exactly the kind of information that goes stale quietly, and a wrong visa detail can cost someone a denied boarding rather than an inconvenience. If a page here is wrong, the fastest correction is a message to the <a href="/contact">support desk</a> — the WhatsApp number and the form both reach the same person who writes the pages. Corrections are made to the page itself rather than appended as a note, and the verification date is updated with them.</p>
-        </section>
-
-        <section>
-          <h2>Bengali and English</h2>
-          <p>URAL publishes in both Bengali and English, and Bengali pages are written for Bengali readers rather than machine-translated from the English. The English edition is currently the more complete of the two: Bengali coverage is being brought to full parity section by section, starting with destination itineraries, visa rules and trip costs, because those are the pages a Bengali reader searches for first.</p>
-          <p>Where a Bengali page is a summary rather than a full translation, it is a summary by design and not a translation of the research. This page states that plainly because a reader planning around a visa rule or a fee needs to know how much of the detail they are getting.</p>
-        </section>
-
-        <section>
-          <h2>Where to start</h2>
-          <ul>
-            <li><a href="/visa-free-countries">Which countries a Bangladeshi passport can enter without a prior visa</a> — and which of them you can actually reach from Dhaka.</li>
-            <li><a href="/visa">Visa guides and checklists by country</a> — Nepal, Maldives, Thailand, Malaysia, Singapore and the UAE.</li>
-            <li><a href="/costs">What an international trip costs in BDT</a> — per-head budgets by destination.</li>
-            <li><a href="/tools">Travel calculators and pre-departure tools</a> — currency conversion, packing and airport checks.</li>
-            <li><a href="/umrah">Umrah and Hajj planning from Bangladesh</a> — Nusuk permits, hotel zones and BDT costs.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Contact</h2>
-          <p>URAL is a small desk, not a call centre. WhatsApp is the fastest route, on +880 1784-385335, email reaches <a href="mailto:support@uraltravel.co.uk">support@uraltravel.co.uk</a>, and the <a href="/contact">contact form</a> reaches the same inbox.</p>
-          <p><small>Published by URAL Travel Intelligence, Dhaka, Bangladesh.</small></p>
-        </section>
-      </article>
-    `,
+    bodyHtml: renderAboutStaticHtml("en"),
   });
 
   // 12. Privacy & Cookie Policy (/privacy)
@@ -4185,6 +4179,25 @@ function buildBengaliBody(
     return renderGlossaryStaticHtml("bn", h1);
   }
 
+  if (englishPath === "/about") {
+    // Same sections, same order and same destinations as the English page —
+    // ABOUT_COPY holds both languages, so the Bengali body cannot fall through
+    // to the generic article builder and lose most of the page again.
+    return renderAboutStaticHtml("bn", h1);
+  }
+
+  if (englishPath === PARTNERS_PATH) {
+    // Same table, facts and source dates as the English page — PARTNERS_COPY
+    // holds both languages.
+    return renderPartnersStaticHtml("bn", h1);
+  }
+
+  if (englishPath === VISA_ASSISTANCE_PATH) {
+    // Same sections, facts and dated snapshot as the English page —
+    // VISA_ASSISTANCE_COPY holds both languages.
+    return renderVisaAssistanceStaticHtml("bn", h1);
+  }
+
   if (englishPath === "/sitemap") {
     // The Bengali site directory: grouped hub links so the static twin works
     // as an actual index (and survives without JS), not just an intro + 6 hubs.
@@ -4216,6 +4229,8 @@ function buildBengaliBody(
         { label: "ইউরোপ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের আকর্ষণ পাস", path: "/experiences/europe" },
         { label: "এশিয়া ও দুবাই আকর্ষণ পাস ও অ্যাক্টিভিটি", path: "/experiences/asia" },
         { label: "আমাদের সম্পর্কে", path: "/about" },
+        { label: "আমাদের পার্টনাররা", path: "/partners" },
+        { label: "ভিসা সহায়তা (eVisas)", path: "/visa-assistance" },
         { label: "যোগাযোগ", path: "/contact" },
       ])
     );

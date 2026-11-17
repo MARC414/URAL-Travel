@@ -157,4 +157,7 @@ export const BN_BREADCRUMB_LABELS: Record<string, string> = {
   "Privacy & Cookie Policy": "গোপনীয়তা ও কুকি নীতিমালা",
   "Official Sources": "সরকারি সূত্র",
   Glossary: "শব্দকোষ",
+  Partners: "পার্টনাররা",
+  About: "আমাদের সম্পর্কে",
+  "Visa assistance": "ভিসা সহায়তা",
 };

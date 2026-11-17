@@ -79,6 +79,8 @@ https://uraltravel.co.uk/resources
 https://uraltravel.co.uk/glossary
 https://uraltravel.co.uk/sitemap
 https://uraltravel.co.uk/contact
+https://uraltravel.co.uk/partners
+https://uraltravel.co.uk/visa-assistance
 https://uraltravel.co.uk/about
 https://uraltravel.co.uk/privacy
 https://uraltravel.co.uk/blog
@@ -211,6 +213,8 @@ https://uraltravel.co.uk/bn/resources
 https://uraltravel.co.uk/bn/glossary
 https://uraltravel.co.uk/bn/sitemap
 https://uraltravel.co.uk/bn/contact
+https://uraltravel.co.uk/bn/partners
+https://uraltravel.co.uk/bn/visa-assistance
 https://uraltravel.co.uk/bn/about
 https://uraltravel.co.uk/bn/privacy
 https://uraltravel.co.uk/bn/blog

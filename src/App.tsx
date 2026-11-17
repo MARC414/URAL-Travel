@@ -48,7 +48,10 @@ import {
   Wifi,
   Zap,
   Lightbulb,
-  AlertTriangle
+  AlertTriangle,
+  Info,
+  HandCoins,
+  Stamp
 } from "lucide-react";
 
 // Types
@@ -97,6 +100,11 @@ import type * as BengaliContentModule from "./data/bengaliContent";
 import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
 import { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH } from "./utils/officialResourcesMeta";
 import { GLOSSARY_META, GLOSSARY_PATH } from "./utils/glossaryMeta";
+import { PARTNERS_META, PARTNERS_PATH } from "./utils/partnersMeta";
+import {
+  VISA_ASSISTANCE_META,
+  VISA_ASSISTANCE_PATH,
+} from "./utils/visaAssistanceMeta";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import {
   getCoreBengaliSeoCopy as getBengaliSeoCopy,
@@ -145,6 +153,8 @@ const NotFoundRouteView = React.lazy(() => import("./routes/NotFoundRouteView"))
 const VisaFreeCountriesRouteView = React.lazy(() => import("./routes/VisaFreeCountriesRouteView"));
 const OfficialResourcesPage = React.lazy(() => import("./components/OfficialResourcesPage"));
 const GlossaryPage = React.lazy(() => import("./components/GlossaryPage"));
+const PartnersPage = React.lazy(() => import("./components/PartnersPage"));
+const VisaAssistancePage = React.lazy(() => import("./components/VisaAssistancePage"));
 const GlobalSiteSearch = React.lazy(() =>
   import("./components/GlobalSiteSearch").then((module) => ({ default: module.GlobalSiteSearch }))
 );
@@ -459,7 +469,7 @@ const singaporeDestImg = "/assets/images/singapore_destination_1790387270177-120
 const maldivesDestImg = "/assets/images/maldives_destination_1790387286896-1200.webp";
 const blogHeroBannerImg = "/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp";
 const umrahMakkahImg = "/assets/images/umrah_makkah_haram_guide_1790430007679-1200.webp";
-type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "resources" | "glossary" | "privacy" | "about" | "notFound";
+type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "resources" | "glossary" | "privacy" | "about" | "partners" | "visaAssistance" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -754,11 +764,13 @@ export default function App() {
   const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
   const mobileDrawerPanelRef = useRef<HTMLDivElement>(null);
-  const [desktopMenuOpen, setDesktopMenuOpen] = useState<"destinations" | "tools" | null>(null);
+  const [desktopMenuOpen, setDesktopMenuOpen] = useState<"destinations" | "tools" | "about" | null>(null);
   const destinationsMenuRef = useRef<HTMLDivElement>(null);
   const toolsMenuRef = useRef<HTMLDivElement>(null);
+  const aboutMenuRef = useRef<HTMLDivElement>(null);
   const destinationsDisclosureRef = useRef<HTMLButtonElement>(null);
   const toolsDisclosureRef = useRef<HTMLButtonElement>(null);
+  const aboutDisclosureRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleSearchShortcut = (event: KeyboardEvent) => {
@@ -1210,6 +1222,14 @@ export default function App() {
       // Glossary: plain meanings of Hajj, Umrah, visa, banking and flight terms.
       section = "glossary";
       isLanding = true;
+    } else if (root === "partners" && segs.length === 1) {
+      // Our partners: who completes the bookings behind the booking links.
+      section = "partners";
+      isLanding = true;
+    } else if (root === "visa-assistance" && segs.length === 1) {
+      // Visa application assistance: what eVisas is, and where URAL stops.
+      section = "visaAssistance";
+      isLanding = true;
     } else if (root === "pre-departure" && segs.length === 1) {
       // Standalone pre-departure hub (split out of the old combined /sitemap
       // page in 2026-10). /indexing stays an alias of the directory page.
@@ -1345,7 +1365,7 @@ export default function App() {
   const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
     if (sec === "destinations" || sec === "experiences" || sec === "attractions") return "destinations";
     if (sec === "blog" || sec === "costs") return "research";
-    if (sec === "tools" || sec === "sitemap" || sec === "preDeparture" || sec === "resources" || sec === "glossary" || sec === "contact") return "tools";
+    if (sec === "tools" || sec === "sitemap" || sec === "preDeparture" || sec === "resources" || sec === "glossary" || sec === "partners" || sec === "visaAssistance" || sec === "contact") return "tools";
     return "booking";
   };
 
@@ -1982,6 +2002,24 @@ export default function App() {
       { name: "Home", url: siteUrl("/", lang) },
       { name: isBn ? "আমাদের সম্পর্কে" : "About", url: aboutUrl }
     ];
+  } else if (section === "partners") {
+    const partnersUrl = siteUrl(PARTNERS_PATH, lang);
+    const partnersCopy = PARTNERS_META[isBn ? "bn" : "en"];
+    seoTitle = partnersCopy.seoTitle;
+    seoDescription = partnersCopy.seoDescription;
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: partnersCopy.breadcrumb, url: partnersUrl }
+    ];
+  } else if (section === "visaAssistance") {
+    const visaAssistanceUrl = siteUrl(VISA_ASSISTANCE_PATH, lang);
+    const visaAssistanceCopy = VISA_ASSISTANCE_META[isBn ? "bn" : "en"];
+    seoTitle = visaAssistanceCopy.seoTitle;
+    seoDescription = visaAssistanceCopy.seoDescription;
+    seoBreadcrumbs = [
+      { name: "Home", url: siteUrl("/", lang) },
+      { name: visaAssistanceCopy.breadcrumb, url: visaAssistanceUrl },
+    ];
   } else if (section === "experiences") {
     const region = parameterId === "europe" ? "europe" : parameterId === "asia" ? "asia" : "all";
     const experiencesHubUrl = siteUrl("/experiences", lang);
@@ -2186,6 +2224,8 @@ export default function App() {
     if (section === "preDeparture") return "/pre-departure";
     if (section === "resources") return OFFICIAL_RESOURCES_PATH;
     if (section === "glossary") return GLOSSARY_PATH;
+    if (section === "partners") return PARTNERS_PATH;
+    if (section === "visaAssistance") return VISA_ASSISTANCE_PATH;
     if (section === "sitemap") return "/sitemap";
     if (section === "privacy") return "/privacy";
     if (section === "tools") {
@@ -3131,6 +3171,104 @@ export default function App() {
                   </div>
                 </div>
               </div>
+
+              {/* 8. About URAL — compact dropdown: identity, partners, visa assistance */}
+              <div
+                ref={aboutMenuRef}
+                className="relative"
+                onMouseEnter={() => {
+                  if (!toolsMenuRef.current?.contains(document.activeElement) && !destinationsMenuRef.current?.contains(document.activeElement)) {
+                    setDesktopMenuOpen("about");
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (!aboutMenuRef.current?.contains(document.activeElement)) {
+                    setDesktopMenuOpen((current) => (current === "about" ? null : current));
+                  }
+                }}
+                onFocusCapture={(event) => {
+                  const previousTarget = event.relatedTarget as Node | null;
+                  if (!previousTarget || !aboutMenuRef.current?.contains(previousTarget)) {
+                    setDesktopMenuOpen("about");
+                  }
+                }}
+                onBlurCapture={(event) => {
+                  const nextTarget = event.relatedTarget as Node | null;
+                  if (!nextTarget || !aboutMenuRef.current?.contains(nextTarget)) {
+                    setDesktopMenuOpen((current) => (current === "about" ? null : current));
+                  }
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    event.preventDefault();
+                    setDesktopMenuOpen(null);
+                    aboutDisclosureRef.current?.focus();
+                  }
+                }}
+              >
+                <div className="flex items-center gap-0.5">
+                  <a
+                    id="nav-about-megamenu"
+                    href={getLocalizedRouteHref("/about")}
+                    onClick={(event) => handleNavigationAnchorClick(event, "/about")}
+                    aria-current={section === "about" || section === "partners" || section === "visaAssistance" ? "page" : undefined}
+                    className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${section === "about" || section === "partners" || section === "visaAssistance" ? "text-[#F6B73C] font-semibold" : "text-slate-300"}`}
+                  >
+                    {isBn ? "আমাদের সম্পর্কে" : "About"}
+                  </a>
+                  <button
+                    ref={aboutDisclosureRef}
+                    type="button"
+                    aria-label={isBn ? "আমাদের সম্পর্কে মেনু খুলুন বা বন্ধ করুন" : "Toggle about menu"}
+                    aria-expanded={desktopMenuOpen === "about"}
+                    aria-controls="about-mega-panel"
+                    onClick={() => setDesktopMenuOpen((current) => (current === "about" ? null : "about"))}
+                    className="w-8 h-8 rounded-md flex items-center justify-center text-slate-300 hover:text-[#F6B73C] hover:bg-white/5 transition-colors cursor-pointer focus-visible:outline-none"
+                  >
+                    <ChevronDown
+                      size={13}
+                      aria-hidden="true"
+                      className={`transition-transform duration-150 ${desktopMenuOpen === "about" ? "rotate-180 text-[#F6B73C]" : ""}`}
+                    />
+                  </button>
+                </div>
+
+                <div
+                  id="about-mega-panel"
+                  role="region"
+                  aria-label={isBn ? "আমাদের সম্পর্কে" : "About URAL"}
+                  aria-hidden={desktopMenuOpen !== "about"}
+                  className={`${desktopMenuOpen === "about" ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"} transition-all duration-150 absolute right-0 top-full pt-2 w-[300px] z-50`}
+                >
+                  <div className="bg-brand-navy border border-white/15 rounded-3xl shadow-2xl p-4 space-y-1.5 text-left">
+                    <span className="text-[10px] font-mono text-[#F6B73C] font-bold uppercase tracking-wider block px-2 pb-1">
+                      {isBn ? "উড়াল (URAL)" : "URAL Travel Intelligence"}
+                    </span>
+                    {[
+                      { id: "about", label: isBn ? "আমাদের সম্পর্কে" : "About URAL", sub: isBn ? "ট্রাভেল ইন্টেলিজেন্স, সম্পাদকীয় অঙ্গীকার" : "Travel intelligence and editorial commitments", path: "/about", icon: Info },
+                      { id: "partners", label: isBn ? "আমাদের পার্টনাররা" : "Our Partners", sub: isBn ? "বুকিং লিংকের পেছনের পার্টনাররা" : "The partners behind the booking links", path: "/partners", icon: HandCoins },
+                      { id: "visa-assistance", label: isBn ? "ভিসা সহায়তা (eVisas)" : "Visa Assistance (eVisas)", sub: isBn ? "পেইড আবেদন সহায়তা, eVisas-এর মাধ্যমে" : "Paid application help through eVisas", path: "/visa-assistance", icon: Stamp },
+                    ].map((item) => {
+                      const IconComp = item.icon;
+                      return (
+                        <a
+                          key={item.id}
+                          href={getLocalizedRouteHref(item.path)}
+                          onClick={(event) => handleNavigationAnchorClick(event, item.path)}
+                          aria-current={isCurrentNavigationPath(item.path) ? "page" : undefined}
+                          className={`w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors flex items-start gap-2.5 cursor-pointer ${isCurrentNavigationPath(item.path) ? "bg-white/10 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
+                        >
+                          <IconComp className="w-4 h-4 text-[#F6B73C] shrink-0 mt-0.5" />
+                          <div>
+                            <div className="text-xs font-semibold text-white">{item.label}</div>
+                            <div className="text-[11px] text-slate-400">{item.sub}</div>
+                          </div>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
             </nav>
 
             {/* Start Trip CTA Right */}
@@ -3278,6 +3416,12 @@ export default function App() {
                           path: "/visa",
                         },
                         {
+                          id: "visa-assistance",
+                          label: isBn ? "ভিসা সহায়তা (eVisas)" : "Visa Assistance (eVisas)",
+                          meta: isBn ? "পেইড আবেদন সহায়তা, eVisas-এর মাধ্যমে" : "Paid application help through eVisas",
+                          path: "/visa-assistance",
+                        },
+                        {
                           id: "umrah",
                           label: isBn ? "ওমরাহ ও হজ প্ল্যানার ২০২৬" : "Umrah & Hajj 2026 Hub",
                           meta: isBn ? "Nusuk অ্যাপ ও DIY খরচ" : "Nusuk permit & DIY cost",
@@ -3408,6 +3552,18 @@ export default function App() {
                           label: GLOSSARY_META[isBn ? "bn" : "en"].navLabel,
                           meta: GLOSSARY_META[isBn ? "bn" : "en"].navSub,
                           path: GLOSSARY_PATH,
+                        },
+                        {
+                          id: "about",
+                          label: isBn ? "আমাদের সম্পর্কে" : "About URAL",
+                          meta: isBn ? "ট্রাভেল ইন্টেলিজেন্স ও সম্পাদকীয় অঙ্গীকার" : "Travel intelligence and editorial commitments",
+                          path: "/about",
+                        },
+                        {
+                          id: "partners",
+                          label: isBn ? "আমাদের পার্টনাররা" : "Our Partners",
+                          meta: isBn ? "বুকিং লিংকের পেছনের পার্টনাররা" : "The partners behind the booking links",
+                          path: "/partners",
                         },
                         {
                           id: "airhelp",
@@ -4607,6 +4763,20 @@ export default function App() {
         </React.Suspense>
       )}
 
+      {/* Our Partners (/partners): who completes the bookings behind the links. */}
+      {section === "partners" && (
+        <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+          <PartnersPage lang={lang} onNavigate={navigateTo} />
+        </React.Suspense>
+      )}
+
+      {/* Visa Assistance (/visa-assistance): eVisas, and where URAL's role ends. */}
+      {section === "visaAssistance" && (
+        <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+          <VisaAssistancePage lang={lang} onNavigate={navigateTo} />
+        </React.Suspense>
+      )}
+
       {/* -------------------------------------------------------------
           🔒 VIEW 11: PRIVACY & COOKIE POLICY HUB
       ------------------------------------------------------------- */}
@@ -5201,7 +5371,27 @@ export default function App() {
                   ? "সাইটের কিছু আউটবাউন্ড লিংক অ্যাফিলিয়েট লিংক; আপনার অতিরিক্ত খরচ ছাড়াই আমরা কমিশন পেতে পারি — যা সব গাইড ফ্রি রাখে।"
                   : "Some outbound links are affiliate links; we may earn a commission at no extra cost to you — which keeps every guide free."}
               </p>
-            </div>
+            
+               <ul className="space-y-1.5 text-xs pt-1">
+                 {[
+                   { path: "/about", label: isBn ? "আমাদের সম্পর্কে" : "About URAL" },
+                   { path: "/partners", label: isBn ? "আমাদের পার্টনাররা" : "Our Partners" },
+                   { path: "/visa-assistance", label: isBn ? "ভিসা সহায়তা (eVisas)" : "Visa Assistance (eVisas)" },
+                   { path: "/contact", label: isBn ? "যোগাযোগ" : "Contact" },
+                   { path: "/privacy", label: isBn ? "গোপনীয়তা ও কুকি নীতি" : "Privacy & Cookie Policy" },
+                 ].map((item) => (
+                   <li key={item.path}>
+                     <a
+                       href={getLocalizedRouteHref(item.path)}
+                       onClick={(event) => handleNavigationAnchorClick(event, item.path)}
+                       className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer"
+                     >
+                       {item.label}
+                     </a>
+                   </li>
+                 ))}
+               </ul>
+</div>
 
             {/* COLUMN 2 (2 Cols): Flights & Routes. Every column in this footer
                 now ends with one gold "everything" link — a consistent pattern
@@ -5265,6 +5455,17 @@ export default function App() {
                 {isBn ? "গ্লোবাল ট্রাভেল সার্ভিস" : "Travel Services"}
               </span>
               <ul className="space-y-1.5 text-xs">
+                <li>
+                  <a
+                    href={resolvePartnerUrl(AFFILIATE_LINKS.evisas)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 py-1 hover:text-white hover:underline"
+                  >
+                    {isBn ? "ভিসা আবেদন সহায়তা (eVisas)" : "Visa application assistance (eVisas)"}
+                    <span aria-hidden="true" className="text-slate-500">↗</span>
+                  </a>
+                </li>
                 <li>
                   <a
                     href={resolvePartnerUrl(AFFILIATE_LINKS.klookHotels)}

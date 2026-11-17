@@ -1,5 +1,10 @@
 import { GLOSSARY_META, GLOSSARY_PATH } from "./glossaryMeta";
 import { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH } from "./officialResourcesMeta";
+import { PARTNERS_META, PARTNERS_PATH } from "./partnersMeta";
+import {
+  VISA_ASSISTANCE_META,
+  VISA_ASSISTANCE_PATH,
+} from "./visaAssistanceMeta";
 import { TOOL_PAGE_SEO } from "./toolRoutes";
 
 export interface SeoCopy {
@@ -287,6 +292,14 @@ export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     title: GLOSSARY_META.en.seoTitle,
     description: GLOSSARY_META.en.seoDescription,
   },
+  [PARTNERS_PATH]: {
+    title: PARTNERS_META.en.seoTitle,
+    description: PARTNERS_META.en.seoDescription,
+  },
+  [VISA_ASSISTANCE_PATH]: {
+    title: VISA_ASSISTANCE_META.en.seoTitle,
+    description: VISA_ASSISTANCE_META.en.seoDescription,
+  },
   "/sitemap": {
     title: "Complete URAL Travel Site Directory & Guide Index | URAL",
     description:
@@ -326,6 +339,14 @@ export const CORE_BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     title: "URAL সম্পর্কে | ফারহান মোমেন — প্রতিষ্ঠাতা ও ট্রাভেল এডিটর",
     description:
       "URAL ঢাকার একটি স্বাধীন ট্রাভেল ইন্টেলিজেন্স ডেস্ক — ট্রাভেল এজেন্সি নয়। কে লেখেন, প্রতিটি গাইড কীভাবে যাচাই ও তারিখসহ প্রকাশ করা হয়, এবং সাইটের আয়ের উৎস কী।",
+  },
+  [PARTNERS_PATH]: {
+    title: PARTNERS_META.bn.seoTitle,
+    description: PARTNERS_META.bn.seoDescription,
+  },
+  [VISA_ASSISTANCE_PATH]: {
+    title: VISA_ASSISTANCE_META.bn.seoTitle,
+    description: VISA_ASSISTANCE_META.bn.seoDescription,
   },
   "/visa-free-countries": {
     title: "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬) | URAL",
