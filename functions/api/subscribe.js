@@ -10,10 +10,25 @@
  * unauthenticated-endpoint problem as `/api/contact`. See the header of
  * `functions/api/contact.js` and `docs/growth/20-FORM-AND-MAIL-HARDENING-2026-10-25.md`.
  *
- * Controls here: honeypot, body-size cap, field caps, and a per-IP sliding
- * window (3 signups / 10 min). Turnstile is intentionally not required on this
- * endpoint — it is rate-limited and low-value to abuse — but the check can be
- * added the same way `/api/contact` does it if signup spam appears.
+ * Controls here: an origin gate (a browser request from anywhere but this site is
+ * refused with 403), a JSON-only rule (415), a measured body-size cap, field
+ * caps, the `_honey` honeypot, and a per-IP sliding window (3 signups / 10 min).
+ * Turnstile is intentionally not required on this endpoint — it is rate-limited
+ * and low-value to abuse — but the check can be added the same way
+ * `/api/contact` does it if signup spam appears.
+ *
+ * CORS is answered per request for the browser's benefit, but it is NOT the
+ * gate: `Access-Control-Allow-Origin` hides a response, it does not stop the
+ * mail from being sent. The origin check below is what actually refuses. Same
+ * repair as `/api/contact` on 17 November 2026.
+ *
+ * ── Known gap: this is not a subscriber list ────────────────────────────────
+ * A signup currently produces ONE email — a notification to the desk. Nothing is
+ * stored, no confirmation is required, and no unsubscribe link is sent, so there
+ * is no list to mail and no record of consent. The fix (double opt-in plus a
+ * hosted list) needs a storage decision that is still open; see
+ * `docs/growth/20-FORM-AND-MAIL-HARDENING-2026-10-25.md` §5. Do not describe this
+ * endpoint as a newsletter subscription until that lands.
  */
 
 const RECIPIENT_EMAIL = "marcwriter2025@gmail.com";
@@ -119,8 +134,31 @@ export async function onRequestPost(context) {
   const origin = context.request.headers.get("Origin");
   const now = Date.now();
 
-  const contentLength = Number(context.request.headers.get("content-length") || 0);
-  if (contentLength > MAX_BODY_BYTES) {
+  // See the same guard in `contact.js` for the full reasoning. Short version:
+  // CORS hides a response, it does not stop the email. A foreign page can post
+  // here without a preflight by using a simple content type, so both the origin
+  // and the declared content type are checked before any work happens. Requests
+  // with NO Origin (curl, server-to-server, uptime checks) stay allowed.
+  if (origin && !isAllowedOrigin(origin)) {
+    return jsonResponse(
+      { ok: false, code: "origin_not_allowed", error: "This form can only be submitted from the URAL website." },
+      403,
+      origin
+    );
+  }
+  const contentType = (context.request.headers.get("content-type") || "").toLowerCase();
+  if (!contentType.startsWith("application/json")) {
+    return jsonResponse(
+      { ok: false, code: "unsupported_media_type", error: "This form must be submitted as JSON." },
+      415,
+      origin
+    );
+  }
+
+  // Declared length is a fast path; the bytes received are measured below, so a
+  // request that omits `content-length` cannot slip past the cap by reading 0.
+  const declaredLength = Number(context.request.headers.get("content-length") || 0);
+  if (declaredLength > MAX_BODY_BYTES) {
     return jsonResponse({ ok: false, code: "payload_too_large", error: "Please send a shorter request." }, 413, origin);
   }
 
@@ -135,9 +173,21 @@ export async function onRequestPost(context) {
     );
   }
 
+  let rawBody;
+  try {
+    rawBody = await context.request.text();
+  } catch {
+    return jsonResponse({ ok: false, code: "invalid_request", error: "Unable to read the signup request." }, 400, origin);
+  }
+  // Measured, not declared — rejects an oversized body even without a
+  // `content-length` header, before it is parsed or mailed.
+  if (new TextEncoder().encode(rawBody).byteLength > MAX_BODY_BYTES) {
+    return jsonResponse({ ok: false, code: "payload_too_large", error: "Please send a shorter request." }, 413, origin);
+  }
+
   let body;
   try {
-    body = await context.request.json();
+    body = JSON.parse(rawBody);
   } catch {
     return jsonResponse({ ok: false, code: "invalid_json", error: "Unable to read the signup request." }, 400, origin);
   }

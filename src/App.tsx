@@ -901,6 +901,11 @@ export default function App() {
   );
   const [emailSubmitting, setEmailSubmitting] = useState<boolean>(false);
   const [emailSubscribeError, setEmailSubscribeError] = useState<string | null>(null);
+  // Honeypot field for /api/subscribe. The endpoint has always checked `_honey`,
+  // but the form never sent it, so the trap could never fire. Hidden from people,
+  // unfocusable and hidden from assistive tech; only a bot fills it. Keep the
+  // name in step with functions/api/subscribe.js.
+  const newsletterHoneypotRef = useRef<HTMLInputElement>(null);
   const hasFareAlertPreference = selectedSubscriptionInterests.includes("dhaka-fare-alerts");
   const hasNewsletterPreference = selectedSubscriptionInterests.includes("travel-newsletter");
 
@@ -982,6 +987,7 @@ export default function App() {
           language: preferredLanguage,
           pageUrl: activePageUrl,
           timestamp: dhakaTimestamp,
+          _honey: newsletterHoneypotRef.current?.value ?? "",
         }),
       }).catch(() => null);
 
@@ -5050,6 +5056,15 @@ export default function App() {
                 }}
                 className="mx-auto mt-7 max-w-2xl space-y-5"
               >
+                <input
+                  ref={newsletterHoneypotRef}
+                  type="text"
+                  name="_honey"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
                 <fieldset
                   aria-describedby={emailSubscribeError ? "sitewide-subscription-error" : undefined}
                   className="space-y-3"
