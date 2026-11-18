@@ -84,6 +84,7 @@ import {
   touristTripSchema,
   serviceSchema,
   collectionPageSchema,
+  aboutPageSchema,
   faqPageNodeSchema,
   howToSchema,
   buildSchemaGraph,
@@ -103,10 +104,12 @@ import type { SiteSearchEntry, SiteSearchKind } from "../src/utils/siteSearch";
 import {
   OFFICIAL_RESOURCES_COPY,
   OFFICIAL_RESOURCES_PATH,
+  officialResourcesItems,
   renderOfficialResourcesStaticHtml,
 } from "../src/utils/officialSourcesPage";
 import { GLOSSARY_COPY, GLOSSARY_PATH, glossarySchema, renderGlossaryStaticHtml } from "../src/utils/glossaryPage";
 import { renderAboutStaticHtml } from "../src/utils/aboutPage";
+import { ABOUT_COPY } from "../src/utils/aboutCopy";
 import { renderPartnersStaticHtml } from "../src/utils/partnersPage";
 import { PARTNERS_META, PARTNERS_PATH } from "../src/utils/partnersMeta";
 import { renderVisaAssistanceStaticHtml } from "../src/utils/visaAssistancePage";
@@ -2829,7 +2832,14 @@ function buildAllRoutes(): PrerenderRoute[] {
       { name: "Home", url: `${BASE_URL}/` },
       { name: OFFICIAL_RESOURCES_COPY.en.breadcrumb, url: `${BASE_URL}${OFFICIAL_RESOURCES_PATH}` },
     ],
-    extraGraphNodes: [],
+    extraGraphNodes: [
+      collectionPageSchema({
+        url: `${BASE_URL}${OFFICIAL_RESOURCES_PATH}`,
+        name: OFFICIAL_RESOURCES_COPY.en.h1,
+        description: OFFICIAL_RESOURCES_COPY.en.seoDescription,
+        items: officialResourcesItems("en"),
+      }),
+    ],
     bodyHtml: renderOfficialResourcesStaticHtml("en"),
   });
 
@@ -2978,7 +2988,14 @@ function buildAllRoutes(): PrerenderRoute[] {
       { name: "Home", url: `${BASE_URL}/` },
       { name: "About", url: `${BASE_URL}/about` },
     ],
-    extraGraphNodes: [],
+    extraGraphNodes: [
+      aboutPageSchema({
+        url: `${BASE_URL}/about`,
+        name: "About URAL Travel Intelligence | Farhan Momen, Founder & Travel Editor",
+        description:
+          "URAL is an independent travel-intelligence publisher in Dhaka — not a travel agency. Who writes it, how each guide is sourced and dated, and how the site stays independent.",
+      }),
+    ],
     bodyHtml: renderAboutStaticHtml("en"),
   });
 
@@ -4737,6 +4754,25 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
       }
     } else if (englishPath === GLOSSARY_PATH) {
       extraGraphNodes.push(glossarySchema("bn", canonicalUrl));
+    } else if (englishPath === OFFICIAL_RESOURCES_PATH) {
+      extraGraphNodes.push(
+        collectionPageSchema({
+          url: canonicalUrl,
+          name: OFFICIAL_RESOURCES_COPY.bn.h1,
+          description: OFFICIAL_RESOURCES_COPY.bn.seoDescription,
+          items: officialResourcesItems("bn"),
+          inLanguage: "bn-BD",
+        })
+      );
+    } else if (englishPath === "/about") {
+      extraGraphNodes.push(
+        aboutPageSchema({
+          url: canonicalUrl,
+          name: ABOUT_COPY.bn.h1,
+          description: ABOUT_COPY.bn.intro,
+          inLanguage: "bn-BD",
+        })
+      );
     } else if (englishPath === "/privacy") {
       extraGraphNodes.push(
         webPageSchema({

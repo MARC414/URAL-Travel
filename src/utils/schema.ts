@@ -323,6 +323,33 @@ export function articleSchema(options: {
 }
 
 /**
+ * Builds the AboutPage + Person node for the editorial-standards page.
+ *
+ * The Organization is emitted once, in the site graph, so it is referenced by
+ * `@id` here rather than re-declared — re-declaring it on every AboutPage would
+ * make parsers treat the two Organization nodes as unrelated. `@id`-linking is
+ * the Schema.org way to say "the same thing".
+ */
+export function aboutPageSchema(options: {
+  url: string;
+  name: string;
+  description: string;
+  inLanguage?: string;
+}) {
+  const { url, name, description, inLanguage = "en-BD" } = options;
+  return {
+    "@type": "AboutPage",
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    isPartOf: { "@id": SITE_WEBSITE_ID },
+    about: { "@id": SITE_ORG_ID },
+    inLanguage,
+  };
+}
+
+/**
  * Builds a Schema.org CollectionPage + ItemList node for hub index pages.
  */
 export function collectionPageSchema(options: {

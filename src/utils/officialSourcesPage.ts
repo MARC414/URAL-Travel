@@ -31,6 +31,32 @@ import {
 
 export { OFFICIAL_RESOURCES_COPY, OFFICIAL_RESOURCES_PATH, officialSourceSectionId };
 
+/**
+ * The ItemList entries for the `/resources` CollectionPage schema.
+ *
+ * One entry per sector, named after the sector's own heading, so the machine
+ * readable index matches the visible jump-to list. Country and organisation
+ * granularity is deliberately not reflected here: a CollectionPage ItemList is
+ * a flat list, and flattening it would mean inventing a hierarchy that does
+ * not exist on the page.
+ */
+export function officialResourcesItems(
+  lang: OfficialResourcesLocale
+): Array<{ name: string; url: string; description?: string }> {
+  const copy = OFFICIAL_RESOURCES_COPY[lang];
+  const groups = groupOfficialSources(getOfficialSources());
+  const localPath = (path: string) => (lang === "bn" ? toBengaliPath(path) : path);
+  return groups.map((group) => {
+    const sector = group.sector;
+    const label = fillResourceCopy(copy.linkCount, { count: group.total }, lang);
+    return {
+      name: sector[lang],
+      url: `${localPath(OFFICIAL_RESOURCES_PATH)}#${officialSourceSectionId(sector.id)}`,
+      description: label,
+    };
+  });
+}
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
