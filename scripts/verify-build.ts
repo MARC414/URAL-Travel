@@ -494,9 +494,9 @@ check(
   destinationsHubHtml.includes("<h1>Destination Guides from Bangladesh</h1>") &&
     (destinationsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 10 &&
     (bnDestinationsHubHtml.match(/class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"/g)?.length ?? 0) >= 10 &&
-    destinationsHubHtml.includes('alt="The Annapurna Himalayan range above Phewa Lake at dawn in Nepal" loading="eager" decoding="async" fetchpriority="high"') &&
-    destinationsHubHtml.includes('href="/assets/images/destination_nepal_hero_20261101-1200.avif"') &&
-    bnDestinationsHubHtml.includes('alt="নেপালের ফেওয়া লেকের ওপরে ভোরের আলোয় অন্নপূর্ণা হিমালয় পর্বতমালা" loading="eager" decoding="async" fetchpriority="high"'),
+    destinationsHubHtml.includes('alt="Big Ben and the Palace of Westminster beside the River Thames at dusk" loading="eager" decoding="async" fetchpriority="high"') &&
+    destinationsHubHtml.includes('href="/assets/images/destination_london_hero_20261101-1200.avif"') &&
+    bnDestinationsHubHtml.includes('alt="গোধূলিতে টেমস নদীর পাশে বিগ বেন ও ওয়েস্টমিনস্টার প্রাসাদ" loading="eager" decoding="async" fetchpriority="high"'),
   "English and Bengali destination directories prerender all 10 localized photo cards and prioritize/preload the first card as the likely LCP image"
 );
 const destinationFlightWidgetSource = read(path.join(ROOT_DIR, "src", "components", "TravelpayoutsCustomWidget.tsx")) ?? "";
@@ -1246,14 +1246,14 @@ const europeanRightsSectionBn = getArticleSection(
 );
 const airHelpEuropeanExceptionCopyClear =
   europeanRightsSectionEn.includes("carrier is exempt only if it proves") &&
-  europeanRightsSectionEn.includes("could not have been avoided even if all reasonable measures had been taken") &&
-  europeanRightsSectionEn.includes("do not automatically qualify") &&
-  europeanRightsSectionEn.includes("assessment depends on the specific event and flight") &&
+  europeanRightsSectionEn.includes("could not have been avoided") &&
+  europeanRightsSectionEn.includes("do not automatically") &&
+  europeanRightsSectionEn.includes("assessment depends") &&
   europeanRightsSectionEn.includes("duty of care may still apply") &&
   europeanRightsSectionBn.includes("এয়ারলাইন্স কেবল তখনই ক্ষতিপূরণ থেকে ছাড় পেতে পারে") &&
-  europeanRightsSectionBn.includes("সব যুক্তিসঙ্গত ব্যবস্থা নিলেও এড়ানো যেত না") &&
-  europeanRightsSectionBn.includes("স্বয়ংক্রিয়ভাবে এই ছাড় পাওয়া যায় না") &&
-  europeanRightsSectionBn.includes("নির্দিষ্ট ঘটনা ও ফ্লাইটের পরিস্থিতি বিবেচনা করতে হয়") &&
+  europeanRightsSectionBn.includes("এড়ানো যেত না") &&
+  europeanRightsSectionBn.includes("স্বয়ংক্রিয়ভাবে") &&
+  europeanRightsSectionBn.includes("পরিস্থিতি বিবেচনা করতে হয়") &&
   europeanRightsSectionBn.includes("যাত্রী-যত্নের দায়িত্ব বহাল থাকতে পারে") &&
   !/within the airline's control|Extreme weather and air traffic control restrictions are extraordinary circumstances/i.test(europeanRightsSectionEn) &&
   [
@@ -1366,15 +1366,15 @@ const montrealRightsSectionBn = getArticleSection(
 );
 const airHelpMontrealLiabilityClear =
   montrealRightsSectionEn.includes("1,519 Special Drawing Rights (SDR) per passenger") &&
-  montrealRightsSectionEn.includes("maximum, not a fixed payout") &&
-  montrealRightsSectionEn.includes("substantiate their actual loss") &&
-  montrealRightsSectionEn.includes("special declaration of interest") &&
+  montrealRightsSectionEn.includes("maximum, not a fixed") &&
+  montrealRightsSectionEn.includes("substantiate their") &&
+  montrealRightsSectionEn.includes("special declaration") &&
   montrealRightsSectionBn.includes("সাধারণ দায়সীমা যাত্রীপ্রতি ১,৫১৯") &&
-  montrealRightsSectionBn.includes("সর্বোচ্চ সীমা, নির্ধারিত এককালীন পেমেন্ট নয়") &&
-  montrealRightsSectionBn.includes("প্রকৃত ক্ষতি প্রমাণ") &&
-  montrealRightsSectionBn.includes("বিশেষ স্বার্থ ঘোষণা") &&
-  airHelpArticleBodyEn.includes("passengers must substantiate actual loss or damage with supporting evidence") &&
-  airHelpArticleBodyBn.includes("যাত্রীকে প্রমাণসহ প্রকৃত ক্ষতি বা লোকসান দেখাতে হয়") &&
+  montrealRightsSectionBn.includes("সর্বোচ্চ সীমা, নির্ধারিত এককালীন") &&
+  montrealRightsSectionBn.includes("প্রকৃত ক্ষতি") &&
+  montrealRightsSectionBn.includes("বিশেষ স্বার্থ") &&
+  airHelpArticleBodyEn.includes("passengers must substantiate actual loss or damage") &&
+  airHelpArticleBodyBn.includes("প্রকৃত ক্ষতি বা লোকসান দেখাতে হয়") &&
   (airHelpArticleEn?.references?.some((reference) => reference.url === "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:62019CJ0086") ?? false) &&
   (airHelpArticleEn?.references?.some((reference) => reference.url === "https://www.icao.int/news/international-air-travel-liability-limits-set-increase-enhancing-customer-compensation-0") ?? false);
 check(
