@@ -1297,7 +1297,8 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Shariah-Compliant Islamic Dual-Currency Cards for Umrah", path: "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah" },
       { text: "RFCD Account vs. Travel Quota (the $300 online-payment rule)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "Cash SAR / USD vs. Card Abroad (choose local currency, avoid DCC)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
-      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" }
+      { text: "Dual-Currency Card Fee & Markup Calculator", path: "/tools/currency-converter" },
+      { text: "Plain meanings of endorsement, RFCD and travel quota", path: "/glossary" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Card Endorsed & Ready?", body: "Compare live international flight fares from Dhaka and book with your endorsed card." }
   },
@@ -2582,6 +2583,9 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka to Bangkok Flight Schedule & Fares", path: "/flights/dhaka-bangkok" },
       { text: "Where to Stay in Bangkok: Hotel Neighborhoods", path: "/hotels/bangkok-hotels" },
       { text: "Bumrungrad & Bangkok Hospital Medical Checkup Guide from Bangladesh (2026): Appointment Booking, BDT Costs & Halal Stays", path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
+      { text: "Where the eVisa application is actually submitted (paid help, if you want it)", path: "/visa-assistance" },
+      { text: "Official Thai immigration and embassy portals URAL cites", path: "/resources" },
+      { text: "What financial evidence and TR visa mean", path: "/glossary" },
     ],
     affiliateCTA: { provider: "klook", headline: "Compare Bangkok family activities and ticket options", body: "Browse relevant Bangkok activity listings and check the total, selected date, inclusions, pickup details where offered, and cancellation terms before booking." }
   },
@@ -2804,7 +2808,9 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka Airport Outbound Immigration 5-Document Checklist", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Official Hajj Registration with NID & e-Passport (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
       { text: "Dhaka Airport Pre-Departure Inspection Checklist", path: "/pre-departure" },
-      { text: "Visa-Free Countries for a Bangladeshi Passport", path: "/visa-free-countries" }
+      { text: "Visa-Free Countries for a Bangladeshi Passport", path: "/visa-free-countries" },
+      { text: "Official passport and immigration portals URAL cites", path: "/resources" },
+      { text: "What RPO, MRP and e-Passport mean", path: "/glossary" }
     ],
     affiliateCTA: { provider: "aviasales", headline: "Got Your New e-Passport? Check First-Trip Flight Fares from Dhaka", body: "Compare live roundtrip fares to Nepal, Maldives, Malaysia, Thailand, and Saudi Arabia." }
   },
@@ -2931,6 +2937,7 @@ export const BLOG_DATA: BlogPost[] = [
       { text: "Dhaka to Jeddah & Madinah Open-Jaw Flight Strategy", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "Best Travel eSIM and Schengen Travel Insurance Guide", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
       { text: "Global Flight Search and Live Inventory", path: "/flights" },
+      { text: "What SDR, EC 261 and duty of care mean", path: "/glossary" },
     ],
     affiliateCTA: {
       provider: "airhelp",

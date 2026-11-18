@@ -670,6 +670,7 @@ Endorsement ও activation আলাদা বিষয়। ব্যাংক
       { text: "RFCD Account বনাম সাধারণ Travel Quota ($300 লিমিট সমাধান)", path: "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix" },
       { text: "নগদ রিয়াল/ডলার বনাম কার্ড (local currency বেছে DCC এড়ান)", path: "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide" },
       { text: "তারিখসহ কারেন্সি রেফারেন্স কনভার্টার", path: "/tools/currency-converter" },
+      { text: "এনডোর্সমেন্ট, RFCD ও travel quota-র সহজ অর্থ", path: "/glossary" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -3013,6 +3014,9 @@ RFCD card কি POS বা ATM limit-ও সরিয়ে দেয়?
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "Thailand ৫ দিনের বিস্তারিত BDT বাজেট", path: "/costs/thailand-costs" },
       { text: "বাংলাদেশ থেকে Bumrungrad ও Bangkok Hospital মেডিকেল চেকআপ গাইড (2026): অ্যাপয়েন্টমেন্ট, BDT খরচ ও হালাল হোটেল", path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh" },
+      { text: "eVisa আবেদনে সহায়তা (পেইড হেল্প)", path: "/visa-assistance" },
+      { text: "URAL যে সরকারি থাই ইমিগ্রেশন সাইট উদ্ধৃত করে", path: "/resources" },
+      { text: "financial evidence ও TR visa মানে কী", path: "/glossary" },
     ],
     affiliateCTA: {
       provider: "klook",
@@ -3415,6 +3419,8 @@ epassport.gov.bd-এ আবেদন করুন, নির্ধারিত �
       { text: "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট", path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go" },
       { text: "NID ও ই-পাসপোর্ট দিয়ে সরকারি Hajj রেজিস্ট্রেশন (hajj.gov.bd)", path: "/blog/hajj-registration-bangladesh-government-vs-private-package-cost" },
       { text: "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া দেশের তালিকা", path: "/visa-free-countries" },
+      { text: "URAL যে সরকারি পাসপোর্ট ও ইমিগ্রেশন সাইট উদ্ধৃত করে", path: "/resources" },
+      { text: "RPO, MRP ও e-Passport মানে কী", path: "/glossary" },
     ],
     affiliateCTA: {
       provider: "aviasales",
@@ -3470,6 +3476,7 @@ epassport.gov.bd-এ আবেদন করুন, নির্ধারিত �
       { text: "ঢাকা থেকে জেদ্দা ও মদিনা Open-Jaw Flight কৌশল", path: "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia" },
       { text: "বিদেশ ভ্রমণে সেরা Travel eSIM ও ট্রাভেল ইনস্যুরেন্স গাইড", path: "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide" },
       { text: "গ্লোবাল ফ্লাইট সার্চ ও বুকিং পোর্টাল", path: "/flights" },
+      { text: "SDR, EC 261 ও duty of care মানে কী", path: "/glossary" },
     ],
     affiliateCTA: {
       provider: "airhelp",
