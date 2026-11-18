@@ -70,6 +70,7 @@ import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
 import { TravelIntelligence } from "./components/AeoInspector";
 import { AscentMark } from "./components/AscentMark";
 import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
+import { focusSitewideSignup } from "./utils/signupCta";
 import {
   AFFILIATE_LINKS,
   KKDAY_PROMO,
@@ -2459,6 +2460,20 @@ export default function App() {
     pushPath(hasBengaliTarget(normalized) ? toLocalePath(normalized, "bn") : normalized);
   };
 
+  // The gold button in the header is the site's primary conversion action: it
+  // closes the drawer (when it was used from there) and lands the visitor on the
+  // signup card with the cursor in the email field. The timing lives in
+  // `utils/signupCta.ts` so it can be tested; see that file for why the delay and
+  // `preventScroll` are both load-bearing.
+  const goToSignup = () => {
+    setMobileMenuOpen(false);
+    focusSitewideSignup({
+      // Defensive: if a future route stops rendering the card, send the visitor
+      // to the home page rather than leaving the click with no effect.
+      onMissing: () => navigateTo("/"),
+    });
+  };
+
   const submitTopBarSearch = async (query: string): Promise<boolean> => {
     const trimmedQuery = query.trim();
     if (trimmedQuery.length >= 2) {
@@ -3323,14 +3338,16 @@ export default function App() {
               </div>
             </nav>
 
-            {/* Start Trip CTA Right */}
+            {/* Sign Up CTA — the header's one conversion action. */}
             <div className="flex items-center gap-4">
               <button
-                id="btn-start-trip-cta"
-                onClick={() => navigateTo("/destinations")}
+                type="button"
+                id="btn-signup-cta"
+                onClick={goToSignup}
+                aria-controls="sitewide-subscription"
                 className="hidden xl:block bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-sm rounded-full px-5 py-2 shadow-md transition-colors whitespace-nowrap cursor-pointer"
               >
-                {t.startTripCta}
+                {t.signUpCta}
               </button>
 
               {/* Mobile Hamburger Menu Burger */}
@@ -3840,13 +3857,11 @@ export default function App() {
                     </a>
                     <button
                       type="button"
-                      onClick={() => {
-                        navigateTo("/destinations");
-                        setMobileMenuOpen(false);
-                      }}
+                      onClick={goToSignup}
+                      aria-controls="sitewide-subscription"
                       className="min-h-[44px] bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-xs px-3 rounded-xl shadow-md text-center transition-colors cursor-pointer"
                     >
-                      {t.startTripCta}
+                      {t.signUpCta}
                     </button>
                   </div>
                 </div>
@@ -5031,9 +5046,13 @@ export default function App() {
                     ? "আপনার পছন্দের ট্রাভেল আপডেট"
                     : "Travel updates, your way"}
               </span>
+              {/* Focusable so the header's Sign Up button has somewhere to send
+                  people who already subscribed — by then the email field is gone.
+                  -1 keeps the heading out of the tab order. */}
               <h2
                 id="sitewide-subscription-title"
-                className="ural-section-title font-serif text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl"
+                tabIndex={-1}
+                className="ural-section-title font-serif text-2xl font-black leading-tight text-white outline-none sm:text-3xl lg:text-4xl"
               >
                 {isBn ? "আপনি কোন আপডেট পেতে চান?" : "Choose the updates you want"}
               </h2>

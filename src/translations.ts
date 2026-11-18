@@ -19,7 +19,7 @@ export const translations = {
     navTools: "Tools",
     navBlog: "Blog",
     navContact: "Contact",
-    startTripCta: "Start Trip",
+    signUpCta: "Sign Up",
 
     // Hero Section
     heroBadge: "🇧🇩 Trusted Travel Companion for Bangladeshis",
@@ -75,7 +75,7 @@ export const translations = {
     navTools: "টুলস",
     navBlog: "ব্লগ",
     navContact: "যোগাযোগ",
-    startTripCta: "ট্যুর শুরু করুন",
+    signUpCta: "সাইন আপ",
 
     // Hero Section
     heroBadge: "🇧🇩 বাংলাদেশি পর্যটকদের বিশ্বস্ত ভ্রমণ সহযোগী",
