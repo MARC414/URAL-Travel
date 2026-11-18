@@ -31,6 +31,7 @@ export const OPTIONAL_STORAGE_KEYS = [
   "ural_subscribed_email",
   "ural_subscription_id",
   "ural_subscription_interests",
+  "ural_subscription_pending",
 ] as const;
 
 export type OptionalStorageKey = (typeof OPTIONAL_STORAGE_KEYS)[number];

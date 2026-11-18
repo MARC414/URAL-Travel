@@ -22,18 +22,44 @@
  * mail from being sent. The origin check below is what actually refuses. Same
  * repair as `/api/contact` on 17 November 2026.
  *
- * ── Known gap: this is not a subscriber list ────────────────────────────────
- * A signup currently produces ONE email — a notification to the desk. Nothing is
- * stored, no confirmation is required, and no unsubscribe link is sent, so there
- * is no list to mail and no record of consent. The fix (double opt-in plus a
- * hosted list) needs a storage decision that is still open; see
- * `docs/growth/20-FORM-AND-MAIL-HARDENING-2026-10-25.md` §5. Do not describe this
- * endpoint as a newsletter subscription until that lands.
+ * ── Double opt-in: a signup is a request, not a subscription (2026-11-17) ───
+ * Before this date a signup produced ONE email — a notification to the desk —
+ * and the page then told the visitor "Subscription confirmed", which was not
+ * true: nothing was stored and nobody had confirmed anything.
+ *
+ * Now a signup writes the address into the Resend contact list in a SEGMENT
+ * (`RESEND_SEGMENT_ID`) with `unsubscribed: true`, which means "known, but not
+ * allowed to receive a broadcast". A confirmation email goes to the visitor; the
+ * signed link in it hits `/api/confirm`, which flips that flag to `false`. Only
+ * then can a mailout reach them.
+ *
+ * Three properties this buys, all of which were missing:
+ *   1. Consent is recorded at Resend, not inferred from a keystroke.
+ *   2. A typo or a stranger's address never receives a mailout — they expire as
+ *      unconfirmed contacts instead of becoming a complaint or a spam trap.
+ *   3. Unsubscribing is handled by Resend's own one-click link inside every
+ *      broadcast, which is what the signup block's "1-Click Unsubscribe"
+ *      promise always claimed.
+ *
+ * The desk notification is kept, but it is now BEST EFFORT and marked
+ * "awaiting confirmation": a subscriber must not fail because the copy to
+ * marcwriter2025@gmail.com failed.
+ *
+ * Unconfigured fallback: without `RESEND_LIST_API_KEY` + `RESEND_SEGMENT_ID` +
+ * a signing secret the endpoint behaves exactly as it did before (notify the
+ * desk, store nothing) and answers `pending: false`, so the browser can say so
+ * instead of claiming a confirmation that never happened.
  */
+
+import { canSign, confirmUrl, createConfirmToken } from "./_lib/signing.js";
 
 const RECIPIENT_EMAIL = "marcwriter2025@gmail.com";
 const PUBLIC_SUPPORT_EMAIL = "support@uraltravel.co.uk";
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const SITE_ORIGIN = "https://uraltravel.co.uk";
+
+const RESEND_CONTACTS_URL = "https://api.resend.com/contacts";
+const RESEND_EMAILS_URL = "https://api.resend.com/emails";
 
 const ALLOWED_SUBSCRIPTION_INTERESTS = new Set([
   "Dhaka flight fare-drop alerts",
@@ -123,6 +149,175 @@ function checkRateLimit(ip, now) {
   return { allowed: true, retryAfter: 0 };
 }
 
+// ── Contact list (double opt-in) ─────────────────────────────────────────────
+// Everything below talks to the Resend Contacts API with `RESEND_LIST_API_KEY`,
+// which is a separate key from the sending key on purpose: a leak of the
+// sending key must not also hand over the list.
+
+function doubleOptInConfigured(env) {
+  return Boolean(env?.RESEND_LIST_API_KEY && env?.RESEND_SEGMENT_ID && canSign(env));
+}
+
+/**
+ * Put the address in the list as PENDING — `unsubscribed: true` means "known,
+ * but must never receive a broadcast" — and return what actually happened.
+ *
+ * `already_confirmed` is not a failure: it is someone re-submitting an address
+ * that already clicked the link. They are told so rather than being sent a
+ * confirmation they do not need.
+ */
+async function addPendingContact({ email, env }) {
+  const listKey = env.RESEND_LIST_API_KEY;
+  const segmentId = env.RESEND_SEGMENT_ID;
+  const headers = { Authorization: `Bearer ${listKey}`, "Content-Type": "application/json" };
+
+  const created = await fetch(RESEND_CONTACTS_URL, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ email, unsubscribed: true, segments: [{ id: segmentId }] }),
+  }).catch(() => null);
+
+  if (created && created.ok) return { outcome: "pending" };
+  if (!created) return { outcome: "error" };
+  // 409 = this address is already a contact. Make sure it is in our segment
+  // (the create above did not run), then read its real consent state.
+  if (created.status !== 409) return { outcome: "error" };
+
+  await fetch(`${RESEND_CONTACTS_URL}/${encodeURIComponent(email)}/segments/${encodeURIComponent(segmentId)}`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${listKey}` },
+  }).catch(() => null);
+
+  const existing = await fetch(`${RESEND_CONTACTS_URL}/${encodeURIComponent(email)}`, {
+    headers: { Authorization: `Bearer ${listKey}` },
+  }).catch(() => null);
+  if (existing && existing.ok) {
+    const contact = await existing.json().catch(() => null);
+    if (contact && contact.unsubscribed === false) return { outcome: "already_confirmed" };
+  }
+  return { outcome: "pending" };
+}
+
+const INTEREST_LABELS_BN = {
+  "Dhaka flight fare-drop alerts": "ঢাকা ফ্লাইট ভাড়া কমার অ্যালার্ট",
+  "General URAL travel newsletter": "URAL ট্রাভেল নিউজলেটার",
+};
+
+function interestSummaryFor(subscriptionInterests, isBengali) {
+  if (!isBengali) return subscriptionInterests.join(" and ");
+  const labels = subscriptionInterests.map((interest) => INTEREST_LABELS_BN[interest] || interest);
+  return labels.join(" ও ");
+}
+
+/**
+ * The confirmation email. Deliberately plain: one sentence, one button, one
+ * line of plain text for clients that refuse buttons, and a line telling the
+ * recipient that ignoring it costs them nothing — which is the honest promise
+ * that makes the "not you?" case harmless.
+ */
+async function sendConfirmationEmail({ email, token, env, language, subscriptionInterests, origin }) {
+  const isBengali = /bengali|bn/i.test(language);
+  const url = confirmUrl(origin, token);
+  const interests = interestSummaryFor(subscriptionInterests, isBengali);
+
+  const subject = isBengali
+    ? "আপনার URAL ট্রাভেল সাবস্ক্রিপশন নিশ্চিত করুন"
+    : "Confirm your URAL Travel subscription";
+  const heading = isBengali ? "একটি ক্লিক, তারপর শুরু" : "One click and you’re in";
+  const intro = isBengali
+    ? `${email} থেকে ${interests} পেতে চাইলে নিচের বোতামে ক্লিক করে নিশ্চিত করুন।`
+    : `Confirm ${email} to start receiving ${interests} from URAL Travel.`;
+  const button = isBengali ? "আমার সাবস্ক্রিপশন নিশ্চিত করুন" : "Confirm my subscription";
+  const fallback = isBengali
+    ? "বোতামটি কাজ না করলে এই লিংকটি ব্রাউজারে পেস্ট করুন:"
+    : "If the button does not work, paste this link into your browser:";
+  const ignore = isBengali
+    ? "আপনি যদি এটি না চেয়ে থাকেন, এই ইমেইলটি উপেক্ষা করুন। লিংকে ক্লিক করার আগে আপনাকে তালিকায় যোগ করা হয় না।"
+    : "If you did not ask for this, ignore this email. Nobody is added to the list until the link is clicked.";
+  const support = isBengali
+    ? `প্রশ্ন থাকলে এই ইমেইলে উত্তর দিন, অথবা লিখুন ${PUBLIC_SUPPORT_EMAIL}-এ।`
+    : `Questions? Reply to this email, or write to ${PUBLIC_SUPPORT_EMAIL}.`;
+  const footer = isBengali ? "URAL ট্রাভেল · ঢাকা, বাংলাদেশ" : "URAL Travel · Dhaka, Bangladesh";
+
+  return fetch(RESEND_EMAILS_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY || env.RESEND_LIST_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: `URAL Travel Support <${PUBLIC_SUPPORT_EMAIL}>`,
+      to: [email],
+      reply_to: PUBLIC_SUPPORT_EMAIL,
+      subject,
+      html: `
+        <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+          <div style="background: #0B192C; color: #ffffff; padding: 18px 24px;">
+            <h2 style="margin: 0; font-size: 18px; color: #F6B73C;">${escapeHtml(heading)}</h2>
+          </div>
+          <div style="padding: 22px 24px; color: #1e293b; font-size: 15px; line-height: 1.65;">
+            <p style="margin: 0 0 18px;">${escapeHtml(intro)}</p>
+            <p style="margin: 0 0 22px; text-align: center;">
+              <a href="${escapeHtml(url)}" style="display: inline-block; background: #F6B73C; color: #0B192C; font-weight: bold; text-decoration: none; padding: 13px 26px; border-radius: 10px;">${escapeHtml(button)}</a>
+            </p>
+            <p style="margin: 0 0 6px; font-size: 12px; color: #475569;">${escapeHtml(fallback)}</p>
+            <p style="margin: 0 0 18px; font-size: 12px; word-break: break-all;"><a href="${escapeHtml(url)}" style="color: #0B192C;">${escapeHtml(url)}</a></p>
+            <p style="margin: 0 0 14px; font-size: 12px; color: #475569;">${escapeHtml(ignore)}</p>
+            <p style="margin: 0 0 14px; font-size: 12px; color: #475569;">${escapeHtml(support)}</p>
+            <p style="margin: 0; font-size: 11px; color: #64748b;">${escapeHtml(footer)}</p>
+          </div>
+        </div>
+      `,
+    }),
+  });
+}
+
+/** The copy to the desk. Same fields as before, plus the real status. */
+function sendDeskNotification({
+  apiKey,
+  email,
+  subscriptionId,
+  sourceLabel,
+  interestSummary,
+  language,
+  pageUrl,
+  dhakaTimestamp,
+  statusLabel,
+}) {
+  return fetch(RESEND_EMAILS_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: `URAL Travel Support <${PUBLIC_SUPPORT_EMAIL}>`,
+      to: [RECIPIENT_EMAIL],
+      reply_to: email,
+      subject: `🔔 New URAL Subscription: ${email} (${interestSummary})`,
+      html: `
+        <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+          <div style="background: #0B192C; color: #ffffff; padding: 18px 24px;">
+            <h2 style="margin: 0; font-size: 18px; color: #F6B73C;">URAL Travel Intelligence — New Subscriber Alert</h2>
+          </div>
+          <div style="padding: 20px 24px; color: #1e293b; font-size: 14px; line-height: 1.6;">
+            <p>A new visitor has subscribed to URAL travel updates:</p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
+              <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Subscriber Email</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(email)}</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Subscription ID</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(subscriptionId)}</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Status</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(statusLabel)}</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Signup Placement</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(sourceLabel)}</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Subscription Interests</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(interestSummary)}</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Preferred Language</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(language)}</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Page URL</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(pageUrl)}</td></tr>
+              <tr><td style="padding: 8px; font-weight: bold;">Timestamp (Dhaka BST)</td><td style="padding: 8px;">${escapeHtml(dhakaTimestamp)}</td></tr>
+            </table>
+          </div>
+        </div>
+      `,
+    }),
+  });
+}
 export async function onRequestOptions(context) {
   return new Response(null, {
     status: 204,
@@ -232,7 +427,10 @@ export async function onRequestPost(context) {
   });
 
   const apiKey = context.env?.RESEND_API_KEY;
-  if (!apiKey) {
+  const sendingKey = apiKey || context.env?.RESEND_LIST_API_KEY;
+  const doubleOptIn = doubleOptInConfigured(context.env);
+
+  if (!sendingKey) {
     return jsonResponse(
       {
         ok: false,
@@ -244,45 +442,44 @@ export async function onRequestPost(context) {
     );
   }
 
-  try {
-    const resendResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: `URAL Travel Support <${PUBLIC_SUPPORT_EMAIL}>`,
-        to: [RECIPIENT_EMAIL],
-        reply_to: cleanEmail,
-        subject: `🔔 New URAL Subscription: ${cleanEmail} (${interestSummary})`,
-        html: `
-          <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
-            <div style="background: #0B192C; color: #ffffff; padding: 18px 24px;">
-              <h2 style="margin: 0; font-size: 18px; color: #F6B73C;">URAL Travel Intelligence — New Subscriber Alert</h2>
-            </div>
-            <div style="padding: 20px 24px; color: #1e293b; font-size: 14px; line-height: 1.6;">
-              <p>A new visitor has subscribed to URAL travel updates:</p>
-              <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
-                <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Subscriber Email</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(cleanEmail)}</td></tr>
-                <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Subscription ID</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(subscriptionId)}</td></tr>
-                <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Signup Placement</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(sourceLabel)}</td></tr>
-                <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Subscription Interests</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(interestSummary)}</td></tr>
-                <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Preferred Language</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(language)}</td></tr>
-                <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Page URL</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${escapeHtml(pageUrl)}</td></tr>
-                <tr><td style="padding: 8px; font-weight: bold;">Timestamp (Dhaka BST)</td><td style="padding: 8px;">${escapeHtml(dhakaTimestamp)}</td></tr>
-              </table>
-            </div>
-          </div>
-        `,
-      }),
+  const deskNotification = () =>
+    sendDeskNotification({
+      apiKey: sendingKey,
+      email: cleanEmail,
+      subscriptionId,
+      sourceLabel,
+      interestSummary,
+      language,
+      pageUrl,
+      dhakaTimestamp,
+      statusLabel: doubleOptIn
+        ? "Awaiting confirmation (double opt-in)"
+        : "Not stored — no list configured, desk copy only",
     });
 
-    if (!resendResponse.ok) {
+  if (!doubleOptIn) {
+    // Unconfigured or partially configured deployment. Behave exactly as before
+    // (notify the desk, store nothing) and answer `pending: false`, so the
+    // browser says "we have your address, email us if you hear nothing" instead
+    // of claiming a confirmation that never happened.
+    try {
+      const deskResponse = await deskNotification();
+      if (!deskResponse.ok) {
+        return jsonResponse(
+          {
+            ok: false,
+            code: "delivery_failed",
+            error: `We could not record your signup. Please email ${PUBLIC_SUPPORT_EMAIL} and we will add you manually.`,
+          },
+          502,
+          origin
+        );
+      }
+    } catch {
       return jsonResponse(
         {
           ok: false,
-          code: "delivery_failed",
+          code: "delivery_error",
           error: `We could not record your signup. Please email ${PUBLIC_SUPPORT_EMAIL} and we will add you manually.`,
         },
         502,
@@ -293,6 +490,7 @@ export async function onRequestPost(context) {
     return jsonResponse(
       {
         ok: true,
+        pending: false,
         subscriptionId,
         subscriberEmail: cleanEmail,
         subscriptionInterests,
@@ -302,15 +500,101 @@ export async function onRequestPost(context) {
       200,
       origin
     );
-  } catch {
+  }
+
+  const contact = await addPendingContact({ email: cleanEmail, env: context.env });
+  if (contact.outcome === "error") {
     return jsonResponse(
       {
         ok: false,
-        code: "delivery_error",
+        code: "list_write_failed",
         error: `We could not record your signup. Please email ${PUBLIC_SUPPORT_EMAIL} and we will add you manually.`,
       },
       502,
       origin
     );
   }
+
+  // Someone re-submitting an address that already clicked the link. Telling them
+  // so is kinder than sending a second "confirm please" they do not need.
+  if (contact.outcome === "already_confirmed") {
+    return jsonResponse(
+      {
+        ok: true,
+        pending: false,
+        alreadyConfirmed: true,
+        subscriptionId,
+        subscriberEmail: cleanEmail,
+        subscriptionInterests,
+        deliveredVia: "resend",
+        timestamp: dhakaTimestamp,
+      },
+      200,
+      origin
+    );
+  }
+
+  const token = await createConfirmToken(cleanEmail, context.env);
+  if (!token) {
+    return jsonResponse(
+      {
+        ok: false,
+        code: "mail_transport_not_configured",
+        error: `Signups are temporarily unavailable. Please email ${PUBLIC_SUPPORT_EMAIL} to be added manually.`,
+      },
+      503,
+      origin
+    );
+  }
+
+  let confirmationResponse;
+  try {
+    confirmationResponse = await sendConfirmationEmail({
+      email: cleanEmail,
+      token,
+      env: context.env,
+      language,
+      subscriptionInterests,
+      origin: SITE_ORIGIN,
+    });
+  } catch {
+    confirmationResponse = null;
+  }
+
+  // The contact exists but is pending, so a retry is safe: it lands on the 409
+  // branch above and sends the confirmation again.
+  if (!confirmationResponse || !confirmationResponse.ok) {
+    return jsonResponse(
+      {
+        ok: false,
+        code: "confirmation_email_failed",
+        error: `We could not send your confirmation email. Please try again, or email ${PUBLIC_SUPPORT_EMAIL}.`,
+      },
+      502,
+      origin
+    );
+  }
+
+  // Best effort from here on: the subscriber is on the list and has been asked
+  // to confirm, so a broken copy to the desk must not undo any of that.
+  try {
+    const deskResponse = await deskNotification();
+    if (!deskResponse.ok) console.warn("[subscribe] desk notification failed", deskResponse.status);
+  } catch (err) {
+    console.warn("[subscribe] desk notification failed", err);
+  }
+
+  return jsonResponse(
+    {
+      ok: true,
+      pending: true,
+      subscriptionId,
+      subscriberEmail: cleanEmail,
+      subscriptionInterests,
+      deliveredVia: "resend",
+      timestamp: dhakaTimestamp,
+    },
+    200,
+    origin
+  );
 }

@@ -25,6 +25,7 @@
     "test:rates": "tsx scripts/test-rates.ts",
     "test:contact-endpoint": "tsx scripts/test-contact-endpoint.ts",
     "test:subscribe-endpoint": "tsx scripts/test-subscribe-endpoint.ts",
+    "test:subscribe-double-opt-in": "tsx scripts/test-subscribe-double-opt-in.ts",
     "test:error-boundary": "tsx scripts/test-error-boundary.ts",
     "test:checklist-progress": "tsx scripts/test-checklist-progress.ts",
     "test:tool-analytics": "tsx scripts/test-tool-analytics.ts",

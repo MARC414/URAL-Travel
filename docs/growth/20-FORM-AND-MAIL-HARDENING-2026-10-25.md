@@ -133,3 +133,51 @@ mail and no record of consent. The traffic rules above stop the endpoint being a
 they do not make the page's "you're subscribed" claim true. Closing that needs a
 storage decision (hosted list vs Cloudflare storage), a double opt-in confirmation
 email, and an unsubscribe path — plus new EN/BN copy for the two-step signup.
+
+## 6. Update — 17 November 2026: the list half, closed
+
+§5 ended on the honest admission that `/api/subscribe` was not a subscriber list.
+It is one now, and the "Subscription confirmed" line is gone.
+
+**What a signup does today**
+
+1. `POST /api/subscribe` writes the address to the Resend contact list with
+   `unsubscribed: true` — known, but not allowed to receive a broadcast — and adds
+   it to the segment in `RESEND_SEGMENT_ID`.
+2. The same request sends a confirmation email to the subscriber, and a
+   "awaiting confirmation" copy to the desk.
+3. Clicking the signed link in that email hits `GET /api/confirm`, which flips
+   `unsubscribed` to `false`. That single flag is the consent record.
+4. Broadcasts sent from the Resend dashboard carry Resend's own one-click
+   unsubscribe, so the signup block's "Spam-free · 1-Click Unsubscribe" promise is
+   finally true rather than aspirational.
+
+**Why the link is signed.** `functions/api/_lib/signing.js` HMACs the address into
+the link. Without that, a stranger could confirm an address they do not own, which
+turns a newsletter into a spam relay and damages the sending domain. A tampered
+link is refused and nothing is written; there is a test for exactly that.
+
+**Two keys, on purpose.** `RESEND_API_KEY` (the existing "URAL Gmail & Site" key,
+Sending access) cannot touch contacts, so list writes use `RESEND_LIST_API_KEY`
+(Full access). A leak of the sending key therefore cannot read or edit the list.
+
+**What failure looks like.** If the list write or the confirmation email fails, the
+visitor is told to retry — never told they are subscribed. The desk copy is best
+effort: it runs after the subscriber is safely pending, because a broken copy to
+Gmail must not undo a real signup.
+
+**Unconfigured deployments** (no list key, no segment, or no signing secret) fall
+back to the old behaviour and answer `pending: false`, so the browser says "we have
+your request" rather than claiming a confirmation. Nothing silently pretends.
+
+**Tests:** `npm run test:subscribe-double-opt-in` (15 behaviours) runs both handlers
+against a stubbed Resend API — pending creation, segment membership, signed-link
+acceptance and refusal, the 404/410 paths, re-submission of a confirmed and of a
+pending address, both failure modes, the unconfigured fallback, and a source
+assertion that the untrue string cannot come back.
+
+**Still open, deliberately:** there is no expiry on confirmation links (a stale link
+only ever turns on the address it names); the confirm page is a standalone branded
+page rather than the site shell; and the "pending" badge in the browser clears on
+returning with `#confirmed`, so a visitor who confirms in another browser keeps
+seeing "check your inbox" in the first one until they revisit from the email.
