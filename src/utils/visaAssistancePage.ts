@@ -10,6 +10,9 @@
  * never writes an eVisas URL of its own.
  */
 
+import * as React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { EvisaBanner } from "../components/EvisaPanels";
 import {
   EVISAS_DISCLOSURE,
   EVISAS_WIDGET_PRIVACY,
@@ -108,6 +111,15 @@ export function renderVisaAssistanceStaticHtml(
           <h2>${escapeHtml(copy.quickAnswerHeading)}</h2>
           <p>${escapeHtml(copy.quickAnswer)}</p>
         </section>
+
+${renderToStaticMarkup(
+  React.createElement(EvisaBanner, {
+    size: "horizontal",
+    lang: locale,
+    placement: "evisas_visa_assistance_banner",
+    campaign: undefined,
+  })
+)}
 
         <section id="visa-assistance-relationship">
           <h2>${escapeHtml(copy.relationshipHeading)}</h2>

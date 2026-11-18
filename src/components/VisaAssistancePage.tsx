@@ -23,6 +23,9 @@ import {
   type VisaAssistanceLocale,
 } from "../utils/visaAssistanceCopy";
 
+import { EvisaBanner } from "../components/EvisaPanels";
+import { useConsent } from "../utils/consent";
+
 /**
  * `/visa-assistance` — the crawlable half is renderVisaAssistanceStaticHtml
  * (visaAssistancePage.ts); both halves read VISA_ASSISTANCE_COPY, so wording
@@ -64,6 +67,7 @@ export default function VisaAssistancePage({ lang, onNavigate }: VisaAssistanceP
   const copy = VISA_ASSISTANCE_COPY[locale];
   const applyHref = evisasDestinationUrl();
   const privacy = EVISAS_WIDGET_PRIVACY[locale];
+  const hasConsent = useConsent("marketing");
   const local = (path: string) => (isBn ? `/bn${path}` : path);
 
   const go = (path: string) => (event: MouseEvent<HTMLAnchorElement>) => {
@@ -100,6 +104,16 @@ export default function VisaAssistancePage({ lang, onNavigate }: VisaAssistanceP
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{copy.quickAnswer}</p>
         </div>
       </div>
+
+      {/* eVisas Banner */}
+      {hasConsent && (
+        <EvisaBanner
+          size="horizontal"
+          lang={locale}
+          placement="evisas_visa_assistance_banner"
+          campaign={undefined}
+        />
+      )}
 
       {/* Relationship */}
       <section className="space-y-3">
