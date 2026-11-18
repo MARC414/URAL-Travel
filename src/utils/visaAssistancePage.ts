@@ -12,7 +12,7 @@
 
 import * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { EvisaBanner } from "../components/EvisaPanels";
+import { EvisaBanner, EvisaWidgetPanel } from "../components/EvisaPanels";
 import {
   EVISAS_DISCLOSURE,
   EVISAS_WIDGET_PRIVACY,
@@ -112,6 +112,7 @@ export function renderVisaAssistanceStaticHtml(
           <p>${escapeHtml(copy.quickAnswer)}</p>
         </section>
 
+        <div>
 ${renderToStaticMarkup(
   React.createElement(EvisaBanner, {
     size: "horizontal",
@@ -120,6 +121,12 @@ ${renderToStaticMarkup(
     campaign: undefined,
   })
 )}
+${renderToStaticMarkup(
+  React.createElement(EvisaWidgetPanel, {
+    lang: locale,
+  })
+)}
+        </div>
 
         <section id="visa-assistance-relationship">
           <h2>${escapeHtml(copy.relationshipHeading)}</h2>

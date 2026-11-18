@@ -23,7 +23,7 @@ import {
   type VisaAssistanceLocale,
 } from "../utils/visaAssistanceCopy";
 
-import { EvisaBanner } from "../components/EvisaPanels";
+import { EvisaBanner, EvisaWidgetPanel } from "../components/EvisaPanels";
 import { useConsent } from "../utils/consent";
 
 /**
@@ -105,15 +105,18 @@ export default function VisaAssistancePage({ lang, onNavigate }: VisaAssistanceP
         </div>
       </div>
 
-      {/* eVisas Banner */}
-      {hasConsent && (
-        <EvisaBanner
-          size="horizontal"
-          lang={locale}
-          placement="evisas_visa_assistance_banner"
-          campaign={undefined}
-        />
-      )}
+      {/* eVisas Banner & Widget */}
+      <div className="space-y-6">
+        {hasConsent && (
+          <EvisaBanner
+            size="horizontal"
+            lang={locale}
+            placement="evisas_visa_assistance_banner"
+            campaign={undefined}
+          />
+        )}
+        <EvisaWidgetPanel lang={locale} />
+      </div>
 
       {/* Relationship */}
       <section className="space-y-3">
