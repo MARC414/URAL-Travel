@@ -484,6 +484,44 @@ export function checkEvisaIntegration(dist: string, check: (ok: boolean, label: 
       render(React.createElement(EvisaDestinationPlacement, { guideId: "nepal-guide", lang: "en" })) === "",
     "unmapped visa and destination pages do not inherit a generic eVisas offer",
   );
+
+  // /visa-assistance
+  const vaIssues: string[] = [];
+  for (const lang of ["en", "bn"] as const) {
+    const file = path.join(dist, lang === "bn" ? "bn" : "", "visa-assistance.html");
+    const html = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
+    const root = parse(html);
+    if (!html) {
+      vaIssues.push(`${lang}: missing page`);
+      continue;
+    }
+    const expectedHtml = render(React.createElement(EvisaBanner, { size: "horizontal", lang, placement: "evisas_visa_assistance_banner" }));
+    if (active && !html.includes(expectedHtml)) {
+      vaIssues.push(`${lang}: missing banner HTML`);
+    }
+    const bannerContainer = root.querySelector('[data-evisa-banner="horizontal"]');
+    if (active && !bannerContainer) {
+      vaIssues.push(`${lang}: missing banner element`);
+    } else if (active && bannerContainer) {
+      const bannerLink = bannerContainer.querySelector('a');
+      if (
+        !bannerLink ||
+        bannerLink.getAttribute("href") !== expectedUrls.general ||
+        bannerLink.getAttribute("data-affiliate-placement") !== "evisas_visa_assistance_banner" ||
+        bannerLink.getAttribute("target") !== "_blank" ||
+        !["noopener", "noreferrer", "sponsored"].every((token) => bannerLink.getAttribute("rel")?.split(/\s+/).includes(token))
+      ) {
+        vaIssues.push(`${lang}: banner anchor incorrect`);
+      }
+      const picture = bannerContainer.querySelector("picture");
+      if (lang === "en" && !picture) vaIssues.push(`${lang}: missing responsive picture`);
+      const adWords = lang === "bn" ? ["বিজ্ঞাপন", "বেসরকারি"] : ["Advertisement", "Private"];
+      const caption = bannerContainer.querySelector("figcaption")?.textContent ?? "";
+      if (!adWords.every((word) => caption.includes(word))) vaIssues.push(`${lang}: ad not labelled`);
+    }
+    if (!active && bannerContainer) vaIssues.push(`${lang}: banner present while paused`);
+  }
+  check(vaIssues.length === 0, `eVisas /visa-assistance placement matches React, keeps exact campaign URL and shows disclosed ad [${vaIssues.join("; ")}]`);
   const fixture = '<a href="https://evisas.com/?ref=uraltravel&amp;sid=dubai" target="_blank" rel="noopener noreferrer sponsored" data-affiliate-placement="test">UAE visa options</a>';
   check(inspectLinks(fixture, expectedUrls.uae) && !inspectLinks(fixture.replace("sid=dubai", "sid=thailand"), expectedUrls.uae) && !inspectLinks(fixture.replace(" noreferrer sponsored", " noreferrer"), expectedUrls.uae), "eVisas attribution guard rejects a wrong destination campaign and a missing sponsored label (negative controls)");
   window.happyDOM.abort();
