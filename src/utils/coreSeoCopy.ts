@@ -320,6 +320,11 @@ export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Read practical travel guides for Bangladeshi travelers, covering visas, flights from Dhaka, Umrah planning, BDT budgets and destination itineraries.",
   },
+  "/about": {
+    title: "About URAL Travel Intelligence | Farhan Momen, Founder & Travel Editor",
+    description:
+      "URAL is an independent travel-intelligence publisher in Dhaka — not a travel agency. Who writes it, how each guide is sourced and dated, and how the site stays independent.",
+  },
 };
 
 /**
