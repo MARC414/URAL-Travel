@@ -301,7 +301,7 @@ export function EvisaWidgetPanel({ lang = "en" }: { lang?: EvisaLang }) {
   return (
     <section aria-labelledby="visa-assistance-widget" data-evisa-panel="visa-assistance-widget" className="ural-panel bg-slate-50 border border-border-subtle p-5 sm:p-6 space-y-4">
       <h2 id="visa-assistance-widget" className="ural-section-title font-serif text-lg font-bold text-brand-navy">
-        {lang === "bn" ? "ভিসার সুযোগ যাচাই করুন" : "Check your visa options"}
+        {lang === "bn" ? "দেখুন eVisas আপনার কাগজপত্র প্রক্রিয়া করতে পারবে কি না" : "See if eVisas can handle your paperwork"}
       </h2>
       <div className="home-evisa-widget" data-evisa-widget-src={EVISAS_WIDGET.src}>
         <div

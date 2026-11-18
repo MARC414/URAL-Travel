@@ -81,7 +81,7 @@ export const VISA_ASSISTANCE_COPY: Record<VisaAssistanceLocale, VisaAssistanceCo
     eyebrow: "Visa application assistance",
     h1: "Visa application assistance, and where URAL's role ends",
     intro:
-      "URAL gives you the rule, the checklist and the official source, and refers you onward. If you want a paid service to prepare and submit the application for you, that service is eVisas.com. This page sets out what eVisas is, what it costs on top of the government fee, and what neither URAL nor eVisas can do.",
+      "URAL gives you the rule, the checklist and the official source, and refers you onward. If you want the peace of mind of a paid service that reviews your documents and submits the application for you, eVisas.com offers expert assistance. They check your paperwork before it reaches the government. This page sets out what eVisas is, what it costs on top of the government fee, and what neither URAL nor eVisas can do.",
 
     quickAnswerHeading: "Quick answer",
     quickAnswer:
@@ -100,12 +100,12 @@ export const VISA_ASSISTANCE_COPY: Record<VisaAssistanceLocale, VisaAssistanceCo
       "Four steps, as eVisas describes them on its own About page (checked 17 November 2026). A trained consultant reviews each application before it is submitted.",
     steps: [
       {
-        title: "Check the requirement",
-        body: "You choose your destination and nationality, and eVisas shows which visa types it can help with for that passport.",
+        title: "Expert Human Review",
+        body: "You choose your destination and nationality. eVisas confirms what you qualify for and a trained consultant reviews your details before anything goes to the embassy.",
       },
       {
-        title: "Complete the guided form",
-        body: "The form adapts to the destination and visa type. Drafts can be saved and resumed, and your passport and photo are uploaded to eVisas.",
+        title: "Simplified Guided Forms",
+        body: "Confusing embassy paperwork is simplified into one guided form that adapts to your trip. You can save your progress and upload your passport and photo directly to eVisas.",
       },
       {
         title: "Pay the government fee plus the service fee",
