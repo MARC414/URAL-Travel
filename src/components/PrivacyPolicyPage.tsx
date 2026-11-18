@@ -804,8 +804,8 @@ export function PrivacyPolicyPage({ onNavigate, lang = "en" }: PrivacyPolicyPage
             <li>
               <strong>{isBn ? "ইমেইল নিউজলেটার:" : "Email Newsletter Subscribers:"}</strong>{" "}
               {isBn
-                ? "যতক্ষণ না ব্যবহারকারী আনসাবস্ক্রাইব করেন বা মুছে ফেলার অনুরোধ করেন।"
-                : "Retained until you explicitly click 'Unsubscribe' or submit a deletion request."}
+                ? "আমাদের ইমেইল প্রোভাইডারের কন্টাক্ট তালিকায় সংরক্ষিত থাকে — আপনি আমাদের পাঠানো নিশ্চিতকরণ লিংকে ক্লিক করার আগে অ-নিশ্চিত অবস্থায়, তারপর আপনি 'আনসাবস্ক্রাইব' না করা বা মুছে ফেলার অনুরোধ না করা পর্যন্ত।"
+                : "Stored in our email provider's contact list — held as unconfirmed until you click the confirmation link we send, then retained until you explicitly click 'Unsubscribe' or submit a deletion request."}
             </li>
             <li>
               <strong>{isBn ? "যোগাযোগের জিজ্ঞাসা:" : "Contact inquiries:"}</strong>{" "}

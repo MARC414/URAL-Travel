@@ -35,7 +35,7 @@ before starting Vite, so a clean checkout behaves like an existing worktree.
 | `content/blog/*.md` | Blog source. Build scripts generate `src/data/scheduledBlog*.generated.ts` (gitignored) |
 | `scripts/prerender.ts` | Emits one real HTML file per canonical route (152 EN + 152 BN), plus sitemap, RSS, og-image and blog JPEGs |
 | `scripts/verify-build.ts` | ~600 assertions over the built output. This is the safety net; treat a failure as a real bug, not noise |
-| `functions/` | Cloudflare Pages Functions: `/api/contact`, `/api/subscribe`, `/api/rates`, plus routing middleware |
+| `functions/` | Cloudflare Pages Functions: `/api/contact`, `/api/subscribe`, `/api/confirm`, `/api/rates`, plus routing middleware |
 
 ## Everyday commands
 
@@ -97,10 +97,13 @@ Cloudflare Pages builds and deploys from `main` through its own GitHub integrati
 
 Two known gaps, recorded here so they are not mistaken for finished work:
 
-- **The newsletter is not a mailing list.** `/api/subscribe` notifies the support
-  desk, but nothing is stored, no confirmation is required and no unsubscribe link
-  is sent — so the signup form's "subscription confirmed" wording is not backed by a
-  list yet. See §5 of
+- **The newsletter list needs three secrets to exist.** Since 17 November 2026 a
+  signup is a real double opt-in: the address lands in a Resend segment marked
+  unsubscribed, a signed confirmation email flips it, and broadcasts carry Resend's
+  own unsubscribe. It only works when `RESEND_LIST_API_KEY`, `RESEND_SEGMENT_ID`
+  and a sending key are all set — see [.env.example](.env.example). Without them the
+  endpoint falls back to notifying the desk and answers `pending: false`, so the
+  page never claims a confirmation that did not happen. See §6 of
   `docs/growth/20-FORM-AND-MAIL-HARDENING-2026-10-25.md`.
 - **Both mail endpoints are hardened but per-isolate.** The rate limiter is
   best-effort; the real control is a Cloudflare WAF rate-limiting rule on `/api/*`.

@@ -82,6 +82,13 @@ jobs:
       - name: Verify /api/subscribe carries the same transport rules and honeypot
         run: npm run test:subscribe-endpoint
 
+      # Transport rules are not consent. This one runs both handlers against a
+      # stubbed Resend API and asserts a signup is stored unsubscribed, that only
+      # a validly signed link flips it, and that a failure is never reported as a
+      # confirmed subscription.
+      - name: Verify newsletter signups need a signed confirmation link
+        run: npm run test:subscribe-double-opt-in
+
       # The boundary only renders when something has already failed, so it is
       # never exercised by hand. This renders it in happy-dom and asserts the
       # fallback appears, is localised, and clears on navigation.

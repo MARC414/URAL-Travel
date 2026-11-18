@@ -902,6 +902,15 @@ export default function App() {
   );
   const [emailSubmitting, setEmailSubmitting] = useState<boolean>(false);
   const [emailSubscribeError, setEmailSubscribeError] = useState<string | null>(null);
+  // Double opt-in. A signup now writes the address to the Resend list as
+  // "pending" and emails a confirmation link, so until that link is opened the
+  // visitor is NOT subscribed. This flag is what keeps the panel below honest —
+  // without it the page would go straight back to "you're subscribed", which is
+  // exactly the lie this work removed. Cleared when the visitor returns from the
+  // confirmation page with `#confirmed`.
+  const [subscriptionPending, setSubscriptionPending] = useState<boolean>(
+    () => readOptionalStorage("ural_subscription_pending") === "1",
+  );
   // Honeypot field for /api/subscribe. The endpoint has always checked `_honey`,
   // but the form never sent it, so the trap could never fire. Hidden from people,
   // unfocusable and hidden from assistive tech; only a bot fills it. Keep the
@@ -909,6 +918,22 @@ export default function App() {
   const newsletterHoneypotRef = useRef<HTMLInputElement>(null);
   const hasFareAlertPreference = selectedSubscriptionInterests.includes("dhaka-fare-alerts");
   const hasNewsletterPreference = selectedSubscriptionInterests.includes("travel-newsletter");
+
+  // The confirmation page links back here as `/#confirmed`. That is the only
+  // signal the browser ever gets that the link was clicked, so it is where the
+  // pending badge comes off. A hash rather than a query string so the router,
+  // which reads `pathname + search`, cannot mistake it for a different page.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash !== "#confirmed") return;
+    writeOptionalStorage("ural_subscription_pending", "0");
+    setSubscriptionPending(false);
+    setAffiliateToast(
+      lang === "bn"
+        ? "সাবস্ক্রিপশন নিশ্চিত হয়েছে — স্বাগতম!"
+        : "Subscription confirmed — welcome aboard!",
+    );
+  }, [lang]);
 
   const toggleSubscriptionInterest = (interest: SubscriptionInterest) => {
     setSelectedSubscriptionInterests((current) =>
@@ -969,6 +994,10 @@ export default function App() {
         ? window.location.href
         : `${SITE_ORIGIN}${currentPath}`;
     const preferredLanguage = lang === "bn" ? "Bengali (BN)" : "English (EN)";
+    // Filled in from the endpoint's answer; defaults to the pre-double-opt-in
+    // behaviour so an unconfigured deployment keeps telling the truth.
+    let serverPending = false;
+    let serverAlreadyConfirmed = false;
 
     try {
       // Single authenticated transport: the Pages Function, which delivers via
@@ -993,6 +1022,12 @@ export default function App() {
       }).catch(() => null);
 
       const result = response && response.ok ? await response.json().catch(() => null) : null;
+      if (result && result.ok === true) {
+        // Pending: the address is on the list but has not confirmed yet, so the
+        // panel and the toast must ask for a click rather than celebrate.
+        serverPending = result.pending === true;
+        serverAlreadyConfirmed = result.alreadyConfirmed === true;
+      }
       if (!response || !response.ok || !result || result.ok !== true) {
         setEmailSubscribeError(
           (result && typeof result.error === "string" && result.error) ||
@@ -1017,13 +1052,23 @@ export default function App() {
     writeOptionalStorage("ural_subscribed_email", cleanEmail);
     writeOptionalStorage("ural_subscription_id", generatedSubId);
     writeOptionalStorage("ural_subscription_interests", JSON.stringify(selectedInterests));
+    writeOptionalStorage("ural_subscription_pending", serverPending ? "1" : "0");
     setSubscriptionId(generatedSubId);
     setSelectedSubscriptionInterests(selectedInterests);
     setEmailSubscribed(true);
+    setSubscriptionPending(serverPending);
     setAffiliateToast(
-      lang === "bn"
-        ? `সাবস্ক্রিপশন নিশ্চিত হয়েছে (${generatedSubId})! ${localizedInterestSummary} আপডেটের জন্য ${cleanEmail} যুক্ত হয়েছে।`
-        : `Subscription confirmed (${generatedSubId})! ${localizedInterestSummary} updates are selected for ${cleanEmail}.`
+      serverAlreadyConfirmed
+        ? lang === "bn"
+          ? `আপনি ইতিমধ্যে তালিকায় আছেন — ${cleanEmail} নিশ্চিত করা হয়েছে। আর কিছু করার নেই।`
+          : `You're already on the list — ${cleanEmail} has confirmed. Nothing else to do.`
+        : serverPending
+          ? lang === "bn"
+            ? `প্রায় শেষ — ${cleanEmail}-এ একটি নিশ্চিতকরণ লিংক পাঠানো হয়েছে। ${localizedInterestSummary} আপডেট পেতে লিংকটিতে ক্লিক করুন। (রেফ ${generatedSubId})`
+            : `Almost there — we've sent a confirm link to ${cleanEmail}. Click it to start receiving ${localizedInterestSummary} updates. (Ref ${generatedSubId})`
+          : lang === "bn"
+            ? `আপনার অনুরোধ পাওয়া গেছে (${generatedSubId})। ${localizedInterestSummary} আপডেটের জন্য ${cleanEmail} যোগ করা হয়েছে।`
+            : `We have your request (${generatedSubId}). ${localizedInterestSummary} updates are noted for ${cleanEmail}.`
     );
   };
   const [packingItems, setPackingItems] = useState([
@@ -5007,23 +5052,34 @@ export default function App() {
               >
                 <div className="space-y-1">
                   <p className="font-serif text-lg font-bold text-white">
-                    {hasFareAlertPreference && hasNewsletterPreference
+                    {subscriptionPending
                       ? isBn
-                        ? "দুই ধরনের আপডেটের জন্য আপনি সাবস্ক্রাইব করেছেন"
-                        : "You’re subscribed to both update types"
-                      : hasFareAlertPreference
+                        ? "প্রায় শেষ — আপনার ইনবক্স দেখুন"
+                        : "Almost there — check your inbox"
+                      : hasFareAlertPreference && hasNewsletterPreference
                         ? isBn
-                          ? "ফ্লাইট ভাড়া কমার অ্যালার্ট চালু হয়েছে"
-                          : "Dhaka fare-drop alerts are enabled"
-                        : hasNewsletterPreference
+                          ? "দুই ধরনের আপডেটের জন্য আপনি সাবস্ক্রাইব করেছেন"
+                          : "You’re subscribed to both update types"
+                        : hasFareAlertPreference
                           ? isBn
-                            ? "ট্রাভেল নিউজলেটার সাবস্ক্রিপশন চালু হয়েছে"
-                            : "The travel newsletter is enabled"
-                          : isBn
-                            ? "আপনার আগের সাবস্ক্রিপশন সক্রিয় আছে"
-                            : "Your existing subscription remains active"}
+                            ? "ফ্লাইট ভাড়া কমার অ্যালার্ট চালু হয়েছে"
+                            : "Dhaka fare-drop alerts are enabled"
+                          : hasNewsletterPreference
+                            ? isBn
+                              ? "ট্রাভেল নিউজলেটার সাবস্ক্রিপশন চালু হয়েছে"
+                              : "The travel newsletter is enabled"
+                            : isBn
+                              ? "আপনার আগের সাবস্ক্রিপশন সক্রিয় আছে"
+                              : "Your existing subscription remains active"}
                   </p>
                   <p className="break-all text-sm text-emerald-100">{userEmail}</p>
+                  {subscriptionPending && (
+                    <p className="mx-auto max-w-md text-sm text-emerald-100">
+                      {isBn
+                        ? "ওই ইমেইলের লিংকে ক্লিক করলেই আপডেট পাওয়া শুরু হবে। লিংক না পেলে স্প্যাম ফোল্ডার দেখুন, অথবা আবার সাবস্ক্রাইব করে নতুন লিংক নিন।"
+                        : "Click the link in that email and your updates begin. No link? Check your spam folder, or subscribe again for a fresh one."}
+                    </p>
+                  )}
                   {subscriptionId && (
                     <p className="font-mono text-[11px] text-emerald-200">ID: {subscriptionId}</p>
                   )}
