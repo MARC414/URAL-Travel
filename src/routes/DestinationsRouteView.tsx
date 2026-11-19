@@ -73,7 +73,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
         </header>
 
         <section aria-label={isBn ? "গন্তব্য গাইডের তালিকা" : "Destination guide directory"}>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {DESTINATIONS_DATA.map((guide: any, index: number) => {
               const image = DESTINATION_HERO_IMAGES[guide.id];
               if (!image) return null;
