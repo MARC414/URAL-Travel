@@ -1,5 +1,10 @@
 # Handoff — Navigation preview before implementation — 19 November 2026
 
+> **HISTORICAL PREVIEW RECORD — DO NOT TREAT AS CURRENT EXECUTION STATE.**
+> The owner subsequently authorized native implementation. Current code, verification and
+> the separate deployment gate are in the [implementation handoff](2026-11-19-approved-navigation-implementation.md).
+> The earlier “not started” and pending execution-choice statements below describe the preview stage only.
+
 **Goal:** make URAL's navigation easier to use while keeping the established design, all existing URLs and affiliate earning doorways intact; show the mega menu before changing the public site.
 
 **Branch:** documentation integration targets `main`, refreshed from upstream `374cbe6`. **Working-file caution:** five untracked owner image files were present when this batch began. They are not part of this documentation commit; do not add, overwrite or remove them. The commit containing this handoff can be found with `git log -- docs/handoff/2026-11-19-navigation-preview-first.md`; no self-referential commit hash is needed here.

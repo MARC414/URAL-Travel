@@ -1,12 +1,17 @@
 # URAL — Navigation, Catalogue Clarity and Affiliate Handoffs
 
-**Lifecycle:** navigation visual preview approved; implementation plan awaiting review; deployment approval pending · **Date:** 19 November 2026.
+**Lifecycle:** navigation implemented locally; independent review addressed; final review-fix CI being closed; deployment approval pending · **Date:** 19 November 2026.
 
-The owner accepted the two-row header and the distinction between destination planning and Things to Do, then explicitly approved the revised local navbar preview on 19 November 2026 ("yes, approved"). The approved preview puts Middle East first, Europe & UK second, Asia third and Americas fourth. No public UI has been implemented or deployed. The broader catalogue/trust work described below is a separate subproject, not automatically authorized by approving the navbar's appearance.
+The owner accepted the two-row header and the distinction between destination planning and Things to Do, then explicitly approved the revised local navbar preview on 19 November 2026 ("yes, approved") and authorized native implementation ("finally approval to implement"). The local React implementation follows Middle East first, Europe & UK second, Asia third and Americas fourth. It has not been pushed, merged into production or deployed. The broader catalogue/trust work described below is a separate subproject, not automatically authorized by approving the navbar's appearance.
 
 **Storage approval, 19 November 2026:** the owner requested committing, merging and pushing the plan so other tools can follow it. This authorizes the documentation batch, not public implementation or deployment. It replaces the earlier no-commit/no-push boundary for this planning step. No new product code, public content, affiliate settings or redirects are changed by the documentation batch.
 
-**Current next gate:** review the [bounded navigation implementation plan](../plans/2026-11-19-approved-navigation.md) and choose execution method. The non-production visual gate is satisfied; implementation verification and separate final deployment approval remain. Do not merge/push UI to the production branch or deploy before that final approval. A saved plan, document commit, or preview approval is not deployment permission. See the preview-first sequence below and `docs/handoff/2026-11-19-navigation-preview-first.md`.
+**Current next gate:** close the final review-fix CI evidence recorded in the
+[implementation handoff](../../handoff/2026-11-19-approved-navigation-implementation.md), then obtain
+separate final deployment approval. The visual and native-execution gates are satisfied. Do not
+merge/push UI to the production branch or deploy before final approval. A saved plan, document
+commit, or preview approval is not deployment permission. The earlier preview sequence below is
+preserved as approval history, not an instruction to rebuild or reapprove the prototype.
 
 ## 1. Intent, goals and boundaries
 
@@ -256,7 +261,7 @@ Keep a narrow maintenance exception: broken commercial links, security/privacy/a
 
 ## 10. Execution sequence and verification contract
 
-The owner's preview-first instruction controls the sequence. **19 November resolution:** the local EN/BN desktop/mobile preview and its four-column destination revision were shown and explicitly approved. Only the approved navigation is covered by the next implementation work order; catalogue roles, article bodies and analytics repair need separate work orders/owner scope approval.
+The owner's preview-first instruction controls the sequence. **19 November resolution:** the local EN/BN desktop/mobile preview and its four-column destination revision were shown and explicitly approved, followed by native implementation authorization. The isolated branch implements navigation only; catalogue roles, article bodies and analytics repair still need separate work orders/owner scope approval. The sequence below is approval history and the remaining deployment contract; stages already satisfied must not be repeated.
 
 1. **Store the plan:** commit and integrate this documentation batch into `main`, making it discoverable through the strategy index and handoff. For this documentation-only push use Cloudflare Pages' documented `[CF-Pages-Skip]` commit-message prefix. Do not invoke deployment hooks or alter build controls. Existing unrelated scheduled publication remains outside this task.
 2. **Reconfirm the baseline:** snapshot existing URLs, partner destinations and key page captures from the latest approved source before making a preview. Preserve work added by other tools.
@@ -288,9 +293,10 @@ The owner's preview-first instruction controls the sequence. **19 November resol
 - [x] Owner authorized documentation commit/merge/push; upstream Pakistan/source absence reconciled on 19 November 2026.
 - [x] Non-production mega-menu preview shown in EN/BN, desktop and mobile.
 - [x] Owner's explicit visual-preview approval recorded, including the revised four-column order.
-- [x] Bounded navigation implementation plan written after preview approval; execution review/method still pending.
+- [x] Bounded navigation plan written after preview approval; owner authorized native execution.
+- [x] Navigation implemented on an isolated local branch; independent whole-branch review performed and both material findings fixed with passing regressions.
 - [ ] Owner's final deployment approval recorded after implementation verification.
-- [ ] Public implementation, its build proof, deployment and acceptance — all future work.
+- [ ] Production integration, deployment and production acceptance — pending separate approval.
 
 ## 11. What is left to the builder
 
@@ -298,4 +304,6 @@ Exact component extraction and typed adapter location, responsive panel widths, 
 
 What a builder must not guess: the current approved deployment/source baseline; an unpublished visa slug; a new eVisas campaign/product ID; partner service coverage, dashboard receipt or commission; the owner's visual/deployment approval; permission to change URLs, deploy account settings, rewrite unrelated bodies or publish scheduled new posts.
 
-**Next action:** review `docs/superpowers/plans/2026-11-19-approved-navigation.md` and choose execution method. All existing URLs remain protected. The prototype's checks are not proof of the eventual React implementation, site-wide repairs or a deployment.
+**Next action:** follow the [implementation handoff](../../handoff/2026-11-19-approved-navigation-implementation.md)
+to close verification and request separate deployment approval. All existing URLs remain protected.
+The local implementation evidence does not certify site-wide repairs or a production deployment.

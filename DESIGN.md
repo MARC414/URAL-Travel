@@ -477,9 +477,44 @@ establish new hotel facts.
   search widgets are the highest-risk surfaces.
 
 ### Navigation
-- Fixed navy bar, `backdrop-blur`, `rgba(11,20,38,0.9)`; Inter `text-sm`, weight 600.
-- Mobile treatment is the primary case — verify at 390px width, including the language
-  switcher and the search entry point.
+- **Local implementation, 19 November 2026; deployment requires separate owner approval.**
+  `SiteHeader.tsx` uses two sticky navy rows in the existing 1200px container with
+  24px side padding. Home and About Us stay visible at every breakpoint; the
+  desktop utility row also contains Partners, Contact, existing search, WhatsApp
+  and EN/বাংলা. The genuine wordmark and existing font files remain unchanged.
+- Seven primary tasks: Destinations, Things to Do, Flights, Hotels, Visa Guides,
+  Umrah & Hajj, Guides & Tools. Only the four grouped tasks have disclosures.
+  Inter/Noto Sans Bengali remains the UI face: 14px/600 links, 18px panel titles,
+  12px group labels and secondary descriptions. These approved navigation steps
+  supplement the general typography ramp; they are not a new editorial type system.
+- Destinations has four columns in **Middle East → Europe & UK → Asia → Americas**
+  order. Saudi Umrah/entry cross-links lead; London leads Europe & UK; Pakistan
+  links to the existing Azad Kashmir guide. Other panels have three columns.
+  The bilingual publication-aware records in `src/data/navigation.ts` supply
+  desktop, mobile and saved-HTML navigation; unpublished visas stay absent.
+- Desktop starts at 1280px. Narrower layouts use a 420px maximum drawer with
+  independently scrolling groups, localized names, visible focus, keyboard
+  containment and ≥44px touch controls. Native parent anchors and separate
+  disclosure buttons preserve modifier clicks. Escape, outside interaction,
+  route changes and breakpoint changes close navigation predictably; a
+  locale-only switch preserves the selected panel. Desktop panel surfaces are
+  capped to the remaining viewport and scroll internally, including native
+  no-JS disclosures; lower links must stay reachable in short desktop windows
+  such as 1280×600.
+- Gold marks active tasks and Email Updates/ইমেইল আপডেট, which focuses the
+  existing subscription card rather than implying an account. Consent and full
+  search take priority over navigation. Explicit first-party overlays carry
+  `data-ural-overlay`; unmarked third-party spillover remains suppressed.
+- The 112px two-row header uses a shared 120px jump offset on touched anchor
+  utilities. `StaticSiteNavigation.tsx` supplies native `<details>` and real
+  links without JavaScript, then React replaces the shell. Its directory link
+  is not a simulated search; interactive search/signup require JavaScript.
+- Fragment-bearing routing restores the real section after lazy/localized
+  rendering and font readiness instead of scrolling to page top. Locale switching
+  and Back preserve the query/fragment and section clearance; stale pending work
+  is cancelled.
+- This implementation preserves page bodies and existing commercial/footer
+  support blocks. It does not resolve wider catalogue, article or analytics debt.
 
 ## Do's and Don'ts
 
