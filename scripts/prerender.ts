@@ -100,6 +100,9 @@ import { TOOL_PAGE_SEO, TOOL_SLUGS } from "../src/utils/toolRoutes";
 import { buildResponsiveSrcSet, getResponsiveImageDimensions } from "../src/utils/imageAssets";
 import { sortBlogsNewestFirst } from "../src/utils/blogOrdering";
 import { SITE_SEARCH_ALIASES } from "../src/data/siteSearchAliases";
+import { NAVIGATION_RECORDS } from "../src/data/navigation";
+import { buildNavigation } from "../src/utils/navigation";
+import { StaticSiteNavigation } from "../src/components/StaticSiteNavigation";
 import type { SiteSearchEntry, SiteSearchKind } from "../src/utils/siteSearch";
 import {
   OFFICIAL_RESOURCES_COPY,
@@ -5530,6 +5533,13 @@ function staticAffiliateDisclosure(isBn: boolean): string {
         `<div id="root"><main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">${r.bodyHtml}</main>${staticAffiliateDisclosure(r.routePath.startsWith("/bn"))}</div>`
       );
     }
+
+    const navigationLocale = r.locale === "bn" ? "bn" : "en";
+    const staticNavigation = renderToStaticMarkup(React.createElement(StaticSiteNavigation, {
+      model: buildNavigation(NAVIGATION_RECORDS, navigationLocale), lang: navigationLocale, currentPath: r.routePath,
+    }));
+    if (!pageHtml.includes('<div id="root">')) throw new Error(`Missing root shell: ${r.routePath}`);
+    pageHtml = pageHtml.replace('<div id="root">', `<div id="root">${staticNavigation}`);
 
     if (r.routePath === "/") {
       pageHtml = injectScheduledBlogDirectory(pageHtml);

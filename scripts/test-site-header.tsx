@@ -161,6 +161,24 @@ await test("Rendered navigation has no supplier promo while retaining activity d
     assert.equal(/KKday 30% Sale|KKday Asia Travel Passes|tpo\.li/.test(markup), false);
   }
 });
+await test("Saved-HTML navigation supplies the same published targets with native disclosures", async () => {
+  assert.ok(existsSync(new URL("../src/components/StaticSiteNavigation.tsx", import.meta.url)), "Static navigation is missing");
+  const { StaticSiteNavigation } = await import("../src/components/StaticSiteNavigation");
+  for (const language of ["en", "bn"] as const) {
+    const model = buildNavigation(NAVIGATION_RECORDS, language);
+    const markup = renderToStaticMarkup(React.createElement(StaticSiteNavigation, { model, lang: language, currentPath: language === "bn" ? "/bn/umrah" : "/umrah" }));
+    const parsed = document.createElement("div"); parsed.innerHTML = markup;
+    assert.equal(parsed.querySelectorAll('[data-static-site-navigation="true"]').length, 1);
+    assert.ok(parsed.querySelector("details > summary"));
+    for (const menu of Object.values(model.menus)) for (const group of menu.groups) for (const item of group.items) {
+      const wanted = navigationHref(item.path, language);
+      assert.ok([...parsed.querySelectorAll("a")].some(a => a.getAttribute("href") === wanted), `Missing static target ${wanted}`);
+    }
+    assert.equal(parsed.querySelectorAll('form, iframe, script').length, 0);
+    assert.equal(parsed.querySelector('a[hreflang="bn-bd"]')?.getAttribute("href"), "/bn/umrah");
+    assert.equal(parsed.querySelector('a[hreflang="en-bd"]')?.getAttribute("href"), "/umrah");
+  }
+});
 await React.act(async () => { root.unmount(); });
 await win.happyDOM.abort();
 console.log(`[site header] All ${checks} behavioural checks passed.`);

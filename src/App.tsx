@@ -4191,12 +4191,10 @@ export default function App() {
               </p>
             
                <ul className="space-y-1.5 text-xs pt-1">
-                 {[
-                   { path: "/about", label: isBn ? "আমাদের সম্পর্কে" : "About URAL" },
-                   { path: "/partners", label: isBn ? "আমাদের পার্টনাররা" : "Our Partners" },
-                   { path: "/visa-assistance", label: isBn ? "ভিসা সহায়তা (eVisas)" : "Visa Assistance (eVisas)" },
-                   { path: "/contact", label: isBn ? "যোগাযোগ" : "Contact" },
-                   { path: "/privacy", label: isBn ? "গোপনীয়তা ও কুকি নীতি" : "Privacy & Cookie Policy" },
+                  {[
+                    ...navigationModel.utility,
+                    { path: "/visa-assistance", label: navigationModel.menus.visas.groups.flatMap(group => group.items).find(item => item.path === "/visa-assistance")!.label },
+                    { path: "/privacy", label: isBn ? "গোপনীয়তা ও কুকি নীতি" : "Privacy & Cookie Policy" },
                  ].map((item) => (
                    <li key={item.path}>
                      <a
@@ -4233,7 +4231,7 @@ export default function App() {
             {/* COLUMN 3 (2 Cols): Visa & entry rules — the site's authority column. */}
             <div className="lg:col-span-2 space-y-2.5">
               <span className="text-white font-bold uppercase text-xs tracking-[0.12em] block">
-                {isBn ? "দেশ অনুযায়ী ভিসা গাইড" : "Visa Checklists"}
+                {navigationModel.primary.find(item => item.id === "visas")!.label}
               </span>
               <ul className="space-y-1.5 text-xs">
                 <li><a href={getLocalizedRouteHref("/visa-free-countries")} onClick={(event) => handleNavigationAnchorClick(event, "/visa-free-countries")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬)" : "Visa-Free Countries (2026)"}</a></li>
@@ -4257,9 +4255,11 @@ export default function App() {
               <ul className="space-y-1.5 text-xs">
                 <li><a href={getLocalizedRouteHref("/costs")} onClick={(event) => handleNavigationAnchorClick(event, "/costs")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ট্রিপের খরচ (BDT গাইড)" : "What a trip costs (BDT)"}</a></li>
                 <li><a href={getLocalizedRouteHref("/hotels")} onClick={(event) => handleNavigationAnchorClick(event, "/hotels")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "হোটেল এলাকা ও জোন" : "Hotel areas & neighbourhoods"}</a></li>
-                <li><a href={getLocalizedRouteHref("/destinations")} onClick={(event) => handleNavigationAnchorClick(event, "/destinations")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "দেশভিত্তিক ইটিনারারি" : "Country itineraries & tips"}</a></li>
-                <li><a href={getLocalizedRouteHref("/experiences")} onClick={(event) => handleNavigationAnchorClick(event, "/experiences")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "অ্যাট্রাকশন পাস ও অভিজ্ঞতা" : "Attraction passes & experiences"}</a></li>
-                <li><a href={getLocalizedRouteHref("/tools")} onClick={(event) => handleNavigationAnchorClick(event, "/tools")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ট্রাভেল ক্যালকুলেটর ও টুলস" : "Travel calculators & tools"}</a></li>
+                <li><a href={getLocalizedRouteHref("/kkday-hotels")} onClick={(event) => handleNavigationAnchorClick(event, "/kkday-hotels")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "আরও হোটেলের বিকল্প" : "More hotel options"}</a></li>
+                <li><a href={getLocalizedRouteHref("/destinations")} onClick={(event) => handleNavigationAnchorClick(event, "/destinations")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{navigationModel.primary.find(item => item.id === "destinations")!.label}</a></li>
+                <li><a href={getLocalizedRouteHref("/experiences")} onClick={(event) => handleNavigationAnchorClick(event, "/experiences")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{navigationModel.primary.find(item => item.id === "activities")!.label}</a></li>
+                <li><a href={getLocalizedRouteHref("/attractions")} onClick={(event) => handleNavigationAnchorClick(event, "/attractions")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{navigationModel.menus.activities.groups.flatMap(group => group.items).find(item => item.path === "/attractions")!.label}</a></li>
+                <li><a href={getLocalizedRouteHref("/tools")} onClick={(event) => handleNavigationAnchorClick(event, "/tools")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{navigationModel.primary.find(item => item.id === "tools")!.label}</a></li>
                 <li><a href={getLocalizedRouteHref("/blog")} onClick={(event) => handleNavigationAnchorClick(event, "/blog")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সব ট্রাভেল গাইড →" : "All travel guides →"}</a></li>
               </ul>
             </div>
@@ -4419,10 +4419,7 @@ export default function App() {
             <div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 font-mono text-[10px] text-slate-300">
               <a
                 href={isBn ? "/bn/about" : "/about"}
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateTo(isBn ? "/bn/about" : "/about");
-                }}
+                onClick={(event) => handleNavigationAnchorClick(event, "/about")}
                 className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
               >
                 {isBn ? "আমাদের সম্পর্কে" : "About"}
@@ -4430,10 +4427,7 @@ export default function App() {
               <span className="hidden sm:inline">•</span>
               <a
                 href={isBn ? "/bn/privacy" : "/privacy"}
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateTo(isBn ? "/bn/privacy" : "/privacy");
-                }}
+                onClick={(event) => handleNavigationAnchorClick(event, "/privacy")}
                 className="min-h-10 px-1 inline-flex items-center hover:text-white underline underline-offset-2 text-[#F6B73C] font-semibold cursor-pointer"
               >
                 {isBn ? "গোপনীয়তা ও কুকি নীতিমালা" : "Privacy & Cookie Policy"}

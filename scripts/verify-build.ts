@@ -8,6 +8,8 @@ import { prepareSiteSearchIndex, searchSite, type SiteSearchEntry } from "../src
 import { HOTEL_GUIDE_DESTINATIONS } from "../src/data/hotelGuideDestinations";
 import { DESTINATION_HERO_IMAGES } from "../src/data/destinationHeroImages";
 import { SITE_SEARCH_ALIASES } from "../src/data/siteSearchAliases";
+import { NAVIGATION_RECORDS } from "../src/data/navigation";
+import { buildNavigation, navigationHref } from "../src/utils/navigation";
 import {
   DESTINATION_FLIGHT_SEARCHES,
   DESTINATION_OFFICIAL_SOURCES,
@@ -168,6 +170,11 @@ function check(condition: boolean, label: string) {
   } else {
     failures.push(label);
   }
+}
+
+/** Editorial link/claim guards inspect the page body, not sitewide navigation. */
+function mainBodyHtml(html: string | null): string {
+  return html?.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? "";
 }
 
 function read(filePath: string): string | null {
@@ -3367,8 +3374,8 @@ if (sitemap) {
     !!nepalEnHtml && !!nepalBnHtml &&
       nepalEnHtml.includes("/flights") &&
       nepalBnHtml.includes("/bn/flights") &&
-      !nepalEnHtml.includes("/experiences") &&
-      !nepalBnHtml.includes("/bn/experiences") &&
+      !mainBodyHtml(nepalEnHtml).includes("/experiences") &&
+      !mainBodyHtml(nepalBnHtml).includes("/bn/experiences") &&
       !nepalEnHtml.includes("free 30-day Visa on Arrival") &&
       !nepalBnHtml.includes("ফ্রি Visa on Arrival"),
     "Nepal uses destination-first navigation and avoids unsupported visa and generic activity claims"
@@ -3402,8 +3409,8 @@ if (sitemap) {
     !!thailandEnHtml && !!thailandBnHtml &&
       thailandEnHtml.includes("/flights") &&
       thailandBnHtml.includes("/bn/flights") &&
-      !thailandEnHtml.includes("/experiences") &&
-      !thailandBnHtml.includes("/bn/experiences") &&
+      !mainBodyHtml(thailandEnHtml).includes("/experiences") &&
+      !mainBodyHtml(thailandBnHtml).includes("/bn/experiences") &&
       !thailandEnHtml.includes("No visa on arrival") &&
       !thailandBnHtml.includes("Visa on Arrival নেই"),
     "Thailand uses destination-first navigation and avoids unsupported visa and generic activity claims"
@@ -3439,8 +3446,8 @@ if (sitemap) {
     !!singaporeEnHtml && !!singaporeBnHtml &&
       singaporeEnHtml.includes("/flights") &&
       singaporeBnHtml.includes("/bn/flights") &&
-      !singaporeEnHtml.includes("/experiences") &&
-      !singaporeBnHtml.includes("/bn/experiences") &&
+      !mainBodyHtml(singaporeEnHtml).includes("/experiences") &&
+      !mainBodyHtml(singaporeBnHtml).includes("/bn/experiences") &&
       singaporeEnHtml.includes("Entry requirements depend on the traveler, purpose and current policy") &&
       singaporeBnHtml.includes("প্রবেশের নিয়ম ভ্রমণকারী, ভ্রমণের উদ্দেশ্য ও বর্তমান নীতির ওপর নির্ভর করে"),
     "Singapore uses destination-first navigation and directs visa questions to official guidance"
@@ -6025,6 +6032,38 @@ function renderAppAtPath(routePath: string): string {
 
 const enAppShellHtml = renderAppAtPath("/");
 const bnAppShellHtml = renderAppAtPath("/bn/");
+check(
+  !mainBodyHtml('<nav><a href="/experiences">Things to Do</a></nav><main><article>Destination plan</article></main>').includes("/experiences") &&
+    mainBodyHtml('<main><article><a href="/experiences">Generic activity action</a></article></main>').includes("/experiences"),
+  "destination activity-link guard excludes global navigation but still detects generic body actions (negative control)"
+);
+// Header discovery is a separate shell contract, not an article-reference gate.
+for (const locale of ["en", "bn"] as const) {
+  const model = buildNavigation(NAVIGATION_RECORDS, locale);
+  const targets = [...model.utility, ...model.primary, ...Object.values(model.menus).flatMap(menu => menu.groups.flatMap(group => group.items))];
+  const navPaths = [...new Set(targets.map(item => navigationHref(item.path, locale)))];
+  const missing = navPaths.filter(href => {
+    const pathname = new URL(href, SITE_ORIGIN).pathname;
+    const file = pathname === "/" ? "index.html" : pathname === "/bn/" ? "bn/index.html" : `${pathname.slice(1)}.html`;
+    return !fs.existsSync(path.join(DIST_DIR, file));
+  });
+  check(missing.length === 0, `${locale} navigation targets are actually published in dist (${missing.join(", ") || "all present"})`);
+  const representative = locale === "en" ? ["index.html", "umrah.html", "visa.html", "attractions.html"] : ["bn/index.html", "bn/umrah.html", "bn/visa.html", "bn/attractions.html"];
+  const problems: string[] = [];
+  for (const file of representative) {
+    const html = read(path.join(DIST_DIR, file)) ?? "";
+    if ((html.match(/data-static-site-navigation="true"/g) ?? []).length !== 1) problems.push(`${file}: missing/duplicate static nav`);
+    for (const href of navPaths) {
+      const escaped = href.replace(/&/g, "&amp;");
+      if (!html.includes(`href="${escaped}"`)) problems.push(`${file}: ${href}`);
+    }
+  }
+  check(problems.length === 0, `${locale} saved navigation preserves React menu/link membership (${problems.slice(0, 3).join("; ") || "matched"})`);
+  const shell = locale === "en" ? enAppShellHtml : bnAppShellHtml;
+  const footer = shell.match(/<footer\b[\s\S]*?<\/footer>/)?.[0] ?? "";
+  check(["/", "/about", "/partners", "/contact", "/visa-assistance", "/experiences", "/attractions", "/kkday-hotels", "/privacy", "/resources", "/sitemap"].every(href => footer.includes(`href="${navigationHref(href, locale)}"`)), `${locale} footer preserves shared trust, planning, attraction and legal discovery`);
+  check(footer.includes(locale === "en" ? "Application Assistance" : "আবেদনে সহায়তা") && footer.includes(locale === "en" ? "Things to Do" : "ঘুরে দেখুন"), `${locale} footer internal labels match the approved header`);
+}
 const appSource = read(path.join(ROOT_DIR, "src", "App.tsx")) ?? "";
 const topBarSearchSource = read(path.join(ROOT_DIR, "src", "components", "TopBarSiteSearch.tsx")) ?? "";
 const globalSearchSource = read(path.join(ROOT_DIR, "src", "components", "GlobalSiteSearch.tsx")) ?? "";
@@ -6059,9 +6098,8 @@ check(
     topBarSearchEnHtml.includes('placeholder="Search destinations, flights, visas, guides..."') &&
     topBarSearchBnHtml.includes('placeholder="গন্তব্য, ফ্লাইট, ভিসা বা গাইড খুঁজুন"') &&
     appSource.includes("onOpenSearch={openSiteSearch}") &&
-    appSource.includes("md:left-1/2") && appSource.includes("md:top-1/2") &&
-    appSource.includes("md:-translate-x-1/2") && appSource.includes("md:-translate-y-1/2") &&
-    appSource.includes("min-h-[68px]") && appSource.includes("md:min-h-12") &&
+    enAppShellHtml.includes('class="ural-utility-search"') && bnAppShellHtml.includes('class="ural-utility-search"') &&
+    enAppShellHtml.includes('id="mobile-site-search"') && bnAppShellHtml.includes('id="mobile-site-search"') &&
     appSource.includes("findSiteSearchPath") && appSource.includes("await onSubmitQuery(value.trim())") &&
     topBarSearchEnHtml.includes("max-w-[360px]") &&
     topBarSearchSource.includes("api.loadSiteSearchIndex()") &&
@@ -6070,7 +6108,7 @@ check(
     topBarSearchSource.includes("selectResult(results[Math.min(activeIndex, results.length - 1)].path)") &&
     topBarSearchSource.includes('role="listbox"') && topBarSearchSource.includes('role="option"') &&
     globalSearchSource.includes("useState(initialQuery)"),
-  "the centered EN/BN top-bar search shows live accessible matches, opens a selected page, and preserves full search"
+  "the approved EN/BN header retains lazy accessible search, selected-page handoffs and full mobile search"
 );
 const packageScripts = JSON.parse(read(path.join(ROOT_DIR, "package.json")) ?? "{}").scripts as Record<string, string>;
 const prerenderSource = read(path.join(ROOT_DIR, "scripts", "prerender.ts")) ?? "";

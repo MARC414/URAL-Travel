@@ -766,6 +766,15 @@ footer ul li a[href] {
 .ural-navigation-title { display: block; font-size: 14px; font-weight: 600; line-height: 1.5; color: var(--color-brand-ivory); }
 .ural-navigation-subtitle { display: block; font-size: 12px; line-height: 1.6; margin-top: 2px; color: rgb(245 241 232 / 80%); }
 .ural-utility-link .ural-navigation-title { font: inherit; color: inherit; }
+.ural-static-directory { align-items: center; justify-content: center; gap: 8px; min-height: 36px; padding: 8px 12px; border-radius: 9999px; background: rgb(245 241 232 / 8%); color: rgb(245 241 232 / 80%); font-size: 12px; display: flex; }
+.ural-static-language a { display: flex; align-items: center; padding: 4px 8px; }
+.ural-static-disclosure summary, .ural-static-mobile-navigation summary { list-style: none; cursor: pointer; }
+.ural-static-disclosure summary::-webkit-details-marker, .ural-static-mobile-navigation summary::-webkit-details-marker { display: none; }
+.ural-static-disclosure summary:focus-visible, .ural-static-mobile-navigation summary:focus-visible { outline: 2px solid var(--color-brand-gold); outline-offset: 3px; }
+.ural-static-disclosure[open] > summary svg, .ural-static-mobile-content details[open] > summary svg { transform: rotate(180deg); }
+.ural-static-mobile-navigation { display: none; }
+.ural-static-mobile-content { position: absolute; top: 100%; right: 0; width: min(420px, 100vw); max-height: calc(100dvh - 112px); padding: 8px 24px 24px; overflow-y: auto; overscroll-behavior: contain; background: var(--color-brand-navy); border: 1px solid rgb(245 241 232 / 15%); border-radius: 0 0 20px 20px; }
+.ural-static-mobile-content ul { list-style: none; margin: 0; padding: 0; }
 .ural-drawer-overlay { position: fixed; inset: 0; z-index: 60; background: rgb(11 20 38 / 58%); display: flex; justify-content: flex-end; }
 .ural-drawer { width: min(420px, 100vw); height: 100dvh; display: flex; flex-direction: column; background: var(--color-brand-navy); color: var(--color-brand-ivory); font-family: var(--font-sans); box-shadow: -12px 0 32px rgb(11 20 38 / 24%); }
 .ural-drawer-top { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; gap: 12px; border-bottom: 1px solid rgb(245 241 232 / 15%); }
@@ -790,6 +799,7 @@ html[lang^="bn"] .ural-navigation-title { line-height: 1.7; }
 @media (max-width: 1279px) {
   .ural-primary-nav, .ural-desktop-email, .ural-desktop-trust, .ural-utility-search, .ural-mega-panel { display: none; }
   .ural-mobile-actions { display: flex; }
+  .ural-static-mobile-navigation { display: block; }
   .ural-primary-inner { justify-content: space-between; }
   .ural-header-brand { width: auto; }
   .ural-utility-inner { gap: 12px; }
