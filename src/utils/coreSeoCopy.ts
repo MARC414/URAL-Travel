@@ -224,6 +224,11 @@ export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "Plan New York City around harbor sights, parks, museums and selected neighborhoods. Check current attraction, transport and entry information for your dates.",
   },
+  "/destinations/kashmir-guide": {
+    title: "Azad Kashmir Destination Guide from Bangladesh: Neelum Valley & Planning | URAL",
+    description:
+      "Plan an Azad Kashmir trip focusing on the Neelum Valley, Muzaffarabad, and Rawalakot. Check current road conditions and Pakistan entry requirements for Bangladeshi passports.",
+  },
   "/costs": {
     title: "Trip Budget Guides: Six Destinations & Quote Planning | URAL",
     description:

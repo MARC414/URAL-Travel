@@ -59,6 +59,7 @@ const DESTINATION_LINKS = [
   { path: "/destinations/italy-guide", en: "Italy", bn: "ইতালি" },
   { path: "/destinations/paris-guide", en: "Paris", bn: "প্যারিস" },
   { path: "/destinations/new-york-guide", en: "New York City", bn: "নিউ ইয়র্ক সিটি" },
+  { path: "/destinations/kashmir-guide", en: "Azad Kashmir", bn: "আজাদ কাশ্মীর" },
 ];
 
 const BENGALI_DIGITS = "০১২৩৪৫৬৭৮৯";
