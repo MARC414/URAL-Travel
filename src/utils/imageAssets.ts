@@ -19,6 +19,7 @@ export const RESPONSIVE_IMAGE_HEIGHTS: Readonly<Record<string, number>> = {
   "destination_maldives_hero_20261101": 670,
   "destination_nepal_hero_20261101": 670,
   "destination_new_york_hero_20261101": 670,
+  "destination_kashmir_hero_20261119": 670,
   "destination_paris_hero_20261101": 670,
   "destination_singapore_hero_20261101": 670,
   "destination_thailand_hero_20261101": 670,
