@@ -15,6 +15,19 @@ questions and becomes the content queue. This replaces the planned on-site AI he
 
 ## Current plan (6 November 2026)
 
+### Navigation stabilization — preview-first owner direction, 19 November 2026
+
+[**Navigation, catalogue clarity and affiliate handoffs — design**](docs/superpowers/specs/2026-11-19-navigation-and-earning-flow-design.md)
+records the owner-accepted, brand-preserving direction: visible Home/About links, organized desktop mega menus,
+equivalent mobile navigation, clearer roles for Destinations/Things to Do, **all existing URLs unchanged**, and
+preserved affiliate doorways. The owner authorized saving/integrating the documentation, **not deploying UI**.
+The next deliverable is a **non-production mega-menu preview**; explicit visual approval precedes public
+implementation and separate final approval precedes any production UI merge/push or deployment.
+[**Cross-tool handoff**](docs/handoff/2026-11-19-navigation-preview-first.md) supplies the resume point and
+the resolved stale-checkout/Pakistan finding. Future UK/Pakistan visa publication remains a separate task.
+
+### Existing master-plan reference
+
 [**MASTER PLAN — international positioning, honest tools, live rates, free AI**](docs/MASTER-PLAN-2026-11-06.md)
 is the single authoritative plan as of 6 November 2026. It records twelve verified findings (including three live
 defects), nine work packages in execution order, the rejected alternatives with reasons, licence constraints and a
