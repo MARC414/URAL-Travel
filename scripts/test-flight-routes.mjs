@@ -26,6 +26,7 @@ const expected = {
   'dhaka-maldives': ['DAC','MLE','/visa/maldives-visa','/hotels/maldives-hotels'],
   'dhaka-los-angeles': ['DAC','LAX','/visa','/hotels'],
   'dhaka-madinah': ['DAC','MED','/visa/saudi-arabia-visa','/blog/where-to-stay-madinah-markazia-gate-guide'],
+  'dhaka-islamabad': ['DAC','ISB','/visa','/hotels'],
 };
 assert.deepEqual(Object.keys(FLIGHT_ROUTES).sort(), Object.keys(expected).sort());
 assert.deepEqual(getLocalizedFlights('en').map(r=>r.id).sort(), Object.keys(expected).sort());
