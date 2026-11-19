@@ -4215,7 +4215,7 @@ export default function App() {
                 <p className="text-xs text-slate-600 max-w-xl mx-auto">{t.destinationsSubtitle}</p>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
                 {[
                   {
                     city: "Kathmandu",
@@ -4288,6 +4288,30 @@ export default function App() {
                     path: "/destinations/dubai-guide",
                     bgImg: dubaiDestImg,
                     alt: "Burj Khalifa rising above Dubai’s skyline at sunset.",
+                  },
+                  {
+                    city: "London",
+                    country: "UK",
+                    tag: isBn
+                      ? "টেমস নদীর ধারের দর্শনীয় স্থান, ঐতিহাসিক যাদুঘর, এবং সেন্ট্রাল লন্ডনের সংস্কৃতি।"
+                      : "Thames river landmarks, historic museums, and the culture of Central London.",
+                    code: "london-guide",
+                    img: "🇬🇧",
+                    path: "/destinations/london-guide",
+                    bgImg: "/assets/images/destination_london_hero_20261101-1200.webp",
+                    alt: "Big Ben and the Palace of Westminster beside the River Thames at dusk.",
+                  },
+                  {
+                    city: "Azad Kashmir",
+                    country: "Pakistan",
+                    tag: isBn
+                      ? "নীলাম ভ্যালি, মুজাফফরাবাদ এবং রাওলাকোট ভ্রমণ গাইড। ঢাকা থেকে যাতায়াত ও পাকিস্তান ভিসা তথ্য।"
+                      : "Explore the Neelum Valley, Muzaffarabad and Rawalakot. Check Pakistan visa requirements and road access.",
+                    code: "kashmir-guide",
+                    img: "🇵🇰",
+                    path: "/destinations/kashmir-guide",
+                    bgImg: "/assets/images/destination_kashmir_hero_20261119-1200.webp",
+                    alt: "Stunning scenic landscape of Azad Kashmir, Pakistan.",
                   },
 
                 ].map((dest, idx) => (
