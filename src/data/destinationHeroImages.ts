@@ -10,6 +10,11 @@ export interface DestinationHeroImage {
  * AVIF LCP preload, so the page never downloads two different hero images.
  */
 export const DESTINATION_HERO_IMAGES: Readonly<Record<string, DestinationHeroImage>> = {
+  "kashmir-guide": {
+    src: "/assets/images/kashmir-generated.jpg",
+    altEn: "Breathtaking landscape of Azad Kashmir, Neelum Valley surrounded by mountains",
+    altBn: "পাহাড়ে ঘেরা আজাদ কাশ্মীরের নীলম ভ্যালির শ্বাসরুদ্ধকর প্রাকৃতিক দৃশ্য",
+  },
   "nepal-guide": {
     src: "/assets/images/destination_nepal_hero_20261101-1200.webp",
     altEn: "The Annapurna Himalayan range above Phewa Lake at dawn in Nepal",
