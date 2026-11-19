@@ -21,46 +21,19 @@ function withMockedNow<T>(timestamp: number, run: () => T): T {
 }
 
 const appSource = readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8");
-const menuSource = appSource.slice(
-  appSource.indexOf("Featured Callout Card inside Mega Menu"),
-  appSource.indexOf("PRIMARY TOP-LEVEL BLOG LINK")
-);
-
-test("the KKday card exists in the menu source at all", () => {
-  assert.ok(menuSource.length > 500, "menu card block not found — did the anchor text change?");
+test("the supplier menu card is retired, without retiring the partner", () => {
+  // The approved navigation has no supplier callout. Mounted shared-header tests
+  // cover its EN/BN output; lifecycle and routing tests below remain in force.
+  assert.equal(appSource.includes("Featured Callout Card inside Mega Menu"), false);
 });
 
-test("the card CONTAINER is gated, not just its copy", () => {
-  // The original defect: `isPromoActive` guarded the text inside the card while
-  // the card's own <div> rendered unconditionally, so an expired promotion kept
-  // occupying menu space. The gate must wrap the container.
-  const gate = menuSource.indexOf("isPromoActive(KKDAY_PROMO.expiresAt) && (");
-  const container = menuSource.indexOf('<div className="bg-white/6 border border-white/12 rounded-2xl');
-  assert.ok(gate !== -1, "the card container is not wrapped in an isPromoActive gate");
-  assert.ok(gate < container, "the gate must appear before the card container");
-  // And the closing `)}` must come after the card's final link.
-  const closing = menuSource.indexOf(")}", menuSource.indexOf("KKday 30% Sale ↗"));
-  assert.ok(closing !== -1, "the gate is never closed after the card");
-});
-
-test("no dead 'evergreen fallback' copy is left behind", () => {
-  // The card used to swap to "KKday Asia Travel Passes / Check terms" when the
-  // promo lapsed. With the container gated that branch is unreachable, and
-  // leaving it in implies a fallback that never renders.
-  for (const phrase of ["Check terms", "KKday Asia Travel Passes", "KKday Passes ↗"]) {
-    assert.ok(!menuSource.includes(phrase), `stale fallback copy remains: "${phrase}"`);
-  }
-});
-
-test("the promo is expired as of the audit date, so the card is hidden today", () => {
+test("the registry promo remains expired at the recorded date", () => {
   const now = Date.UTC(2026, 10, 6); // 6 Nov 2026
   assert.equal(withMockedNow(now, () => isPromoActive(KKDAY_PROMO.expiresAt)), false);
   assert.equal(KKDAY_PROMO.expiresAt, "2026-10-31");
 });
 
-test("the card returns automatically when a future campaign is live", () => {
-  // Proves the gate is a real date gate rather than a permanent delete: setting
-  // a future expiresAt must bring the card back without touching App.tsx.
+test("registry date gating can still recognize an active campaign without a menu card", () => {
   const duringSale = Date.UTC(2026, 9, 30); // 30 Oct 2026
   assert.equal(withMockedNow(duringSale, () => isPromoActive(KKDAY_PROMO.expiresAt)), true);
 });

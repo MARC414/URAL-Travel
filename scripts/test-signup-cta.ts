@@ -1,5 +1,5 @@
 /**
- * Behavioural tests for the header's "Sign Up" button.
+ * Behavioural tests for the header's Email Updates action.
  *
  * WHY THIS SUITE EXISTS
  * ---------------------
@@ -139,8 +139,7 @@ const appSource = fs.readFileSync(path.join(ROOT_DIR, "src", "App.tsx"), "utf8")
 const translations = fs.readFileSync(path.join(ROOT_DIR, "src", "translations.ts"), "utf8");
 
 await test("both header buttons are wired to the signup action", async () => {
-  const wired = appSource.match(/onClick=\{goToSignup\}/g) ?? [];
-  assert.equal(wired.length, 2, "the desktop button and the mobile drawer button must both open the signup card");
+  assert.ok(appSource.includes("onEmailUpdates={goToSignup}"), "the shared header must receive the existing signup action; mounted header tests exercise both buttons");
   assert.equal(
     appSource.includes("btn-start-trip-cta"),
     false,
@@ -148,9 +147,9 @@ await test("both header buttons are wired to the signup action", async () => {
   );
 });
 
-await test('the label is "Sign Up" in both languages, with the key renamed', async () => {
-  assert.match(translations, /signUpCta: "Sign Up"/);
-  assert.match(translations, /signUpCta: "সাইন আপ"/);
+await test('the label describes email updates rather than an account in both languages', async () => {
+  assert.match(translations, /signUpCta: "Email Updates"/);
+  assert.match(translations, /signUpCta: "ইমেইল আপডেট"/);
   assert.equal(translations.includes("startTripCta"), false, "a stale Start Trip label must not survive");
 });
 

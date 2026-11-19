@@ -33,6 +33,7 @@ export function LanguageSwitcher({
         href={enHref}
         hrefLang="en-bd"
         onClick={(event) => {
+          if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
           event.preventDefault();
           onToggle("en");
         }}
@@ -52,6 +53,7 @@ export function LanguageSwitcher({
         href={bnHref}
         hrefLang="bn-bd"
         onClick={(event) => {
+          if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
           event.preventDefault();
           onToggle("bn");
         }}

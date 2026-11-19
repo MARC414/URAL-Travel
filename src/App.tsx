@@ -71,6 +71,9 @@ import { TravelIntelligence } from "./components/AeoInspector";
 import { AscentMark } from "./components/AscentMark";
 import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
 import { focusSitewideSignup } from "./utils/signupCta";
+import { SiteHeader } from "./components/SiteHeader";
+import { NAVIGATION_RECORDS } from "./data/navigation";
+import { buildNavigation, navigationHref } from "./utils/navigation";
 import {
   AFFILIATE_LINKS,
   KKDAY_PROMO,
@@ -99,7 +102,7 @@ import {
 } from "./hooks/useSeoMeta";
 import { Language, translations } from "./translations";
 import type * as BengaliContentModule from "./data/bengaliContent";
-import { WhatsAppSupport, TopBarWhatsApp } from "./components/WhatsAppSupport";
+import { WhatsAppSupport } from "./components/WhatsAppSupport";
 import { OFFICIAL_RESOURCES_META, OFFICIAL_RESOURCES_PATH } from "./utils/officialResourcesMeta";
 import { GLOSSARY_META, GLOSSARY_PATH } from "./utils/glossaryMeta";
 import { PARTNERS_META, PARTNERS_PATH } from "./utils/partnersMeta";
@@ -107,7 +110,6 @@ import {
   VISA_ASSISTANCE_META,
   VISA_ASSISTANCE_PATH,
 } from "./utils/visaAssistanceMeta";
-import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import {
   getCoreBengaliSeoCopy as getBengaliSeoCopy,
   getCoreSeoCopy as getSeoCopy,
@@ -750,13 +752,15 @@ export default function App() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [siteSearchOpen, setSiteSearchOpen] = useState(false);
   const [topBarSearchEnhanced, setTopBarSearchEnhanced] = useState(false);
   const [topBarSearchQuery, setTopBarSearchQuery] = useState("");
   const [siteSearchInitialQuery, setSiteSearchInitialQuery] = useState("");
   const siteSearchTriggerRef = useRef<HTMLInputElement>(null);
+  const siteSearchOpenerRef = useRef<HTMLElement | null>(null);
   const openSiteSearch = (query = "") => {
+    const focused = document.activeElement;
+    if (focused instanceof HTMLElement && focused !== document.body) siteSearchOpenerRef.current = focused;
     setSiteSearchInitialQuery(query);
     setSiteSearchOpen(true);
   };
@@ -764,17 +768,6 @@ export default function App() {
     setSiteSearchOpen(false);
     setSiteSearchInitialQuery("");
   };
-  const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
-  const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
-  const mobileDrawerPanelRef = useRef<HTMLDivElement>(null);
-  const [desktopMenuOpen, setDesktopMenuOpen] = useState<"destinations" | "tools" | "about" | null>(null);
-  const destinationsMenuRef = useRef<HTMLDivElement>(null);
-  const toolsMenuRef = useRef<HTMLDivElement>(null);
-  const aboutMenuRef = useRef<HTMLDivElement>(null);
-  const destinationsDisclosureRef = useRef<HTMLButtonElement>(null);
-  const toolsDisclosureRef = useRef<HTMLButtonElement>(null);
-  const aboutDisclosureRef = useRef<HTMLButtonElement>(null);
-
   useEffect(() => {
     const handleSearchShortcut = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
@@ -821,7 +814,7 @@ export default function App() {
     // crawlable Bengali surface, it is not just a client-side state flip.
     const current =
       typeof window !== "undefined"
-        ? window.location.pathname + window.location.search
+        ? window.location.pathname + window.location.search + window.location.hash
         : currentPath;
     pushPath(toLocalePath(current, newLang));
   };
@@ -1416,79 +1409,6 @@ export default function App() {
   }, [locale]);
 
   // Mobile Drawer User-Intent Accordion State (reduces vertical scroll depth)
-  const getDefaultDrawerGroup = (sec: SectionType): "booking" | "destinations" | "research" | "tools" => {
-    if (sec === "destinations" || sec === "experiences" || sec === "attractions") return "destinations";
-    if (sec === "blog" || sec === "costs") return "research";
-    if (sec === "tools" || sec === "sitemap" || sec === "preDeparture" || sec === "resources" || sec === "glossary" || sec === "partners" || sec === "visaAssistance" || sec === "contact") return "tools";
-    return "booking";
-  };
-
-  const [expandedDrawerGroup, setExpandedDrawerGroup] = useState<
-    "booking" | "destinations" | "research" | "tools" | null
-  >(() => getDefaultDrawerGroup(section));
-
-  useEffect(() => {
-    setExpandedDrawerGroup(getDefaultDrawerGroup(section));
-  }, [section]);
-
-  useEffect(() => {
-    if (!mobileMenuOpen) return;
-
-    const previousOverflow = document.body.style.overflow;
-    const focusableSelector =
-      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-    document.body.style.overflow = "hidden";
-
-    const focusFrame = window.requestAnimationFrame(() => {
-      mobileMenuCloseRef.current?.focus();
-    });
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        setMobileMenuOpen(false);
-        return;
-      }
-      if (event.key !== "Tab") return;
-
-      const drawer = mobileDrawerPanelRef.current;
-      const focusableElements: HTMLElement[] = drawer
-        ? Array.from(drawer.querySelectorAll(focusableSelector)).filter(
-            (element): element is HTMLElement =>
-              element instanceof HTMLElement && element.getClientRects().length > 0,
-          )
-        : [];
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-      const focusIsOutsideDrawer = !drawer?.contains(document.activeElement);
-
-      if (!firstElement || !lastElement) {
-        event.preventDefault();
-        drawer?.focus();
-        return;
-      }
-      if (event.shiftKey && (document.activeElement === firstElement || focusIsOutsideDrawer)) {
-        event.preventDefault();
-        lastElement.focus();
-      } else if (!event.shiftKey && (document.activeElement === lastElement || focusIsOutsideDrawer)) {
-        event.preventDefault();
-        firstElement.focus();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", handleKeyDown);
-      window.cancelAnimationFrame(focusFrame);
-      window.requestAnimationFrame(() => {
-        if (mobileMenuTriggerRef.current?.isConnected) {
-          mobileMenuTriggerRef.current.focus();
-        }
-      });
-    };
-  }, [mobileMenuOpen]);
-
   // Fetch the Banking & Forex hub FAQ pairs only when the hub is opened, then
   // let useSeoMeta rebuild the graph with the FAQPage node. Until it lands the
   // page keeps its breadcrumbs, and dist/banking.html already ships the static
@@ -2417,14 +2337,7 @@ export default function App() {
    * stable and switching languages twice can never produce /bn/bn/…
    * Query strings and hashes are preserved ("/experiences/europe").
    */
-  const toLocalePath = (path: string, target: Language): string => {
-    const match = String(path || "/").match(/^([^?#]*)([\s\S]*)$/);
-    const pathname = match?.[1] || "/";
-    const rest = match?.[2] || "";
-    const base = pathname.replace(/^\/bn(?=\/|$)/, "") || "/";
-    if (target === "en") return `${base}${rest}`;
-    return base === "/" ? `/bn${rest}` : `/bn${base}${rest}`;
-  };
+  const toLocalePath = navigationHref;
 
   /** Low-level history push — no locale awareness (see navigateTo). */
   const pushPath = (path: string) => {
@@ -2434,8 +2347,6 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     setCurrentPath(cleanPath);
-    setMobileMenuOpen(false);
-    setDesktopMenuOpen(null);
   };
 
   /**
@@ -2471,7 +2382,6 @@ export default function App() {
   // `utils/signupCta.ts` so it can be tested; see that file for why the delay and
   // `preventScroll` are both load-bearing.
   const goToSignup = () => {
-    setMobileMenuOpen(false);
     focusSitewideSignup({
       // Defensive: if a future route stops rendering the card, send the visitor
       // to the home page rather than leaving the click with no effect.
@@ -2558,55 +2468,8 @@ export default function App() {
 
   const routeViewContext: Record<string, any> = { BLOG_DATA, AuthorBioCard, InteractiveTools, TopicalAuthorityBlueprint, TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsOnboarding, TravelpayoutsWidgetSkeleton, areTpScriptsReady, blogBodies, blogCategoryFilter, blogHeroBannerImg, blogSearchQuery, contactDestination, contactError, contactLoading, contactMessage, contactName, contactPhone, contactSubject, contactSubmitted, getLocalizedRouteHref, getCountryCityName, getCountryCityWithIata, getCountryDestId, getCountryFlightId, getCountryHotelId, getCountryIata, getCountryVisaId, isAdmin, isBn, isLanding, lang, localizedBlogs, localizedCosts, localizedDestinations: DESTINATIONS_DATA, localizedFlights, localizedHajjFaqs, localizedHotels, localizedVisas, navigateTo, openPriceAlert, parameterId, section, setAffiliateToast, setAreTpScriptsReady, setBlogCategoryFilter, setBlogSearchQuery, setContactDestination, setContactError, setContactLoading, setContactMessage, setContactName, setContactPhone, setContactSubject, setContactSubmitted, triggerAffiliateToast };
 
-  return (
-    // `overflow-x-clip`, not `overflow-x-hidden`: the full-bleed (100vw) heroes
-    // eventually poke a few pixels past the right edge (100vw includes the
-    // classic scrollbar) and this box has to cut that. But `hidden` turns this
-    // element into a SCROLL CONTAINER (visible + hidden computes to auto), and a
-    // scroll container that never scrolls silently kills `position: sticky` on
-    // #sticky-site-header below it. `clip` cuts the overflow without creating a
-    // scrollport, so the header keeps sticking.
-    <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-brand-gold selection:text-brand-navy overflow-x-clip">
-      {siteSearchOpen && (
-        <React.Suspense fallback={null}>
-          <GlobalSiteSearch
-            isBn={isBn}
-            initialQuery={siteSearchInitialQuery}
-            onClose={closeSiteSearch}
-            navigateTo={navigateTo}
-            triggerRef={siteSearchTriggerRef}
-          />
-        </React.Suspense>
-      )}
-
-      {/* Reading progress bar — shown only on blog post pages */}
-      {section === "blog" && !isLanding && (
-        <div
-          className="fixed top-0 left-0 right-0 z-[60] h-0.5 bg-slate-200"
-          role="progressbar"
-          aria-valuenow={scrollProgress}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-label={isBn ? `পড়ার অগ্রগতি: ${scrollProgress}%` : `Reading progress: ${scrollProgress}%`}
-        >
-          <div
-            className="h-full bg-brand-gold transition-[width] duration-150 ease-linear"
-            style={{ width: `${scrollProgress}%` }}
-          />
-        </div>
-      )}
-
-      {/* 🟦 STICKY HEADER WRAPPER (Top Strip + Main Navbar) */}
-      <div id="sticky-site-header" className="sticky top-0 z-50 w-full shadow-lg">
-        
-        {/* Utility strip: true viewport-centered search with balanced outer utilities. */}
-        <div className="flex min-h-[68px] w-full items-center bg-brand-navy py-1 select-none md:min-h-12 md:py-0">
-          <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-y-1 px-4 py-1 text-white/55 sm:px-6 md:h-12 md:flex-row md:items-center md:justify-between md:gap-y-0 md:py-0">
-            <span className="hidden truncate font-sans text-xs font-medium md:block">
-              {t.topStripTagline}
-            </span>
-            <div className="order-first flex w-full justify-center md:absolute md:left-1/2 md:top-1/2 md:order-none md:w-auto md:-translate-x-1/2 md:-translate-y-1/2">
-              {topBarSearchEnhanced ? (
+  const navigationModel = React.useMemo(() => buildNavigation(NAVIGATION_RECORDS, lang), [lang]);
+  const utilitySearch = (<>{topBarSearchEnhanced ? (
                 <React.Suspense fallback={
                   <TopBarSearchTrigger
                     isBn={isBn}
@@ -2637,1246 +2500,60 @@ export default function App() {
                   onActivate={() => setTopBarSearchEnhanced(true)}
                   onSubmitQuery={submitTopBarSearch}
                 />
-              )}
-            </div>
-            <div className="flex items-center justify-end gap-2 font-sans text-[11px] font-medium sm:gap-3 md:ml-auto">
-              <TopBarWhatsApp lang={lang} />
-              <span aria-hidden="true" className="h-3 w-px bg-white/20"></span>
-              <LanguageSwitcher
-                lang={lang}
-                onToggle={handleLangToggle}
-                enHref={localeHrefs.en}
-                bnHref={localeHrefs.bn}
-              />
-            </div>
-          </div>
+              )}</>);
+
+  return (
+    // `overflow-x-clip`, not `overflow-x-hidden`: the full-bleed (100vw) heroes
+    // eventually poke a few pixels past the right edge (100vw includes the
+    // classic scrollbar) and this box has to cut that. But `hidden` turns this
+    // element into a SCROLL CONTAINER (visible + hidden computes to auto), and a
+    // scroll container that never scrolls silently kills `position: sticky` on
+    // #sticky-site-header below it. `clip` cuts the overflow without creating a
+    // scrollport, so the header keeps sticking.
+    <div className="min-h-screen bg-brand-ivory text-slate-800 font-sans leading-relaxed selection:bg-brand-gold selection:text-brand-navy overflow-x-clip">
+      {siteSearchOpen && (
+        <React.Suspense fallback={null}>
+          <GlobalSiteSearch
+            isBn={isBn}
+            initialQuery={siteSearchInitialQuery}
+            onClose={closeSiteSearch}
+            navigateTo={navigateTo}
+            triggerRef={siteSearchOpenerRef}
+          />
+        </React.Suspense>
+      )}
+
+      {/* Reading progress bar — shown only on blog post pages */}
+      {section === "blog" && !isLanding && (
+        <div
+          className="fixed top-0 left-0 right-0 z-[60] h-0.5 bg-slate-200"
+          role="progressbar"
+          aria-valuenow={scrollProgress}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={isBn ? `পড়ার অগ্রগতি: ${scrollProgress}%` : `Reading progress: ${scrollProgress}%`}
+        >
+          <div
+            className="h-full bg-brand-gold transition-[width] duration-150 ease-linear"
+            style={{ width: `${scrollProgress}%` }}
+          />
         </div>
+      )}
 
-        {/* 🟦 1. MAIN NAVBAR (Height: 64px, Background: #0B1426) */}
-        <header id="main-navbar-sticky" className="w-full bg-brand-navy text-white border-b border-white/8 h-16 flex items-center">
-          <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between">
-            
-            {/* Logo Left + Precision Brand Slogan */}
-            <a
-              href={getLocalizedRouteHref("/")}
-              onClick={(event) => handleNavigationAnchorClick(event, "/")}
-              aria-label={isBn ? "URAL হোম পেজ" : "URAL home"}
-              className="flex flex-col items-start justify-center group shrink-0 py-1 focus-visible:outline-none"
-            >
-              <img
-                src="/assets/brand/svg/ural-wordmark-v1.svg"
-                alt="URAL"
-                width="98"
-                height="32"
-                className="h-7 sm:h-8 w-auto transition-opacity duration-200 group-hover:opacity-95"
-              />
-              <span className="text-[10px] sm:text-[10px] font-medium tracking-wide text-slate-300/90 group-hover:text-[#F6B73C] transition-colors leading-none mt-1 whitespace-nowrap">
-                {BRAND_TAGLINE}
-              </span>
-            </a>
-
-            {/* Navigation Centered — Streamlined High-Intent Information Architecture */}
-            <nav aria-label={isBn ? "প্রধান নেভিগেশন" : "Primary navigation"} className="hidden xl:flex items-center gap-3 xl:gap-4">
-              {/* 1. Home */}
-              <a
-                id="nav-home"
-                href={getLocalizedRouteHref("/")}
-                onClick={(event) => handleNavigationAnchorClick(event, "/")}
-                aria-current={section === "home" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
-                  section === "home" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
-                }`}
-              >
-                {t.navHome}
-              </a>
-
-              {/* 2. Priority #1 Pillar: Umrah & Hajj */}
-              <a
-                id="nav-umrah"
-                href={getLocalizedRouteHref("/umrah")}
-                onClick={(event) => handleNavigationAnchorClick(event, "/umrah")}
-                aria-current={section === "umrah" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-semibold hover:text-[#F6B73C] whitespace-nowrap flex items-center gap-1.5 py-3 ${
-                  section === "umrah" ? "text-[#F6B73C]" : "text-slate-200"
-                }`}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" aria-hidden="true" />
-                <span>{t.navUmrah}</span>
-              </a>
-
-              {/* 3. Flights */}
-              <a
-                id="nav-flights"
-                href={getLocalizedRouteHref("/flights")}
-                onClick={(event) => handleNavigationAnchorClick(event, "/flights")}
-                aria-current={section === "flights" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
-                  section === "flights" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
-                }`}
-              >
-                {t.navFlights}
-              </a>
-
-              {/* 4. Hotels */}
-              <a
-                id="nav-hotels"
-                href={getLocalizedRouteHref("/hotels")}
-                onClick={(event) => handleNavigationAnchorClick(event, "/hotels")}
-                aria-current={section === "hotels" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
-                  section === "hotels" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
-                }`}
-              >
-                {t.navHotels}
-              </a>
-
-              {/* 5. Visa Checklists */}
-              <a
-                id="nav-visa"
-                href={getLocalizedRouteHref("/visa")}
-                onClick={(event) => handleNavigationAnchorClick(event, "/visa")}
-                aria-current={section === "visa" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
-                  section === "visa" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
-                }`}
-              >
-                {t.navVisa}
-              </a>
-
-              {/* 6. Destinations & Global Attractions Mega Menu */}
-              <div
-                ref={destinationsMenuRef}
-                className="relative"
-                onMouseEnter={() => {
-                  if (!toolsMenuRef.current?.contains(document.activeElement)) {
-                    setDesktopMenuOpen("destinations");
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (!destinationsMenuRef.current?.contains(document.activeElement)) {
-                    setDesktopMenuOpen((current) => current === "destinations" ? null : current);
-                  }
-                }}
-                onFocusCapture={(event) => {
-                  const previousTarget = event.relatedTarget as Node | null;
-                  if (!previousTarget || !destinationsMenuRef.current?.contains(previousTarget)) {
-                    setDesktopMenuOpen("destinations");
-                  }
-                }}
-                onBlurCapture={(event) => {
-                  const nextTarget = event.relatedTarget as Node | null;
-                  if (!nextTarget || !destinationsMenuRef.current?.contains(nextTarget)) {
-                    setDesktopMenuOpen((current) => current === "destinations" ? null : current);
-                  }
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    event.preventDefault();
-                    setDesktopMenuOpen(null);
-                    destinationsDisclosureRef.current?.focus();
-                  }
-                }}
-              >
-                <div className="flex items-center gap-0.5">
-                  <a
-                    id="nav-destinations-megamenu"
-                    href={getLocalizedRouteHref("/destinations")}
-                    onClick={(event) => handleNavigationAnchorClick(event, "/destinations")}
-                    aria-current={section === "destinations" || section === "experiences" || section === "attractions" ? "page" : undefined}
-                    className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
-                      section === "destinations" || section === "experiences" || section === "attractions"
-                        ? "text-[#F6B73C] font-semibold"
-                        : "text-slate-300"
-                    }`}
-                  >
-                    {t.navDestinations}
-                  </a>
-                  <button
-                    ref={destinationsDisclosureRef}
-                    type="button"
-                    aria-label={isBn ? "গন্তব্য মেনু খুলুন বা বন্ধ করুন" : "Toggle destinations menu"}
-                    aria-expanded={desktopMenuOpen === "destinations"}
-                    aria-controls="destinations-mega-panel"
-                    onClick={() => setDesktopMenuOpen((current) => current === "destinations" ? null : "destinations")}
-                    className="w-8 h-8 rounded-md flex items-center justify-center text-slate-300 hover:text-[#F6B73C] hover:bg-white/5 transition-colors cursor-pointer focus-visible:outline-none"
-                  >
-                    <ChevronDown
-                      size={13}
-                      aria-hidden="true"
-                      className={`transition-transform duration-150 ${desktopMenuOpen === "destinations" ? "rotate-180 text-[#F6B73C]" : ""}`}
-                    />
-                  </button>
-                </div>
-
-                <div
-                  id="destinations-mega-panel"
-                  role="region"
-                  aria-label={isBn ? "গন্তব্য ও অ্যাক্টিভিটি পাস" : "Destination and attraction guides"}
-                  aria-hidden={desktopMenuOpen !== "destinations"}
-                  className={`${desktopMenuOpen === "destinations" ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"} transition-all duration-150 absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[780px] lg:w-[860px] z-50`}
-                >
-                  <div className="bg-brand-navy border border-white/15 rounded-3xl shadow-2xl p-6 grid grid-cols-12 gap-6 text-left">
-                    {/* Column 1: Asia & Middle East Pillars (4 Cols) */}
-                    <div className="col-span-4 space-y-3 border-r border-white/10 pr-5">
-                      <div className="space-y-0.5">
-                        <span className="text-[10px] font-mono text-[#F6B73C] font-bold uppercase tracking-wider block">
-                          {isBn ? "এশিয়া ও মধ্যপ্রাচ্য গাইড" : "Asia & Middle East Pillars"}
-                        </span>
-                        <span className="text-xs text-slate-400 block">
-                          {isBn ? "ভিসা + ফ্লাইট + BDT বাজেট গাইড" : "Full Visa, Flight & Hotel Guides"}
-                        </span>
-                      </div>
-
-                      <div className="space-y-1">
-                        {[
-                          {
-                            label: isBn ? "🇳🇵 নেপাল (কাঠমান্ডু ও পোখরা)" : "🇳🇵 Nepal (Kathmandu & Pokhara)",
-                            sub: isBn ? "ফ্রি SAARC অন-অ্যারাইভাল ভিসা" : "Free SAARC VOA · Check live fares",
-                            path: "/destinations/nepal-guide",
-                          },
-                          {
-                            label: isBn ? "🇹🇭 থাইল্যান্ড (ব্যাংকক ও ফুকেট)" : "🇹🇭 Thailand (Bangkok & Phuket)",
-                            sub: isBn ? "শপিং, হালাল ফুড ও আইল্যান্ড" : "Halal dining, shopping & islands",
-                            path: "/destinations/thailand-guide",
-                          },
-                          {
-                            label: isBn ? "🇲🇾 মালয়েশিয়া (কুয়ালালামপুর)" : "🇲🇾 Malaysia (KL & Genting)",
-                            sub: isBn ? "ই-ভিসা ও ফ্যামিলি হাব" : "Fast e-Visa · Family favorite",
-                            path: "/destinations/malaysia-guide",
-                          },
-                          {
-                            label: isBn ? "🇸🇬 সিঙ্গাপুর (মেরিনা বে ও সেন্টোসা)" : "🇸🇬 Singapore (Sentosa & Bugis)",
-                            sub: isBn ? "MRT গাইড ও থিম পার্ক" : "SimplyGo MRT & Universal Studios",
-                            path: "/destinations/singapore-guide",
-                          },
-                          {
-                            label: isBn ? "🇲🇻 মালদ্বীপ (মাফুশি ও রিসোর্ট)" : "🇲🇻 Maldives (Maafushi & Resorts)",
-                            sub: isBn ? "ফ্রি ভিসা · বাজেট ও ওয়াটার ভিলা" : "Free VOA · Local island & resorts",
-                            path: "/destinations/maldives-guide",
-                          },
-                          {
-                            label: isBn ? "🇦🇪 দুবাই ও আবুধাবি (UAE)" : "🇦🇪 Dubai & Abu Dhabi (UAE)",
-                            sub: isBn ? "ডেজার্ট সাফারি ও বুর্জ খলিফা" : "Desert Safari, Deira & Downtown",
-                            path: "/destinations/dubai-guide",
-                          },
-                        ].map((item, idx) => (
-                          <a
-                            key={idx}
-                            href={getLocalizedRouteHref(item.path)}
-                            onClick={(event) => handleNavigationAnchorClick(event, item.path)}
-                            aria-current={isCurrentNavigationPath(item.path) ? "page" : undefined}
-                            className={`w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer ${isCurrentNavigationPath(item.path) ? "bg-white/8 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
-                          >
-                            <div className="text-xs font-semibold text-white">{item.label}</div>
-                            <div className="text-[11px] text-slate-400">{item.sub}</div>
-                          </a>
-                        ))}
-                      </div>
-
-                      <a
-                        href={getLocalizedRouteHref("/destinations")}
-                        onClick={(event) => handleNavigationAnchorClick(event, "/destinations")}
-                        aria-current={isCurrentNavigationPath("/destinations") ? "page" : undefined}
-                        className={`w-full text-left px-3 pt-1 text-xs font-semibold text-[#F6B73C] hover:underline cursor-pointer ${isCurrentNavigationPath("/destinations") ? "underline underline-offset-2" : ""}`}
-                      >
-                        {isBn ? "সবগুলো এশিয়ান গন্তব্য দেখুন →" : "View All Asian Destination Guides →"}
-                      </a>
-                    </div>
-
-                    {/* Column 2: Europe, UK & USA Hubs — Tiqets Official (4 Cols) */}
-                    <div className="col-span-4 space-y-3 border-r border-white/10 pr-5">
-                      <div className="space-y-0.5">
-                        <span className="text-[10px] font-mono text-[#F6B73C] font-bold uppercase tracking-wider block">
-                          {isBn ? "ইউরোপ, যুক্তরাজ্য ও আমেরিকা (Tiqets)" : "Europe, UK & USA (Tiqets)"}
-                        </span>
-                        <span className="text-xs text-slate-400 block">
-                          {isBn ? "স্কিপ-দ্য-লাইন মিউজিয়াম ও পাস" : "Skip-the-Line Passes & Bundles"}
-                        </span>
-                      </div>
-
-                      <div className="space-y-1.5">
-                        {[
-                          {
-                            label: isBn ? "🇫🇷 প্যারিস, ফ্রান্স (Paris)" : "🇫🇷 Paris, France (Schengen)",
-                            sub: isBn ? "লুভর, আইফেল টাওয়ার ও সেইন ক্রুজ" : "Louvre, Eiffel Tower & Seine Cruise",
-                            path: "/destinations/paris-guide",
-                          },
-                          {
-                            label: isBn ? "🇬🇧 লন্ডন, যুক্তরাজ্য (London)" : "🇬🇧 London, United Kingdom",
-                            sub: isBn ? "লন্ডন আই, টাওয়ার অব লন্ডন ও টেমস" : "Tower of London, Thames & London Eye",
-                            path: "/destinations/london-guide",
-                          },
-                          {
-                            label: isBn ? "🇮🇹 রোম, মিলান ও ভেনিস (Italy)" : "🇮🇹 Rome, Milan & Venice (Italy)",
-                            sub: isBn ? "কলোসিয়াম, দুওমো ও ভেনিস গন্ডোলা" : "Colosseum, Milan Duomo & Gondola",
-                            path: "/destinations/italy-guide",
-                          },
-                          {
-                            label: isBn ? "🇺🇸 নিউ ইয়র্ক সিটি (USA)" : "🇺🇸 New York City (USA)",
-                            sub: isBn ? "স্ট্যাচু অব লিবার্টি ও SUMMIT ডেক" : "Statue of Liberty, Harbor & SUMMIT",
-                            path: "/destinations/new-york-guide",
-                          },
-                        ].map((item, idx) => (
-                          <a
-                            key={idx}
-                            href={getLocalizedRouteHref(item.path)}
-                            onClick={(event) => handleNavigationAnchorClick(event, item.path)}
-                            aria-current={isCurrentNavigationPath(item.path) ? "page" : undefined}
-                            className={`w-full text-left px-3 py-2.5 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer ${isCurrentNavigationPath(item.path) ? "bg-white/8 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
-                          >
-                            <div className="text-xs font-semibold text-white">{item.label}</div>
-                            <div className="text-[11px] text-slate-400">{item.sub}</div>
-                          </a>
-                        ))}
-                      </div>
-
-                      <a
-                        href={getLocalizedRouteHref("/experiences/europe")}
-                        onClick={(event) => handleNavigationAnchorClick(event, "/experiences/europe")}
-                        aria-current={isCurrentNavigationPath("/experiences/europe") ? "page" : undefined}
-                        className={`w-full text-left px-3 pt-1 text-xs font-semibold text-[#F6B73C] hover:underline cursor-pointer ${isCurrentNavigationPath("/experiences/europe") ? "underline underline-offset-2" : ""}`}
-                      >
-                        {isBn
-                          ? "ইউরোপ, UK ও USA-এর সব পাস দেখুন →"
-                          : "Browse Europe, UK & USA Hub →"}
-                      </a>
-
-                      <a
-                        href={getLocalizedRouteHref("/attractions")}
-                        onClick={(event) => handleNavigationAnchorClick(event, "/attractions")}
-                        aria-current={isCurrentNavigationPath("/attractions") ? "page" : undefined}
-                        className={`w-full text-left px-3 pt-1 text-xs font-semibold text-emerald-400 hover:underline cursor-pointer ${isCurrentNavigationPath("/attractions") ? "underline underline-offset-2" : ""}`}
-                      >
-                        {isBn
-                          ? "৫৯টি ইউরোপিয়ন আকর্ষণ দেখুন →"
-                          : "Browse 59 European Attractions →"}
-                      </a>
-                    </div>
-
-                    {/* Column 3: Asia Attractions (Klook) + KKday Promo (4 Cols) */}
-                    <div className="col-span-4 flex flex-col justify-between space-y-4">
-                      <div className="space-y-3">
-                        <div className="space-y-0.5">
-                          <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider block">
-                            {isBn ? "এশিয়া ও দুবাই ডে-পাস (Klook)" : "Asia & Dubai Passes (Klook)"}
-                          </span>
-                          <span className="text-xs text-slate-400 block">
-                            {isBn
-                              ? "বাংলাদেশিদের শীর্ষ বুকিংকৃত আকর্ষণ"
-                              : "Top Residency Experiences"}
-                          </span>
-                        </div>
-
-                        <div className="space-y-1.5">
-                          {[
-                            {
-                              label: isBn ? "🇦🇪 দুবাই সাফারি ও বুর্জ খলিফা" : "🇦🇪 Dubai Safari & Burj Khalifa",
-                              sub: isBn ? "মিউজিয়াম অব দ্য ফিউচার ও ডিনার ক্রুজ" : "Museum of the Future + Red Dunes",
-                              path: "/experiences/asia",
-                            },
-                            {
-                              label: isBn ? "🇹🇭 ব্যাংকক সাফারি ওয়ার্ল্ড ও ক্রুজ" : "🇹🇭 Bangkok Safari World & Cruise",
-                              sub: isBn ? "হালাল চাও ফ্রায়া ডিনার ও স্কাইওয়াক" : "Halal Chao Phraya Cruise & SkyWalk",
-                              path: "/experiences/asia",
-                            },
-                            {
-                              label: isBn ? "🇸🇬 সিঙ্গাপুর ও গেন্টিং হাইল্যান্ডস" : "🇸🇬 Universal Studios & Genting",
-                              sub: isBn ? "গার্ডেন্স বাই দ্য বে ও কেবল কার" : "Gardens by the Bay & Awana SkyWay",
-                              path: "/experiences/asia",
-                            },
-                          ].map((item, idx) => (
-                            <a
-                              key={idx}
-                              href={getLocalizedRouteHref(item.path)}
-                              onClick={(event) => handleNavigationAnchorClick(event, item.path)}
-                              aria-current={isCurrentNavigationPath(item.path) ? "page" : undefined}
-                              className={`w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors block cursor-pointer ${isCurrentNavigationPath(item.path) ? "bg-white/8 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
-                            >
-                              <div className="text-xs font-semibold text-white">{item.label}</div>
-                              <div className="text-[11px] text-slate-400">{item.sub}</div>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Featured Callout Card inside Mega Menu.
-
-                          GATED ON THE PROMO'S OWN EXPIRY. The container was
-                          previously rendered unconditionally while only its
-                          *copy* was gated, so after 31 October 2026 the menu
-                          still carried a KKday card advertising a finished
-                          10.10 sale and duplicating Klook, which is the featured
-                          partner in the column beside it.
-
-                          KKday's functionality is untouched: the partner
-                          registry entry, the affiliate deep link, the
-                          /kkday-hotels page and the klook/kkdayHotels fallbacks
-                          all remain. Only this promotional placement is hidden.
-
-                          To run a future KKday campaign, set a new `expiresAt`
-                          (and matching copy) on KKDAY_PROMO and the card returns
-                          automatically. Do not re-add the markup ungated. */}
-                      {isPromoActive(KKDAY_PROMO.expiresAt) && (
-                      <div className="bg-white/6 border border-white/12 rounded-2xl p-3.5 space-y-2">
-                        <div className="flex items-center justify-between text-[11px] font-mono">
-                          <span className="text-cyan-300 font-bold inline-flex items-center gap-1.5">
-                            <span>{isBn ? "KKday ১০.১০ উইন্টার সেল (৩০% ছাড়)" : "KKday 10.10 Winter Sale (30% OFF)"}</span>
-                          </span>
-                          <span className="text-amber-300 font-semibold">30% Codes</span>
-                        </div>
-                        <p className="text-[11px] text-slate-300 leading-relaxed">
-                          {isBn
-                            ? "জাপান স্কি ট্যুর, থিম পার্ক ও এয়ারপোর্ট রেল পাসে ৩০% প্রোমো কোড (1010TOURS, 1010MOVE, 1010TIX)।"
-                            : "30% OFF promo codes for Japan ski tours, theme parks & airport express rail (1010TOURS, 1010MOVE, 1010TIX)."}
-                        </p>
-                        <div className="grid grid-cols-2 gap-2 pt-0.5">
-                          <a
-                            href={getLocalizedRouteHref("/experiences")}
-                            onClick={(event) => handleNavigationAnchorClick(event, "/experiences")}
-                            aria-current={isCurrentNavigationPath("/experiences") ? "page" : undefined}
-                            className={`bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors cursor-pointer ${isCurrentNavigationPath("/experiences") ? "underline underline-offset-2" : ""}`}
-                          >
-                            {isBn ? "অ্যাক্টিভিটি হাব →" : "All Passes →"}
-                          </a>
-                          <a
-                            href={resolvePartnerUrl(AFFILIATE_LINKS.kkday)}
-                            target="_blank"
-                            rel="noopener noreferrer sponsored"
-                            className="bg-cyan-400 hover:bg-cyan-300 text-[#0B192C] font-bold text-[11px] py-2 px-2.5 rounded-xl transition-colors text-center"
-                          >
-                            {isBn ? "KKday ৩০% ডিল ↗" : "KKday 30% Sale ↗"}
-                          </a>
-                        </div>
-                      </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 7. PRIMARY TOP-LEVEL BLOG LINK (Crawl Depth = 1 for Topical Authority) */}
-              <a
-                id="nav-blog"
-                href={getLocalizedRouteHref("/blog")}
-                onClick={(event) => handleNavigationAnchorClick(event, "/blog")}
-                aria-current={section === "blog" ? "page" : undefined}
-                className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
-                  section === "blog" ? "text-[#F6B73C] font-semibold" : "text-slate-300"
-                }`}
-              >
-                {t.navBlog}
-              </a>
-
-              {/* 8. COMPACT UTILITY MENU: TOOLS, BUDGETS & PRE-DEPARTURE HUB */}
-              <div
-                ref={toolsMenuRef}
-                className="relative"
-                onMouseEnter={() => {
-                  if (!destinationsMenuRef.current?.contains(document.activeElement)) {
-                    setDesktopMenuOpen("tools");
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (!toolsMenuRef.current?.contains(document.activeElement)) {
-                    setDesktopMenuOpen((current) => current === "tools" ? null : current);
-                  }
-                }}
-                onFocusCapture={(event) => {
-                  const previousTarget = event.relatedTarget as Node | null;
-                  if (!previousTarget || !toolsMenuRef.current?.contains(previousTarget)) {
-                    setDesktopMenuOpen("tools");
-                  }
-                }}
-                onBlurCapture={(event) => {
-                  const nextTarget = event.relatedTarget as Node | null;
-                  if (!nextTarget || !toolsMenuRef.current?.contains(nextTarget)) {
-                    setDesktopMenuOpen((current) => current === "tools" ? null : current);
-                  }
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    event.preventDefault();
-                    setDesktopMenuOpen(null);
-                    toolsDisclosureRef.current?.focus();
-                  }
-                }}
-              >
-                <div className="flex items-center gap-0.5">
-                  <a
-                    id="nav-tools-megamenu"
-                    href={getLocalizedRouteHref("/tools")}
-                    onClick={(event) => handleNavigationAnchorClick(event, "/tools")}
-                    aria-current={["costs", "tools", "contact", "sitemap", "banking"].includes(section) ? "page" : undefined}
-                    className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${
-                      ["costs", "tools", "contact", "sitemap", "banking"].includes(section)
-                        ? "text-[#F6B73C] font-semibold"
-                        : "text-slate-300"
-                    }`}
-                  >
-                    {t.navTools}
-                  </a>
-                  <button
-                    ref={toolsDisclosureRef}
-                    type="button"
-                    aria-label={isBn ? "টুলস মেনু খুলুন বা বন্ধ করুন" : "Toggle tools menu"}
-                    aria-expanded={desktopMenuOpen === "tools"}
-                    aria-controls="tools-mega-panel"
-                    onClick={() => setDesktopMenuOpen((current) => current === "tools" ? null : "tools")}
-                    className="w-8 h-8 rounded-md flex items-center justify-center text-slate-300 hover:text-[#F6B73C] hover:bg-white/5 transition-colors cursor-pointer focus-visible:outline-none"
-                  >
-                    <ChevronDown
-                      size={13}
-                      aria-hidden="true"
-                      className={`transition-transform duration-150 ${desktopMenuOpen === "tools" ? "rotate-180 text-[#F6B73C]" : ""}`}
-                    />
-                  </button>
-                </div>
-
-                <div
-                  id="tools-mega-panel"
-                  role="region"
-                  aria-label={isBn ? "টুলস, বাজেট ও সাপোর্ট" : "Travel tools, budgets and support"}
-                  aria-hidden={desktopMenuOpen !== "tools"}
-                  className={`${desktopMenuOpen === "tools" ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"} transition-all duration-150 absolute right-0 top-full pt-2 w-[340px] z-50`}
-                >
-                  <div className="bg-brand-navy border border-white/15 rounded-3xl shadow-2xl p-4 space-y-1.5 text-left">
-                    <span className="text-[10px] font-mono text-[#F6B73C] font-bold uppercase tracking-wider block px-2 pb-1">
-                      {isBn ? "ইন্টারেক্টিভ টুলস ও হেল্পলাইন" : "Calculators, Checklists & Support"}
-                    </span>
-
-                    {[
-                      {
-                        id: "costs",
-                        icon: BarChart3,
-                        label: isBn ? "ট্রিপ বাজেট গাইড" : "Trip Budget Guides",
-                        sub: isBn ? "৬টি গন্তব্যের কোটেশন ও খরচের খাত" : "Quote planning for six destinations",
-                        path: "/costs",
-                      },
-                      {
-                        id: "currency-converter",
-                        icon: DollarSign,
-                        label: isBn ? "কারেন্সি কনভার্টার" : "Currency Converter",
-                        sub: isBn ? "Provider ও তারিখসহ দৈনিক রেফারেন্স রেট" : "Daily reference rates with provider and date",
-                        path: "/tools/currency-converter",
-                      },
-                      {
-                        id: "budget-calculator",
-                        icon: Calculator,
-                        label: isBn ? "ট্রিপ কস্ট এস্টিমেটর" : "Trip Cost Estimator",
-                        sub: isBn ? "৬ গন্তব্য · কোটেশন, যাত্রী ও রুম-রাত" : "Six destinations · quotes, travellers & room-nights",
-                        path: "/tools/budget-calculator",
-                      },
-                      {
-                        id: "packing-checklist",
-                        icon: Check,
-                        label: isBn ? "স্মার্ট প্যাকিং চেকলিস্ট" : "Smart Packing Checklist",
-                        sub: isBn ? "কেবিন ওজন, তরল ও পাওয়ার ব্যাংক নিয়ম" : "Carry-on, 100ml liquids & power-bank rules",
-                        path: "/tools/packing-checklist",
-                      },
-                      {
-                        id: "airport-codes",
-                        icon: MapPin,
-                        label: isBn ? "এয়ারপোর্ট কোড ডিরেক্টরি (IATA)" : "IATA Airport Codes Directory",
-                        sub: isBn ? "DAC সহ বিশ্বব্যাপী কোড ও টার্মিনাল" : "DAC & worldwide codes with terminals",
-                        path: "/tools/airport-codes",
-                      },
-                      {
-                        id: "banking",
-                        icon: CreditCard,
-                        label: isBn ? "ডলার এনডোর্সমেন্ট ও ডুয়েল কারেন্সি কার্ড" : "Dollar Endorsement & Dual-Currency Cards",
-                        sub: isBn ? "USD 18,000 সীমা, $300 নিয়ম ও NOC" : "USD 18,000 ceiling, $300 rule & NOC",
-                        path: "/banking",
-                      },
-                      {
-                        id: "pre-departure",
-                        icon: Plane,
-                        label: isBn ? "প্রি-ডিপার্চার ও দূতাবাস হেল্পলাইন" : "Pre-Departure & Embassy Hub",
-                        sub: isBn ? "লাগেজ নিয়ম, জমজম ও জরুরি নাম্বার" : "DAC baggage, Zamzam & embassy contacts",
-                        path: "/pre-departure",
-                      },
-                      {
-                        id: "resources",
-                        icon: Landmark,
-                        label: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navLabel,
-                        sub: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navSub,
-                        path: OFFICIAL_RESOURCES_PATH,
-                      },
-                      {
-                        id: "glossary",
-                        icon: BookOpen,
-                        label: GLOSSARY_META[isBn ? "bn" : "en"].navLabel,
-                        sub: GLOSSARY_META[isBn ? "bn" : "en"].navSub,
-                        path: GLOSSARY_PATH,
-                      },
-                      {
-                        id: "airhelp",
-                        icon: ShieldCheck,
-                        label: isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)" : "Flight Disruption Check (AirHelp)",
-                        sub: isBn ? "যোগ্যতা ঘটনার বিবরণের ওপর নির্ভর করে" : "Eligibility depends on case details",
-                        path: "/tools/flight-delay-claim",
-                      },
-                      {
-                        id: "contact",
-                        icon: MessageSquare,
-                        label: isBn ? "যোগাযোগ ও ভ্রমণ-সহায়তা" : "Contact & Trip Help",
-                        sub: isBn ? "WhatsApp-এ প্রশ্ন করুন" : "Ask a question on WhatsApp",
-                        path: "/contact",
-                      },
-                    ].map((toolItem) => {
-                      const IconComp = toolItem.icon;
-                      return (
-                        <a
-                          key={toolItem.id}
-                          href={getLocalizedRouteHref(toolItem.path)}
-                          onClick={(event) => handleNavigationAnchorClick(event, toolItem.path)}
-                          aria-current={isCurrentNavigationPath(toolItem.path) ? "page" : undefined}
-                          className={`w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors flex items-start gap-2.5 cursor-pointer ${isCurrentNavigationPath(toolItem.path) ? "bg-white/10 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
-                        >
-                          <IconComp className="w-4 h-4 text-[#F6B73C] shrink-0 mt-0.5" />
-                          <div>
-                            <div className="text-xs font-semibold text-white">{toolItem.label}</div>
-                            <div className="text-[11px] text-slate-400">{toolItem.sub}</div>
-                          </div>
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              {/* 8. About URAL — compact dropdown: identity, partners, visa assistance */}
-              <div
-                ref={aboutMenuRef}
-                className="relative"
-                onMouseEnter={() => {
-                  if (!toolsMenuRef.current?.contains(document.activeElement) && !destinationsMenuRef.current?.contains(document.activeElement)) {
-                    setDesktopMenuOpen("about");
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (!aboutMenuRef.current?.contains(document.activeElement)) {
-                    setDesktopMenuOpen((current) => (current === "about" ? null : current));
-                  }
-                }}
-                onFocusCapture={(event) => {
-                  const previousTarget = event.relatedTarget as Node | null;
-                  if (!previousTarget || !aboutMenuRef.current?.contains(previousTarget)) {
-                    setDesktopMenuOpen("about");
-                  }
-                }}
-                onBlurCapture={(event) => {
-                  const nextTarget = event.relatedTarget as Node | null;
-                  if (!nextTarget || !aboutMenuRef.current?.contains(nextTarget)) {
-                    setDesktopMenuOpen((current) => (current === "about" ? null : current));
-                  }
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    event.preventDefault();
-                    setDesktopMenuOpen(null);
-                    aboutDisclosureRef.current?.focus();
-                  }
-                }}
-              >
-                <div className="flex items-center gap-0.5">
-                  <a
-                    id="nav-about-megamenu"
-                    href={getLocalizedRouteHref("/about")}
-                    onClick={(event) => handleNavigationAnchorClick(event, "/about")}
-                    aria-current={section === "about" || section === "partners" || section === "visaAssistance" ? "page" : undefined}
-                    className={`text-[13.5px] transition-colors duration-200 cursor-pointer font-medium hover:text-[#F6B73C] whitespace-nowrap py-3 ${section === "about" || section === "partners" || section === "visaAssistance" ? "text-[#F6B73C] font-semibold" : "text-slate-300"}`}
-                  >
-                    {isBn ? "আমাদের সম্পর্কে" : "About"}
-                  </a>
-                  <button
-                    ref={aboutDisclosureRef}
-                    type="button"
-                    aria-label={isBn ? "আমাদের সম্পর্কে মেনু খুলুন বা বন্ধ করুন" : "Toggle about menu"}
-                    aria-expanded={desktopMenuOpen === "about"}
-                    aria-controls="about-mega-panel"
-                    onClick={() => setDesktopMenuOpen((current) => (current === "about" ? null : "about"))}
-                    className="w-8 h-8 rounded-md flex items-center justify-center text-slate-300 hover:text-[#F6B73C] hover:bg-white/5 transition-colors cursor-pointer focus-visible:outline-none"
-                  >
-                    <ChevronDown
-                      size={13}
-                      aria-hidden="true"
-                      className={`transition-transform duration-150 ${desktopMenuOpen === "about" ? "rotate-180 text-[#F6B73C]" : ""}`}
-                    />
-                  </button>
-                </div>
-
-                <div
-                  id="about-mega-panel"
-                  role="region"
-                  aria-label={isBn ? "আমাদের সম্পর্কে" : "About URAL"}
-                  aria-hidden={desktopMenuOpen !== "about"}
-                  className={`${desktopMenuOpen === "about" ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"} transition-all duration-150 absolute right-0 top-full pt-2 w-[300px] z-50`}
-                >
-                  <div className="bg-brand-navy border border-white/15 rounded-3xl shadow-2xl p-4 space-y-1.5 text-left">
-                    <span className="text-[10px] font-mono text-[#F6B73C] font-bold uppercase tracking-wider block px-2 pb-1">
-                      {isBn ? "উড়াল (URAL)" : "URAL Travel Intelligence"}
-                    </span>
-                    {[
-                      { id: "about", label: isBn ? "আমাদের সম্পর্কে" : "About URAL", sub: isBn ? "ট্রাভেল ইন্টেলিজেন্স, সম্পাদকীয় অঙ্গীকার" : "Travel intelligence and editorial commitments", path: "/about", icon: Info },
-                      { id: "partners", label: isBn ? "আমাদের পার্টনাররা" : "Our Partners", sub: isBn ? "বুকিং লিংকের পেছনের পার্টনাররা" : "The partners behind the booking links", path: "/partners", icon: HandCoins },
-                      { id: "visa-assistance", label: isBn ? "ভিসা সহায়তা (eVisas)" : "Visa Assistance (eVisas)", sub: isBn ? "পেইড আবেদন সহায়তা, eVisas-এর মাধ্যমে" : "Paid application help through eVisas", path: "/visa-assistance", icon: Stamp },
-                    ].map((item) => {
-                      const IconComp = item.icon;
-                      return (
-                        <a
-                          key={item.id}
-                          href={getLocalizedRouteHref(item.path)}
-                          onClick={(event) => handleNavigationAnchorClick(event, item.path)}
-                          aria-current={isCurrentNavigationPath(item.path) ? "page" : undefined}
-                          className={`w-full text-left px-3 py-2 rounded-xl hover:bg-white/8 transition-colors flex items-start gap-2.5 cursor-pointer ${isCurrentNavigationPath(item.path) ? "bg-white/10 ring-1 ring-inset ring-[#F6B73C]/35" : ""}`}
-                        >
-                          <IconComp className="w-4 h-4 text-[#F6B73C] shrink-0 mt-0.5" />
-                          <div>
-                            <div className="text-xs font-semibold text-white">{item.label}</div>
-                            <div className="text-[11px] text-slate-400">{item.sub}</div>
-                          </div>
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </nav>
-
-            {/* Sign Up CTA — the header's one conversion action. */}
-            <div className="flex items-center gap-4">
-              <button
-                type="button"
-                id="btn-signup-cta"
-                onClick={goToSignup}
-                aria-controls="sitewide-subscription"
-                className="hidden xl:block bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-sm rounded-full px-5 py-2 shadow-md transition-colors whitespace-nowrap cursor-pointer"
-              >
-                {t.signUpCta}
-              </button>
-
-              {/* Mobile Hamburger Menu Burger */}
-              <button
-                type="button"
-                id="mobile-menu-burger"
-                ref={mobileMenuTriggerRef}
-                aria-label={isBn ? "নেভিগেশন মেনু খুলুন" : "Open navigation menu"}
-                aria-expanded={mobileMenuOpen}
-                aria-controls="mobile-intent-drawer"
-                onClick={() => setMobileMenuOpen(true)}
-                className="xl:hidden w-11 h-11 rounded-xl flex flex-col items-center justify-center gap-1.5 hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] cursor-pointer transition-colors"
-              >
-                <span className="w-5 h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
-                <span className="w-5 h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
-                <span className="w-5 h-[2px] bg-[#F6B73C] rounded-full transition-all"></span>
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Sliding Navigation Drawer — Grouped by User Intent with Collapsible Sub-Menus */}
-          {mobileMenuOpen && (
-            <div
-              id="mobile-intent-drawer"
-              role="dialog"
-              aria-modal="true"
-              aria-label={isBn ? "মোবাইল নেভিগেশন মেনু" : "Mobile navigation menu"}
-              className="fixed inset-0 z-50 xl:hidden"
-            >
-              {/* Semi-transparent backdrop with click-to-close */}
-              <div
-                className="fixed inset-0 bg-black/65 backdrop-blur-xs transition-opacity"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-hidden="true"
-              />
-
-              {/* Sliding drawer from right */}
-              <div
-                ref={mobileDrawerPanelRef}
-                tabIndex={-1}
-                className="fixed top-0 right-0 h-full w-[340px] max-w-[90vw] bg-brand-navy shadow-2xl flex flex-col z-10 border-l border-white/10"
-              >
-                {/* Drawer Header */}
-                <div className="h-15 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
-                  <div className="flex flex-col items-start gap-0.5">
-                    <img
-                      src="/assets/brand/svg/ural-wordmark-v1.svg"
-                      alt="URAL"
-                      width="70"
-                      height="24"
-                      className="h-6 w-auto"
-                    />
-                    <span className="text-[10px] text-slate-300 block">
-                      {BRAND_TAGLINE}
-                    </span>
-                  </div>
-                  <button
-                    ref={mobileMenuCloseRef}
-                    type="button"
-                    aria-label={isBn ? "মেনু বন্ধ করুন" : "Close navigation menu"}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-11 h-11 rounded-xl flex items-center justify-center text-[#F6B73C] hover:text-white hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] transition-colors cursor-pointer"
-                  >
-                    <X size={20} />
-                  </button>
-                </div>
-
-                {/* Compact Pinned Top Shortcuts (Zero-Scroll High-Frequency Entry Points) */}
-                <div className="px-3.5 pt-3 pb-2.5 border-b border-white/8 grid grid-cols-2 gap-2 shrink-0">
-                  <button
-                    type="button"
-                    aria-current={section === "home" ? "page" : undefined}
-                    onClick={() => {
-                      navigateTo("/");
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
-                      section === "home"
-                        ? "bg-[#F6B73C]/15 text-[#F6B73C] border border-[#F6B73C]/40"
-                        : "bg-white/5 text-white/90 hover:bg-white/10 border border-white/8"
-                    }`}
-                  >
-                    <span>{t.navHome}</span>
-                    <ArrowRight size={12} className="opacity-70 shrink-0" />
-                  </button>
-
-                  <button
-                    type="button"
-                    aria-current={section === "umrah" ? "page" : undefined}
-                    onClick={() => {
-                      navigateTo("/umrah");
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
-                      section === "umrah"
-                        ? "bg-[#F6B73C] text-brand-navy"
-                        : "bg-[#F6B73C]/15 text-[#F6B73C] hover:bg-[#F6B73C]/25 border border-[#F6B73C]/35"
-                    }`}
-                  >
-                    <span className="truncate">{t.navUmrah}</span>
-                    <ArrowRight size={12} className="shrink-0" />
-                  </button>
-                </div>
-
-                {/* Collapsible User-Intent Accordion Navigation */}
-                <nav
-                  aria-label={isBn ? "প্রধান মোবাইল নেভিগেশন" : "Primary mobile navigation by intent"}
-                  className="flex-1 px-3.5 py-2.5 overflow-y-auto space-y-2"
-                >
-                  {([
-                    {
-                      id: "booking" as const,
-                      title: isBn ? "ফ্লাইট, হোটেল ও ভিসা বুকিং" : "Flights, Hotels & Visas",
-                      subtitle: isBn
-                        ? "ঢাকা রুট · হালাল হোটেল · ই-ভিসা চেকলিস্ট"
-                        : "Dhaka fares · Hotel zones · Visa rules",
-                      isActiveGroup: ["flights", "hotels", "visa", "umrah"].includes(section),
-                      primaryLinks: [
-                        {
-                          id: "flights",
-                          label: t.navFlights,
-                          meta: isBn ? "ঢাকা থেকে ৬টি প্রধান রুট" : "Compare Dhaka (DAC) routes",
-                          path: "/flights",
-                        },
-                        {
-                          id: "hotels",
-                          label: t.navHotels,
-                          meta: isBn ? "হালাল ও ফ্যামিলি জোন গাইড" : "Family & Halal hotel areas",
-                          path: "/hotels",
-                        },
-                        {
-                          id: "visa",
-                          label: t.navVisa,
-                          meta: isBn ? "অন-অ্যারাইভাল ও ই-ভিসা ধাপ" : "Free VOA & e-Visa checklists",
-                          path: "/visa",
-                        },
-                        {
-                          id: "visa-assistance",
-                          label: isBn ? "ভিসা সহায়তা (eVisas)" : "Visa Assistance (eVisas)",
-                          meta: isBn ? "পেইড আবেদন সহায়তা, eVisas-এর মাধ্যমে" : "Paid application help through eVisas",
-                          path: "/visa-assistance",
-                        },
-                        {
-                          id: "umrah",
-                          label: isBn ? "ওমরাহ ও হজ প্ল্যানার ২০২৬" : "Umrah & Hajj 2026 Hub",
-                          meta: isBn ? "Nusuk অ্যাপ ও DIY খরচ" : "Nusuk permit & DIY cost",
-                          path: "/umrah",
-                        },
-                      ],
-                      quickChips: [
-                        { label: isBn ? "কাঠমান্ডু ফ্লাইট" : "Dhaka → KTM", path: "/flights/dhaka-kathmandu" },
-                        { label: isBn ? "ব্যাংকক ফ্লাইট" : "Dhaka → BKK", path: "/flights/dhaka-bangkok" },
-                        { label: isBn ? "থাইল্যান্ড ই-ভিসা" : "Thai e-Visa", path: "/visa/thailand-visa" },
-                        { label: isBn ? "মালয়েশিয়া ভিসা" : "Malaysia eVisa", path: "/visa/malaysia-visa" },
-                      ],
-                    },
-                    {
-                      id: "destinations" as const,
-                      title: isBn ? "গন্তব্য গাইড ও অ্যাক্টিভিটি পাস" : "Destinations & Attraction Passes",
-                      subtitle: isBn
-                        ? "এশিয়া গাইড · ইউরোপ, UK ও USA পাস"
-                        : "6 Asian hubs · Europe, UK & USA passes",
-                      isActiveGroup: ["destinations", "experiences", "attractions"].includes(section),
-                      primaryLinks: [
-                        {
-                          id: "destinations",
-                          label: t.navDestinations,
-                          meta: isBn ? "নেপাল, থাইল্যান্ড, মালয়েশিয়া ও দুবাই" : "Full country itineraries & tips",
-                          path: "/destinations",
-                        },
-                        {
-                          id: "experiences",
-                          label: t.navExperiences,
-                          meta: isBn ? "Tiqets ও Klook স্কিপ-দ্য-লাইন পাস" : "Tiqets & Klook skip-the-line passes",
-                          path: "/experiences",
-                        },
-                      ],
-                      quickChips: [
-                        { label: isBn ? "নেপাল গাইড" : "Nepal Guide", path: "/destinations/nepal-guide" },
-                        { label: isBn ? "থাইল্যান্ড" : "Thailand", path: "/destinations/thailand-guide" },
-                        { label: isBn ? "মালয়েশিয়া" : "Malaysia", path: "/destinations/malaysia-guide" },
-                        { label: isBn ? "সিঙ্গাপুর" : "Singapore", path: "/destinations/singapore-guide" },
-                        { label: isBn ? "মালদ্বীপ" : "Maldives", path: "/destinations/maldives-guide" },
-                        { label: isBn ? "দুবাই ও UAE" : "Dubai / UAE", path: "/destinations/dubai-guide" },
-                        { label: isBn ? "লন্ডন গাইড" : "London Guide", path: "/destinations/london-guide" },
-                        { label: isBn ? "কাশ্মীর" : "Kashmir", path: "/destinations/kashmir-guide" },
-                        { label: isBn ? "ইতালি গাইড" : "Italy Guide", path: "/destinations/italy-guide" },
-                        { label: isBn ? "প্যারিস গাইড" : "Paris Guide", path: "/destinations/paris-guide" },
-                        { label: isBn ? "নিউ ইয়র্ক গাইড" : "New York Guide", path: "/destinations/new-york-guide" },
-                        { label: isBn ? "ইউরোপ ও UK অ্যাক্টিভিটি" : "Europe & UK Activities", path: "/experiences/europe" },
-                        { label: isBn ? "এশিয়া অ্যাক্টিভিটি" : "Asia Passes", path: "/experiences/asia" },
-                      ],
-                    },
-                    {
-                      id: "research" as const,
-                      title: isBn ? "ট্রাভেল ব্লগ ও BDT বাজেট হিসাব" : "Blog Guides & BDT Trip Budgets",
-                      subtitle: isBn
-                        ? "বিস্তারিত গাইড · ৫ দিনের খরচ"
-                        : "In-depth guides · 5-day BDT sheets",
-                      isActiveGroup: ["blog", "costs", "banking"].includes(section),
-                      primaryLinks: [
-                        {
-                          id: "blog",
-                          label: isBn ? "সবগুলো ট্রাভেল ব্লগ" : "All Travel Blog Guides",
-                          meta: isBn ? "ওমরাহ, কার্ড এন্ডোর্সমেন্ট ও ইমিগ্রেশন" : "Umrah, Card Endorsement & Visas",
-                          path: "/blog",
-                        },
-                        {
-                          id: "banking",
-                          label: isBn ? "ডলার এন্ডোর্সমেন্ট ও ব্যাংকিং হাব" : "Dollar Endorsement & Banking Hub",
-                          meta: isBn ? "USD 18,000 সীমা, $300 নিয়ম ও NOC" : "USD 18,000 ceiling, $300 rule & NOC",
-                          path: "/banking",
-                        },
-                        {
-                          id: "costs",
-                          label: t.navCosts,
-                          meta: isBn ? "বাজেট, মিড-রেঞ্জ ও ফ্যামিলি খরচ" : "3-tier cost matrices by country",
-                          path: "/costs",
-                        },
-                      ],
-                      quickChips: [
-                        {
-                          label: isBn ? "কার্ড এন্ডোর্সমেন্ট" : "Card Endorsement",
-                          path: "/blog/dual-currency-card-endorsement-bangladesh",
-                        },
-                        {
-                          label: isBn ? "ব্যাংকিং হাব" : "Banking Hub",
-                          path: "/banking",
-                        },
-                        {
-                          label: isBn ? "ঢাকা ইমিগ্রেশন" : "DAC Immigration",
-                          path: "/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
-                        },
-                        {
-                          label: isBn ? "ব্যাংকক মেডিকেল" : "Medical Visa",
-                          path: "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh",
-                        },
-                        {
-                          label: isBn ? "ই-পাসপোর্ট গাইড" : "e-Passport Guide",
-                          path: "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide",
-                        },
-                      ],
-                    },
-                    {
-                      id: "tools" as const,
-                      title: isBn ? "এয়ারপোর্ট প্রস্তুতি, টুলস ও সাপোর্ট" : "Airport Readiness, Tools & Help",
-                      subtitle: isBn
-                        ? "কারেন্সি কনভার্টার · দূতাবাস · ফ্লাইট-সমস্যার গাইড"
-                        : "FX tool · DAC checklist · flight-disruption guide",
-                      isActiveGroup: ["tools", "sitemap", "preDeparture", "resources", "glossary", "contact"].includes(section),
-                      primaryLinks: [
-                        {
-                          id: "tools",
-                          label: isBn ? "সব ট্রাভেল টুলস হাব" : "All Travel Tools Hub",
-                          meta: isBn ? "লাইভ BDT রেট, ক্যালকুলেটর ও চেকলিস্ট" : "FX, budget & checklist workspace",
-                          path: "/tools",
-                        },
-                        {
-                          id: "sitemap",
-                          label: isBn ? "ঢাকা এয়ারপোর্ট (DAC) ও দূতাবাস হাব" : "Pre-Departure & Embassy Hub",
-                          meta: isBn ? "লাগেজ নিয়ম, জমজম ও জরুরি নাম্বার" : "Baggage rules, Zamzam & embassies",
-                          path: "/pre-departure",
-                        },
-                        {
-                          id: "resources",
-                          label: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navLabel,
-                          meta: OFFICIAL_RESOURCES_META[isBn ? "bn" : "en"].navSub,
-                          path: OFFICIAL_RESOURCES_PATH,
-                        },
-                        {
-                          id: "glossary",
-                          label: GLOSSARY_META[isBn ? "bn" : "en"].navLabel,
-                          meta: GLOSSARY_META[isBn ? "bn" : "en"].navSub,
-                          path: GLOSSARY_PATH,
-                        },
-                        {
-                          id: "about",
-                          label: isBn ? "আমাদের সম্পর্কে" : "About URAL",
-                          meta: isBn ? "ট্রাভেল ইন্টেলিজেন্স ও সম্পাদকীয় অঙ্গীকার" : "Travel intelligence and editorial commitments",
-                          path: "/about",
-                        },
-                        {
-                          id: "partners",
-                          label: isBn ? "আমাদের পার্টনাররা" : "Our Partners",
-                          meta: isBn ? "বুকিং লিংকের পেছনের পার্টনাররা" : "The partners behind the booking links",
-                          path: "/partners",
-                        },
-                        {
-                          id: "airhelp",
-                          label: isBn ? "ফ্লাইট-সমস্যার দাবি যাচাই (AirHelp)" : "Flight Disruption Check (AirHelp)",
-                          meta: isBn ? "যোগ্যতা ঘটনার বিবরণের ওপর নির্ভর করে" : "Eligibility depends on case details",
-                          path: "/tools/flight-delay-claim",
-                        },
-                        {
-                          id: "contact",
-                          label: t.navContact,
-                          meta: isBn ? "WhatsApp বা ইমেইলে প্রশ্ন করুন" : "Ask a question on WhatsApp",
-                          path: "/contact",
-                        },
-                      ],
-                      quickChips: [
-                        {
-                          label: isBn ? "কারেন্সি কনভার্টার" : "Currency Converter",
-                          path: "/tools/currency-converter",
-                        },
-                        {
-                          label: isBn ? "ট্রিপ কস্ট এস্টিমেটর" : "Trip Cost Estimator",
-                          path: "/tools/budget-calculator",
-                        },
-                        {
-                          label: isBn ? "প্যাকিং চেকলিস্ট" : "Packing Checklist",
-                          path: "/tools/packing-checklist",
-                        },
-                        {
-                          label: isBn ? "এয়ারপোর্ট কোড" : "Airport Codes",
-                          path: "/tools/airport-codes",
-                        },
-                      ],
-                    },
-                  ]).map((group) => {
-                    const isExpanded = expandedDrawerGroup === group.id;
-                    return (
-                      <div
-                        key={group.id}
-                        className={`rounded-2xl border transition-colors ${
-                          isExpanded
-                            ? "bg-white/[0.05] border-white/15"
-                            : group.isActiveGroup
-                            ? "bg-white/[0.03] border-[#F6B73C]/35"
-                            : "bg-white/[0.02] border-white/8"
-                        }`}
-                      >
-                        {/* Accordion Trigger Button */}
-                        <button
-                          type="button"
-                          id={`drawer-trigger-${group.id}`}
-                          aria-expanded={isExpanded}
-                          aria-controls={`drawer-panel-${group.id}`}
-                          onClick={() =>
-                            setExpandedDrawerGroup((prev) => (prev === group.id ? null : group.id))
-                          }
-                          className="w-full min-h-[52px] px-3.5 py-2.5 text-left flex items-center justify-between gap-2 cursor-pointer rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
-                        >
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2">
-                              <span
-                                className={`text-[13.5px] font-semibold leading-snug truncate ${
-                                  group.isActiveGroup || isExpanded ? "text-[#F6B73C]" : "text-white"
-                                }`}
-                              >
-                                {group.title}
-                              </span>
-                            </div>
-                            <span className="text-[11px] text-slate-400 block truncate mt-0.5">
-                              {group.subtitle}
-                            </span>
-                          </div>
-                          <ChevronDown
-                            size={16}
-                            className={`shrink-0 text-slate-400 transition-transform duration-200 ${
-                              isExpanded ? "rotate-180 text-[#F6B73C]" : ""
-                            }`}
-                          />
-                        </button>
-
-                        {/* Collapsible Sub-Menu Panel */}
-                        {isExpanded && (
-                          <div
-                            id={`drawer-panel-${group.id}`}
-                            role="region"
-                            aria-labelledby={`drawer-trigger-${group.id}`}
-                            className="px-2.5 pb-2.5 pt-1 border-t border-white/8 space-y-1.5"
-                          >
-                            <div className="space-y-1">
-                              {group.primaryLinks.map((link) => {
-                                const isCurrent =
-                                  section === link.id || isCurrentNavigationPath(link.path);
-                                return (
-                                  <button
-                                    key={link.path}
-                                    type="button"
-                                    aria-current={isCurrent ? "page" : undefined}
-                                    onClick={() => {
-                                      navigateTo(link.path);
-                                      setMobileMenuOpen(false);
-                                    }}
-                                    className={`w-full min-h-[44px] px-3 py-2 rounded-xl text-left flex items-center justify-between gap-2 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
-                                      isCurrent
-                                        ? "bg-[#F6B73C]/15 text-[#F6B73C]"
-                                        : "hover:bg-white/8 text-white/90"
-                                    }`}
-                                  >
-                                    <div className="min-w-0">
-                                      <div className="text-xs font-semibold truncate">{link.label}</div>
-                                      <div className="text-[11px] text-slate-400 truncate">{link.meta}</div>
-                                    </div>
-                                    <ArrowRight
-                                      size={12}
-                                      className={isCurrent ? "text-[#F6B73C] shrink-0" : "text-slate-500 shrink-0"}
-                                    />
-                                  </button>
-                                );
-                              })}
-                            </div>
-
-                            {group.quickChips.length > 0 && (
-                              <div className="pt-1.5 border-t border-white/6">
-                                <div className="grid grid-cols-2 gap-1.5">
-                                  {group.quickChips.map((chip) => {
-                                    const isCurrent = isCurrentNavigationPath(chip.path);
-                                    return (
-                                      <button
-                                        key={chip.path}
-                                        type="button"
-                                        aria-current={isCurrent ? "page" : undefined}
-                                        onClick={() => {
-                                          navigateTo(chip.path);
-                                          setMobileMenuOpen(false);
-                                        }}
-                                        className={`min-h-[44px] px-2.5 py-1.5 rounded-lg border text-left text-[11px] font-medium truncate transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C] ${
-                                          isCurrent
-                                            ? "bg-[#F6B73C]/15 border-[#F6B73C]/45 text-[#F6B73C]"
-                                            : "bg-slate-900/80 hover:bg-white/10 border-white/8 text-slate-200 hover:text-[#F6B73C]"
-                                        }`}
-                                      >
-                                        {chip.label}
-                                      </button>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </nav>
-
-                {/* Drawer CTA Footer (Compact to preserve vertical viewport budget) */}
-                <div className="p-4 border-t border-white/10 bg-brand-navy space-y-2.5 shrink-0">
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-1.5">
-                      <a
-                        href={URAL_SOCIAL_LINKS.facebook}
-                        target="_blank"
-                        rel="me noopener noreferrer"
-                        aria-label="URAL on Facebook (@uraltravelbd)"
-                        title="Facebook (@uraltravelbd)"
-                        className="w-11 h-11 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
-                      >
-                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-                        </svg>
-                      </a>
-                      <a
-                        href={URAL_SOCIAL_LINKS.instagram}
-                        target="_blank"
-                        rel="me noopener noreferrer"
-                        aria-label="URAL on Instagram (@uraltravelbd)"
-                        title="Instagram (@uraltravelbd)"
-                        className="w-11 h-11 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
-                      >
-                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                        </svg>
-                      </a>
-                      <a
-                        href={URAL_SOCIAL_LINKS.linkedin}
-                        target="_blank"
-                        rel="me noopener noreferrer"
-                        aria-label="URAL on LinkedIn"
-                        title="LinkedIn (URAL Travel Bangladesh)"
-                        className="w-11 h-11 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
-                      >
-                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-                        </svg>
-                      </a>
-                      <a
-                        href={URAL_SOCIAL_LINKS.tiktok}
-                        target="_blank"
-                        rel="me noopener noreferrer"
-                        aria-label="URAL on TikTok (@uraltravelbd)"
-                        title="TikTok (@uraltravelbd)"
-                        className="w-11 h-11 rounded-lg bg-white/8 hover:bg-[#F6B73C] text-slate-200 hover:text-brand-navy flex items-center justify-center transition-colors"
-                      >
-                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.5 6.3 6.3 0 0 0 1.86-4.49V8.75a8.28 8.28 0 0 0 4.91 1.6V6.9a4.83 4.83 0 0 1-1-.21z" />
-                        </svg>
-                      </a>
-                    </div>
-                    <LanguageSwitcher
-                      lang={lang}
-                      onToggle={handleLangToggle}
-                      enHref={localeHrefs.en}
-                      bnHref={localeHrefs.bn}
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <a
-                      href="https://wa.me/8801784385335?text=Hi%20URAL%2C%20I%20need%20travel%20assistance%21"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="min-h-[44px] bg-brand-emerald text-white font-bold text-xs px-3 rounded-xl flex items-center justify-center gap-1.5 shadow transition-colors"
-                    >
-                      <span>WhatsApp</span>
-                    </a>
-                    <button
-                      type="button"
-                      onClick={goToSignup}
-                      aria-controls="sitewide-subscription"
-                      className="min-h-[44px] bg-[#F6B73C] text-brand-navy hover:bg-[#D4941A] font-bold text-xs px-3 rounded-xl shadow-md text-center transition-colors cursor-pointer"
-                    >
-                      {t.signUpCta}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </header>
-
-      </div>
+      <SiteHeader
+        lang={lang}
+        currentPath={currentPath}
+        model={navigationModel}
+        getHref={getLocalizedRouteHref}
+        onNavigate={navigateTo}
+        onLanguageChange={handleLangToggle}
+        localeHrefs={localeHrefs}
+        utilitySearch={utilitySearch}
+        searchOpen={siteSearchOpen}
+        consentOpen={consentBannerMode !== "idle"}
+        onRequestSearch={(trigger) => { siteSearchOpenerRef.current = trigger; openSiteSearch(); }}
+        onEmailUpdates={goToSignup}
+      />
 
       {/* ⚡ ACTIVE TEMPLATE RENDER */}
       {section === "home" && (
