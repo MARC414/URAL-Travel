@@ -77,6 +77,7 @@ const GLOBAL_AIRPORTS = [
   { label: "Doha (DOH)", code: "DOH", city: "Doha", country: "Qatar", flag: "🇶🇦" },
   { label: "Istanbul (IST)", code: "IST", city: "Istanbul", country: "Turkey", flag: "🇹🇷" },
   { label: "London Heathrow (LHR)", code: "LHR", city: "London", country: "United Kingdom", flag: "🇬🇧" },
+  { label: "Islamabad (ISB)", code: "ISB", city: "Islamabad", country: "Pakistan", flag: "🇵🇰" },
   { label: "Paris (CDG)", code: "CDG", city: "Paris", country: "France", flag: "🇫🇷" },
   { label: "Rome (FCO)", code: "FCO", city: "Rome", country: "Italy", flag: "🇮🇹" },
   { label: "Frankfurt (FRA)", code: "FRA", city: "Frankfurt", country: "Germany", flag: "🇩🇪" },
