@@ -13,6 +13,10 @@ const entry: Record<string, { en: string; bn: string }> = {
   "dhaka-maldives": { en: "Check Maldives Immigration's tourist entry and IMUGA declaration instructions, including the current timing and supporting documents, before departure.", bn: "রওনা হওয়ার আগে Maldives Immigration-এর পর্যটক প্রবেশ ও IMUGA declaration-এর বর্তমান সময়সীমা ও প্রয়োজনীয় নথি দেখুন।" },
   "dhaka-los-angeles": { en: "Bangladeshi passport holders should check the appropriate US visa category and current application requirements with the US State Department. Transit rules depend on the connection and passport.", bn: "বাংলাদেশি পাসপোর্টে উপযুক্ত US ভিসার ধরন ও আবেদনের বর্তমান শর্ত US State Department-এ দেখুন। ট্রানজিটের নিয়ম পাসপোর্ট ও সংযোগের ওপর নির্ভর করে।" },
   "dhaka-madinah": { en: "Check the Saudi visa route for your passport, purpose and circumstances. Some travellers may qualify through other documents; do not assume a particular application method or approval.", bn: "আপনার পাসপোর্ট, ভ্রমণের উদ্দেশ্য ও পরিস্থিতি অনুযায়ী সৌদি ভিসার পথ যাচাই করুন। অন্য দেশের যোগ্য নথি থাকলে কিছু ভ্রমণকারীর জন্য ভিন্ন পথ থাকতে পারে; আবেদনপদ্ধতি বা অনুমোদন নিশ্চিত ধরে নেবেন না।" },
+  "dhaka-islamabad": { 
+    en: "Review Pakistan's current entry rules for Bangladeshi passports.", 
+    bn: "বাংলাদেশি পাসপোর্টের জন্য পাকিস্তানের বর্তমান প্রবেশ নিয়ম যাচাই করুন।" 
+  },
 };
 
 export function flightEditorial(route: Pick<FlightRoute, "id" | "from" | "to">, lang: "en" | "bn") {
