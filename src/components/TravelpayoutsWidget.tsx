@@ -61,6 +61,7 @@ const AIRPORTS_DIRECTORY = [
   { code: 'CXB', city: "Cox's Bazar", name: "Cox's Bazar Airport", country: 'Bangladesh', flag: '🇧🇩' },
   // South & Southeast Asia
   { code: 'KTM', city: 'Kathmandu', name: 'Tribhuvan International Airport', country: 'Nepal', flag: '🇳🇵' },
+  { code: 'ISB', city: 'Islamabad', name: 'Islamabad International Airport', country: 'Pakistan', flag: '🇵🇰' },
   { code: 'BKK', city: 'Bangkok', name: 'Suvarnabhumi International Airport', country: 'Thailand', flag: '🇹🇭' },
   { code: 'DMK', city: 'Bangkok (Don Mueang)', name: 'Don Mueang International Airport', country: 'Thailand', flag: '🇹🇭' },
   { code: 'HKT', city: 'Phuket', name: 'Phuket International Airport', country: 'Thailand', flag: '🇹🇭' },
