@@ -15,4 +15,5 @@ export const FLIGHT_ROUTES: Record<string, {
   "dhaka-maldives": { origin: "DAC", destination: "MLE", hasNonstop: true, visaPath: "/visa/maldives-visa", hotelPath: "/hotels/maldives-hotels", destinationEn: "Maldives", destinationBn: "মালদ্বীপ", fromBn: "ঢাকা", toBn: "মালে" },
   "dhaka-los-angeles": { origin: "DAC", destination: "LAX", hasNonstop: false, visaPath: "/visa", hotelPath: "/hotels", destinationEn: "Los Angeles", destinationBn: "লস অ্যাঞ্জেলেস", fromBn: "ঢাকা", toBn: "লস অ্যাঞ্জেলেস" },
   "dhaka-madinah": { origin: "DAC", destination: "MED", hasNonstop: true, visaPath: "/visa/saudi-arabia-visa", hotelPath: "/blog/where-to-stay-madinah-markazia-gate-guide", destinationEn: "Madinah", destinationBn: "মদিনা", fromBn: "ঢাকা", toBn: "মদিনা" },
+  "dhaka-islamabad": { origin: "DAC", destination: "ISB", hasNonstop: false, visaPath: "/visa", hotelPath: "/hotels", destinationEn: "Islamabad", destinationBn: "ইসলামাবাদ", fromBn: "ঢাকা", toBn: "ইসলামাবাদ" },
 };
