@@ -1,8 +1,8 @@
 # Approved URAL Navigation Implementation Plan
 
 > **EXECUTED — 19 November 2026. Historical work order, not current instructions.** Native execution
-> was authorized and completed on `feat/approved-navigation`; source passed all 46 CI commands and the
-> owner then instructed push and merge. Results live in `DESIGN.md` and the
+> was authorized and completed on `feat/approved-navigation`; source passed all 46 CI commands and was
+> merged to `main` as `aeab651` on 19 November 2026. Results live in `DESIGN.md` and the
 > [implementation handoff](../../handoff/2026-11-19-approved-navigation-implementation.md). Keep this
 > file for the verified scope and evidence contract; do not re-run it as a to-do list.
 
@@ -147,8 +147,9 @@ Saudi cross-links do not invent a Saudi destination record; the direct primary `
 - [x] Self-review: scoped navigation requirements mapped to tasks; approved region revision replaces the older three-column constraint; interfaces and review-focus tests aligned; legacy presentation-test conflicts identified.
 - [x] Owner approved implementation with native execution, 19 November 2026. Live production acceptance remains a separate step.
 - [x] Tasks 1–4 implemented/verified on an isolated branch; all 46 CI commands passed on final source.
-- [x] Owner authorized push and merge into the repository, 19 November 2026.
-- [ ] Production acceptance observed after any host deployment.
+- [x] Owner authorized push and merge into the repository, 19 November 2026; merged as `aeab651`.
+- [x] Static production navigation matched the verified build on six EN/BN routes.
+- [ ] Live interactive acceptance, authenticated analytics and booking/commission receipt.
 
 Execution used **native, inline implementation** in this session with one fresh whole-branch review at
 the end. The shared model/header/static interfaces were implemented together; the reviewer inspected the

@@ -26,10 +26,11 @@ navigation implementation**, not deployment.
 including **Middle East → Europe & UK → Asia → Americas**. The
 [**executed navigation plan**](docs/history/2026-11-19-approved-navigation-plan.md) is archived as a
 historical work order. One independent review's two material findings were fixed with passing
-regressions, and the owner authorized push/merge on 19 November 2026. The
+regressions; the work passed all 46 CI commands and was merged to `main` as `aeab651` on
+19 November 2026. The
 [**implementation handoff**](docs/handoff/2026-11-19-approved-navigation-implementation.md) records
-source changes, preservation evidence and the remaining post-deployment checks. Broader
-catalogue/article/trust repairs are a
+source changes, preservation evidence, the static production check and the remaining interactive
+checks. Broader catalogue/article/trust repairs are a
 separate subproject, not approval inferred from the navbar preview.
 [**Earlier preview handoff**](docs/handoff/2026-11-19-navigation-preview-first.md) preserves the resolved
 stale-checkout/Pakistan finding as historical context. Future UK/Pakistan visa publication remains separate.

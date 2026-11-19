@@ -2,7 +2,8 @@
 
 **Goal:** implement the approved navbar and mega menus in the real website while preserving URAL's design, URLs and affiliate earning paths.
 
-**Lifecycle:** implemented and verified locally; owner authorized push/merge; **production acceptance not observed**.
+**Lifecycle:** implemented and verified locally; owner authorized push/merge; **merged to `main` as `aeab651`**;
+static production navigation observed (interactive/booking/analytics not certified).
 **Branch:** `feat/approved-navigation`, base `0e83b102e2c6b37c20a3c72311ef9b7805168c03`.
 **Workspace:** `E:\AI\Worktrees\approved-navigation`. Application source is committed through
 `443f20a`; the archive/integration documentation follows it. The original checkout and its five owner
@@ -20,8 +21,14 @@ images remain untouched.
   reproduced and fixed in one pass, with passing regressions; no cosmetic redesign or second review.
 - Final 46-command CI passed on `443f20a` (including lint/build/verify:build and 618 build checks);
   the earlier `9d9d080` run is superseded. Owner then instructed push and merge.
-- Not started: post-deployment production acceptance, wider catalogue/article/trust repairs, new
-  UK/Pakistan visa publication or authenticated GTM/GA4/partner receipt checks.
+- Merged by fast-forward into `main` as `aeab651`; `feat/approved-navigation` has the same tip.
+- Production observation: the served static header is **byte-identical** to the verified local build
+  on `/`, `/bn/`, `/umrah`, `/bn/umrah`, `/visa/saudi-arabia-visa` and `/bn/visa/saudi-arabia-visa`.
+  The host build uses different internal asset filenames; JS content matches apart from those
+  self-referential names, and CSS differs only in oklab rounding. Interactive production behaviour
+  was not exercised.
+- Not started: wider catalogue/article/trust repairs, new UK/Pakistan visa publication or
+  authenticated GTM/GA4/partner receipt checks.
 
 ## Files
 
@@ -111,14 +118,19 @@ the final browser result. Before scratch cleanup, preserve the final evidence ou
 
 ## Next step
 
-Verify the merged `main` build and, if the host deploys automatically, observe production navigation
-after deployment. Do not treat the local evidence as proof of bookings, commissions or authenticated
-analytics receipt.
+Maintain the approved navigation within its documented rules. Reopen it only for a reproducible defect,
+a broken commercial link or an owner-approved capability the structure cannot represent. Routine work is
+publishing and improving guides, not another cosmetic navigation pass.
+
+Production hosting was checked read-only after the push: the static navigation header matched the
+local verified build byte-for-byte on six representative EN/BN routes, and the live assets were
+functionally equivalent (host-generated filenames and CSS rounding differ). No live form, partner
+consent, booking or analytics report was exercised.
 
 ## Open questions and limitations
 
-- Production integration was owner-approved on 19 November 2026. If the host auto-deploys from `main`,
-  live acceptance still needs to be observed; no deployment receipt was available when this was written.
+- Production integration and push/merge are complete. Live interactive navigation, bookings and
+  authenticated analytics were not exercised; a host deployment receipt was not available.
 - Code and navigation checks do not prove bookings, approved commissions, payouts or authenticated
   GTM/GA4 event receipt. Catalogue metadata/accessibility claims and wider editorial parity debt remain separate.
 - No physical-device, screen-reader, Lighthouse or field Core Web Vitals score was measured here.

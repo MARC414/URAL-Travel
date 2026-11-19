@@ -1,6 +1,6 @@
 # URAL — Navigation, Catalogue Clarity and Affiliate Handoffs
 
-**Lifecycle:** navigation implemented and verified locally; owner authorized push/merge on 19 November 2026; production acceptance not observed · **Date:** 19 November 2026.
+**Lifecycle:** navigation implemented, verified and merged to `main` on 19 November 2026; static production navigation verified, interactive acceptance not certified · **Date:** 19 November 2026.
 
 The owner accepted the two-row header and the distinction between destination planning and Things to Do, then explicitly approved the revised local navbar preview on 19 November 2026 ("yes, approved") and authorized native implementation ("finally approval to implement"). The local React implementation follows Middle East first, Europe & UK second, Asia third and Americas fourth. It has not been pushed, merged into production or deployed. The broader catalogue/trust work described below is a separate subproject, not automatically authorized by approving the navbar's appearance.
 
@@ -293,8 +293,9 @@ The owner's preview-first instruction controls the sequence. **19 November resol
 - [x] Owner's explicit visual-preview approval recorded, including the revised four-column order.
 - [x] Bounded navigation plan written after preview approval; owner authorized native execution.
 - [x] Navigation implemented on an isolated local branch; independent whole-branch review performed and both material findings fixed with passing regressions.
-- [x] Owner authorized push and merge after implementation verification, 19 November 2026.
-- [ ] Production acceptance observed after any host deployment.
+- [x] Navigation merged to `main` (`aeab651`) after all 46 CI commands passed; static production
+  navigation matched the verified build on six representative EN/BN routes.
+- [ ] Live interactive production acceptance, authenticated analytics and booking/commission receipt.
 
 ## 11. What is left to the builder
 
