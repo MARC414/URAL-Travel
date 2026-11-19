@@ -547,6 +547,7 @@ function getCountryDestId(country: string): string {
   if (c === "uae") return "dubai-guide";
   if (c === "singapore") return "singapore-guide";
   if (c === "maldives") return "maldives-guide";
+  if (c === "pakistan" || c === "azad kashmir" || c === "kashmir") return "kashmir-guide";
   return "nepal-guide";
 }
 
@@ -1743,6 +1744,8 @@ export default function App() {
         ? "Paris Itinerary from Bangladesh: Landmarks & Planning | URAL"
         : activeDes.id === "new-york-guide"
         ? "New York City Itinerary from Bangladesh: Landmarks & Planning | URAL"
+        : activeDes.id === "kashmir-guide"
+        ? "Azad Kashmir Destination Guide from Bangladesh: Neelum Valley & Planning | URAL"
         : `${activeDes.country} Tour Itinerary & Travel Plan from Bangladesh | URAL`;
       seoDescription = activeDes.id === "nepal-guide"
         ? "Plan a flexible Nepal trip around Kathmandu, nearby heritage sites and Pokhara. Check current entry, transport, access and cost details for your dates."
@@ -1762,6 +1765,8 @@ export default function App() {
         ? "Plan a flexible Paris itinerary around museums, landmarks and the Seine. Check current opening, ticket, transport and entry information for your dates."
         : activeDes.id === "new-york-guide"
         ? "Plan New York City around harbor sights, parks, museums and selected neighborhoods. Check current attraction, transport and entry information for your dates."
+        : activeDes.id === "kashmir-guide"
+        ? "Plan an Azad Kashmir trip focusing on the Neelum Valley, Muzaffarabad, and Rawalakot. Check current road conditions and Pakistan entry requirements for Bangladeshi passports."
         : `Find tourist route plans, day-by-day itineraries, local transport guides, and estimated daily spends in BDT.`;
 
       let schemaObj: any = undefined;
@@ -3533,6 +3538,7 @@ export default function App() {
                         { label: isBn ? "মালদ্বীপ" : "Maldives", path: "/destinations/maldives-guide" },
                         { label: isBn ? "দুবাই ও UAE" : "Dubai / UAE", path: "/destinations/dubai-guide" },
                         { label: isBn ? "লন্ডন গাইড" : "London Guide", path: "/destinations/london-guide" },
+                        { label: isBn ? "কাশ্মীর" : "Kashmir", path: "/destinations/kashmir-guide" },
                         { label: isBn ? "ইতালি গাইড" : "Italy Guide", path: "/destinations/italy-guide" },
                         { label: isBn ? "প্যারিস গাইড" : "Paris Guide", path: "/destinations/paris-guide" },
                         { label: isBn ? "নিউ ইয়র্ক গাইড" : "New York Guide", path: "/destinations/new-york-guide" },

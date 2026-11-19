@@ -28,7 +28,7 @@ export default function DestinationsRouteView({ context }: RouteViewProps) {
   const { TravelEssentials, TravelpayoutsCustomWidget, TravelpayoutsEmbed, TravelpayoutsWidgetSkeleton, areTpScriptsReady, getCountryCityName, getCountryCityWithIata, getCountryIata, getCountryVisaId, getLocalizedRouteHref, isBn, isLanding, lang, localizedBlogs, localizedHotels = [], navigateTo, openPriceAlert, parameterId, section, setAreTpScriptsReady, triggerAffiliateToast } = context;
   const DESTINATIONS_DATA = context.localizedDestinations ?? EN_DESTINATIONS_DATA;
 
-  if (!isLanding && ["nepal-guide", "thailand-guide", "malaysia-guide", "singapore-guide", "maldives-guide", "dubai-guide", "london-guide", "italy-guide", "paris-guide", "new-york-guide"].includes(parameterId)) {
+  if (!isLanding && ["nepal-guide", "thailand-guide", "malaysia-guide", "singapore-guide", "maldives-guide", "dubai-guide", "london-guide", "italy-guide", "paris-guide", "new-york-guide", "kashmir-guide"].includes(parameterId)) {
     const destinationGuide = DESTINATIONS_DATA.find((destination: any) => destination.id === parameterId);
     if (destinationGuide) {
       return (
