@@ -776,6 +776,7 @@ export const VISA_DATA: VisaGuide[] = [
 ];
 
 export const DESTINATIONS_DATA: DestinationGuide[] = [
+
   {
     id: "nepal-guide",
     country: "Nepal",
@@ -2361,6 +2362,7 @@ export const BLOG_DATA: BlogPost[] = [
     ],
     affiliateCTA: { provider: "klook", headline: "Compare Dubai Desert Safari, Burj Khalifa & Museum of the Future listings", body: "Check the selected date, total price, inclusions, ticket delivery and cancellation terms on Klook; compare with the attraction or operator before booking." }
   },
+
   {
     id: "blog-25",
     slug: "abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
