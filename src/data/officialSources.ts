@@ -42,7 +42,7 @@ export type OfficialSourceSector =
   | "government";
 
 export type OfficialSourceCountry =
-  | "BD" | "SA" | "AE" | "TH" | "MY" | "SG" | "MV" | "NP" | "IN"
+  | "BD" | "SA" | "AE" | "TH" | "MY" | "SG" | "MV" | "NP" | "IN" | "PK"
   | "GB" | "EU" | "DE" | "FR" | "IT" | "TR" | "US" | "INTL";
 
 /** Who publishes the website. Shown as the badge on each organisation card. */
@@ -169,6 +169,7 @@ export const OFFICIAL_SOURCE_COUNTRIES: Readonly<
   MY: { en: "Malaysia", bn: "মালয়েশিয়া", aliases: ["malaysia", "kuala", "lumpur", "মালয়েশিয়া", "কুয়ালালামপুর"] },
   SG: { en: "Singapore", bn: "সিঙ্গাপুর", aliases: ["singapore", "সিঙ্গাপুর"] },
   MV: { en: "Maldives", bn: "মালদ্বীপ", aliases: ["maldives", "male", "maafushi", "মালদ্বীপ", "মালে"] },
+  PK: { en: "Pakistan", bn: "পাকিস্তান", aliases: ["pakistan", "islamabad", "kashmir", "পাকিস্তান", "ইসলামাবাদ", "কাশ্মীর"] },
   NP: { en: "Nepal", bn: "নেপাল", aliases: ["nepal", "kathmandu", "pokhara", "নেপাল", "কাঠমান্ডু", "পোখারা"] },
   IN: { en: "India", bn: "ভারত", aliases: ["india", "indian", "kolkata", "delhi", "ভারত", "ইন্ডিয়া", "কলকাতা", "দিল্লি"] },
   GB: { en: "United Kingdom", bn: "যুক্তরাজ্য", aliases: ["uk", "britain", "british", "england", "london", "যুক্তরাজ্য", "লন্ডন", "ইংল্যান্ড"] },
@@ -272,6 +273,9 @@ export const OFFICIAL_ORGANISATIONS: readonly OfficialOrganisation[] = [
   // Maldives
   org("mv-immigration", "Maldives Immigration", "মালদ্বীপ ইমিগ্রেশন", "government", "MV", "visa", ["immigration.gov.mv", "imuga.immigration.gov.mv"]),
   org("mv-visit-maldives", "Visit Maldives (official tourism site)", "Visit Maldives (অফিসিয়াল পর্যটন সাইট)", "portal", "MV", "tourism", ["visitmaldives.com"]),
+  // Pakistan
+  org("pk-nadra", "NADRA (National Database and Registration Authority)", "নাদ্রা (ন্যাশনাল ডেটাবেস অ্যান্ড রেজিস্ট্রেশন অথরিটি)", "government", "PK", "visa", ["visa.nadra.gov.pk"]),
+  org("pk-tourism", "Pakistan Tourism Development Corporation (PTDC)", "পাকিস্তান পর্যটন উন্নয়ন কর্পোরেশন (PTDC)", "government", "PK", "tourism", ["tourism.gov.pk"]),
   // Nepal
   org("np-immigration", "Nepal Department of Immigration", "নেপাল ইমিগ্রেশন বিভাগ", "government", "NP", "visa", ["immigration.gov.np", "nepaliport.immigration.gov.np", "pokhara.immigration.gov.np"]),
   org("np-tourism-board", "Nepal Tourism Board", "নেপাল ট্যুরিজম বোর্ড", "government", "NP", "tourism", ["ntb.gov.np"]),

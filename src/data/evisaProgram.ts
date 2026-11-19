@@ -339,6 +339,7 @@ export const EVISAS_BLOG_PLACEMENTS: Partial<Record<string, { campaign: EvisaCam
 export const EVISAS_DESTINATION_CAMPAIGNS: Partial<Record<string, EvisaCampaignKey>> = {
   "thailand-guide": "thailand",
   "dubai-guide": "uae",
+  "kashmir-guide": "pakistan",
 };
 
 export function getEvisaOfficialAction(campaign: EvisaCampaignKey, lang: EvisaLang): EvisaAction {
@@ -347,6 +348,7 @@ export function getEvisaOfficialAction(campaign: EvisaCampaignKey, lang: EvisaLa
     thailand: { href: officialSourceUrl("thailand-visa"), label: isBn ? "সরকারি থাই ই-ভিসা পোর্টাল" : "Official Thai e-Visa portal" },
     uae: { href: officialSourceUrl("dubai-visa"), label: isBn ? "UAE সরকারের ভিসা তথ্য" : "UAE government visa information" },
     morocco: { href: "https://www.acces-maroc.ma/", label: isBn ? "মরক্কোর সরকারি Accès Maroc পোর্টাল" : "Morocco’s official Accès Maroc portal" },
+    pakistan: { href: "https://visa.nadra.gov.pk/", label: isBn ? "পাকিস্তানের সরকারি NADRA ভিসা পোর্টাল" : "Pakistan's official NADRA visa portal" },
   };
   return { ...sources[campaign], sponsored: false, emphasis: "text" };
 }
@@ -368,6 +370,11 @@ export function getEvisaContext(campaign: EvisaCampaignKey, lang: EvisaLang) {
       before: isBn ? "মরক্কো যাওয়ার আগে " : "Before travelling to Morocco, check ",
       label: isBn ? "eVisas-এর মরক্কো ই-ভিসা আবেদন সহায়তা" : "Morocco eVisa assistance through eVisas",
       after: isBn ? " দেখুন। পাসপোর্ট, residence permit বা আগে থেকে থাকা ভিসার শর্ত আপনার ক্ষেত্রে প্রযোজ্য কি না সরকারি পোর্টালে মিলিয়ে নিন।" : ". Check the official portal for the passport, residence-permit or existing-visa conditions that apply to you.",
+    },
+    pakistan: {
+      before: isBn ? "পাকিস্তান ই-ভিসার জন্য " : "For your Pakistan eVisa, check ",
+      label: isBn ? "eVisas-এর পাকিস্তান ভিসা আবেদন সহায়তা" : "Pakistan visa assistance through eVisas",
+      after: isBn ? " দেখুন। আবেদনের আগে যোগ্যতা ও সম্পূর্ণ ফি যাচাই করুন।" : ". Confirm your eligibility and the full fee before applying.",
     },
   };
   return { ...copy[campaign], href: evisasCampaignUrl(campaign), official: getEvisaOfficialAction(campaign, lang) };
