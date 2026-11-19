@@ -1119,6 +1119,31 @@ export const DESTINATIONS_DATA: DestinationGuide[] = [
       { question: "Does this guide confirm U.S. visa eligibility?", answer: "No. Visa and entry decisions depend on your circumstances and current rules. Check current official U.S. guidance before booking." }
     ],
     schemaMarkup: { type: "DestinationGuide", description: "New York City destination planning guide", code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"New York City"}` }
+  },
+  {
+    id: "kashmir-guide",
+    country: "Pakistan",
+    title: "Azad Kashmir Destination Guide from Bangladesh: Neelum Valley & Planning",
+    description: "Plan an Azad Kashmir trip focusing on the Neelum Valley, Muzaffarabad, and Rawalakot. Check current road conditions and Pakistan entry requirements for Bangladeshi passports.",
+    bestTimeToVisit: "Check seasonal road access in the Neelum Valley before travel; summer months offer the most reliable weather.",
+    itinerary: [
+      { day: 1, title: "Arrival in Islamabad & Travel to Muzaffarabad", activities: ["Arrive in Islamabad and arrange road transport to Muzaffarabad.", "Check the official travel advisories for the route before departing."] },
+      { day: 2, title: "Muzaffarabad to Neelum Valley", activities: ["Travel into the Neelum Valley, stopping at Keran or Sharda.", "Verify local hotel bookings and weather conditions."] },
+      { day: 3, title: "Kel, Arang Kel & Return", activities: ["Explore Arang Kel if access is open, then begin the journey back.", "Always allow buffer time for mountain road travel."] }
+    ],
+    localTransport: ["Hire a private vehicle or use local transport options from Islamabad.", "Confirm route safety and border-area requirements with a local operator.", "Mountain roads require experienced drivers."],
+    budgetBdt: "No trip total is quoted. Airfare to Islamabad, local transport, and accommodation vary by date; check live prices before booking.",
+    quickAnswer: "Apply for a Pakistan Tourist Visa online. Fly from Dhaka to Islamabad, then travel by road to Muzaffarabad and the Neelum Valley. Check current road access and entry requirements before travel.",
+    keyFacts: [
+      { label: "Planning focus", value: "Neelum Valley, Muzaffarabad, mountain landscapes" },
+      { label: "Access", value: "Road travel from Islamabad" },
+      { label: "Entry requirements", value: "Check current Pakistan eVisa rules for BD passports" }
+    ],
+    faqs: [
+      { question: "How do I reach Azad Kashmir from Dhaka?", answer: "Fly to Islamabad and arrange road transport to Muzaffarabad." },
+      { question: "Is a visa required?", answer: "Yes, Bangladeshi citizens must apply for a Pakistan visa before travel." }
+    ],
+    schemaMarkup: { type: "DestinationGuide", description: "Azad Kashmir destination planning guide", code: `{"@context":"https://schema.org","@type":"TouristDestination","name":"Azad Kashmir"}` }
   }
 ];
 

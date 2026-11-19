@@ -11,7 +11,7 @@ export interface DestinationHeroImage {
  */
 export const DESTINATION_HERO_IMAGES: Readonly<Record<string, DestinationHeroImage>> = {
   "kashmir-guide": {
-    src: "/assets/images/destination_kashmir_hero_20261119-1200.avif",
+    src: "/assets/images/destination_kashmir_hero_20261119-1200.webp",
     altEn: "Breathtaking landscape of Azad Kashmir, Neelum Valley surrounded by mountains",
     altBn: "পাহাড়ে ঘেরা আজাদ কাশ্মীরের নীলম ভ্যালির শ্বাসরুদ্ধকর প্রাকৃতিক দৃশ্য",
   },

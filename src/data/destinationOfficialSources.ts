@@ -28,6 +28,7 @@ export const DESTINATION_FLIGHT_SEARCHES: Readonly<Record<string, DestinationFli
   },
   "paris-guide": { initialTo: "Paris (CDG)" },
   "new-york-guide": { initialTo: "New York (JFK)" },
+  "kashmir-guide": { initialTo: "Islamabad (ISB)" },
 };
 
 /**
@@ -173,6 +174,20 @@ export const DESTINATION_OFFICIAL_SOURCES: Readonly<Record<string, readonly Dest
       labelEn: "MTA: New York transit maps and service updates",
       labelBn: "MTA: নিউ ইয়র্কের ট্রানজিট ম্যাপ ও পরিষেবা আপডেট",
       url: "https://new.mta.info/",
+    },
+  ],
+  "kashmir-guide": [
+    {
+      category: "entry",
+      url: "https://visa.nadra.gov.pk/",
+      labelEn: "Pakistan Online Visa System (NADRA)",
+      labelBn: "পাকিস্তান অনলাইন ভিসা সিস্টেম (NADRA)",
+    },
+    {
+      category: "tourism",
+      url: "https://tourism.gov.pk/",
+      labelEn: "Pakistan Tourism Development Corporation",
+      labelBn: "পাকিস্তান পর্যটন উন্নয়ন কর্পোরেশন",
     },
   ],
 };
