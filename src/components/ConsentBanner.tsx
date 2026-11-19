@@ -21,6 +21,8 @@ interface ConsentBannerProps {
   onNavigate?: (path: string) => void;
   lang?: Language;
   initialCustomize?: boolean;
+  /** Lets the navigation coordinate with actual visibility, not lazy-mount state. */
+  onVisibilityChange?: (visible: boolean) => void;
 }
 
 const BTN_FOCUS =
@@ -41,6 +43,7 @@ export function ConsentBanner({
   onNavigate,
   lang = "en",
   initialCustomize = false,
+  onVisibilityChange,
 }: ConsentBannerProps) {
   const [visible, setVisible] = useState(initialCustomize);
   const [showCustomize, setShowCustomize] = useState(initialCustomize);
@@ -53,6 +56,8 @@ export function ConsentBanner({
   const isBn = lang === "bn";
   const locale = isBn ? "bn" : "en";
   const privacyPath = isBn ? "/bn/privacy" : "/privacy";
+
+  useEffect(() => { onVisibilityChange?.(visible); }, [visible, onVisibilityChange]);
 
   useEffect(() => {
     const initial = readConsentState();

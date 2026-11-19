@@ -47,6 +47,16 @@ export function navigationHref(path: string, lang: Language): string {
   return `${localized}${url.search}${url.hash}`;
 }
 
+/** The router and locale links must retain fragments on initial load and Back. */
+export function navigationLocationPath(location: { pathname: string; search: string; hash?: string }): string {
+  return `${location.pathname}${location.search}${location.hash ?? ""}`;
+}
+
+/** A closing search cannot return focus to a hidden/unmounted modal child. */
+export function selectNavigationSearchOpener(active: HTMLElement | null, fallback: HTMLElement | null): HTMLElement | null {
+  return active && active.tagName !== "BODY" && active.isConnected && active.getClientRects().length > 0 && !active.closest('[role="dialog"]') ? active : fallback;
+}
+
 export function activeNavigationMenu(path: string): NavigationMenuId | null {
   const base = toEnglishBasePath(path);
   if (base === "/destinations" || base.startsWith("/destinations/")) return "destinations";

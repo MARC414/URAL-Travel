@@ -73,7 +73,7 @@ import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
 import { focusSitewideSignup } from "./utils/signupCta";
 import { SiteHeader } from "./components/SiteHeader";
 import { NAVIGATION_RECORDS } from "./data/navigation";
-import { buildNavigation, navigationHref } from "./utils/navigation";
+import { buildNavigation, navigationHref, navigationLocationPath, selectNavigationSearchOpener } from "./utils/navigation";
 import {
   AFFILIATE_LINKS,
   KKDAY_PROMO,
@@ -723,7 +723,7 @@ export default function App() {
   // Simulated Browser Routing State
   const [currentPath, setCurrentPath] = useState<string>(() => {
     if (typeof window !== "undefined") {
-      return window.location.pathname + window.location.search;
+      return navigationLocationPath(window.location);
     }
     return "/";
   });
@@ -731,7 +731,7 @@ export default function App() {
   useEffect(() => {
     const cleanupClickTracking = initGlobalClickTracking();
     const handlePopState = () => {
-      setCurrentPath(window.location.pathname + window.location.search);
+      setCurrentPath(navigationLocationPath(window.location));
     };
     window.addEventListener("popstate", handlePopState);
     return () => {
@@ -758,13 +758,15 @@ export default function App() {
   const [siteSearchInitialQuery, setSiteSearchInitialQuery] = useState("");
   const siteSearchTriggerRef = useRef<HTMLInputElement>(null);
   const siteSearchOpenerRef = useRef<HTMLElement | null>(null);
+  const fallbackSearchTrigger = () => window.innerWidth < 1280 ? document.getElementById("mobile-site-search") : siteSearchTriggerRef.current;
   const openSiteSearch = (query = "") => {
     const focused = document.activeElement;
-    if (focused instanceof HTMLElement && focused !== document.body) siteSearchOpenerRef.current = focused;
+    siteSearchOpenerRef.current = selectNavigationSearchOpener(focused instanceof HTMLElement ? focused : null, fallbackSearchTrigger());
     setSiteSearchInitialQuery(query);
     setSiteSearchOpen(true);
   };
   const closeSiteSearch = () => {
+    siteSearchOpenerRef.current = selectNavigationSearchOpener(siteSearchOpenerRef.current, fallbackSearchTrigger());
     setSiteSearchOpen(false);
     setSiteSearchInitialQuery("");
   };
@@ -774,8 +776,7 @@ export default function App() {
       if (event.altKey || target?.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target?.tagName ?? "")) return;
       if ((event.key === "/" && !event.metaKey && !event.ctrlKey) || ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k")) {
         event.preventDefault();
-        setSiteSearchInitialQuery("");
-        setSiteSearchOpen(true);
+        openSiteSearch();
       }
     };
     window.addEventListener("keydown", handleSearchShortcut);
@@ -814,7 +815,7 @@ export default function App() {
     // crawlable Bengali surface, it is not just a client-side state flip.
     const current =
       typeof window !== "undefined"
-        ? window.location.pathname + window.location.search + window.location.hash
+        ? navigationLocationPath(window.location)
         : currentPath;
     pushPath(toLocalePath(current, newLang));
   };
@@ -851,6 +852,7 @@ export default function App() {
   const [isPriceAlertOpen, setIsPriceAlertOpen] = useState(false);
   const [alertDestination, setAlertDestination] = useState("Bangkok (BKK)");
   const [consentBannerMode, setConsentBannerMode] = useState<"idle" | "auto" | "customize">("idle");
+  const [consentBannerVisible, setConsentBannerVisible] = useState(false);
 
   useEffect(() => {
     let timer: number | undefined;
@@ -2550,7 +2552,7 @@ export default function App() {
         localeHrefs={localeHrefs}
         utilitySearch={utilitySearch}
         searchOpen={siteSearchOpen}
-        consentOpen={consentBannerMode !== "idle"}
+        consentOpen={consentBannerVisible}
         onRequestSearch={(trigger) => { siteSearchOpenerRef.current = trigger; openSiteSearch(); }}
         onEmailUpdates={goToSignup}
       />
@@ -4492,6 +4494,7 @@ export default function App() {
             onNavigate={navigateTo}
             lang={lang}
             initialCustomize={consentBannerMode === "customize"}
+            onVisibilityChange={setConsentBannerVisible}
           />
         </React.Suspense>
       )}

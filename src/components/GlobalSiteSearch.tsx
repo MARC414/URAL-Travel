@@ -130,6 +130,7 @@ export function GlobalSiteSearch({ isBn, initialQuery, onClose, navigateTo, trig
 
   return createPortal(
     <div
+      data-ural-overlay="search"
       className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-slate-950/65 px-3 py-[8vh] backdrop-blur-[2px] sm:px-6"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();

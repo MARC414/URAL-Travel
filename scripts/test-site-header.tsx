@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { Window } from "happy-dom";
 
 assert.ok(existsSync(new URL("../src/components/SiteHeader.tsx", import.meta.url)), "Accessible approved SiteHeader is missing");
@@ -21,8 +21,9 @@ const { createRoot } = await import("react-dom/client");
 const { renderToStaticMarkup } = await import("react-dom/server");
 const { SiteHeader } = await import("../src/components/SiteHeader");
 const { GlobalSiteSearch } = await import("../src/components/GlobalSiteSearch");
+const { default: ConsentBanner } = await import("../src/components/ConsentBanner");
 const { NAVIGATION_RECORDS } = await import("../src/data/navigation");
-const { buildNavigation, navigationHref } = await import("../src/utils/navigation");
+const { buildNavigation, navigationHref, selectNavigationSearchOpener } = await import("../src/utils/navigation");
 const { focusSitewideSignup } = await import("../src/utils/signupCta");
 const mounted = document.createElement("div"); document.body.appendChild(mounted);
 const root = createRoot(mounted);
@@ -60,6 +61,18 @@ async function key(element: Element, value: string, shiftKey = false) {
 const settle = async () => { await React.act(async () => { await new Promise(resolve => win.setTimeout(resolve, 35)); }); };
 let checks = 0;
 async function test(name: string, run: () => void | Promise<void>) { await run(); checks++; console.log(`PASS ${name}`); }
+await test("The widget safety rule leaves explicit first-party overlays visible", () => {
+  const css = readFileSync(new URL("../src/index.css", import.meta.url), "utf8");
+  const safetyRule = css.match(/body\s*>\s*[^{}]+\{[^{}]+\}/)?.[0];
+  assert.ok(safetyRule, "Widget safety rule must remain present");
+  const style = document.createElement("style"); style.textContent = safetyRule!; document.head.appendChild(style);
+  const owned = document.createElement("div"); owned.setAttribute("data-ural-overlay", "test");
+  const thirdParty = document.createElement("div"); document.body.append(owned, thirdParty);
+  try {
+    assert.notEqual(win.getComputedStyle(owned as never).display, "none", "A first-party portal must not be hidden by the third-party safety valve");
+    assert.equal(win.getComputedStyle(thirdParty as never).display, "none", "Unstyled third-party spillover must remain suppressed");
+  } finally { owned.remove(); thirdParty.remove(); style.remove(); }
+});
 await render();
 await test("All four disclosure controls operate one panel and Escape restores focus", async () => {
   for (const id of ["destinations", "activities", "visas", "tools"]) {
@@ -161,6 +174,24 @@ await test("Rendered navigation has no supplier promo while retaining activity d
     assert.equal(/KKday 30% Sale|KKday Asia Travel Passes|tpo\.li/.test(markup), false);
   }
 });
+await test("Real consent visibility blocks navigation only while the banner is actually open", async () => {
+  function ConsentHeaderHarness() {
+    const [visible, setVisible] = React.useState(false);
+    return React.createElement(React.Fragment, null,
+      React.createElement(ConsentBanner, { initialCustomize: true, onVisibilityChange: setVisible }),
+      React.createElement(SiteHeader, { ...props(), consentOpen: visible }),
+    );
+  }
+  await React.act(async () => { root.render(React.createElement(ConsentHeaderHarness)); });
+  assert.ok(document.querySelector("[data-consent-banner]"));
+  await click(button("mobile-menu-burger"));
+  assert.equal(Boolean(document.getElementById("mobile-intent-drawer")), false, "Visible consent must take precedence");
+  await click(document.querySelector('[data-consent-action="reject-all"]')!); await settle();
+  assert.equal(document.querySelector("[data-consent-banner]"), null);
+  await click(button("mobile-menu-burger")); await settle();
+  assert.ok(document.getElementById("mobile-intent-drawer"), "A mounted but dismissed consent component must not disable navigation");
+  await key(document.getElementById("mobile-intent-drawer")!, "Escape"); await settle();
+});
 await test("Saved-HTML navigation supplies the same published targets with native disclosures", async () => {
   assert.ok(existsSync(new URL("../src/components/StaticSiteNavigation.tsx", import.meta.url)), "Static navigation is missing");
   const { StaticSiteNavigation } = await import("../src/components/StaticSiteNavigation");
@@ -178,6 +209,31 @@ await test("Saved-HTML navigation supplies the same published targets with nativ
     assert.equal(parsed.querySelector('a[hreflang="bn-bd"]')?.getAttribute("href"), "/bn/umrah");
     assert.equal(parsed.querySelector('a[hreflang="en-bd"]')?.getAttribute("href"), "/umrah");
   }
+});
+await test("App language links preserve the incoming query and fragment on first render", async () => {
+  const oldWindow = scope.window;
+  const routeWindow = new Window({ url: "https://uraltravel.co.uk/umrah?utm_source=nav-test#umrah-calculator" });
+  scope.window = routeWindow;
+  try {
+    const { default: App } = await import("../src/App");
+    const markup = renderToStaticMarkup(React.createElement(App));
+    assert.ok(markup.includes('href="/bn/umrah?utm_source=nav-test#umrah-calculator"'), "First-render language link must not lose an incoming fragment");
+  } finally { scope.window = oldWindow; await routeWindow.happyDOM.abort(); }
+});
+await test("Search focus returns to a visible non-dialog control, not a removed drawer child", () => {
+  assert.equal(typeof selectNavigationSearchOpener, "function", "Search-return focus selection is missing");
+  const fallback = button("mobile-site-search");
+  const dialog = document.createElement("section"); dialog.setAttribute("role", "dialog");
+  const nested = document.createElement("button"); dialog.appendChild(nested); document.body.appendChild(dialog);
+  assert.equal(selectNavigationSearchOpener(nested, fallback) === fallback, true);
+  const link = document.createElement("a"); link.href = "/blog"; document.body.appendChild(link);
+  assert.equal(selectNavigationSearchOpener(link, fallback) === link, true);
+  link.hidden = true;
+  assert.equal(selectNavigationSearchOpener(link, fallback) === fallback, true);
+  link.remove();
+  assert.equal(selectNavigationSearchOpener(link, fallback) === fallback, true);
+  assert.equal(selectNavigationSearchOpener(document.body, fallback) === fallback, true);
+  dialog.remove();
 });
 await React.act(async () => { root.unmount(); });
 await win.happyDOM.abort();

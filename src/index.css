@@ -456,7 +456,7 @@ html {
    SAFETY VALVE: PREVENT UNSTYLED THIRD-PARTY WIDGET ELEMENTS (CALENDARS/TIMEPICKERS)
    FROM SPILLING IN-FLOW BELOW THE FOOTER
    ========================================================================== */
-body > :not(#root):not(script):not(style) {
+body > :not(#root):not(script):not(style):not([data-ural-overlay]) {
   display: none;
   position: absolute;
   pointer-events: none;
@@ -476,6 +476,7 @@ body > :not(#root):not(script):not(style) {
   [role="complementary"],
   .lg\:sticky,
   #mobile-intent-drawer,
+  [data-ural-overlay],
   .stats-bar,
   .consent-banner,
   .affiliate-toast,
