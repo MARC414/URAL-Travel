@@ -4356,6 +4356,20 @@ export default function App() {
                   </div>
                 ))}
               </div>
+
+              <div className="mt-12 flex justify-center">
+                <a
+                  href={siteUrl("/destinations", lang)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo(siteUrl("/destinations", lang));
+                  }}
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-brand-navy hover:bg-slate-800 text-white font-sans font-bold text-[15px] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 border border-white/5"
+                >
+                  <Globe className="w-5 h-5 text-brand-gold" />
+                  <span>{isBn ? "সব গন্তব্যের গাইড দেখুন" : "Explore All Destination Guides"}</span>
+                </a>
+              </div>
             </div>
 
             {/* Quick airport-code reference now follows the destination cards. */}
