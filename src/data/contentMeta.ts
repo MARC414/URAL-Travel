@@ -40,11 +40,11 @@
  * once this value is more than `CONTENT_UPDATED_MAX_AGE_DAYS` old, so it cannot
  * rot silently.
  *
- * Last intentional refresh: 2026-11-16 — regional Experiences pages
+ * Last intentional refresh: 2026-11-18 — regional Experiences pages
  * (/experiences/europe and /experiences/asia, EN + BN), canonical destination
  * and article link upgrades, and first-party flight-CTA disclosure updates.
  */
-export const CONTENT_UPDATED = "2026-11-16";
+export const CONTENT_UPDATED = "2026-11-18";
 
 /**
  * Warn (do not fail) once CONTENT_UPDATED is older than this. Chosen so a content
