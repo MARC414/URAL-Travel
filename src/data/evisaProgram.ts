@@ -49,6 +49,8 @@ export const EVISAS_CAMPAIGNS = {
   uae: "https://evisas.com/?ref=uraltravel&sid=dubai",
   morocco: "https://evisas.com/?ref=uraltravel&sid=morocco",
   thailand: "https://evisas.com/?ref=uraltravel&sid=thailand",
+  pakistan: "https://evisas.com/?ref=uraltravel&sid=pakistan",
+  uk: "https://evisas.com/?ref=uraltravel&sid=uk",
 } as const satisfies Record<EvisaCampaignKey, string>;
 
 export interface EvisaAction {
@@ -340,6 +342,7 @@ export const EVISAS_DESTINATION_CAMPAIGNS: Partial<Record<string, EvisaCampaignK
   "thailand-guide": "thailand",
   "dubai-guide": "uae",
   "kashmir-guide": "pakistan",
+  "london-guide": "uk",
 };
 
 export function getEvisaOfficialAction(campaign: EvisaCampaignKey, lang: EvisaLang): EvisaAction {
@@ -349,6 +352,7 @@ export function getEvisaOfficialAction(campaign: EvisaCampaignKey, lang: EvisaLa
     uae: { href: officialSourceUrl("dubai-visa"), label: isBn ? "UAE সরকারের ভিসা তথ্য" : "UAE government visa information" },
     morocco: { href: "https://www.acces-maroc.ma/", label: isBn ? "মরক্কোর সরকারি Accès Maroc পোর্টাল" : "Morocco’s official Accès Maroc portal" },
     pakistan: { href: "https://visa.nadra.gov.pk/", label: isBn ? "পাকিস্তানের সরকারি NADRA ভিসা পোর্টাল" : "Pakistan's official NADRA visa portal" },
+    uk: { href: "https://www.gov.uk/standard-visitor", label: isBn ? "যুক্তরাজ্যের সরকারি ভিসা পোর্টাল" : "UK's official visa portal" },
   };
   return { ...sources[campaign], sponsored: false, emphasis: "text" };
 }
@@ -375,6 +379,11 @@ export function getEvisaContext(campaign: EvisaCampaignKey, lang: EvisaLang) {
       before: isBn ? "পাকিস্তান ই-ভিসার জন্য " : "For your Pakistan eVisa, check ",
       label: isBn ? "eVisas-এর পাকিস্তান ভিসা আবেদন সহায়তা" : "Pakistan visa assistance through eVisas",
       after: isBn ? " দেখুন। আবেদনের আগে যোগ্যতা ও সম্পূর্ণ ফি যাচাই করুন।" : ". Confirm your eligibility and the full fee before applying.",
+    },
+    uk: {
+      before: isBn ? "UK ভিসার জন্য " : "For your UK visa, check ",
+      label: isBn ? "eVisas-এর UK ভিসা আবেদন সহায়তা" : "UK visa assistance through eVisas",
+      after: isBn ? " দেখুন। আবেদনের আগে যোগ্যতা ও ফি যাচাই করুন।" : ". Confirm your eligibility and fees before applying.",
     },
   };
   return { ...copy[campaign], href: evisasCampaignUrl(campaign), official: getEvisaOfficialAction(campaign, lang) };

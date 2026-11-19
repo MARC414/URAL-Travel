@@ -11,6 +11,7 @@ https://uraltravel.co.uk/flights/dhaka-singapore
 https://uraltravel.co.uk/flights/dhaka-maldives
 https://uraltravel.co.uk/flights/dhaka-los-angeles
 https://uraltravel.co.uk/flights/dhaka-madinah
+https://uraltravel.co.uk/flights/dhaka-islamabad
 https://uraltravel.co.uk/hotels
 https://uraltravel.co.uk/hotels/kathmandu-hotels
 https://uraltravel.co.uk/hotels/bangkok-hotels
@@ -38,6 +39,7 @@ https://uraltravel.co.uk/destinations/london-guide
 https://uraltravel.co.uk/destinations/italy-guide
 https://uraltravel.co.uk/destinations/paris-guide
 https://uraltravel.co.uk/destinations/new-york-guide
+https://uraltravel.co.uk/destinations/kashmir-guide
 https://uraltravel.co.uk/costs
 https://uraltravel.co.uk/costs/nepal-costs
 https://uraltravel.co.uk/costs/thailand-costs
@@ -145,6 +147,7 @@ https://uraltravel.co.uk/bn/flights/dhaka-singapore
 https://uraltravel.co.uk/bn/flights/dhaka-maldives
 https://uraltravel.co.uk/bn/flights/dhaka-los-angeles
 https://uraltravel.co.uk/bn/flights/dhaka-madinah
+https://uraltravel.co.uk/bn/flights/dhaka-islamabad
 https://uraltravel.co.uk/bn/hotels
 https://uraltravel.co.uk/bn/hotels/kathmandu-hotels
 https://uraltravel.co.uk/bn/hotels/bangkok-hotels
@@ -172,6 +175,7 @@ https://uraltravel.co.uk/bn/destinations/london-guide
 https://uraltravel.co.uk/bn/destinations/italy-guide
 https://uraltravel.co.uk/bn/destinations/paris-guide
 https://uraltravel.co.uk/bn/destinations/new-york-guide
+https://uraltravel.co.uk/bn/destinations/kashmir-guide
 https://uraltravel.co.uk/bn/costs
 https://uraltravel.co.uk/bn/costs/nepal-costs
 https://uraltravel.co.uk/bn/costs/thailand-costs

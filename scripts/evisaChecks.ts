@@ -36,6 +36,8 @@ export function checkEvisaIntegration(dist: string, check: (ok: boolean, label: 
     uae: "https://evisas.com/?ref=uraltravel&sid=dubai",
     thailand: "https://evisas.com/?ref=uraltravel&sid=thailand",
     morocco: "https://evisas.com/?ref=uraltravel&sid=morocco",
+    pakistan: "https://evisas.com/?ref=uraltravel&sid=pakistan",
+    uk: "https://evisas.com/?ref=uraltravel&sid=uk",
   };
   const inspectLinks = (html: string, expected: string) => {
     const links = [...parse(html).querySelectorAll('a[href^="https://evisas.com/"]')];

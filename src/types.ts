@@ -115,7 +115,7 @@ export interface TripCostData {
   references: { name: string; nameBn: string; url: string }[];
 }
 
-export type EvisaCampaignKey = "uae" | "morocco" | "thailand" | "pakistan";
+export type EvisaCampaignKey = "uae" | "morocco" | "thailand" | "pakistan" | "uk";
 
 export interface BlogPost {
   id: string;
