@@ -52,6 +52,39 @@ export function navigationLocationPath(location: { pathname: string; search: str
   return `${location.pathname}${location.search}${location.hash ?? ""}`;
 }
 
+/** Restore a real fragment after route/language rendering, including lazy views. */
+export function restoreNavigationFragment(path: string): () => void {
+  if (typeof document === "undefined" || typeof window === "undefined") return () => {};
+  let id: string;
+  try { id = decodeURIComponent(new URL(path, SITE_ORIGIN).hash.slice(1)); }
+  catch { return () => {}; }
+  if (!id) return () => {};
+  let cancelled = false;
+  let frame = 0;
+  const cleanup = () => {
+    cancelled = true;
+    window.cancelAnimationFrame(frame);
+    window.clearTimeout(timeout);
+    observer.disconnect();
+  };
+  const scroll = () => {
+    frame = 0;
+    if (cancelled) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ block: "start", behavior: "instant" });
+    cleanup();
+  };
+  const schedule = () => { if (!cancelled && !frame) frame = window.requestAnimationFrame(scroll); };
+  const observer = new MutationObserver(schedule);
+  observer.observe(document.body, { childList: true, subtree: true });
+  const timeout = window.setTimeout(cleanup, 5000);
+  // Fonts can move an otherwise mounted target; wait for the current font load.
+  if (document.fonts?.ready) void document.fonts.ready.then(schedule);
+  else schedule();
+  return cleanup;
+}
+
 /** A closing search cannot return focus to a hidden/unmounted modal child. */
 export function selectNavigationSearchOpener(active: HTMLElement | null, fallback: HTMLElement | null): HTMLElement | null {
   return active && active.tagName !== "BODY" && active.isConnected && active.getClientRects().length > 0 && !active.closest('[role="dialog"]') ? active : fallback;

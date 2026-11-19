@@ -748,7 +748,7 @@ footer ul li a[href] {
 .ural-header-icon { display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 10px; border-radius: 10px; color: inherit; }
 .ural-header-icon:hover { background: rgb(245 241 232 / 8%); }
 .ural-mega-panel { position: absolute; left: 50%; top: 100%; transform: translateX(-50%); padding-top: 8px; width: min(1056px, calc(100vw - 48px)); z-index: 60; text-align: left; }
-.ural-mega-surface { background: var(--color-brand-navy); border: 1px solid rgb(245 241 232 / 15%); border-radius: 20px; box-shadow: 0 18px 40px rgb(11 20 38 / 24%); overflow: hidden; }
+.ural-mega-surface { background: var(--color-brand-navy); border: 1px solid rgb(245 241 232 / 15%); border-radius: 20px; box-shadow: 0 18px 40px rgb(11 20 38 / 24%); max-height: calc(100dvh - var(--ural-header-offset) - 8px); overflow-y: auto; overscroll-behavior: contain; scrollbar-color: var(--color-brand-emerald) var(--color-brand-navy); }
 .ural-mega-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 28px 20px; border-bottom: 1px solid rgb(245 241 232 / 10%); }
 .ural-mega-head h2 { font-family: var(--font-sans); color: var(--color-brand-ivory); font-size: 18px; font-weight: 600; line-height: 1.4; margin: 0 0 4px; }
 .ural-mega-head p { font-size: 12px; color: rgb(245 241 232 / 80%); margin: 0; }

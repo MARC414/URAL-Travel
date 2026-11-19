@@ -23,7 +23,7 @@ const { SiteHeader } = await import("../src/components/SiteHeader");
 const { GlobalSiteSearch } = await import("../src/components/GlobalSiteSearch");
 const { default: ConsentBanner } = await import("../src/components/ConsentBanner");
 const { NAVIGATION_RECORDS } = await import("../src/data/navigation");
-const { buildNavigation, navigationHref, selectNavigationSearchOpener } = await import("../src/utils/navigation");
+const { buildNavigation, navigationHref, selectNavigationSearchOpener, restoreNavigationFragment } = await import("../src/utils/navigation");
 const { focusSitewideSignup } = await import("../src/utils/signupCta");
 const mounted = document.createElement("div"); document.body.appendChild(mounted);
 const root = createRoot(mounted);
@@ -234,6 +234,32 @@ await test("Search focus returns to a visible non-dialog control, not a removed 
   assert.equal(selectNavigationSearchOpener(link, fallback) === fallback, true);
   assert.equal(selectNavigationSearchOpener(document.body, fallback) === fallback, true);
   dialog.remove();
+});
+await test("Desktop menu surface has a viewport cap and contains its own scrolling", () => {
+  const css = readFileSync(new URL("../src/index.css", import.meta.url), "utf8");
+  const style = document.createElement("style"); style.textContent = css.match(/\.ural-mega-surface\s*\{[^{}]+\}/)![0]; document.head.appendChild(style);
+  const surface = document.createElement("div"); surface.className = "ural-mega-surface"; document.body.appendChild(surface);
+  try {
+    const computed = win.getComputedStyle(surface as never);
+    assert.ok(computed.maxHeight.includes("vh") || computed.maxHeight.includes("dvh"), "Panel must have a viewport-relative height cap");
+    assert.equal(computed.overflowY, "auto", "Lower links must scroll within the surface");
+    assert.equal(computed.overscrollBehavior, "contain");
+  } finally { surface.remove(); style.remove(); }
+});
+await test("Fragment navigation waits for lazy targets and cancels stale scroll work", async () => {
+  assert.equal(typeof restoreNavigationFragment, "function", "Route-aware fragment scrolling is missing");
+  const calls: unknown[] = [];
+  const cleanup = restoreNavigationFragment("/bn/umrah?utm_source=test#late-guide");
+  const target = document.createElement("section"); target.id = "late-guide";
+  target.scrollIntoView = options => { calls.push(options); };
+  document.body.appendChild(target); await settle();
+  assert.deepEqual(calls, [{ block: "start", behavior: "instant" }]);
+  cleanup(); target.remove();
+  const cancel = restoreNavigationFragment("/umrah#cancelled-guide"); cancel();
+  target.id = "cancelled-guide"; document.body.appendChild(target); await settle();
+  assert.equal(calls.length, 1, "Leaving the route must cancel pending fragment scrolling");
+  target.remove();
+  assert.doesNotThrow(() => restoreNavigationFragment("/umrah#%broken")());
 });
 await React.act(async () => { root.unmount(); });
 await win.happyDOM.abort();

@@ -73,7 +73,7 @@ import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
 import { focusSitewideSignup } from "./utils/signupCta";
 import { SiteHeader } from "./components/SiteHeader";
 import { NAVIGATION_RECORDS } from "./data/navigation";
-import { buildNavigation, navigationHref, navigationLocationPath, selectNavigationSearchOpener } from "./utils/navigation";
+import { buildNavigation, navigationHref, navigationLocationPath, restoreNavigationFragment, selectNavigationSearchOpener } from "./utils/navigation";
 import {
   AFFILIATE_LINKS,
   KKDAY_PROMO,
@@ -2346,10 +2346,15 @@ export default function App() {
     const cleanPath = normalizeRoutePath(path);
     if (typeof window !== "undefined") {
       window.history.pushState({}, "", cleanPath);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (!new URL(cleanPath, SITE_ORIGIN).hash) window.scrollTo({ top: 0, behavior: "smooth" });
     }
     setCurrentPath(cleanPath);
   };
+
+  useEffect(() => {
+    if (lang !== locale) return;
+    return restoreNavigationFragment(currentPath);
+  }, [currentPath, lang, locale]);
 
   /**
    * Locale routing for links and navigation, with one rule that used to be
