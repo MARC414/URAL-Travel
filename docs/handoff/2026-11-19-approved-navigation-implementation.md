@@ -2,11 +2,11 @@
 
 **Goal:** implement the approved navbar and mega menus in the real website while preserving URAL's design, URLs and affiliate earning paths.
 
-**Lifecycle:** local implementation; independent review addressed; final review-fix CI being closed;
-**not deployed**. **Branch:** `feat/approved-navigation`, base `0e83b102e2c6b37c20a3c72311ef9b7805168c03`.
+**Lifecycle:** implemented and verified locally; owner authorized push/merge; **production acceptance not observed**.
+**Branch:** `feat/approved-navigation`, base `0e83b102e2c6b37c20a3c72311ef9b7805168c03`.
 **Workspace:** `E:\AI\Worktrees\approved-navigation`. Application source is committed through
-`af0ef65`; lifecycle documentation is still being finalized locally. Do not push, merge or deploy
-without the owner's separate approval. The original checkout and its five owner images remain untouched.
+`443f20a`; the archive/integration documentation follows it. The original checkout and its five owner
+images remain untouched.
 
 ## State
 
@@ -18,10 +18,10 @@ without the owner's separate approval. The original checkout and its five owner 
   London leads Europe & UK, Pakistan retains its Azad Kashmir/Neelum Valley subtitle and existing path.
 - Independent review: 0 Critical, 2 Important, 0 Minor. Both material findings were independently
   reproduced and fixed in one pass, with passing regressions; no cosmetic redesign or second review.
-- Pending closure: final 46-command CI rerun on `af0ef65`. The earlier full run on `9d9d080` passed,
-  but predates these review fixes and is not the final verdict.
-- Not started: production integration/deployment, wider catalogue/article/trust repairs, new UK/Pakistan
-  visa publication or authenticated GTM/GA4/partner receipt checks.
+- Final 46-command CI passed on `443f20a` (including lint/build/verify:build and 618 build checks);
+  the earlier `9d9d080` run is superseded. Owner then instructed push and merge.
+- Not started: post-deployment production acceptance, wider catalogue/article/trust repairs, new
+  UK/Pakistan visa publication or authenticated GTM/GA4/partner receipt checks.
 
 ## Files
 
@@ -61,11 +61,11 @@ without the owner's separate approval. The original checkout and its five owner 
   the same 19 existing scheduled posts per locale. No article was authored or live-published here.
 - UI detector exited 0 on touched components/CSS. Navigation 14px links and 18px panel titles match
   the approved design; pre-existing typography/print/error-color advisories remain outside this task.
-- Pre-review-fix source `9d9d080` passed **all 46 CI commands**, including lint, build and **618 build checks**.
-  Eager JavaScript measured **169.3 KB gzip** against the unchanged **185 KB ceiling**. The build
+- Final source `443f20a` passed **all 46 CI commands**, including lint, build and **618 build checks**.
+  Eager JavaScript measured **169.5 KB gzip** against the unchanged **185 KB ceiling**. The build
   generated 155 English + 155 Bengali routes, skipped IndexNow and left protected feed/config hashes
   unchanged. This is a local Windows run, not a claim of remote GitHub CI or live production acceptance.
-  Final CI is being rerun on `af0ef65`; do not infer its result from this earlier source.
+  The earlier full run on `9d9d080` is superseded.
 
 Local evidence lives in `.impeccable/review/` (screenshots, `implementation-checks.json`,
 `preservation-checks.json`, `review-regressions.json`, `independent-review.md`, `detector.json`)
@@ -111,12 +111,14 @@ the final browser result. Before scratch cleanup, preserve the final evidence ou
 
 ## Next step
 
-Close the final review-fix CI evidence, show the actual local preview and key EN/BN screenshots, then ask
-the owner for **separate deployment approval**. Do not rerun a cosmetic design cycle.
+Verify the merged `main` build and, if the host deploys automatically, observe production navigation
+after deployment. Do not treat the local evidence as proof of bookings, commissions or authenticated
+analytics receipt.
 
 ## Open questions and limitations
 
-- Production integration/deployment — owner approval still required, followed by fresh production checks.
+- Production integration was owner-approved on 19 November 2026. If the host auto-deploys from `main`,
+  live acceptance still needs to be observed; no deployment receipt was available when this was written.
 - Code and navigation checks do not prove bookings, approved commissions, payouts or authenticated
   GTM/GA4 event receipt. Catalogue metadata/accessibility claims and wider editorial parity debt remain separate.
 - No physical-device, screen-reader, Lighthouse or field Core Web Vitals score was measured here.

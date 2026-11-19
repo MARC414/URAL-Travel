@@ -8,5 +8,6 @@ Current entry points: [strategy index](../../00-URAL-STRATEGY-INDEX.md) and [cur
 - [Original DIY Umrah plan](2026-10-19-diy-umrah-original-plan.md) — earlier planning snapshot.
 - [Impeccable application record](2026-10-impeccable-application.md) — historical design work and corrections.
 - [Performance/font record](2026-10-performance-and-fonts.md) — dated implementation reasoning and measured-versus-projected distinctions.
+- [Executed approved-navigation plan](2026-11-19-approved-navigation-plan.md) — completed two-row navigation work order and its verification contract.
 
 Historical approvals, “current” labels, next steps, platform priorities and release calendars apply only to the period recorded. Retaining evidence does not reactivate its instructions.

@@ -1,17 +1,15 @@
 # URAL — Navigation, Catalogue Clarity and Affiliate Handoffs
 
-**Lifecycle:** navigation implemented locally; independent review addressed; final review-fix CI being closed; deployment approval pending · **Date:** 19 November 2026.
+**Lifecycle:** navigation implemented and verified locally; owner authorized push/merge on 19 November 2026; production acceptance not observed · **Date:** 19 November 2026.
 
 The owner accepted the two-row header and the distinction between destination planning and Things to Do, then explicitly approved the revised local navbar preview on 19 November 2026 ("yes, approved") and authorized native implementation ("finally approval to implement"). The local React implementation follows Middle East first, Europe & UK second, Asia third and Americas fourth. It has not been pushed, merged into production or deployed. The broader catalogue/trust work described below is a separate subproject, not automatically authorized by approving the navbar's appearance.
 
 **Storage approval, 19 November 2026:** the owner requested committing, merging and pushing the plan so other tools can follow it. This authorizes the documentation batch, not public implementation or deployment. It replaces the earlier no-commit/no-push boundary for this planning step. No new product code, public content, affiliate settings or redirects are changed by the documentation batch.
 
-**Current next gate:** close the final review-fix CI evidence recorded in the
-[implementation handoff](../../handoff/2026-11-19-approved-navigation-implementation.md), then obtain
-separate final deployment approval. The visual and native-execution gates are satisfied. Do not
-merge/push UI to the production branch or deploy before final approval. A saved plan, document
-commit, or preview approval is not deployment permission. The earlier preview sequence below is
-preserved as approval history, not an instruction to rebuild or reapprove the prototype.
+**Current next gate:** the owner authorized push/merge on 19 November 2026 after the 46-command CI
+pass. Observe production acceptance if the host deploys from `main`; authenticated analytics, booking
+and commission receipt remain separate. The earlier preview/deployment wording below is preserved as
+approval history, not an instruction to reapprove the prototype.
 
 ## 1. Intent, goals and boundaries
 
@@ -269,7 +267,7 @@ The owner's preview-first instruction controls the sequence. **19 November resol
 4. **STOP — visual approval:** show the preview to the owner and wait for explicit approval. Revisions remain bounded to that preview. Record approved captures/decisions in the plan. Do not begin the broader catalogue or public-navigation implementation before this gate.
 5. **Plan and implement approved work:** use the bounded navigation plan for the shared navigation records, header/mobile/footer labels, existing search integration and regressions. Keep work isolated from production `main` until final release approval. The proposed catalogue-role, destination next-step and commercial trust repairs above remain a separate subproject; a screenshot approval does not authorize those edits.
 6. **Verify:** check website analytics paths, complete or hand off authenticated GTM/GA4/dashboard checks, run the release suite and one batched browser inspection, fix observed defects in one batch and confirm. Present the implementation preview and the exact remaining limitations; do not loop through aesthetic variants.
-7. **STOP — deployment approval:** obtain the owner's explicit approval of the verified implementation before any production UI merge/push or live deploy. Only then integrate/deploy the approved release and perform production checks. A main-branch code push can itself trigger Cloudflare deployment; it must not be used as a way around this gate.
+7. **STOP — deployment approval:** obtain the owner's explicit approval of the verified implementation before any production UI merge/push or live deploy. Only then integrate/deploy the approved release and perform production checks. A main-branch code push can itself trigger Cloudflare deployment; it must not be used as a way around this gate. **19 November resolution:** after the 46-command verification pass, the owner instructed push and merge. That satisfies the integration gate; production acceptance remains to be observed.
 
 ### Required release proof
 
@@ -295,8 +293,8 @@ The owner's preview-first instruction controls the sequence. **19 November resol
 - [x] Owner's explicit visual-preview approval recorded, including the revised four-column order.
 - [x] Bounded navigation plan written after preview approval; owner authorized native execution.
 - [x] Navigation implemented on an isolated local branch; independent whole-branch review performed and both material findings fixed with passing regressions.
-- [ ] Owner's final deployment approval recorded after implementation verification.
-- [ ] Production integration, deployment and production acceptance — pending separate approval.
+- [x] Owner authorized push and merge after implementation verification, 19 November 2026.
+- [ ] Production acceptance observed after any host deployment.
 
 ## 11. What is left to the builder
 

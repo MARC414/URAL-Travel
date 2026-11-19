@@ -1,9 +1,10 @@
 # Handoff — Navigation preview before implementation — 19 November 2026
 
 > **HISTORICAL PREVIEW RECORD — DO NOT TREAT AS CURRENT EXECUTION STATE.**
-> The owner subsequently authorized native implementation. Current code, verification and
-> the separate deployment gate are in the [implementation handoff](2026-11-19-approved-navigation-implementation.md).
-> The earlier “not started” and pending execution-choice statements below describe the preview stage only.
+> The owner subsequently authorized native implementation and then push/merge. Current code, verification
+> and remaining deployment acceptance are in the [implementation handoff](2026-11-19-approved-navigation-implementation.md).
+> The earlier “not started” and pending execution-choice statements below describe the preview stage only;
+> the executed plan is archived at [docs/history/2026-11-19-approved-navigation-plan.md](../history/2026-11-19-approved-navigation-plan.md).
 
 **Goal:** make URAL's navigation easier to use while keeping the established design, all existing URLs and affiliate earning doorways intact; show the mega menu before changing the public site.
 
@@ -14,7 +15,7 @@
 - Recorded: the owner accepted the two-row header, visible Home/About Us, a Things to Do entry separate from destination itineraries, geographic menu groups and preserving all current URLs.
 - Written: `docs/superpowers/specs/2026-11-19-navigation-and-earning-flow-design.md`, including the named trust/discovery repairs and an independent builder clarity check.
 - Visual approval recorded: owner said "yes, approved" after the revised navbar preview, including Middle East → Europe & UK → Asia → Americas.
-- Written next: `docs/superpowers/plans/2026-11-19-approved-navigation.md`; awaiting review and execution-method choice.
+- Written next: `docs/superpowers/plans/2026-11-19-approved-navigation.md` (since executed and archived under `docs/history/`); awaiting review and execution-method choice at the time.
 - Local prototype complete: outside the repository/deployable graph; 42 screen-state checks and review-board controls passed. This is not verification of production React code.
 - Not started: production React navigation implementation, catalogue repairs and new UK/Pakistan visa-guide publication. The latter two are separate subprojects, not included in the navbar approval.
 - No additional commit/push performed for this approval record or implementation plan. Earlier documentation-push permission did not authorize production UI deployment.

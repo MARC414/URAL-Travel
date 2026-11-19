@@ -24,12 +24,12 @@ preserved affiliate doorways. The owner authorized documentation integration and
 navigation implementation**, not deployment.
 **Visual gate satisfied, 19 November 2026:** the owner approved the local EN/BN desktop/mobile preview,
 including **Middle East → Europe & UK → Asia → Americas**. The
-[**bounded navigation implementation plan**](docs/superpowers/plans/2026-11-19-approved-navigation.md)
-is being closed against the local implementation on `feat/approved-navigation`; one independent
-review's two material findings were fixed with passing regressions. The
+[**executed navigation plan**](docs/history/2026-11-19-approved-navigation-plan.md) is archived as a
+historical work order. One independent review's two material findings were fixed with passing
+regressions, and the owner authorized push/merge on 19 November 2026. The
 [**implementation handoff**](docs/handoff/2026-11-19-approved-navigation-implementation.md) records
-source changes, preservation evidence and the remaining approval gate. Separate final approval still
-precedes any production UI merge/push or deployment. Broader catalogue/article/trust repairs are a
+source changes, preservation evidence and the remaining post-deployment checks. Broader
+catalogue/article/trust repairs are a
 separate subproject, not approval inferred from the navbar preview.
 [**Earlier preview handoff**](docs/handoff/2026-11-19-navigation-preview-first.md) preserves the resolved
 stale-checkout/Pakistan finding as historical context. Future UK/Pakistan visa publication remains separate.
