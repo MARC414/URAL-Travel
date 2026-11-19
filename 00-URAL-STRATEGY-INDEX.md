@@ -21,8 +21,12 @@ questions and becomes the content queue. This replaces the planned on-site AI he
 records the owner-accepted, brand-preserving direction: visible Home/About links, organized desktop mega menus,
 equivalent mobile navigation, clearer roles for Destinations/Things to Do, **all existing URLs unchanged**, and
 preserved affiliate doorways. The owner authorized saving/integrating the documentation, **not deploying UI**.
-The next deliverable is a **non-production mega-menu preview**; explicit visual approval precedes public
-implementation and separate final approval precedes any production UI merge/push or deployment.
+**Visual gate satisfied, 19 November 2026:** the owner approved the local EN/BN desktop/mobile preview,
+including **Middle East → Europe & UK → Asia → Americas**. The
+[**bounded navigation implementation plan**](docs/superpowers/plans/2026-11-19-approved-navigation.md)
+awaits plan review/execution choice. Separate final approval still precedes any production UI merge/push
+or deployment. Broader catalogue/article/trust repairs are a separate subproject, not approval inferred
+from the navbar preview.
 [**Cross-tool handoff**](docs/handoff/2026-11-19-navigation-preview-first.md) supplies the resume point and
 the resolved stale-checkout/Pakistan finding. Future UK/Pakistan visa publication remains a separate task.
 

@@ -8,8 +8,11 @@
 
 - Recorded: the owner accepted the two-row header, visible Home/About Us, a Things to Do entry separate from destination itineraries, geographic menu groups and preserving all current URLs.
 - Written: `docs/superpowers/specs/2026-11-19-navigation-and-earning-flow-design.md`, including the named trust/discovery repairs and an independent builder clarity check.
-- Authorized now: commit, integrate and push this documentation so other tools can follow it.
-- Not started: mega-menu prototype, public-navigation/catalogue implementation and new UK/Pakistan visa-guide publication.
+- Visual approval recorded: owner said "yes, approved" after the revised navbar preview, including Middle East → Europe & UK → Asia → Americas.
+- Written next: `docs/superpowers/plans/2026-11-19-approved-navigation.md`; awaiting review and execution-method choice.
+- Local prototype complete: outside the repository/deployable graph; 42 screen-state checks and review-board controls passed. This is not verification of production React code.
+- Not started: production React navigation implementation, catalogue repairs and new UK/Pakistan visa-guide publication. The latter two are separate subprojects, not included in the navbar approval.
+- No additional commit/push performed for this approval record or implementation plan. Earlier documentation-push permission did not authorize production UI deployment.
 - **Not authorized:** live UI deployment. The owner explicitly requires preview approval first and final approval before deploying the verified implementation.
 
 ## Files and entry points
@@ -25,6 +28,7 @@
 
 - Keep the two-row header: Home/About/Partners/Contact plus search/help/language in the utility row; Destinations, Things to Do, Flights, Hotels, Visa Guides, Umrah & Hajj and Guides & Tools in the primary row.
 - Use mega menus only for grouped sections; mobile uses expandable drawer groups. Preserve keyboard, native anchor and Back behavior.
+- Approved Destinations order: four desktop columns, Middle East (Saudi Umrah hub, Saudi visa guide, Dubai) → Europe & UK (London first) → Asia (including Pakistan/Azad Kashmir) → Americas (New York). These same groups/order apply on mobile and in Bengali. Other panels remain three columns.
 - Keep `/experiences`, its regional URLs, `/attractions` and every existing detail URL. `/experiences` is activity discovery; `/attractions` becomes the individual-guide directory. **No consolidation redirect.**
 - Service names lead menus; providers remain identifiable at commercial handoffs and on relationship pages. Do not hide eVisas' private paid role or erase affiliate disclosures.
 - Preserve the prominent eVisas section, supplied widget/campaigns, hosted Page 24232 and existing affiliate lifecycle/consent behavior.
@@ -40,15 +44,16 @@
 - A proposed `/attractions` redirect was explicitly withdrawn after the owner said no existing URL may change.
 - No full application implementation/test/deployment success is implied by a plan or this handoff. Earlier audit measurements are dated observations, not current certificates.
 
-## Next step — do this first
+## Next step — visual gate satisfied
 
-Reconfirm the latest source, then create **only an isolated non-production mega-menu preview**. Show the utility row, four desktop mega menus, mobile groups and English/Bengali variants in the existing URAL style. Keep it outside deployable `src/`/`public/` and production `main`. Do not submit forms, load partner widgets, make real booking actions or deploy a public preview route as a shortcut.
+Review the bounded navigation plan with the owner and retain their chosen execution method. Reconfirm the latest source before execution and use an isolated worktree; do not rebuild or re-request approval of the already accepted visual direction. Implement only the navigation subproject, preserving application behaviour and existing commercial handoffs.
 
-**Stop and ask the owner to approve the visual preview.** After that approval, write/execute the bounded implementation plan on isolated work. Present verification and the implemented preview; obtain **separate final deployment approval** before merging/pushing UI to the production branch or deploying.
+Present verification and the implemented preview; obtain **separate final deployment approval** before merging/pushing UI to the production branch or deploying. The local prototype is available at `C:\Users\HP\AppData\Local\Temp\opencode\ural-navigation-preview-2026-11-19\`; its `review/` screenshots and `session/content/assets/ui.html` are reference artifacts only, not production code or portable build dependencies.
 
 ## Open questions / approval gates
 
-- Mega-menu appearance, panel layout and mobile treatment — owner approval after preview; pending.
+- Mega-menu appearance, panel layout and mobile treatment — owner approved on 19 November 2026; do not reopen cosmetics without a material defect or owner request.
+- Bounded navigation plan review and native/subagent-driven execution choice — pending.
 - Final implementation/deployment — owner approval after verified result; pending.
 - GA4/GTM and partner dashboard receipt/service coverage — authenticated evidence/operational permission needed if absent. Website code or a supplied URL is not booking/commission proof.
 

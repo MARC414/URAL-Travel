@@ -1,12 +1,12 @@
 # URAL — Navigation, Catalogue Clarity and Affiliate Handoffs
 
-**Lifecycle:** owner-accepted direction; visual preview and deployment approvals pending · **Date:** 19 November 2026.
+**Lifecycle:** navigation visual preview approved; implementation plan awaiting review; deployment approval pending · **Date:** 19 November 2026.
 
-The owner accepted the two-row header and the distinction between destination planning and Things to Do. This document completes that direction with design preservation, a no-existing-URL-change rule, Pakistan/future visa support, affiliate transparency and a bounded stabilization release. Approval of the earlier outline does not mean this entire design has been implemented or approved for publication.
+The owner accepted the two-row header and the distinction between destination planning and Things to Do, then explicitly approved the revised local navbar preview on 19 November 2026 ("yes, approved"). The approved preview puts Middle East first, Europe & UK second, Asia third and Americas fourth. No public UI has been implemented or deployed. The broader catalogue/trust work described below is a separate subproject, not automatically authorized by approving the navbar's appearance.
 
 **Storage approval, 19 November 2026:** the owner requested committing, merging and pushing the plan so other tools can follow it. This authorizes the documentation batch, not public implementation or deployment. It replaces the earlier no-commit/no-push boundary for this planning step. No new product code, public content, affiliate settings or redirects are changed by the documentation batch.
 
-**Mandatory next gate:** show a non-production mega-menu preview first, obtain the owner's visual approval, then proceed with approved implementation. Show the verified result and obtain separate final deployment approval before any UI merge/push to the production branch or live deploy. A saved plan, document commit, or preview approval is not deployment permission. See the preview-first sequence below and `docs/handoff/2026-11-19-navigation-preview-first.md`.
+**Current next gate:** review the [bounded navigation implementation plan](../plans/2026-11-19-approved-navigation.md) and choose execution method. The non-production visual gate is satisfied; implementation verification and separate final deployment approval remain. Do not merge/push UI to the production branch or deploy before that final approval. A saved plan, document commit, or preview approval is not deployment permission. See the preview-first sequence below and `docs/handoff/2026-11-19-navigation-preview-first.md`.
 
 ## 1. Intent, goals and boundaries
 
@@ -101,14 +101,14 @@ Destination, Things to Do, Visa Guides, and Guides & Tools receive compact mega-
 
 ### 5.2 Menu destinations
 
-**Destinations — geography only**
+**Destinations — geographic groups, owner-approved order and Saudi cross-links**
 
 - Parent/all: `/destinations`.
-- Asia: existing Nepal, Thailand, Malaysia, Singapore, Maldives and the owner's Pakistan/Azad-Kashmir guide.
-- Middle East: Dubai & Abu Dhabi via `/destinations/dubai-guide`.
-- Europe: London `/destinations/london-guide`, Paris `/destinations/paris-guide`, Italy `/destinations/italy-guide`.
-- Americas: New York `/destinations/new-york-guide`.
-- Three columns maximum for current inventory: Asia; Middle East; Europe and Americas, with distinct subheadings. More countries are handled by records and the all-guides directory, not by adding another fixed header item.
+- First — Middle East: Saudi Arabia — Umrah & Hajj `/umrah`; Saudi Arabia visa guide `/visa/saudi-arabia-visa`; Dubai & Abu Dhabi `/destinations/dubai-guide`. The first two are explicitly labelled existing planning/entry cross-links, not invented Saudi destination pages.
+- Second — Europe & UK: London `/destinations/london-guide`, Paris `/destinations/paris-guide`, Italy `/destinations/italy-guide`.
+- Third — Asia: existing Nepal, Thailand, Malaysia, Singapore, Maldives and the owner's Pakistan/Azad-Kashmir guide.
+- Fourth — Americas: New York `/destinations/new-york-guide`.
+- Four desktop columns for Destinations supersede the earlier three-column limit. The other panels retain three columns; mobile renders these groups in the same order. More countries are handled by records and the all-guides directory, not another fixed header item.
 - No partner slogans, visa fees, FX quotas, booking-volume claims or attraction ticket labels in these columns.
 
 **Things to Do — activity discovery**
@@ -256,13 +256,13 @@ Keep a narrow maintenance exception: broken commercial links, security/privacy/a
 
 ## 10. Execution sequence and verification contract
 
-This is a design, not permission to implement the public site. The owner's preview-first instruction controls the sequence:
+The owner's preview-first instruction controls the sequence. **19 November resolution:** the local EN/BN desktop/mobile preview and its four-column destination revision were shown and explicitly approved. Only the approved navigation is covered by the next implementation work order; catalogue roles, article bodies and analytics repair need separate work orders/owner scope approval.
 
 1. **Store the plan:** commit and integrate this documentation batch into `main`, making it discoverable through the strategy index and handoff. For this documentation-only push use Cloudflare Pages' documented `[CF-Pages-Skip]` commit-message prefix. Do not invoke deployment hooks or alter build controls. Existing unrelated scheduled publication remains outside this task.
 2. **Reconfirm the baseline:** snapshot existing URLs, partner destinations and key page captures from the latest approved source before making a preview. Preserve work added by other tools.
 3. **Produce only the mega-menu preview:** a local/isolated non-production visual prototype showing the utility row, all four desktop panels, mobile groups, search/language/control placement and EN/BN text. Existing page links may illustrate destinations, but do not submit forms, mount partner widgets, initiate real affiliate bookings, or introduce public routes. Use a separate preview artifact outside the deployable `src/` and `public/` graph. Do not merge preview/UI changes to the production branch.
 4. **STOP — visual approval:** show the preview to the owner and wait for explicit approval. Revisions remain bounded to that preview. Record approved captures/decisions in the plan. Do not begin the broader catalogue or public-navigation implementation before this gate.
-5. **Plan and implement approved work:** write the implementation work order, build the discovery adapter/regressions, implement header/mobile/footer navigation, clarify existing catalogue roles and destination next-step paths, and correct the named commercial trust/rendering problems. Reuse the existing UI/data and preserve partner handoffs. Keep this work isolated from production `main` until final release approval.
+5. **Plan and implement approved work:** use the bounded navigation plan for the shared navigation records, header/mobile/footer labels, existing search integration and regressions. Keep work isolated from production `main` until final release approval. The proposed catalogue-role, destination next-step and commercial trust repairs above remain a separate subproject; a screenshot approval does not authorize those edits.
 6. **Verify:** check website analytics paths, complete or hand off authenticated GTM/GA4/dashboard checks, run the release suite and one batched browser inspection, fix observed defects in one batch and confirm. Present the implementation preview and the exact remaining limitations; do not loop through aesthetic variants.
 7. **STOP — deployment approval:** obtain the owner's explicit approval of the verified implementation before any production UI merge/push or live deploy. Only then integrate/deploy the approved release and perform production checks. A main-branch code push can itself trigger Cloudflare deployment; it must not be used as a way around this gate.
 
@@ -286,9 +286,9 @@ This is a design, not permission to implement the public site. The owner's previ
 - [x] Named defects, bounded scope, maintenance exceptions and release gates specified.
 - [x] Independent builder check: the reviewer reported "nothing important left" on 19 November 2026. This is a design-clarity check, not implementation or factual certification.
 - [x] Owner authorized documentation commit/merge/push; upstream Pakistan/source absence reconciled on 19 November 2026.
-- [ ] Non-production mega-menu preview shown in EN/BN, desktop and mobile.
-- [ ] Owner's explicit visual-preview approval recorded.
-- [ ] Implementation plan written after preview approval.
+- [x] Non-production mega-menu preview shown in EN/BN, desktop and mobile.
+- [x] Owner's explicit visual-preview approval recorded, including the revised four-column order.
+- [x] Bounded navigation implementation plan written after preview approval; execution review/method still pending.
 - [ ] Owner's final deployment approval recorded after implementation verification.
 - [ ] Public implementation, its build proof, deployment and acceptance — all future work.
 
@@ -298,4 +298,4 @@ Exact component extraction and typed adapter location, responsive panel widths, 
 
 What a builder must not guess: the current approved deployment/source baseline; an unpublished visa slug; a new eVisas campaign/product ID; partner service coverage, dashboard receipt or commission; the owner's visual/deployment approval; permission to change URLs, deploy account settings, rewrite unrelated bodies or publish scheduled new posts.
 
-**Next action:** produce the mega-menu preview only, then wait for the owner's visual approval. All existing URLs remain protected. Public implementation and deployment have not been performed or approved by storing this plan.
+**Next action:** review `docs/superpowers/plans/2026-11-19-approved-navigation.md` and choose execution method. All existing URLs remain protected. The prototype's checks are not proof of the eventual React implementation, site-wide repairs or a deployment.
