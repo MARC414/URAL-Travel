@@ -39,7 +39,7 @@ export const translations = {
     // Destinations Section
     destinationsBadge: "Popular destinations from Bangladesh",
     destinationsTitle: "Where Are You Flying Next?",
-    destinationsSubtitle: "Pick a destination to see flights, visa requirements, hotel guides, and a full trip budget — all in BDT.",
+    destinationsSubtitle: "Pick a destination to see flights, visa requirements, hotel guides, and a full trip budget.",
 
     // Hotels Section
     hotelsBadge: "Verified Hotel Deals",
