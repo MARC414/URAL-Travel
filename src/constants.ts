@@ -14,6 +14,7 @@ const FLIGHT_ROUTE_BASES: Pick<FlightRoute, "id" | "from" | "to" | "country" | "
   { id: "dhaka-maldives", from: "Dhaka (DAC)", to: "Malé (MLE)", country: "Maldives", airlines: ["US-Bangla Airlines", "SriLankan Airlines", "Maldivian", "Malaysia Airlines"] },
   { id: "dhaka-los-angeles", from: "Dhaka (DAC)", to: "Los Angeles (LAX)", country: "United States", airlines: ["Emirates", "Qatar Airways", "Etihad Airways", "Turkish Airlines", "Biman Bangladesh Airlines", "US-Bangla Airlines"] },
   { id: "dhaka-madinah", from: "Dhaka (DAC)", to: "Madinah (MED)", country: "Saudi Arabia", airlines: ["Saudia", "Biman Bangladesh Airlines", "Flynas", "Flyadeal"] },
+  { id: "dhaka-islamabad", from: "Dhaka (DAC)", to: "Islamabad (ISB)", country: "Pakistan", airlines: ["Biman Bangladesh Airlines", "PIA", "Emirates", "Qatar Airways"] },
 ];
 
 export const FLIGHTS_DATA: FlightRoute[] = FLIGHT_ROUTE_BASES.map((route) => {
