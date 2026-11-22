@@ -25,9 +25,11 @@ Readiness, foundation and growth/pilot companions break the proposal into 24 bou
 
 [**Review-only instructions**](URAL-INTERNATIONAL-PLAN-REVIEW-INSTRUCTIONS.md) retain the two open
 handoff refinements: release-manifest lifecycle and acquisition attribution acceptance.
-[**Next technical implementation prompt**](URAL-INTERNATIONAL-IMPLEMENTATION-START.md) switches the
-recipient from review to a bounded engineering start, leaving new article/homepage/hub/FAQ copy and
-translations with the editorial tool. Missing content is not replaced by publishable placeholders.
+[**Next implementation-and-authoring prompt**](URAL-INTERNATIONAL-IMPLEMENTATION-START.md) switches
+the recipient from review to a bounded start. **Owner correction:** that same AI also researches and
+writes the approved articles, homepage/hub/FAQ copy and Bengali translations; the earlier separate-
+writer restriction is withdrawn. The prompt directs qualified A-D plan corrections before code.
+Missing evidence is not replaced by publishable placeholders; publication/deployment remain gated.
 
 **Authority:** the owner authorised this documentation-only commit/push to main using
 `[CF-Pages-Skip]`, not application implementation in this publishing session or production UI release.

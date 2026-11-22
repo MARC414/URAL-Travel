@@ -9,6 +9,11 @@ implementation assignment, follow [the new start prompt](URAL-INTERNATIONAL-IMPL
 instead of treating this earlier review-only role as permanent. This file remains the reviewer entry
 point; neither role includes unapproved content publication or production deployment.
 
+**Owner's writing-role correction:** the AI that provided the review also owns implementation and
+scope-approved content research/authoring, not just engineering. The implementation prompt removes
+the separate-writer restriction and directs qualified A-D plan corrections. A reviewer reading only
+this file must still verify the current assignment; this update is not permission to publish.
+
 ## 1. Your role and boundary
 
 You are reviewing the proposed international expansion plan, not executing it. Check whether the
@@ -98,6 +103,28 @@ SEO canonical URLs remain clean; do not forward arbitrary query strings or perso
 Earlier builder gaps were incorporated into the proposal: bilingual homepage FAQs (F03), actual
 WhatsApp contact/share marker producers (R05), and null destination for newly scoped Bangladesh search
 (F06). Check their coverage; do not report them as still missing without new evidence.
+
+### Later review A-D — qualification and next tool's work
+
+The receiving reviewer confirmed A/B and proposed C/D (BN actual-counterpart assertions and body-
+extractor fixture controls). The implementation-start prompt instructs applying all four document
+corrections with these distinctions:
+- Missing proposed directories before implementation is expected; missing artefact ownership/schema
+  or executable acceptance is the plan gap.
+- Initial pageview carries full href and query, and language switching preserves query. Ordinary
+  internal navigation drops incoming query on bare routes. That does not establish loss of GA4
+  session attribution; no application UTM parser is required merely because a search found none.
+- Affiliate/contact/share events and report/session association need coverage. Inventory actual
+  reachable WhatsApp producers instead of a fixed count/four-file list. Existing `verify-build.ts`
+  already has delegated affiliate/WhatsApp consent guards; add targeted coverage rather than claim
+  no analytics tests exist. Keep both zero-emission and duplicate-emission protections.
+- An empty `DEFERRED_BN_GROUPS` is not inherently a defect. Test actual generated content and no fake
+  alternate destinations, and classify baseline exceptions before a blanket failure policy.
+- `quote()` rejects expired, not every stale, payload. A bounded labelled stale fallback is part of
+  the current rates contract; do not weaken or accidentally remove it based on review wording.
+
+These are proposed plan-contract corrections for the receiving tool, not application fixes performed
+by this handoff publisher. Review completion is not publication approval.
 
 ## 6. Review method and required output
 

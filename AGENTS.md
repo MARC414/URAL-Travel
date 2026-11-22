@@ -14,8 +14,10 @@ automatic implementation approval.
 For an owner-authorised technical implementation session, read
 [`URAL-INTERNATIONAL-IMPLEMENTATION-START.md`](URAL-INTERNATIONAL-IMPLEMENTATION-START.md), then its
 corrected master/design and companion plan. Follow the current assigned role, not an earlier
-review-only prompt. Content writing stays with the separate editorial tool; missing copy blocks
-publication. A documentation commit/push or prior navigation approval does not authorise UI deployment.
+review-only prompt. **Owner correction:** the implementing AI also owns scope-approved research,
+article/homepage/hub/FAQ writing and Bengali translations; the earlier separate-writer instruction
+is withdrawn. Source, publication and deployment gates remain. A documentation commit/push or prior
+navigation approval does not authorise UI deployment.
 
 The direction is **international travel intelligence, with Bangladesh as the home market and priority**
 (owner decision, 6 November 2026 — see [`PRODUCT.md`](PRODUCT.md) and

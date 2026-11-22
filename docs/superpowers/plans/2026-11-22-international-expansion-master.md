@@ -7,13 +7,20 @@
 **Tech Stack:** existing React 19, TypeScript, Vite 6, Tailwind CSS 4, tsx/node:assert, happy-dom, Cloudflare Pages. No new dependencies.
 **Spec:** [Corrected design](../specs/2026-11-22-international-expansion-design.md).
 
-**22 November handoff update:** the owner requested a next prompt for the other AI to start technical
-implementation while leaving new content writing separate. Read
+**22 November handoff update, corrected by the owner:** the AI that provided the review now owns
+implementation **and scope-approved content research/writing**, including articles, homepage/hubs,
+FAQs and Bengali translations. The previous separate-writer restriction is withdrawn. Read
 [`URAL-INTERNATIONAL-IMPLEMENTATION-START.md`](../../../URAL-INTERNATIONAL-IMPLEMENTATION-START.md)
 for this bounded role and first batch; it does not approve application deployment. The owner also
 authorised sharing these documents in a documentation-only `[CF-Pages-Skip]` commit/push to main.
 Fetched source at `f782dd7` already has the approved navigation; older missing-header observations
 describe the stale planning checkout, not current upstream. Do not re-execute that work order.
+
+The later reviewer raised A-D: release-manifest lifecycle, event/source attribution coverage,
+actual BN-counterpart guards and real body-extractor fixtures. The start prompt gives the recipient
+the corrections to apply before implementation, with qualified attribution/locale/rates claims.
+These plan-contract changes remain pending until applied and verified by that tool; naming proposed
+new artefacts here does not mean they already exist or authorise an application workaround.
 
 ## Global Constraints
 

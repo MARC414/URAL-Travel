@@ -3,10 +3,11 @@
 **Lifecycle:** corrected design proposal, awaiting owner review. **Date:** 22 November 2026.
 **Authority:** the owner requested a detailed cross-tool plan, not application edits, publication or deployment.
 
-**Later handoff update, 22 November:** the owner authorised publishing the documents and asked for
-an implementation-start prompt for a separate technical AI, with content writing left separate.
-That prompt scopes the first engineering batch; it is not editorial/publication/UI-deployment
-approval. Fetched upstream `f782dd7` already contains the approved navigation, so any old
+**Later handoff update, corrected 22 November:** the owner authorised publishing the documents and
+clarified that the AI which supplied the review owns implementation **and approved research/content
+writing**. The earlier instruction to leave writing to a separate tool is withdrawn. The prompt
+scopes an initial engineering batch and A-D plan-contract corrections; it does not waive article
+scope, source, publication or UI-deployment gates. Fetched upstream `f782dd7` contains the approved navigation, so any old
 missing-navigation observation belongs to the earlier stale checkout.
 
 ## 1. Intent and confirmed direction

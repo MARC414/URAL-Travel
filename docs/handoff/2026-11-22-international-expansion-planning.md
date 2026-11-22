@@ -149,3 +149,21 @@ hubs or placeholders publish. The two review refinements remain first-batch depe
 The document push must be verified against GitHub after commit. No application build/test result
 or deployment is claimed by this documentation batch. Recheck the latest remote revision before
 starting R01; source/runtime/account checks remain the implementing tool's responsibility.
+
+## Latest owner correction — implementation and writing belong to the same AI
+
+The owner clarified that the AI which supplied the review also writes the articles and other new
+content. The previous separate-editorial-tool restriction in the start prompt is withdrawn. The
+recipient now owns engineering and scope-approved EN/BN research/article/homepage/hub/FAQ authoring;
+source/brief/maintenance/publication/deployment gates still apply. This session remains the reviewer
+and documentation handoff publisher, not the website implementer.
+
+The recipient's subsequent review raised A-D. The updated prompt directs all four plan-document
+corrections before code, with verified qualifications: initial landing query/full href survives;
+plain internal routes lack query but GA4 session attribution loss is unproven; actual click/report
+coverage and all reachable WhatsApp producers need tests; verify-build already has some analytics
+guards; empty deferral list is not proof of a bad locale; expired FX is rejected but bounded labelled
+stale FX is allowed. Count/availability claims must be rechecked in the recipient's own worktree.
+
+No release manifest, extractor, locale guard, analytics code or article was implemented by this
+update. Those remain the recipient's tasks after applying the corrected plan contracts.
