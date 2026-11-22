@@ -3471,8 +3471,8 @@ if (sitemap) {
     !!londonEnHtml && !!londonBnHtml && !!londonEnBlock && !!londonBnBlock &&
       londonEnHtml.includes(`rel="canonical" href="${locOf(londonEnBlock)}"`) &&
       londonBnHtml.includes(`rel="canonical" href="${locOf(londonBnBlock)}"`) &&
-      londonEnHtml.includes('hreflang="bn-bd"') &&
-      londonBnHtml.includes('hreflang="en-bd"') &&
+      londonEnHtml.includes('hreflang="bn"') &&
+      londonBnHtml.includes('hreflang="en"') &&
       londonEnBlock.includes(`href="${locOf(londonBnBlock)}"`) &&
       londonBnBlock.includes(`href="${locOf(londonEnBlock)}"`),
     "London EN/BN canonical routes are included in the sitemap and linked by hreflang"
@@ -8661,8 +8661,8 @@ checkArticlePresentation(DIST_DIR, check);
       [pair.bnFile, bnHtml],
     ] as const) {
       if (
-        !html.includes(`hreflang="en-bd" href="${pair.enUrl}"`) ||
-        !html.includes(`hreflang="bn-bd" href="${pair.bnUrl}"`) ||
+        !html.includes(`hreflang="en" href="${pair.enUrl}"`) ||
+        !html.includes(`hreflang="bn" href="${pair.bnUrl}"`) ||
         !html.includes(`hreflang="x-default" href="${pair.enUrl}"`)
       ) {
         regionalIssues.push(`${label}: incomplete reciprocal hreflang cluster`);
