@@ -9,6 +9,14 @@ Start with [`00-URAL-STRATEGY-INDEX.md`](00-URAL-STRATEGY-INDEX.md) and
 from 25 October 2026. The current owner task controls scope; the audit's recommendations are not
 automatic implementation approval.
 
+**International-expansion cross-tool entry points (22 November 2026):** for plan review, read
+[`URAL-INTERNATIONAL-PLAN-REVIEW-INSTRUCTIONS.md`](URAL-INTERNATIONAL-PLAN-REVIEW-INSTRUCTIONS.md).
+For an owner-authorised technical implementation session, read
+[`URAL-INTERNATIONAL-IMPLEMENTATION-START.md`](URAL-INTERNATIONAL-IMPLEMENTATION-START.md), then its
+corrected master/design and companion plan. Follow the current assigned role, not an earlier
+review-only prompt. Content writing stays with the separate editorial tool; missing copy blocks
+publication. A documentation commit/push or prior navigation approval does not authorise UI deployment.
+
 The direction is **international travel intelligence, with Bangladesh as the home market and priority**
 (owner decision, 6 November 2026 — see [`PRODUCT.md`](PRODUCT.md) and
 [`docs/MASTER-PLAN-2026-11-06.md`](docs/MASTER-PLAN-2026-11-06.md)). Display currency follows the

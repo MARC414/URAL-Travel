@@ -15,6 +15,29 @@ questions and becomes the content queue. This replaces the planned on-site AI he
 
 ## Current plan (6 November 2026)
 
+### International expansion — corrected proposal and technical handoff, 22 November 2026
+
+The owner requested an international-facing direction, preserved Bangladesh expertise and existing
+public URLs, with UK growth as a focused expansion rather than a UK-only rewrite. Start with the
+[**master implementation plan**](docs/superpowers/plans/2026-11-22-international-expansion-master.md)
+and [**corrected design**](docs/superpowers/specs/2026-11-22-international-expansion-design.md).
+Readiness, foundation and growth/pilot companions break the proposal into 24 bounded tasks.
+
+[**Review-only instructions**](URAL-INTERNATIONAL-PLAN-REVIEW-INSTRUCTIONS.md) retain the two open
+handoff refinements: release-manifest lifecycle and acquisition attribution acceptance.
+[**Next technical implementation prompt**](URAL-INTERNATIONAL-IMPLEMENTATION-START.md) switches the
+recipient from review to a bounded engineering start, leaving new article/homepage/hub/FAQ copy and
+translations with the editorial tool. Missing content is not replaced by publishable placeholders.
+
+**Authority:** the owner authorised this documentation-only commit/push to main using
+`[CF-Pages-Skip]`, not application implementation in this publishing session or production UI release.
+The detailed content/deployment gates remain; `/uk`, articles, account changes and communications are
+separately scoped. The earlier 22 November drafts are withdrawn behind historical pointers.
+
+**Source correction:** fetched upstream already includes the navigation implementation below at
+`f782dd7`. The original planning checkout was stale. Do not repeat the archived navigation work or
+overwrite the merged header. Reconfirm current source and preserve later contributions before execution.
+
 ### Navigation stabilization — local implementation, 19 November 2026
 
 [**Navigation, catalogue clarity and affiliate handoffs — design**](docs/superpowers/specs/2026-11-19-navigation-and-earning-flow-design.md)
