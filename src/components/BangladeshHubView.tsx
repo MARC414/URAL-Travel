@@ -30,6 +30,7 @@ export default function BangladeshHubView() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{isBn ? "ফ্লাইট রুট" : "Flights from Dhaka"}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Placeholder for real links to existing BD content */}
             {routesList.map(route => (
               <Link 
                 key={route.id} 
