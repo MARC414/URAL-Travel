@@ -1185,6 +1185,9 @@ export default function App() {
     if (!root) {
       section = "home";
       isLanding = true;
+    } else if (root === "bangladesh" && segs.length === 1) {
+      section = "bangladesh";
+      isLanding = true;
     } else if (root === "flights" && segs.length <= 2) {
       const routeParam = searchParams.get("route") || subSegment;
       section = "flights";
@@ -4090,6 +4093,11 @@ export default function App() {
             with it: this keeps the shell and shows a reload prompt. `resetKey`
             is the current path, so leaving the broken route clears the error. */}
         <RouteErrorBoundary lang={lang} resetKey={currentPath}>
+
+        {/* -------------------------------------------------------------
+            🇧🇩 VIEW 01b: BANGLADESH HUB
+        ------------------------------------------------------------- */}
+        {section === "bangladesh" && <BangladeshHubView />}
 
         {/* -------------------------------------------------------------
             🏠 VIEW 1: HOME PAGE (CONVERSION HUB)
