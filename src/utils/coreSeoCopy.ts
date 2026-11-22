@@ -40,7 +40,7 @@ const TOOL_SLUG_SEO_COPY: Record<"en" | "bn", Record<string, SeoCopy>> = {
 export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   ...TOOL_SLUG_SEO_COPY.en,
   "/": {
-    title: "Bangladesh Travel Guides, Flights & Visas from Dhaka | URAL",
+    title: "Travel Intelligence: Global Flights, Hotels & eVisas | URAL",
     description:
       "Plan travel from Dhaka with BDT flight guidance, visa checklists for Bangladeshi passport holders, destination itineraries and practical trip-budget guides.",
   },

@@ -4998,8 +4998,8 @@ ${routesToRender
     // publish byte-identical annotations (a one-sided cluster is invalid).
     const alternates =
       r.enUrl && r.bnUrl
-        ? `\n    <xhtml:link rel="alternate" hreflang="en-bd" href="${escapeXml(r.enUrl)}" />` +
-          `\n    <xhtml:link rel="alternate" hreflang="bn-bd" href="${escapeXml(r.bnUrl)}" />` +
+        ? `\n    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(r.enUrl)}" />` +
+          `\n    <xhtml:link rel="alternate" hreflang="bn" href="${escapeXml(r.bnUrl)}" />` +
           `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(r.enUrl)}" />`
         : "";
     return `  <url>
@@ -5336,7 +5336,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     // return tag pointing at a 404 is worse than no tag at all.
     const englishUrl = r.enUrl || r.canonicalUrl;
     const bengaliUrl = r.bnUrl || null;
-    const localeTag = r.locale === "bn" ? "bn-BD" : "en-BD";
+    const localeTag = r.locale === "bn" ? "bn" : "en";
     const localeOgp = r.locale === "bn" ? "bn_BD" : "en_BD";
 
     let pageHtml = templateHtml
@@ -5366,17 +5366,17 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       // all 83 pages would declare the homepage as their alternate, which
       // Search Console reports as "no return tag" and ignores wholesale.
       .replace(
-        /<link rel="alternate" hreflang="en-bd" href="[^"]*" \/>/,
-        `<link rel="alternate" hreflang="en-bd" href="${escapeHtml(englishUrl)}" />`
+        /<link rel="alternate" hreflang="en" href="[^"]*" \/>/,
+        `<link rel="alternate" hreflang="en" href="${escapeHtml(englishUrl)}" />`
       )
       .replace(
         /<link rel="alternate" hreflang="x-default" href="[^"]*" \/>/,
         `<link rel="alternate" hreflang="x-default" href="${escapeHtml(englishUrl)}" />`
       )
       .replace(
-        /\n?\s*<link rel="alternate" hreflang="bn-bd" href="[^"]*" \/>/,
+        /\n?\s*<link rel="alternate" hreflang="bn" href="[^"]*" \/>/,
         bengaliUrl
-          ? `\n    <link rel="alternate" hreflang="bn-bd" href="${escapeHtml(bengaliUrl)}" />`
+          ? `\n    <link rel="alternate" hreflang="bn" href="${escapeHtml(bengaliUrl)}" />`
           : ""
       )
       .replace(
