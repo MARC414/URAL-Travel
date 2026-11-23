@@ -105,6 +105,7 @@ import { NAVIGATION_RECORDS } from "../src/data/navigation";
 import { buildNavigation } from "../src/utils/navigation";
 import { StaticSiteNavigation } from "../src/components/StaticSiteNavigation";
 import BangladeshHubView from "../src/components/BangladeshHubView";
+import UkHubView from "../src/components/UkHubView";
 import { getDepartureHub } from "../src/data/departureHubs";
 import { departureHubCollectionSchema } from "../src/utils/departureHubSchema";
 import type { SiteSearchEntry, SiteSearchKind } from "../src/utils/siteSearch";
@@ -1822,6 +1823,21 @@ function buildAllRoutes(): PrerenderRoute[] {
       <h1>${escapeHtml(getHomePositioning("en").h1Lines.join(" "))}</h1>
       <p>${escapeHtml(getHomePositioning("en").subtitle)}</p>
     `,
+  });
+
+  // Step 4: Add the UK Hub view static generation
+  routes.push({
+    routePath: "/uk",
+    canonicalUrl: `${BASE_URL}/uk`,
+    title: "UK Travel Hub & Intelligence | URAL",
+    description: "Travel intelligence for the UK market: DIY Umrah preparation, ATOL checks, and UK261 flight disruption guides.",
+    imageUrl: defaultOgImage,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: "United Kingdom Travel Hub", url: `${BASE_URL}/uk` },
+    ],
+    extraGraphNodes: [],
+    bodyHtml: renderToStaticMarkup(React.createElement(UkHubView, { lang: "en" })),
   });
 
   // F02: the real departure hub is rendered by the same component as React.
@@ -5072,7 +5088,7 @@ ${routesToRender
     // publish byte-identical annotations (a one-sided cluster is invalid).
     const alternates =
       r.enUrl && r.bnUrl
-        ? `\n    <xhtml:link rel="alternate" hreflang="${englishPath === "/bangladesh" ? "en-bd" : "en"}" href="${escapeXml(r.enUrl)}" />` +
+        ? `\n    <xhtml:link rel="alternate" hreflang="${englishPath === "/bangladesh" ? "en-bd" : englishPath === "/uk" ? "en-gb" : "en"}" href="${escapeXml(r.enUrl)}" />` +
           `\n    <xhtml:link rel="alternate" hreflang="${englishPath === "/bangladesh" ? "bn-bd" : "bn"}" href="${escapeXml(r.bnUrl)}" />` +
           `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(r.enUrl)}" />`
         : "";
@@ -5411,10 +5427,12 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     const englishUrl = r.enUrl || r.canonicalUrl;
     const bengaliUrl = r.bnUrl || null;
     const isBangladeshHub = toEnglishBasePath(r.routePath) === "/bangladesh";
+    const isUkHub = toEnglishBasePath(r.routePath) === "/uk";
     const localeTag = isBangladeshHub
       ? r.locale === "bn" ? "bn-BD" : "en-BD"
+      : isUkHub ? "en-GB"
       : r.locale === "bn" ? "bn" : "en";
-    const localeOgp = r.locale === "bn" ? "bn_BD" : "en_BD";
+    const localeOgp = r.locale === "bn" ? "bn_BD" : isUkHub ? "en_GB" : "en_US";
 
     let pageHtml = templateHtml
       .replace(/<html lang="[^"]*">/, `<html lang="${localeTag}">`)
@@ -5444,7 +5462,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       // Search Console reports as "no return tag" and ignores wholesale.
       .replace(
         /<link rel="alternate" hreflang="en" href="[^"]*" \/>/,
-        `<link rel="alternate" hreflang="${isBangladeshHub ? "en-bd" : "en"}" href="${escapeHtml(englishUrl)}" />`
+        `<link rel="alternate" hreflang="${isBangladeshHub ? "en-bd" : isUkHub ? "en-gb" : "en"}" href="${escapeHtml(englishUrl)}" />`
       )
       .replace(
         /<link rel="alternate" hreflang="x-default" href="[^"]*" \/>/,
