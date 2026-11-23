@@ -1282,7 +1282,7 @@ function addBengaliLinkSections(
         renderLinkSection("read-in-english", "ইংরেজিতে পড়ুন — Read this page in English", [
           {
             href: englishPath,
-            text: en ? stripBrandSuffix(en.title) : "English version",
+            text: (en as any) ? stripBrandSuffix((en as any).title) : "English version",
           },
           { href: "/", text: "URAL Travel Intelligence English homepage" },
         ])
@@ -5435,9 +5435,9 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     // tag is dropped entirely when no Bengali twin was generated, because a
     // return tag pointing at a 404 is worse than no tag at all.
     const englishUrl = r.enUrl || r.canonicalUrl;
+    const isUkHub = toEnglishBasePath(r.routePath) === "/uk";
     const bengaliUrl = r.bnUrl || (isUkHub ? englishUrl : null);
     const isBangladeshHub = toEnglishBasePath(r.routePath) === "/bangladesh";
-    const isUkHub = toEnglishBasePath(r.routePath) === "/uk";
     const localeTag = isBangladeshHub
       ? r.locale === "bn" ? "bn-BD" : "en-BD"
       : isUkHub ? "en-GB"
