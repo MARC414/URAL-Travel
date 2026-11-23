@@ -336,6 +336,13 @@ export const EVISAS_BLOG_PLACEMENTS: Partial<Record<string, { campaign: EvisaCam
   "thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide": { campaign: "thailand" },
   "halal-food-guide-bangkok-bangladesh": { campaign: "thailand" },
   "nepal-vs-thailand-first-trip": { campaign: "thailand" },
+  "umrah-hajj-guide-united-kingdom-2026": { campaign: "uk" },
+  "uk-umrah-packages-atol-operator-checks": { campaign: "uk" },
+  "uk-to-saudi-flights-umrah-direct-or-connecting": { campaign: "uk" },
+  "uk-passport-umrah-visa-eta-evisa-waiver-step-by-step": { campaign: "uk" },
+  "hajj-2027-uk-dates-nusuk-registration-cost": { campaign: "uk" },
+  "ramadan-umrah-2027-uk-dates-fares-last-ten-nights": { campaign: "uk" },
+  "madinah-first-uk-umrah-routings-open-jaw-stopover": { campaign: "uk" },
 };
 
 export const EVISAS_DESTINATION_CAMPAIGNS: Partial<Record<string, EvisaCampaignKey>> = {
