@@ -10,6 +10,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/" />
   </url>
   <url>
+    <loc>https://uraltravel.co.uk/uk</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en-gb" href="https://uraltravel.co.uk/uk" />
+    <xhtml:link rel="alternate" hreflang="bn" href="https://uraltravel.co.uk/uk" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://uraltravel.co.uk/uk" />
+  </url>
+  <url>
     <loc>https://uraltravel.co.uk/bangladesh</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>

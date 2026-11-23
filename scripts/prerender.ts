@@ -1208,7 +1208,7 @@ function addInternalLinkSections(
       route.bodyHtml = route.bodyHtml.replace("</article>", `${sitewideHubSection}</article>`);
     }
 
-    if (route.bnUrl && bnRouteByCanonicalUrl) {
+    if (route.bnUrl && bnRouteByCanonicalUrl && route.routePath !== "/uk") {
       const bnTwin = bnRouteByCanonicalUrl.get(route.bnUrl);
       const bnTitle = bnTwin?.title ? stripBrandSuffix(bnTwin.title) : "বাংলা সংস্করণ";
       const bnHref = toBengaliPath(route.routePath);
@@ -1264,6 +1264,14 @@ function addBengaliLinkSections(
     //    hreflang cluster existed in the <head> only, with no editorial path
     //    between the two language trees.
     if (englishPath === "/") {
+      sections.push(
+        renderLinkSection("read-in-english", "ইংরেজিতে পড়ুন — Read this page in English", [
+          { href: "/", text: "URAL Travel Intelligence (English homepage)" },
+        ])
+      );
+    } else if (englishPath === "/uk") {
+      // The UK hub does not have a Bengali twin right now, so we do not emit a reciprocal link back to /bn/uk
+    } else if (en) {
       sections.push(
         renderLinkSection("read-in-english", "ইংরেজিতে পড়ুন — Read this page in English", [
           { href: "/", text: "URAL Travel Intelligence (English homepage)" },
@@ -1829,6 +1837,8 @@ function buildAllRoutes(): PrerenderRoute[] {
   routes.push({
     routePath: "/uk",
     canonicalUrl: `${BASE_URL}/uk`,
+    enUrl: `${BASE_URL}/uk`,
+    bnUrl: `${BASE_URL}/uk`,
     title: "UK Travel Hub & Intelligence | URAL",
     description: "Travel intelligence for the UK market: DIY Umrah preparation, ATOL checks, and UK261 flight disruption guides.",
     imageUrl: defaultOgImage,
@@ -5425,14 +5435,14 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     // tag is dropped entirely when no Bengali twin was generated, because a
     // return tag pointing at a 404 is worse than no tag at all.
     const englishUrl = r.enUrl || r.canonicalUrl;
-    const bengaliUrl = r.bnUrl || null;
+    const bengaliUrl = r.bnUrl || (isUkHub ? englishUrl : null);
     const isBangladeshHub = toEnglishBasePath(r.routePath) === "/bangladesh";
     const isUkHub = toEnglishBasePath(r.routePath) === "/uk";
     const localeTag = isBangladeshHub
       ? r.locale === "bn" ? "bn-BD" : "en-BD"
       : isUkHub ? "en-GB"
       : r.locale === "bn" ? "bn" : "en";
-    const localeOgp = r.locale === "bn" ? "bn_BD" : isUkHub ? "en_GB" : "en_US";
+    const localeOgp = r.locale === "bn" ? "bn_BD" : isUkHub ? "en_GB" : isBangladeshHub ? "en_BD" : "en_US";
 
     let pageHtml = templateHtml
       .replace(/<html lang="[^"]*">/, `<html lang="${localeTag}">`)
@@ -5480,7 +5490,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       )
       .replace(
         /<meta property="og:locale:alternate" content="[^"]*" \/>/,
-        `<meta property="og:locale:alternate" content="${r.locale === "bn" ? "en_BD" : "bn_BD"}" />`
+        isUkHub ? "" : `<meta property="og:locale:alternate" content="${r.locale === "bn" ? (isBangladeshHub ? "en_BD" : "en_US") : "bn_BD"}" />`
       )
       .replace(
         /<meta property="og:url" content="[^"]*" \/>/,
