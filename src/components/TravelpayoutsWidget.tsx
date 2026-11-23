@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useRef, useState, useMemo, useId } from 'react';
 import {
   Plane,
@@ -925,7 +924,7 @@ function generateDynamicRouteData(originInfo, destInfo) {
     visaBadge: `${destCountry} Global Route`,
     bestWindow: `Compare live airlines, 1-stop connections, and multi-city fares for ${origCity} (${origCode}) → ${destCity} (${destCode})`,
     terminalTip: 'Check current schedules, terminals and fares in the provider results',
-    flights: [],
+    flights: [] as any[],
   };
 }
 
@@ -1008,8 +1007,10 @@ function isWithinOneEdit(a, b) {
   return edits <= 1;
 }
 
-function findAirportInfo(codeOrQuery: string): { code: string; city: string; name: string; country: string; flag: string } {
-  if (!codeOrQuery) return AIRPORTS_DIRECTORY[0];
+type AirportSelection = { code: string; city: string; name: string; country: string; flag: string };
+
+function findAirportInfo(codeOrQuery: string | null | undefined): AirportSelection | null {
+  if (!codeOrQuery || !codeOrQuery.trim()) return null;
   const q = codeOrQuery.trim().toUpperCase();
   const compactQ = q.replace(/[^A-Z]/g, '');
 
@@ -1040,32 +1041,39 @@ function findAirportInfo(codeOrQuery: string): { code: string; city: string; nam
   });
   if (fuzzy) return fuzzy;
 
-  return {
-    code: q.slice(0, 3) || 'KTM',
-    city: codeOrQuery.trim(),
-    name: `${codeOrQuery.trim()} International Airport`,
-    country: 'International',
-    flag: '✈️',
-  };
+  return null;
 }
 
 export default function TravelpayoutsWidget({
-  defaultOrigin = 'DAC',
-  defaultDestination = 'KTM',
+  defaultOrigin,
+  defaultDestination,
   showQuickRoutes = true,
   showInlineResults = false,
   lang = 'en',
   onOpenPriceAlert,
+}: {
+  /** Omit for the legacy Dhaka default; `null` starts the form unselected. */
+  defaultOrigin?: string | null;
+  /** Omit for the legacy Kathmandu default; `null` starts the form unselected. */
+  defaultDestination?: string | null;
+  showQuickRoutes?: boolean;
+  showInlineResults?: boolean;
+  lang?: 'en' | 'bn';
+  onOpenPriceAlert?: (dest?: string) => void;
 }) {
   const isBn = lang === 'bn';
+  // Omitted props keep the legacy Dhaka/Kathmandu defaults; an explicit null
+  // (or blank string) selects nothing so a form can start unselected.
+  const resolvedDefaultOrigin = defaultOrigin === undefined ? 'DAC' : defaultOrigin;
+  const resolvedDefaultDestination = defaultDestination === undefined ? 'KTM' : defaultDestination;
   const instanceId = useId();
   const originInputId = `${instanceId}-origin-input`;
   const destInputId = `ural-global-dest-input`;
   const departDateId = `${instanceId}-depart-date`;
   const returnDateId = `${instanceId}-return-date`;
 
-  const [originInfo, setOriginInfo] = useState(() => findAirportInfo(defaultOrigin));
-  const [destInfo, setDestInfo] = useState(() => findAirportInfo(defaultDestination));
+  const [originInfo, setOriginInfo] = useState<AirportSelection | null>(() => findAirportInfo(resolvedDefaultOrigin));
+  const [destInfo, setDestInfo] = useState<AirportSelection | null>(() => findAirportInfo(resolvedDefaultDestination));
 
   const [originQuery, setOriginQuery] = useState('');
   const [destQuery, setDestQuery] = useState('');
@@ -1083,7 +1091,9 @@ export default function TravelpayoutsWidget({
   const [tripType, setTripType] = useState<'roundtrip' | 'oneway'>('roundtrip');
   const [cabinClass, setCabinClass] = useState<'economy' | 'business'>('economy');
   const [passengers, setPassengers] = useState(1);
-  const [currency, setCurrency] = useState<"BDT" | "USD" | "EUR" | "GBP" | "SAR" | "AED">(() => preferredCurrencyForOrigin(defaultOrigin));
+  const [currency, setCurrency] = useState<"BDT" | "USD" | "EUR" | "GBP" | "SAR" | "AED">(() =>
+    preferredCurrencyForOrigin(resolvedDefaultOrigin || '')
+  );
   const { rates, status } = useRates();
   const [ratesReady, setRatesReady] = useState(false);
 
@@ -1103,12 +1113,12 @@ export default function TravelpayoutsWidget({
   const [filterMode, setFilterMode] = useState('all'); // 'all' | 'direct' | 'baggage30'
   const [sortBy, setSortBy] = useState('cheapest'); // 'cheapest' | 'fastest' | 'earliest'
   const [expandedFlightId, setExpandedFlightId] = useState<string | null>(null);
-  const [selectedBookingFlight, setSelectedBookingFlight] = useState(null);
+  const [selectedBookingFlight, setSelectedBookingFlight] = useState<any>(null);
 
   // Committed query state that updates when user clicks "Search Flights" or picks a Quick Route
   interface CommittedQuery {
-    origin: { code: string; city: string; name: string; country: string; flag: string };
-    destination: { code: string; city: string; name: string; country: string; flag: string };
+    origin: AirportSelection;
+    destination: AirportSelection;
     departDate: string;
     returnDate: string;
     tripType: 'roundtrip' | 'oneway';
@@ -1116,40 +1126,52 @@ export default function TravelpayoutsWidget({
     passengers: number;
   }
 
-  const [committedQuery, setCommittedQuery] = useState<CommittedQuery>(() => ({
-    origin: findAirportInfo(defaultOrigin),
-    destination: findAirportInfo(defaultDestination),
-    departDate: getFutureDateIso(14),
-    returnDate: getFutureDateIso(21),
-    tripType: 'roundtrip',
-    cabinClass: 'economy',
-    passengers: 1,
-  }));
+  const [committedQuery, setCommittedQuery] = useState<CommittedQuery | null>(() => {
+    const origin = findAirportInfo(resolvedDefaultOrigin);
+    const destination = findAirportInfo(resolvedDefaultDestination);
+    if (!origin || !destination) return null;
+    return {
+      origin,
+      destination,
+      departDate: getFutureDateIso(14),
+      returnDate: getFutureDateIso(21),
+      tripType: 'roundtrip',
+      cabinClass: 'economy',
+      passengers: 1,
+    };
+  });
 
   const resultsContainerRef = useRef<HTMLDivElement | null>(null);
   const formWrapperRef = useRef<HTMLDivElement | null>(null);
 
   // Sync if parent prop changes (e.g. navigating between Nepal, Thailand, Malaysia, Dubai flight pages or Home Global Search)
   useEffect(() => {
-    const nextOrigin = findAirportInfo(defaultOrigin);
-    const nextDest = findAirportInfo(defaultDestination);
+    const nextOrigin = findAirportInfo(resolvedDefaultOrigin);
+    const nextDest = findAirportInfo(resolvedDefaultDestination);
     setOriginInfo(nextOrigin);
     setDestInfo(nextDest);
-    setCommittedQuery((prev) => ({
-      ...prev,
-      origin: nextOrigin,
-      destination: nextDest,
-    }));
+    setCommittedQuery((prev) => {
+      if (!nextOrigin || !nextDest) return null;
+      return {
+        origin: nextOrigin,
+        destination: nextDest,
+        departDate: prev?.departDate ?? getFutureDateIso(14),
+        returnDate: prev?.returnDate ?? getFutureDateIso(21),
+        tripType: prev?.tripType ?? 'roundtrip',
+        cabinClass: prev?.cabinClass ?? 'economy',
+        passengers: prev?.passengers ?? 1,
+      };
+    });
     setExpandedFlightId(null);
     setSelectedBookingFlight(null);
-  }, [defaultOrigin, defaultDestination]);
+  }, [resolvedDefaultOrigin, resolvedDefaultDestination]);
 
   // Currency follows the departure country until the visitor picks one explicitly:
   // Dhaka keeps BDT, any other origin starts from the Page's USD default.
   useEffect(() => {
     if (currencyChosenRef.current) return;
-    setCurrency(preferredCurrencyForOrigin(originInfo.code));
-  }, [originInfo.code]);
+    setCurrency(preferredCurrencyForOrigin(originInfo?.code || ''));
+  }, [originInfo?.code]);
 
   // Close autocomplete dropdown on outside click & clean up speech recognition on unmount
   useEffect(() => {
@@ -1175,7 +1197,8 @@ export default function TravelpayoutsWidget({
     const cleaned = (spokenText || '').replace(/[.,!?]/g, '').trim();
     if (!cleaned) return null;
     const localMatch = findAirportInfo(cleaned);
-    const isKnownDirectoryMatch = AIRPORTS_DIRECTORY.some((a) => a.code === localMatch.code);
+    const isKnownDirectoryMatch =
+      localMatch !== null && AIRPORTS_DIRECTORY.some((a) => a.code === localMatch.code);
     if (isKnownDirectoryMatch) return localMatch;
 
     try {
@@ -1186,8 +1209,10 @@ export default function TravelpayoutsWidget({
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
           const top = data[0];
+          const providerCode = String(top.code || localMatch?.code || '').trim().toUpperCase();
+          if (!/^[A-Z]{3}$/.test(providerCode)) return null;
           return {
-            code: (top.code || localMatch.code).toUpperCase(),
+            code: providerCode,
             city: top.name || top.city_name || cleaned,
             name: top.main_airport_name || `${top.name || cleaned} (${top.code})`,
             country: top.country_name || 'International',
@@ -1377,13 +1402,13 @@ export default function TravelpayoutsWidget({
         if (!res.ok || cancelled) return;
         const data = await res.json();
         if (cancelled || !Array.isArray(data)) return;
-        const mapped = data.slice(0, 8).map((item) => ({
-          code: (item.code || 'KTM').toUpperCase(),
+        const mapped = data.map((item) => ({
+          code: String(item.code || '').trim().toUpperCase(),
           city: item.name || item.city_name || item.code,
           name: item.main_airport_name || `${item.name} (${item.code})`,
           country: item.country_name || 'International',
           flag: '✈️',
-        }));
+        })).filter((item) => /^[A-Z]{3}$/.test(item.code)).slice(0, 8);
         if (isOrig) setOriginRemoteSuggestions(mapped);
         if (isDest) setDestRemoteSuggestions(mapped);
         if (isGlobal) setGlobalRemoteSuggestions(mapped);
@@ -1455,6 +1480,11 @@ export default function TravelpayoutsWidget({
   } = {}) => {
     const finalOrigin = resolveTypedPlaceIfAny(nextOrigin, originQuery, 'origin');
     const finalDest = resolveTypedPlaceIfAny(nextDest, destQuery, 'dest');
+
+    if (!finalOrigin || !finalDest) {
+      document.getElementById(finalOrigin ? destInputId : originInputId)?.focus();
+      return;
+    }
 
     setOriginInfo(finalOrigin);
     setDestInfo(finalDest);
@@ -1552,8 +1582,8 @@ export default function TravelpayoutsWidget({
 
   // Compute dynamic flight results based on committedQuery
   const routeMeta = useMemo(() => {
-    return generateDynamicRouteData(committedQuery.origin, committedQuery.destination);
-  }, [committedQuery.origin, committedQuery.destination]);
+    return generateDynamicRouteData(committedQuery?.origin ?? null, committedQuery?.destination ?? null);
+  }, [committedQuery]);
 
   // Hosted search is the price source. The old hand-typed route table has no
   // supplier quote/date and must not enter the results, including preview mode.
@@ -1571,6 +1601,7 @@ export default function TravelpayoutsWidget({
   }, [computedFlights]);
 
   const searchCode = useMemo(() => {
+    if (!committedQuery) return '';
     return buildFlightSearchCode({
       origin: committedQuery.origin.code,
       destination: committedQuery.destination.code,
@@ -1614,17 +1645,29 @@ export default function TravelpayoutsWidget({
     return destInfo;
   }, [activeDropdown, destQuery, destInfo, destRemoteSuggestions]);
 
+  // A null selection renders an empty field with localized guidance. It must
+  // never fabricate an airport, reuse the first directory entry, or crash.
+  const describeAirport = (airport: AirportSelection | null): string =>
+    airport ? `${airport.flag || ''} ${airport.city} (${airport.code})`.trim() : '';
+  const originFieldHint = isBn
+    ? 'যাত্রা শুরু করতে ছাড়ার বিমানবন্দর বেছে নিন'
+    : 'Select a departure airport';
+  const destFieldHint = isBn
+    ? 'গন্তব্য বিমানবন্দর বেছে নিন'
+    : 'Select a destination airport';
+  const destCityLabel = effectiveDest?.city || (isBn ? 'গন্তব্য' : 'your destination');
+
   const liveFormSearchCode = useMemo(() => {
     return buildFlightSearchCode({
-      origin: effectiveOrigin.code,
-      destination: effectiveDest.code,
+      origin: effectiveOrigin?.code || '',
+      destination: effectiveDest?.code || '',
       departureDate: departDate,
       returnDate,
       tripType,
       cabinClass,
       adults: passengers,
     });
-  }, [effectiveOrigin.code, effectiveDest.code, departDate, returnDate, tripType, cabinClass, passengers]);
+  }, [effectiveOrigin?.code, effectiveDest?.code, departDate, returnDate, tripType, cabinClass, passengers]);
 
   const liveFormUralWlUrl = useMemo(() => {
     return buildWhiteLabelUrl({ flightSearch: liveFormSearchCode, currency, locale: lang, subId: placementSubId });
@@ -1876,7 +1919,7 @@ export default function TravelpayoutsWidget({
                     {isBn ? 'কোথা থেকে · From' : 'From · Origin'}
                   </label>
                   <span className="text-[11px] font-mono font-bold bg-brand-navy/10 text-brand-navy px-1.5 py-0.5 rounded">
-                    {effectiveOrigin.code}
+                    {effectiveOrigin?.code || '—'}
                   </span>
                 </div>
 
@@ -1890,7 +1933,7 @@ export default function TravelpayoutsWidget({
                     value={
                       activeDropdown === 'origin'
                         ? originQuery
-                        : `${originInfo.flag || '✈️'} ${originInfo.city} (${originInfo.code})`
+                        : describeAirport(originInfo)
                     }
                     placeholder={
                       isBn
@@ -1934,7 +1977,7 @@ export default function TravelpayoutsWidget({
                 </div>
 
                 <div className="text-[11px] text-slate-500 truncate">
-                  {effectiveOrigin.name}
+                  {effectiveOrigin ? effectiveOrigin.name : originFieldHint}
                 </div>
               </div>
 
@@ -2040,7 +2083,7 @@ export default function TravelpayoutsWidget({
                       <span>{isBn ? 'অদলবদল' : 'Swap'}</span>
                     </button>
                     <span className="text-[11px] font-mono font-bold bg-[#F6B73C]/30 text-brand-navy px-1.5 py-0.5 rounded">
-                      {effectiveDest.code}
+                      {effectiveDest?.code || '—'}
                     </span>
                   </div>
                 </div>
@@ -2055,7 +2098,7 @@ export default function TravelpayoutsWidget({
                     value={
                       activeDropdown === 'dest'
                         ? destQuery
-                        : `${destInfo.flag || '🌍'} ${destInfo.city} (${destInfo.code})`
+                        : describeAirport(destInfo)
                     }
                     placeholder={
                       isBn
@@ -2099,7 +2142,7 @@ export default function TravelpayoutsWidget({
                 </div>
 
                 <div className="text-[11px] text-slate-500 truncate">
-                  {effectiveDest.name}
+                  {effectiveDest ? effectiveDest.name : destFieldHint}
                 </div>
               </div>
 
@@ -2249,7 +2292,7 @@ export default function TravelpayoutsWidget({
                 />
               </div>
               <span className="text-[11px] font-mono font-bold text-brand-navy/80">
-                {effectiveOrigin.code} → {effectiveDest.code} · {currency}
+                {effectiveOrigin?.code || '—'} → {effectiveDest?.code || '—'} · {currency}
               </span>
             </a>
             <p className="text-xs leading-relaxed text-slate-600" role={!liveFormSearchCode ? 'status' : undefined}>
@@ -2314,15 +2357,15 @@ export default function TravelpayoutsWidget({
       </form>
 
       {/* 3. OPTIONAL INLINE RESULTS SECTION (Disabled by default so search opens strictly in a new tab) */}
-      {showInlineResults && (
+      {showInlineResults && committedQuery && (
       <div ref={resultsContainerRef} className="p-4 sm:p-6 bg-slate-50/70 space-y-5">
         {/* Loading state feedback when user clicks Search Flights */}
         {isSearching && (
           <div className="bg-white border border-emerald-200 rounded-xl p-6 text-center space-y-3 shadow-xs">
             <div className="w-9 h-9 rounded-full border-3 border-[#07C369] border-t-transparent animate-spin mx-auto" />
             <div className="text-sm font-bold text-slate-900">
-              Searching live airline schedules for {originInfo.city} ({originInfo.code}) →{' '}
-              {destInfo.city} ({destInfo.code})...
+              Searching live airline schedules for {originInfo?.city} ({originInfo?.code}) →{' '}
+              {destInfo?.city} ({destInfo?.code})...
             </div>
             <p className="text-xs text-slate-500">
               Checking direct & connecting fares, baggage allowances, and visa rules for{' '}
@@ -2890,9 +2933,9 @@ export default function TravelpayoutsWidget({
                 </p>
               </div>
               <span className="inline-flex min-h-8 shrink-0 items-center gap-1.5 self-start rounded-full border border-slate-200 bg-white/85 px-3 py-1 font-mono text-[11px] font-bold text-brand-navy">
-                {effectiveOrigin.code}
+                {effectiveOrigin?.code || '—'}
                 <ArrowRight size={12} aria-hidden="true" />
-                {effectiveDest.code}
+                {effectiveDest?.code || '—'}
                 <span className="ml-1 border-l border-slate-200 pl-2 text-slate-500">{currency}</span>
               </span>
             </div>
@@ -2946,7 +2989,7 @@ export default function TravelpayoutsWidget({
                 {onOpenPriceAlert && (
                   <button
                     type="button"
-                    onClick={() => onOpenPriceAlert(effectiveDest.city)}
+                    onClick={() => onOpenPriceAlert(effectiveDest?.city)}
                     className="inline-flex min-h-10 items-center gap-2 rounded-lg text-xs font-semibold text-white transition-colors hover:text-[#F6B73C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
                   >
                     <Bell size={14} className="text-[#F6B73C]" aria-hidden="true" />
@@ -2974,8 +3017,8 @@ export default function TravelpayoutsWidget({
                   >
                     <span>
                       {isBn
-                        ? `${effectiveDest.city} ট্যুর (Klook)`
-                        : `${effectiveDest.city} Tours (Klook)`}
+                        ? `${destCityLabel} ট্যুর (Klook)`
+                        : `${destCityLabel} Tours (Klook)`}
                     </span>
                     <ExternalLink size={11} aria-hidden="true" />
                   </a>

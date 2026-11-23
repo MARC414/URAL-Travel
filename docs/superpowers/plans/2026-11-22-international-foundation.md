@@ -99,11 +99,29 @@ FAQ interfaces: `getHomeFaqs(lang: Language): HomeFaq[]`, `getHomeFaqHeading(lan
 explicit widget props `defaultOrigin?: string | null`, `defaultDestination?: string | null`.
 Omitted props retain current legacy defaults; explicit `null` selects nothing. Keep known-alias lookup behaviour; blank/unmatched free text may not produce a selected fictional airport.
 
-- [ ] Test `explicit_null_origin_destination_are_unselected`, `partial_swap_is_safe`, `unmatched_text_is_not_an_airport`, and `incomplete_form_has_no_route_handoff`. SSR null props have no selected DAC/KTM; mounted selection/type/clear/swap stays safe; search requires two real selected codes and dates. Generic provider chooser links may remain clearly labelled; none may imply a completed route search.
-- [ ] Run `npx tsx scripts/test-flight-widget-state.tsx`; observe the current empty-to-directory[0] behaviour fail.
-- [ ] Implement nullable input and committed-query state; handle all `.code`/`.city` uses, date comparison, search/retry and swap. A freeform string is not selected until a local/remote result with a real code is chosen. Do not restore sample fares or invent lookup fallback codes.
-- [ ] Preserve omitted-prop behaviour for existing route-specific callers. Null/empty cannot flow through `findAirportInfo` into the first directory item; show localized field guidance and appropriate focus after validation.
-- [ ] Run widget tests and `npm run test:flight-search` in both languages. Stub remote autocomplete/network in tests; no partner application. Record omitted versus explicit-null controls and checkpoint.
+- [x] Test `explicit_null_origin_destination_are_unselected`, `partial_swap_is_safe`, `unmatched_text_is_not_an_airport`, and `incomplete_form_has_no_route_handoff`. SSR null props have no selected DAC/KTM; mounted selection/type/clear/swap stays safe; search requires two real selected codes and dates. Generic provider chooser links may remain clearly labelled; none may imply a completed route search.
+- [x] Run `npx tsx scripts/test-flight-widget-state.tsx`; observe the current empty-to-directory[0] behaviour fail.
+- [x] Implement nullable input and committed-query state; handle all `.code`/`.city` uses, date comparison, search/retry and swap. A freeform string is not selected until a local/remote result with a real code is chosen. Do not restore sample fares or invent lookup fallback codes.
+- [x] Preserve omitted-prop behaviour for existing route-specific callers. Null/empty cannot flow through `findAirportInfo` into the first directory item; show localized field guidance and appropriate focus after validation.
+- [x] Run widget tests and `npm run test:flight-search` in both languages. Stub remote autocomplete/network in tests; no partner application. Record omitted versus explicit-null controls and checkpoint.
+
+**Checkpoint — 23 November 2026.** Built on `feat/f04-safe-unselected` after the `f787698`
+production restore. `findAirportInfo` returns `AirportSelection | null` (blank/unmatched returns
+`null`; the fabricated `q.slice(0,3)` airport is gone), state and committed query are nullable,
+`buildFlightSearchCode` is never called with `undefined`, and the inline results block renders only
+with a committed query. `scripts/test-flight-widget-state.tsx` mounts the real component with
+`react-dom/client` in happy-dom; it failed against the pre-F04 widget (SSR rendered `(DAC)` for
+explicit `null`) and passes now. Controls recorded:
+
+| Caller | Props | Result |
+| --- | --- | --- |
+| Homepage (`App.tsx`) | omitted | Dhaka → Kathmandu, BDT; unchanged legacy behaviour |
+| `TravelpayoutsEmbed` | `"DAC"` / `"KTM"` | unchanged |
+| Explicit null (F06 target) | `null` / `null` | empty fields with localized guidance, no route handoff, USD until a Bangladesh origin is chosen |
+
+`@ts-nocheck` was removed from `TravelpayoutsWidget.tsx`; `tsc --noEmit` now checks the nullable
+state, so this class of post-mount crash fails `npm run lint`. The homepage surface itself is not
+switched to explicit `null` here — that remains F06.
 
 ## F05 — Selected-origin currency, with manual choice protected
 
