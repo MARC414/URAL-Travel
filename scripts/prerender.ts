@@ -1269,20 +1269,12 @@ function addBengaliLinkSections(
           { href: "/", text: "URAL Travel Intelligence (English homepage)" },
         ])
       );
-    } else if (englishPath === "/uk") {
-      // The UK hub does not have a Bengali twin right now, so we do not emit a reciprocal link back to /bn/uk
-    } else if (en) {
-      sections.push(
-        renderLinkSection("read-in-english", "ইংরেজিতে পড়ুন — Read this page in English", [
-          { href: "/", text: "URAL Travel Intelligence (English homepage)" },
-        ])
-      );
     } else {
       sections.push(
         renderLinkSection("read-in-english", "ইংরেজিতে পড়ুন — Read this page in English", [
           {
             href: englishPath,
-            text: "English version",
+            text: en ? stripBrandSuffix(en.title) : "English version",
           },
           { href: "/", text: "URAL Travel Intelligence English homepage" },
         ])

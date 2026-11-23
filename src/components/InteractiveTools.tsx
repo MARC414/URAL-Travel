@@ -155,7 +155,7 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   // WhatsApp Inquiry Generator State
-  const [inquiryOrigin, setInquiryOrigin] = useState("");
+  const [inquiryOrigin, setInquiryOrigin] = useState("DAC");
   const [inquiryDestination, setInquiryDestination] = useState("DXB");
   const [inquiryDate, setInquiryDate] = useState("");
   const [inquiryReturnDate, setInquiryReturnDate] = useState("");
