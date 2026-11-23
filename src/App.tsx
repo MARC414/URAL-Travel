@@ -65,7 +65,8 @@ import {
   HOME_FEATURED_BLOG_META,
 } from "./data/homeFeaturedBlogMeta";
 import type { BankingFaq } from "./data/bankingHubFaqs";
-import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
+import { getHomeFaqs, getHomeFaqHeading } from "./data/homeFaqs";
+import { getHomePositioning } from "./data/homePositioning";
 import { getDepartureHub } from "./data/departureHubs";
 import { departureHubCollectionSchema } from "./utils/departureHubSchema";
 
@@ -849,6 +850,7 @@ export default function App() {
 
   const t = translations[lang];
   const isBn = lang === "bn";
+  const homePositioning = getHomePositioning(lang);
   const localizedHajjFaqs = isBn && bnContent ? bnContent.getLocalizedHajjFaqs(lang) : HAJJ_UMRAH_FAQS;
   const featuredGrowthTopics =
     isBn && bnContent ? bnContent.getFeaturedGrowthTopics(lang) : ENGLISH_FEATURED_GROWTH_TOPICS;
@@ -1452,11 +1454,9 @@ export default function App() {
   const pageLanguage = lang === "bn" ? "bn-BD" : "en-BD";
 
   if (section === "home") {
-    if (!isBn) {
-      // Same array that renders the visible #home-faqs section below and the
-      // static FAQPage node in scripts/prerender.ts. See src/data/homeFaqs.ts.
-      seoSchema = generateFAQSchema(HOME_FAQS);
-    }
+    seoTitle = homePositioning.title;
+    seoDescription = homePositioning.description;
+    seoSchema = generateFAQSchema(getHomeFaqs(lang));
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) }
     ];
@@ -2669,23 +2669,12 @@ export default function App() {
               
 
               <h1 className="ural-page-title font-serif text-[clamp(2.3rem,6vw,4.5rem)] font-[900] leading-[1.1] tracking-tight text-white max-w-4xl drop-shadow text-center sm:text-left">
-                {isBn ? (
-                  <>
-                    যেকোনো স্থান থেকে ভ্রমণ <br />
-                    <span className="text-[#F6B73C]">পরিকল্পনা করুন স্মার্টভাবে</span>
-                  </>
-                ) : (
-                  <>
-                    Plan Your Trip <br />
-                    <span className="text-[#F6B73C]">From Anywhere</span>
-                  </>
-                )}
+                {homePositioning.h1Lines[0]} <br />
+                <span className="text-[#F6B73C]">{homePositioning.h1Lines[1]}</span>
               </h1>
               
               <p className="text-white/80 text-[1.1rem] sm:text-[1.2rem] leading-[1.60] max-w-2xl font-sans text-center sm:text-left">
-                {isBn
-                  ? "বাংলাদেশি ভ্রমণকারীদের জন্য তৈরি Flight, Hotel, Visa চেকলিস্ট, Hajj ও Umrah প্রস্তুতি এবং BDT বাজেট গাইড—সবকিছু এক জায়গায়।"
-                  : "Flights, hotels, visas, and destination guides. Your travel intelligence for the world."}
+                {homePositioning.subtitle}
               </p>
 
               {/* High-Intent Above-the-Fold Quick Action Bar */}
@@ -2726,21 +2715,24 @@ export default function App() {
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 pt-4">
                 <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/95 text-xs sm:text-sm font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" />
-                  {isBn ? "যাচাইকৃত Visa ও Umrah গাইড" : "Expert Visa Guides"}
+                  {homePositioning.features[0]}
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/95 text-xs sm:text-sm font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" />
-                  {isBn ? "BDT বাজেট হিসাব" : "BDT Pricing"}
+                  {homePositioning.features[1]}
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/95 text-xs sm:text-sm font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" />
-                  {isBn ? "Halal খাবার ও হোটেল জোন" : "Halal-Friendly Picks"}
+                  {homePositioning.features[2]}
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/95 text-xs sm:text-sm font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#F6B73C]" />
-                  {isBn ? "Dhaka (DAC) ফ্লাইট রুট" : "Dhaka Routes Focus"}
+                  {homePositioning.features[3]}
                 </span>
               </div>
+              <a href={getLocalizedRouteHref("/bangladesh")} onClick={(event) => handleNavigationAnchorClick(event, "/bangladesh")} className="text-white underline underline-offset-4">
+                {homePositioning.bangladeshLinkLabel}
+              </a>
             </div>
           </div>
 
@@ -2748,27 +2740,27 @@ export default function App() {
           <div id="hero-stats-bar" className="stats-bar bg-brand-navy py-7 px-4 shadow-lg border-t border-b border-[#F6B73C]/20">
             <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-around gap-6 md:gap-4 md:divide-x md:divide-white/10 text-center select-none">
               <div className="flex-1 w-full space-y-1">
-                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">50+</div>
+                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">{isBn ? "সূত্রভিত্তিক" : "Source-backed"}</div>
                 <div className="text-white/75 text-[12px] uppercase tracking-widest font-semibold font-sans">
                   {isBn ? "ট্রাভেল ও Umrah গাইড" : "Travel Guides"}
                 </div>
               </div>
               <div className="flex-1 w-full space-y-1 md:pl-4">
-                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">15+</div>
+                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">{isBn ? "বিশ্বজুড়ে" : "Global"}</div>
                 <div className="text-white/75 text-[12px] uppercase tracking-widest font-semibold font-sans">
-                  {isBn ? "জনপ্রিয় গন্তব্য" : "Destinations Covered"}
+                  {isBn ? "ফ্লাইট খোঁজা" : "Flight Search"}
                 </div>
               </div>
               <div className="flex-1 w-full space-y-1 md:pl-4">
-                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">100%</div>
+                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">{isBn ? "আপনার পছন্দ" : "Your choice"}</div>
                 <div className="text-white/75 text-[12px] uppercase tracking-widest font-semibold font-sans">
-                  {isBn ? "বাংলাদেশি পাসপোর্ট ফোকাস" : "BD Traveler Focus"}
+                  {isBn ? "দাম দেখার মুদ্রা" : "Display Currency"}
                 </div>
               </div>
               <div className="flex-1 w-full space-y-1 md:pl-4">
-                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">Free</div>
+                <div className="text-[#F6B73C] text-3xl font-extrabold leading-none">{isBn ? "বাংলাদেশ" : "Bangladesh"}</div>
                 <div className="text-white/75 text-[12px] uppercase tracking-widest font-semibold font-sans">
-                  {isBn ? "ফ্রি ট্রাভেল ইন্টেলিজেন্স" : "Travel Intelligence"}
+                  {isBn ? "যাত্রার বিশেষ গাইড" : "Departure Expertise"}
                 </div>
               </div>
             </div>
@@ -3641,11 +3633,15 @@ export default function App() {
                 </span>
                 <span aria-hidden="true">·</span>
                 <span>
-                  {isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য যাচাইকৃত গাইড (2026)" : "Verified Playbooks for Bangladeshi Travelers (2026)"}
+                  {section === "home"
+                    ? (isBn ? "বাংলাদেশ থেকে যাত্রার বিশেষ গাইড" : "Bangladesh departure expertise")
+                    : (isBn ? "বাংলাদেশি ভ্রমণকারীদের জন্য যাচাইকৃত গাইড (2026)" : "Verified Playbooks for Bangladeshi Travelers (2026)")}
                 </span>
               </div>
               <h2 className="ural-section-title font-serif text-2xl sm:text-3xl font-black text-brand-navy tracking-tight">
-                {isBn
+                {section === "home"
+                  ? (isBn ? "বাংলাদেশ থেকে যাত্রা: নির্বাচিত ট্রাভেল ও ওমরাহ গাইড" : "Travelling from Bangladesh: Selected Travel & Umrah Guides")
+                  : isBn
                   ? "বাংলাদেশি ভ্রমণকারীদের জন্য সবচেয়ে জরুরি ৪টি ট্রাভেল ও Umrah গাইড"
                   : "Essential Travel & Umrah Guides for Bangladeshi Flyers"}
               </h2>
@@ -3748,12 +3744,12 @@ export default function App() {
           only copy and React removed it on mount, leaving the FAQPage node
           describing text that was no longer on the page.
       ------------------------------------------------------------- */}
-      {section === "home" && !isBn && (
+      {section === "home" && (
         <section aria-labelledby="home-faqs" className="mt-10 space-y-4">
           <h2 id="home-faqs" className="ural-section-title font-serif text-2xl font-black text-brand-navy sm:text-3xl">
-            {HOME_FAQ_HEADING}
+            {getHomeFaqHeading(lang)}
           </h2>
-          {HOME_FAQS.map((faq) => (
+          {getHomeFaqs(lang).map((faq) => (
             <div key={faq.question} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
               <h3 className="font-serif text-lg font-bold text-brand-navy">{faq.question}</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-700">{faq.answer}</p>

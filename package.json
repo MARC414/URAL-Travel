@@ -13,6 +13,7 @@
     "verify:build": "tsx scripts/verify-build.ts",
     "test:departure-hubs": "tsx scripts/test-departure-hubs.tsx",
     "test:bangladesh-hub-build": "tsx scripts/test-bangladesh-hub-build.ts",
+    "test:home-positioning": "tsx scripts/test-home-positioning.tsx --built",
     "test:scheduling": "tsx scripts/test-scheduled-posts.ts",
     "scheduled:check": "tsx scripts/check-scheduled-posts.ts",
     "preview": "vite preview",

@@ -129,7 +129,8 @@ import { blogPublicationTimestamp, sortBlogsNewestFirst } from "../src/utils/blo
 import { articleLinkPath } from "../src/utils/blogPresentation";
 import { BANKING_CLUSTER_NODES } from "../src/data/bankingHubData";
 import { BANKING_HUB_FAQS } from "../src/data/bankingHubFaqs";
-import { HOME_FAQS } from "../src/data/homeFaqs";
+import { HOME_FAQS, getHomeFaqs } from "../src/data/homeFaqs";
+import { getHomePositioning } from "../src/data/homePositioning";
 import { BN_BREADCRUMB_LABELS } from "../src/utils/localeRoutes";
 import {
   buildResponsiveSrcSet,
@@ -1495,7 +1496,7 @@ const staticHeroMarkup =
     : "";
 const staticHeroHasCopyAndCtas =
   /<h1[^>]*class="pre-hydration-hero__title"[^>]*>[\s\S]*?Plan Your Trip[\s\S]*?From Anywhere/.test(staticHeroMarkup) &&
-  staticHeroMarkup.includes("Flights, hotels, visas, and destination guides") &&
+  staticHeroMarkup.includes(getHomePositioning("en").subtitle) &&
   staticHeroMarkup.includes('href="/flights"') &&
   staticHeroMarkup.includes('href="/hotels"');
 check(
@@ -8947,7 +8948,7 @@ function readHomeFaqPairs(html: string): {
   schema: { question: string; answer: string }[];
 } {
   const block = html.match(
-    /<section aria-labelledby="home-faqs">([\s\S]*?)<\/section>\s*<\/main>/
+    /<section aria-labelledby="home-faqs">([\s\S]*?<\/section>)\s*<\/section>/
   )?.[1];
   const visible: { question: string; answer: string }[] = [];
   if (block) {
@@ -8979,14 +8980,15 @@ function readHomeFaqPairs(html: string): {
   return { visible, schema };
 }
 
-function homeFaqParityProblems(html: string): string[] {
+function homeFaqParityProblems(html: string, lang: "en" | "bn" = "en"): string[] {
   const { visible, schema } = readHomeFaqPairs(html);
+  const faqs = getHomeFaqs(lang);
   const problems: string[] = [];
-  if (visible.length !== HOME_FAQS.length)
-    problems.push(`visible pairs ${visible.length} != ${HOME_FAQS.length}`);
-  if (schema.length !== HOME_FAQS.length)
-    problems.push(`FAQPage pairs ${schema.length} != ${HOME_FAQS.length}`);
-  HOME_FAQS.forEach((faq, index) => {
+  if (visible.length !== faqs.length)
+    problems.push(`visible pairs ${visible.length} != ${faqs.length}`);
+  if (schema.length !== faqs.length)
+    problems.push(`FAQPage pairs ${schema.length} != ${faqs.length}`);
+  faqs.forEach((faq, index) => {
     const question = faqCompareText(faq.question);
     const answer = faqCompareText(faq.answer);
     if (visible[index]?.question !== question) problems.push(`visible Q${index + 1}`);
@@ -9024,6 +9026,13 @@ check(
     ? "homepage FAQ guard rejects a changed answer (negative control)"
     : "homepage FAQ guard failed its changed-answer negative control"
 );
+
+const bnHomepageHtml = read(path.join(DIST_DIR, "bn", "index.html"));
+const bnHomeFaqProblems = bnHomepageHtml ? homeFaqParityProblems(bnHomepageHtml, "bn") : ["dist/bn/index.html missing"];
+check(bnHomeFaqProblems.length === 0, `Bengali homepage: four localized visible FAQs match schema [${bnHomeFaqProblems.join("; ")}]`);
+const bnFaqMutatedHtml = bnHomepageHtml?.replace(getHomeFaqs("bn")[0].answer, `MUTATED ${getHomeFaqs("bn")[0].answer}`) ?? "";
+check(bnFaqMutatedHtml !== bnHomepageHtml && homeFaqParityProblems(bnFaqMutatedHtml, "bn").length > bnHomeFaqProblems.length,
+  "Bengali homepage FAQ guard rejects a changed schema answer (negative control)");
 
 // --- Banking & Forex cluster guard ------------------------------------------
 // The content contract (`auditPostLinks`) checks that a post's own links resolve,
@@ -9581,7 +9590,7 @@ checkBangladeshHubBuild(DIST_DIR, check);
       }
       let readsDist = distReaderOverride?.has(name) ?? false;
       if (!distReaderOverride) {
-        const scriptRel = command.match(/scripts\/[^\s"']+\.(?:ts|mjs|js)/)?.[0];
+          const scriptRel = command.match(/scripts\/[^\s"']+\.(?:tsx|ts|mjs|js)/)?.[0];
         if (scriptRel) {
           readsDist = scriptReadsDist(read(path.join(ROOT_DIR, scriptRel)) ?? "");
         }

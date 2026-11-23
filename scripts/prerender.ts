@@ -75,7 +75,8 @@ import {
 // The homepage's four FAQ pairs. One array drives the visible block in
 // dist/index.html, the static FAQPage node, and the React render in App.tsx, so
 // the marked-up answer and the visible answer cannot diverge.
-import { HOME_FAQS, HOME_FAQ_HEADING } from "../src/data/homeFaqs";
+import { getHomeFaqs, getHomeFaqHeading } from "../src/data/homeFaqs";
+import { getHomePositioning } from "../src/data/homePositioning";
 import {
   BASE_URL,
   breadcrumbSchema,
@@ -380,26 +381,39 @@ function stripInlineEmphasis(text: string): string {
 }
 
 /**
- * Renders the homepage's visible FAQ block from `HOME_FAQS`.
+ * Renders the homepage's visible FAQ block from its localized records.
  *
  * `src/index.html` carries only the marker, so the visible question and answer
  * text and the FAQPage node in the same document are generated from one array.
  * A missing marker throws rather than shipping a page whose schema describes text
  * the reader cannot see.
  */
-function injectHomeFaq(html: string): string {
+function injectHomeFaq(html: string, lang: "en" | "bn" = "en"): string {
   const marker = "<!-- HOME_FAQ -->";
   if (!html.includes(marker)) {
     throw new Error("The source homepage is missing the home FAQ marker.");
   }
-  const sections = HOME_FAQS.map(
+  const sections = getHomeFaqs(lang).map(
     (faq) =>
       `          <section>\n            <h3>${escapeHtml(faq.question)}</h3>\n            <p>${escapeHtml(faq.answer)}</p>\n          </section>`
   ).join("\n");
   const block = `        <section aria-labelledby="home-faqs">\n          <h2 id="home-faqs">${escapeHtml(
-    HOME_FAQ_HEADING
+    getHomeFaqHeading(lang)
   )}</h2>\n${sections}\n        </section>`;
-  return html.replace(`        ${marker}`, block);
+  return html.replace(marker, block);
+}
+
+/** Localize the existing first-paint hero without changing its image or layout. */
+function localizeHomeHero(html: string, lang: "en" | "bn"): string {
+  const copy = getHomePositioning(lang);
+  return html
+    .replace(/(<h1 class="pre-hydration-hero__title">)[\s\S]*?(<\/h1>)/, `$1${escapeHtml(copy.h1Lines[0])}<br /><span>${escapeHtml(copy.h1Lines[1])}</span>$2`)
+    .replace(/(<p class="pre-hydration-hero__description">)[\s\S]*?(<\/p>)/, `$1${escapeHtml(copy.subtitle)}$2`)
+    .replace('aria-label="Travel planning from anywhere"', `aria-label="${lang === "bn" ? "যেকোনো স্থান থেকে ভ্রমণ পরিকল্পনা" : "Travel planning from anywhere"}"`)
+    .replace('href="/flights">Search Global Flights', `href="${lang === "bn" ? "/bn/flights" : "/flights"}">${lang === "bn" ? "গ্লোবাল ফ্লাইট খুঁজুন" : "Search Global Flights"}`)
+    .replace('href="/hotels">Explore Global Hotels', `href="${lang === "bn" ? "/bn/hotels" : "/hotels"}">${lang === "bn" ? "হোটেল ও আবাসন খুঁজুন" : "Explore Global Hotels"}`)
+    .replace('href="/bangladesh">Travelling from Bangladesh? Start here', `href="${lang === "bn" ? "/bn/bangladesh" : "/bangladesh"}">${escapeHtml(copy.bangladeshLinkLabel)}`)
+    .replace("<!-- HOME_POSITIONING_FEATURES -->", `<ul>${copy.features.map(feature => `<li>${escapeHtml(feature)}</li>`).join("")}</ul>`);
 }
 
 function renderVisibleFaqHtml(
@@ -1790,24 +1804,23 @@ function buildAllRoutes(): PrerenderRoute[] {
   //
   // The pairs come from src/data/homeFaqs.ts, which also renders the visible
   // #home-faqs block in index.html and the runtime schema in src/App.tsx.
-  const homeFaq = stripContext(generateFAQSchema(HOME_FAQS));
+  const homeFaq = stripContext(generateFAQSchema(getHomeFaqs("en")));
   homeFaq["@id"] = `${BASE_URL}/#faq`;
   homeFaq["mainEntityOfPage"] = { "@id": `${BASE_URL}/#webpage` };
 
   routes.push({
     routePath: "/",
     canonicalUrl: `${BASE_URL}/`,
-    title: "URAL — Compare Flights, Hotels & Visa Guides for Bangladeshi Travelers",
-    description:
-      "Compare flight prices from Dhaka to Nepal, Thailand, Malaysia and Dubai, check visa requirements step by step, and plan your trip budget in BDT.",
+    title: getHomePositioning("en").title,
+    description: getHomePositioning("en").description,
     imageUrl: defaultOgImage,
     lcpImageUrl: `/assets/images/clouds_boat_hero_1781438671378-1200.webp`,
     lcpImageSizes: "100vw",
     breadcrumbs: [{ name: "Home", url: `${BASE_URL}/` }],
     extraGraphNodes: [homeFaq],
     bodyHtml: `
-      <h1>URAL — Flights, Hotels, Umrah &amp; Visa Guides for Bangladeshi Travelers</h1>
-      <p>Compare cheap international flights from Dhaka (DAC), check official e-Visa checklists, plan DIY Umrah &amp; Hajj in BDT, and explore verified travel guides for Bangladeshi passport holders.</p>
+      <h1>${escapeHtml(getHomePositioning("en").h1Lines.join(" "))}</h1>
+      <p>${escapeHtml(getHomePositioning("en").subtitle)}</p>
     `,
   });
 
@@ -3525,15 +3538,32 @@ function buildBengaliBody(
   if (englishPath === "/bangladesh") {
     return renderToStaticMarkup(React.createElement(BangladeshHubView, { lang: "bn" }));
   }
+  if (englishPath === "/") {
+    const source = fs.readFileSync(path.join(ROOT_DIR, "index.html"), "utf8");
+    const hero = source.match(/<section class="hero-bg pre-hydration-hero"[\s\S]*?<\/section>/)?.[0];
+    if (!hero) throw new Error("The source homepage is missing the first-paint hero");
+    return `${localizeHomeHero(hero, "bn")}<article><h2>ভ্রমণ পরিকল্পনার গাইড ও পরবর্তী ধাপ</h2>
+      <p>বিশ্বজুড়ে ফ্লাইট খুঁজুন, হোটেল সেবাদাতার লিংক দেখুন এবং আপনার পাসপোর্ট ও যাত্রার স্থান অনুযায়ী শর্ত যাচাই করতে সংশ্লিষ্ট গাইড ব্যবহার করুন। বাংলাদেশভিত্তিক গাইডে ঢাকা থেকে রুট, পাসপোর্টের চেকলিস্ট ও BDT বাজেট ইনপুট বজায় রয়েছে।</p>
+      ${renderToStaticMarkup(React.createElement(EvisaHomeSection, { lang: "bn" }))}
+      ${bnLinkList("মূল ভ্রমণ পরিকল্পনা", [
+        { label: "ঢাকা থেকে ফ্লাইট রুটের গাইড", path: "/flights" },
+        { label: "হোটেল ও আবাসনের গাইড", path: "/hotels" },
+        { label: "বাংলাদেশি পাসপোর্টের ভিসা চেকলিস্ট", path: "/visa" },
+        { label: "গন্তব্যভিত্তিক ভ্রমণ গাইড", path: "/destinations" },
+        { label: "বাংলাদেশ থেকে ওমরাহ ও হজের পরিকল্পনা", path: "/umrah" },
+        { label: "BDT ইনপুটে ভ্রমণ বাজেট", path: "/costs" },
+        { label: "ভ্রমণের টুলস", path: "/tools" },
+        { label: "ভ্রমণের অভিজ্ঞতা ও আকর্ষণ", path: "/experiences" },
+        { label: "সব ট্রাভেল ও ওমরাহ গাইড", path: "/blog" },
+      ])}
+      ${injectHomeFaq("<!-- HOME_FAQ -->", "bn")}</article>`;
+  }
   const segments = englishPath.split("/").filter(Boolean);
   const [group, id] = segments;
   const parts: string[] = [
     `<h1>${escapeHtml(h1)}</h1>`,
     `<p>${escapeHtml(description)}</p>`,
   ];
-  if (englishPath === "/") {
-    parts.push(renderToStaticMarkup(React.createElement(EvisaHomeSection, { lang: "bn" })));
-  }
   if (englishPath === "/privacy") {
     parts.push(renderToStaticMarkup(React.createElement(EvisaWidgetPrivacyNote, { lang: "bn" })));
   }
@@ -4531,7 +4561,12 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
 
     const extraGraphNodes: Record<string, unknown>[] = [];
     const segments = englishPath.split("/").filter(Boolean);
-    if (englishPath === "/bangladesh") {
+    if (englishPath === "/") {
+      const faq = stripContext(generateFAQSchema(getHomeFaqs("bn")));
+      faq["@id"] = `${canonicalUrl}#faq`;
+      faq["mainEntityOfPage"] = { "@id": `${canonicalUrl}#webpage` };
+      extraGraphNodes.push(faq);
+    } else if (englishPath === "/bangladesh") {
       const hub = getDepartureHub("bangladesh");
       if (!hub) throw new Error("Bangladesh departure hub record is missing");
       extraGraphNodes.push(departureHubCollectionSchema(hub, "bn"));
@@ -5581,6 +5616,7 @@ function staticAffiliateDisclosure(isBn: boolean): string {
     pageHtml = pageHtml.replace('<div id="root">', `<div id="root">${staticNavigation}`);
 
     if (r.routePath === "/") {
+      pageHtml = localizeHomeHero(pageHtml, "en");
       pageHtml = injectScheduledBlogDirectory(pageHtml);
       const evisaHomeMarker = "<!-- HOME_EVISAS -->";
       if (!pageHtml.includes(evisaHomeMarker)) throw new Error("The source homepage is missing the eVisas marker.");

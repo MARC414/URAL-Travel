@@ -7,6 +7,7 @@ import {
 } from "./visaAssistanceMeta";
 import { TOOL_PAGE_SEO } from "./toolRoutes";
 import { DEPARTURE_HUBS } from "../data/departureHubs";
+import { getHomePositioning } from "../data/homePositioning";
 
 export interface SeoCopy {
   title: string;
@@ -41,11 +42,7 @@ const TOOL_SLUG_SEO_COPY: Record<"en" | "bn", Record<string, SeoCopy>> = {
 export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   ...TOOL_SLUG_SEO_COPY.en,
   "/bangladesh": DEPARTURE_HUBS.bangladesh!.copy.en,
-  "/": {
-    title: "Travel Intelligence: Global Flights, Hotels & eVisas | URAL",
-    description:
-      "Plan travel from Dhaka with BDT flight guidance, visa checklists for Bangladeshi passport holders, destination itineraries and practical trip-budget guides.",
-  },
+  "/": getHomePositioning("en"),
   "/umrah": {
     title: "Umrah Cost from Bangladesh: DIY Guide & Nusuk | URAL",
     description:
@@ -366,11 +363,7 @@ export const CORE_BENGALI_SEO_COPY: Record<string, SeoCopy> = {
     description:
       "বাংলাদেশি পাসপোর্টে আগে থেকে ভিসা ছাড়া যেসব দেশে যাওয়া যায় — ঢাকা থেকে সরাসরি ব্যবহারযোগ্য গন্তব্য, সম্পূর্ণ তালিকা, ট্রানজিট ভিসার ফাঁদ এবং সহজ ভাবা হলেও যেগুলো আসলে নয়।",
   },
-  "/": {
-    title: "বাংলাদেশ থেকে ভ্রমণ গাইড, ফ্লাইট ও ভিসা | URAL",
-    description:
-      "ঢাকা থেকে ভ্রমণ পরিকল্পনা করুন — টাকায় ফ্লাইট গাইড, বাংলাদেশি পাসপোর্টধারীদের জন্য ভিসা চেকলিস্ট, গন্তব্যভিত্তিক দিকনির্দেশনা ও ব্যবহারিক বাজেট গাইড।",
-  },
+  "/": getHomePositioning("bn"),
   "/blog": {
     title: "বাংলাদেশ ভ্রমণ ব্লগ: ভিসা, ওমরাহ ও টাকায় গাইড | URAL",
     description:
