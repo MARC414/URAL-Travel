@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
-import { Link } from "react-router-dom";
-import { useLocale } from "../utils/localeProvider";
+
+
 import { CORE_PRIORITY_SEO_COPY } from "../utils/coreSeoCopy";
 import { FLIGHT_ROUTES } from "../data/flightRoutes";
 
 export default function BangladeshHubView() {
-  const { isBn } = useLocale();
+  const isBn = typeof window !== "undefined" && window.location.pathname.startsWith("/bn");
 
   const routesList = useMemo(() => {
     return Object.entries(FLIGHT_ROUTES)
@@ -29,13 +29,13 @@ export default function BangladeshHubView() {
           <h2 className="text-2xl font-bold mb-6">{isBn ? "ফ্লাইট রুট" : "Flights from Dhaka"}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {routesList.map(route => (
-              <Link 
+              <a 
                 key={route.id} 
-                to={`/flights/${route.id}`}
+                href={`/flights/${route.id}`}
                 className="block p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
               >
                 <div className="font-semibold text-lg">{route.id.split('-').join(' to ').toUpperCase()}</div>
-              </Link>
+              </a>
             ))}
           </div>
         </section>

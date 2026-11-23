@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+const BangladeshHubView = React.lazy(() => import("./components/BangladeshHubView"));
 import { initGlobalClickTracking } from "./utils/analytics";
 import {
   CONSENT_OPEN_EVENT,
@@ -2781,7 +2782,11 @@ export default function App() {
         {/* -------------------------------------------------------------
             🇧🇩 VIEW 01b: BANGLADESH HUB
         ------------------------------------------------------------- */}
-        {section === "bangladesh" && <BangladeshHubView />}
+        {section === "bangladesh" && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <BangladeshHubView />
+          </React.Suspense>
+        )}
 
         {/* -------------------------------------------------------------
             🏠 VIEW 1: HOME PAGE (CONVERSION HUB)
