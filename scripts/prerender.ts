@@ -103,6 +103,9 @@ import { SITE_SEARCH_ALIASES } from "../src/data/siteSearchAliases";
 import { NAVIGATION_RECORDS } from "../src/data/navigation";
 import { buildNavigation } from "../src/utils/navigation";
 import { StaticSiteNavigation } from "../src/components/StaticSiteNavigation";
+import BangladeshHubView from "../src/components/BangladeshHubView";
+import { getDepartureHub } from "../src/data/departureHubs";
+import { departureHubCollectionSchema } from "../src/utils/departureHubSchema";
 import type { SiteSearchEntry, SiteSearchKind } from "../src/utils/siteSearch";
 import {
   OFFICIAL_RESOURCES_COPY,
@@ -1083,6 +1086,9 @@ function addInternalLinkSections(
   const categoryHubPaths = new Set(CATEGORY_HUB_LINKS.map((link) => link.href));
 
   for (const route of routes) {
+    // This index already renders its complete native guide links through the
+    // shared React component; do not append a second static-only index.
+    if (route.routePath === "/bangladesh") continue;
     let extraLinks = "";
     if (categoryHubPaths.has(route.routePath)) {
       const siblingHubs = CATEGORY_HUB_LINKS.filter((link) => link.href !== route.routePath);
@@ -1234,6 +1240,7 @@ function addBengaliLinkSections(
 ): void {
   for (const route of bnRoutes) {
     const englishPath = toEnglishBasePath(route.routePath);
+    if (englishPath === "/bangladesh") continue;
     const en = enByPath.get(englishPath);
     const sections: string[] = [];
 
@@ -1802,6 +1809,24 @@ function buildAllRoutes(): PrerenderRoute[] {
       <h1>URAL — Flights, Hotels, Umrah &amp; Visa Guides for Bangladeshi Travelers</h1>
       <p>Compare cheap international flights from Dhaka (DAC), check official e-Visa checklists, plan DIY Umrah &amp; Hajj in BDT, and explore verified travel guides for Bangladeshi passport holders.</p>
     `,
+  });
+
+  // F02: the real departure hub is rendered by the same component as React.
+  const bangladeshHub = getDepartureHub("bangladesh");
+  if (!bangladeshHub) throw new Error("Bangladesh departure hub record is missing");
+  routes.push({
+    routePath: bangladeshHub.path,
+    canonicalUrl: `${BASE_URL}${bangladeshHub.path}`,
+    title: bangladeshHub.copy.en.title,
+    description: bangladeshHub.copy.en.description,
+    imageUrl: defaultOgImage,
+    lastmod: bangladeshHub.updatedAt,
+    breadcrumbs: [
+      { name: "Home", url: `${BASE_URL}/` },
+      { name: bangladeshHub.copy.en.h1, url: `${BASE_URL}${bangladeshHub.path}` },
+    ],
+    extraGraphNodes: [departureHubCollectionSchema(bangladeshHub, "en")],
+    bodyHtml: renderToStaticMarkup(React.createElement(BangladeshHubView, { lang: "en" })),
   });
 
   // 2. Umrah & Hajj Hub (/umrah)
@@ -3497,6 +3522,9 @@ function buildBengaliBody(
   h1: string,
   description: string
 ): string {
+  if (englishPath === "/bangladesh") {
+    return renderToStaticMarkup(React.createElement(BangladeshHubView, { lang: "bn" }));
+  }
   const segments = englishPath.split("/").filter(Boolean);
   const [group, id] = segments;
   const parts: string[] = [
@@ -4396,6 +4424,10 @@ function buildBengaliBody(
 function bengaliStaticCopy(
   englishPath: string
 ): { title: string; description: string; h1: string } | null {
+  if (englishPath === "/bangladesh") {
+    const hub = getDepartureHub("bangladesh");
+    return hub ? { title: hub.copy.bn.title, description: hub.copy.bn.description, h1: hub.copy.bn.h1 } : null;
+  }
   const copy = BENGALI_SEO_COPY[englishPath];
   if (!copy) return null;
   return {
@@ -4499,7 +4531,11 @@ function buildBengaliRoutes(enRoutes: PrerenderRoute[]): PrerenderRoute[] {
 
     const extraGraphNodes: Record<string, unknown>[] = [];
     const segments = englishPath.split("/").filter(Boolean);
-    if (segments[0] === "blog" && segments[1]) {
+    if (englishPath === "/bangladesh") {
+      const hub = getDepartureHub("bangladesh");
+      if (!hub) throw new Error("Bangladesh departure hub record is missing");
+      extraGraphNodes.push(departureHubCollectionSchema(hub, "bn"));
+    } else if (segments[0] === "blog" && segments[1]) {
       const localizedPost = getLocalizedBlogs("bn").find(
         (item) => item.slug === segments[1]
       );
@@ -5001,8 +5037,8 @@ ${routesToRender
     // publish byte-identical annotations (a one-sided cluster is invalid).
     const alternates =
       r.enUrl && r.bnUrl
-        ? `\n    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(r.enUrl)}" />` +
-          `\n    <xhtml:link rel="alternate" hreflang="bn" href="${escapeXml(r.bnUrl)}" />` +
+        ? `\n    <xhtml:link rel="alternate" hreflang="${englishPath === "/bangladesh" ? "en-bd" : "en"}" href="${escapeXml(r.enUrl)}" />` +
+          `\n    <xhtml:link rel="alternate" hreflang="${englishPath === "/bangladesh" ? "bn-bd" : "bn"}" href="${escapeXml(r.bnUrl)}" />` +
           `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(r.enUrl)}" />`
         : "";
     return `  <url>
@@ -5339,7 +5375,10 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     // return tag pointing at a 404 is worse than no tag at all.
     const englishUrl = r.enUrl || r.canonicalUrl;
     const bengaliUrl = r.bnUrl || null;
-    const localeTag = r.locale === "bn" ? "bn" : "en";
+    const isBangladeshHub = toEnglishBasePath(r.routePath) === "/bangladesh";
+    const localeTag = isBangladeshHub
+      ? r.locale === "bn" ? "bn-BD" : "en-BD"
+      : r.locale === "bn" ? "bn" : "en";
     const localeOgp = r.locale === "bn" ? "bn_BD" : "en_BD";
 
     let pageHtml = templateHtml
@@ -5370,7 +5409,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       // Search Console reports as "no return tag" and ignores wholesale.
       .replace(
         /<link rel="alternate" hreflang="en" href="[^"]*" \/>/,
-        `<link rel="alternate" hreflang="en" href="${escapeHtml(englishUrl)}" />`
+        `<link rel="alternate" hreflang="${isBangladeshHub ? "en-bd" : "en"}" href="${escapeHtml(englishUrl)}" />`
       )
       .replace(
         /<link rel="alternate" hreflang="x-default" href="[^"]*" \/>/,
@@ -5379,7 +5418,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       .replace(
         /\n?\s*<link rel="alternate" hreflang="bn" href="[^"]*" \/>/,
         bengaliUrl
-          ? `\n    <link rel="alternate" hreflang="bn" href="${escapeHtml(bengaliUrl)}" />`
+          ? `\n    <link rel="alternate" hreflang="${isBangladeshHub ? "bn-bd" : "bn"}" href="${escapeHtml(bengaliUrl)}" />`
           : ""
       )
       .replace(

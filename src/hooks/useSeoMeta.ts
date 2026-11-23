@@ -477,6 +477,12 @@ export function useSeoMeta({
       }
       link.setAttribute("href", href);
     };
+    // F02 only: on entering the new hub from an older static route, remove its
+    // generic aliases so the hub has exactly one reciprocal alternate set.
+    if (englishAlternateUrl === `${SITE_ORIGIN}/bangladesh`) {
+      setAlternateLink("en", null);
+      setAlternateLink("bn", null);
+    }
     setAlternateLink("en-bd", englishAlternateUrl);
     setAlternateLink("x-default", englishAlternateUrl);
     setAlternateLink("bn-bd", bengaliAlternateUrl);
@@ -488,6 +494,15 @@ export function useSeoMeta({
       document.head.appendChild(ogLocale);
     }
     ogLocale.setAttribute("content", isBengaliRoute ? "bn_BD" : "en_BD");
+    if (englishAlternateUrl === `${SITE_ORIGIN}/bangladesh`) {
+      let ogAlternate = document.querySelector('meta[property="og:locale:alternate"]');
+      if (!ogAlternate) {
+        ogAlternate = document.createElement("meta");
+        ogAlternate.setAttribute("property", "og:locale:alternate");
+        document.head.appendChild(ogAlternate);
+      }
+      ogAlternate.setAttribute("content", isBengaliRoute ? "en_BD" : "bn_BD");
+    }
 
     // 3. Set/Update og:url & twitter:url Meta Tags
     let ogUrl = document.querySelector('meta[property="og:url"]');

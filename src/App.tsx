@@ -66,6 +66,8 @@ import {
 } from "./data/homeFeaturedBlogMeta";
 import type { BankingFaq } from "./data/bankingHubFaqs";
 import { HOME_FAQS, HOME_FAQ_HEADING } from "./data/homeFaqs";
+import { getDepartureHub } from "./data/departureHubs";
+import { departureHubCollectionSchema } from "./utils/departureHubSchema";
 
 // Subcomponents
 import { TravelIntelligence } from "./components/AeoInspector";
@@ -2188,6 +2190,19 @@ export default function App() {
     ];
   }
 
+  if (section === "bangladesh") {
+    const hub = getDepartureHub("bangladesh");
+    if (hub) {
+      seoTitle = hub.copy[lang].title;
+      seoDescription = hub.copy[lang].description;
+      seoSchema = departureHubCollectionSchema(hub, lang);
+      seoBreadcrumbs = [
+        { name: "Home", url: siteUrl("/", lang) },
+        { name: hub.copy[lang].h1, url: siteUrl(hub.path, lang) },
+      ];
+    }
+  }
+
   if (section === "notFound") {
     seoTitle = "Page not found | URAL";
     seoDescription = "The requested URAL travel page could not be found. Browse the travel guides or return to the homepage.";
@@ -2195,6 +2210,7 @@ export default function App() {
 
   const seoRoutePath = (() => {
     if (section === "home") return "/";
+    if (section === "bangladesh") return "/bangladesh";
     if (["flights", "hotels", "visa", "destinations", "costs"].includes(section)) {
       return isLanding ? `/${section}` : `/${section}/${parameterId}`;
     }
@@ -2263,6 +2279,7 @@ export default function App() {
 
   if (isBn && seoBreadcrumbs.length > 0) {
     const bnLastLabel =
+      (section === "bangladesh" ? getDepartureHub("bangladesh")?.copy.bn.h1 : undefined) ??
       bnContent?.getBengaliRouteSeo(seoRoutePath)?.h1 ??
       seoTitle.replace(/\s*\|\s*URAL.*$/i, "").trim();
     const isBlogHubPage = section === "blog" && isLanding;
@@ -2784,7 +2801,7 @@ export default function App() {
         ------------------------------------------------------------- */}
         {section === "bangladesh" && (
           <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
-            <BangladeshHubView />
+            <BangladeshHubView lang={lang} />
           </React.Suspense>
         )}
 

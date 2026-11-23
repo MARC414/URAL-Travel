@@ -40,6 +40,8 @@ import {
 import { runOfficialSourcesChecks } from "./officialSourcesChecks";
 import { glossaryGuidePaths, runGlossaryChecks } from "./glossaryChecks";
 import { GLOSSARY_TERMS } from "../src/data/glossary";
+import { checkBangladeshHubBuild } from "./bangladeshHubChecks";
+import { getDepartureHub } from "../src/data/departureHubs";
 import { NON_OFFICIAL_HOSTS, OFFICIAL_HOSTS, getCommunitySources, getOfficialSources, officialSourceHost } from "../src/data/officialSources";
 import { OFFICIAL_RESOURCES_COPY } from "../src/utils/officialResourcesCopy";
 import fs from "node:fs";
@@ -4286,13 +4288,17 @@ if (sitemap) {
       loc === `https://uraltravel.co.uk/bn/costs/${item.id}`
     );
     const isCostDate = !!cost && value === cost.updatedAt;
-    if (!isBlogTimestamp && !isContentDate && !isCostDate) badLastmod.push(value);
+    const hub = getDepartureHub("bangladesh");
+    const isDepartureHubDate = !!hub &&
+      (loc === `${SITE_ORIGIN}${hub.path}` || loc === `${SITE_ORIGIN}/bn${hub.path}`) &&
+      value === hub.updatedAt;
+    if (!isBlogTimestamp && !isContentDate && !isCostDate && !isDepartureHubDate) badLastmod.push(value);
   }
   check(
     badLastmod.length === 0,
     badLastmod.length === 0
-      ? `every lastmod is a blog timestamp, cost guide date or CONTENT_UPDATED (${CONTENT_UPDATED})`
-      : `lastmod must be a blog ISO timestamp, cost guide date or CONTENT_UPDATED (${CONTENT_UPDATED}); ` +
+      ? `every lastmod is a blog timestamp, cost/departure guide date or CONTENT_UPDATED (${CONTENT_UPDATED})`
+      : `lastmod must be a blog ISO timestamp, cost/departure guide date or CONTENT_UPDATED (${CONTENT_UPDATED}); ` +
           `found ${badLastmod.length} unexpected value(s): ${[...new Set(badLastmod)].slice(0, 5).join(", ")}`
   );
 
@@ -9532,6 +9538,7 @@ check(
 }
 
 checkEvisaIntegration(DIST_DIR, check);
+checkBangladeshHubBuild(DIST_DIR, check);
 
 // --- CI test-suite completeness, build-phase order & off-peak schedule ------
 {

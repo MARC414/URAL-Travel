@@ -11,6 +11,8 @@
     "build": "npm run generate:scheduled && vite build --mode production && tsx scripts/prerender.ts",
     "build:spa": "npm run generate:scheduled && vite build",
     "verify:build": "tsx scripts/verify-build.ts",
+    "test:departure-hubs": "tsx scripts/test-departure-hubs.tsx",
+    "test:bangladesh-hub-build": "tsx scripts/test-bangladesh-hub-build.ts",
     "test:scheduling": "tsx scripts/test-scheduled-posts.ts",
     "scheduled:check": "tsx scripts/check-scheduled-posts.ts",
     "preview": "vite preview",

@@ -6,6 +6,7 @@ import {
   VISA_ASSISTANCE_PATH,
 } from "./visaAssistanceMeta";
 import { TOOL_PAGE_SEO } from "./toolRoutes";
+import { DEPARTURE_HUBS } from "../data/departureHubs";
 
 export interface SeoCopy {
   title: string;
@@ -39,10 +40,7 @@ const TOOL_SLUG_SEO_COPY: Record<"en" | "bn", Record<string, SeoCopy>> = {
  */
 export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   ...TOOL_SLUG_SEO_COPY.en,
-  "/bangladesh": {
-    title: "Bangladesh Travel Guides, Flights & Visas from Dhaka | URAL",
-    description: "Plan travel from Dhaka with BDT flight guidance, visa checklists for Bangladeshi passport holders, destination itineraries and practical trip-budget guides."
-  },
+  "/bangladesh": DEPARTURE_HUBS.bangladesh!.copy.en,
   "/": {
     title: "Travel Intelligence: Global Flights, Hotels & eVisas | URAL",
     description:
@@ -342,6 +340,7 @@ export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
  * routes, imported directly by scripts/prerender.ts).
  */
 export const CORE_BENGALI_SEO_COPY: Record<string, SeoCopy> = {
+  "/bangladesh": DEPARTURE_HUBS.bangladesh!.copy.bn,
   // Canonical tool sub-pages, Bengali twin (see TOOL_PAGE_SEO).
   ...TOOL_SLUG_SEO_COPY.bn,
   "/destinations": {

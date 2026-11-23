@@ -104,6 +104,9 @@ jobs:
       - name: Verify bilingual navigation membership and publication gates
         run: npm run test:navigation
 
+      - name: Verify shared Bangladesh hub rendering and bilingual guide links
+        run: npm run test:departure-hubs
+
       - name: Verify header disclosures, drawer focus and existing actions
         run: npm run test:site-header
 
@@ -171,6 +174,9 @@ jobs:
 
       - name: Verify prerendered output
         run: npm run verify:build
+
+      - name: Verify real Bangladesh hub files, metadata and guide destinations
+        run: npm run test:bangladesh-hub-build
 
       - name: Visa-claim and built-HTML affiliate-disclosure integrity
         run: npm run test:visa-claims
