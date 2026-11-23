@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../utils/localeProvider";
 import { CORE_PRIORITY_SEO_COPY } from "../utils/coreSeoCopy";
 import { FLIGHT_ROUTES } from "../data/flightRoutes";
-import { VISAS } from "../data/visaIndex";
-import TopNavBar from "./TopNavBar";
-import PageFooter from "./PageFooter";
 
 export default function BangladeshHubView() {
   const { isBn } = useLocale();
 
   const routesList = useMemo(() => {
-    return Object.values(FLIGHT_ROUTES).filter(r => r.from === "DAC");
+    return Object.entries(FLIGHT_ROUTES)
+      .map(([id, r]) => ({ id, ...r }))
+      .filter(r => r.origin === "DAC");
   }, []);
 
   const seo = CORE_PRIORITY_SEO_COPY["/bangladesh"];
@@ -20,17 +19,15 @@ export default function BangladeshHubView() {
 
   return (
     <div className="bg-gray-50 min-h-screen text-gray-900 font-sans">
-      <TopNavBar />
-      <main className="max-w-6xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-8 mt-16">
         <header className="mb-12">
           <h1 className="text-4xl font-bold mb-4">{isBn ? "বাংলাদেশ ট্রাভেল হাব" : "Bangladesh Travel Hub"}</h1>
-          <p className="text-xl text-gray-600">{isBn ? desc : desc}</p>
+          <p className="text-xl text-gray-600">{desc}</p>
         </header>
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{isBn ? "ফ্লাইট রুট" : "Flights from Dhaka"}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Placeholder for real links to existing BD content */}
             {routesList.map(route => (
               <Link 
                 key={route.id} 
@@ -43,7 +40,6 @@ export default function BangladeshHubView() {
           </div>
         </section>
       </main>
-      <PageFooter />
     </div>
   );
 }

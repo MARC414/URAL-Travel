@@ -473,7 +473,7 @@ const singaporeDestImg = "/assets/images/singapore_destination_1790387270177-120
 const maldivesDestImg = "/assets/images/maldives_destination_1790387286896-1200.webp";
 const blogHeroBannerImg = "/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp";
 const umrahMakkahImg = "/assets/images/umrah_makkah_haram_guide_1790430007679-1200.webp";
-type SectionType = "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "resources" | "glossary" | "privacy" | "about" | "partners" | "visaAssistance" | "notFound";
+type SectionType = "bangladesh" | "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "resources" | "glossary" | "privacy" | "about" | "partners" | "visaAssistance" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
