@@ -21,6 +21,7 @@
     "lint": "npm run generate:scheduled && tsc --noEmit",
     "test:sitemaps": "tsx scripts/test-sitemaps.ts",
     "test:flight-search": "tsx scripts/test-flight-search.ts",
+    "test:flight-widget-state": "tsx scripts/test-flight-widget-state.tsx",
     "verify:sitemaps:live": "tsx scripts/verify-live-sitemaps.ts",
     "verify:klook:live": "tsx scripts/verify-klook-deeplinks.ts",
     "test:umrah-budget": "tsx scripts/test-umrah-budget.ts",

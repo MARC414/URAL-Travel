@@ -57,6 +57,9 @@ jobs:
       - name: Verify hosted flight-search handoffs and legacy redirects
         run: npm run test:flight-search
 
+      - name: Verify the flight widget's unselected-airport state after mount
+        run: npm run test:flight-widget-state
+
       - name: Verify quote-based Umrah budget
         run: npm run test:umrah-budget
 
