@@ -1282,7 +1282,7 @@ function addBengaliLinkSections(
         renderLinkSection("read-in-english", "ইংরেজিতে পড়ুন — Read this page in English", [
           {
             href: englishPath,
-            text: (en as any) ? stripBrandSuffix((en as any).title) : "English version",
+            text: "English version",
           },
           { href: "/", text: "URAL Travel Intelligence English homepage" },
         ])
