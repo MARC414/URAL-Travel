@@ -49,7 +49,7 @@ assert.equal(isBangladeshAirport("zyl"), true);
 assert.equal(isBangladeshAirport("RAJ"), false, "RAJ is Rajkot, not Rajshahi");
 
 for (const lang of ["en", "bn"] as const) {
-  const html = renderToStaticMarkup(React.createElement(TravelpayoutsWidget as React.ComponentType<any>, { lang, showQuickRoutes: true, showInlineResults: true }));
+  const html = renderToStaticMarkup(React.createElement(TravelpayoutsWidget as React.ComponentType<any>, { lang, showQuickRoutes: true, showInlineResults: true, defaultOrigin: "DAC" }));
   assert.ok(html.includes("data-flight-date-comparison"));
   assert.ok(html.includes("https://flights.uraltravel.co.uk/"));
   assert.ok(!/Lowest Fare Found|30-Day Flight Price Trend|Base fare:|Round-trip incl\. taxes/.test(html), "unsupported sample fares and date-based forecasts must not render");
@@ -130,7 +130,7 @@ for (const passthrough of [
 for (const lang of ["en", "bn"] as const) {
   for (const showInlineResults of [false, true]) {
     for (const element of [
-      React.createElement(TravelpayoutsWidget as React.ComponentType<any>, { lang, showInlineResults, showQuickRoutes: false }),
+      React.createElement(TravelpayoutsWidget as React.ComponentType<any>, { lang, showInlineResults, showQuickRoutes: false, defaultOrigin: "DAC" }),
       React.createElement(TravelpayoutsCustomWidget as React.ComponentType<any>, { lang, showInlineResults, initialTo: "Bangkok (BKK)", showFlightProviderHandoffs: true }),
     ]) {
       const html = renderToStaticMarkup(element);

@@ -1621,15 +1621,15 @@ export default function TravelpayoutsWidget({
 
   const liveFormSearchCode = useMemo(() => {
     return buildFlightSearchCode({
-      origin: effectiveOrigin.code,
-      destination: effectiveDest.code,
+      origin: (effectiveOrigin?.code || ''),
+      destination: (effectiveDest?.code || ''),
       departureDate: departDate,
       returnDate,
       tripType,
       cabinClass,
       adults: passengers,
     });
-  }, [effectiveOrigin.code, effectiveDest.code, departDate, returnDate, tripType, cabinClass, passengers]);
+  }, [(effectiveOrigin?.code || ''), (effectiveDest?.code || ''), departDate, returnDate, tripType, cabinClass, passengers]);
 
   const liveFormUralWlUrl = useMemo(() => {
     return buildWhiteLabelUrl({ flightSearch: liveFormSearchCode, currency, locale: lang, subId: placementSubId });
@@ -1881,7 +1881,7 @@ export default function TravelpayoutsWidget({
                     {isBn ? 'কোথা থেকে · From' : 'From · Origin'}
                   </label>
                   <span className="text-[11px] font-mono font-bold bg-brand-navy/10 text-brand-navy px-1.5 py-0.5 rounded">
-                    {effectiveOrigin.code}
+                    {(effectiveOrigin?.code || '')}
                   </span>
                 </div>
 
@@ -1939,7 +1939,7 @@ export default function TravelpayoutsWidget({
                 </div>
 
                 <div className="text-[11px] text-slate-500 truncate">
-                  {effectiveOrigin.name}
+                  {effectiveOrigin?.name}
                 </div>
               </div>
 
@@ -2045,7 +2045,7 @@ export default function TravelpayoutsWidget({
                       <span>{isBn ? 'অদলবদল' : 'Swap'}</span>
                     </button>
                     <span className="text-[11px] font-mono font-bold bg-[#F6B73C]/30 text-brand-navy px-1.5 py-0.5 rounded">
-                      {effectiveDest.code}
+                      {(effectiveDest?.code || '')}
                     </span>
                   </div>
                 </div>
@@ -2104,7 +2104,7 @@ export default function TravelpayoutsWidget({
                 </div>
 
                 <div className="text-[11px] text-slate-500 truncate">
-                  {effectiveDest.name}
+                  {effectiveDest?.name}
                 </div>
               </div>
 
@@ -2254,7 +2254,7 @@ export default function TravelpayoutsWidget({
                 />
               </div>
               <span className="text-[11px] font-mono font-bold text-brand-navy/80">
-                {effectiveOrigin.code} → {effectiveDest.code} · {currency}
+                {(effectiveOrigin?.code || '')} → {(effectiveDest?.code || '')} · {currency}
               </span>
             </a>
             <p className="text-xs leading-relaxed text-slate-600" role={!liveFormSearchCode ? 'status' : undefined}>
@@ -2895,9 +2895,9 @@ export default function TravelpayoutsWidget({
                 </p>
               </div>
               <span className="inline-flex min-h-8 shrink-0 items-center gap-1.5 self-start rounded-full border border-slate-200 bg-white/85 px-3 py-1 font-mono text-[11px] font-bold text-brand-navy">
-                {effectiveOrigin.code}
+                {(effectiveOrigin?.code || '')}
                 <ArrowRight size={12} aria-hidden="true" />
-                {effectiveDest.code}
+                {(effectiveDest?.code || '')}
                 <span className="ml-1 border-l border-slate-200 pl-2 text-slate-500">{currency}</span>
               </span>
             </div>
@@ -2951,7 +2951,7 @@ export default function TravelpayoutsWidget({
                 {onOpenPriceAlert && (
                   <button
                     type="button"
-                    onClick={() => onOpenPriceAlert(effectiveDest.city)}
+                    onClick={() => onOpenPriceAlert(effectiveDest?.city)}
                     className="inline-flex min-h-10 items-center gap-2 rounded-lg text-xs font-semibold text-white transition-colors hover:text-[#F6B73C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
                   >
                     <Bell size={14} className="text-[#F6B73C]" aria-hidden="true" />
@@ -2979,8 +2979,8 @@ export default function TravelpayoutsWidget({
                   >
                     <span>
                       {isBn
-                        ? `${effectiveDest.city} ট্যুর (Klook)`
-                        : `${effectiveDest.city} Tours (Klook)`}
+                        ? `${effectiveDest?.city} ট্যুর (Klook)`
+                        : `${effectiveDest?.city} Tours (Klook)`}
                     </span>
                     <ExternalLink size={11} aria-hidden="true" />
                   </a>
