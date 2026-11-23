@@ -37,7 +37,7 @@
 - [x] Verify only two canonical paths are added; all existing titles/canonicals and 308 bodies stay unchanged; the two directories gain only their new hub entry.
 - [x] Run focused tests, all existing test scripts, lint, build and verify:build.
 - [x] Check plain direct load, language switch, Back and unknown-child 404 in browser/local HTTP.
-- [ ] Resolve first-load fragment scrolling before final browser acceptance.
+- [x] Verify a local first-load fragment repair (follow-up branch; not yet published).
 - [x] Review scoped diff; report evidence and stop before F03/publication.
 
 ## Evidence
@@ -62,6 +62,7 @@ Status: integration authorised with the known first-load fragment-scrolling issu
 - Responsive browser measurements at **390, 768 and 1280px**, both languages: no horizontal overflow, all five sections and 15 links present, body text 16px/18px, guide-link height at least 46px. The mechanical UI detector returned `[]`. Screenshot capture was unavailable; no screenshot-based visual approval is claimed.
 - HTTP artifact verification used a read-only local static server with **no SPA fallback**: both hub URLs return 200; both `/bangladesh/not-a-guide` and `/bn/bangladesh/not-a-guide` return 404 with the existing noindex error page. Vite preview alone returns its SPA fallback for unknown paths, so it was not used as 404 evidence. This is local artifact verification, not a Cloudflare deployment test.
 - **Open item:** on a first full-page load with `#money`, browser diagnostics show the section initially lands below the header, then the viewport returns to the top. Back and ordinary language switching restore the section. The later scroll's origin is not established; this issue is not declared fixed by green tests. A temporary adapter-restoration experiment passed its isolated test but did not solve the real browser observation and was removed.
+  **23 November follow-up:** `docs/handoff/2026-11-23-fragment-scroll-repair.md` records a confirmed stalled-frame failure and a locally verified timer fallback in the existing shared helper. Fresh plain-browser EN/BN first loads, switching and Back retain the section below the header. This follow-up is uncommitted/unpublished; production `b41e584` still contains the earlier implementation until separately integrated.
 - At the end of the initial implementation the original shared checkout and other worktrees were untouched, and no commit/push/merge/deployment had occurred. The later owner-authorised integration updates original local main after verified document backup. Other worktrees and unrelated owner assets remain outside the integration.
 
 ## Changed files
@@ -72,4 +73,4 @@ Status: integration authorised with the known first-load fragment-scrolling issu
 - Generated source sitemaps: `public/sitemap.xml`, `public/sitemap.txt`.
 - This execution record. No `dist/`, owner assets or unrelated branch changes are staged.
 
-**Next single task:** diagnose and fix the first-load fragment scroll before closing its browser acceptance or starting F03. The authorised main push is limited to this hub implementation and its verification/evidence.
+**Next single task:** finish the separately recorded fragment-repair checkpoint, then F03. The earlier authorised main push was limited to the hub implementation; it is not blanket permission for later publication or visual upgrades.

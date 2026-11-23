@@ -261,6 +261,88 @@ await test("Fragment navigation waits for lazy targets and cancels stale scroll 
   target.remove();
   assert.doesNotThrow(() => restoreNavigationFragment("/umrah#%broken")());
 });
+
+// Paused animation frames are a real browser condition (for example, an
+// occluded window). Keep DOM, mutations and timers real; replace only frames.
+async function pausedFrames(run: (frames: Array<() => void>) => Promise<void>) {
+  const original = win.requestAnimationFrame;
+  const frames: Array<() => void> = [];
+  win.requestAnimationFrame = callback => {
+    frames.push(() => callback(win.performance.now()));
+    // Keep happy-dom's real opaque handle/lifecycle; withhold only the callback.
+    return original.call(win, () => {});
+  };
+  try { await run(frames); }
+  finally { win.requestAnimationFrame = original; }
+}
+const settleFallback = async () => { await React.act(async () => { await new Promise(resolve => win.setTimeout(resolve, 150)); }); };
+
+await test("Fragment restoration works when animation frames are paused, and a late frame cannot scroll twice", async () => {
+  await pausedFrames(async frames => {
+    const calls: unknown[] = [];
+    const target = document.createElement("section"); target.id = "money";
+    target.scrollIntoView = options => { calls.push(options); };
+    document.body.append(target);
+    const cleanup = restoreNavigationFragment("/bangladesh#money");
+    try {
+      await settleFallback();
+      assert.deepEqual(calls, [{ block: "start", behavior: "instant" }], "A stalled frame must not prevent the real target from receiving the scroll");
+      frames.forEach(frame => frame());
+      assert.equal(calls.length, 1, "A late frame must not repeat a completed timer scroll");
+    } finally { cleanup(); target.remove(); }
+  });
+});
+await test("Paused-frame restoration waits for a real late target in either locale", async () => {
+  for (const route of ["/bangladesh#late-money", "/bn/bangladesh#late-money"]) {
+    await pausedFrames(async () => {
+      let calls = 0;
+      const cleanup = restoreNavigationFragment(route);
+      const target = document.createElement("section"); target.id = "late-money";
+      target.scrollIntoView = () => { calls++; };
+      try {
+        await settleFallback();
+        assert.equal(calls, 0, "Missing targets must not be guessed");
+        document.body.append(target);
+        await settleFallback();
+        assert.equal(calls, 1, "A newly mounted target must still receive the fallback scroll");
+      } finally { cleanup(); target.remove(); }
+    });
+  }
+});
+await test("Navigation cleanup cancels both the paused frame and timer fallback", async () => {
+  await pausedFrames(async frames => {
+    let calls = 0;
+    const cleanup = restoreNavigationFragment("/bangladesh#cancelled-money");
+    await settle();
+    cleanup();
+    const target = document.createElement("section"); target.id = "cancelled-money";
+    target.scrollIntoView = () => { calls++; };
+    document.body.append(target);
+    try {
+      frames.forEach(frame => frame());
+      await settleFallback();
+      assert.equal(calls, 0, "Leaving a route must cancel every pending scroll path");
+    } finally { target.remove(); }
+  });
+});
+for (const intent of ["wheel", "touchstart", "PageDown"] as const) {
+  await test(`Manual ${intent} cancels pending fragment restoration instead of fighting the reader`, async () => {
+    await pausedFrames(async frames => {
+      let calls = 0;
+      const target = document.createElement("section"); target.id = "reader-money";
+      target.scrollIntoView = () => { calls++; };
+      document.body.append(target);
+      const cleanup = restoreNavigationFragment("/bangladesh#reader-money");
+      try {
+        await settle();
+        win.dispatchEvent(intent === "PageDown" ? new win.KeyboardEvent("keydown", { key: intent }) : new win.Event(intent));
+        frames.forEach(frame => frame());
+        await settleFallback();
+        assert.equal(calls, 0, "Explicit scrolling must take priority over a delayed automatic jump");
+      } finally { cleanup(); target.remove(); }
+    });
+  });
+}
 await React.act(async () => { root.unmount(); });
 await win.happyDOM.abort();
 console.log(`[site header] All ${checks} behavioural checks passed.`);

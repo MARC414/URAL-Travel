@@ -61,24 +61,48 @@ export function restoreNavigationFragment(path: string): () => void {
   if (!id) return () => {};
   let cancelled = false;
   let frame = 0;
+  let fallbackTimer = 0;
+  const clearScheduledScroll = () => {
+    window.cancelAnimationFrame(frame);
+    window.clearTimeout(fallbackTimer);
+    frame = 0;
+    fallbackTimer = 0;
+  };
   const cleanup = () => {
     cancelled = true;
-    window.cancelAnimationFrame(frame);
+    clearScheduledScroll();
     window.clearTimeout(timeout);
     observer.disconnect();
+    window.removeEventListener("wheel", cleanup);
+    window.removeEventListener("touchstart", cleanup);
+    window.removeEventListener("keydown", cancelOnScrollKey);
+  };
+  const cancelOnScrollKey = (event: KeyboardEvent) => {
+    if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) cleanup();
   };
   const scroll = () => {
-    frame = 0;
+    clearScheduledScroll();
     if (cancelled) return;
     const target = document.getElementById(id);
     if (!target) return;
     target.scrollIntoView({ block: "start", behavior: "instant" });
     cleanup();
   };
-  const schedule = () => { if (!cancelled && !frame) frame = window.requestAnimationFrame(scroll); };
+  const schedule = () => {
+    if (cancelled || frame || fallbackTimer) return;
+    frame = window.requestAnimationFrame(scroll);
+    // Occluded tabs can pause animation frames while timers still run. Race a
+    // short fallback, cancelling the other path before either attempts a jump.
+    fallbackTimer = window.setTimeout(scroll, 100);
+  };
   const observer = new MutationObserver(schedule);
   observer.observe(document.body, { childList: true, subtree: true });
   const timeout = window.setTimeout(cleanup, 5000);
+  // A delayed automatic jump must never pull the reader away from their own
+  // scroll gesture. These listeners live only until success, cancellation or timeout.
+  window.addEventListener("wheel", cleanup, { passive: true });
+  window.addEventListener("touchstart", cleanup, { passive: true });
+  window.addEventListener("keydown", cancelOnScrollKey);
   // Fonts can move an otherwise mounted target; wait for the current font load.
   if (document.fonts?.ready) void document.fonts.ready.then(schedule);
   else schedule();
