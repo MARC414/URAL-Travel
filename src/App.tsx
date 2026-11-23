@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 const BangladeshHubView = React.lazy(() => import("./components/BangladeshHubView"));
+const UkHubView = React.lazy(() => import("./components/UkHubView"));
 import { initGlobalClickTracking } from "./utils/analytics";
 import {
   CONSENT_OPEN_EVENT,
@@ -477,7 +478,7 @@ const singaporeDestImg = "/assets/images/singapore_destination_1790387270177-120
 const maldivesDestImg = "/assets/images/maldives_destination_1790387286896-1200.webp";
 const blogHeroBannerImg = "/assets/images/blog_editorial_hero_banner_1790429994056-1200.webp";
 const umrahMakkahImg = "/assets/images/umrah_makkah_haram_guide_1790430007679-1200.webp";
-type SectionType = "bangladesh" | "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "resources" | "glossary" | "privacy" | "about" | "partners" | "visaAssistance" | "notFound";
+type SectionType = "uk" | "bangladesh" | "home" | "flights" | "hotels" | "visa" | "visaFree" | "destinations" | "experiences" | "attractions" | "umrah" | "banking" | "kkdayHotels" | "costs" | "tools" | "blog" | "contact" | "sitemap" | "preDeparture" | "resources" | "glossary" | "privacy" | "about" | "partners" | "visaAssistance" | "notFound";
 
 function getCountryIata(country: string): string {
   const c = country.toLowerCase();
@@ -1184,6 +1185,9 @@ export default function App() {
 
     if (!root) {
       section = "home";
+      isLanding = true;
+    } else if (root === "uk" && segs.length === 1) {
+      section = "uk";
       isLanding = true;
     } else if (root === "bangladesh" && segs.length === 1) {
       section = "bangladesh";
@@ -2787,6 +2791,15 @@ export default function App() {
             with it: this keeps the shell and shows a reload prompt. `resetKey`
             is the current path, so leaving the broken route clears the error. */}
         <RouteErrorBoundary lang={lang} resetKey={currentPath}>
+
+        {/* -------------------------------------------------------------
+            🇬🇧 VIEW 01c: UK HUB
+        ------------------------------------------------------------- */}
+        {section === "uk" && (
+          <React.Suspense fallback={<div className="min-h-[44vh]" aria-hidden="true" />}>
+            <UkHubView />
+          </React.Suspense>
+        )}
 
         {/* -------------------------------------------------------------
             🇧🇩 VIEW 01b: BANGLADESH HUB

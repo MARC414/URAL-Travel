@@ -432,7 +432,7 @@ check(
   siteSearchEntries.length >= 120 &&
     new Set(siteSearchEntries.map((entry) => entry.pathEn)).size === siteSearchEntries.length &&
     new Set(siteSearchEntries.map((entry) => entry.pathBn)).size === siteSearchEntries.length &&
-    siteSearchEntries.every((entry) => Boolean(entry.pathBn) && !entry.pathEn.startsWith("/admin") && !entry.pathBn?.startsWith("/admin")) &&
+    siteSearchEntries.every((entry) => (Boolean(entry.pathBn) || entry.pathEn === "/uk") && !entry.pathEn.startsWith("/admin") && !entry.pathBn?.startsWith("/admin")) &&
     siteSearchEntries.some((entry) => entry.pathBn === "/bn/hotels/dubai-hotels") &&
     siteSearchEntries.some((entry) => entry.pathEn === "/hotels/dubai-hotels"),
   "the lazy site-search index contains bilingual public pages without private/admin routes"

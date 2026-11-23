@@ -13,7 +13,7 @@ export function StaticSiteNavigation({ model, lang, currentPath }: { model: Navi
       <div className="ural-utility-row"><div className="ural-header-container ural-utility-inner">
         <nav className="ural-utility-links" aria-label={isBn ? "URAL সম্পর্কে" : "About URAL"}>{model.utility.map((item, index) => <span key={item.id} className={index > 1 ? "ural-desktop-trust" : undefined}>{link(item, "ural-utility-link")}</span>)}</nav>
         <a className="ural-utility-search ural-static-directory" href={navigationHref("/sitemap", lang)}>{isBn ? "সব গাইডের ডিরেক্টরি" : "All guides directory"}<ArrowRight size={15} aria-hidden="true" /></a>
-        <nav className="ural-utility-controls ural-static-language" aria-label={isBn ? "ভাষা" : "Language"}><a href={navigationHref(currentPath, "en")} hrefLang="en-bd" lang="en">EN</a><a href={navigationHref(currentPath, "bn")} hrefLang="bn-bd" lang="bn">বাংলা</a></nav>
+        <nav className="ural-utility-controls ural-static-language" aria-label={isBn ? "ভাষা" : "Language"}><a href={navigationHref(currentPath, "en")} hrefLang="en-bd" lang="en">EN</a>{currentPath !== "/uk" && <a href={navigationHref(currentPath, "bn")} hrefLang="bn-bd" lang="bn">বাংলা</a>}</nav>
       </div></div>
       <header id="main-navbar-sticky" className="ural-primary-row"><div className="ural-header-container ural-primary-inner">
         <a className="ural-header-brand" href={navigationHref("/", lang)} aria-label={isBn ? "URAL হোম" : "URAL home"}><img src="/assets/brand/svg/ural-wordmark-v1.svg" alt="URAL" width="98" height="34" loading="lazy" /><span>A Travel Intelligence Ecosystem</span></a>
