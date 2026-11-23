@@ -1009,7 +1009,7 @@ function isWithinOneEdit(a, b) {
 }
 
 function findAirportInfo(codeOrQuery: string): { code: string; city: string; name: string; country: string; flag: string } {
-  if (!codeOrQuery) return AIRPORTS_DIRECTORY[0];
+  if (!codeOrQuery) return null;
   const q = codeOrQuery.trim().toUpperCase();
   const compactQ = q.replace(/[^A-Z]/g, '');
 
@@ -1050,7 +1050,7 @@ function findAirportInfo(codeOrQuery: string): { code: string; city: string; nam
 }
 
 export default function TravelpayoutsWidget({
-  defaultOrigin = 'DAC',
+  defaultOrigin = '',
   defaultDestination = 'KTM',
   showQuickRoutes = true,
   showInlineResults = false,
@@ -1083,7 +1083,7 @@ export default function TravelpayoutsWidget({
   const [tripType, setTripType] = useState<'roundtrip' | 'oneway'>('roundtrip');
   const [cabinClass, setCabinClass] = useState<'economy' | 'business'>('economy');
   const [passengers, setPassengers] = useState(1);
-  const [currency, setCurrency] = useState<"BDT" | "USD" | "EUR" | "GBP" | "SAR" | "AED">(() => preferredCurrencyForOrigin(defaultOrigin));
+  const [currency, setCurrency] = useState<"BDT" | "USD" | "EUR" | "GBP" | "SAR" | "AED">(() => preferredCurrencyForOrigin(defaultOrigin || 'DAC'));
   const { rates, status } = useRates();
   const [ratesReady, setRatesReady] = useState(false);
 
@@ -1117,8 +1117,10 @@ export default function TravelpayoutsWidget({
   }
 
   const [committedQuery, setCommittedQuery] = useState<CommittedQuery>(() => ({
-    origin: findAirportInfo(defaultOrigin),
-    destination: findAirportInfo(defaultDestination),
+    // Safe defensive fallback for initial state even if origin is empty
+
+    origin: findAirportInfo(defaultOrigin) || findAirportInfo('DAC'),
+    destination: findAirportInfo(defaultDestination) || findAirportInfo('KTM'),
     departDate: getFutureDateIso(14),
     returnDate: getFutureDateIso(21),
     tripType: 'roundtrip',
@@ -1148,8 +1150,8 @@ export default function TravelpayoutsWidget({
   // Dhaka keeps BDT, any other origin starts from the Page's USD default.
   useEffect(() => {
     if (currencyChosenRef.current) return;
-    setCurrency(preferredCurrencyForOrigin(originInfo.code));
-  }, [originInfo.code]);
+    setCurrency(preferredCurrencyForOrigin(originInfo?.code || ''));
+  }, [originInfo?.code]);
 
   // Close autocomplete dropdown on outside click & clean up speech recognition on unmount
   useEffect(() => {
@@ -1456,6 +1458,9 @@ export default function TravelpayoutsWidget({
     const finalOrigin = resolveTypedPlaceIfAny(nextOrigin, originQuery, 'origin');
     const finalDest = resolveTypedPlaceIfAny(nextDest, destQuery, 'dest');
 
+    if (!finalOrigin || !finalDest) return;
+
+
     setOriginInfo(finalOrigin);
     setDestInfo(finalDest);
     setOriginQuery('');
@@ -1572,8 +1577,8 @@ export default function TravelpayoutsWidget({
 
   const searchCode = useMemo(() => {
     return buildFlightSearchCode({
-      origin: committedQuery.origin.code,
-      destination: committedQuery.destination.code,
+      origin: committedQuery.origin?.code,
+      destination: committedQuery.destination?.code,
       departureDate: committedQuery.departDate,
       returnDate: committedQuery.returnDate,
       tripType: committedQuery.tripType,
@@ -1616,15 +1621,15 @@ export default function TravelpayoutsWidget({
 
   const liveFormSearchCode = useMemo(() => {
     return buildFlightSearchCode({
-      origin: effectiveOrigin.code,
-      destination: effectiveDest.code,
+      origin: (effectiveOrigin?.code || ''),
+      destination: (effectiveDest?.code || ''),
       departureDate: departDate,
       returnDate,
       tripType,
       cabinClass,
       adults: passengers,
     });
-  }, [effectiveOrigin.code, effectiveDest.code, departDate, returnDate, tripType, cabinClass, passengers]);
+  }, [(effectiveOrigin?.code || ''), (effectiveDest?.code || ''), departDate, returnDate, tripType, cabinClass, passengers]);
 
   const liveFormUralWlUrl = useMemo(() => {
     return buildWhiteLabelUrl({ flightSearch: liveFormSearchCode, currency, locale: lang, subId: placementSubId });
@@ -1876,7 +1881,7 @@ export default function TravelpayoutsWidget({
                     {isBn ? 'কোথা থেকে · From' : 'From · Origin'}
                   </label>
                   <span className="text-[11px] font-mono font-bold bg-brand-navy/10 text-brand-navy px-1.5 py-0.5 rounded">
-                    {effectiveOrigin.code}
+                    {(effectiveOrigin?.code || '')}
                   </span>
                 </div>
 
@@ -1890,7 +1895,7 @@ export default function TravelpayoutsWidget({
                     value={
                       activeDropdown === 'origin'
                         ? originQuery
-                        : `${originInfo.flag || '✈️'} ${originInfo.city} (${originInfo.code})`
+                        : originInfo ? `${originInfo.flag || '✈️'} ${originInfo.city} (${originInfo.code})` : ''
                     }
                     placeholder={
                       isBn
@@ -1934,7 +1939,7 @@ export default function TravelpayoutsWidget({
                 </div>
 
                 <div className="text-[11px] text-slate-500 truncate">
-                  {effectiveOrigin.name}
+                  {effectiveOrigin?.name}
                 </div>
               </div>
 
@@ -2040,7 +2045,7 @@ export default function TravelpayoutsWidget({
                       <span>{isBn ? 'অদলবদল' : 'Swap'}</span>
                     </button>
                     <span className="text-[11px] font-mono font-bold bg-[#F6B73C]/30 text-brand-navy px-1.5 py-0.5 rounded">
-                      {effectiveDest.code}
+                      {(effectiveDest?.code || '')}
                     </span>
                   </div>
                 </div>
@@ -2099,7 +2104,7 @@ export default function TravelpayoutsWidget({
                 </div>
 
                 <div className="text-[11px] text-slate-500 truncate">
-                  {effectiveDest.name}
+                  {effectiveDest?.name}
                 </div>
               </div>
 
@@ -2249,7 +2254,7 @@ export default function TravelpayoutsWidget({
                 />
               </div>
               <span className="text-[11px] font-mono font-bold text-brand-navy/80">
-                {effectiveOrigin.code} → {effectiveDest.code} · {currency}
+                {(effectiveOrigin?.code || '')} → {(effectiveDest?.code || '')} · {currency}
               </span>
             </a>
             <p className="text-xs leading-relaxed text-slate-600" role={!liveFormSearchCode ? 'status' : undefined}>
@@ -2321,7 +2326,7 @@ export default function TravelpayoutsWidget({
           <div className="bg-white border border-emerald-200 rounded-xl p-6 text-center space-y-3 shadow-xs">
             <div className="w-9 h-9 rounded-full border-3 border-[#07C369] border-t-transparent animate-spin mx-auto" />
             <div className="text-sm font-bold text-slate-900">
-              Searching live airline schedules for {originInfo.city} ({originInfo.code}) →{' '}
+              Searching live airline schedules for {originInfo?.city} ({originInfo?.code}) →{' '}
               {destInfo.city} ({destInfo.code})...
             </div>
             <p className="text-xs text-slate-500">
@@ -2357,11 +2362,11 @@ export default function TravelpayoutsWidget({
 
               <h3 className="text-base sm:text-lg font-bold text-slate-900 flex flex-wrap items-center gap-2">
                 <span>
-                  {committedQuery.origin.city} ({committedQuery.origin.code})
+                  {committedQuery.origin?.city} ({committedQuery.origin?.code})
                 </span>
                 <span className="text-[#07C369]">→</span>
                 <span>
-                  {committedQuery.destination.city} ({committedQuery.destination.code})
+                  {committedQuery.destination?.city} ({committedQuery.destination?.code})
                 </span>
                 <span className="text-xs font-normal text-slate-500">
                   ({formatReadableDate(committedQuery.departDate)}
@@ -2416,7 +2421,7 @@ export default function TravelpayoutsWidget({
                   {isBn ? 'আপনার সার্চ রুট' : 'Your search route'}
                 </div>
                 <div className="text-sm font-black text-brand-navy mt-0.5">
-                  {committedQuery.origin.code} → {committedQuery.destination.code} ({currency})
+                  {committedQuery.origin?.code} → {committedQuery.destination?.code} ({currency})
                 </div>
                 <div className="text-[11px] text-slate-600 mt-0.5">
                   {isBn ? 'Provider-এর results-এ বর্তমান availability দেখুন' : 'Check current availability in provider results'}
@@ -2470,10 +2475,10 @@ export default function TravelpayoutsWidget({
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider bg-brand-navy text-[#F6B73C] px-2.5 py-1 rounded-md">
-                  <span>Global Live Flight Search Ready · {committedQuery.origin.code} → {committedQuery.destination.code}</span>
+                  <span>Global Live Flight Search Ready · {committedQuery.origin?.code} → {committedQuery.destination?.code}</span>
                 </div>
                 <h4 className="text-base font-bold text-slate-900">
-                  Compare Live {committedQuery.origin.city} ({committedQuery.origin.code}) to {committedQuery.destination.city} ({committedQuery.destination.code}) Fares in {currency}
+                  Compare Live {committedQuery.origin?.city} ({committedQuery.origin?.code}) to {committedQuery.destination?.city} ({committedQuery.destination?.code}) Fares in {currency}
                 </h4>
                 <p className="text-xs text-slate-600 max-w-2xl">
                   {isBn
@@ -2633,7 +2638,7 @@ export default function TravelpayoutsWidget({
                           {flight.departTime}
                         </div>
                         <div className="text-xs font-mono font-bold text-slate-500">
-                          {committedQuery.origin.code} · Outbound
+                          {committedQuery.origin?.code} · Outbound
                         </div>
                       </div>
 
@@ -2660,7 +2665,7 @@ export default function TravelpayoutsWidget({
                           {flight.arriveTime}
                         </div>
                         <div className="text-xs font-mono font-bold text-slate-500">
-                          {committedQuery.destination.code} · Arrival
+                          {committedQuery.destination?.code} · Arrival
                         </div>
                       </div>
                     </div>
@@ -2673,7 +2678,7 @@ export default function TravelpayoutsWidget({
                             {flight.returnDepartTime}
                           </div>
                           <div className="text-[11px] font-mono text-slate-500">
-                            {committedQuery.destination.code} · Return
+                            {committedQuery.destination?.code} · Return
                           </div>
                         </div>
 
@@ -2695,7 +2700,7 @@ export default function TravelpayoutsWidget({
                             {flight.returnArriveTime}
                           </div>
                           <div className="text-[11px] font-mono text-slate-500">
-                            {committedQuery.origin.code} · Arrival
+                            {committedQuery.origin?.code} · Arrival
                           </div>
                         </div>
                       </div>
@@ -2801,7 +2806,7 @@ export default function TravelpayoutsWidget({
                       <p className="text-xs text-slate-600">
                         Proceed to official Travelpayouts / Aviasales partner checkout for{' '}
                         <strong>
-                          {committedQuery.origin.code} → {committedQuery.destination.code}
+                          {committedQuery.origin?.code} → {committedQuery.destination?.code}
                         </strong>{' '}
                         on <strong>{formatReadableDate(committedQuery.departDate)}</strong> (Partner ID #{MARKER_ID}).
                       </p>
@@ -2890,9 +2895,9 @@ export default function TravelpayoutsWidget({
                 </p>
               </div>
               <span className="inline-flex min-h-8 shrink-0 items-center gap-1.5 self-start rounded-full border border-slate-200 bg-white/85 px-3 py-1 font-mono text-[11px] font-bold text-brand-navy">
-                {effectiveOrigin.code}
+                {(effectiveOrigin?.code || '')}
                 <ArrowRight size={12} aria-hidden="true" />
-                {effectiveDest.code}
+                {(effectiveDest?.code || '')}
                 <span className="ml-1 border-l border-slate-200 pl-2 text-slate-500">{currency}</span>
               </span>
             </div>
@@ -2946,7 +2951,7 @@ export default function TravelpayoutsWidget({
                 {onOpenPriceAlert && (
                   <button
                     type="button"
-                    onClick={() => onOpenPriceAlert(effectiveDest.city)}
+                    onClick={() => onOpenPriceAlert(effectiveDest?.city)}
                     className="inline-flex min-h-10 items-center gap-2 rounded-lg text-xs font-semibold text-white transition-colors hover:text-[#F6B73C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6B73C]"
                   >
                     <Bell size={14} className="text-[#F6B73C]" aria-hidden="true" />
@@ -2974,8 +2979,8 @@ export default function TravelpayoutsWidget({
                   >
                     <span>
                       {isBn
-                        ? `${effectiveDest.city} ট্যুর (Klook)`
-                        : `${effectiveDest.city} Tours (Klook)`}
+                        ? `${effectiveDest?.city} ট্যুর (Klook)`
+                        : `${effectiveDest?.city} Tours (Klook)`}
                     </span>
                     <ExternalLink size={11} aria-hidden="true" />
                   </a>
