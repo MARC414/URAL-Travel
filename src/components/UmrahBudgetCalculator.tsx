@@ -10,7 +10,8 @@ export function UmrahBudgetCalculator({ isBn, originCode }: { isBn: boolean; ori
   const [pilgrims, setPilgrims] = useState(2);
   const [inputs, setInputs] = useState(emptyUmrahBudget());
   const [currencyChoice, setCurrencyChoice] = useState<"BDT" | "USD" | null>(null);
-  const displayCurrency = currencyChoice ?? preferredCurrencyForOrigin(originCode || "DAC");
+  const preferredCurrency = preferredCurrencyForOrigin(originCode || "DAC");
+  const displayCurrency = currencyChoice ?? (preferredCurrency === "GBP" ? "USD" : preferredCurrency);
   const { rates } = useRates();
 
   const format = (value: number, currency: "BDT" | "USD") =>

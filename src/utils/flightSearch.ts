@@ -22,13 +22,24 @@ import {
 /** Active Bangladeshi gateways in the airport directory. Do not include codes owned elsewhere. */
 const BANGLADESH_AIRPORT_CODES = new Set(["DAC", "CGP", "CXB", "ZYL", "JSR", "RJH", "SPD", "BZL"]);
 
+/** UK gateways that default the hosted flight search to GBP. Currency mapping only —
+ *  not a claim of flights or a complete UK airport directory. */
+const UK_AIRPORT_CODES = new Set([
+  "LHR", "LGW", "MAN", "BHX", "STN", "LTN", "EDI", "GLA", "BRS", "NCL",
+  "LPL", "BFS", "BHD", "EMA", "ABZ",
+]);
+
 export function isBangladeshAirport(code: string): boolean {
   return BANGLADESH_AIRPORT_CODES.has(String(code ?? "").trim().toUpperCase());
 }
 
-/** BDT only when the journey starts in Bangladesh; every other origin starts from USD. */
-export function preferredCurrencyForOrigin(origin: string): "BDT" | "USD" {
-  return isBangladeshAirport(origin) ? "BDT" : "USD";
+/** BDT for a Bangladesh departure, GBP for a UK departure, USD otherwise. A currency
+ *  mapping, not a claim of flights or a complete airport directory. */
+export function preferredCurrencyForOrigin(origin: string): "BDT" | "GBP" | "USD" {
+  const code = String(origin ?? "").trim().toUpperCase();
+  if (isBangladeshAirport(code)) return "BDT";
+  if (UK_AIRPORT_CODES.has(code)) return "GBP";
+  return "USD";
 }
 
 const CABIN_CODES: Record<string, string> = { economy: "", business: "c", comfort: "w", first: "f" };

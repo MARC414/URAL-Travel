@@ -42,9 +42,16 @@ assert.equal(new URL(buildWhiteLabelUrl({ currency: "bdt" })).searchParams.get("
 for (const code of ["DAC", "cgp", " CXB ", "zyl", "JSR", "RJH", "SPD", "BZL"]) {
   assert.equal(preferredCurrencyForOrigin(code), "BDT", `${code} is a Bangladesh departure`);
 }
-for (const code of ["LHR", "JFK", "", "RAJ", "DXB", "SYL", "BAR"]) {
-  assert.equal(preferredCurrencyForOrigin(code), "USD", `${code} is not a Bangladesh departure`);
+const ukCodes = ["LHR", "LGW", "MAN", "BHX", "STN", "LTN", "EDI", "GLA", "BRS", "NCL", "LPL", "BFS", "BHD", "EMA", "ABZ"];
+for (const code of ukCodes) {
+  assert.equal(preferredCurrencyForOrigin(code), "GBP", `${code} is a UK departure`);
+  assert.equal(preferredCurrencyForOrigin(code.toLowerCase()), "GBP", `${code} lowercase still maps to GBP`);
+  assert.equal(preferredCurrencyForOrigin(` ${code} `), "GBP", `${code} with surrounding whitespace still maps to GBP`);
 }
+for (const code of ["JFK", "", "RAJ", "DXB", "SYL", "BAR", "DACX"]) {
+  assert.equal(preferredCurrencyForOrigin(code), "USD", `${code} is not a Bangladesh or UK departure`);
+}
+assert.equal(preferredCurrencyForOrigin("RAJ"), "USD", "RAJ is Rajkot, not Rajshahi (RJH)");
 assert.equal(isBangladeshAirport("zyl"), true);
 assert.equal(isBangladeshAirport("RAJ"), false, "RAJ is Rajkot, not Rajshahi");
 
@@ -158,7 +165,7 @@ for (const lang of ["en", "bn"] as const) {
     assert.ok(links.length > 0);
     for (const [, href] of links) {
       const url = new URL(href.replace(/&amp;/g, "&"));
-      assert.equal(url.searchParams.get("currency"), "USD", `a non-Bangladesh search must not open in BDT: ${href}`);
+      assert.equal(url.searchParams.get("currency"), "GBP", `a UK-origin search must open in GBP, not BDT or USD: ${href}`);
       assert.equal(url.searchParams.get("locale"), lang);
     }
   }

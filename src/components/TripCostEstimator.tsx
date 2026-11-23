@@ -37,7 +37,8 @@ export function TripCostEstimator({ isBn, initialCountry = "thailand" }: { isBn:
       resultRef.current.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     }
   }, [submitted]);
-  const displayCurrency = currencyChoice ?? preferredCurrencyForOrigin(origin);
+  const preferredCurrency = preferredCurrencyForOrigin(origin);
+  const displayCurrency = currencyChoice ?? (preferredCurrency === "GBP" ? "USD" : preferredCurrency);
   const { rates } = useRates();
   const result = calculateTripCostEstimate({
     country, origin, days, nights, rooms, party: { adults, children, infants }, airfareMode, quotes, source, checkedOn,

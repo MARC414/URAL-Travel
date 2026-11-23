@@ -130,11 +130,13 @@ switched to explicit `null` here — that remains F06.
 Recognised UK mapping for this release: `LHR, LGW, MAN, BHX, STN, LTN, EDI, GLA, BRS, NCL, LPL, BFS, BHD, EMA, ABZ`.
 This is a currency mapping, not a claim of flights or a complete UK airport directory. Bangladesh mapping is preserved; other/unknown -> USD.
 
-- [ ] Add exact assertions: DAC/CGP/ZYL -> BDT; every listed UK code, lowercase and whitespace -> GBP; JFK/DXB/RAJ/empty/unknown -> USD. Preserve distinction between real Bangladesh codes and similar foreign codes.
-- [ ] Add mounted `manual_currency_survives_origin_change_and_swap`: choose EUR, change DAC to LHR and swap, display/handoff remains EUR; without manual choice DAC -> BDT, LHR -> GBP, JFK -> USD. Locale change must not infer nationality.
-- [ ] Run flight and widget tests red; then implement the narrow pure map and existing `currencyChosenRef`/caller logic. Update old London=USD expectations, not unrelated URL or consent guards. Preserve explicit legacy-bookmark currency.
-- [ ] Run `npm run test:flight-search`, widget tests and `npm run test:rates`. GBP provider preference does not require fetching FX; converted published totals still require valid dated rates. Expired/missing data cannot become a constant or zero.
-- [ ] Check identical route/date/cabin/adult encoding and provider locale `bn`, never `/bn/` on the hosted provider. Record the approved policy change and checkpoint.
+- [x] Add exact assertions: DAC/CGP/ZYL -> BDT; every listed UK code, lowercase and whitespace -> GBP; JFK/DXB/RAJ/empty/unknown -> USD. Preserve distinction between real Bangladesh codes and similar foreign codes.
+- [x] Add mounted `manual_currency_survives_origin_change_and_swap`: choose EUR, change DAC to LHR and swap, display/handoff remains EUR; without manual choice DAC -> BDT, LHR -> GBP, JFK -> USD. Locale change must not infer nationality.
+- [x] Run flight and widget tests red; then implement the narrow pure map and existing `currencyChosenRef`/caller logic. Update old London=USD expectations, not unrelated URL or consent guards. Preserve explicit legacy-bookmark currency.
+- [x] Run `npm run test:flight-search`, widget tests and `npm run test:rates`. GBP provider preference does not require fetching FX; converted published totals still require valid dated rates. Expired/missing data cannot become a constant or zero.
+- [x] Check identical route/date/cabin/adult encoding and provider locale `bn`, never `/bn/` on the hosted provider. Record the approved policy change and checkpoint.
+
+**Checkpoint — 24 November 2026.** `preferredCurrencyForOrigin` now returns `"BDT" | "GBP" | "USD"`; UK gateways (15 codes) map to GBP, Bangladesh codes to BDT, everything else to USD. The two flight widgets already follow it; TripCostEstimator and UmrahBudgetCalculator keep their BDT/USD display set (GBP coerces to USD there) so no unrelated UI change. Legacy-bookmark currency is untouched. `test-flight-search.ts` asserts every UK code in both cases and whitespace; `test-flight-widget-state.tsx` adds `manual_currency_survives_origin_change_and_swap`. All 46 suites, build and verify:build pass.
 
 ## F06 — Apply defaults at surfaces, not globally
 

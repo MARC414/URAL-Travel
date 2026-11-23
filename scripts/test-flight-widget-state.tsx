@@ -243,4 +243,103 @@ await test("a_complete_selection_still_offers_the_route", async () => {
   }
 });
 
+function currencyButton(host: HTMLElement, code: string) {
+  return [...host.querySelectorAll("button")].find((button) =>
+    (button.textContent ?? "").includes(code),
+  ) as HTMLButtonElement | undefined;
+}
+
+await test("manual_currency_survives_origin_change_and_swap", async () => {
+  // Without a manual choice, the origin drives the provider currency.
+  {
+    const { host, unmount } = await mount({
+      lang: "en",
+      defaultOrigin: "DAC",
+      defaultDestination: "DXB",
+    });
+    try {
+      assert.ok(
+        submitLink(host).getAttribute("href")?.includes("currency=BDT"),
+        "Dhaka defaults the provider currency to BDT",
+      );
+
+      const input = originInput(host);
+      await React.act(async () => input.focus());
+      await type(input, "LHR");
+      const lhrSuggestion = [...host.querySelectorAll('button[role="option"]')].find((button) =>
+        button.textContent?.includes("LHR"),
+      );
+      assert.ok(lhrSuggestion, "London is offered as a real airport");
+      await click(lhrSuggestion!);
+      assert.ok(
+        submitLink(host).getAttribute("href")?.includes("currency=GBP"),
+        "a UK origin switches the provider currency to GBP",
+      );
+    } finally {
+      await unmount();
+    }
+  }
+
+  // A non-UK, non-BD origin falls back to USD.
+  {
+    const { host, unmount } = await mount({
+      lang: "en",
+      defaultOrigin: "DAC",
+      defaultDestination: "DXB",
+    });
+    try {
+      const input = originInput(host);
+      await React.act(async () => input.focus());
+      await type(input, "JFK");
+      const jfkSuggestion = [...host.querySelectorAll('button[role="option"]')].find((button) =>
+        button.textContent?.includes("JFK"),
+      );
+      assert.ok(jfkSuggestion, "New York is offered as a real airport");
+      await click(jfkSuggestion!);
+      assert.ok(
+        submitLink(host).getAttribute("href")?.includes("currency=USD"),
+        "a non-UK, non-BD origin falls back to USD",
+      );
+    } finally {
+      await unmount();
+    }
+  }
+
+  // A manual choice survives an origin change and a swap.
+  {
+    const { host, unmount } = await mount({
+      lang: "en",
+      defaultOrigin: "DAC",
+      defaultDestination: "DXB",
+    });
+    try {
+      const eurButton = currencyButton(host, "EUR");
+      assert.ok(eurButton, "EUR is an explicit currency choice");
+      await click(eurButton!);
+
+      const input = originInput(host);
+      await React.act(async () => input.focus());
+      await type(input, "LHR");
+      const lhrSuggestion = [...host.querySelectorAll('button[role="option"]')].find((button) =>
+        button.textContent?.includes("LHR"),
+      );
+      assert.ok(lhrSuggestion, "London is offered as a real airport");
+      await click(lhrSuggestion!);
+
+      assert.ok(
+        submitLink(host).getAttribute("href")?.includes("currency=EUR"),
+        "a manual currency choice survives an origin change",
+      );
+
+      await click(swapButton(host));
+      assert.ok(
+        submitLink(host).getAttribute("href")?.includes("currency=EUR"),
+        "a manual currency choice survives a swap",
+      );
+    } finally {
+      await unmount();
+    }
+  }
+});
+
 console.log(`\n[test-flight-widget-state] ${checks} checks passed.`);
