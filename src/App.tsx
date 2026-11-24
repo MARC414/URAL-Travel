@@ -4309,7 +4309,8 @@ export default function App() {
                 <li><a href={getLocalizedRouteHref("/experiences")} onClick={(event) => handleNavigationAnchorClick(event, "/experiences")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{navigationModel.primary.find(item => item.id === "activities")!.label}</a></li>
                 <li><a href={getLocalizedRouteHref("/attractions")} onClick={(event) => handleNavigationAnchorClick(event, "/attractions")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{navigationModel.menus.activities.groups.flatMap(group => group.items).find(item => item.path === "/attractions")!.label}</a></li>
                 <li><a href={getLocalizedRouteHref("/tools")} onClick={(event) => handleNavigationAnchorClick(event, "/tools")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{navigationModel.primary.find(item => item.id === "tools")!.label}</a></li>
-                <li><a href={getLocalizedRouteHref("/blog")} onClick={(event) => handleNavigationAnchorClick(event, "/blog")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সব ট্রাভেল গাইড →" : "All travel guides →"}</a></li>
+                <li><a href={getLocalizedRouteHref("/uk")} onClick={(event) => handleNavigationAnchorClick(event, "/uk")} className="inline-block py-1 hover:text-white hover:underline text-left cursor-pointer">{isBn ? "ব্রিটেনের ভ্রমণ হাব" : "United Kingdom Travel Hub"}</a></li>
+              <li><a href={getLocalizedRouteHref("/blog")} onClick={(event) => handleNavigationAnchorClick(event, "/blog")} className="inline-block py-1 text-[#F6B73C] font-semibold hover:underline text-left cursor-pointer">{isBn ? "সব ট্রাভেল গাইড →" : "All travel guides →"}</a></li>
               </ul>
             </div>
 

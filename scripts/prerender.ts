@@ -130,6 +130,7 @@ import { TIQETS_TOP_ATTRACTIONS, TIQETS_CITY_STACKS } from "../src/data/tiqetsAt
 import {
   CONTENT_UPDATED,
   CONTENT_UPDATED_MAX_AGE_DAYS,
+  UK_HUB_UPDATED,
 } from "../src/data/contentMeta";
 import {
   RADICAL_STORAGE_BLOG_PLACEMENTS,
@@ -186,6 +187,7 @@ import {
   DESTINATION_PARTNER_COPY,
   DESTINATION_RELATED_BLOG_SLUGS,
 } from "../src/data/destinationResources";
+import { CORE_PRIORITY_SEO_COPY } from "../src/utils/coreSeoCopy";
 
 const ROOT_DIR = process.cwd();
 const PUBLIC_DIR = path.join(ROOT_DIR, "public");
@@ -1825,14 +1827,21 @@ function buildAllRoutes(): PrerenderRoute[] {
     `,
   });
 
-  // Step 4: Add the UK Hub view static generation
+  // Step 4: Add the UK Hub view static generation.
+  // English-only market hub: no /bn/uk page is generated, so it declares no
+  // Bengali alternate. `bnUrl` stays unset and the head/sitemap writers read
+  // that as "no twin" rather than inventing one.
+  const ukHubCopy = CORE_PRIORITY_SEO_COPY["/uk"];
+  if (!ukHubCopy) throw new Error("The /uk hub SERP copy is missing from CORE_PRIORITY_SEO_COPY");
   routes.push({
     routePath: "/uk",
     canonicalUrl: `${BASE_URL}/uk`,
     enUrl: `${BASE_URL}/uk`,
-    bnUrl: `${BASE_URL}/uk`,
-    title: "UK Travel Hub & Intelligence | URAL",
-    description: "Travel intelligence for the UK market: DIY Umrah preparation, ATOL checks, and UK261 flight disruption guides.",
+    // The hub's listing and head were repaired on this date; lastmod states that
+    // change, not the shared blog-content date it used to inherit.
+    lastmod: UK_HUB_UPDATED,
+    title: ukHubCopy.title,
+    description: ukHubCopy.description,
     imageUrl: defaultOgImage,
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
@@ -5088,12 +5097,19 @@ ${routesToRender
     // Reciprocal hreflang annotations, emitted only when the twin page exists.
     // The three values are derived from the pair, so both members of a pair
     // publish byte-identical annotations (a one-sided cluster is invalid).
+    // /uk is the one English-only hub: it publishes its own en-gb + x-default
+    // pair and no Bengali annotation, because no /bn/uk page exists.
+    const ukSelfCluster =
+      `\n    <xhtml:link rel="alternate" hreflang="en-gb" href="${escapeXml(r.enUrl ?? r.canonicalUrl)}" />` +
+      `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(r.enUrl ?? r.canonicalUrl)}" />`;
     const alternates =
       r.enUrl && r.bnUrl
         ? `\n    <xhtml:link rel="alternate" hreflang="${englishPath === "/bangladesh" ? "en-bd" : englishPath === "/uk" ? "en-gb" : "en"}" href="${escapeXml(r.enUrl)}" />` +
           `\n    <xhtml:link rel="alternate" hreflang="${englishPath === "/bangladesh" ? "bn-bd" : "bn"}" href="${escapeXml(r.bnUrl)}" />` +
           `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(r.enUrl)}" />`
-        : "";
+        : englishPath === "/uk"
+          ? ukSelfCluster
+          : "";
     return `  <url>
     <loc>${escapeXml(r.canonicalUrl)}</loc>
     <lastmod>${escapeXml(lastmod)}</lastmod>
@@ -5428,7 +5444,10 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
     // return tag pointing at a 404 is worse than no tag at all.
     const englishUrl = r.enUrl || r.canonicalUrl;
     const isUkHub = toEnglishBasePath(r.routePath) === "/uk";
-    const bengaliUrl = r.bnUrl || (isUkHub ? englishUrl : null);
+    // The UK hub has no Bengali twin. Falling back to the English URL here used
+    // to publish hreflang="bn" pointing at /uk itself, which Google treats as an
+    // invalid one-page cluster.
+    const bengaliUrl = r.bnUrl || null;
     const isBangladeshHub = toEnglishBasePath(r.routePath) === "/bangladesh";
     const localeTag = isBangladeshHub
       ? r.locale === "bn" ? "bn-BD" : "en-BD"

@@ -184,6 +184,9 @@ jobs:
       - name: Verify international homepage copy and saved bilingual FAQ parity
         run: npm run test:home-positioning
 
+      - name: Verify the /uk hub lists its own posts and claims no Bengali twin
+        run: npm run test:uk-hub
+
       - name: Visa-claim and built-HTML affiliate-disclosure integrity
         run: npm run test:visa-claims
 

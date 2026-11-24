@@ -47,6 +47,16 @@
 export const CONTENT_UPDATED = "2026-11-18";
 
 /**
+ * Date the English-only /uk market hub last changed materially.
+ *
+ * The hub keeps its own date instead of borrowing `CONTENT_UPDATED`: bumping the
+ * site-wide value to record one hub's change would move `<lastmod>` for every
+ * other data-driven page, which is the freshness-signal damage this file exists
+ * to prevent. Bump this only when the hub's own listing or copy changes.
+ */
+export const UK_HUB_UPDATED = "2026-11-24";
+
+/**
  * Warn (do not fail) once CONTENT_UPDATED is older than this. Chosen so a content
  * refresh is prompted well before a quarterly review cycle elapses.
  */
