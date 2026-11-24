@@ -23,6 +23,11 @@ public URLs, with UK growth as a focused expansion rather than a UK-only rewrite
 and [**corrected design**](docs/superpowers/specs/2026-11-22-international-expansion-design.md).
 Readiness, foundation and growth/pilot companions break the proposal into 24 bounded tasks.
 
+**Landed 24 November 2026:** the foundation slice (F01–F09) is integrated in `main`; its scope,
+limitations and evidence are in the [release summary](docs/handoff/2026-11-24-international-release-summary.md).
+The readiness (R) and growth/pilot (G) companions are separate, still-open work; landing this slice does
+not approve later content, acquisition, language or deployment work.
+
 [**Review-only instructions**](URAL-INTERNATIONAL-PLAN-REVIEW-INSTRUCTIONS.md) retain the two open
 handoff refinements: release-manifest lifecycle and acquisition attribution acceptance.
 [**Next implementation-and-authoring prompt**](URAL-INTERNATIONAL-IMPLEMENTATION-START.md) switches
