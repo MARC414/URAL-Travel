@@ -190,6 +190,9 @@ jobs:
       - name: Verify scoped locale profiles and reciprocal alternate sets
         run: npm run test:page-locale
 
+      - name: Verify hub discoverability across nav, footer, home and search
+        run: npm run test:discoverability
+
       - name: Visa-claim and built-HTML affiliate-disclosure integrity
         run: npm run test:visa-claims
 

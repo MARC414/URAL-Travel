@@ -85,6 +85,9 @@ const KIND_INTENT_TOKENS: Partial<Record<SiteSearchKind, ReadonlySet<string>>> =
   visa: new Set(["visa", "evisa", "ভিসা"]),
   cost: new Set(["cost", "budget", "expense", "খরচ", "বাজেট"]),
   tool: new Set(["tool", "calculator", "converter", "checklist", "টুল", "ক্যালকুলেটর"]),
+  // A published market/planning hub owns its market-name query. Without this
+  // boost the alphabetical tie-break buried /bangladesh under 30+ articles.
+  hub: new Set(["hub", "start", "bangladesh", "বাংলাদেশ"]),
 };
 
 function normalizeSearchText(value: string): string {

@@ -24,7 +24,7 @@ const expected = {
   tools: [
     ["/blog", "/costs"],
     ["/tools/currency-converter", "/tools/budget-calculator", "/tools/packing-checklist", "/tools/airport-codes"],
-    ["/banking", "/pre-departure", "/resources", "/glossary", "/tools/flight-delay-claim"],
+    ["/banking", "/pre-departure", "/resources", "/glossary", "/tools/flight-delay-claim", "/bangladesh"],
   ],
 };
 let checks = 0;
