@@ -1,0 +1,46 @@
+{
+  "release": "International foundation F01-F09, 24 November 2026",
+  "baselineRevision": "16c92ad",
+  "baselineFixture": "scripts/fixtures/route-baseline-pre-international.json",
+  "allowedAddedPaths": [
+    "/bangladesh",
+    "/bn/bangladesh",
+    "/uk"
+  ],
+  "allowedChangedPaths": [
+    "/",
+    "/bn/",
+    "/costs",
+    "/bn/costs",
+    "/bn/flights",
+    "/sitemap",
+    "/bn/sitemap",
+    "/blog/umrah-hajj-guide-united-kingdom-2026",
+    "/blog/uk-umrah-packages-atol-operator-checks",
+    "/blog/uk-to-saudi-flights-umrah-direct-or-connecting",
+    "/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step",
+    "/blog/hajj-2027-uk-dates-nusuk-registration-cost",
+    "/blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights",
+    "/blog/madinah-first-uk-umrah-routings-open-jaw-stopover",
+    "/bn/blog/umrah-hajj-guide-united-kingdom-2026",
+    "/bn/blog/uk-umrah-packages-atol-operator-checks",
+    "/bn/blog/uk-to-saudi-flights-umrah-direct-or-connecting",
+    "/bn/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step",
+    "/bn/blog/hajj-2027-uk-dates-nusuk-registration-cost",
+    "/bn/blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights",
+    "/bn/blog/madinah-first-uk-umrah-routings-open-jaw-stopover"
+  ],
+  "reasons": {
+    "/bangladesh": "F01/F02 published EN departure hub.",
+    "/bn/bangladesh": "F01/F02 published BN departure hub.",
+    "/uk": "PR #148 step-4 market hub, repaired and published by PR #153; the route did not exist in the baseline revision.",
+    "/": "F03/F06/F07/F08 approved international home copy, unselected widget defaults, scoped locale head and footer doorway.",
+    "/bn/": "Matching Bengali home copy, head and footer doorway.",
+    "/costs": "F08 approved directory-boundary intro (Bangladesh/BDT).",
+    "/bn/costs": "F08 approved Bengali directory-boundary intro.",
+    "/bn/flights": "F08 approved Bengali flights intro (global search + labelled Dhaka guides).",
+    "/sitemap": "F02 hub list additions and approved home title refresh in the crawl directory.",
+    "/bn/sitemap": "Matching Bengali hub list additions.",
+    "uk-articles": "PR #150 eVisas UK context injected into the seven UK pillar articles in EN and BN; separately authorised work that postdates the baseline revision, not an article rewrite by F01-F09."
+  }
+}
