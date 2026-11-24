@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { trackPageView } from "../utils/analytics";
 import { hasBengaliCounterpart, SITE_ORIGIN } from "../utils/localeRoutes";
 import { SLUG_TO_TOOL_TAB, toolPathForTab } from "../utils/toolRoutes";
+import { getPageAlternates, getPageLocaleProfile } from "../utils/pageLocale";
+import { toEnglishBasePath } from "../utils/localeRoutes";
 import {
   generateFaqSchema,
   getFaqSchemaForPage,
@@ -477,26 +479,18 @@ export function useSeoMeta({
       }
       link.setAttribute("href", href);
     };
-    // F02 only: on entering the new hub from an older static route, remove its
-    // generic aliases so the hub has exactly one reciprocal alternate set.
-    if (englishAlternateUrl === `${SITE_ORIGIN}/bangladesh`) {
-      setAlternateLink("en", null);
-      setAlternateLink("bn", null);
+    // F07: reconcile the whole managed alternate set instead of patching one
+    // tag at a time. Navigating between hubs must not leave an en-bd/bn-bd
+    // pair from the previous page on a route that never had that twin.
+    const englishPath = toEnglishBasePath(englishAlternateUrl);
+    const localeProfile = getPageLocaleProfile(englishPath, isBengaliRoute ? "bn" : "en");
+    const alternates = getPageAlternates(englishPath, Boolean(bengaliAlternateUrl));
+    const MANAGED_HREFLANGS = ["en", "en-bd", "en-gb", "bn", "bn-bd", "x-default"];
+    for (const tag of MANAGED_HREFLANGS) {
+      if (!alternates.some((a) => a.hreflang === tag)) setAlternateLink(tag, null);
     }
-    // /uk is English-only (no /bn/uk page). The saved HTML declares en-gb, so the
-    // client must keep that tag and drop the generic en-bd alias instead of
-    // adding a second, conflicting alternate after hydration.
-    const isUkRoute = englishAlternateUrl === `${SITE_ORIGIN}/uk`;
-    if (isUkRoute) {
-      setAlternateLink("en", null);
-      setAlternateLink("en-bd", null);
-      setAlternateLink("en-gb", englishAlternateUrl);
-    } else {
-      setAlternateLink("en-gb", null);
-      setAlternateLink("en-bd", englishAlternateUrl);
-    }
-    setAlternateLink("x-default", englishAlternateUrl);
-    setAlternateLink("bn-bd", bengaliAlternateUrl);
+    for (const alternate of alternates) setAlternateLink(alternate.hreflang, alternate.href);
+    document.documentElement.lang = localeProfile.languageTag;
 
     let ogLocale = document.querySelector('meta[property="og:locale"]');
     if (!ogLocale) {
@@ -504,20 +498,21 @@ export function useSeoMeta({
       ogLocale.setAttribute("property", "og:locale");
       document.head.appendChild(ogLocale);
     }
-    ogLocale.setAttribute("content", isUkRoute ? "en_GB" : isBengaliRoute ? "bn_BD" : "en_BD");
-    // A stale alternate from the previous route would claim a Bengali twin the
-    // UK hub does not have, so it is removed rather than left behind.
-    if (isUkRoute) {
-      document.head.querySelector('meta[property="og:locale:alternate"]')?.remove();
-    }
-    if (englishAlternateUrl === `${SITE_ORIGIN}/bangladesh`) {
-      let ogAlternate = document.querySelector('meta[property="og:locale:alternate"]');
+    ogLocale.setAttribute("content", localeProfile.ogLocale);
+    let ogAlternate = document.querySelector('meta[property="og:locale:alternate"]');
+    if (alternates.some((a) => a.hreflang.startsWith("bn"))) {
       if (!ogAlternate) {
         ogAlternate = document.createElement("meta");
         ogAlternate.setAttribute("property", "og:locale:alternate");
         document.head.appendChild(ogAlternate);
       }
-      ogAlternate.setAttribute("content", isBengaliRoute ? "en_BD" : "bn_BD");
+      // The alternate locale names the other member of the pair, so it must
+      // match that page's own og:locale.
+      ogAlternate.setAttribute("content", isBengaliRoute
+        ? getPageLocaleProfile(englishPath, "en").ogLocale
+        : "bn_BD");
+    } else if (ogAlternate) {
+      ogAlternate.remove();
     }
 
     // 3. Set/Update og:url & twitter:url Meta Tags

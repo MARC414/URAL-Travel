@@ -105,7 +105,10 @@ await test("Outside interaction and route changes close menus", async () => {
   assert.equal(button("nav-tools-toggle").getAttribute("aria-expanded"), "false");
 });
 await test("Language anchors retain new-tab behaviour and preserve an open panel on ordinary switching", async () => {
-  const target = document.querySelector('#sticky-site-header a[hreflang="bn-bd"]')!;
+  // Home publishes the native en/bn pair (F07); country hubs use en-bd/bn-bd.
+  assert.ok(document.querySelector('#sticky-site-header a[hreflang="en"]'), "home EN link uses the native en tag");
+  const target = document.querySelector('#sticky-site-header a[hreflang="bn"]')!;
+  assert.ok(target, "home BN link uses the native bn tag");
   const modified = await click(target, { ctrlKey: true }); assert.equal(modified.defaultPrevented, false); assert.equal(lang, "en");
   await click(button("nav-destinations-toggle"));
   await click(target); path = "/bn/visa"; await render();

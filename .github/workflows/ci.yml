@@ -187,6 +187,9 @@ jobs:
       - name: Verify the /uk hub lists its own posts and claims no Bengali twin
         run: npm run test:uk-hub
 
+      - name: Verify scoped locale profiles and reciprocal alternate sets
+        run: npm run test:page-locale
+
       - name: Visa-claim and built-HTML affiliate-disclosure integrity
         run: npm run test:visa-claims
 
