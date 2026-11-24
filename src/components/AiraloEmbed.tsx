@@ -1,10 +1,13 @@
 import { ExternalLink, Wifi } from "lucide-react";
 import React, { lazy, Suspense } from "react";
+import { AFFILIATE_LINKS } from "./AffiliatePartners";
 
 const PromoCard = lazy(() => import("./PromoCard").then((module) => ({ default: module.PromoCard })));
 
-const AIRALO_AFFILIATE_URL = "https://airalo.tpo.li/mV2QXsXK";
-const YESIM_AFFILIATE_URL = "https://yesim.tpo.li/O8Zvqr73";
+// Read the registry lazily: AffiliatePartners.tsx imports this module, so the
+// registry consts are not initialised while this file evaluates.
+const airaloUrl = () => AFFILIATE_LINKS.airalo;
+const yesimUrl = () => AFFILIATE_LINKS.yesim;
 
 /**
  * The affiliate URLs are provider-level redirects, not country-specific
@@ -37,7 +40,7 @@ export function AiraloEmbed({ lang = "en" }: { lang?: "en" | "bn" }) {
 
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         <a
-          href={AIRALO_AFFILIATE_URL}
+          href={airaloUrl()}
           target="_blank"
           rel="noopener noreferrer sponsored"
           className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-900 px-3 py-2.5 text-center text-xs font-bold text-white transition-colors hover:bg-slate-800"
@@ -47,7 +50,7 @@ export function AiraloEmbed({ lang = "en" }: { lang?: "en" | "bn" }) {
         </a>
 
         <a
-          href={YESIM_AFFILIATE_URL}
+          href={yesimUrl()}
           target="_blank"
           rel="noopener noreferrer sponsored"
           className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#F6B73C] px-3 py-2.5 text-center text-xs font-bold text-brand-navy transition-colors hover:bg-[#ffc654]"
