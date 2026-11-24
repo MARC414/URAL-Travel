@@ -16,6 +16,7 @@
     "test:home-positioning": "tsx scripts/test-home-positioning.tsx --built",
     "test:uk-hub": "tsx scripts/test-uk-hub.tsx --built",
     "test:page-locale": "tsx scripts/test-page-locale.ts",
+    "test:discoverability": "tsx scripts/test-discoverability.tsx --built",
     "test:scheduling": "tsx scripts/test-scheduled-posts.ts",
     "scheduled:check": "tsx scripts/check-scheduled-posts.ts",
     "preview": "vite preview",

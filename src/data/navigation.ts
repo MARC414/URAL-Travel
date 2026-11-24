@@ -59,6 +59,8 @@ export const NAVIGATION_RECORDS: readonly NavigationRecord[] = [
   link("resources", "/resources", "Official sources", "সরকারি তথ্যসূত্র", [member("tools", "prepare", 2)]),
   link("glossary", "/glossary", "Travel glossary", "ভ্রমণের শব্দকোষ", [member("tools", "prepare", 3)]),
   link("disruption", "/tools/flight-delay-claim", "Flight disruption check", "ফ্লাইট সমস্যার অধিকার যাচাই", [member("tools", "prepare", 4)]),
+  // Published EN/BN departure doorway. Appended so the approved prepare order is untouched.
+  link("bangladesh-hub", "/bangladesh", "Start from Bangladesh", "বাংলাদেশ থেকে শুরু করুন", [member("tools", "prepare", 5)], paired("Dhaka routes, passport guides & BDT planning", "ঢাকা রুট, পাসপোর্ট গাইড ও টাকার হিসাব")),
 ];
 
 export const NAVIGATION_LAYOUT = {

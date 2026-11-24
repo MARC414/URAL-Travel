@@ -5749,7 +5749,7 @@ function searchKindForPath(routePath: string): SiteSearchKind {
   if (pathOnly.startsWith("/blog/")) return "article";
   if (pathOnly.startsWith("/tools/")) return "tool";
   if (pathOnly === "/tools") return "hub";
-  if (["/", "/umrah", "/banking", "/experiences", "/experiences/europe", "/experiences/asia", "/attractions"].includes(pathOnly)) return "hub";
+  if (["/", "/bangladesh", "/uk", "/umrah", "/banking", "/experiences", "/experiences/europe", "/experiences/asia", "/attractions"].includes(pathOnly)) return "hub";
   return "other";
 }
 
