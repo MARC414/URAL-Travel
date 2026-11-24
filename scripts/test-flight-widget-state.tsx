@@ -12,7 +12,8 @@
  *  - explicit `null` selects nothing and never falls back to directory[0];
  *  - unmatched free text is not an airport;
  *  - a partial swap is safe;
- *  - an incomplete form has no route handoff and no invented route banner.
+ *  - an incomplete form has no route-specific handoff or invented route banner,
+ *    but still opens the hosted white-label search for any origin/destination.
  */
 import assert from "node:assert/strict";
 import { Window } from "happy-dom";
@@ -150,8 +151,14 @@ await test("explicit_null_props_keep_the_widget_mounted_and_empty", async () => 
       assert.equal(originInput(host).value, "", "origin starts empty");
       assert.equal(destInput(host).value, "", "destination starts empty");
       const link = submitLink(host);
-      assert.equal(link.getAttribute("href"), null, "no route handoff without a selected route");
-      assert.equal(link.getAttribute("aria-disabled"), "true", "the action is announced as disabled");
+      const href = link.getAttribute("href");
+      assert.ok(href, "the global hosted search is available before any route is chosen");
+      assert.equal(
+        new URL(href!).searchParams.has("flightSearch"),
+        false,
+        "no route code is invented for the unselected widget",
+      );
+      assert.equal(link.getAttribute("aria-disabled"), "false", "the action is enabled");
     } finally {
       await unmount();
     }
@@ -192,13 +199,17 @@ await test("unmatched_text_is_not_an_airport", async () => {
 
     await submitForm(host);
     assert.equal(originInput(host).value, "", "unmatched text does not become a selected airport");
-    assert.equal(submitLink(host).getAttribute("href"), null, "no handoff for an incomplete route");
+    assert.equal(
+      new URL(submitLink(host).getAttribute("href")!).searchParams.has("flightSearch"),
+      false,
+      "unmatched text never becomes a route code in the handoff",
+    );
   } finally {
     await unmount();
   }
 });
 
-await test("incomplete_form_has_no_route_handoff", async () => {
+await test("incomplete_form_opens_the_generic_hosted_search_without_a_fabricated_route", async () => {
   const { host, unmount } = await mount({
     lang: "en",
     defaultOrigin: null,
@@ -213,12 +224,24 @@ await test("incomplete_form_has_no_route_handoff", async () => {
     assert.ok(!host.textContent?.includes("Lowest Fare Found"), "no fare block is rendered");
     assert.ok(
       !host.querySelector('a[href*="aviasales.com/search/"]'),
-      "no provider search link is offered without a route",
+      "no route-specific Aviasales link is offered without a route",
     );
 
-    await submitForm(host);
-    assert.equal(document.activeElement, originInput(host), "validation focuses the missing field");
-    assert.equal(submitLink(host).getAttribute("href"), null, "still no handoff");
+    const href = submitLink(host).getAttribute("href");
+    assert.ok(href, "the primary action still opens the hosted affiliate search");
+    const url = new URL(href!);
+    assert.equal(url.origin + url.pathname, "https://flights.uraltravel.co.uk/", "hosted white-label page");
+    assert.equal(url.searchParams.has("flightSearch"), false, "no invented route code");
+    assert.equal(url.searchParams.get("currency"), "USD", "no origin means the provider default");
+    assert.equal(url.searchParams.get("locale"), "en", "the provider keeps the native locale");
+
+    // The generic handoff is actionable: clicking it is not swallowed by validation.
+    let opened = false;
+    const click = new win.MouseEvent("click", { bubbles: true, cancelable: true, button: 0 });
+    submitLink(host).addEventListener("click", () => { opened = true; });
+    await React.act(async () => { submitLink(host).dispatchEvent(click as unknown as Event); });
+    assert.equal(click.defaultPrevented, false, "the click is not cancelled");
+    assert.equal(opened, true, "the handler ran on the generic handoff");
   } finally {
     await unmount();
   }
