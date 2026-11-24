@@ -133,6 +133,7 @@ import {
   siteUrl,
   SITE_ORIGIN,
 } from "./utils/localeRoutes";
+import { getPageLocaleProfile } from "./utils/pageLocale";
 import { AirHelpWidget } from "./components/AirHelpWidget";
 import { TiqetsEmbedWidget } from "./components/TiqetsEmbedWidget";
 import { ResponsiveImage } from "./components/ResponsiveImage";
@@ -842,7 +843,9 @@ export default function App() {
   // the wrong pronunciation rules (WCAG 3.1.1 / 3.1.2).
   useEffect(() => {
     if (typeof document !== "undefined") {
-      document.documentElement.lang = lang === "bn" ? "bn-BD" : "en-BD";
+      // Scoped by page, not by site: deep English guides keep their native en,
+    // the Bangladesh pair keeps en-BD/bn-BD, and /uk keeps en-GB.
+    document.documentElement.lang = getPageLocaleProfile(currentPath, lang).languageTag;
     }
     if (lang === "bn" && !bnContent) {
       import("./data/bengaliContent").then((mod) => setBnContent(mod));
@@ -1461,6 +1464,9 @@ export default function App() {
     seoTitle = homePositioning.title;
     seoDescription = homePositioning.description;
     seoSchema = generateFAQSchema(getHomeFaqs(lang));
+    // Touched page node: the home profile is native en/bn, not the legacy
+    // en-BD default other FAQ schemas still use.
+    seoSchema["inLanguage"] = getPageLocaleProfile("/", lang).languageTag;
     seoBreadcrumbs = [
       { name: "Home", url: siteUrl("/", lang) }
     ];

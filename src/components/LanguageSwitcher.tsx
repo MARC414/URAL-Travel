@@ -1,6 +1,7 @@
 import React from "react";
 import { Language } from "../translations";
 import { Globe } from "lucide-react";
+import { getBengaliAlternateHreflang, getPageLocaleProfile } from "../utils/pageLocale";
 
 interface LanguageSwitcherProps {
   lang: Language;
@@ -23,6 +24,11 @@ export function LanguageSwitcher({
   bnHref,
   compact = false,
 }: LanguageSwitcherProps) {
+  // The label describes the *target* page, so a Bangladesh hub switch uses
+  // en-bd/bn-bd while a home or deep-page switch keeps en/bn. Modifier clicks
+  // are left to the browser (the handler bails out on them).
+  const enHreflang = getPageLocaleProfile(enHref, "en").englishHreflang;
+  const bnHreflang = getBengaliAlternateHreflang(bnHref) ?? "bn";
   const baseClass = `px-2 py-0.5 rounded-md transition-all cursor-pointer flex items-center gap-1 ${
     compact ? "text-[10px]" : ""
   }`;
@@ -31,7 +37,8 @@ export function LanguageSwitcher({
     <div className="inline-flex items-center rounded-lg bg-white/10 p-0.5 border border-white/15 text-[11px] font-medium select-none">
       <a
         href={enHref}
-        hrefLang="en-bd"
+        hrefLang={enHreflang}
+        lang="en"
         onClick={(event) => {
           if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
           event.preventDefault();
@@ -51,7 +58,7 @@ export function LanguageSwitcher({
 
       <a
         href={bnHref}
-        hrefLang="bn-bd"
+        hrefLang={bnHreflang}
         onClick={(event) => {
           if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
           event.preventDefault();

@@ -188,6 +188,7 @@ import {
   DESTINATION_RELATED_BLOG_SLUGS,
 } from "../src/data/destinationResources";
 import { CORE_PRIORITY_SEO_COPY } from "../src/utils/coreSeoCopy";
+import { getBengaliAlternateHreflang, getPageAlternates, getPageLocaleProfile } from "../src/utils/pageLocale";
 
 const ROOT_DIR = process.cwd();
 const PUBLIC_DIR = path.join(ROOT_DIR, "public");
@@ -1808,6 +1809,7 @@ function buildAllRoutes(): PrerenderRoute[] {
   // The pairs come from src/data/homeFaqs.ts, which also renders the visible
   // #home-faqs block in index.html and the runtime schema in src/App.tsx.
   const homeFaq = stripContext(generateFAQSchema(getHomeFaqs("en")));
+  homeFaq["inLanguage"] = getPageLocaleProfile("/", "en").languageTag;
   homeFaq["@id"] = `${BASE_URL}/#faq`;
   homeFaq["mainEntityOfPage"] = { "@id": `${BASE_URL}/#webpage` };
 
@@ -5094,22 +5096,11 @@ ${routesToRender
     const hub = isHub(englishPath);
     const changefreq = hub ? "weekly" : "monthly";
     const priority = englishPath === "/" ? "1.0" : hub ? "0.9" : "0.7";
-    // Reciprocal hreflang annotations, emitted only when the twin page exists.
-    // The three values are derived from the pair, so both members of a pair
-    // publish byte-identical annotations (a one-sided cluster is invalid).
-    // /uk is the one English-only hub: it publishes its own en-gb + x-default
-    // pair and no Bengali annotation, because no /bn/uk page exists.
-    const ukSelfCluster =
-      `\n    <xhtml:link rel="alternate" hreflang="en-gb" href="${escapeXml(r.enUrl ?? r.canonicalUrl)}" />` +
-      `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(r.enUrl ?? r.canonicalUrl)}" />`;
-    const alternates =
-      r.enUrl && r.bnUrl
-        ? `\n    <xhtml:link rel="alternate" hreflang="${englishPath === "/bangladesh" ? "en-bd" : englishPath === "/uk" ? "en-gb" : "en"}" href="${escapeXml(r.enUrl)}" />` +
-          `\n    <xhtml:link rel="alternate" hreflang="${englishPath === "/bangladesh" ? "bn-bd" : "bn"}" href="${escapeXml(r.bnUrl)}" />` +
-          `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(r.enUrl)}" />`
-        : englishPath === "/uk"
-          ? ukSelfCluster
-          : "";
+    // Sitemap annotations come from the same scoped policy as the saved head
+    // and the mounted client, so a route can never publish a one-sided pair.
+    const alternates = getPageAlternates(r.routePath, Boolean(r.bnUrl))
+      .map((a) => `\n    <xhtml:link rel="alternate" hreflang="${escapeXml(a.hreflang)}" href="${escapeXml(a.href)}" />`)
+      .join("");
     return `  <url>
     <loc>${escapeXml(r.canonicalUrl)}</loc>
     <lastmod>${escapeXml(lastmod)}</lastmod>
@@ -5438,22 +5429,23 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
           ? `    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-700-v1.woff2" crossorigin />\n`
           : `    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-v1.woff2" crossorigin />\n    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-600-v1.woff2" crossorigin />\n`;
 
-    // Reciprocal hreflang cluster: identical on both members of a locale pair
-    // (en-bd/x-default → the English URL, bn-bd → the Bengali URL). The bn-bd
-    // tag is dropped entirely when no Bengali twin was generated, because a
-    // return tag pointing at a 404 is worse than no tag at all.
+    // One scoped locale policy drives every head tag. The client reads the
+    // same helpers in useSeoMeta, so a route change cannot leave a stale
+    // en-bd/bn pair behind on a page that never had a Bengali twin.
     const englishUrl = r.enUrl || r.canonicalUrl;
-    const isUkHub = toEnglishBasePath(r.routePath) === "/uk";
-    // The UK hub has no Bengali twin. Falling back to the English URL here used
-    // to publish hreflang="bn" pointing at /uk itself, which Google treats as an
-    // invalid one-page cluster.
-    const bengaliUrl = r.bnUrl || null;
-    const isBangladeshHub = toEnglishBasePath(r.routePath) === "/bangladesh";
-    const localeTag = isBangladeshHub
-      ? r.locale === "bn" ? "bn-BD" : "en-BD"
-      : isUkHub ? "en-GB"
-      : r.locale === "bn" ? "bn" : "en";
-    const localeOgp = r.locale === "bn" ? "bn_BD" : isUkHub ? "en_GB" : isBangladeshHub ? "en_BD" : "en_US";
+    const profile = getPageLocaleProfile(r.routePath, r.locale === "bn" ? "bn" : "en");
+    const alternates = getPageAlternates(r.routePath, Boolean(r.bnUrl));
+    const englishAlternate = alternates.find((a) => a.hreflang !== "x-default")!;
+    const bengaliAlternate = alternates.find((a) => a.hreflang.startsWith("bn"));
+    const bengaliUrl = bengaliAlternate?.href ?? null;
+    const bnHreflang = bengaliAlternate?.hreflang ?? null;
+    const localeTag = profile.languageTag;
+    const localeOgp = profile.ogLocale;
+    // The alternate locale names the other member of the pair, so its value
+    // must match that page's own og:locale, not the current page's.
+    const counterpartOg = r.locale === "bn"
+      ? getPageLocaleProfile(r.routePath, "en").ogLocale
+      : "bn_BD";
 
     let pageHtml = templateHtml
       .replace(/<html lang="[^"]*">/, `<html lang="${localeTag}">`)
@@ -5483,7 +5475,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       // Search Console reports as "no return tag" and ignores wholesale.
       .replace(
         /<link rel="alternate" hreflang="en" href="[^"]*" \/>/,
-        `<link rel="alternate" hreflang="${isBangladeshHub ? "en-bd" : isUkHub ? "en-gb" : "en"}" href="${escapeHtml(englishUrl)}" />`
+        `<link rel="alternate" hreflang="${escapeHtml(profile.englishHreflang)}" href="${escapeHtml(englishAlternate.href)}" />`
       )
       .replace(
         /<link rel="alternate" hreflang="x-default" href="[^"]*" \/>/,
@@ -5492,7 +5484,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       .replace(
         /\n?\s*<link rel="alternate" hreflang="bn" href="[^"]*" \/>/,
         bengaliUrl
-          ? `\n    <link rel="alternate" hreflang="${isBangladeshHub ? "bn-bd" : "bn"}" href="${escapeHtml(bengaliUrl)}" />`
+          ? `\n    <link rel="alternate" hreflang="${escapeHtml(bnHreflang ?? "bn")}" href="${escapeHtml(bengaliUrl ?? englishUrl)}" />`
           : ""
       )
       .replace(
@@ -5501,7 +5493,7 @@ function prerenderDistHtmlFiles(routes: PrerenderRoute[]) {
       )
       .replace(
         /<meta property="og:locale:alternate" content="[^"]*" \/>/,
-        isUkHub ? "" : `<meta property="og:locale:alternate" content="${r.locale === "bn" ? (isBangladeshHub ? "en_BD" : "en_US") : "bn_BD"}" />`
+        bengaliUrl ? `<meta property="og:locale:alternate" content="${escapeHtml(counterpartOg)}" />` : ""
       )
       .replace(
         /<meta property="og:url" content="[^"]*" \/>/,
