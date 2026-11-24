@@ -155,8 +155,8 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   // WhatsApp Inquiry Generator State
-  const [inquiryOrigin, setInquiryOrigin] = useState("DAC");
-  const [inquiryDestination, setInquiryDestination] = useState("DXB");
+  const [inquiryOrigin, setInquiryOrigin] = useState("");
+  const [inquiryDestination, setInquiryDestination] = useState("");
   const [inquiryDate, setInquiryDate] = useState("");
   const [inquiryReturnDate, setInquiryReturnDate] = useState("");
   const [inquiryPassengers, setInquiryPassengers] = useState("1 Adult");
@@ -187,8 +187,12 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
   const generateWhatsAppInquiryUrl = () => {
     const originItem = AIRPORTS_DIRECTORY.find((a) => a.code === inquiryOrigin);
     const destItem = AIRPORTS_DIRECTORY.find((a) => a.code === inquiryDestination);
-    const originLabel = originItem ? `${originItem.city} (${originItem.code})` : inquiryOrigin;
-    const destLabel = destItem ? `${destItem.city} (${destItem.code})` : inquiryDestination;
+    const originLabel = originItem
+      ? `${originItem.city} (${originItem.code})`
+      : inquiryOrigin || "any origin";
+    const destLabel = destItem
+      ? `${destItem.city} (${destItem.code})`
+      : inquiryDestination || "any destination";
 
     const message = [
       `Assalamu Alaikum URAL, I have a question about a flight route:`,
@@ -402,6 +406,7 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
                     onChange={(e) => setInquiryOrigin(e.target.value)}
                     className="w-full min-h-11 bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
                   >
+                    <option value="">Select origin (optional)</option>
                     <optgroup label="Bangladesh Hubs">
                       <option value="DAC">DAC — Dhaka (Hazrat Shahjalal)</option>
                       <option value="CGP">CGP — Chattogram (Shah Amanat)</option>
@@ -428,6 +433,7 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
                     onChange={(e) => setInquiryDestination(e.target.value)}
                     className="w-full min-h-11 bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#F6B73C]"
                   >
+                    <option value="">Select destination (optional)</option>
                     <optgroup label="Middle East">
                       <option value="DXB">DXB — Dubai International, UAE</option>
                       <option value="SHJ">SHJ — Sharjah (Air Arabia Hub)</option>
@@ -512,7 +518,7 @@ export function InteractiveTools({ initialTool, initialCountry }: InteractiveToo
 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
                 <span className="text-[11px] text-slate-400">
-                  Ready to send via WhatsApp: <strong className="text-white font-mono">{inquiryOrigin} ➔ {inquiryDestination}</strong> ({inquiryDate || "Flexible date"})
+                  Ready to send via WhatsApp: <strong className="text-white font-mono">{inquiryOrigin || "any origin"} → {inquiryDestination || "any destination"}</strong> ({inquiryDate || "Flexible date"})
                 </span>
                 <a
                   href={generateWhatsAppInquiryUrl()}

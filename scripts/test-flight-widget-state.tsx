@@ -47,6 +47,7 @@ const React = await import("react");
 const { createRoot } = await import("react-dom/client");
 const { renderToStaticMarkup } = await import("react-dom/server");
 const { default: TravelpayoutsWidget } = await import("../src/components/TravelpayoutsWidget");
+const { InteractiveTools } = await import("../src/components/InteractiveTools");
 
 type WidgetProps = Record<string, unknown>;
 
@@ -339,6 +340,36 @@ await test("manual_currency_survives_origin_change_and_swap", async () => {
     } finally {
       await unmount();
     }
+  }
+});
+
+await test("global_inquiry_does_not_assume_dhaka_or_passport", async () => {
+  const host2 = document.createElement("div");
+  document.body.appendChild(host2);
+  const root2 = (await import("react-dom/client")).createRoot(host2);
+  await React.act(async () => {
+    root2.render(
+      React.createElement(InteractiveTools as unknown as React.ComponentType<Record<string, unknown>>, {
+        initialTool: "airports",
+      }),
+    );
+  });
+  try {
+    const originSelect = host2.querySelector("#airport-inquiry-origin") as HTMLSelectElement | null;
+    const destSelect = host2.querySelector("#airport-inquiry-destination") as HTMLSelectElement | null;
+    assert.ok(originSelect, "inquiry origin select renders");
+    assert.ok(destSelect, "inquiry destination select renders");
+    assert.equal(originSelect!.value, "", "no silent Dhaka origin");
+    assert.equal(destSelect!.value, "", "no silent Dubai destination");
+    assert.ok(
+      (host2.textContent ?? "").includes("any origin") || (host2.textContent ?? "").includes("any destination"),
+      "the preview no longer claims a fabricated route",
+    );
+    const whatsapp = host2.querySelector('a[href*="wa.me"]') as HTMLAnchorElement | null;
+    assert.ok(whatsapp, "free help via WhatsApp remains available");
+  } finally {
+    await React.act(async () => root2.unmount());
+    host2.remove();
   }
 });
 

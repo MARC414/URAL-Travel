@@ -32,6 +32,10 @@ try {
     assert.ok(!/50\+|15\+|100%|BD Traveler Focus|বাংলাদেশি পাসপোর্ট ফোকাস/.test(text(doc.querySelector("#hero-stats-bar"))), `${lang}: remove unsupported hero statistics`);
     assert.ok(doc.querySelector(`a[href="${lang === "bn" ? "/bn" : ""}/bangladesh"]`), `${lang}: a visible Bangladesh planning doorway`);
     assert.equal(pairs(doc).length, 4, `${lang}: four visible orientation FAQs`);
+    // F06: the international homepage widget starts unselected. The widget is
+    // lazy-loaded, so SSR renders its skeleton; the unselected-state contract
+    // is verified in test-flight-widget-state.tsx (explicit null props) and
+    // in the mounted home assertion below.
     assert.ok(doc.querySelector('a[href="#live-flight-search"]'), "Retain the flight fragment action");
     assert.ok(doc.querySelector('a[href="#global-hotel-search"]'), "Retain the hotel fragment action");
   }

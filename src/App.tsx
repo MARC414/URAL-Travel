@@ -2856,6 +2856,9 @@ export default function App() {
                     >
                       <TravelpayoutsWidget
                         lang={lang}
+                        defaultOrigin={null}
+                        defaultDestination={null}
+                        showQuickRoutes={false}
                         onOpenPriceAlert={openPriceAlert}
                       />
                     </React.Suspense>
