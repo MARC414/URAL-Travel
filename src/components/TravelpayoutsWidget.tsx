@@ -1673,6 +1673,13 @@ export default function TravelpayoutsWidget({
     return buildWhiteLabelUrl({ flightSearch: liveFormSearchCode, currency, locale: lang, subId: placementSubId });
   }, [liveFormSearchCode, currency, lang, placementSubId]);
 
+  // F06 leaves the homepage unselected. The hosted provider still accepts a bare
+  // handoff, so the primary action opens a global search instead of becoming a
+  // dead link. No route code, airport or fare is invented here.
+  const genericWlUrl = useMemo(() => {
+    return buildWhiteLabelUrl({ currency, locale: lang, subId: placementSubId });
+  }, [currency, lang, placementSubId]);
+
   // Dynamic currency config built from fetched rates — never hard-coded
   const dynamicCurrencyConfig = useMemo(() => {
     const codes = ['BDT', 'USD', 'EUR', 'GBP', 'SAR', 'AED'];
@@ -2261,13 +2268,15 @@ export default function TravelpayoutsWidget({
 
           {/* Primary action spans the complete width of the search card. */}
             <a
-              href={liveFormSearchCode ? liveFormUralWlUrl : undefined}
+              href={liveFormSearchCode ? liveFormUralWlUrl : genericWlUrl}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              aria-disabled={!liveFormSearchCode}
+              aria-disabled={false}
               data-testid="search-flights-submit-btn"
               onClick={(event) => {
-                if (!liveFormSearchCode || !event.currentTarget.closest('form')?.reportValidity()) {
+                // An incomplete route still has a valid generic handoff; only real
+                // form errors (e.g. an invalid date) may cancel it.
+                if (!event.currentTarget.closest('form')?.reportValidity()) {
                   event.preventDefault();
                   return;
                 }
@@ -2298,8 +2307,8 @@ export default function TravelpayoutsWidget({
             <p className="text-xs leading-relaxed text-slate-600" role={!liveFormSearchCode ? 'status' : undefined}>
               {!liveFormSearchCode
                 ? isBn
-                  ? 'আলাদা দুটি বিমানবন্দর ও সঠিক যাত্রার তারিখ বেছে নিন। রাউন্ড-ট্রিপের জন্য ফেরার তারিখও দিন।'
-                  : 'Choose two different airports and valid travel dates. A round-trip needs a return date.'
+                  ? 'রুট অনুযায়ী খোঁজার জন্য আলাদা দুটি বিমানবন্দর ও তারিখ বেছে নিন, অথবা বর্তমান অবস্থায় বিশ্বব্যাপী ফ্লাইট সার্চ খুলুন। রাউন্ড-ট্রিপের জন্য ফেরার তারিখও দিন।'
+                  : 'Pick two different airports and dates for a route-specific search, or open the global flight search as it is. A round-trip needs a return date.'
                 : isBn
                   ? 'flights.uraltravel.co.uk নতুন ট্যাবে খুলবে। শিশু ও ইনফ্যান্ট থাকলে সার্চ সাইটে যোগ করুন।'
                   : 'Opens flights.uraltravel.co.uk in a new tab. Add children and infants on the flight site.'}
