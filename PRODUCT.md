@@ -58,9 +58,11 @@ what they do, and no surface addresses a single passport as though it were the o
 
 Three consequences that are testable, not aspirational:
 
-- **Currency follows origin.** BDT for a Bangladesh departure, USD for every other origin, always
-  overridable, never forced. This extends the rule the flight search already implements
-  (`AGENTS.md` §3) rather than reversing Bangladesh-first pricing.
+- **Currency follows origin.** BDT for a Bangladesh departure, GBP for a UK departure in the hosted
+  flight search, USD for every other origin; always overridable, never forced. The budget worksheet
+  and estimator keep their BDT/USD display set (a UK origin resolves to USD there), and converted
+  published totals still require dated rates. This extends the rule the flight search already
+  implements (`AGENTS.md` §3) rather than reversing Bangladesh-first pricing.
 - **Tools are named by function**; the audience is named in the subtitle. A tool labelled "BDT
   Currency Converter" tells a reader in Jakarta the site is not for them; "Currency Converter — live
   daily rates, with BDT-first guidance for Bangladesh" serves both.

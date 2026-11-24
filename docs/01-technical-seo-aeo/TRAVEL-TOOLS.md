@@ -57,8 +57,10 @@ reader-supplied provenance, not a claim that URAL verified the supplier's price.
 - Amounts are parsed into integer poisha. Equal share is rounded only after summing
   and includes everyone; it is not an actual adult/child fare allocation.
 - Inputs stay BDT. Display defaults to BDT for a Bangladesh departure and USD for
-  other origins. An explicit selection wins. Missing USD rates produce a labelled
-  BDT result. Display changes never change input amounts.
+  other origins. The hosted flight search additionally maps UK gateways to GBP;
+  this estimator and the Umrah worksheet keep their BDT/USD display set, so a UK
+  origin resolves to USD there. An explicit selection wins. Missing USD rates
+  produce a labelled BDT result. Display changes never change input amounts.
 - Any input edit requires recalculation, so a former result cannot masquerade as
   the updated trip. Sources and amounts stay local; usage events carry coarse bands.
 - Flight handoffs keep the route, departure/return dates, adult count, locale and

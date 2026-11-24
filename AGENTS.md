@@ -35,6 +35,8 @@ standard. [`URAL-SOCIAL-CONTENT-ECOSYSTEM.md`](URAL-SOCIAL-CONTENT-ECOSYSTEM.md)
 existing-content production programme. Guides and draft calendars do not authorize article rewrites,
 site repairs or live publication outside the current owner task.
 
+**Landed 24 November 2026 — international foundation F01–F09.** The published Bangladesh EN/BN hub pair, the repaired English-only /uk hub, the unselected international homepage widget, UK-origin GBP mapping in the hosted flight search, one scoped locale policy shared by the saved and mounted heads, and hub links in the nav/footer/search are all in `main` (see [`release summary`](docs/handoff/2026-11-24-international-release-summary.md)). The flight search still prefers BDT for Bangladesh gateways and honours a manual currency choice; budget worksheets and published totals still require dated rates. Additional languages, a domain change and Europe/rail expansion remain unapproved. Deployment of this package needs the owner's separate explicit approval.
+
 ---
 
 ## 1. Mission & Product Identity
