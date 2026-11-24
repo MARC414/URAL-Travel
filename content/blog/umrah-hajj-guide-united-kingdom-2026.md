@@ -4,8 +4,8 @@ status: scheduled
 publishDate: "2026-11-12"
 title: "Umrah and Hajj from the UK: Visas, Nusuk and ATOL (2026)"
 titleBn: "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ (২০২৬): ভিসা, নুসুক ও এটিওএল"
-summary: "Checked 12 November 2026: three online routes cover Umrah from a British passport — an ETA, an e-visa or an electronic visa waiver — while Hajj needs its own visa. The Nusuk permit is a separate step, MenACWY must be given at least 10 days before arrival, and Hajj 2027 has no announced dates or UK registration window yet. Flights leave Heathrow, Manchester and Birmingham; ATOL protects your money if an operator fails, not your health; and the FCDO currently advises against all but essential travel to most of Saudi Arabia, warning that insurance may be void if you travel anyway."
-summaryBn: "১২ নভেম্বর ২০২৬-এ যাচাই করা: ব্রিটিশ পাসপোর্টে ওমরাহর জন্য তিনটি অনলাইন রুট — ইটিএ, ই-ভিসা বা ইলেকট্রনিক ভিসা ওয়েভার — আর হজ্জের জন্য আলাদা ভিসা লাগে। নুসুক পারমিট আলাদা ধাপ, মেনিঙ্গোকক্যাল ACWY টিকা আগমনের অন্তত ১০ দিন আগে, আর হজ্জ ২০২৭-এর কোনো তারিখ বা যুক্তরাজ্য নিবন্ধন উইন্ডো এখনো ঘোষণা হয়নি। ফ্লাইট ছাড়ে হিথরো, ম্যানচেস্টার ও বার্মিংহাম থেকে; এটিওএল অপারেটর বন্ধ হলে আপনার টাকা রক্ষা করে, স্বাস্থ্য নয়; আর এফসিডিও বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে, এবং পরামর্শের বিরুদ্ধে গেলে বীমা বাতিল হতে পারে বলে সতর্ক করে।"
+summary: "Checked 24 November 2026: three online routes cover Umrah from a British passport — an ETA, an e-visa or an electronic visa waiver — while Hajj needs its own visa. The Nusuk permit is a separate step, MenACWY must be given at least 10 days before arrival. Hajj 2027 is projected for 14–19 May 2027 (Arafah 15 May, Eid al-Adha 16 May), subject to crescent confirmation, but no 1448 AH packages or UK registration window were on sale yet. Flights leave Heathrow, Manchester and Birmingham; ATOL protects your money if an operator fails, not your health; and the FCDO currently advises against all but essential travel to most of Saudi Arabia, warning that insurance may be void if you travel anyway."
+summaryBn: "২৪ নভেম্বর ২০২৬-এ যাচাই করা: ব্রিটিশ পাসপোর্টে ওমরাহর জন্য তিনটি অনলাইন রুট — ইটিএ, ই-ভিসা বা ইলেকট্রনিক ভিসা ওয়েভার — আর হজ্জের জন্য আলাদা ভিসা লাগে। নুসুক পারমিট আলাদা ধাপ, মেনিঙ্গোকক্যাল ACWY টিকা আগমনের অন্তত ১০ দিন আগে। হজ্জ ২০২৭ সম্ভাব্য ১৪–১৯ মে ২০২৭ (আরাফাহ ১৫ মে, ঈদুল আজহা ১৬ মে), চাঁদ দেখার নিশ্চিতকরণ সাপেক্ষে; তবে ১৪৪৮ হিজরির কোনো প্যাকেজ বা যুক্তরাজ্য নিবন্ধন উইন্ডো তখনো খোলা ছিল না। ফ্লাইট ছাড়ে হিথরো, ম্যানচেস্টার ও বার্মিংহাম থেকে; এটিওএল অপারেটর বন্ধ হলে আপনার টাকা রক্ষা করে, স্বাস্থ্য নয়; আর এফসিডিও বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে, এবং পরামর্শের বিরুদ্ধে গেলে বীমা বাতিল হতে পারে বলে সতর্ক করে।"
 category: Hajj & Umrah
 categoryBn: হজ্জ ও ওমরাহ
 journeyStage: prepare
@@ -13,7 +13,7 @@ author: Farhan Momen (Founder & Travel Editor)
 authorBn: ফারহান মোমেন (ফাউন্ডার ও ট্রাভেল এডিটর)
 readTime: 8 min read
 readTimeBn: ৮ মিনিট পঠন
-updatedAt: "2026-11-12"
+updatedAt: "2026-11-24"
 coverImage: uk_umrah_hajj_guide_20261112
 coverAltEn: A family with suitcases walks through a sunlit airport departures hall at dawn.
 coverAltBn: রোদে আলোকিত এয়ারপোর্ট প্রস্থান হল দিয়ে সামানসহ হাঁটছে একটি পরিবার।
@@ -21,15 +21,15 @@ seoTitle: "Umrah and Hajj from the UK (2026): Visas, Nusuk & ATOL"
 seoDescription: "Which passport governs your Saudi visa, how Nusuk permits work, ATOL checks and the current FCDO advice — planning Umrah or Hajj from the UK in 2026."
 seoTitleBn: "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ (২০২৬): ভিসা, নুসুক ও এটিওএল"
 seoDescriptionBn: "কোন পাসপোর্টে সৌদি ভিসা কোনটি, নুসুক পারমিট কীভাবে কাজ করে, এটিওএল যাচাই আর বর্তমান এফসিডিও পরামর্শ — ২০২৬ সালে যুক্তরাজ্য থেকে ওমরাহ বা হজ্জ পরিকল্পনা।"
-snippet: "Three online routes — an ETA, an e-visa or a waiver — cover Umrah from a British passport, yet the FCDO currently advises against all but essential travel to most of Saudi Arabia and warns that insurance could be invalidated if you travel against it. This guide walks through the visa choices, the Nusuk permit step, Hajj 2027's announcement status, UK flights from Heathrow, Manchester and Birmingham, ATOL protection and a dated GBP cost snapshot."
-snippetBn: "ব্রিটিশ পাসপোর্টে ওমরাহ তিনটি অনলাইন রুটে — ইটিএ, ই-ভিসা বা ওয়েভার — সম্ভব, তবে এফসিডিও বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে পরামর্শ দেয় এবং পরামর্শের বিরুদ্ধে গেলে বীমা বাতিল হতে পারে বলে সতর্ক করে। এই গাইডে ভিসার পছন্দ, নুসুক পারমিটের ধাপ, হজ্জ ২০২৭ ঘোষণার অবস্থা, হিথরো-ম্যানচেস্টার-বার্মিংহাম থেকে ফ্লাইট, এটিওএল সুরক্ষা আর তারিখসহ জিবিপি খরচের স্ন্যাপশট।"
+snippet: "Three online routes — an ETA, an e-visa or a waiver — cover Umrah from a British passport, yet the FCDO currently advises against all but essential travel to most of Saudi Arabia and warns that insurance could be invalidated if you travel against it. This guide walks through the visa choices, the Nusuk permit step, Hajj 2027's projected dates and current registration status, UK flights from Heathrow, Manchester and Birmingham, ATOL protection and a dated GBP cost snapshot."
+snippetBn: "ব্রিটিশ পাসপোর্টে ওমরাহ তিনটি অনলাইন রুটে — ইটিএ, ই-ভিসা বা ওয়েভার — সম্ভব, তবে এফসিডিও বর্তমানে সৌদি আরবের বেশিরভাগ অঞ্চলে অতিজরুরি নয় সকল ভ্রমণের বিরুদ্ধে পরামর্শ দেয় এবং পরামর্শের বিরুদ্ধে গেলে বীমা বাতিল হতে পারে বলে সতর্ক করে। এই গাইডে ভিসার পছন্দ, নুসুক পারমিটের ধাপ, হজ্জ ২০২৭-এর সম্ভাব্য তারিখ ও বর্তমান নিবন্ধন অবস্থা, হিথরো-ম্যানচেস্টার-বার্মিংহাম থেকে ফ্লাইট, এটিওএল সুরক্ষা আর তারিখসহ জিবিপি খরচের স্ন্যাপশট।"
 faqHeadingEn: "7. Frequently Asked Questions"
 faqHeadingBn: "৭. সচরাচর জিজ্ঞাসা"
 audience: uk
 audienceLabelEn: UK travellers
 audienceLabelBn: যুক্তরাজ্যের ভ্রমণকারীদের
-aeoSummary: "From the UK, Umrah outside Hajj season runs on three British passport routes — ETA, e-visa or visa waiver — and every traveller needs a Nusuk permit and an ACWY certificate dated at least 10 days before arrival. Hajj is separate: place only through Nusuk Hajj, and no 2027 dates have been published. Flights are nonstop only from Heathrow and Manchester to Jeddah, and no UK airport flies nonstop to Madinah. The FCDO still advises against all but essential travel to most of Saudi Arabia, and insurance may be invalid if you travel against that advice."
-aeoSummaryBn: "যুক্তরাজ্য থেকে হজ্জ মৌসুমের বাইরে ওমরাহ চলে ব্রিটিশ পাসপোর্টের তিনটি রুটে — ইটিএ, ই-ভিসা বা ভিসা ওয়েভার — আর প্রত্যেকেরই লাগে নুসুক পারমিট এবং পৌঁছানোর অন্তত ১০ দিন আগের এসিডব্লিউওয়াই সার্টিফিকেট। হজ্জ আলাদা: জায়গা শুধু নুসুক হজ্জ দিয়ে, আর ২০২৭-এর কোনো তারিখ এখনো প্রকাশিত হয়নি। নন-স্টপ ফ্লাইট শুধু হিথরো ও ম্যানচেস্টার থেকে জেদ্দার; মদিনার জন্য যুক্তরাজ্যের কোনো বিমানবন্দর থেকে নন-স্টপ নেই। এফসিডিও এখনো সৌদি আরবের বেশিরভাগ অংশে অতিজরুরি নয় এমন ভ্রমণের বিরুদ্ধে পরামর্শ দেয়, আর সেই পরামর্শের বিরুদ্ধে গেলে বিমা বাতিল হতে পারে।"
+aeoSummary: "From the UK, Umrah outside Hajj season runs on three British passport routes — ETA, e-visa or visa waiver — and every traveller needs a Nusuk permit and an ACWY certificate dated at least 10 days before arrival. Hajj is separate: place only through Nusuk Hajj. Hajj 2027 is projected for 14–19 May 2027 pending crescent confirmation, but no 1448 AH packages or UK registration window were on sale as of 24 November 2026 (1448H licensing is open at haj.gov.sa; Nusuk Hajj still showed 1447/2026 content). Flights are nonstop only from Heathrow and Manchester to Jeddah, and no UK airport flies nonstop to Madinah. The FCDO still advises against all but essential travel to most of Saudi Arabia, and insurance may be invalid if you travel against that advice."
+aeoSummaryBn: "যুক্তরাজ্য থেকে হজ্জ মৌসুমের বাইরে ওমরাহ চলে ব্রিটিশ পাসপোর্টের তিনটি রুটে — ইটিএ, ই-ভিসা বা ভিসা ওয়েভার — আর প্রত্যেকেরই লাগে নুসুক পারমিট এবং পৌঁছানোর অন্তত ১০ দিন আগের এসিডব্লিউওয়াই সার্টিফিকেট। হজ্জ আলাদা: জায়গা শুধু নুসুক হজ্জ দিয়ে। হজ্জ ২০২৭ সম্ভাব্য ১৪–১৯ মে ২০২৭, চাঁদ দেখার নিশ্চিতকরণ সাপেক্ষে; কিন্তু ২৪ নভেম্বর ২০২৬ পর্যন্ত ১৪৪৮ হিজরির কোনো প্যাকেজ বা যুক্তরাজ্য নিবন্ধন উইন্ডো খোলা ছিল না (haj.gov.sa-তে ১৪৪৮ লাইসেন্সিং খোলা, নুসুক হজ্জে তখনো ১৪৪৭/২০২৬ তথ্য)। নন-স্টপ ফ্লাইট শুধু হিথরো ও ম্যানচেস্টার থেকে জেদ্দার; মদিনার জন্য যুক্তরাজ্যের কোনো বিমানবন্দর থেকে নন-স্টপ নেই। এফসিডিও এখনো সৌদি আরবের বেশিরভাগ অংশে অতিজরুরি নয় এমন ভ্রমণের বিরুদ্ধে পরামর্শ দেয়, আর সেই পরামর্শের বিরুদ্ধে গেলে বিমা বাতিল হতে পারে।"
 aeoFacts:
   - label: British passport routes
     labelBn: ব্রিটিশ পাসপোর্টের রুট
@@ -37,8 +37,8 @@ aeoFacts:
     valueBn: ইটিএ, ই-ভিসা বা ভিসা ওয়েভার হজ্জ মৌসুমের বাইরের ওমরাহ কভার করে — ১৪ নভেম্বর ২০২৬-এ যাচাই
   - label: Hajj 2027
     labelBn: হজ্জ ২০২৭
-    value: No dates published; 1448H licensing applications open at haj.gov.sa — checked 14 Nov 2026
-    valueBn: তারিখ প্রকাশিত হয়নি; ১৪৪৮ হিজরি মৌসুমের লাইসেন্সিং আবেদন haj.gov.sa-তে খোলা — ১৪ নভেম্বর ২০২৬-এ যাচাই
+    value: Projected 14–19 May 2027 (crescent pending); no 1448 packages/UK registration window on sale, 1448H licensing open — checked 24 Nov 2026
+    valueBn: সম্ভাব্য ১৪–১৯ মে ২০২৭ (চাঁদ নিশ্চিতকরণ বাকি); ১৪৪৮ প্যাকেজ/যুক্তরাজ্য নিবন্ধন খোলা নয়, ১৪৪৮ লাইসেন্সিং খোলা — ২৪ নভেম্বর ২০২৬-এ যাচাই
   - label: Current FCDO position
     labelBn: এফসিডিওর বর্তমান অবস্থান
     value: Against all but essential travel to most of Saudi Arabia; insurance may be void — checked 14 Nov 2026
@@ -78,6 +78,10 @@ internalLinksEn:
     path: /blog/hajj-umrah-accommodation-guide-makkah-madinah
   - text: "Nusuk hotel BRN and Rawdah permits: what actually opens the gate"
     path: /blog/nusuk-hotel-brn-rawdah-gate-guide
+  - text: "A British passport and the three Umrah entry routes, step by step"
+    path: /blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step
+  - text: "UK to Saudi flights: which routes are non-stop and what they cost"
+    path: /blog/uk-to-saudi-flights-umrah-direct-or-connecting
   - text: "Makkah to Madinah: Haramain train, VIP bus or private van"
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
   - text: "UK packages: ATOL cover and operator checks before you pay"
@@ -99,6 +103,10 @@ internalLinksBn:
     path: /blog/hajj-umrah-accommodation-guide-makkah-madinah
   - text: "নুসুক হোটেল BRN ও রওদা পারমিট: গেট আসলে কীসে খোলে"
     path: /blog/nusuk-hotel-brn-rawdah-gate-guide
+  - text: "ব্রিটিশ পাসপোর্টে ওমরাহর তিন প্রবেশ রুট, ধাপে ধাপে"
+    path: /blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step
+  - text: "যুক্তরাজ্য থেকে সৌদি ফ্লাইট: কোন রুট নন-স্টপ ও খরচ কত"
+    path: /blog/uk-to-saudi-flights-umrah-direct-or-connecting
   - text: "মক্কা থেকে মদিনা: হারামাইন ট্রেন, ভিআইপি বাস নাকি প্রাইভেট ভ্যান"
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
   - text: "যুক্তরাজ্যের প্যাকেজ: এটিওএল সুরক্ষা ও অপারেটর যাচাই"
@@ -156,12 +164,14 @@ Around Hajj the rules tighten: Saudi authorities have stopped non-Hajj visitors 
 
 ## Is Hajj 2027 open yet?
 
-**Not yet — checked 11 November 2026.** Neither the Ministry of Hajj and Umrah's portal (haj.gov.sa) nor Nusuk has published Hajj 2027 ritual dates or a UK registration window. What the Ministry has published is the supply side: **applications are open for licensing foreign pilgrim service companies for the 1448 AH Hajj season** (haj.gov.sa, checked 11 November 2026).
+**No 1448 AH packages or UK registration window were on sale yet — checked 24 November 2026.** Hajj 2027 is **projected for 14–19 May 2027** (Arafah 15 May, Eid al-Adha 16 May) on the Umm al-Qura calendar, subject to Saudi crescent confirmation. But the official sale/registration side was still not open: the Ministry of Hajj and Umrah portal (haj.gov.sa) showed licensing applications open for foreign pilgrim service companies for the 1448 AH season, while Nusuk Hajj still showed 1447/2026 serviced-country content (including the United Kingdom on that 1447 list). Neither haj.gov.sa nor Nusuk Hajj had published a 1448 package sale or UK registration window.
 
 Two rules do not change while you wait:
 
 - **Hajj places are booked only through the official Nusuk Hajj platform** — the FCDO states this directly; it is the best guard against Hajj fraud.
-- **A tourist visa, e-visa or ETA is not a Hajj visa.** When they appear on haj.gov.sa and Nusuk, treat any operator-quoted date as an estimate until then.
+- **A tourist visa, e-visa or ETA is not a Hajj visa.** Treat any operator-quoted "confirmed place" before packages open on Nusuk Hajj as a red flag.
+
+For the dated projection, fares and Nusuk steps, see [Hajj 2027 from the UK: dates, Nusuk Hajj registration and what it costs](/blog/hajj-2027-uk-dates-nusuk-registration-cost). For Ramadan timing, see [Ramadan Umrah 2027: dates, dated fares and the last ten nights](/blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights). The [ATOL and operator checks guide](/blog/uk-umrah-packages-atol-operator-checks) is the read to have open before you pay any deposit.
 
 ## How do you fly from the UK?
 
@@ -215,7 +225,7 @@ Yes — all three cover Umrah outside the Hajj season. You still book the permit
 Does holding a non-British passport change the route?
 Yes. The three routes above are the British citizen passport track. The official eVisa portal publishes which countries are eligible; for every passport not on that list the instruction is to contact the nearest Saudi Arabia Embassy. Check the live list before paying any agent (checked 12 November 2026).
 Is Hajj 2027 registration open for UK pilgrims?
-Not as of 11 November 2026 — neither the Ministry nor Nusuk has published Hajj 2027 dates or a UK registration window. Licensing for foreign pilgrim service companies is open for the 1448 AH season; when registration opens it will be through Nusuk Hajj, the only channel the FCDO recognises.
+No — as of 24 November 2026, no 1448 AH Hajj packages or UK registration window were on sale on Nusuk Hajj, and haj.gov.sa showed only 1448 AH licensing for foreign pilgrim service companies. Hajj 2027 is projected for 14–19 May 2027 (Arafah 15 May, Eid al-Adha 16 May), subject to crescent confirmation; when registration opens it will be through Nusuk Hajj, the only channel the FCDO recognises. See the Hajj 2027 from the UK guide on URAL for the dated breakdown.
 Does the e-visa's included health insurance mean you do not need travel insurance?
 No. The e-visa includes cover up to SAR 100,000 and the FCDO advises more — and currently against all but essential travel to most of Saudi Arabia, warning cover could be invalidated if you travel against advice. Read your policy against the FCDO page before you pay (checked 11 November 2026).
 How do you check that an Umrah booking company is protected?
@@ -252,7 +262,9 @@ Ask for the ATOL number and check it on atol.org; the certificate arrives as soo
 
 ## হজ্জ ২০২৭ কি খোলা?
 
-১১ নভেম্বর ২০২৬ পর্যন্ত হজ্জ ২০২৭ কোনো তারিখ বা যুক্তরাজ্য নিবন্ধন উইন্ডো প্রকাশ করা হয়নি। যা প্রকাশিত হলো হজ্জ মৌসুমের প্রস্তুতির দিক থেকে: ১৪৪৮ হিজরি মৌসুমে বিদেশী তীর্থযাত্রা সেবা কোম্পানির লাইসেন্সিং আবেদন খোলা (haj.gov.sa, ১১ নভেম্বর ২০২৬-এ যাচাই করা)। হজ্জের স্থান শুধু অফিসিয়াল নুসুক হজ্জ প্ল্যাটফর্মেই বুক হয় (এফসিডিও); পর্যটক ভিসা বা ই-ভিসা হজ্জ ভিসা নয়।
+**১৪৪৮ হিজরির কোনো প্যাকেজ বা যুক্তরাজ্য নিবন্ধন উইন্ডো এখনো খোলা ছিল না — ২৪ নভেম্বর ২০২৬-এ যাচাই করা।** উম্মুল কুরা ক্যালেন্ডার অনুযায়ী হজ্জ ২০২৭ সম্ভাব্য **১৪–১৯ মে ২০২৭** (আরাফাহ ১৫ মে, ঈদুল আজহা ১৬ মে), সৌদি চাঁদ দেখার নিশ্চিতকরণ সাপেক্ষে। কিন্তু অফিসিয়াল বিক্রি/নিবন্ধন তখনো খোলেনি: হজ্জ ও ওমরাহ মন্ত্রণালয়ের পোর্টালে (haj.gov.sa) ১৪৪৮ হিজরি মৌসুমে বিদেশি সেবা কোম্পানির লাইসেন্সিং আবেদন খোলা দেখা গেছে, আর নুসুক হজ্জে তখনো ১৪৪৭/২০২৬ সেবা-প্রাপ্ত দেশের তথ্য ছিল (ওই ১৪৪৭ তালিকায় যুক্তরাজ্য আছে)। haj.gov.sa বা নুসুক হজ্জে ১৪৪৮-এর প্যাকেজ বিক্রি বা যুক্তরাজ্য নিবন্ধন উইন্ডো প্রকাশিত হয়নি।
+
+হজ্জ খুললে স্থান শুধু অফিসিয়াল নুসুক হজ্জ প্ল্যাটফর্মেই বুক হয় (এফসিডিও)। পর্যটক ই-ভিসা বা ইটিএ হজ্জ ভিসা নয়, আর প্ল্যাটফর্ম খোলার আগে “নিশ্চিত স্থানসহ হজ্জ ২০২৭ প্যাকেজ” বিক্রি করা এমন কিছু যা এখনো ধরে রাখা সম্ভব নয়। তারিখ, ভাড়া ও নুসুকের ধাপের বিস্তারিত দেখুন [যুক্তরাজ্য থেকে হজ্জ ২০২৭: তারিখ, নুসুক হজ্জ নিবন্ধন ও খরচ](/blog/hajj-2027-uk-dates-nusuk-registration-cost)। রমজানের সময়সূচির জন্য দেখুন [রমজান ওমরাহ ২০২৭: তারিখ, যাচাই করা ভাড়া ও শেষ দশ রাত](/blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights)।
 
 ## যুক্তরাজ্য থেকে কীভাবে উড়বেন
 
@@ -283,6 +295,6 @@ ATOL হলো অর্থসুরক্ষা, বীমা নয় — ফ
 হজ্জের জন্য একেবারে খোলা ফেরার টিকিট কি চলবে?
 না। এফসিডিও বলে, অনিশ্চিত অবধির টিকিট বিনা হজ্জ ভিসায় বোর্ডিং বা প্রবেশে সমস্যা তৈরি করতে পারে — হজ্জের ফিরতি নিশ্চিত করেই বুক করুন (১১ নভেম্বর ২০২৬-এ যাচাই করা)।
 হজ্জ ২০২৭ কি এখনো খোলেনি?
-তারিখ এখনো প্রকাশ পায়নি — ১১ নভেম্বর ২০২৬ পর্যন্ত হজ্জ ২০২৭-এর কোনো অফিসিয়াল তারিখ বা যুক্তরাজ্য নিবন্ধন উইন্ডো পাওয়া যায়নি; এখন খোলা হলো ১৪৪৮ হিজরি মৌসুমের লাইসেন্সিং আবেদন (haj.gov.sa), আর হজ্জ বুকিং শুধু নুসুকেই।
+না — ২৪ নভেম্বর ২০২৬ পর্যন্ত নুসুক হজ্জে ১৪৪৮ হিজরির কোনো প্যাকেজ বা যুক্তরাজ্য নিবন্ধন উইন্ডো খোলা ছিল না; haj.gov.sa-তে দেখা গেছে শুধু ১৪৪৮ হিজরি মৌসুমের বিদেশি সেবা কোম্পানির লাইসেন্সিং। হজ্জ ২০২৭ সম্ভাব্য ১৪–১৯ মে ২০২৭ (আরাফাহ ১৫ মে, ঈদুল আজহা ১৬ মে), চাঁদ দেখার নিশ্চিতকরণ সাপেক্ষে; নিবন্ধন খুললে হবে শুধু নুসুক হজ্জে, যা এফসিডিও স্বীকৃত একমাত্র চ্যানেল। তারিখভিত্তিক বিস্তারিত URAL-এর ‘যুক্তরাজ্য থেকে হজ্জ ২০২৭: তারিখ, নুসুক হজ্জ নিবন্ধন ও খরচ’ গাইডে দেখুন।
 সৌদি আরব ভ্রমণে বীমা কি প্রয়োজন?
 ই-ভিসায় SAR 100,000 পর্যন্ত স্বাস্থ্য বীমা অন্তর্ভুক্ত; এফসিডিও এর চেয়ে বেশি বীমার পরামর্শ দেয় এবং পরামর্শের বিরুদ্ধে গেলে নীতিমালা মতে বীমা বাতিল হতে পারে — বুকিংয়ের আগে নীতির শর্ত ও এফসিডিও পাতা মিলিয়ে দেখুন (১১ নভেম্বর ২০২৬-এ যাচাই করা)।
