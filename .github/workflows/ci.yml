@@ -193,6 +193,9 @@ jobs:
       - name: Verify hub discoverability across nav, footer, home and search
         run: npm run test:discoverability
 
+      - name: Verify route preservation against the pre-international baseline
+        run: npm run test:route-preservation
+
       - name: Visa-claim and built-HTML affiliate-disclosure integrity
         run: npm run test:visa-claims
 

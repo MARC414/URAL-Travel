@@ -132,6 +132,7 @@ import { BANKING_HUB_FAQS } from "../src/data/bankingHubFaqs";
 import { HOME_FAQS, getHomeFaqs } from "../src/data/homeFaqs";
 import { getHomePositioning } from "../src/data/homePositioning";
 import { BN_BREADCRUMB_LABELS } from "../src/utils/localeRoutes";
+import { assertRoutePreservation, captureBaselineFromDist, type RouteBaseline } from "../src/utils/routeBaseline";
 import {
   buildResponsiveSrcSet,
   RESPONSIVE_IMAGE_BREAKPOINTS,
@@ -9646,6 +9647,36 @@ checkBangladeshHubBuild(DIST_DIR, check);
       ? `scheduled-publish.yml runs off the top-of-hour spike (${expectedUtcLabel}) and matches content/blog/README.md`
       : `scheduled-publish.yml cron must run at 03:<01-59> UTC and match content/blog/README.md (saw cron="${cronMatch?.[0]?.trim() ?? "missing"}")`
   );
+}
+
+// --- R02/F09 route preservation --------------------------------------------
+{
+  const fixtureRaw = read(path.join(ROOT_DIR, "scripts/fixtures/route-baseline-pre-international.json"));
+  const manifestRaw = read(path.join(ROOT_DIR, "docs/releases/2026-11-24-international-manifest.json"));
+  let fixture: RouteBaseline | null = null;
+  type ApprovedManifest = { allowedAddedPaths: string[]; allowedChangedPaths: string[] };
+  let manifest: ApprovedManifest | null = null;
+  try {
+    fixture = fixtureRaw ? JSON.parse(fixtureRaw) as RouteBaseline : null;
+    manifest = manifestRaw ? JSON.parse(manifestRaw) as ApprovedManifest : null;
+  } catch { /* reported by the next check */ }
+  check(
+    Boolean(fixture && fixture.routes.length > 0 && manifest),
+    "route preservation fixture and approved change manifest are present and non-empty"
+  );
+  if (fixture && manifest) {
+    const current = captureBaselineFromDist(DIST_DIR, "current-build", "verification");
+    let issue: string | null = null;
+    try {
+      assertRoutePreservation(fixture, current, manifest.allowedAddedPaths, manifest.allowedChangedPaths);
+    } catch (error) { issue = String(error); }
+    check(
+      !issue,
+      issue
+        ? `route preservation: ${issue}`
+        : `route preservation: ${current.routes.length} built routes match the baseline plus only approved additions and changes`
+    );
+  }
 }
 
 // --- Report ----------------------------------------------------------------

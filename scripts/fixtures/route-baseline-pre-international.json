@@ -1,0 +1,2176 @@
+{
+  "sourceRevision": "16c92ad",
+  "capturedAt": "2026-11-24T11:50:47.725Z",
+  "routes": [
+    {
+      "path": "/",
+      "canonical": "https://uraltravel.co.uk/",
+      "title": "Travel Intelligence: Global Flights, Hotels & eVisas | URAL",
+      "h1": "Plan Your TripFrom Anywhere",
+      "bodySha256": "3ea71ffab7c7d31aeb314928e2643f2aa18dc1e814ad07b1a16edd810d0932df"
+    },
+    {
+      "path": "/umrah",
+      "canonical": "https://uraltravel.co.uk/umrah",
+      "title": "Umrah Cost from Bangladesh: DIY Guide & Nusuk | URAL",
+      "h1": "Umrah & Hajj Guide from Bangladesh (2026): DIY BDT Cost Calculator, Nusuk & Flights",
+      "bodySha256": "27d0efff3c4b2b8a7f7cbd636239f0ef7ce4a73af29e99a2fa679ba3c6d5404b"
+    },
+    {
+      "path": "/banking",
+      "canonical": "https://uraltravel.co.uk/banking",
+      "title": "Dollar Endorsement Limit, Dual-Currency Card & NOC | URAL",
+      "h1": "Dollar Endorsement, Dual-Currency Cards & NOC: Bangladesh Banking Guide (2026)",
+      "bodySha256": "dd9352c149bf5d0feeb43560a8355996fffe5a75fe84090f59cf8f90a08a019f"
+    },
+    {
+      "path": "/flights",
+      "canonical": "https://uraltravel.co.uk/flights",
+      "title": "Flights from Dhaka: Routes, Fares & Airlines | URAL",
+      "h1": "International Flights from Dhaka: Routes, Fares & Airlines",
+      "bodySha256": "34e133e1e8f5834cc9ff36fef9fe8fa1a97f399f6eff2461d45da69f66fe7453"
+    },
+    {
+      "path": "/flights/dhaka-kathmandu",
+      "canonical": "https://uraltravel.co.uk/flights/dhaka-kathmandu",
+      "title": "Dhaka to Kathmandu Flights: Price & Route Guide | URAL",
+      "h1": "Flights from Dhaka (DAC) to Kathmandu (KTM)",
+      "bodySha256": "be1a037545e0901b07df8bd9a77772870cd5de9385ecbcf6f40c0d6bba10ccdc"
+    },
+    {
+      "path": "/flights/ktm-dhaka",
+      "canonical": "https://uraltravel.co.uk/flights/ktm-dhaka",
+      "title": "Kathmandu to Dhaka Flights: Price & Route Guide | URAL",
+      "h1": "Flights from Kathmandu (KTM) to Dhaka (DAC)",
+      "bodySha256": "125a91530574ac2261d98c9e75f10db6a612d62dd019492083b4a43c1cfe07d9"
+    },
+    {
+      "path": "/flights/dhaka-bangkok",
+      "canonical": "https://uraltravel.co.uk/flights/dhaka-bangkok",
+      "title": "Dhaka to Bangkok Flights: Fares, Airlines & Tips | URAL",
+      "h1": "Flights from Dhaka (DAC) to Bangkok (BKK / DMK)",
+      "bodySha256": "588355a5fe0da8d524534ddcb9e7e63f3a1d610240d4551ac4dbdb41d66f1c0a"
+    },
+    {
+      "path": "/flights/dhaka-kuala-lumpur",
+      "canonical": "https://uraltravel.co.uk/flights/dhaka-kuala-lumpur",
+      "title": "Dhaka to Kuala Lumpur Flights: Price & Airlines | URAL",
+      "h1": "Flights from Dhaka (DAC) to Kuala Lumpur (KUL)",
+      "bodySha256": "754e776933c58fc612abf23da820ac055517ee70ea40b50b329f11750ffe544b"
+    },
+    {
+      "path": "/flights/dhaka-dubai",
+      "canonical": "https://uraltravel.co.uk/flights/dhaka-dubai",
+      "title": "Dhaka to Dubai Flights: BDT Fares & Airlines | URAL",
+      "h1": "Flights from Dhaka (DAC) to Dubai (DXB)",
+      "bodySha256": "8666ddf9664f658f12745507267b317d52ca89bfb1b0504713ab198441e4cab1"
+    },
+    {
+      "path": "/flights/dhaka-singapore",
+      "canonical": "https://uraltravel.co.uk/flights/dhaka-singapore",
+      "title": "Dhaka to Singapore Flights: Airlines & BDT Fares | URAL",
+      "h1": "Flights from Dhaka (DAC) to Singapore (SIN)",
+      "bodySha256": "de128f060b3467dd3c6e144b62118b98be83b6ac7b829fd77d9a10b3bbd8964e"
+    },
+    {
+      "path": "/flights/dhaka-maldives",
+      "canonical": "https://uraltravel.co.uk/flights/dhaka-maldives",
+      "title": "Dhaka to Maldives Flights: Direct & Transit Fares | URAL",
+      "h1": "Flights from Dhaka (DAC) to Malé (MLE)",
+      "bodySha256": "8150b97ddc6be6e03bba9c962d1a644708af7a739c99901510014e431b778be7"
+    },
+    {
+      "path": "/flights/dhaka-los-angeles",
+      "canonical": "https://uraltravel.co.uk/flights/dhaka-los-angeles",
+      "title": "Dhaka to Los Angeles Flights: Route & Fares | URAL",
+      "h1": "Flights from Dhaka (DAC) to Los Angeles (LAX)",
+      "bodySha256": "fdf7871dcc92989896c7d38c097bea00805b3704c1fb014ca2fb80e1081e3ab9"
+    },
+    {
+      "path": "/flights/dhaka-madinah",
+      "canonical": "https://uraltravel.co.uk/flights/dhaka-madinah",
+      "title": "Flights from Dhaka to Madinah (Saudi Arabia) 2026 | URAL",
+      "h1": "Flights from Dhaka (DAC) to Madinah (MED)",
+      "bodySha256": "35fed9fe86dc7750c82486602c911aa8e3447130ef70af2a2db528f887359c6b"
+    },
+    {
+      "path": "/flights/dhaka-islamabad",
+      "canonical": "https://uraltravel.co.uk/flights/dhaka-islamabad",
+      "title": "Flights from Dhaka to Islamabad (Pakistan) 2026 | URAL",
+      "h1": "Flights from Dhaka (DAC) to Islamabad (ISB)",
+      "bodySha256": "e766c9e2f0adf7e961a842ab6444d83531a0ceea1ef9945f7613d9c5c04f8795"
+    },
+    {
+      "path": "/hotels",
+      "canonical": "https://uraltravel.co.uk/hotels",
+      "title": "Hotel Area Guides for Bangladesh Travelers | URAL",
+      "h1": "Hotel Area Guides for Trips from Bangladesh",
+      "bodySha256": "469248f78cfff7fb852357264ad790e624391dd4346a85aae44ce0b7fd853ec0"
+    },
+    {
+      "path": "/hotels/kathmandu-hotels",
+      "canonical": "https://uraltravel.co.uk/hotels/kathmandu-hotels",
+      "title": "Where to Stay in Kathmandu: Neighborhoods & Booking Checks | URAL",
+      "h1": "Where to Stay in Kathmandu: Neighborhoods & Booking Checklist",
+      "bodySha256": "d1d2253ed5bfbb999ed40cbe0afd1cf20629700205cd32e50aba60da5e48acfd"
+    },
+    {
+      "path": "/hotels/bangkok-hotels",
+      "canonical": "https://uraltravel.co.uk/hotels/bangkok-hotels",
+      "title": "Where to Stay in Bangkok: Neighborhoods & Booking Checks | URAL",
+      "h1": "Where to Stay in Bangkok: Neighborhoods & Booking Checklist",
+      "bodySha256": "d2eaac9339a4f658708efeccebe68354d9255ff0c9ce9e666aaa4615834dce3a"
+    },
+    {
+      "path": "/hotels/kuala-lumpur-hotels",
+      "canonical": "https://uraltravel.co.uk/hotels/kuala-lumpur-hotels",
+      "title": "Where to Stay in Kuala Lumpur: Area Comparison & Booking Checks | URAL",
+      "h1": "Where to Stay in Kuala Lumpur: Neighborhoods & Booking Checklist",
+      "bodySha256": "3b2c96028a496499af719247ac6af805b0876cb0a06935a77e918e8d43b6315f"
+    },
+    {
+      "path": "/hotels/dubai-hotels",
+      "canonical": "https://uraltravel.co.uk/hotels/dubai-hotels",
+      "title": "Where to Stay in Dubai: Deira, Downtown & Marina | URAL",
+      "h1": "Where to Stay in Dubai: Neighborhoods & Booking Checklist",
+      "bodySha256": "0022c3a66b4d3ce52ad3b3a045a9a6ed479e64ce7d3c2ba8c146e46511b48981"
+    },
+    {
+      "path": "/hotels/singapore-hotels",
+      "canonical": "https://uraltravel.co.uk/hotels/singapore-hotels",
+      "title": "Where to Stay in Singapore: Area Comparison & Booking Checks | URAL",
+      "h1": "Where to Stay in Singapore: Neighborhoods & Booking Checklist",
+      "bodySha256": "ff2392179380637c2ec40c674ca4b5e6904e4011a71672473833e8d40ff21d57"
+    },
+    {
+      "path": "/hotels/maldives-hotels",
+      "canonical": "https://uraltravel.co.uk/hotels/maldives-hotels",
+      "title": "Where to Stay in the Maldives: Local Islands & Resorts | URAL",
+      "h1": "Where to Stay in Malé & Maafushi: Neighborhoods & Booking Checklist",
+      "bodySha256": "eba77fe2e7d4fa7b8d2754337449425c0e7bbe69eebede28611f6a65465c2089"
+    },
+    {
+      "path": "/visa-free-countries",
+      "canonical": "https://uraltravel.co.uk/visa-free-countries",
+      "title": "Visa-Free Countries for a Bangladeshi Passport… | URAL",
+      "h1": "Visa-Free Countries for a Bangladeshi Passport (2026)",
+      "bodySha256": "3ed3ec99bd65091d1a5722fe4d20def8dbeeca70bafbfdcc19412a81a550493c"
+    },
+    {
+      "path": "/visa",
+      "canonical": "https://uraltravel.co.uk/visa",
+      "title": "Visa Guides for Bangladeshi Citizens | URAL",
+      "h1": "Visa Guides & Travel Document Checklists",
+      "bodySha256": "5c1c4f84eecb7973b20bc4fc1592b793c73a983cca0a57a9c11526a9d114bad2"
+    },
+    {
+      "path": "/visa/nepal-visa",
+      "canonical": "https://uraltravel.co.uk/visa/nepal-visa",
+      "title": "Nepal Visa for Bangladeshi Citizens | URAL",
+      "h1": "Nepal Visa Requirements for Bangladeshi Citizens",
+      "bodySha256": "c5ef23e9fe39836c749c669678b556884f434cffe3971adfa99b4778f94cbd45"
+    },
+    {
+      "path": "/visa/thailand-visa",
+      "canonical": "https://uraltravel.co.uk/visa/thailand-visa",
+      "title": "Thailand Visa from Bangladesh: Process & Documents | URAL",
+      "h1": "Thailand Visa Requirements for Bangladeshi Citizens",
+      "bodySha256": "f2d93b1c903704dbc83f3db813a50f5965af0b8e590038b2ff347732e046c37d"
+    },
+    {
+      "path": "/visa/malaysia-visa",
+      "canonical": "https://uraltravel.co.uk/visa/malaysia-visa",
+      "title": "Malaysia Visa from Bangladesh: eVisa & MDAC | URAL",
+      "h1": "Malaysia Visa Requirements for Bangladeshi Citizens",
+      "bodySha256": "0d87c5ef328d30087b76c6bd922d1e3b22302842ef7f602bf36c52d362af6c8c"
+    },
+    {
+      "path": "/visa/dubai-visa",
+      "canonical": "https://uraltravel.co.uk/visa/dubai-visa",
+      "title": "Dubai & UAE Visa from Bangladesh: Tourist eVisa | URAL",
+      "h1": "UAE Visa Requirements for Bangladeshi Citizens",
+      "bodySha256": "611d4e3da4188adfed5a97144456616f3413a708a8a316381fb280e33575a89c"
+    },
+    {
+      "path": "/visa/singapore-visa",
+      "canonical": "https://uraltravel.co.uk/visa/singapore-visa",
+      "title": "Singapore Visa from Bangladesh: Documents & Process | URAL",
+      "h1": "Singapore Visa Requirements for Bangladeshi Citizens",
+      "bodySha256": "e531591cdd5808e2dd88bbd29468439c1e8ba0ed5f80febe64ac90c91f7049ad"
+    },
+    {
+      "path": "/visa/maldives-visa",
+      "canonical": "https://uraltravel.co.uk/visa/maldives-visa",
+      "title": "Maldives Visa for Bangladeshi Citizens: VOA & IMUGA | URAL",
+      "h1": "Maldives Visa Requirements for Bangladeshi Citizens",
+      "bodySha256": "897a856f760490c91c85f69104ea4347813fcd9799e8ca597b64ad7e1e9ac91d"
+    },
+    {
+      "path": "/visa/saudi-arabia-visa",
+      "canonical": "https://uraltravel.co.uk/visa/saudi-arabia-visa",
+      "title": "Saudi Visa: Which Route Fits Your Passport (2026) | URAL",
+      "h1": "Saudi Arabia Visa Requirements for Bangladeshi Citizens",
+      "bodySha256": "cc9d0c8f1746b3550f02c64b07b71f4f2cfcd8473bfeb1a6c81274da6aeef55b"
+    },
+    {
+      "path": "/destinations",
+      "canonical": "https://uraltravel.co.uk/destinations",
+      "title": "Destination Guides from Bangladesh | URAL",
+      "h1": "Destination Guides from Bangladesh",
+      "bodySha256": "b32178e9c709bfd6910f541a1add527b82235c2ba6cacc141742ad587291548f"
+    },
+    {
+      "path": "/destinations/nepal-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/nepal-guide",
+      "title": "Nepal Destination Guide from Bangladesh: Kathmandu & Pokhara | URAL",
+      "h1": "Nepal Destination Guide from Bangladesh: Kathmandu & Pokhara",
+      "bodySha256": "fd14058ef95bd6adf6d927018cd538a6df77ddfb7e3739bc208a639c29775315"
+    },
+    {
+      "path": "/destinations/thailand-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/thailand-guide",
+      "title": "Bangkok Destination Guide from Bangladesh: Four-Day Plan | URAL",
+      "h1": "Bangkok Destination Guide from Bangladesh: Four-Day Plan",
+      "bodySha256": "310b899b653337525bee684084d0f7cddbcda1c5efc6d95f6879686305a0b370"
+    },
+    {
+      "path": "/destinations/malaysia-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/malaysia-guide",
+      "title": "Kuala Lumpur Itinerary from Bangladesh | URAL",
+      "h1": "Malaysia Tour Itinerary & Travel Plan from Bangladesh",
+      "bodySha256": "a253c6fbc41474ea1c77fd0cd5e584ffa83de6b126d33942d7984908729e0ab1"
+    },
+    {
+      "path": "/destinations/dubai-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/dubai-guide",
+      "title": "Dubai Destination Guide from Bangladesh: Four-Day Plan | URAL",
+      "h1": "Dubai Destination Guide from Bangladesh: Four-Day Plan",
+      "bodySha256": "1df06865e2122be2f8b6d76e25c36e30574331bacec511f1110fd03f25235a51"
+    },
+    {
+      "path": "/destinations/singapore-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/singapore-guide",
+      "title": "Singapore Destination Guide from Bangladesh: Four-Day Plan | URAL",
+      "h1": "Singapore Tour Itinerary & Travel Plan from Bangladesh",
+      "bodySha256": "b181220330e2fab3355a2992aa237b12f674c5dc7ea18895683bc118ac79b8ac"
+    },
+    {
+      "path": "/destinations/maldives-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/maldives-guide",
+      "title": "Maldives Destination Guide from Bangladesh: Island Planning | URAL",
+      "h1": "Maldives Destination Guide from Bangladesh: Island Planning",
+      "bodySha256": "080faf0c0cb2803f49f98b845b60d541592d8488655fafcd19102d46c668aa76"
+    },
+    {
+      "path": "/destinations/london-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/london-guide",
+      "title": "London Destination Guide from Bangladesh: Landmarks & Planning | URAL",
+      "h1": "London Destination Guide from Bangladesh: Landmarks & Planning",
+      "bodySha256": "05ad1e47bfec91a1f585bb95fdf16a8cc390651698658eb461563d2e51637b23"
+    },
+    {
+      "path": "/destinations/italy-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/italy-guide",
+      "title": "Italy Itinerary from Bangladesh: Rome, Milan & Venice | URAL",
+      "h1": "Italy Itinerary from Bangladesh: Rome, Milan & Venice",
+      "bodySha256": "2688d152734ac5b7488ef50f116a5c94e13428f206b6575fcdcb18be807cd632"
+    },
+    {
+      "path": "/destinations/paris-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/paris-guide",
+      "title": "Paris Itinerary from Bangladesh: Landmarks & Planning | URAL",
+      "h1": "Paris Itinerary from Bangladesh: Landmarks & Planning",
+      "bodySha256": "8ef3b5a5286f6e0bcb9c6de9bcf69f1cd76dc016942fdcd449dfcdcc7bbb3f5e"
+    },
+    {
+      "path": "/destinations/new-york-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/new-york-guide",
+      "title": "New York City Itinerary from Bangladesh: Landmarks & Planning | URAL",
+      "h1": "New York City Itinerary from Bangladesh: Landmarks & Planning",
+      "bodySha256": "9240fc5688ab1415089a25fd56ab13f579de8753656942f23cc7f67309c5f257"
+    },
+    {
+      "path": "/destinations/kashmir-guide",
+      "canonical": "https://uraltravel.co.uk/destinations/kashmir-guide",
+      "title": "Azad Kashmir Destination Guide from Bangladesh: Neelum Valley & Planning | URAL",
+      "h1": "Pakistan Tour Itinerary & Travel Plan from Bangladesh",
+      "bodySha256": "bf5ec4f244f19e823a703fb841d8500ed8fcb79928947c432ac476c99bda0dc9"
+    },
+    {
+      "path": "/costs",
+      "canonical": "https://uraltravel.co.uk/costs",
+      "title": "Trip Budget Guides: Six Destinations & Quote Planning | URAL",
+      "h1": "Trip Budget Guides",
+      "bodySha256": "29edb25a01179202ebeaccff6ab92e5d7a72728963008d9090fe32bd97bc7d47"
+    },
+    {
+      "path": "/costs/nepal-costs",
+      "canonical": "https://uraltravel.co.uk/costs/nepal-costs",
+      "title": "Nepal Trip Budget: Quotes, Hotels & Transport | URAL",
+      "h1": "Nepal Trip Budget Planning",
+      "bodySha256": "cec16ae86bcb08bd02ac9436724dafdb0a7cd22eeed78a4650b97e9eaf629e0e"
+    },
+    {
+      "path": "/costs/thailand-costs",
+      "canonical": "https://uraltravel.co.uk/costs/thailand-costs",
+      "title": "Thailand Trip Budget: Quotes & Cost Planning | URAL",
+      "h1": "Thailand Trip Budget Planning",
+      "bodySha256": "c4add90146d8ab83ffd5c17d70d04122afc1b72d724a73b0b8c0950b0f121ca9"
+    },
+    {
+      "path": "/costs/malaysia-costs",
+      "canonical": "https://uraltravel.co.uk/costs/malaysia-costs",
+      "title": "Malaysia Trip Budget: Quotes, Hotels & Transport | URAL",
+      "h1": "Malaysia Trip Budget Planning",
+      "bodySha256": "9fc873111ef3af2934bf6694629c43ca131479244becb01dffc9e45f4631c6aa"
+    },
+    {
+      "path": "/costs/dubai-costs",
+      "canonical": "https://uraltravel.co.uk/costs/dubai-costs",
+      "title": "Dubai Trip Budget: Quotes, Hotels & Transfers | URAL",
+      "h1": "Dubai, UAE Trip Budget Planning",
+      "bodySha256": "8bf6f488700b44531d8b82001622faf9c8b0a8f4fd60ef3c8f5761affdf4aad2"
+    },
+    {
+      "path": "/costs/singapore-costs",
+      "canonical": "https://uraltravel.co.uk/costs/singapore-costs",
+      "title": "Singapore Trip Budget: Quotes, Hotels & Activities | URAL",
+      "h1": "Singapore Trip Budget Planning",
+      "bodySha256": "83452ad22d43513c649da5e580878912f0714680489d78fd38b4a78f25449c12"
+    },
+    {
+      "path": "/costs/maldives-costs",
+      "canonical": "https://uraltravel.co.uk/costs/maldives-costs",
+      "title": "Maldives Trip Budget: Stays, Transfers & Quotes | URAL",
+      "h1": "Maldives Trip Budget Planning",
+      "bodySha256": "f95ae62760779a62aa2cc7db29a4f7cf145e9ad55df47165e47d5708035b6a8b"
+    },
+    {
+      "path": "/experiences",
+      "canonical": "https://uraltravel.co.uk/experiences",
+      "title": "Attraction & Activity Guides for Bangladesh Travelers | URAL",
+      "h1": "Europe, UK, USA & Asian Attraction Passes (Tiqets & Klook Hub)",
+      "bodySha256": "dda70b48b7ca53a290d9a7eb3e5b77f2f6c3858a21ed4e06544fb2d2a75f6b82"
+    },
+    {
+      "path": "/experiences/europe",
+      "canonical": "https://uraltravel.co.uk/experiences/europe",
+      "title": "Europe, UK & US Attraction Passes: Tiqets Guides | URAL",
+      "h1": "Europe, UK & US Attraction Passes & Timed-Entry Guides",
+      "bodySha256": "ec1ee39628816898c012178b726a98c0718161dd29c9ea3468228aad4398225b"
+    },
+    {
+      "path": "/experiences/asia",
+      "canonical": "https://uraltravel.co.uk/experiences/asia",
+      "title": "Asia & Dubai Attraction Passes & Activity Guides | URAL",
+      "h1": "Asia & Dubai Attraction Passes & Activity Guides",
+      "bodySha256": "32869875edc737e0600e136ed0dce2ecd996644fed1a049b7e61065489627a27"
+    },
+    {
+      "path": "/attractions",
+      "canonical": "https://uraltravel.co.uk/attractions",
+      "title": "European Attractions & Skip-the-Line Passes (Tiqets) | URAL",
+      "h1": "European Attractions & Skip-the-Line Passes (Tiqets)",
+      "bodySha256": "e74756e4fad6d36b8b8234e2ec0d19921cc6943cdfe73022bb5b24524ec63b30"
+    },
+    {
+      "path": "/attractions/london:992434",
+      "canonical": "https://uraltravel.co.uk/attractions/london:992434",
+      "title": "Warner Bros. Studio Tour London — The Making of… | URAL",
+      "h1": "Warner Bros. Studio Tour London — The Making of Harry Potter",
+      "bodySha256": "7de984302c12b4aa18e18979e8b975660a37a105b6ab702aaf695712514045da"
+    },
+    {
+      "path": "/attractions/london:975910",
+      "canonical": "https://uraltravel.co.uk/attractions/london:975910",
+      "title": "Lastminute.com London Eye: Fast-Track Boarding… | URAL",
+      "h1": "Lastminute.com London Eye: Fast-Track Boarding Ticket",
+      "bodySha256": "27286f137b1b696d176574839ce61c56b279e6497089dfec00a3d5895f299afe"
+    },
+    {
+      "path": "/attractions/london:974054",
+      "canonical": "https://uraltravel.co.uk/attractions/london:974054",
+      "title": "Tower of London & Crown Jewels Exhibition: Entry… | URAL",
+      "h1": "Tower of London & Crown Jewels Exhibition: Entry Ticket",
+      "bodySha256": "0119dea8a000d7818be38abba623bbf34f63eee53e156b93393e66f03486286d"
+    },
+    {
+      "path": "/attractions/london:974688",
+      "canonical": "https://uraltravel.co.uk/attractions/london:974688",
+      "title": "Chelsea FC Stamford Bridge / Arsenal Emirates… | URAL",
+      "h1": "Chelsea FC Stamford Bridge / Arsenal Emirates Stadium Tour (975045)",
+      "bodySha256": "1531b030491f394fd017639d5ba2c7232b1795c32e718215c964ef7d2ac7dd21"
+    },
+    {
+      "path": "/attractions/paris:997343",
+      "canonical": "https://uraltravel.co.uk/attractions/paris:997343",
+      "title": "Eiffel Tower: Skip The Ticket Line + 2nd Floor &… | URAL",
+      "h1": "Eiffel Tower: Skip The Ticket Line + 2nd Floor & Summit Option",
+      "bodySha256": "82c60b34086e933dcb4eac3a172c9fdc102dca5d166768516776da823ba9f538"
+    },
+    {
+      "path": "/attractions/paris:1065031",
+      "canonical": "https://uraltravel.co.uk/attractions/paris:1065031",
+      "title": "Louvre Museum: Priority Entry + Direct Access to… | URAL",
+      "h1": "Louvre Museum: Priority Entry + Direct Access to Mona Lisa (ML)",
+      "bodySha256": "dcc9beb5b7c65eae54a82844dc9c008bbeb439d547b7d44c1d85c6df2351601e"
+    },
+    {
+      "path": "/attractions/paris:973977",
+      "canonical": "https://uraltravel.co.uk/attractions/paris:973977",
+      "title": "Sightseeing Cruise On The Seine (Bateaux Parisiens… | URAL",
+      "h1": "Sightseeing Cruise On The Seine (Bateaux Parisiens / Mouches)",
+      "bodySha256": "ef2af964b82542dbec1fd8c568260ab971705d44688c3e04fad0eac23fd049e0"
+    },
+    {
+      "path": "/attractions/rome:973975",
+      "canonical": "https://uraltravel.co.uk/attractions/rome:973975",
+      "title": "Vatican Museums & Sistine Chapel: Official… | URAL",
+      "h1": "Vatican Museums & Sistine Chapel: Official Fast-Track Ticket",
+      "bodySha256": "0f1c07d9923bd9cb768a5e9c0b442a3a346396c5cdf4fb854ff1a53fc7636df5"
+    },
+    {
+      "path": "/attractions/rome:997640",
+      "canonical": "https://uraltravel.co.uk/attractions/rome:997640",
+      "title": "Colosseum, Gladiator Arena Floor, Roman Forum &… | URAL",
+      "h1": "Colosseum, Gladiator Arena Floor, Roman Forum & Palatine Hill + Audio Guide",
+      "bodySha256": "0b7666641098894369d288ef28d4d06828057ac7b222a3e0eb323646588c18cc"
+    },
+    {
+      "path": "/attractions/new-york:1023033",
+      "canonical": "https://uraltravel.co.uk/attractions/new-york:1023033",
+      "title": "SUMMIT One Vanderbilt: General & Sunset Admission —… | URAL",
+      "h1": "SUMMIT One Vanderbilt: General & Sunset Admission",
+      "bodySha256": "9f74e132ba4f98baab909ec0215ba961effd6662579fd62c74ffea08fee0d56b"
+    },
+    {
+      "path": "/attractions/new-york:974085",
+      "canonical": "https://uraltravel.co.uk/attractions/new-york:974085",
+      "title": "Statue of Liberty & Ellis Island: Official Ferry +… | URAL",
+      "h1": "Statue of Liberty & Ellis Island: Official Ferry + Guidebook",
+      "bodySha256": "573360fa60784691d580046404dc4edad74969875fe4db300e4067649f584854"
+    },
+    {
+      "path": "/attractions/new-york:1002293",
+      "canonical": "https://uraltravel.co.uk/attractions/new-york:1002293",
+      "title": "Official New York CityPASS® (5 Iconic Attractions… | URAL",
+      "h1": "Official New York CityPASS® (5 Iconic Attractions Bundle)",
+      "bodySha256": "1bc614d7022affde95680c2cbd62eeaae9e68c4024d3b3bed9fe79cdfe39290d"
+    },
+    {
+      "path": "/attractions/amsterdam:974079",
+      "canonical": "https://uraltravel.co.uk/attractions/amsterdam:974079",
+      "title": "Van Gogh Museum: Official Timed-Entry Ticket —… | URAL",
+      "h1": "Van Gogh Museum: Official Timed-Entry Ticket",
+      "bodySha256": "308a4269771d0d6ff421ceb5169b49ff8018d39954cd946daa65368fd8d52212"
+    },
+    {
+      "path": "/attractions/milan:1032004",
+      "canonical": "https://uraltravel.co.uk/attractions/milan:1032004",
+      "title": "Da Vinci’s Last Supper: Skip-the-Line Guided Tour —… | URAL",
+      "h1": "Da Vinci’s Last Supper: Skip-the-Line Guided Tour",
+      "bodySha256": "c1ec85aa490feabd90986a634a95390db6017aa39e9c2cee1a21c5c1551c9534"
+    },
+    {
+      "path": "/attractions/milan:976045",
+      "canonical": "https://uraltravel.co.uk/attractions/milan:976045",
+      "title": "The Duomo di Milano, Rooftops & Duomo Museum: Fast… | URAL",
+      "h1": "The Duomo di Milano, Rooftops & Duomo Museum: Fast Track",
+      "bodySha256": "90a2523cbba2a81d59d68fc6c0d4acd52bf0780ef17a7ff6cf7f0e641b489a9e"
+    },
+    {
+      "path": "/attractions/venice:1092565",
+      "canonical": "https://uraltravel.co.uk/attractions/venice:1092565",
+      "title": "Doge’s Palace & St. Mark’s Basilica: Skip-the-Line… | URAL",
+      "h1": "Doge’s Palace & St. Mark’s Basilica: Skip-the-Line + Basilica Terrace",
+      "bodySha256": "3731e3a2a84d96559d966ece35136b551c5126c61bd43f971d350682f26fe547"
+    },
+    {
+      "path": "/attractions/florence:974170",
+      "canonical": "https://uraltravel.co.uk/attractions/florence:974170",
+      "title": "Uffizi Gallery: Official Reserved Entrance +… | URAL",
+      "h1": "Uffizi Gallery: Official Reserved Entrance + Digital Audio Guide",
+      "bodySha256": "78fb54ff0b9b781e27b0f87887014cd98a367d245c170ebb50ac8d957811f3c5"
+    },
+    {
+      "path": "/attractions/lisbon:1025946",
+      "canonical": "https://uraltravel.co.uk/attractions/lisbon:1025946",
+      "title": "Sintra, Pena Palace & Quinta da Regaleira: Full-Day… | URAL",
+      "h1": "Sintra, Pena Palace & Quinta da Regaleira: Full-Day Guided Trip from Lisbon",
+      "bodySha256": "83f96d118e32955aced99c81ecbbe7ff77a4aa08d501a864f028b02cb6e46dd7"
+    },
+    {
+      "path": "/kkday-hotels",
+      "canonical": "https://uraltravel.co.uk/kkday-hotels",
+      "title": "KKday Hotel & Stay Deals for Bangladeshi Travelers | URAL",
+      "h1": "KKday Hotel & Stay Deals",
+      "bodySha256": "345048de46861434a983ce5274ed8be6319d070b1c9e4d1ce7e1cfd905e41197"
+    },
+    {
+      "path": "/tools",
+      "canonical": "https://uraltravel.co.uk/tools",
+      "title": "Travel Tools: Trip Cost Estimator, Currency & Checklists | URAL",
+      "h1": "Travel Tools",
+      "bodySha256": "f9bb4aab724e3c2814300fcdf0576c5baf09ee66eba19c4a550259b0d065f05b"
+    },
+    {
+      "path": "/tools/currency-converter",
+      "canonical": "https://uraltravel.co.uk/tools/currency-converter",
+      "title": "Currency Converter: Dated BDT Reference Rates | URAL",
+      "h1": "Currency Converter",
+      "bodySha256": "24fb98a3e0fa0e82cd7c650811f3fe3bcb88e6db6ada0fcbad796c9af0f6e6f7"
+    },
+    {
+      "path": "/tools/budget-calculator",
+      "canonical": "https://uraltravel.co.uk/tools/budget-calculator",
+      "title": "Trip Cost Estimator: Quotes, Travellers & Hotel Nights | URAL",
+      "h1": "Trip Cost Estimator",
+      "bodySha256": "4bfb1728c6c5f444e7e7450124d0afbb9acbbefb254588a5dc144173b022301e"
+    },
+    {
+      "path": "/tools/packing-checklist",
+      "canonical": "https://uraltravel.co.uk/tools/packing-checklist",
+      "title": "Smart Packing Checklist for Flights from Dhaka | URAL",
+      "h1": "Smart Packing Checklist for Flights from Dhaka",
+      "bodySha256": "d3406185e29a3a54f71b8bc82651b15a5064ff1d73c713862ebbd6a29c6fc6b0"
+    },
+    {
+      "path": "/tools/flight-delay-claim",
+      "canonical": "https://uraltravel.co.uk/tools/flight-delay-claim",
+      "title": "Flight Disruption Claim Check & Passenger-Rights Guide | URAL",
+      "h1": "Flight Disruption Claim Check",
+      "bodySha256": "42b0492f35242477c28680d02484322e9e410cdc29e0bcbb3cb8ee79f661d3ce"
+    },
+    {
+      "path": "/tools/airport-codes",
+      "canonical": "https://uraltravel.co.uk/tools/airport-codes",
+      "title": "IATA Airport Codes Directory for Dhaka Travelers | URAL",
+      "h1": "IATA Airport Codes Directory for Dhaka Travelers",
+      "bodySha256": "e141e075336405a54f312a62aeb00a323d9e22e33959a3f9c34937372c246884"
+    },
+    {
+      "path": "/pre-departure",
+      "canonical": "https://uraltravel.co.uk/pre-departure",
+      "title": "Dhaka Airport (DAC) Pre-Departure Checklist & Helplines | URAL",
+      "h1": "Dhaka Airport (DAC) Pre-Departure Checklist & Traveler Emergency Hub",
+      "bodySha256": "8be4f9b854b67e0dc9188abb1d435f48606fdb6d7619102cfc1477f20c17a9fc"
+    },
+    {
+      "path": "/resources",
+      "canonical": "https://uraltravel.co.uk/resources",
+      "title": "Official Travel Sources: Visa, Hajj & Airline Sites | URAL",
+      "h1": "Official Travel Sources: Government, Visa, Hajj and Airline Websites",
+      "bodySha256": "a3d78f0d1f9d17c320ee5c6ed09217d5bf23016afe48a405f0f51cf396f9dc6d"
+    },
+    {
+      "path": "/glossary",
+      "canonical": "https://uraltravel.co.uk/glossary",
+      "title": "Hajj, Umrah, Visa & Flight Terms Explained | URAL",
+      "h1": "Hajj, Umrah and Travel Terms in Plain Words",
+      "bodySha256": "6e9b413ff13e7b073384b1c0d6d8091ec65a8b488c96282499f3aae1fa4e443f"
+    },
+    {
+      "path": "/sitemap",
+      "canonical": "https://uraltravel.co.uk/sitemap",
+      "title": "Complete URAL Travel Site Directory & Guide Index | URAL",
+      "h1": "Complete URAL Travel Site Directory & Guide Index",
+      "bodySha256": "4a97693859cb1065f54d11a82379000096ec7f6fd3d249078a7b79e5681aec35"
+    },
+    {
+      "path": "/contact",
+      "canonical": "https://uraltravel.co.uk/contact",
+      "title": "Contact URAL — Travel Information Desk in Dhaka | URAL",
+      "h1": "Contact URAL — Travel Information Desk (+8801784385335)",
+      "bodySha256": "812f2c75e0429723b3c5d4ff5596879fbfa21396b9a1f06f3b76e017ff70c09c"
+    },
+    {
+      "path": "/partners",
+      "canonical": "https://uraltravel.co.uk/partners",
+      "title": "The Partners Behind the Booking Links | URAL",
+      "h1": "The partners behind the booking links",
+      "bodySha256": "e675b438e9e0014c80d56a015b56ec7b6e0ed849d26d321e28ae5991f502e5d3"
+    },
+    {
+      "path": "/visa-assistance",
+      "canonical": "https://uraltravel.co.uk/visa-assistance",
+      "title": "Visa Application Assistance Through eVisas | URAL",
+      "h1": "Visa application assistance, and where URAL's role ends",
+      "bodySha256": "f68abda32aab19c96aec1d8db3fbe388b2d30d1b841279f6d40b57ccf44ffadd"
+    },
+    {
+      "path": "/about",
+      "canonical": "https://uraltravel.co.uk/about",
+      "title": "About URAL Travel Intelligence | Farhan Momen, Founder & Travel Editor",
+      "h1": "Travel Intelligence. Not a Travel Agency.",
+      "bodySha256": "43b5a770b2bf201688834c8567886ce3919e9f55381affdb1a9693055a9011dd"
+    },
+    {
+      "path": "/privacy",
+      "canonical": "https://uraltravel.co.uk/privacy",
+      "title": "Privacy & Cookie Policy | URAL Travel Intelligence",
+      "h1": "Privacy & Cookie Policy — URAL Travel Intelligence",
+      "bodySha256": "3de4ab2fd9961058e1ad10da2858270827fe8ab35c3a75cc43499a4ba255d506"
+    },
+    {
+      "path": "/blog",
+      "canonical": "https://uraltravel.co.uk/blog",
+      "title": "Bangladesh Travel Blog: Visa, Umrah & BDT Guides | URAL",
+      "h1": "Travel Guides, Umrah Preparation & Outbound Intelligence for Bangladesh (2026)",
+      "bodySha256": "c3915b91496701c2e98061bd7e6a1949921da36bdf6e12e25467af30139ae7dd"
+    },
+    {
+      "path": "/blog/cheap-flight-booking-hacks-dhaka",
+      "canonical": "https://uraltravel.co.uk/blog/cheap-flight-booking-hacks-dhaka",
+      "title": "Cheap Flights from Dhaka: Booking Tips | URAL",
+      "h1": "Five Flight-Booking Checks from Dhaka: Dates, Airports, Baggage & Terms",
+      "bodySha256": "3846cc76c894bbafe003bbfcae1ab16360d9829d764deb1fb679a4c7d645054f"
+    },
+    {
+      "path": "/blog/nepal-vs-thailand-first-trip",
+      "canonical": "https://uraltravel.co.uk/blog/nepal-vs-thailand-first-trip",
+      "title": "Nepal vs Thailand: Best First Trip from Bangladesh | URAL",
+      "h1": "Nepal vs Thailand: Which is the Best First Country to Visit for Bangladeshis?",
+      "bodySha256": "22e14d6ad19ddeecae04687ac4c8381df851a0bf86bac029b7e6807dde8adbc1"
+    },
+    {
+      "path": "/blog/hotel-savings-guide-bangkok-kl-dubai",
+      "canonical": "https://uraltravel.co.uk/blog/hotel-savings-guide-bangkok-kl-dubai",
+      "title": "Compare Hotel Areas and Booking Terms in Bangkok, Kuala Lumpur & Dubai | URAL",
+      "h1": "How to Compare Hotel Areas and Booking Terms in Bangkok, Kuala Lumpur & Dubai",
+      "bodySha256": "3961e2a3f681c57147df9dd04dda5d8a7288c8aa7d4a13787daa93d1dfb72052"
+    },
+    {
+      "path": "/blog/halal-food-guide-bangkok-bangladesh",
+      "canonical": "https://uraltravel.co.uk/blog/halal-food-guide-bangkok-bangladesh",
+      "title": "Halal Food Guide in Bangkok for Bangladeshis | URAL",
+      "h1": "Where to Eat Halal Food in Bangkok: A Complete Guide for Bangladeshi Travelers",
+      "bodySha256": "b624fdc52162da19cdd8bf7080991289a10440726b97f0b8bec1e027fc040795"
+    },
+    {
+      "path": "/blog/nepal-pokhara-itinerary-bangladesh",
+      "canonical": "https://uraltravel.co.uk/blog/nepal-pokhara-itinerary-bangladesh",
+      "title": "Kathmandu–Pokhara Itinerary from Bangladesh | URAL",
+      "h1": "Kathmandu to Pokhara: A 5-Day Nepal Itinerary for Bangladeshis (With Costs in BDT)",
+      "bodySha256": "25a63a1a09be18f9ed468fbaf8f856f2bf0e3e2a760ed78c01a46324598330ca"
+    },
+    {
+      "path": "/blog/dual-currency-card-endorsement-bangladesh",
+      "canonical": "https://uraltravel.co.uk/blog/dual-currency-card-endorsement-bangladesh",
+      "title": "Dual-Currency Card Endorsement in Bangladesh | URAL",
+      "h1": "How to Get Dual-Currency Card Endorsement in Bangladesh (2026 Passport Dollar Endorsement Guide)",
+      "bodySha256": "c5a399ac3afc1ae165e7ed33275510093edbe114b1a660d29245f98978807b18"
+    },
+    {
+      "path": "/blog/maldives-budget-trip-bangladesh-maafushi",
+      "canonical": "https://uraltravel.co.uk/blog/maldives-budget-trip-bangladesh-maafushi",
+      "title": "Maldives Budget Trip from Bangladesh: Maafushi | URAL",
+      "h1": "Maldives on a Budget from Dhaka: Maafushi Local Island vs. Private Resort Guide",
+      "bodySha256": "725f250e54e014a9e01bcde647e24c18df1d62effa961e92a5028506794bce2d"
+    },
+    {
+      "path": "/blog/singapore-visa-guide-bangladesh-agents",
+      "canonical": "https://uraltravel.co.uk/blog/singapore-visa-guide-bangladesh-agents",
+      "title": "Singapore Visa from Bangladesh: Application Guide | URAL",
+      "h1": "Singapore Tourist Visa from Bangladesh (2026): Authorized Agents, LOI V39A & Checklist",
+      "bodySha256": "493515409c45dbc7d97686f9d36fa97b68be14c914f321c016d3fd1bc92f396d"
+    },
+    {
+      "path": "/blog/top-budget-family-destinations-from-dhaka",
+      "canonical": "https://uraltravel.co.uk/blog/top-budget-family-destinations-from-dhaka",
+      "title": "Family Trips from Dhaka: Destination Ideas & Budgets | URAL",
+      "h1": "Six Family Destinations from Dhaka: Entry, Travel Pace & Budget Checks",
+      "bodySha256": "5f8eeb141b4adf6762bef91feac5ed88b0ae431c4387ad5c2376d5da4b58a7d4"
+    },
+    {
+      "path": "/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
+      "canonical": "https://uraltravel.co.uk/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
+      "title": "Dhaka Airport Immigration Checklist for Travelers | URAL",
+      "h1": "Dhaka Airport (DAC) Outbound Immigration Checklist 2026: NOC, GO, Return Ticket & First-Time Flyer Rules",
+      "bodySha256": "efbcb6a0695f7fb239fe081962f1e297125eb18f69e08d459da0cda8815cc3cf"
+    },
+    {
+      "path": "/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+      "canonical": "https://uraltravel.co.uk/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+      "title": "DIY Umrah from Bangladesh: Cost, Visa & Nusuk | URAL",
+      "h1": "DIY Umrah from Bangladesh: Visa Routes, Nusuk Steps & Budget Checks",
+      "bodySha256": "a1fd6b0051cbcdce8d7f8ffd1b65c42b1499f0d372631db6c803202d71a1ba5e"
+    },
+    {
+      "path": "/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+      "canonical": "https://uraltravel.co.uk/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+      "title": "Makkah & Madinah Hotel Zones & Haramain Train | URAL",
+      "h1": "Makkah & Madinah Hotels: Access Checks and Haramain Train Guide (2026)",
+      "bodySha256": "c8c42600dca38f60355358f8e2f79ce834cd2c26adb468a8f78554a94352aee8"
+    },
+    {
+      "path": "/blog/hajj-registration-bangladesh-government-vs-private-package-cost",
+      "canonical": "https://uraltravel.co.uk/blog/hajj-registration-bangladesh-government-vs-private-package-cost",
+      "title": "Hajj Registration in Bangladesh: Process & Packages | URAL",
+      "h1": "Hajj Registration from Bangladesh for 2027: Status, Official Portal & Package Costs",
+      "bodySha256": "054f3b013640a583e988ae462cd9a22f0a2addcd3fcc2b62375465f43575f2bb"
+    },
+    {
+      "path": "/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
+      "canonical": "https://uraltravel.co.uk/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
+      "title": "Umrah with Elderly Parents: Wheelchair & Mobility Guide | URAL",
+      "h1": "Umrah with Elderly Parents from Bangladesh: Airline Wheelchair, Haram Mobility & Medical Preparation",
+      "bodySha256": "3542ba15a1de93860515a32cd254cfe3afc102784fc59b104e2e56b7270763c9"
+    },
+    {
+      "path": "/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
+      "canonical": "https://uraltravel.co.uk/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
+      "title": "96-Hour Saudi Stopover Visa for Bangladeshis | URAL",
+      "h1": "96-Hour Saudi Stopover from Bangladesh: Eligibility, Booking & Umrah",
+      "bodySha256": "a3f20b3095391a6681a943106222eee97e27fdb2ca30e477bee4c6154ec8cb95"
+    },
+    {
+      "path": "/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+      "canonical": "https://uraltravel.co.uk/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+      "title": "Nusuk App & Saudi Visa Bio Guide for Bangladesh | URAL",
+      "h1": "Nusuk & Saudi Visa Bio for Bangladeshis: Registration, Biometrics and Rawdah Permits",
+      "bodySha256": "d9da3e696ceadb9019c275d5bcaa73eee40b4d39ed6c952f21fa5d8856ac6d40"
+    },
+    {
+      "path": "/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
+      "canonical": "https://uraltravel.co.uk/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
+      "title": "Umrah for Women: Visa, Rawdah & Religious Guidance | URAL",
+      "h1": "Umrah for Bangladeshi Women: Mahram, Visa, Rawdah & Ihram Checks (2026)",
+      "bodySha256": "bee0c900a2ebab5814aada00809a63e971f7e6343c1521c68491897ce19c55b5"
+    },
+    {
+      "path": "/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
+      "canonical": "https://uraltravel.co.uk/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
+      "title": "Dhaka–Jeddah/Madinah Flight Planning & Baggage | URAL",
+      "h1": "Dhaka–Jeddah/Madinah Flights: Open-Jaw, Baggage & Quote Checks (2026)",
+      "bodySha256": "c2c1c9517c42ac087dee3020b4bfb49749f467e591e719440e266b1746e8d863"
+    },
+    {
+      "path": "/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
+      "canonical": "https://uraltravel.co.uk/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
+      "title": "Ramadan 1448 Umrah Dates & I'tikaf Eligibility | URAL",
+      "h1": "Ramadan 1448 Umrah & I&#x27;tikaf Guide from Bangladesh (2027): Dates, Season Deadlines and Who Can Register",
+      "bodySha256": "0b4df69191805cded0a745029b37118e9dab03fee218d3a8f072bfc20fcb6ce3"
+    },
+    {
+      "path": "/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+      "canonical": "https://uraltravel.co.uk/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+      "title": "Ihram & Miqat Rules: Dhaka to Jeddah Flights | URAL",
+      "h1": "Ihram & Miqat Rules for Flights from Bangladesh (2026): Direct to Jeddah, Gulf Transit or Madinah First",
+      "bodySha256": "9ee17269e147475c3473343320c01aaa5a5470e988f35e1bf546ee6f1766edd4"
+    },
+    {
+      "path": "/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
+      "canonical": "https://uraltravel.co.uk/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
+      "title": "Zamzam, Dates & Gold Limits for Dhaka Arrivals | URAL",
+      "h1": "Zamzam, Dates & Gold: What You Can Actually Bring Back to Bangladesh (2026)",
+      "bodySha256": "9484f57400b852b1a8be36351a88980c4140d5e85f737920f033f9d2db38d5dd"
+    },
+    {
+      "path": "/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals",
+      "canonical": "https://uraltravel.co.uk/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals",
+      "title": "Bangladeshi & Pakistani Food in Makkah & Madinah | URAL",
+      "h1": "Bangladeshi & Pakistani Food in Makkah & Madinah (2026): Where to Eat and How to Budget Honestly",
+      "bodySha256": "8301e76c34dc6ef16aabae669c4e3714e372a65a595c3a967eab0c4dd7757a2f"
+    },
+    {
+      "path": "/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
+      "canonical": "https://uraltravel.co.uk/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
+      "title": "Makkah, Madinah, Badr & Taif Ziyarah Guide | URAL",
+      "h1": "Makkah, Madinah, Badr & Taif Ziyarah Guide (2026): Verified Sites, Opening Hours and How to Book a Car Honestly",
+      "bodySha256": "1c15cc5f9efd376544a08a1a5992f5d8dd173b4e8447ee87179672c9021c60f4"
+    },
+    {
+      "path": "/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide",
+      "canonical": "https://uraltravel.co.uk/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide",
+      "title": "Umrah + Dubai 10-Day Combo Trip from Dhaka | URAL",
+      "h1": "Umrah + Dubai 10-Day Combo Trip from Dhaka (2026): How to Combine Makkah, Madinah & UAE on One Multi-City Ticket",
+      "bodySha256": "f0025baadb516ef786389d2d2b901cd4704191413c16c3f672c38af4f9cef6cb"
+    },
+    {
+      "path": "/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
+      "canonical": "https://uraltravel.co.uk/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
+      "title": "Abu Dhabi Sheikh Zayed Mosque Day Trip from Dubai | URAL",
+      "h1": "Abu Dhabi Sheikh Zayed Grand Mosque, Qasr Al Watan & Louvre Day Trip Guide from Dubai (2026 BDT Costs)",
+      "bodySha256": "4fe93794905ab7eee5bdb549b065e3c8c4881e7edea1c7e1c8fe7b70ff50c61d"
+    },
+    {
+      "path": "/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
+      "canonical": "https://uraltravel.co.uk/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
+      "title": "Malaysia Islamic Heritage & Putrajaya Family Guide | URAL",
+      "h1": "Malaysia Islamic Heritage & Halal Family Trail (2026): Putrajaya Pink Mosque, Islamic Arts Museum & KLCC Guide",
+      "bodySha256": "34d5a9e68c9bf0da2935607c05376ff2cb2a49e0773df6724b68c25a8428debf"
+    },
+    {
+      "path": "/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
+      "canonical": "https://uraltravel.co.uk/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
+      "title": "Europe, UK & USA Attraction Passes from Bangladesh | URAL",
+      "h1": "Europe, UK & USA Sightseeing and Saudi Visa Planning for Bangladeshi Travelers",
+      "bodySha256": "68b327cbac689fd8fcb2baa83b40eccc9cb0f0941d492a705972211bf1e65a48"
+    },
+    {
+      "path": "/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
+      "canonical": "https://uraltravel.co.uk/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
+      "title": "Islamic Dual-Currency Cards in Bangladesh for Umrah | URAL",
+      "h1": "Shariah-Compliant Dual-Currency Cards in Bangladesh: Riba-Free Travel Card Guide (2026)",
+      "bodySha256": "95304d3220c5a3b1cd871641f175daae9ce77338388be9c6e2aef43b0e7502ec"
+    },
+    {
+      "path": "/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
+      "canonical": "https://uraltravel.co.uk/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
+      "title": "RFCD vs Travel Quota: $300 Online Limit | URAL",
+      "h1": "RFCD Account vs. Travel Quota in Bangladesh (2026): How to Handle the $300 Online-Payment Limit",
+      "bodySha256": "c0204770589ec803d411d6215de1fd4cc834b2c119ae84f8652629eee2a06216"
+    },
+    {
+      "path": "/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
+      "canonical": "https://uraltravel.co.uk/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
+      "title": "Cash SAR/USD vs Dual-Currency Card Abroad | URAL",
+      "h1": "Cash SAR / USD vs. Dual-Currency Card Abroad: Choosing the Local Currency and Avoiding Money-Changer Traps",
+      "bodySha256": "d2b136d10115789b4187cdd54829bc5e4329bd8349defd5aaaace4d2b6fa2aa7"
+    },
+    {
+      "path": "/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
+      "canonical": "https://uraltravel.co.uk/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
+      "title": "Thailand e-Visa from Bangladesh: Documents & Bank Balance Guide | URAL",
+      "h1": "Thailand Official e-Visa from Bangladesh: Dhaka Documents, Bank Evidence & Application Checks (2026)",
+      "bodySha256": "b4f91d65d836141433a362a20450f7515bfa1afb781b5f3a9c810d5d08a973f6"
+    },
+    {
+      "path": "/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
+      "canonical": "https://uraltravel.co.uk/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
+      "title": "Malaysia eVisa & MDAC Guide for Bangladesh Travelers | URAL",
+      "h1": "Malaysia Online e-Visa & Free MDAC Arrival Card Guide for Bangladeshi Passports (2026 — KLIA Immigration Rules)",
+      "bodySha256": "f492969c4107718b45acc240e600eca5c89b4ef4cc0ac6c3e90f2cf49889c78d"
+    },
+    {
+      "path": "/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
+      "canonical": "https://uraltravel.co.uk/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
+      "title": "Fresh Bangladeshi Passport Travel History Guide | URAL",
+      "h1": "First International Trip on a Fresh Bangladeshi Passport (2026): The 3-Step Travel History Ladder",
+      "bodySha256": "cef881cc9a1fa08a93ec826d856f667058127b91b6547dbf2941bb1289d0e745"
+    },
+    {
+      "path": "/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide",
+      "canonical": "https://uraltravel.co.uk/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide",
+      "title": "Singapore 4-Day Budget Itinerary Under BDT 85,000 | URAL",
+      "h1": "Singapore Four-Day Family Itinerary: SimplyGo, Halal Dining & Sentosa",
+      "bodySha256": "1de272a294fd44174a2ebbf9dd6d56fa1743cdf7350bb81eaccc1fb89afcce3a"
+    },
+    {
+      "path": "/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh",
+      "canonical": "https://uraltravel.co.uk/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh",
+      "title": "Bumrungrad & Bangkok Hospital Guide from Bangladesh | URAL",
+      "h1": "Bumrungrad & Bangkok Hospital Medical Checkup Guide from Bangladesh (2026): Appointment Booking, BDT Costs & Halal Stays",
+      "bodySha256": "8ad1127c9cf2fc0547244bba31474b70e2514ddb353ffe1ca8f463a6214d1be4"
+    },
+    {
+      "path": "/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide",
+      "canonical": "https://uraltravel.co.uk/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide",
+      "title": "Travel eSIM & Insurance from Bangladesh: Oman & Schengen | URAL",
+      "h1": "Travel eSIM & Schengen Travel Insurance Guide for Bangladeshi Travelers (2026 — Umrah, Asia & Europe)",
+      "bodySha256": "5572fa340c5bc0e372adf24e3b0ffcf0c4f6805fb60221001e6f2de0b824e338"
+    },
+    {
+      "path": "/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost",
+      "canonical": "https://uraltravel.co.uk/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost",
+      "title": "Sri Lanka + Maldives 7-Day Combo Tour in BDT | URAL",
+      "h1": "Sri Lanka + Maldives 7-Day Combo Tour from Bangladesh (2026): Colombo ETA Visa, Kandy Scenic Train, Maafushi & BDT Budget",
+      "bodySha256": "4b3265cbe51fd488a6f1f43ba05955d8d92bcb91fe1dde8011604a4581e77f9d"
+    },
+    {
+      "path": "/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide",
+      "canonical": "https://uraltravel.co.uk/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide",
+      "title": "Bangladesh e-Passport Fees 2026: 48 vs 64 Pages, Renewal & RPO List | URAL",
+      "h1": "Bangladesh e-Passport Application & MRP Renewal Guide Across All 64 Districts (2026): 48 vs. 64 Pages, Fees & Police Verification",
+      "bodySha256": "9a9c594c02b8975b178db0007de90408e658fc6e10a4752edfe496219ab6d6b2"
+    },
+    {
+      "path": "/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
+      "canonical": "https://uraltravel.co.uk/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
+      "title": "Flight Delay, Cancellation & Baggage Compensation Guide | URAL",
+      "h1": "Flight Delay, Cancellation & Baggage Compensation Guide for Bangladeshi Flyers (2026)",
+      "bodySha256": "ac352059d0e68177aaa53c1ecd4351a1514657e80d1ef7d4db07155ec454a091"
+    },
+    {
+      "path": "/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla",
+      "canonical": "https://uraltravel.co.uk/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla",
+      "title": "Airlines from Dhaka: Routes & Baggage Guide | URAL",
+      "h1": "Top Airlines Operating from Dhaka (2026 Comparison): Biman, Saudia, Emirates, Qatar Airways, Singapore Airlines & US-Bangla Baggage Rules",
+      "bodySha256": "0b7dcf3961a95f93b1dfea0ac6d174800ef32017e17e4b17b8b96192d26c58d3"
+    },
+    {
+      "path": "/blog/bangladesh-travelers-iata-airport-codes-directory-guide",
+      "canonical": "https://uraltravel.co.uk/blog/bangladesh-travelers-iata-airport-codes-directory-guide",
+      "title": "The Ultimate Airport Codes Directory for… | URAL",
+      "h1": "The Ultimate Airport Codes Directory for Bangladeshi Travelers (2026 Guide)",
+      "bodySha256": "3dea56c1ac8e828bacca0a91852330534b97da84e768c10ac1a0175bc181abf1"
+    },
+    {
+      "path": "/blog/chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai",
+      "canonical": "https://uraltravel.co.uk/blog/chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai",
+      "title": "Chattogram to Dubai & Middle East Direct Flights… | URAL",
+      "h1": "Chattogram to Dubai & Middle East Direct Flights (2026): CGP to DXB Schedules, Fares & Shah Amanat Rules",
+      "bodySha256": "1c5733b2c2d8373e85b20586529652986692efbd63d838f00754dcf5a03c3c44"
+    },
+    {
+      "path": "/blog/havana-cuba-travel-guide-bangladesh",
+      "canonical": "https://uraltravel.co.uk/blog/havana-cuba-travel-guide-bangladesh",
+      "title": "Havana, Cuba Travel Guide from Dhaka: Classic Cars,… | URAL",
+      "h1": "Havana, Cuba Travel Guide from Dhaka: Classic Cars, Old Havana & the Gran Teatro (2026)",
+      "bodySha256": "4998b74ed22265169aaa67721d5f1574d3d46b9bd1cfc46345979c1d7d3f9161"
+    },
+    {
+      "path": "/blog/chefchaouen-morocco-travel-guide-bangladesh",
+      "canonical": "https://uraltravel.co.uk/blog/chefchaouen-morocco-travel-guide-bangladesh",
+      "title": "Chefchaouen, Morocco Travel Guide from Dhaka:… | URAL",
+      "h1": "Chefchaouen, Morocco Travel Guide from Dhaka: Exploring Morocco&#x27;s Blue City (2026)",
+      "bodySha256": "fb5e047518cae803a96adcfc7160a40c8e3aaf2ffca236066c5ad1c832087a4f"
+    },
+    {
+      "path": "/blog/travel-creator-resources",
+      "canonical": "https://uraltravel.co.uk/blog/travel-creator-resources",
+      "title": "Travel Creator Resources: The Tools We Actually Use… | URAL",
+      "h1": "Travel Creator Resources: The Tools We Actually Use (2026)",
+      "bodySha256": "e938ba5116fe8ed625a42d7b34a3c968ec034aafaf73c1bbc5d35928079bb58e"
+    },
+    {
+      "path": "/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
+      "canonical": "https://uraltravel.co.uk/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
+      "title": "Dhaka to Kolkata by Train & Bus: Benapole Border… | URAL",
+      "h1": "Dhaka to Kolkata by Train & Bus: Benapole Border Crossing, Maitree Express Status & Complete BDT Cost Guide (2026)",
+      "bodySha256": "e0927102f2a01efcbfc4ed5b5e9038d4cdec4a66f9516922a4667cba20feacc9"
+    },
+    {
+      "path": "/blog/tawaf-sai-seven-circuits-step-by-step-guide",
+      "canonical": "https://uraltravel.co.uk/blog/tawaf-sai-seven-circuits-step-by-step-guide",
+      "title": "Tawaf and Sa'i: Seven Circuits, Counted Right (2026) | URAL",
+      "h1": "Tawaf and Sa&#x27;i: Seven Circuits, Counted Right (2026)",
+      "bodySha256": "4cade0c72a900c8a14bd3d661d4d9a1497b7482b14ca38a9fc25299332febfa5"
+    },
+    {
+      "path": "/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day",
+      "canonical": "https://uraltravel.co.uk/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day",
+      "title": "Hajj Rites Day by Day: Arafah, Mina, Jamarat (2026) | URAL",
+      "h1": "Hajj Rites Day by Day: Arafah, Mina, Jamarat (2026)",
+      "bodySha256": "b50a8e3a924707654e4dcf760c3e27ef923317cda6e7e6d62954000b61dd876e"
+    },
+    {
+      "path": "/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh",
+      "canonical": "https://uraltravel.co.uk/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh",
+      "title": "Cox's Bazar Travel Guide 2026: Flights, Train, Hotels & Costs",
+      "h1": "Cox&#x27;s Bazar Travel Guide 2026: Flights, Train, Hotels & Costs for Bangladeshi Travelers",
+      "bodySha256": "0caebe326721221a1e57bd35385d293c081a610b889037a3b3b766b2702ff38e"
+    },
+    {
+      "path": "/blog/kathmandu-to-coxs-bazar-flights-route-status-booking",
+      "canonical": "https://uraltravel.co.uk/blog/kathmandu-to-coxs-bazar-flights-route-status-booking",
+      "title": "Kathmandu–Cox's Bazar Flights: No Direct Route Yet | URAL",
+      "h1": "Kathmandu to Cox&#x27;s Bazar Flights (2026): No Direct Route Yet — Dhaka Connection, Fares & Visa Guide",
+      "bodySha256": "2a49a7e724f6ca01a03c3b5555b41cfbff1dd5e7a3eace138228aec13e8250cf"
+    },
+    {
+      "path": "/blog/can-you-make-money-travel-affiliate-marketing-ural-experiment",
+      "canonical": "https://uraltravel.co.uk/blog/can-you-make-money-travel-affiliate-marketing-ural-experiment",
+      "title": "Can You Make Money With Travel Affiliate Marketing? An Honest Experiment",
+      "h1": "Can You Really Make Money With Travel Affiliate Marketing? I&#x27;m Building Ural Travel to Find Out",
+      "bodySha256": "5bc826162001fef096fbc7d24989d3a6c3d7eda0e759c54f1427aa0913ad215d"
+    },
+    {
+      "path": "/blog/turn-travel-experience-into-income-without-a-website",
+      "canonical": "https://uraltravel.co.uk/blog/turn-travel-experience-into-income-without-a-website",
+      "title": "Turn Travel Stories Into Helpful Guides — and Maybe Income",
+      "h1": "Your Travel Stories Can Take Other People Around the World — And They Can Earn Too",
+      "bodySha256": "f8359a23899efda2f26c4d88073b2e044d741611e449ae29b6419e96618e2b0e"
+    },
+    {
+      "path": "/blog/nusuk-hotel-brn-rawdah-gate-guide",
+      "canonical": "https://uraltravel.co.uk/blog/nusuk-hotel-brn-rawdah-gate-guide",
+      "title": "Nusuk Hotel BRN and Rawdah Permits: What Opens the Gate (2026)",
+      "h1": "Nusuk Hotel BRN and Rawdah Permits: What Actually Opens the Gate",
+      "bodySha256": "77e4f447f152a8904aad8b9272d17f3451385f3497fb8704fffdfa9fe11da3a6"
+    },
+    {
+      "path": "/blog/makkah-hotel-sectors-abraj-al-bait-jabal-omar",
+      "canonical": "https://uraltravel.co.uk/blog/makkah-hotel-sectors-abraj-al-bait-jabal-omar",
+      "title": "Makkah Hotel Sectors Compared: Abraj Al-Bait vs Jabal Omar vs Shuttle Zones",
+      "h1": "Makkah Hotel Sectors: Abraj Al-Bait, Jabal Omar or a Shuttle Zone",
+      "bodySha256": "71c64b14c99a4963e26d56025c599c4aedda73fea5ca7a0e4ca6ff41914795e1"
+    },
+    {
+      "path": "/blog/where-to-stay-madinah-markazia-gate-guide",
+      "canonical": "https://uraltravel.co.uk/blog/where-to-stay-madinah-markazia-gate-guide",
+      "title": "Where to Stay in Madinah: Markazia Sectors and Gate Access (2026)",
+      "h1": "Where to Stay in Madinah: Markazia Sides and the Gate You Will Use",
+      "bodySha256": "af26368d98af6486c3a0d4b57ed9192b1eb080368918dc656660daf479f7b3c8"
+    },
+    {
+      "path": "/blog/makkah-budget-shuttle-hotels-prayer-timing",
+      "canonical": "https://uraltravel.co.uk/blog/makkah-budget-shuttle-hotels-prayer-timing",
+      "title": "Budget Makkah Hotels and Shuttles: The Pre-Adhan Timing Rule (2026)",
+      "h1": "Budget Hotels in Makkah: Making a Shuttle Work at Prayer Time",
+      "bodySha256": "4ac2870aee518d9bce829789e82fdc85179d4c3529e5dfeee08f101ce08ea372"
+    },
+    {
+      "path": "/blog/makkah-to-madinah-haramain-train-vs-bus-taxi",
+      "canonical": "https://uraltravel.co.uk/blog/makkah-to-madinah-haramain-train-vs-bus-taxi",
+      "title": "Makkah to Madinah Transport: Train vs VIP Bus vs Private Van (2026)",
+      "h1": "Makkah to Madinah: Haramain Train, VIP Bus or Private Van",
+      "bodySha256": "b1a311254977e23e1ae2494ebb655886e422a2163f3cc475515f0545748d2db7"
+    },
+    {
+      "path": "/blog/family-elderly-umrah-hotels-ground-access",
+      "canonical": "https://uraltravel.co.uk/blog/family-elderly-umrah-hotels-ground-access",
+      "title": "Family and Elderly Umrah Hotels: Ground Access and Quad Rooms (2026)",
+      "h1": "Family and Elderly Umrah Hotels: Ground Access and Real Quad Rooms",
+      "bodySha256": "4aebdb0414bcca688c5e41ba8d84c38d291ddd935cd1bc6907ecfebd28b8eb50"
+    },
+    {
+      "path": "/blog/makkah-hotel-walking-time-vs-map-distance",
+      "canonical": "https://uraltravel.co.uk/blog/makkah-hotel-walking-time-vs-map-distance",
+      "title": "Makkah Walking Times vs Map Distance: Real Room-to-Haram Transit (2026)",
+      "h1": "Makkah Walking Times: What Map Distance Does Not Tell You",
+      "bodySha256": "8768d051b18cc392da0861b12b628f88a6e0783638a958a51630c57bed18d925"
+    },
+    {
+      "path": "/blog/hajj-umrah-accommodation-guide-makkah-madinah",
+      "canonical": "https://uraltravel.co.uk/blog/hajj-umrah-accommodation-guide-makkah-madinah",
+      "title": "Hajj and Umrah Accommodation Guide: Makkah and Madinah (2026)",
+      "h1": "Hajj and Umrah Accommodation: How to Choose Where You Sleep",
+      "bodySha256": "d7526826b0179c616f01a1bd7ca760ccb47d3e698c8d7a01bffb9fa6848a89c0"
+    },
+    {
+      "path": "/blog/umrah-hajj-guide-united-kingdom-2026",
+      "canonical": "https://uraltravel.co.uk/blog/umrah-hajj-guide-united-kingdom-2026",
+      "title": "Umrah and Hajj from the UK (2026): Visas, Nusuk & ATOL",
+      "h1": "Umrah and Hajj from the UK: Visas, Nusuk and ATOL (2026)",
+      "bodySha256": "e22936c63ce18f667e2d2e227055599b934fb2b6d1fc3598096778ebfa35162a"
+    },
+    {
+      "path": "/blog/uk-umrah-packages-atol-operator-checks",
+      "canonical": "https://uraltravel.co.uk/blog/uk-umrah-packages-atol-operator-checks",
+      "title": "UK Umrah Packages (2026): ATOL Checks and Operator Vetting",
+      "h1": "UK Umrah Packages: ATOL, Operator Checks and What You Pay For (2026)",
+      "bodySha256": "962c21b9a00ba6bb57ab2932c144ee134ff35712f730679ff3e8f851383e1ed7"
+    },
+    {
+      "path": "/blog/uk-to-saudi-flights-umrah-direct-or-connecting",
+      "canonical": "https://uraltravel.co.uk/blog/uk-to-saudi-flights-umrah-direct-or-connecting",
+      "title": "UK to Saudi Flights for Umrah (2026): Direct Routes and Dated Fares",
+      "h1": "UK to Saudi Flights for Umrah: What Is Actually Direct From Heathrow, Manchester and Birmingham (2026)",
+      "bodySha256": "90c1c79ceb56616d36a34094a89cc36b2e401305bc3c35a8fa7c501df30ce175"
+    },
+    {
+      "path": "/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step",
+      "canonical": "https://uraltravel.co.uk/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step",
+      "title": "Umrah Visa for UK Passports (2026): ETA vs e-Visa vs Waiver",
+      "h1": "Umrah Visa on a UK Passport: ETA, e-Visa or Visa Waiver, Step by Step (2026)",
+      "bodySha256": "70a0b19fdcf814bf71c681b881b04587882e7600c32669404fedb70648b20aad"
+    },
+    {
+      "path": "/blog/hajj-2027-uk-dates-nusuk-registration-cost",
+      "canonical": "https://uraltravel.co.uk/blog/hajj-2027-uk-dates-nusuk-registration-cost",
+      "title": "Hajj 2027 From the UK: Dates, Registration and Costs",
+      "h1": "Hajj 2027 From the UK: Dates, Nusuk Hajj Registration and What a Place Really Costs",
+      "bodySha256": "5f296e2adf79871846f66d71e78443c3969a0a0de3b97f00bcf8bffbb7ee3a52"
+    },
+    {
+      "path": "/blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights",
+      "canonical": "https://uraltravel.co.uk/blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights",
+      "title": "Ramadan Umrah 2027 From the UK: Dates and Dated Fares",
+      "h1": "Ramadan Umrah 2027 From the UK: Dates, Dated Fares and How the Last Ten Nights Actually Work",
+      "bodySha256": "7a869d7a7f8717497dd9cd98ba483ece58ec8c2663078e02c81f67ccaf5cc03c"
+    },
+    {
+      "path": "/blog/madinah-first-uk-umrah-routings-open-jaw-stopover",
+      "canonical": "https://uraltravel.co.uk/blog/madinah-first-uk-umrah-routings-open-jaw-stopover",
+      "title": "Madinah First or Jeddah First? UK Umrah Routings Compared",
+      "h1": "Madinah First or Jeddah First: The Three UK Umrah Routings, Priced Against Each Other (2026)",
+      "bodySha256": "9f49b8ac36d87cb89368c43f1517523f4349aaf88dac2db435ff78cca87ea33e"
+    },
+    {
+      "path": "/bn/",
+      "canonical": "https://uraltravel.co.uk/",
+      "title": "Travel Intelligence: Global Flights, Hotels & eVisas | URAL",
+      "h1": "Plan Your TripFrom Anywhere",
+      "bodySha256": "3ea71ffab7c7d31aeb314928e2643f2aa18dc1e814ad07b1a16edd810d0932df"
+    },
+    {
+      "path": "/bn/umrah",
+      "canonical": "https://uraltravel.co.uk/bn/umrah",
+      "title": "বাংলাদেশ থেকে ওমরাহ খরচ: নিজে করুন গাইড ও নুসুক | URAL",
+      "h1": "বাংলাদেশ থেকে ওমরাহ খরচ: নিজে করুন গাইড ও নুসুক",
+      "bodySha256": "010c15b48ca3e3a482faaa447145a57c1b05fe2e009266252d316dd17578bcb5"
+    },
+    {
+      "path": "/bn/banking",
+      "canonical": "https://uraltravel.co.uk/bn/banking",
+      "title": "পাসপোর্টে ডলার এনডোর্সমেন্ট সীমা, ডুয়েল কারেন্সি কার্ড ও NOC | URAL",
+      "h1": "পাসপোর্টে ডলার এনডোর্সমেন্ট সীমা, ডুয়েল কারেন্সি কার্ড ও NOC",
+      "bodySha256": "d95cd4ed38cb2764c4666f3cf1ac7afb1912411cff47ecf2232ad74c23f86127"
+    },
+    {
+      "path": "/bn/flights",
+      "canonical": "https://uraltravel.co.uk/bn/flights",
+      "title": "ঢাকা থেকে ফ্লাইট: রুট, ভাড়া ও এয়ারলাইন্স | URAL",
+      "h1": "ঢাকা থেকে ফ্লাইট: রুট, ভাড়া ও এয়ারলাইন্স",
+      "bodySha256": "8472faa9cc87c403358c03eaeec3b690a601839244469be7bd7612ba9c7dfa10"
+    },
+    {
+      "path": "/bn/flights/dhaka-kathmandu",
+      "canonical": "https://uraltravel.co.uk/bn/flights/dhaka-kathmandu",
+      "title": "ঢাকা টু কাঠমান্ডু ফ্লাইট: ভাড়া ও রুট গাইড | URAL",
+      "h1": "ঢাকা → কাঠমান্ডু বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "8da57307c3136f45ec91549d2b872a6d5c2d875d9546cc150380da64cc08184d"
+    },
+    {
+      "path": "/bn/flights/ktm-dhaka",
+      "canonical": "https://uraltravel.co.uk/bn/flights/ktm-dhaka",
+      "title": "কাঠমান্ডু টু ঢাকা ফ্লাইট: ভাড়া ও রুট গাইড | URAL",
+      "h1": "কাঠমান্ডু → ঢাকা বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "8da8ceb70cda53f24b64ebf83ccb17d55d6b98bd9938a0b65a3e147e8cf89251"
+    },
+    {
+      "path": "/bn/flights/dhaka-bangkok",
+      "canonical": "https://uraltravel.co.uk/bn/flights/dhaka-bangkok",
+      "title": "ঢাকা টু ব্যাংকক ফ্লাইট: ভাড়া, এয়ারলাইন ও টিপস | URAL",
+      "h1": "ঢাকা → ব্যাংকক বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "ec7ff48851918ab638013e3d4a3a6f9637b341d65d71c9c0c6a39a90f900d73a"
+    },
+    {
+      "path": "/bn/flights/dhaka-kuala-lumpur",
+      "canonical": "https://uraltravel.co.uk/bn/flights/dhaka-kuala-lumpur",
+      "title": "ঢাকা টু কুয়ালালামপুর ফ্লাইট: ভাড়া ও এয়ারলাইন | URAL",
+      "h1": "ঢাকা → কুয়ালালামপুর বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "9fdaa23fd84504da512151dc4eaeb557b6ef3df598947396aef953ddfdc71b30"
+    },
+    {
+      "path": "/bn/flights/dhaka-dubai",
+      "canonical": "https://uraltravel.co.uk/bn/flights/dhaka-dubai",
+      "title": "ঢাকা টু দুবাই ফ্লাইট: টাকায় ভাড়া ও এয়ারলাইন | URAL",
+      "h1": "ঢাকা → দুবাই বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "81a51b8210bf94e250f8f9ad12ddb932588ed37151be065a6b53df95c9aa6598"
+    },
+    {
+      "path": "/bn/flights/dhaka-singapore",
+      "canonical": "https://uraltravel.co.uk/bn/flights/dhaka-singapore",
+      "title": "ঢাকা টু সিঙ্গাপুর ফ্লাইট: এয়ারলাইন ও টাকায় ভাড়া | URAL",
+      "h1": "ঢাকা → সিঙ্গাপুর বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "1a785bbe7a88cd2f7555677c434ad3c29728d55fe560fcf1669da592a5f53ad6"
+    },
+    {
+      "path": "/bn/flights/dhaka-maldives",
+      "canonical": "https://uraltravel.co.uk/bn/flights/dhaka-maldives",
+      "title": "ঢাকা টু মালদ্বীপ ফ্লাইট: সরাসরি ও ট্রানজিট ভাড়া | URAL",
+      "h1": "ঢাকা → মালে বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "998677016ac29a35efe7ed1d6f9d659165d8344a9a70d37ccf19c8417a890f41"
+    },
+    {
+      "path": "/bn/flights/dhaka-los-angeles",
+      "canonical": "https://uraltravel.co.uk/bn/flights/dhaka-los-angeles",
+      "title": "ঢাকা থেকে লস অ্যাঞ্জেলেস ফ্লাইট গাইড: ভাড়া। | URAL",
+      "h1": "ঢাকা → লস অ্যাঞ্জেলেস বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "5478731a3135de1f73c90b901100bbcfbcb0467459c86f39230676e776a71754"
+    },
+    {
+      "path": "/bn/flights/dhaka-madinah",
+      "canonical": "https://uraltravel.co.uk/bn/flights/dhaka-madinah",
+      "title": "ঢাকা থেকে মদিনা ফ্লাইট গাইড: ভাড়া, সময় ও ভিসা | URAL",
+      "h1": "ঢাকা → মদিনা বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "5a9cbaf8cc2838210dd6914a31969c4f47ea626750a5215f512939732fcde0da"
+    },
+    {
+      "path": "/bn/flights/dhaka-islamabad",
+      "canonical": "https://uraltravel.co.uk/bn/flights/dhaka-islamabad",
+      "title": "ঢাকা থেকে ইসলামাবাদ ফ্লাইট গাইড: ভাড়া, সময় ও ভিসা | URAL",
+      "h1": "ঢাকা → ইসলামাবাদ বিমান ভাড়া, সময় ও ভিসা গাইড",
+      "bodySha256": "eaccdb2e699698b0842f2f2b544a689f47f1f0406a405d31142442f2c51455af"
+    },
+    {
+      "path": "/bn/hotels",
+      "canonical": "https://uraltravel.co.uk/bn/hotels",
+      "title": "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড | URAL",
+      "h1": "বাংলাদেশি ভ্রমণকারীদের জন্য হোটেল এলাকা গাইড",
+      "bodySha256": "0e141f9c508c34906be7ac136aa5ea03b5ae30cb867b9942aecf2b3734fef6e0"
+    },
+    {
+      "path": "/bn/hotels/kathmandu-hotels",
+      "canonical": "https://uraltravel.co.uk/bn/hotels/kathmandu-hotels",
+      "title": "কাঠমান্ডুতে কোথায় থাকবেন: এলাকা ও বুকিং চেক | URAL",
+      "h1": "কাঠমান্ডু-এ কোথায় থাকবেন: এলাকা ও বুকিংয়ের চেকলিস্ট",
+      "bodySha256": "46334853755175d5a81f52ad031700fb261f035b5f002ed2fffc1778918bcf2c"
+    },
+    {
+      "path": "/bn/hotels/bangkok-hotels",
+      "canonical": "https://uraltravel.co.uk/bn/hotels/bangkok-hotels",
+      "title": "ব্যাংককে কোথায় থাকবেন: এলাকা ও বুকিং চেক | URAL",
+      "h1": "ব্যাংকক-এ কোথায় থাকবেন: এলাকা ও বুকিংয়ের চেকলিস্ট",
+      "bodySha256": "28cd2361630f5d9f272c31c36b3a60e140b040a34c8b4b1cee4303a6969392cf"
+    },
+    {
+      "path": "/bn/hotels/kuala-lumpur-hotels",
+      "canonical": "https://uraltravel.co.uk/bn/hotels/kuala-lumpur-hotels",
+      "title": "কুয়ালালামপুরে কোথায় থাকবেন: এলাকা তুলনা ও বুকিং চেক | URAL",
+      "h1": "কুয়ালালামপুর-এ কোথায় থাকবেন: এলাকা ও বুকিংয়ের চেকলিস্ট",
+      "bodySha256": "0ff29e90da6accfbc33ece1c9b5f72096e45b42b57309b2cc905a94fd42b52c4"
+    },
+    {
+      "path": "/bn/hotels/dubai-hotels",
+      "canonical": "https://uraltravel.co.uk/bn/hotels/dubai-hotels",
+      "title": "দুবাইয়ে কোথায় থাকবেন: দেইরা, ডাউনটাউন ও মেরিনা | URAL",
+      "h1": "দুবাই-এ কোথায় থাকবেন: এলাকা ও বুকিংয়ের চেকলিস্ট",
+      "bodySha256": "8b2d2ca925cd0c7b075665327df19a9a5c9269ec7807922109e8a040b23291b6"
+    },
+    {
+      "path": "/bn/hotels/singapore-hotels",
+      "canonical": "https://uraltravel.co.uk/bn/hotels/singapore-hotels",
+      "title": "সিঙ্গাপুরে কোথায় থাকবেন: এলাকা ও বুকিং চেক | URAL",
+      "h1": "সিঙ্গাপুর-এ কোথায় থাকবেন: এলাকা ও বুকিংয়ের চেকলিস্ট",
+      "bodySha256": "6461a9405434816cadff95d742c682daf34c747e6d627c4db1f352052273475d"
+    },
+    {
+      "path": "/bn/hotels/maldives-hotels",
+      "canonical": "https://uraltravel.co.uk/bn/hotels/maldives-hotels",
+      "title": "মালদ্বীপে কোথায় থাকবেন: লোকাল আইল্যান্ড ও রিসোর্ট | URAL",
+      "h1": "মালে ও মাফুশি-এ কোথায় থাকবেন: এলাকা ও বুকিংয়ের চেকলিস্ট",
+      "bodySha256": "7efbd80315c993410042c2d30fbf945c0f402b2d74716c551772ab560d5f6502"
+    },
+    {
+      "path": "/bn/visa-free-countries",
+      "canonical": "https://uraltravel.co.uk/bn/visa-free-countries",
+      "title": "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬) | URAL",
+      "h1": "বাংলাদেশি পাসপোর্টে ভিসা ছাড়া যেসব দেশে যাওয়া যায় (২০২৬)",
+      "bodySha256": "bf07843acd154a89fa82dfc4da6a716f4ec9e6e24c7a1d7c17214f9ae18e5d46"
+    },
+    {
+      "path": "/bn/visa",
+      "canonical": "https://uraltravel.co.uk/bn/visa",
+      "title": "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড | URAL",
+      "h1": "বাংলাদেশি নাগরিকদের জন্য ভিসা গাইড",
+      "bodySha256": "9dcf6973ad05bd57d85c1bc5cc4d07477340fda4a1f6fadab6b758cdc534ecb1"
+    },
+    {
+      "path": "/bn/visa/nepal-visa",
+      "canonical": "https://uraltravel.co.uk/bn/visa/nepal-visa",
+      "title": "বাংলাদেশি নাগরিকদের জন্য নেপাল ভিসা | URAL",
+      "h1": "নেপাল ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)",
+      "bodySha256": "1deccb51c02993265905ff64a457ad8cd0ee5be30254669b2b6026d08e14a129"
+    },
+    {
+      "path": "/bn/visa/thailand-visa",
+      "canonical": "https://uraltravel.co.uk/bn/visa/thailand-visa",
+      "title": "বাংলাদেশ থেকে থাইল্যান্ড ভিসা: প্রক্রিয়া ও কাগজপত্র | URAL",
+      "h1": "থাইল্যান্ড ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)",
+      "bodySha256": "8b43958758985594a2a7b7b7cdce6e0f89a59020aa3009bad2a817e6347f5454"
+    },
+    {
+      "path": "/bn/visa/malaysia-visa",
+      "canonical": "https://uraltravel.co.uk/bn/visa/malaysia-visa",
+      "title": "বাংলাদেশ থেকে মালয়েশিয়া ভিসা: eVisa ও MDAC | URAL",
+      "h1": "মালয়েশিয়া ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)",
+      "bodySha256": "f1b2c5456a2f6c8babdc7f93208d1a85d74505147af7d1071ac89c9f5c83b443"
+    },
+    {
+      "path": "/bn/visa/dubai-visa",
+      "canonical": "https://uraltravel.co.uk/bn/visa/dubai-visa",
+      "title": "বাংলাদেশ থেকে দুবাই ও UAE ভিসা: ট্যুরিস্ট eVisa | URAL",
+      "h1": "সংযুক্ত আরব আমিরাত ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)",
+      "bodySha256": "f71a81e5c719edf4f278dd3b7b64f3193e3cb7d2a19fa3549c134461bc767cba"
+    },
+    {
+      "path": "/bn/visa/singapore-visa",
+      "canonical": "https://uraltravel.co.uk/bn/visa/singapore-visa",
+      "title": "বাংলাদেশ থেকে সিঙ্গাপুর ভিসা: কাগজপত্র ও প্রক্রিয়া | URAL",
+      "h1": "সিঙ্গাপুর ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)",
+      "bodySha256": "ec42a846219ace8852487204d9aa44135bd1f4b07397bfee9c7561a3ac83c9ce"
+    },
+    {
+      "path": "/bn/visa/maldives-visa",
+      "canonical": "https://uraltravel.co.uk/bn/visa/maldives-visa",
+      "title": "বাংলাদেশি নাগরিকদের জন্য মালদ্বীপ ভিসা: VOA ও IMUGA | URAL",
+      "h1": "মালদ্বীপ ভিসা (বাংলাদেশি পাসপোর্ট): নিয়ম, ডকুমেন্ট ও খরচ (২০২৬)",
+      "bodySha256": "3f8946c4beb03aff768f90b20eee39c51e82e96ed2eb39bcd0c9a8d360962988"
+    },
+    {
+      "path": "/bn/visa/saudi-arabia-visa",
+      "canonical": "https://uraltravel.co.uk/bn/visa/saudi-arabia-visa",
+      "title": "সৌদি ভিসা: বাংলাদেশি পাসপোর্টে কোন পথ প্রযোজ্য (২০২৬) | URAL",
+      "h1": "সৌদি ভিসা (বাংলাদেশি পাসপোর্ট): কোন পথটি আপনার জন্য প্রযোজ্য",
+      "bodySha256": "106f0faf546df8c938c9fbbbc5ff5412f4315a9f39e995f40a82da1adf89645b"
+    },
+    {
+      "path": "/bn/destinations",
+      "canonical": "https://uraltravel.co.uk/bn/destinations",
+      "title": "বাংলাদেশ থেকে ট্রিপ ইটিনারারি: গন্তব্য গাইড | URAL",
+      "h1": "বাংলাদেশ থেকে ট্রিপ ইটিনারারি: গন্তব্য গাইড",
+      "bodySha256": "01e460697d852921feffd700f6eb6c9c9d22d49e5d67ba83a14b81777d8a459d"
+    },
+    {
+      "path": "/bn/destinations/nepal-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/nepal-guide",
+      "title": "নেপাল ভ্রমণ পরিকল্পনা: কাঠমান্ডু ও পোখারা | URAL",
+      "h1": "নেপাল ভ্রমণ পরিকল্পনা: কাঠমান্ডু ও পোখারা",
+      "bodySha256": "2d9b939445bcbbda7315289c8553601096c33f1369458985ee358142e4daf26e"
+    },
+    {
+      "path": "/bn/destinations/thailand-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/thailand-guide",
+      "title": "থাইল্যান্ড ভ্রমণ পরিকল্পনা: ব্যাংককের নমনীয় চার… | URAL",
+      "h1": "থাইল্যান্ড ভ্রমণ পরিকল্পনা: ব্যাংককের নমনীয় চার দিনের গাইড",
+      "bodySha256": "a415bab68f8703d903078c7c88f93c77884dd379a267b5e4b03df2842ddc8dd7"
+    },
+    {
+      "path": "/bn/destinations/malaysia-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/malaysia-guide",
+      "title": "মালয়েশিয়া ভ্রমণ গাইড ২০২৬। | URAL",
+      "h1": "মালয়েশিয়া ভ্রমণ গাইড ২০২৬: কুয়ালালামপুরের ৪ দিনের ইটিনারারি, খরচ ও ভিসা",
+      "bodySha256": "bf44f5419c21b608fce2d0dd3f0fb04a2fb23620f0ee246dffd4230641fa2c11"
+    },
+    {
+      "path": "/bn/destinations/dubai-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/dubai-guide",
+      "title": "দুবাই ভ্রমণ পরিকল্পনা: নমনীয় চার দিনের গাইড | URAL",
+      "h1": "দুবাই ভ্রমণ পরিকল্পনা: নমনীয় চার দিনের গাইড",
+      "bodySha256": "16daf6bedea05f47a3fe0412a9a9d030f6ed9808804ed5839076b9d4f05d2f81"
+    },
+    {
+      "path": "/bn/destinations/singapore-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/singapore-guide",
+      "title": "সিঙ্গাপুর ভ্রমণ পরিকল্পনা: নমনীয় চার দিনের গাইড | URAL",
+      "h1": "সিঙ্গাপুর ভ্রমণ পরিকল্পনা: নমনীয় চার দিনের গাইড",
+      "bodySha256": "be4a4213826708db01a64012782b1f7f9e6d7008c28f2b62692e1fb4866925a6"
+    },
+    {
+      "path": "/bn/destinations/maldives-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/maldives-guide",
+      "title": "মালদ্বীপ ভ্রমণ পরিকল্পনা: দ্বীপ বাছাই ও নমনীয় গাইড | URAL",
+      "h1": "মালদ্বীপ ভ্রমণ পরিকল্পনা: দ্বীপ বাছাই ও নমনীয় গাইড",
+      "bodySha256": "e30b3154ae720b4445658da5ff9089f64178a57eb02779dcb8428e6e0a6dc5a7"
+    },
+    {
+      "path": "/bn/destinations/london-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/london-guide",
+      "title": "বাংলাদেশ থেকে লন্ডন ভ্রমণ গাইড। | URAL",
+      "h1": "বাংলাদেশ থেকে লন্ডন ভ্রমণ গাইড: দর্শনীয় স্থান ও পরিকল্পনা",
+      "bodySha256": "d03ae9c8db587953ec960762448d7e481d55be17ac6d1f04ba86ccd64e1d7415"
+    },
+    {
+      "path": "/bn/destinations/italy-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/italy-guide",
+      "title": "বাংলাদেশ থেকে ইতালি ভ্রমণ পরিকল্পনা: রোম। | URAL",
+      "h1": "বাংলাদেশ থেকে ইতালি ভ্রমণ পরিকল্পনা: রোম, মিলান ও ভেনিস",
+      "bodySha256": "a555ff13428f40942bcaf3b065558d0527ca88bafbe004976c52473ebaf89f9d"
+    },
+    {
+      "path": "/bn/destinations/paris-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/paris-guide",
+      "title": "বাংলাদেশ থেকে প্যারিস ভ্রমণ পরিকল্পনা। | URAL",
+      "h1": "বাংলাদেশ থেকে প্যারিস ভ্রমণ পরিকল্পনা: দর্শনীয় স্থান ও রুট",
+      "bodySha256": "05efd58b0c18a2001df92dacdbf477f17f1f1b64f670625a74568d5a21877448"
+    },
+    {
+      "path": "/bn/destinations/new-york-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/new-york-guide",
+      "title": "বাংলাদেশ থেকে নিউ ইয়র্ক সিটি ভ্রমণ পরিকল্পনা। | URAL",
+      "h1": "বাংলাদেশ থেকে নিউ ইয়র্ক সিটি ভ্রমণ পরিকল্পনা: দর্শনীয় স্থান ও রুট",
+      "bodySha256": "b3c4e43646cda21750e3fa75a7067bcdc65d493015b50c2ef43e11e48d4b9a3b"
+    },
+    {
+      "path": "/bn/destinations/kashmir-guide",
+      "canonical": "https://uraltravel.co.uk/bn/destinations/kashmir-guide",
+      "title": "আজাদ কাশ্মীর ভ্রমণ গাইড: নীলাম ভ্যালি ও ট্রিপ প্ল্যান | URAL",
+      "h1": "আজাদ কাশ্মীর ভ্রমণ গাইড: নীলাম ভ্যালি ও ট্রিপ প্ল্যান",
+      "bodySha256": "7834f1ec776dcc766d6aecd699321567c1c446af40f7f7fb936fc97796e4ed17"
+    },
+    {
+      "path": "/bn/costs",
+      "canonical": "https://uraltravel.co.uk/bn/costs",
+      "title": "ট্রিপ বাজেট গাইড: ৬ গন্তব্যের কোটেশন ও পরিকল্পনা | URAL",
+      "h1": "ট্রিপ বাজেট গাইড",
+      "bodySha256": "dad0f036cc2f634307970d554ab336e24335ae5918af7981d06e78315035f0ef"
+    },
+    {
+      "path": "/bn/costs/nepal-costs",
+      "canonical": "https://uraltravel.co.uk/bn/costs/nepal-costs",
+      "title": "বাংলাদেশ থেকে নেপাল ভ্রমণ খরচ: টাকায় বাজেট | URAL",
+      "h1": "নেপাল ভ্রমণের বাজেট পরিকল্পনা",
+      "bodySha256": "93e5f3a82031d2de12861d16aeafa9f20292b77105ee16aca1e67f22ae6be627"
+    },
+    {
+      "path": "/bn/costs/thailand-costs",
+      "canonical": "https://uraltravel.co.uk/bn/costs/thailand-costs",
+      "title": "বাংলাদেশ থেকে থাইল্যান্ড ভ্রমণ খরচ: টাকায় বাজেট | URAL",
+      "h1": "থাইল্যান্ড ভ্রমণের বাজেট পরিকল্পনা",
+      "bodySha256": "2ded9c3e3d5b401981254ab4b1271be8bb66d0d4aec655fded68149838db6eca"
+    },
+    {
+      "path": "/bn/costs/malaysia-costs",
+      "canonical": "https://uraltravel.co.uk/bn/costs/malaysia-costs",
+      "title": "বাংলাদেশ থেকে মালয়েশিয়া ভ্রমণ খরচ: টাকায় বাজেট | URAL",
+      "h1": "মালয়েশিয়া ভ্রমণের বাজেট পরিকল্পনা",
+      "bodySha256": "2b5c19f7799bee91f878845aa005009256d1b6e8c17961240593d288e6b86827"
+    },
+    {
+      "path": "/bn/costs/dubai-costs",
+      "canonical": "https://uraltravel.co.uk/bn/costs/dubai-costs",
+      "title": "বাংলাদেশ থেকে দুবাই ভ্রমণ খরচ: ৫ দিনের টাকায় বাজেট | URAL",
+      "h1": "দুবাই, সংযুক্ত আরব আমিরাত ভ্রমণের বাজেট পরিকল্পনা",
+      "bodySha256": "79cb58a7103d46aa52b462018afc7e5a1e3f4f94629619c0a51dc62031566b3f"
+    },
+    {
+      "path": "/bn/costs/singapore-costs",
+      "canonical": "https://uraltravel.co.uk/bn/costs/singapore-costs",
+      "title": "বাংলাদেশ থেকে সিঙ্গাপুর ভ্রমণ খরচ: টাকায় বাজেট | URAL",
+      "h1": "সিঙ্গাপুর ভ্রমণের বাজেট পরিকল্পনা",
+      "bodySha256": "c5d6b70883de58195b8adc51443783efe8e32c424d6fcb66a9282cb6e6f27493"
+    },
+    {
+      "path": "/bn/costs/maldives-costs",
+      "canonical": "https://uraltravel.co.uk/bn/costs/maldives-costs",
+      "title": "বাংলাদেশ থেকে মালদ্বীপ ভ্রমণ খরচ: টাকায় বাজেট | URAL",
+      "h1": "মালদ্বীপ ভ্রমণের বাজেট পরিকল্পনা",
+      "bodySha256": "fdf530e0f848a35c2a7c0ee749ddd983543c4bd97f16e2a5f27d07a061ed6790"
+    },
+    {
+      "path": "/bn/experiences",
+      "canonical": "https://uraltravel.co.uk/bn/experiences",
+      "title": "বাংলাদেশি ভ্রমণকারীদের জন্য অ্যাক্টিভিটি গাইড | URAL",
+      "h1": "বাংলাদেশি ভ্রমণকারীদের জন্য অ্যাক্টিভিটি গাইড",
+      "bodySha256": "006967a909368cbced9a86e281d0a64c005fa8e1e7aa17e3637c93ff10020259"
+    },
+    {
+      "path": "/bn/experiences/europe",
+      "canonical": "https://uraltravel.co.uk/bn/experiences/europe",
+      "title": "ইউরোপ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের আকর্ষণ পাস গাইড | URAL",
+      "h1": "ইউরোপ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের আকর্ষণ পাস গাইড",
+      "bodySha256": "2673bca10e8e3c1374db8c52342ba799bcbef25838a829f2497650f4130459a3"
+    },
+    {
+      "path": "/bn/experiences/asia",
+      "canonical": "https://uraltravel.co.uk/bn/experiences/asia",
+      "title": "এশিয়া ও দুবাই আকর্ষণ পাস ও অ্যাক্টিভিটি গাইড | URAL",
+      "h1": "এশিয়া ও দুবাই আকর্ষণ পাস ও অ্যাক্টিভিটি গাইড",
+      "bodySha256": "57611e4c2d5c40f2c4c98fca0ecf1912c038539de1e88cbc80a85636841eefc0"
+    },
+    {
+      "path": "/bn/attractions",
+      "canonical": "https://uraltravel.co.uk/bn/attractions",
+      "title": "ইউরোপের আকর্ষণ এবং টিকিট পাস (Tiqets) | URAL",
+      "h1": "ইউরোপের আকর্ষণ ও টিকিট পাস (Tiqets)",
+      "bodySha256": "aba60a636765775a5f93907869e1d10b757c9086ce0b64d9a81efba6ad0441fa"
+    },
+    {
+      "path": "/bn/attractions/london:992434",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/london:992434",
+      "title": "ওয়ার্নার ব্রাদার্স স্টুডিও ট্যুর লন্ডন — হ্যারি… | URAL",
+      "h1": "ওয়ার্নার ব্রাদার্স স্টুডিও ট্যুর লন্ডন — হ্যারি পটার মেকিং — টিকিট ও পাস",
+      "bodySha256": "d867ac692fdfed14407e3ceed915ee8b36da3922df30ef4f8e47b16c78affd66"
+    },
+    {
+      "path": "/bn/attractions/london:975910",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/london:975910",
+      "title": "লন্ডন আই (London Eye): ফাস্ট-ট্র্যাক বোর্ডিং টিকেট… | URAL",
+      "h1": "লন্ডন আই (London Eye): ফাস্ট-ট্র্যাক বোর্ডিং টিকেট — টিকিট ও পাস",
+      "bodySha256": "ca732d22b9a01cd1a5a64769e81e09affa5c74ba436cd5a22aebc31535aa62b9"
+    },
+    {
+      "path": "/bn/attractions/london:974054",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/london:974054",
+      "title": "টাওয়ার অফ লন্ডন ও ক্রাউন জুয়েলস এন্ট্রি টিকেট —… | URAL",
+      "h1": "টাওয়ার অফ লন্ডন ও ক্রাউন জুয়েলস এন্ট্রি টিকেট — টিকিট ও পাস",
+      "bodySha256": "ce01b9950a4d343cb36cb878164de330880c9e7d1bde0bd385f66f981b42612a"
+    },
+    {
+      "path": "/bn/attractions/london:974688",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/london:974688",
+      "title": "চেলসি স্ট্যামফোর্ড ব্রিজ / আর্সেনাল এমিরেটস… | URAL",
+      "h1": "চেলসি স্ট্যামফোর্ড ব্রিজ / আর্সেনাল এমিরেটস স্টেডিয়াম ট্যুর — টিকিট ও পাস",
+      "bodySha256": "2f587a9bef54b9d3df7a8e4801d96d9d388734d7ce87c6450764c9a18baab842"
+    },
+    {
+      "path": "/bn/attractions/paris:997343",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/paris:997343",
+      "title": "আইফেল টাওয়ার: স্কিপ-দ্য-লাইন + ২য় তলা ও সামিট অপশন… | URAL",
+      "h1": "আইফেল টাওয়ার: স্কিপ-দ্য-লাইন + ২য় তলা ও সামিট অপশন — টিকিট ও পাস",
+      "bodySha256": "6632fabe6e6bf965be8fde53986f8b75a29cbe462071ca8c2646929b6ab25f64"
+    },
+    {
+      "path": "/bn/attractions/paris:1065031",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/paris:1065031",
+      "title": "লুভর মিউজিয়াম: প্রায়োরিটি এন্ট্রি + সরাসরি… | URAL",
+      "h1": "লুভর মিউজিয়াম: প্রায়োরিটি এন্ট্রি + সরাসরি মোনালিসা অ্যাক্সেস — টিকিট ও পাস",
+      "bodySha256": "86c2b3a957585a37d15609b03a8a5e687748f6dd499b498ebcb170c5b4c91f68"
+    },
+    {
+      "path": "/bn/attractions/paris:973977",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/paris:973977",
+      "title": "সেইন নদীতে সাইটসিইং বোট ক্রুজ (আইফেল টাওয়ারের নিচ… | URAL",
+      "h1": "সেইন নদীতে সাইটসিইং বোট ক্রুজ (আইফেল টাওয়ারের নিচ থেকে) — টিকিট ও পাস",
+      "bodySha256": "8c9185ced34462f668e6c0113c7f20b9ee344856265bd13d799f7f1e9161dc99"
+    },
+    {
+      "path": "/bn/attractions/rome:973975",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/rome:973975",
+      "title": "ভ্যাটিকান মিউজিয়াম ও সিস্টিন চ্যাপেল: ফাস্ট-ট্র্যাক… | URAL",
+      "h1": "ভ্যাটিকান মিউজিয়াম ও সিস্টিন চ্যাপেল: ফাস্ট-ট্র্যাক টিকেট — টিকিট ও পাস",
+      "bodySha256": "f48cf54824e962ffc8884ac67c40e946c39ec0e2de0286a8e44da35c20cb2e7d"
+    },
+    {
+      "path": "/bn/attractions/rome:997640",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/rome:997640",
+      "title": "কলোসিয়াম, গ্ল্যাডিয়েটর এরিনা ফ্লোর ও রোমান ফোরাম… | URAL",
+      "h1": "কলোসিয়াম, গ্ল্যাডিয়েটর এরিনা ফ্লোর ও রোমান ফোরাম + অডিও গাইড — টিকিট ও পাস",
+      "bodySha256": "5e4033c16857c6b2fc635dfc3077c190397ee67900f3f317caea99496f992b93"
+    },
+    {
+      "path": "/bn/attractions/new-york:1023033",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/new-york:1023033",
+      "title": "সামিট ওয়ান ভ্যান্ডারবিল্ট (SUMMIT One Vanderbilt)… | URAL",
+      "h1": "সামিট ওয়ান ভ্যান্ডারবিল্ট (SUMMIT One Vanderbilt) এন্ট্রি টিকেট — টিকিট ও পাস",
+      "bodySha256": "91e921bf42de53e6ed63fd16c89942ef50a17dba6924fa5a5df8af385ab97e22"
+    },
+    {
+      "path": "/bn/attractions/new-york:974085",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/new-york:974085",
+      "title": "স্ট্যাচু অফ লিবার্টি ও এলিস আইল্যান্ড: অফিসিয়াল… | URAL",
+      "h1": "স্ট্যাচু অফ লিবার্টি ও এলিস আইল্যান্ড: অফিসিয়াল ফেরি টিকেট — টিকিট ও পাস",
+      "bodySha256": "3150fa74525c0ee8c630c120344139a6f2ff8abd78a7a264d6b6a4f3c0816bce"
+    },
+    {
+      "path": "/bn/attractions/new-york:1002293",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/new-york:1002293",
+      "title": "অফিসিয়াল নিউ ইয়র্ক CityPASS® (৫টি শীর্ষ আকর্ষণ এক… | URAL",
+      "h1": "অফিসিয়াল নিউ ইয়র্ক CityPASS® (৫টি শীর্ষ আকর্ষণ এক টিকেটে) — টিকিট ও পাস",
+      "bodySha256": "58037f69b02b03ab30bd4ee0b7b6f2f77e4949db2d0d2a4009aa2ac469951de4"
+    },
+    {
+      "path": "/bn/attractions/amsterdam:974079",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/amsterdam:974079",
+      "title": "ভ্যান গগ মিউজিয়াম: অফিসিয়াল টাইমড-এন্ট্রি টিকেট —… | URAL",
+      "h1": "ভ্যান গগ মিউজিয়াম: অফিসিয়াল টাইমড-এন্ট্রি টিকেট — টিকিট ও পাস",
+      "bodySha256": "467fb7e039c0bb315a8bffb3f79f72c1cc952c6e29474b029dc19017731f2f7a"
+    },
+    {
+      "path": "/bn/attractions/milan:1032004",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/milan:1032004",
+      "title": "দা ভিঞ্চির 'দ্য লাস্ট সাপার': স্কিপ-দ্য-লাইন গাইডেড… | URAL",
+      "h1": "দা ভিঞ্চির 'দ্য লাস্ট সাপার': স্কিপ-দ্য-লাইন গাইডেড ট্যুর — টিকিট ও পাস",
+      "bodySha256": "1de4446c7ace74c7f2cebba3f36a07708ccd631dd17f5564d374dea6cdb9a7f9"
+    },
+    {
+      "path": "/bn/attractions/milan:976045",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/milan:976045",
+      "title": "দুওমো দি মিলানো, রুফটপ ও মিউজিয়াম: ফাস্ট-ট্র্যাক… | URAL",
+      "h1": "দুওমো দি মিলানো, রুফটপ ও মিউজিয়াম: ফাস্ট-ট্র্যাক টিকেট — টিকিট ও পাস",
+      "bodySha256": "50cd3954c3aa792df3628870062fb4d4a8a243c060b17aabfc717a19902e5048"
+    },
+    {
+      "path": "/bn/attractions/venice:1092565",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/venice:1092565",
+      "title": "ডোজের প্রাসাদ ও সেন্ট মার্কস ব্যাসিলিকা:… | URAL",
+      "h1": "ডোজের প্রাসাদ ও সেন্ট মার্কস ব্যাসিলিকা: স্কিপ-দ্য-লাইন + টেরেস — টিকিট ও পাস",
+      "bodySha256": "0658dbf4b764287eb3239867d9590fd39e0a956e5cd041ed7f8674611e326299"
+    },
+    {
+      "path": "/bn/attractions/florence:974170",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/florence:974170",
+      "title": "উফিজি গ্যালারি (Uffizi Gallery): রিজার্ভড এন্ট্রি +… | URAL",
+      "h1": "উফিজি গ্যালারি (Uffizi Gallery): রিজার্ভড এন্ট্রি + অডিও গাইড — টিকিট ও পাস",
+      "bodySha256": "1f5eaf74d84d5822e9642bfb77e3885617092346d1f0b6a33651d71a1f5f1f21"
+    },
+    {
+      "path": "/bn/attractions/lisbon:1025946",
+      "canonical": "https://uraltravel.co.uk/bn/attractions/lisbon:1025946",
+      "title": "সিনত্রা, পেনা প্যালেস ও কিন্তা দা রেগালেইরা: লিসবন… | URAL",
+      "h1": "সিনত্রা, পেনা প্যালেস ও কিন্তা দা রেগালেইরা: লিসবন থেকে ডে-ট্রিপ — টিকিট ও পাস",
+      "bodySha256": "1e4edc37d28b5c961d12b602d3bb538cefdbbfc484cf9732a96af1c8771d2c3f"
+    },
+    {
+      "path": "/bn/kkday-hotels",
+      "canonical": "https://uraltravel.co.uk/bn/kkday-hotels",
+      "title": "KKday হোটেল ও স্টে ডিল: বাংলাদেশি ভ্রমণকারীদের জন্য | URAL",
+      "h1": "KKday হোটেল ও স্টে ডিল: বাংলাদেশি ভ্রমণকারীদের জন্য",
+      "bodySha256": "e9c64fef5d575612e973b44199f2ef77970d2666c961fa047f8e580abb4d9af6"
+    },
+    {
+      "path": "/bn/tools",
+      "canonical": "https://uraltravel.co.uk/bn/tools",
+      "title": "ট্রাভেল টুলস: ট্রিপ কস্ট এস্টিমেটর, কারেন্সি ও চেকলিস্ট | URAL",
+      "h1": "ট্রাভেল টুলস: ট্রিপ কস্ট এস্টিমেটর, কারেন্সি ও চেকলিস্ট",
+      "bodySha256": "3fd6f8a8f8306f8a015d982be9575a78459535e3f85a201c0bee33b617d11834"
+    },
+    {
+      "path": "/bn/tools/currency-converter",
+      "canonical": "https://uraltravel.co.uk/bn/tools/currency-converter",
+      "title": "কারেন্সি কনভার্টার: তারিখসহ BDT রেফারেন্স রেট | URAL",
+      "h1": "কারেন্সি কনভার্টার: তারিখসহ BDT রেফারেন্স রেট",
+      "bodySha256": "5228117f138d90a6635dca3b595b71fcc123640db32390da23f49ebc4d8d8aa9"
+    },
+    {
+      "path": "/bn/tools/budget-calculator",
+      "canonical": "https://uraltravel.co.uk/bn/tools/budget-calculator",
+      "title": "ট্রিপ কস্ট এস্টিমেটর: কোটেশন, যাত্রী ও হোটেলের রাত | URAL",
+      "h1": "ট্রিপ কস্ট এস্টিমেটর: কোটেশন, যাত্রী ও হোটেলের রাত",
+      "bodySha256": "056bcf31b0ff2ef9d1e7929f462ab9abdb79eaf24764bbe4617b2b64a77e4396"
+    },
+    {
+      "path": "/bn/tools/packing-checklist",
+      "canonical": "https://uraltravel.co.uk/bn/tools/packing-checklist",
+      "title": "ঢাকা থেকে ফ্লাইটের প্যাকিং চেকলিস্ট | URAL",
+      "h1": "ঢাকা থেকে ফ্লাইটের প্যাকিং চেকলিস্ট",
+      "bodySha256": "59cb1e84bbc723582acde5da55d93c5020a82faca7752177d738bcc359b011e8"
+    },
+    {
+      "path": "/bn/tools/flight-delay-claim",
+      "canonical": "https://uraltravel.co.uk/bn/tools/flight-delay-claim",
+      "title": "ফ্লাইটে সমস্যা হলে দাবি যাচাই ও যাত্রী-অধিকার গাইড | URAL",
+      "h1": "ফ্লাইটে সমস্যা হলে দাবি যাচাই ও যাত্রী-অধিকার গাইড",
+      "bodySha256": "f4e904b0f5317d7e9ff11096f45262a153048444a7f0b6e8a0af9aa167ed4537"
+    },
+    {
+      "path": "/bn/tools/airport-codes",
+      "canonical": "https://uraltravel.co.uk/bn/tools/airport-codes",
+      "title": "IATA এয়ারপোর্ট কোড ডিরেক্টরি (ঢাকা ভ্রমণকারীদের জন্য) | URAL",
+      "h1": "IATA এয়ারপোর্ট কোড ডিরেক্টরি (ঢাকা ভ্রমণকারীদের জন্য)",
+      "bodySha256": "17f8274f242ca5ee17ee25fb625acf80ca938e30421dea58968b2dfd0a0756b3"
+    },
+    {
+      "path": "/bn/pre-departure",
+      "canonical": "https://uraltravel.co.uk/bn/pre-departure",
+      "title": "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার চেকলিস্ট, লাগেজ নিয়ম ও দূতাবাস হেল্পলাইন | URAL",
+      "h1": "ঢাকা এয়ারপোর্ট প্রি-ডিপার্চার চেকলিস্ট, লাগেজ নিয়ম ও দূতাবাস হেল্পলাইন",
+      "bodySha256": "06ebfd4775764e4400ef3fffad7cd6f2c1e9a6bbdec5b5b743152257b436f86e"
+    },
+    {
+      "path": "/bn/resources",
+      "canonical": "https://uraltravel.co.uk/bn/resources",
+      "title": "সরকারি ভ্রমণ সূত্র: ভিসা, হজ ও এয়ারলাইনের অফিসিয়াল সাইট | URAL",
+      "h1": "সরকারি ভ্রমণ সূত্র: ভিসা, হজ ও এয়ারলাইনের অফিসিয়াল সাইট",
+      "bodySha256": "82c45a6f5a2e70e78102ecf2dd040aad7ed9a7385c206c8d9f578ca4a53b9a09"
+    },
+    {
+      "path": "/bn/glossary",
+      "canonical": "https://uraltravel.co.uk/bn/glossary",
+      "title": "হজ, ওমরাহ, ভিসা ও ফ্লাইটের শব্দকোষ | URAL",
+      "h1": "হজ, ওমরাহ, ভিসা ও ফ্লাইটের শব্দকোষ",
+      "bodySha256": "994c8631f12b914805acf6c14d8cb6dc945a5cb6d21f59e62956e3d886d2c177"
+    },
+    {
+      "path": "/bn/sitemap",
+      "canonical": "https://uraltravel.co.uk/bn/sitemap",
+      "title": "URAL ভ্রমণ সাইট ডিরেক্টরি ও গাইড ইনডেক্স | URAL",
+      "h1": "URAL ভ্রমণ সাইট ডিরেক্টরি ও গাইড ইনডেক্স",
+      "bodySha256": "dbc100cf7b5cd04cfbf53a6a55fc4fd447c0c3feb12b451e9b182d7f737d2554"
+    },
+    {
+      "path": "/bn/contact",
+      "canonical": "https://uraltravel.co.uk/bn/contact",
+      "title": "ঢাকায় URAL ট্রাভেল ইনফরমেশন ডেস্কে যোগাযোগ | URAL",
+      "h1": "ঢাকায় URAL ট্রাভেল ইনফরমেশন ডেস্কে যোগাযোগ",
+      "bodySha256": "f2b5699150953dbdab2ea1eaedc756d8586073fa82ad4b94ca21ac23f6fb8f53"
+    },
+    {
+      "path": "/bn/partners",
+      "canonical": "https://uraltravel.co.uk/bn/partners",
+      "title": "বুকিং লিংকের পেছনের পার্টনাররা | URAL",
+      "h1": "বুকিং লিংকের পেছনের পার্টনাররা",
+      "bodySha256": "ff37d70335d41a502608422cd717350a86fca8b5615a84d967843e8c1003a299"
+    },
+    {
+      "path": "/bn/visa-assistance",
+      "canonical": "https://uraltravel.co.uk/bn/visa-assistance",
+      "title": "eVisas-এর মাধ্যমে ভিসা আবেদনে সহায়তা | URAL",
+      "h1": "eVisas-এর মাধ্যমে ভিসা আবেদনে সহায়তা",
+      "bodySha256": "81d188b3be413c88555277f290619626b07fd536b7caaa09badd6a9a410d13c0"
+    },
+    {
+      "path": "/bn/about",
+      "canonical": "https://uraltravel.co.uk/bn/about",
+      "title": "URAL সম্পর্কে | ফারহান মোমেন — প্রতিষ্ঠাতা ও ট্রাভেল এডিটর",
+      "h1": "URAL সম্পর্কে | ফারহান মোমেন — প্রতিষ্ঠাতা ও ট্রাভেল এডিটর",
+      "bodySha256": "ed8bf2f275fdff3f0900b24c8084c323c50b38895304dc54b5aa8a9f8fdbb2dd"
+    },
+    {
+      "path": "/bn/privacy",
+      "canonical": "https://uraltravel.co.uk/bn/privacy",
+      "title": "গোপনীয়তা ও কুকি নীতিমালা | URAL Travel Intelligence",
+      "h1": "গোপনীয়তা ও কুকি নীতিমালা | URAL Travel Intelligence",
+      "bodySha256": "dfa5e9d9014a3df2411ccfb1c76b9484b0deb3c023bb116cff20d7e2431c78ea"
+    },
+    {
+      "path": "/bn/blog",
+      "canonical": "https://uraltravel.co.uk/bn/blog",
+      "title": "বাংলাদেশ ভ্রমণ ব্লগ: ভিসা, ওমরাহ ও টাকায় গাইড | URAL",
+      "h1": "বাংলাদেশ ভ্রমণ ব্লগ: ভিসা, ওমরাহ ও টাকায় গাইড",
+      "bodySha256": "ee81b4384f05909ebd5873b37b3381859af9c869a347c3c6b5a1ef164d8ebb7e"
+    },
+    {
+      "path": "/bn/blog/cheap-flight-booking-hacks-dhaka",
+      "canonical": "https://uraltravel.co.uk/bn/blog/cheap-flight-booking-hacks-dhaka",
+      "title": "ঢাকা থেকে কম ভাড়ায় আন্তর্জাতিক Flight বুকিংয়ের ৫টি… | URAL",
+      "h1": "ঢাকা থেকে কম ভাড়ায় আন্তর্জাতিক Flight বুকিংয়ের ৫টি কার্যকরী কৌশল (2026)",
+      "bodySha256": "c139ca5e34487c065f55809bd8b75be2c6781ddb530cdd3f1266c799ee8eb1bc"
+    },
+    {
+      "path": "/bn/blog/nepal-vs-thailand-first-trip",
+      "canonical": "https://uraltravel.co.uk/bn/blog/nepal-vs-thailand-first-trip",
+      "title": "Nepal বনাম Thailand: বাংলাদেশিদের প্রথম বিদেশ… | URAL",
+      "h1": "Nepal বনাম Thailand: বাংলাদেশিদের প্রথম বিদেশ ভ্রমণের জন্য কোন দেশটি সেরা?",
+      "bodySha256": "69cb618cac36a0702a964b8718814200b18e9cd1748bf8a490f883eec64b41d8"
+    },
+    {
+      "path": "/bn/blog/hotel-savings-guide-bangkok-kl-dubai",
+      "canonical": "https://uraltravel.co.uk/bn/blog/hotel-savings-guide-bangkok-kl-dubai",
+      "title": "Bangkok, Kuala Lumpur ও Dubai-তে হোটেল এলাকা ও বুকিং… | URAL",
+      "h1": "Bangkok, Kuala Lumpur ও Dubai-তে হোটেল এলাকা ও বুকিং শর্ত তুলনা গাইড",
+      "bodySha256": "2a3564f0818f85f67128980473601c14d79d7720b06b46c9637cc64fb2932b42"
+    },
+    {
+      "path": "/bn/blog/halal-food-guide-bangkok-bangladesh",
+      "canonical": "https://uraltravel.co.uk/bn/blog/halal-food-guide-bangkok-bangladesh",
+      "title": "Bangkok-এ Halal খাবার কোথায় পাবেন। | URAL",
+      "h1": "Bangkok-এ Halal খাবার কোথায় পাবেন: বাংলাদেশি পর্যটকদের জন্য সম্পূর্ণ গাইড ও BDT দাম",
+      "bodySha256": "0c08e9ab445e4b6dedd185a911a316090a76ae348ad53f1a08c2b3dd8a6588fb"
+    },
+    {
+      "path": "/bn/blog/nepal-pokhara-itinerary-bangladesh",
+      "canonical": "https://uraltravel.co.uk/bn/blog/nepal-pokhara-itinerary-bangladesh",
+      "title": "Kathmandu থেকে Pokhara: বাংলাদেশিদের জন্য ৫ দিনের… | URAL",
+      "h1": "Kathmandu থেকে Pokhara: বাংলাদেশিদের জন্য ৫ দিনের Nepal ভ্রমণ প্ল্যান ও BDT খরচ",
+      "bodySha256": "011c2e7c0802dec2d3de88caf1c045a407b40219bcb5cc7e4b35beee4dd6a6cd"
+    },
+    {
+      "path": "/bn/blog/dual-currency-card-endorsement-bangladesh",
+      "canonical": "https://uraltravel.co.uk/bn/blog/dual-currency-card-endorsement-bangladesh",
+      "title": "বাংলাদেশে Dual-Currency Card ও Passport Dollar… | URAL",
+      "h1": "বাংলাদেশে Dual-Currency Card ও Passport Dollar Endorsement করার নিয়ম (2026 গাইড)",
+      "bodySha256": "eac727bb1fc546069dda14964671a6aae58f6bfd1362b5893d3d005478e552ba"
+    },
+    {
+      "path": "/bn/blog/maldives-budget-trip-bangladesh-maafushi",
+      "canonical": "https://uraltravel.co.uk/bn/blog/maldives-budget-trip-bangladesh-maafushi",
+      "title": "ঢাকা থেকে Maldives ভ্রমণ: Maafushi Local Island বনাম… | URAL",
+      "h1": "ঢাকা থেকে Maldives ভ্রমণ: Maafushi Local Island বনাম প্রাইভেট রিসোর্ট গাইড",
+      "bodySha256": "7e90c602b639a1f80303722634d597f0cba29b46323b7b99ad47914da05a49ef"
+    },
+    {
+      "path": "/bn/blog/singapore-visa-guide-bangladesh-agents",
+      "canonical": "https://uraltravel.co.uk/bn/blog/singapore-visa-guide-bangladesh-agents",
+      "title": "বাংলাদেশ থেকে Singapore Tourist Visa পাওয়ার নিয়ম… | URAL",
+      "h1": "বাংলাদেশ থেকে Singapore Tourist Visa পাওয়ার নিয়ম (2026): Authorized Agents, LOI V39A ও চেকলিস্ট",
+      "bodySha256": "26231a9cf8807cc206ab4aa4030248b565a14c080d4c718cfa8292f11ee5a3d9"
+    },
+    {
+      "path": "/bn/blog/top-budget-family-destinations-from-dhaka",
+      "canonical": "https://uraltravel.co.uk/bn/blog/top-budget-family-destinations-from-dhaka",
+      "title": "ঢাকা থেকে পরিবারের সাথে ঘোরার সেরা ৬টি বাজেট… | URAL",
+      "h1": "ঢাকা থেকে পরিবারের সাথে ঘোরার সেরা ৬টি বাজেট ফ্রেন্ডলি দেশ (2026 — BDT খরচ ও Visa তুলনা)",
+      "bodySha256": "55390cf80e4a4c3347357cd792b31612a6dd978c93c8f192856cd65fdd8f1c83"
+    },
+    {
+      "path": "/bn/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
+      "canonical": "https://uraltravel.co.uk/bn/blog/dhaka-airport-outbound-immigration-checklist-noc-go",
+      "title": "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট… | URAL",
+      "h1": "Dhaka Airport (DAC) Outbound Immigration চেকলিস্ট 2026: NOC, GO, Return Ticket ও প্রথমবার ভ্রমণের নিয়ম",
+      "bodySha256": "c6f31446e903386696371aef77f4253e912460b626de639332ca24f1e219ff28"
+    },
+    {
+      "path": "/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+      "canonical": "https://uraltravel.co.uk/bn/blog/umrah-hajj-guide-bangladesh-nusuk-bdt-cost",
+      "title": "বাংলাদেশ থেকে DIY ওমরাহ: ভিসার পথ। | URAL",
+      "h1": "বাংলাদেশ থেকে DIY ওমরাহ: ভিসার পথ, Nusuk ধাপ ও বাজেট যাচাই",
+      "bodySha256": "6b7c0380e4e1d1e39b6d5be93af2b2b5691a8ef2f5de39502a708200c924fd35"
+    },
+    {
+      "path": "/bn/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+      "canonical": "https://uraltravel.co.uk/bn/blog/makkah-madinah-hotel-zones-haramain-train-guide-bangladesh",
+      "title": "Makkah ও Madinah hotel বাছাই। | URAL",
+      "h1": "Makkah ও Madinah hotel বাছাই: access check ও Haramain train (২০২৬)",
+      "bodySha256": "e087d9787843ddc794ad0e7254665ef344c87475e04793b20c507563ba27dc9c"
+    },
+    {
+      "path": "/bn/blog/hajj-registration-bangladesh-government-vs-private-package-cost",
+      "canonical": "https://uraltravel.co.uk/bn/blog/hajj-registration-bangladesh-government-vs-private-package-cost",
+      "title": "বাংলাদেশ থেকে ২০২৭ Hajj নিবন্ধন: বর্তমান অবস্থা। | URAL",
+      "h1": "বাংলাদেশ থেকে ২০২৭ Hajj নিবন্ধন: বর্তমান অবস্থা, সরকারি পোর্টাল ও প্যাকেজ খরচ",
+      "bodySha256": "c93fde0b2b8990a155f98c5472887aa623c9768cd65496d0eebd869774d02f9e"
+    },
+    {
+      "path": "/bn/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/umrah-with-elderly-parents-bangladesh-wheelchair-medical-guide",
+      "title": "বয়স্ক বাবা-মাকে নিয়ে বাংলাদেশ থেকে ওমরাহ। | URAL",
+      "h1": "বয়স্ক বাবা-মাকে নিয়ে বাংলাদেশ থেকে ওমরাহ: এয়ারলাইন হুইলচেয়ার, হারামের মোবিলিটি ও মেডিকেল প্রস্তুতি",
+      "bodySha256": "c34c8e59924082cc70e4d8995c3bdf62b08b2f0bde2c21ea1592ce19154d218b"
+    },
+    {
+      "path": "/bn/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
+      "canonical": "https://uraltravel.co.uk/bn/blog/saudi-stopover-visa-96-hours-bangladesh-saudia-flynas-umrah",
+      "title": "বাংলাদেশ থেকে ৯৬ ঘণ্টার Saudi Stopover: যোগ্যতা। | URAL",
+      "h1": "বাংলাদেশ থেকে ৯৬ ঘণ্টার Saudi Stopover: যোগ্যতা, বুকিং ও ওমরাহ",
+      "bodySha256": "adb8956e3fcae429e0e0b2d0916f8ba0de146a9926654ae3380142317955eff1"
+    },
+    {
+      "path": "/bn/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+      "canonical": "https://uraltravel.co.uk/bn/blog/nusuk-app-saudi-visa-bio-guide-bangladesh-rawdah-permit",
+      "title": "বাংলাদেশিদের Nusuk ও Saudi Visa Bio গাইড: নিবন্ধন। | URAL",
+      "h1": "বাংলাদেশিদের Nusuk ও Saudi Visa Bio গাইড: নিবন্ধন, বায়োমেট্রিক ও Rawdah পারমিট",
+      "bodySha256": "eec07ffde7e46f6f5985fdd86c5b20e00a34bcc85f0bf4b7446dd1f1691a5532"
+    },
+    {
+      "path": "/bn/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
+      "canonical": "https://uraltravel.co.uk/bn/blog/umrah-rules-for-women-bangladesh-mahram-visa-ladies-gates",
+      "title": "নারীদের ওমরাহ: মাহরাম, ভিসা। | URAL",
+      "h1": "নারীদের ওমরাহ: মাহরাম, ভিসা, Rawdah ও ইহরাম যাচাই (২০২৬)",
+      "bodySha256": "de54ec84b95b04b502d881ce935168eaca9651b1815c241bced54a6c0cad7380"
+    },
+    {
+      "path": "/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
+      "canonical": "https://uraltravel.co.uk/bn/blog/dhaka-to-jeddah-madinah-open-jaw-flight-strategy-biman-saudia",
+      "title": "ঢাকা–জেদ্দা/মদিনা ফ্লাইট: Open-Jaw। | URAL",
+      "h1": "ঢাকা–জেদ্দা/মদিনা ফ্লাইট: Open-Jaw, Baggage ও Quote তুলনা (২০২৬)",
+      "bodySha256": "d40a5277904de7d95dd6a004dae7c7ac2aa81af9b03a74c69047a28c491eed30"
+    },
+    {
+      "path": "/bn/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
+      "canonical": "https://uraltravel.co.uk/bn/blog/ramadan-umrah-itikaf-guide-bangladesh-booking-budget",
+      "title": "বাংলাদেশ থেকে রমজান ১৪৪৮ ওমরাহ ও ইতিকাফ গাইড (২০২৭)। | URAL",
+      "h1": "বাংলাদেশ থেকে রমজান ১৪৪৮ ওমরাহ ও ইতিকাফ গাইড (২০২৭): তারিখ, সিজনের সময়সীমা এবং কে নিবন্ধন করতে পারেন",
+      "bodySha256": "390d1c4972774153589295077159ee48dbd6f8cfe7989a932bab63dbc9786b7a"
+    },
+    {
+      "path": "/bn/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+      "canonical": "https://uraltravel.co.uk/bn/blog/wearing-ihram-dhaka-airport-vs-transit-flight-miqat-rules",
+      "title": "বাংলাদেশ থেকে ফ্লাইটে ইহরাম ও মিকাতের নিয়ম (২০২৬)। | URAL",
+      "h1": "বাংলাদেশ থেকে ফ্লাইটে ইহরাম ও মিকাতের নিয়ম (২০২৬): সরাসরি জেদ্দা, উপসাগরীয় ট্রানজিট নাকি আগে মদিনা",
+      "bodySha256": "a7e099adc864ab93cec8c6cb78839aebed1a54d8d4074a06f06fbb00ffe4437c"
+    },
+    {
+      "path": "/bn/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
+      "canonical": "https://uraltravel.co.uk/bn/blog/official-zamzam-water-dates-gold-customs-rules-jeddah-dhaka-airport",
+      "title": "জমজম, খেজুর ও স্বর্ণ: বাংলাদেশে আসলে কী কী আনা যাবে… | URAL",
+      "h1": "জমজম, খেজুর ও স্বর্ণ: বাংলাদেশে আসলে কী কী আনা যাবে (২০২৬)",
+      "bodySha256": "6810f5d2c4f08dd6ab2a6ccfffbb3b79867938887496ed79fe794a8c6fb86c43"
+    },
+    {
+      "path": "/bn/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals",
+      "canonical": "https://uraltravel.co.uk/bn/blog/bangladeshi-halal-food-guide-makkah-madinah-budget-meals",
+      "title": "মক্কা ও মদিনায় বাংলাদেশি ও পাকিস্তানি খাবার (২০২৬)। | URAL",
+      "h1": "মক্কা ও মদিনায় বাংলাদেশি ও পাকিস্তানি খাবার (২০২৬): কোথায় খাবেন আর বাজেট কীভাবে সৎভাবে রাখবেন",
+      "bodySha256": "e92227c622b01c1f1851f1a5859fd690019cc3bbe8ac7b2ddb544fda64c65e2f"
+    },
+    {
+      "path": "/bn/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/makkah-madinah-badr-taif-historical-ziyarah-taxi-guide",
+      "title": "মক্কা, মদিনা, বদর ও তায়েফ জিয়ারত গাইড (২০২৬)। | URAL",
+      "h1": "মক্কা, মদিনা, বদর ও তায়েফ জিয়ারত গাইড (২০২৬): যাচাই করা স্থান, খোলার সময় ও সৎভাবে গাড়ি ভাড়া করার নিয়ম",
+      "bodySha256": "3becfa3405f8b04528e1d687cbccd372ed1a5eefcc6a6857d0ae5d2c1fdb80e8"
+    },
+    {
+      "path": "/bn/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/umrah-dubai-10-day-combo-trip-dhaka-multi-city-guide",
+      "title": "একই ট্রিপে Umrah + Dubai ভ্রমণ গাইড (2026)। | URAL",
+      "h1": "একই ট্রিপে Umrah + Dubai ভ্রমণ গাইড (2026): ঢাকা থেকে ১০ দিনে মক্কা, মদিনা ও দুবাই ঘোরার মাল্টি-সিটি বাজেট",
+      "bodySha256": "c06ea9233c9cfb82268edbb14466531f149fe89ac0ef60ecaa6b3d416869c254"
+    },
+    {
+      "path": "/bn/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/abu-dhabi-sheikh-zayed-mosque-day-trip-from-dubai-guide",
+      "title": "দুবাই থেকে আবুধাবি ডে-ট্রিপ গাইড (2026)। | URAL",
+      "h1": "দুবাই থেকে আবুধাবি ডে-ট্রিপ গাইড (2026): শেখ জায়েদ গ্র্যান্ড মসজিদ, কাসর আল ওয়াতান ও লুভর মিউজিয়াম",
+      "bodySha256": "26b53123a228d3e1c5bd498822477a503a181b18c06baa884f680c543059a457"
+    },
+    {
+      "path": "/bn/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/malaysia-islamic-heritage-putrajaya-halal-family-tour-guide",
+      "title": "মালয়েশিয়া ইসলামিক হেরিটেজ ও হালাল ফ্যামিলি ট্যুর… | URAL",
+      "h1": "মালয়েশিয়া ইসলামিক হেরিটেজ ও হালাল ফ্যামিলি ট্যুর (2026): পুত্রজায়া পিঙ্ক মসজিদ, ইসলামিক আর্টস মিউজিয়াম ও KLCC",
+      "bodySha256": "c083dd4327bd91f8e3f0f01679d4544cf3abc9b1564558b6b32d2c41db213bfa"
+    },
+    {
+      "path": "/bn/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/europe-uk-usa-sightseeing-skip-the-line-passes-bangladesh-guide",
+      "title": "ইউরোপ, যুক্তরাজ্য ও আমেরিকা দর্শনীয় স্থান এবং সৌদি… | URAL",
+      "h1": "ইউরোপ, যুক্তরাজ্য ও আমেরিকা দর্শনীয় স্থান এবং সৌদি ভিসা গাইড",
+      "bodySha256": "24fdcb60a2521f006f29ae77951edc6ba7a44c1917605c01e4059d4b01ae8b94"
+    },
+    {
+      "path": "/bn/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
+      "canonical": "https://uraltravel.co.uk/bn/blog/shariah-compliant-islamic-dual-currency-cards-bangladesh-umrah",
+      "title": "বাংলাদেশে শরীয়াহ-সম্মত ডুয়েল-কারেন্সি কার্ড। | URAL",
+      "h1": "বাংলাদেশে শরীয়াহ-সম্মত ডুয়েল-কারেন্সি কার্ড: সুদমুক্ত ট্রাভেল কার্ড গাইড (২০২৬)",
+      "bodySha256": "85452999f449fe7264f02cf10603ae935d5c0ee4817335927bdb9b0c05936915"
+    },
+    {
+      "path": "/bn/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
+      "canonical": "https://uraltravel.co.uk/bn/blog/rfcd-account-vs-travel-quota-bangladesh-300-dollar-limit-fix",
+      "title": "বাংলাদেশে RFCD বনাম Travel Quota: $300 লিমিট (2026) | URAL",
+      "h1": "বাংলাদেশে RFCD বনাম Travel Quota: $300 লিমিট (2026)",
+      "bodySha256": "7168ce59f132dc54361038fe3a8a689feb23a4c8fa8a5c4d6c973c6f17bfb788"
+    },
+    {
+      "path": "/bn/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/cash-sar-usd-vs-dual-currency-card-dcc-fee-money-exchange-guide",
+      "title": "বিদেশে ক্যাশ (SAR/USD) বনাম ডুয়েল-কারেন্সি কার্ড। | URAL",
+      "h1": "বিদেশে ক্যাশ (SAR/USD) বনাম ডুয়েল-কারেন্সি কার্ড: local currency বেছে মানি-চেঞ্জারের ফাঁদ এড়ান",
+      "bodySha256": "1f7e25ef5112f3f9a531050140c452f57a1833ca4f6d5e9b23bb0ab51f543200"
+    },
+    {
+      "path": "/bn/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/thailand-evisa-bangladesh-thaievisa-document-bank-balance-guide",
+      "title": "বাংলাদেশ থেকে Thailand Official e-Visa। | URAL",
+      "h1": "বাংলাদেশ থেকে Thailand Official e-Visa: Dhaka ডকুমেন্ট, ব্যাংক প্রমাণ ও আবেদন যাচাই (2026)",
+      "bodySha256": "69f3fdea2dbf05276b0857d5590c957495305e33ef80a0ccfd3495d6d0ca9cd6"
+    },
+    {
+      "path": "/bn/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
+      "canonical": "https://uraltravel.co.uk/bn/blog/malaysia-evisa-mdac-arrival-card-guide-bangladesh-klia-immigration",
+      "title": "বাংলাদেশিদের জন্য Malaysia e-Visa ও ফ্রি MDAC কার্ড… | URAL",
+      "h1": "বাংলাদেশিদের জন্য Malaysia e-Visa ও ফ্রি MDAC কার্ড গাইড (2026): ঘরে বসে ২–৪ দিনে ভিসা ও KLIA ইমিগ্রেশন নিয়ম",
+      "bodySha256": "d022be4b07868dec7d675c7272039c058afdb2703a4b4a06790e5d0108e1d0c0"
+    },
+    {
+      "path": "/bn/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
+      "canonical": "https://uraltravel.co.uk/bn/blog/fresh-bangladeshi-passport-travel-history-ladder-nepal-maldives-malaysia",
+      "title": "নতুন পাসপোর্টে (Fresh Passport) প্রথম বিদেশ ভ্রমণ… | URAL",
+      "h1": "নতুন পাসপোর্টে (Fresh Passport) প্রথম বিদেশ ভ্রমণ (2026): ৩ ধাপে শক্তিশালী Travel History তৈরির গাইড",
+      "bodySha256": "d4b8c09734d4cc6ad21720f766a1a6f62b42e6d80b9d17729fcde7c626aa83b6"
+    },
+    {
+      "path": "/bn/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/singapore-4-day-budget-itinerary-mrt-simplygo-mustafa-halal-guide",
+      "title": "ঢাকা থেকে ৮৫,০০০ টাকায় ৪ দিনের Singapore ফ্যামিলি ও… | URAL",
+      "h1": "ঢাকা থেকে ৮৫,০০০ টাকায় ৪ দিনের Singapore ফ্যামিলি ও বাজেট ট্যুর (2026): MRT SimplyGo, Little India হালাল খাবার ও Sentosa গাইড",
+      "bodySha256": "fbc304f47c4f71a50726f4504fa82525d3c07124f2c8ab5d70b223b45656fac3"
+    },
+    {
+      "path": "/bn/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh",
+      "canonical": "https://uraltravel.co.uk/bn/blog/bumrungrad-bangkok-hospital-medical-checkup-visa-guide-bangladesh",
+      "title": "বাংলাদেশ থেকে Bumrungrad ও Bangkok Hospital মেডিকেল… | URAL",
+      "h1": "বাংলাদেশ থেকে Bumrungrad ও Bangkok Hospital মেডিকেল চেকআপ গাইড (2026): অ্যাপয়েন্টমেন্ট, BDT খরচ ও হালাল হোটেল",
+      "bodySha256": "c22f537a38669df122ec439d871a81a7f0ffe082cad1b9f319235a69389590e1"
+    },
+    {
+      "path": "/bn/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/best-travel-esim-and-schengen-travel-insurance-bangladesh-guide",
+      "title": "বিদেশ ভ্রমণে Travel eSIM ও শেনজেন ট্রাভেল… | URAL",
+      "h1": "বিদেশ ভ্রমণে Travel eSIM ও শেনজেন ট্রাভেল ইনস্যুরেন্স গাইড (২০২৬ — ওমরাহ, এশিয়া ও ইউরোপ)",
+      "bodySha256": "052fe46cd3f308af24128c4555641f36b22cc9338cb0e79816335099f71af7b2"
+    },
+    {
+      "path": "/bn/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost",
+      "canonical": "https://uraltravel.co.uk/bn/blog/sri-lanka-maldives-combo-tour-from-bangladesh-eta-bdt-cost",
+      "title": "বাংলাদেশ থেকে ৭ দিনে Sri Lanka + Maldives কম্বো… | URAL",
+      "h1": "বাংলাদেশ থেকে ৭ দিনে Sri Lanka + Maldives কম্বো ট্যুর (2026): কলম্বো ETA ভিসা, ক্যান্ডি ট্রেন, মাফুশি ও BDT খরচ",
+      "bodySha256": "922daaf3191291d42db4f8e1a73170cdbb845f9fd424d6fc45f7c1a43886c0af"
+    },
+    {
+      "path": "/bn/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/bangladesh-epassport-application-renewal-64-districts-fee-guide",
+      "title": "বাংলাদেশের ৬৪ জেলায় e-Passport আবেদন ও MRP নবায়ন… | URAL",
+      "h1": "বাংলাদেশের ৬৪ জেলায় e-Passport আবেদন ও MRP নবায়ন গাইড (2026): ৪৮ বনাম ৬৪ পৃষ্ঠা, সরকারি ফি ও পুলিশ ভেরিফিকেশন",
+      "bodySha256": "c15430efa0b42faa123dad379e2442ea53fed423d8d0674fe90acb32d849f5f3"
+    },
+    {
+      "path": "/bn/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
+      "canonical": "https://uraltravel.co.uk/bn/blog/flight-delay-cancellation-lost-baggage-compensation-bangladesh-airhelp",
+      "title": "ফ্লাইট বিলম্ব, বাতিল ও লাগেজ ক্ষতিপূরণ গাইড। | URAL",
+      "h1": "ফ্লাইট বিলম্ব, বাতিল ও লাগেজ ক্ষতিপূরণ গাইড: বাংলাদেশি যাত্রীদের অধিকার ও নিয়ম (২০২৬)",
+      "bodySha256": "6895a6ab56dc26c39a9b73384c92b86fcbef93de6a663542c24594c98e4fcb5e"
+    },
+    {
+      "path": "/bn/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla",
+      "canonical": "https://uraltravel.co.uk/bn/blog/top-airlines-from-dhaka-baggage-rules-biman-saudia-emirates-qatar-us-bangla",
+      "title": "ঢাকা থেকে পরিচালিত সেরা এয়ারলাইন্স তুলনা (2026)। | URAL",
+      "h1": "ঢাকা থেকে পরিচালিত সেরা এয়ারলাইন্স তুলনা (2026): Biman, Saudia, Emirates, Qatar Airways, Singapore Airlines ও US-Bangla লাগেজ নিয়ম",
+      "bodySha256": "da4656861713435a6e8dc30efa064a851b2e4181640cc94f2a0ee0c4f2a900d7"
+    },
+    {
+      "path": "/bn/blog/bangladesh-travelers-iata-airport-codes-directory-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/bangladesh-travelers-iata-airport-codes-directory-guide",
+      "title": "বাংলাদেশি ভ্রমণকারীদের জন্য পূর্ণাঙ্গ IATA এয়ারপোর্ট… | URAL",
+      "h1": "বাংলাদেশি ভ্রমণকারীদের জন্য পূর্ণাঙ্গ IATA এয়ারপোর্ট কোড ডিরেক্টরি (২০২৬ গাইড)",
+      "bodySha256": "0a38aabe69c2363113b05b035428a4e78871a173f893cd36fbf8f49a2c44e7e2"
+    },
+    {
+      "path": "/bn/blog/chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai",
+      "canonical": "https://uraltravel.co.uk/bn/blog/chattogram-to-dubai-middle-east-direct-flights-cgp-dxb-biman-flydubai",
+      "title": "চট্টগ্রাম থেকে দুবাই ও মধ্যপ্রাচ্য সরাসরি ফ্লাইট… | URAL",
+      "h1": "চট্টগ্রাম থেকে দুবাই ও মধ্যপ্রাচ্য সরাসরি ফ্লাইট গাইড (২০২৬): CGP-DXB শিডিউল, ভাড়া ও শাহ আমানত নিয়মাবলী",
+      "bodySha256": "754aad12e588206ae1044164f70565530638cb1a9d33e7345bd6e3fc0d804b0c"
+    },
+    {
+      "path": "/bn/blog/havana-cuba-travel-guide-bangladesh",
+      "canonical": "https://uraltravel.co.uk/bn/blog/havana-cuba-travel-guide-bangladesh",
+      "title": "হাভানা, কিউবা ট্রাভেল গাইড (২০২৬): ক্লাসিক গাড়ি। | URAL",
+      "h1": "হাভানা, কিউবা ট্রাভেল গাইড (২০২৬): ক্লাসিক গাড়ি, ওল্ড হাভানা ও গ্রান তেয়াত্রো — ঢাকা থেকে BDT বাজেটসহ",
+      "bodySha256": "cb47c283d616358d8cb5357b037f375628148aaa0f151066c4a724cc40533b65"
+    },
+    {
+      "path": "/bn/blog/chefchaouen-morocco-travel-guide-bangladesh",
+      "canonical": "https://uraltravel.co.uk/bn/blog/chefchaouen-morocco-travel-guide-bangladesh",
+      "title": "শেফশাওয়েন, মরক্কো ট্রাভেল গাইড (২০২৬)। | URAL",
+      "h1": "শেফশাওয়েন, মরক্কো ট্রাভেল গাইড (২০২৬): নীল শহরের মেদিনা, ফোয়ারা ও রিফ পাহাড় — ঢাকা থেকে BDT বাজেটসহ",
+      "bodySha256": "5b8862d46359f0dec97002edc9fa4d3da62d88061a2480faaed50aaa19a8230d"
+    },
+    {
+      "path": "/bn/blog/travel-creator-resources",
+      "canonical": "https://uraltravel.co.uk/bn/blog/travel-creator-resources",
+      "title": "ট্রাভেল ক্রিয়েটর রিসোর্সেস। | URAL",
+      "h1": "ট্রাভেল ক্রিয়েটর রিসোর্সেস: আমরা যে টুলগুলো সত্যিই ব্যবহার করি (২০২৬)",
+      "bodySha256": "fe2b9b7c68ac8d762d2e369098317097a9723bdc1fcf84b457160825f6c1746d"
+    },
+    {
+      "path": "/bn/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide",
+      "title": "ঢাকা থেকে কলকাতা ট্রেন ও বাস। | URAL",
+      "h1": "ঢাকা থেকে কলকাতা ট্রেন ও বাস: বেনাপোল সীমান্ত পারাপার, মৈত্রী এক্সপ্রেস অবস্থা ও সম্পূর্ণ BDT খরচ (২০২৬)",
+      "bodySha256": "5e03face9fe4ead9d29947b68228342ca581c70b06b4b3041b95717b61ca3089"
+    },
+    {
+      "path": "/bn/blog/tawaf-sai-seven-circuits-step-by-step-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/tawaf-sai-seven-circuits-step-by-step-guide",
+      "title": "তাওয়াফ ও সাঈ: সাত প্রদক্ষিণ, সঠিক গণনা (২০২৬) | URAL",
+      "h1": "তাওয়াফ ও সাঈ: সাত প্রদক্ষিণ, সঠিক গণনা (২০২৬)",
+      "bodySha256": "164aac0cdeb60a38b88ea399318c77054ed63d98812096cdc508794425e2732c"
+    },
+    {
+      "path": "/bn/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day",
+      "canonical": "https://uraltravel.co.uk/bn/blog/hajj-rites-mina-arafah-muzdalifah-day-by-day",
+      "title": "হজের আমল দিনে দিনে: আরাফাহ, মিনা ও জামারাত (২০২৬) | URAL",
+      "h1": "হজের আমল দিনে দিনে: আরাফাহ, মিনা ও জামারাত (২০২৬)",
+      "bodySha256": "efce25acccc0594ea873fb73f74460a4715ef0e201d832b6b1f49367c4fc34b5"
+    },
+    {
+      "path": "/bn/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh",
+      "canonical": "https://uraltravel.co.uk/bn/blog/coxs-bazar-travel-guide-flights-train-hotels-costs-bangladesh",
+      "title": "কক্সবাজার ট্রাভেল গাইড ২০২৬: ফ্লাইট, ট্রেন, হোটেল ও খরচ",
+      "h1": "কক্সবাজার ভ্রমণ গাইড ২০২৬: ফ্লাইট, ট্রেন, হোটেল আর খরচের আদ্যোপান্ত (যাওয়ার আগে একবার চোখ বুলিয়ে নিন)",
+      "bodySha256": "f6fe02f06ebeaed0f95c3ac816f68d70ca20af7359f3e425615d8e4a41b344e5"
+    },
+    {
+      "path": "/bn/blog/kathmandu-to-coxs-bazar-flights-route-status-booking",
+      "canonical": "https://uraltravel.co.uk/bn/blog/kathmandu-to-coxs-bazar-flights-route-status-booking",
+      "title": "কাঠমান্ডু–কক্সবাজার ফ্লাইট: সরাসরি রুট নেই | URAL",
+      "h1": "কাঠমান্ডু থেকে কক্সবাজার ফ্লাইট (২০২৬): সরাসরি রুট এখনো নেই — ঢাকা সংযোগ, ভাড়া ও ভিসা গাইড",
+      "bodySha256": "19dfabb6ce3be3d632dfd751546c0fa23bda99f34360babfbb5b6d9088fb8de2"
+    },
+    {
+      "path": "/bn/blog/can-you-make-money-travel-affiliate-marketing-ural-experiment",
+      "canonical": "https://uraltravel.co.uk/bn/blog/can-you-make-money-travel-affiliate-marketing-ural-experiment",
+      "title": "ট্রাভেল অ্যাফিলিয়েট মার্কেটিংয়ে কি আয় সম্ভব? বাস্তব পরীক্ষা",
+      "h1": "ট্রাভেল অ্যাফিলিয়েট মার্কেটিংয়ে কি সত্যিই আয় করা যায়? জানতে Ural Travel তৈরি করছি",
+      "bodySha256": "92746b5abdcd48d7bc09777d564ed68abb5442f4b78b4f0004d034bca6798432"
+    },
+    {
+      "path": "/bn/blog/turn-travel-experience-into-income-without-a-website",
+      "canonical": "https://uraltravel.co.uk/bn/blog/turn-travel-experience-into-income-without-a-website",
+      "title": "ভ্রমণ-গল্প থেকে সহায়ক গাইড — আর সম্ভাব্য কিছু আয়",
+      "h1": "আপনার ভ্রমণ-গল্পই অন্য কাউকে পৃথিবী ঘোরাতে পারে — আর সেটি আয়ও এনে দিতে পারে",
+      "bodySha256": "bfbfaa42c72fc8f5c44bdcc1a0455a8ef41b036a83ea088df2a86d506719524f"
+    },
+    {
+      "path": "/bn/blog/nusuk-hotel-brn-rawdah-gate-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/nusuk-hotel-brn-rawdah-gate-guide",
+      "title": "নুসুক হোটেল BRN ও রওদা পারমিট: গেট খোলে কীসে (২০২৬)",
+      "h1": "নুসুক হোটেল BRN ও রওদা পারমিট: গেট আসলে কীসে খোলে",
+      "bodySha256": "70d0ac0830650292359ebc81f1eb58dba182a72c1504936de2523f8b04e7d2bd"
+    },
+    {
+      "path": "/bn/blog/makkah-hotel-sectors-abraj-al-bait-jabal-omar",
+      "canonical": "https://uraltravel.co.uk/bn/blog/makkah-hotel-sectors-abraj-al-bait-jabal-omar",
+      "title": "মক্কার হোটেল সেক্টর: আবরাজ আল-বাইত, জাবাল ওমর ও শাটল জোনের তুলনা",
+      "h1": "মক্কার হোটেল সেক্টর: আবরাজ আল-বাইত, জাবাল ওমর নাকি শাটল জোন",
+      "bodySha256": "f08a7170e67c2acd04f2ac8ee0e9088c2f638edb787f7ac910b88b1394b5ecd9"
+    },
+    {
+      "path": "/bn/blog/where-to-stay-madinah-markazia-gate-guide",
+      "canonical": "https://uraltravel.co.uk/bn/blog/where-to-stay-madinah-markazia-gate-guide",
+      "title": "মদিনায় কোথায় থাকবেন: মারকাজিয়া সেক্টর ও গেট (২০২৬)",
+      "h1": "মদিনায় কোথায় থাকবেন: মারকাজিয়া কোন পাশে, আর কোন গেট ব্যবহার করবেন",
+      "bodySha256": "465ce0bc77b489714d98d0c959693a7ac74e57a7e6930d6610597b92b12a6331"
+    },
+    {
+      "path": "/bn/blog/makkah-budget-shuttle-hotels-prayer-timing",
+      "canonical": "https://uraltravel.co.uk/bn/blog/makkah-budget-shuttle-hotels-prayer-timing",
+      "title": "মক্কার বাজেট হোটেল ও শাটল: আজানের আগের সময়ের নিয়ম (২০২৬)",
+      "h1": "মক্কার বাজেট হোটেল: নামাজের সময়ে শাটলকে কাজে লাগানো",
+      "bodySha256": "7d0a0d53023176b46bab412df95fae34dc2f8b511d8fb5601813e75c6dcc0acd"
+    },
+    {
+      "path": "/bn/blog/makkah-to-madinah-haramain-train-vs-bus-taxi",
+      "canonical": "https://uraltravel.co.uk/bn/blog/makkah-to-madinah-haramain-train-vs-bus-taxi",
+      "title": "মক্কা থেকে মদিনা: ট্রেন, ভিআইপি বাস ও প্রাইভেট ভ্যান (২০২৬)",
+      "h1": "মক্কা থেকে মদিনা: হারামাইন ট্রেন, ভিআইপি বাস নাকি প্রাইভেট ভ্যান",
+      "bodySha256": "a91801611786d29269abdb9bed2b62f6d93751183c449f6e027e6d0be9e2137d"
+    },
+    {
+      "path": "/bn/blog/family-elderly-umrah-hotels-ground-access",
+      "canonical": "https://uraltravel.co.uk/bn/blog/family-elderly-umrah-hotels-ground-access",
+      "title": "পরিবার ও বয়স্কদের ওমরাহ হোটেল: মাটি থেকে প্রবেশ ও কোয়াড রুম (২০২৬)",
+      "h1": "পরিবার ও বয়স্কদের জন্য ওমরাহ হোটেল: মাটি থেকে প্রবেশ ও আসল কোয়াড রুম",
+      "bodySha256": "f0d29d3f00cfc8779592688c7ea006e50c3668c39ec73a95d5cd22a4d4f03718"
+    },
+    {
+      "path": "/bn/blog/makkah-hotel-walking-time-vs-map-distance",
+      "canonical": "https://uraltravel.co.uk/bn/blog/makkah-hotel-walking-time-vs-map-distance",
+      "title": "মক্কায় হাঁটার সময় বনাম ম্যাপের দূরত্ব: রুম থেকে হারাম (২০২৬)",
+      "h1": "মক্কায় হাঁটার সময়: ম্যাপের দূরত্ব যা বলে না",
+      "bodySha256": "196a18eebc29bc489d7344318c804c577245afe9ae0e296a69d1eb11631c2d28"
+    },
+    {
+      "path": "/bn/blog/hajj-umrah-accommodation-guide-makkah-madinah",
+      "canonical": "https://uraltravel.co.uk/bn/blog/hajj-umrah-accommodation-guide-makkah-madinah",
+      "title": "হজ্জ ও ওমরাহর আবাসন গাইড: মক্কা ও মদিনা (২০২৬)",
+      "h1": "হজ্জ ও ওমরাহর আবাসন: কোথায় ঘুমাবেন তা কীভাবে ঠিক করবেন",
+      "bodySha256": "0b4f25c578c14b1eeac3c7872f21da3a4f2d932af981a14d119932704858a448"
+    },
+    {
+      "path": "/bn/blog/umrah-hajj-guide-united-kingdom-2026",
+      "canonical": "https://uraltravel.co.uk/bn/blog/umrah-hajj-guide-united-kingdom-2026",
+      "title": "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ (২০২৬): ভিসা, নুসুক ও এটিওএল",
+      "h1": "যুক্তরাজ্য থেকে ওমরাহ ও হজ্জ (২০২৬): ভিসা, নুসুক ও এটিওএল",
+      "bodySha256": "6986b2d3e53f0c7224f7b72ef4ec75af36db1d2e1a0047fecf6ea9c11962a40f"
+    },
+    {
+      "path": "/bn/blog/uk-umrah-packages-atol-operator-checks",
+      "canonical": "https://uraltravel.co.uk/bn/blog/uk-umrah-packages-atol-operator-checks",
+      "title": "যুক্তরাজ্যের ওমরাহ প্যাকেজ (২০২৬): এটিওএল যাচাই ও অপারেটর বাছাই",
+      "h1": "যুক্তরাজ্যের ওমরাহ প্যাকেজ (২০২৬): এটিওএল, অপারেটর যাচাই ও টাকাটা কোথায় যায়",
+      "bodySha256": "d922682b175dd0e31af1f5538ab9c03d92fa38e7e8b9b93f1905e16e2d6b614b"
+    },
+    {
+      "path": "/bn/blog/uk-to-saudi-flights-umrah-direct-or-connecting",
+      "canonical": "https://uraltravel.co.uk/bn/blog/uk-to-saudi-flights-umrah-direct-or-connecting",
+      "title": "যুক্তরাজ্য থেকে সৌদি ফ্লাইট (২০২৬): কোন রুট ডাইরেক্ট, ভাড়া কত",
+      "h1": "যুক্তরাজ্য থেকে ওমরাহর ফ্লাইট: হিথরো, ম্যানচেস্টার ও বার্মিংহাম থেকে কোনটা সত্যিই ডাইরেক্ট (২০২৬)",
+      "bodySha256": "4575c6d7eadb9fcd5ce072762a8d0689c50f3077360188a1035516e8e4ce92c9"
+    },
+    {
+      "path": "/bn/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step",
+      "canonical": "https://uraltravel.co.uk/bn/blog/uk-passport-umrah-visa-eta-evisa-waiver-step-by-step",
+      "title": "যুক্তরাজ্যের পাসপোর্টে ওমরাহ ভিসা (২০২৬): ইটিএ, ই-ভিসা নাকি ওয়েভার",
+      "h1": "যুক্তরাজ্যের পাসপোর্টে ওমরাহ ভিসা: ইটিএ, ই-ভিসা নাকি ভিসা ওয়েভার — ধাপে ধাপে (২০২৬)",
+      "bodySha256": "b3ddc6dfe02c6cd78d696509658a8ad6fd4cafc5b2bf0dd049b67c3622abd318"
+    },
+    {
+      "path": "/bn/blog/hajj-2027-uk-dates-nusuk-registration-cost",
+      "canonical": "https://uraltravel.co.uk/bn/blog/hajj-2027-uk-dates-nusuk-registration-cost",
+      "title": "যুক্তরাজ্য থেকে হজ্জ ২০২৭: তারিখ, নিবন্ধন ও খরচ",
+      "h1": "যুক্তরাজ্য থেকে হজ্জ ২০২৭: তারিখ, নুসুক হজ্জ নিবন্ধন ও একটি জায়গার আসল খরচ",
+      "bodySha256": "2230fec77fa2a571247d30b244dc70d44fa90554ea0e5edafcbff5711121c2a5"
+    },
+    {
+      "path": "/bn/blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights",
+      "canonical": "https://uraltravel.co.uk/bn/blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights",
+      "title": "যুক্তরাজ্য থেকে রমজান ওমরাহ ২০২৭: তারিখ ও যাচাই করা ভাড়া",
+      "h1": "যুক্তরাজ্য থেকে রমজান ওমরাহ ২০২৭: তারিখ, যাচাই করা ভাড়া ও শেষ দশ রাতের আসল হিসাব",
+      "bodySha256": "a508d062be550751e101fcd9554bcf26055154304927f327c0df6bf421cdd506"
+    },
+    {
+      "path": "/bn/blog/madinah-first-uk-umrah-routings-open-jaw-stopover",
+      "canonical": "https://uraltravel.co.uk/bn/blog/madinah-first-uk-umrah-routings-open-jaw-stopover",
+      "title": "আগে মদিনা নাকি জেদ্দা? যুক্তরাজ্যের ওমরাহ রুট তুলনা",
+      "h1": "আগে মদিনা নাকি আগে জেদ্দা: যুক্তরাজ্য থেকে ওমরাহর তিন রুট, দামসহ তুলনা (২০২৬)",
+      "bodySha256": "df32dbcd05db65bc5453b23be57c874049e4575be875eb790ab59d48268ef73c"
+    }
+  ]
+}
