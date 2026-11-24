@@ -73,6 +73,10 @@ internalLinksEn:
     path: /blog/umrah-hajj-guide-united-kingdom-2026
   - text: "UK Umrah packages: ATOL and operator checks"
     path: /blog/uk-umrah-packages-atol-operator-checks
+  - text: "Hajj 2027 from the UK: dates, Nusuk Hajj registration and what it costs"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
+  - text: "Ramadan Umrah 2027 from the UK: dates, fares and the last ten nights"
+    path: /blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights
   - text: "Haramain train, VIP bus or private van between Makkah and Madinah"
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
   - text: "Madinah first or Jeddah first: the three routings priced"
@@ -88,6 +92,10 @@ internalLinksBn:
     path: /blog/umrah-hajj-guide-united-kingdom-2026
   - text: "যুক্তরাজ্যের ওমরাহ প্যাকেজ: এটিওএল ও অপারেটর যাচাই"
     path: /blog/uk-umrah-packages-atol-operator-checks
+  - text: "যুক্তরাজ্য থেকে হজ্জ ২০২৭: তারিখ, নুসুক হজ্জ নিবন্ধন ও খরচ"
+    path: /blog/hajj-2027-uk-dates-nusuk-registration-cost
+  - text: "রমজান ওমরাহ ২০২৭: তারিখ, যাচাই করা ভাড়া ও শেষ দশ রাত"
+    path: /blog/ramadan-umrah-2027-uk-dates-fares-last-ten-nights
   - text: "মক্কা-মদিনায় হারামাইন ট্রেন, ভিআইপি বাস নাকি প্রাইভেট ভ্যান"
     path: /blog/makkah-to-madinah-haramain-train-vs-bus-taxi
   - text: "আগে মদিনা নাকি আগে জেদ্দা: তিন রুটের ভাড়া তুলনা"
