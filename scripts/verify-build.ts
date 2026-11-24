@@ -50,7 +50,7 @@ import path from "node:path";
 import { validateSitemapPair } from "./sitemapValidation";
 import { checkKlookHotelRedirect } from "./klookRedirectValidation";
 import { fileURLToPath } from "node:url";
-import { CONTENT_UPDATED } from "../src/data/contentMeta";
+import { CONTENT_UPDATED, UK_HUB_UPDATED } from "../src/data/contentMeta";
 import { SITE_ORIGIN, localizePublicSiteUrl } from "../src/utils/localeRoutes";
 import { BLOG_DATA, DESTINATIONS_DATA, FLIGHTS_DATA, HOTELS_DATA, TRIP_COSTS_DATA, VISA_DATA } from "../src/constants";
 import { getBlogAeoPanel, getStaticBlogAeoSlugs } from "../src/utils/blogAeoPanel";
@@ -4293,7 +4293,8 @@ if (sitemap) {
     const isDepartureHubDate = !!hub &&
       (loc === `${SITE_ORIGIN}${hub.path}` || loc === `${SITE_ORIGIN}/bn${hub.path}`) &&
       value === hub.updatedAt;
-    if (!isBlogTimestamp && !isContentDate && !isCostDate && !isDepartureHubDate) badLastmod.push(value);
+    const isUkHubDate = loc === `${SITE_ORIGIN}/uk` && value === UK_HUB_UPDATED;
+    if (!isBlogTimestamp && !isContentDate && !isCostDate && !isDepartureHubDate && !isUkHubDate) badLastmod.push(value);
   }
   check(
     badLastmod.length === 0,

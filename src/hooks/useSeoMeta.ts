@@ -483,7 +483,18 @@ export function useSeoMeta({
       setAlternateLink("en", null);
       setAlternateLink("bn", null);
     }
-    setAlternateLink("en-bd", englishAlternateUrl);
+    // /uk is English-only (no /bn/uk page). The saved HTML declares en-gb, so the
+    // client must keep that tag and drop the generic en-bd alias instead of
+    // adding a second, conflicting alternate after hydration.
+    const isUkRoute = englishAlternateUrl === `${SITE_ORIGIN}/uk`;
+    if (isUkRoute) {
+      setAlternateLink("en", null);
+      setAlternateLink("en-bd", null);
+      setAlternateLink("en-gb", englishAlternateUrl);
+    } else {
+      setAlternateLink("en-gb", null);
+      setAlternateLink("en-bd", englishAlternateUrl);
+    }
     setAlternateLink("x-default", englishAlternateUrl);
     setAlternateLink("bn-bd", bengaliAlternateUrl);
 
@@ -493,7 +504,12 @@ export function useSeoMeta({
       ogLocale.setAttribute("property", "og:locale");
       document.head.appendChild(ogLocale);
     }
-    ogLocale.setAttribute("content", isBengaliRoute ? "bn_BD" : "en_BD");
+    ogLocale.setAttribute("content", isUkRoute ? "en_GB" : isBengaliRoute ? "bn_BD" : "en_BD");
+    // A stale alternate from the previous route would claim a Bengali twin the
+    // UK hub does not have, so it is removed rather than left behind.
+    if (isUkRoute) {
+      document.head.querySelector('meta[property="og:locale:alternate"]')?.remove();
+    }
     if (englishAlternateUrl === `${SITE_ORIGIN}/bangladesh`) {
       let ogAlternate = document.querySelector('meta[property="og:locale:alternate"]');
       if (!ogAlternate) {

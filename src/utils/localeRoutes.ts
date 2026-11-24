@@ -38,13 +38,15 @@ export const SITE_ORIGIN = "https://uraltravel.co.uk";
  * all. The prerender and the client both read it, so the menu can never offer a
  * link the build refused to publish.
  *
- * It is currently EMPTY: /destinations was the last deferred group, and all
- * destination guides now have Bengali copy. A route only
+ * It names /uk: the UK market hub is English-only by design, so it has no
+ * /bn/uk page. Without this entry the client offered a Bengali switcher link and
+ * a bn-bd hreflang that both pointed at a 404. The /destinations group that used
+ * to be listed here now has Bengali copy. A route only
  * gets a Bengali page when BOTH this gate is open AND the route has copy in
  * bengaliContent.ts (BENGALI_ROUTE_SEO or BENGALI_SEO_COPY), so lifting the
  * gate cannot publish an English-bodied bn-BD page.
  */
-export const DEFERRED_BN_GROUPS: readonly string[] = [];
+export const DEFERRED_BN_GROUPS: readonly string[] = ["/uk"];
 
 /** Normalises a path (or full URL) to its English base ("/bn/blog/x?y=1" → "/blog/x"). */
 export function toEnglishBasePath(path: string): string {

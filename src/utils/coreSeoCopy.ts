@@ -42,6 +42,13 @@ const TOOL_SLUG_SEO_COPY: Record<"en" | "bn", Record<string, SeoCopy>> = {
 export const CORE_PRIORITY_SEO_COPY: Record<string, SeoCopy> = {
   ...TOOL_SLUG_SEO_COPY.en,
   "/bangladesh": DEPARTURE_HUBS.bangladesh!.copy.en,
+  // English-only market hub: no /bn/uk page is generated, so this table is the
+  // single source for the hub's visible description and its SERP copy.
+  "/uk": {
+    title: "UK Travel Hub & Intelligence | URAL",
+    description:
+      "Travel intelligence for the UK market: DIY Umrah preparation, ATOL checks, and UK261 flight disruption guides.",
+  },
   "/": getHomePositioning("en"),
   "/umrah": {
     title: "Umrah Cost from Bangladesh: DIY Guide & Nusuk | URAL",
