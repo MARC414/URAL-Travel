@@ -17,8 +17,8 @@ export function CostPlanningHub({ costs, isBn }: { costs: TripCostData[]; isBn: 
     <header className="space-y-4">
       <h1 className="ural-page-title text-3xl text-slate-900 sm:text-4xl">{isBn ? "ট্রিপ বাজেট গাইড" : "Trip Budget Guides"}</h1>
       <p className="max-w-prose text-base leading-relaxed text-slate-700">{isBn
-        ? "নেপাল, থাইল্যান্ড, মালয়েশিয়া, দুবাই, সিঙ্গাপুর ও মালদ্বীপের বাজেট পরিকল্পনা করুন নিজের তারিখ ও যাত্রী অনুযায়ী। প্রতিটি গাইডে কোটেশনের খাত, একক এবং কী মিলিয়ে দেখবেন তা আছে।"
-        : "Plan a budget for Nepal, Thailand, Malaysia, Dubai, Singapore or the Maldives around your own dates and travellers. Each guide explains which quotes to gather, their units and what to compare."}</p>
+        ? "বাংলাদেশ থেকে নেপাল, থাইল্যান্ড, মালয়েশিয়া, দুবাই, সিঙ্গাপুর ও মালদ্বীপ যাত্রার BDT বাজেট পরিকল্পনা করুন নিজের তারিখ ও যাত্রী অনুযায়ী। প্রতিটি গাইডে কোটেশনের খাত, একক এবং কী মিলিয়ে দেখবেন তা আছে।"
+        : "Plan a BDT budget for journeys from Bangladesh to Nepal, Thailand, Malaysia, Dubai, Singapore or the Maldives around your own dates and travellers. Each guide explains which quotes to gather, their units and what to compare."}</p>
       <p className="max-w-prose text-sm leading-relaxed text-slate-600">{isBn
         ? "ফ্লাইট, রুম-রাত ও দৈনিক খরচ আলাদা করে যোগ করুন। একই তারিখ, দল, কর ও অন্তর্ভুক্ত সেবা ছাড়া দুটি মোট তুলনাযোগ্য নয়। কোটেশন সংগ্রহ হলে এস্টিমেটরে উৎস ও তারিখসহ হিসাব করুন।"
         : "Add flights, room-nights and daily spending on their own basis. Two totals are comparable only when dates, party, taxes and inclusions match. Once you have quotes, calculate them with their sources and dates in the estimator."}</p>

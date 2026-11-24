@@ -114,6 +114,35 @@ if (process.argv.includes("--built")) {
     assert.ok(uk, "the live UK hub remains in local search");
     assert.equal(uk.pathBn, undefined, "no fabricated Bengali route for the English-only hub");
   });
+
+  test("directory_intros_state_their_scope_without_rewriting_articles", () => {
+    const read = (path: string) => readFileSync(`dist/${path}.html`, "utf8");
+    const enFlights = read("flights");
+    const bnFlights = read("bn/flights");
+    assert.match(
+      enFlights,
+      /any route worldwide|global flight search/i,
+      "EN Flights says the search is global, not Dhaka-only",
+    );
+    assert.match(enFlights, /popular flights from Dhaka/i, "its curated guides stay labelled Dhaka");
+    assert.match(
+      bnFlights,
+      /বিশ্বের যেকোনো রুট/,
+      "BN Flights carries the same global-search clarification",
+    );
+    assert.match(bnFlights, /ঢাকা/, "the Bengali guide list stays labelled Dhaka");
+
+    const enCosts = read("costs");
+    const bnCosts = read("bn/costs");
+    assert.match(enCosts, /BDT/i, "EN Costs names its currency");
+    assert.match(enCosts, /Bangladesh/i, "EN Costs names its departure context");
+    assert.match(bnCosts, /BDT|টাকা/, "BN Costs names its currency");
+    assert.match(bnCosts, /বাংলাদেশ/, "BN Costs names its departure context");
+
+    // Already-correct characterization: these pages never claimed a global audience.
+    assert.match(read("visa"), /Bangladeshi travelers/i);
+    assert.match(read("destinations"), /from Bangladesh/i);
+  });
 }
 
 console.log(`\n[test-discoverability] ${checks} checks passed.`);
