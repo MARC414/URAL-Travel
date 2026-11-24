@@ -42,8 +42,8 @@ export function FlightsIndex({ routes, isBn, navigateTo, searchSlot }: FlightsIn
         eyebrow={isBn ? "ঢাকা থেকে ফ্লাইট গাইড" : "FLIGHT GUIDES FROM DHAKA"}
         title={isBn ? "ঢাকা থেকে ফ্লাইট: রুট, ভাড়া ও এয়ারলাইন্স" : "International Flights from Dhaka: Routes, Fares & Airlines"}
         description={isBn
-          ? "ঢাকা থেকে সরাসরি ও সংযোগী ফ্লাইটের রুট, যাত্রার সময় ও এয়ারলাইন্স তুলনা করুন, তারপর আপনার তারিখের লাইভ ভাড়া দেখুন।"
-          : "Compare nonstop and connecting routes from Dhaka by journey time and airline, then check live fares for your own travel dates."}
+          ? "বিশ্বের যেকোনো রুটের ফ্লাইট লাইভ সার্চে খুঁজুন। নিচের নির্বাচিত গাইডগুলো ঢাকা থেকে জনপ্রিয় ফ্লাইট নিয়ে — রুট, যাত্রার সময় ও এয়ারলাইন্স তুলনা করে আপনার তারিখের লাইভ ভাড়া দেখুন।"
+          : "Search any route worldwide with the live flight search. The curated guides below cover popular flights from Dhaka, with journey times and airlines to compare before you check live fares for your dates."}
         /* Same photograph as the homepage first-paint hero, so a reader who
            clicks a flight next step from an article lands somewhere that looks
            like the site they were reading — this page is that stop. */

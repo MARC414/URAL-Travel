@@ -346,6 +346,34 @@ for (const intent of ["wheel", "touchstart", "PageDown"] as const) {
     });
   });
 }
+await test("The published hub is focusable at 390/768/1280 in EN and BN", async () => {
+  for (const width of [390, 768, 1280]) {
+    for (const locale of ["en", "bn"] as const) {
+      win.innerWidth = width; lang = locale; await render();
+      if (width >= 1280) {
+        await click(button("nav-tools-toggle"));
+      } else {
+        await click(button("mobile-menu-burger"));
+        await settle();
+        await click(button("mobile-tools-toggle"));
+      }
+      const expected = locale === "bn" ? "/bn/bangladesh" : "/bangladesh";
+      const hub = [...document.querySelectorAll("a")].find((a) => a.getAttribute("href") === expected);
+      assert.ok(hub, `${width}px ${locale}: the hub is in the open Guides & Tools navigation`);
+      assert.equal(hub!.tagName, "A", "a real, focusable anchor, not a click handler on a div");
+      (hub as HTMLElement).focus();
+      assert.equal(document.activeElement, hub, `${width}px ${locale}: keyboard focus reaches the hub`);
+      const before = visits.length;
+      await click(hub!);
+      assert.ok(visits.slice(before).includes("/bangladesh"), `${width}px ${locale}: activating the hub navigates`);
+      await key(document.activeElement ?? document.body, "Escape");
+      await settle();
+      assert.equal(button("mobile-menu-burger")?.getAttribute("aria-expanded") ?? "false", "false", "Escape closes the drawer");
+    }
+  }
+  win.innerWidth = 1280; lang = "en"; await render();
+});
+
 await React.act(async () => { root.unmount(); });
 await win.happyDOM.abort();
 console.log(`[site header] All ${checks} behavioural checks passed.`);
