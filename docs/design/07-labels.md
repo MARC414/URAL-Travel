@@ -5,8 +5,8 @@
 - `uppercase` anywhere: **203 hits in 50 files**.
 - DESIGN.md reserves uppercase tracked labels for section eyebrows, field labels, metadata.
 
-## Decision needed
-Keep one functional tracked-caps style, or retire tracked caps entirely. This is a brand decision, not a mechanical one — record the ruling in `01-gate-precedence.md` before any codemod.
+## Ruling (owner decision, 25 Nov 2026)
+Keep tracked caps for section eyebrows only (per `DESIGN.md` Label role: `--ls-widest: 0.12em` when uppercase). Retire tracked caps from table heads, tags, nav links and metadata. Apply per-file during page redesigns, not as a global codemod.
 
 ## Action
 - Decide ruling (open question to owner).

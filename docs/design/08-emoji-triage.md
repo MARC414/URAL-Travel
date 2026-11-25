@@ -15,5 +15,5 @@
 | `src/routes/DestinationsRouteView.tsx` | 10 |
 | `src/utils/shareCaption.ts` | 10 |
 
-## Action
-Classify each: **icon** (replace with `lucide-react`), **content** (keep, e.g. flag in a country name), or **delete**. `lucide-react` is already a dependency (62 import sites). Apply per-file, not globally, so context is preserved.
+## Ruling (owner decision, 25 Nov 2026)
+Keep emoji where they are part of a text label (e.g. badge strings like "🧳 MUSEUM SECURITY"). Replace only when an emoji is used as a standalone icon. Apply per-file during page redesigns.

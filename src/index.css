@@ -140,6 +140,7 @@ html {
      navy, unusable for text. This shade is 5.93:1 on white / 5.26:1 on ivory. */
   --color-brand-gold-ink: #8A5A00;
   --color-brand-gold-light: #FDF0CC;
+--color-brand-gold-bright: #FFD783; /* gold highlight on navy surfaces (EditorialPageHero) */
 
   --color-navy-deepest: #0B1426;
   --color-navy-dark: #0B1426;
