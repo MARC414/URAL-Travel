@@ -77,7 +77,8 @@ Scanned 187 files in src/. Found **762 hex colour references**, of which 16 dist
 - **Promote** — genuinely new colour, add to `@theme` (max ~6 new tokens).
 - **Exception** — one-off with a written reason (e.g. a partner brand colour).
 
-## Recommended promotions (candidates)
+## Promotions applied (owner decision, 25 Nov 2026)
+- `--color-brand-gold-bright: #FFD783` added to `src/index.css` `@theme`. `EditorialPageHero.tsx` now uses `text-brand-gold-bright` / `[&_a:hover]:text-brand-gold-bright` instead of `text-[#FFD783]`.
 
 Values appearing 5+ times that have no close token match: review the top-20 table above and decide per value. Suggested: `#FFD783` (gold highlight on navy, used in EditorialPageHero) → promote as `--color-brand-gold-bright`.
 

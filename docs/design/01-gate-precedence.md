@@ -22,10 +22,15 @@ When two design authorities disagree, this list is the arbiter. Record any new r
 | 9 | Hallmark CSS stamp on line 1 | URAL has `DESIGN.md` + Tailwind | No stamp. Hallmark runs in audit mode only. |
 | 10 | Impeccable detector (59 rules, `overused-font` deviation) | Applied in PR #27 | Impeccable stays authoritative for URAL-specific rules; Hallmark is the second opinion. |
 
-## Open rulings (need owner decision)
-- Tracked-caps labels: keep one functional style, or retire entirely? (see `07-labels.md`)
-- Bengali type: no automated guard exists; manual BN pass per template required.
-- LCP preload: per-route `lcpImageUrl` added only where a hero image exists.
+## Resolved rulings (owner decision, 25 Nov 2026)
+
+| # | Ruling | Decision |
+|---|---|---|
+| 1 | Tracked-caps labels | **Keep one functional style** — tracked caps (`--ls-widest: 0.12em`) are retained for section eyebrows per `DESIGN.md` (Label role). Retire from table heads, tags, nav links and metadata. Applied per-file during page redesigns, not as a global codemod. |
+| 2 | Emoji | **Keep as content where they are part of a text label** (e.g. badge strings like "🧳 MUSEUM SECURITY"); replace only when an emoji is used as a standalone icon. Applied per-file during page redesigns. |
+| 3 | Promote `#FFD783` | **Promoted** to `--color-brand-gold-bright` in `src/index.css`; `EditorialPageHero.tsx` now uses `text-brand-gold-bright` / `[&_a:hover]:text-brand-gold-bright`. |
+
+## Open rulings (none remaining from Tier 0)
 
 ## Waiver log
 | Date | Gate | Reason |

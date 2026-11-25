@@ -34,7 +34,7 @@ export function EditorialPageHero({
     <section className="overflow-hidden rounded-3xl border border-slate-200 bg-brand-navy text-white shadow-xl">
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)]">
         <div className="relative z-10 flex flex-col justify-center gap-4 p-6 sm:p-8 lg:p-9">
-          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-[#F6B73C]/40 bg-[#F6B73C]/10 px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#FFD783] sm:text-xs">
+          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-[#F6B73C]/40 bg-[#F6B73C]/10 px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-brand-gold-bright sm:text-xs">
             <span className="size-1.5 rounded-full bg-[#F6B73C]" aria-hidden="true" />
             {eyebrow}
           </span>
@@ -61,7 +61,7 @@ export function EditorialPageHero({
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent lg:bg-gradient-to-l lg:from-brand-navy/10 lg:via-transparent lg:to-transparent"
           />
           {credit ? (
-            <figcaption className="absolute bottom-2 right-2 max-w-[90%] rounded-md bg-slate-950/75 px-2 py-1 text-[10px] font-medium leading-tight text-white backdrop-blur-sm [&_a]:underline [&_a]:decoration-white/60 [&_a]:underline-offset-2 [&_a:hover]:text-[#FFD783]">
+            <figcaption className="absolute bottom-2 right-2 max-w-[90%] rounded-md bg-slate-950/75 px-2 py-1 text-[10px] font-medium leading-tight text-white backdrop-blur-sm [&_a]:underline [&_a]:decoration-white/60 [&_a]:underline-offset-2 [&_a:hover]:text-brand-gold-bright">
               {credit}
             </figcaption>
           ) : null}
