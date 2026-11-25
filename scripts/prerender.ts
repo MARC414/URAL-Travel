@@ -1862,6 +1862,8 @@ function buildAllRoutes(): PrerenderRoute[] {
     title: bangladeshHub.copy.en.title,
     description: bangladeshHub.copy.en.description,
     imageUrl: defaultOgImage,
+    lcpImageUrl: `/assets/images/dhaka_airport_widebody_airlines_tarmac_1790520836931-1200.webp`,
+    lcpImageSizes: "100vw",
     lastmod: bangladeshHub.updatedAt,
     breadcrumbs: [
       { name: "Home", url: `${BASE_URL}/` },
