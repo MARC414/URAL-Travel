@@ -2865,6 +2865,7 @@ export default function App() {
                         defaultOrigin={null}
                         defaultDestination={null}
                         showQuickRoutes={false}
+                        compactSubmit
                         onOpenPriceAlert={openPriceAlert}
                       />
                     </React.Suspense>

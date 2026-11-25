@@ -1049,6 +1049,7 @@ export default function TravelpayoutsWidget({
   defaultDestination,
   showQuickRoutes = true,
   showInlineResults = false,
+  compactSubmit = false,
   lang = 'en',
   onOpenPriceAlert,
 }: {
@@ -1058,6 +1059,8 @@ export default function TravelpayoutsWidget({
   defaultDestination?: string | null;
   showQuickRoutes?: boolean;
   showInlineResults?: boolean;
+  /** When true, the submit button shows only "Search Flights" (no arrow, no route/currency summary). Used on the homepage. */
+  compactSubmit?: boolean;
   lang?: 'en' | 'bn';
   onOpenPriceAlert?: (dest?: string) => void;
 }) {
@@ -2295,14 +2298,18 @@ export default function TravelpayoutsWidget({
               <div className="flex items-center gap-1.5 font-black text-base tracking-tight">
                 <Search size={17} className="shrink-0 stroke-[2.5]" />
                 <span>{isBn ? 'ফ্লাইট খুঁজুন' : 'Search Flights'}</span>
-                <ArrowRight
-                  size={16}
-                  className="shrink-0 stroke-[2.5] group-hover:translate-x-0.5 transition-transform"
-                />
+{!compactSubmit && (
+                  <ArrowRight
+                    size={16}
+                    className="shrink-0 stroke-[2.5] group-hover:translate-x-0.5 transition-transform"
+                  />
+                )}
               </div>
-              <span className="text-[11px] font-mono font-bold text-brand-navy/80">
-                {effectiveOrigin?.code || '—'} → {effectiveDest?.code || '—'} · {currency}
-              </span>
+{!compactSubmit && (
+                <span className="text-[11px] font-mono font-bold text-brand-navy/80">
+                  {effectiveOrigin?.code || '—'} → {effectiveDest?.code || '—'} · {currency}
+                </span>
+              )}
             </a>
             <p className="text-xs leading-relaxed text-slate-600" role={!liveFormSearchCode ? 'status' : undefined}>
               {!liveFormSearchCode
