@@ -1295,6 +1295,34 @@ export default function BlogPostRouteView({ context }: RouteViewProps) {
 
 
 
+                          // Standalone markdown image: ![alt](src) or ![alt](src "caption")
+                          {
+                            const mdImageMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/);
+                            if (mdImageMatch) {
+                              const [, altText, src, caption] = mdImageMatch;
+                              const safeSrc = src.trim();
+                              const isAllowedSrc = safeSrc.startsWith("/") || safeSrc.startsWith("https://");
+                              if (isAllowedSrc) {
+                                return (
+                                  <figure key={bIdx} className="my-6">
+                                    <img
+                                      src={safeSrc}
+                                      alt={altText}
+                                      loading="lazy"
+                                      decoding="async"
+                                      className="w-full h-auto rounded-2xl border border-slate-200"
+                                    />
+                                    {caption ? (
+                                      <figcaption className="mt-2 text-xs text-slate-500 leading-relaxed">
+                                        {caption}
+                                      </figcaption>
+                                    ) : null}
+                                  </figure>
+                                );
+                              }
+                            }
+                          }
+
                           // Explicit Markdown headings preserve the author-defined outline.
                           // H1 is the page title; article sections are H2 and nested topics are H3.
                           if (/^##\s+/.test(trimmed) && trimmed.length < 200 && !trimmed.includes("\n")) {

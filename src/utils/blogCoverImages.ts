@@ -47,6 +47,7 @@ const BLOG_COVER_IMAGES: Record<string, string> = {
   "havana-cuba-travel-guide-bangladesh": "havana_gran_teatro_classic_cars_1791427200000",
   "chefchaouen-morocco-travel-guide-bangladesh": "chefchaouen_blue_fountain_alley_1791427400000",
   "dhaka-kolkata-train-bus-benapole-border-bdt-cost-guide": "dhaka_kolkata_benapole_border_train_1791500000000",
+  "travelpayouts-promo-offers-gigsky-yesim-airhelp-travel-guide": "blog_editorial_hero_banner_1790429994056",
 };
 
 export function getBlogCoverImage(slug: string): string {

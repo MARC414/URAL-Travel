@@ -296,7 +296,7 @@ export const OFFICIAL_ORGANISATIONS: readonly OfficialOrganisation[] = [
   org("gb-tfl", "Transport for London (TfL)", "Transport for London (TfL)", "government", "GB", "transport", ["tfl.gov.uk"]),
   org("gb-cbh", "Council of British Hajjis (CBHUK)", "কাউন্সিল অব ব্রিটিশ হাজিস (CBHUK)", "community", "GB", "pilgrimage", ["cbhuk.org"]),
   // European Union and member states
-  org("eu-commission", "European Commission", "ইউরোপীয় কমিশন", "international", "EU", "visa", ["home-affairs.ec.europa.eu"]),
+  org("eu-commission", "European Commission", "ইউরোপীয় কমিশন", "international", "EU", "visa", ["home-affairs.ec.europa.eu", "transport.ec.europa.eu"]),
   org("eu-eur-lex", "EUR-Lex (European Union law)", "EUR-Lex (ইউরোপীয় ইউনিয়নের আইন)", "international", "EU", "consumer", ["eur-lex.europa.eu"], true),
   org("eu-your-europe", "Your Europe (European Union)", "Your Europe (ইউরোপীয় ইউনিয়ন)", "international", "EU", "consumer", ["europa.eu"]),
   org("de-embassy-dhaka", "Embassy of Germany, Dhaka", "জার্মান দূতাবাস, ঢাকা", "government", "DE", "visa", ["dhaka.diplo.de"]),
@@ -341,7 +341,7 @@ export const NON_OFFICIAL_HOSTS: readonly string[] = [
   "blog.wego.com", "booking.com", "csmadinah.com", "deltalife.org", "ebl.com.bd",
   "green-delta.com", "hilton.com", "hiradistrict.com", "kayak.co.uk", "loveumrah.com",
   "packageumrah.co.uk", "reserval.com", "roaming.grameenphone.com", "siblbd.com",
-  "webook.com", "yesim.app", "ziyarago.com", "thefabryk.com", "toptravelsights.com",
+  "webook.com", "yesim.app", "gigsky.com", "ziyarago.com", "thefabryk.com", "toptravelsights.com",
   // encyclopaedias and app-store listings
   "en.wikipedia.org", "saudipedia.com", "play.google.com",
   // private prayer-time and calendar sites
