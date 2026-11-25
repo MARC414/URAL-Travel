@@ -1,5 +1,6 @@
 import React, { useState, useId } from "react";
 import { ExternalLink, Car, Calendar, MapPin, Loader2 } from "lucide-react";
+import { AFFILIATE_LINKS } from "./AffiliatePartners";
 
 export function QeeqEmbed() {
   const uid = useId();
@@ -16,7 +17,9 @@ export function QeeqEmbed() {
     // Simulate premium affiliate routing delay for visual feedback
     setTimeout(() => {
       setIsRedirecting(false);
-      window.open("https://qeeq.tpo.li/nooi5oSG", "_blank", "noopener,noreferrer,sponsored");
+      // Read the registry lazily: AffiliatePartners.tsx imports this module,
+      // so the registry consts are not initialised while this file evaluates.
+      window.open(AFFILIATE_LINKS.qeeq, "_blank", "noopener,noreferrer,sponsored");
     }, 1000);
   };
 

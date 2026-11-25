@@ -12,6 +12,15 @@ export interface DepartureHubRecord {
     h1: string;
     intro: string;
     qualification: string;
+    /**
+     * Optional photo-hero copy. Only a market with a designed hero sets this;
+     * a market without it keeps the plain text header.
+     */
+    hero?: {
+      lead: string;
+      primaryLabel: string;
+      secondaryLabel: string;
+    };
   }>;
   sections: readonly {
     id: string;
@@ -34,6 +43,11 @@ export const DEPARTURE_HUBS: Partial<Record<DepartureMarket, DepartureHubRecord>
         h1: "Travelling from Bangladesh: Start Here",
         intro: "Start with the decision you need to make before leaving Bangladesh. These guides cover Dhaka flight routes, Bangladeshi-passport entry checks, BDT budgets, cards, airport preparation and pilgrimage planning. Open the relevant guide for its sources and details; this page is an index, not a booking or visa-application service.",
         qualification: "Departure country does not determine visa eligibility. If you hold another passport or live abroad, check the rules for your nationality and residence. Confirm current entry conditions, flight availability and baggage rules with the official authority or airline before paying.",
+        hero: {
+          lead: "Your route, your visa, your money and your airport day decide how the trip goes. Start with the one you have not settled yet.",
+          primaryLabel: "Start with flights",
+          secondaryLabel: "Check visa rules",
+        },
       },
       bn: {
         title: "বাংলাদেশ থেকে ভ্রমণ: ফ্লাইট, ভিসা ও যাত্রার প্রস্তুতি | URAL",
@@ -41,6 +55,11 @@ export const DEPARTURE_HUBS: Partial<Record<DepartureMarket, DepartureHubRecord>
         h1: "বাংলাদেশ থেকে ভ্রমণ: এখান থেকেই শুরু করুন",
         intro: "বাংলাদেশ ছাড়ার আগে যে সিদ্ধান্তটি নিতে হবে, সেটি দিয়েই শুরু করুন। এখানে ঢাকার ফ্লাইট রুট, বাংলাদেশি পাসপোর্টের প্রবেশের শর্ত, টাকায় বাজেট, কার্ড, বিমানবন্দরের প্রস্তুতি ও তীর্থযাত্রার গাইড আছে। সূত্র ও বিস্তারিত জানতে সংশ্লিষ্ট গাইড খুলুন; এই পাতা একটি গাইড সূচি, বুকিং বা ভিসা আবেদনের সেবা নয়।",
         qualification: "কোন দেশ থেকে যাত্রা করছেন, তা দিয়ে ভিসার যোগ্যতা নির্ধারিত হয় না। অন্য দেশের পাসপোর্ট থাকলে বা বিদেশে বসবাস করলে আপনার জাতীয়তা ও বসবাসের অবস্থার জন্য প্রযোজ্য নিয়ম যাচাই করুন। টাকা দেওয়ার আগে সংশ্লিষ্ট সরকারি কর্তৃপক্ষ বা এয়ারলাইনের কাছে বর্তমান প্রবেশের শর্ত, ফ্লাইটের প্রাপ্যতা ও ব্যাগেজের নিয়ম নিশ্চিত করুন।",
+        hero: {
+          lead: "আপনার রুট, ভিসা, টাকা আর বিমানবন্দরের দিনটিই ঠিক করে ভ্রমণ কেমন হবে। যেটি এখনো ঠিক করেননি, সেটি দিয়েই শুরু করুন।",
+          primaryLabel: "ফ্লাইট দিয়ে শুরু করুন",
+          secondaryLabel: "ভিসার নিয়ম দেখুন",
+        },
       },
     },
     sections: [

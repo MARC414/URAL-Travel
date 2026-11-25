@@ -297,7 +297,7 @@ export const AttractionDetailPage: React.FC<AttractionDetailPageProps> = ({
 
             {/* Primary CTA: Tiqets */}
             <a
-              href={`https://tiqets.tpo.li/KSc4uyIB?product=${attractionId}`}
+              href={`${AFFILIATE_LINKS.tiqets}?product=${attractionId}`}
               target="_blank"
               rel="noopener noreferrer sponsored"
               className="w-full lg:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-navy text-white font-bold rounded-2xl hover:bg-brand-emerald transition-all shadow-lg hover:shadow-xl border border-brand-gold/30"

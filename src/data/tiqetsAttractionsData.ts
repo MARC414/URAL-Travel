@@ -9,10 +9,9 @@
  * This is real, researched affiliate content — keep it unless the
  * global-attractions surface is formally abandoned.
  *
- * Note: `TIQETS_PARTNER_LINK` below duplicates the canonical affiliate URL in
- * `src/components/AffiliatePartners.tsx` (identical value today). If the
- * partner link ever changes, change both — or have this file import the
- * canonical constant instead of keeping its own copy.
+ * Note: `TIQETS_PARTNER_LINK` is derived from the canonical registry entry
+ * `AFFILIATE_LINKS.tiqets` in `src/components/AffiliatePartners.tsx`; there is
+ * one source of truth.
  *
  * See `docs/MASTER-REMEDIATION-PLAN.md` → "Unshipped surfaces".
  */
@@ -86,7 +85,10 @@ export interface CityTripleStack {
   };
 }
 
-export const TIQETS_PARTNER_LINK = "https://tiqets.tpo.li/KSc4uyIB";
+import { AFFILIATE_LINKS } from "../components/AffiliatePartners";
+
+// Single source of truth: AFFILIATE_LINKS.tiqets in src/components/AffiliatePartners.tsx.
+export const TIQETS_PARTNER_LINK = AFFILIATE_LINKS.tiqets;
 
 export const TIQETS_CITY_STACKS: CityTripleStack[] = [
   {
