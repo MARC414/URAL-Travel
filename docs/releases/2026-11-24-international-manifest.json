@@ -5,7 +5,9 @@
   "allowedAddedPaths": [
     "/bangladesh",
     "/bn/bangladesh",
-    "/uk"
+    "/uk",
+    "/blog/travelpayouts-promo-offers-gigsky-yesim-airhelp-travel-guide",
+    "/bn/blog/travelpayouts-promo-offers-gigsky-yesim-airhelp-travel-guide"
   ],
   "allowedChangedPaths": [
     "/",
@@ -17,6 +19,8 @@
     "/bn/sitemap",
     "/blog",
     "/bn/blog",
+    "/resources",
+    "/bn/resources",
     "/blog/umrah-hajj-guide-united-kingdom-2026",
     "/blog/uk-umrah-packages-atol-operator-checks",
     "/blog/uk-to-saudi-flights-umrah-direct-or-connecting",

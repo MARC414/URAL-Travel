@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Yesim travel eSIM promo card">
+  <defs>
+    <linearGradient id="bgY" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1426"/>
+      <stop offset="100%" stop-color="#1F3B2C"/>
+    </linearGradient>
+    <linearGradient id="accentY" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#D4941A"/>
+      <stop offset="100%" stop-color="#F0B429"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bgY)" rx="28"/>
+  <rect x="48" y="48" width="1104" height="579" rx="20" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <rect x="72" y="72" width="180" height="42" rx="21" fill="rgba(212,148,26,0.18)" stroke="rgba(212,148,26,0.45)"/>
+  <text x="162" y="99" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#F0B429">TRAVEL eSIM</text>
+  <text x="72" y="170" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700" fill="#FFFFFF">Yesim</text>
+  <text x="72" y="215" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#CBD5E1">Travel eSIM plans for international data, with Pay &amp; Fly options</text>
+  <rect x="72" y="260" width="520" height="2" fill="url(#accentY)"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#E2E8F0">
+    <circle cx="88" cy="318" r="7" fill="#F0B429"/><text x="112" y="327">Pay &amp; Fly / country / global plan options vary by destination</text>
+    <circle cx="88" cy="378" r="7" fill="#F0B429"/><text x="112" y="387">Digital install and plan management in the Yesim app</text>
+    <circle cx="88" cy="438" r="7" fill="#F0B429"/><text x="112" y="447">Confirm device support, validity, hotspot rules, and final price</text>
+  </g>
+  <rect x="72" y="500" width="420" height="72" rx="16" fill="url(#accentY)"/>
+  <text x="282" y="545" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#0B1426">Check live promo terms</text>
+  <text x="72" y="610" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#94A3B8">Editorial promo card by URAL • Not an official brand banner • Verify live terms before purchase</text>
+</svg>
