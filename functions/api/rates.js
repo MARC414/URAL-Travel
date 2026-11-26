@@ -1,6 +1,6 @@
 /** Daily reference data for URAL's own display; cache retains a bounded stale copy. */
 import {
-  RATES_UPSTREAM, normalizeUpstreamRates, validateRatesPayload, ratesFreshness, ratesExpireAt,
+  RATES_UPSTREAM, FALLBACK_UPSTREAM, normalizeFallbackRates, normalizeUpstreamRates, validateRatesPayload, ratesFreshness, ratesExpireAt,
 } from "../../src/utils/rateData.ts";
 
 const RETRY_MS = 20 * 60 * 1000;
@@ -29,13 +29,18 @@ async function fetchUpstream() {
   if (upstreamPending) return upstreamPending;
   upstreamPending = (async () => {
     try {
-      const response = await fetch(RATES_UPSTREAM, { signal: AbortSignal.timeout(7000) });
-      if (!response.ok) return null;
-      const payload = normalizeUpstreamRates(await response.json());
-      if (payload?.eol) console.warn("[ural rates] Provider end-of-life announced:", new Date(payload.eol * 1000).toISOString());
-      return payload;
-    } catch {
-      return null;
+      let best = null;
+      for (const [url, normalize] of [[RATES_UPSTREAM, normalizeUpstreamRates], [FALLBACK_UPSTREAM, normalizeFallbackRates]]) {
+        try {
+          const response = await fetch(url, { signal: AbortSignal.timeout(4500) });
+          if (!response.ok) continue;
+          const payload = normalize(await response.json());
+          if (payload?.eol) console.warn("[ural rates] Provider end-of-life announced:", new Date(payload.eol * 1000).toISOString());
+          if (payload && (!best || payload.timeLastUpdateUnix > best.timeLastUpdateUnix)) best = payload;
+          if (best && ratesFreshness(best) === "fresh") return best;
+        } catch { /* Try the independent fallback before using a bounded stale copy. */ }
+      }
+      return best;
     } finally {
       upstreamPending = null;
     }
@@ -47,7 +52,7 @@ export async function onRequestGet({ request }) {
   if (!isSameOrigin(request)) return reply(request, { unavailable: true }, 403);
   // Cache API is best-effort and per Cloudflare location, not a global daily cron.
   const cache = globalThis.caches?.default;
-  const key = new Request(new URL("/api/rates-cache-v2", request.url), { method: "GET" });
+  const key = new Request(new URL("/api/rates-cache-v3", request.url), { method: "GET" });
   let saved = null;
   try {
     const response = await cache?.match(key);

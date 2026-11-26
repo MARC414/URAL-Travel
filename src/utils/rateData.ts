@@ -2,17 +2,24 @@
 export const RATES_PROVIDER = "Rates By Exchange Rate API";
 export const RATES_PROVIDER_URL = "https://www.exchangerate-api.com";
 export const RATES_UPSTREAM = "https://open.er-api.com/v6/latest/BDT";
+export const FALLBACK_PROVIDER = "Frankfurter";
+export const FALLBACK_PROVIDER_URL = "https://frankfurter.dev";
+export const FALLBACK_UPSTREAM = "https://api.frankfurter.dev/v2/rates?base=BDT&quotes=USD,EUR,GBP,SAR,AED,NPR,THB,MYR,SGD,MVR";
 export const RATE_DAY_MS = 86_400_000;
-const DISPLAY_CODES = ["BDT", "USD", "EUR", "GBP", "SAR", "AED", "NPR", "THB", "MYR", "SGD", "MVR"];
+export const DISPLAY_CODES = ["BDT", "USD", "EUR", "GBP", "SAR", "AED", "NPR", "THB", "MYR", "SGD", "MVR"];
 
 export interface RatesPayload {
   base: "BDT";
   rates: Record<string, number>;
+  /** Exact publication time for primary; oldest daily observation at UTC midnight for fallback. */
   timeLastUpdateUnix: number;
+  /** Provider's next update for primary; conservative next-midnight refresh boundary for fallback. */
   timeNextUpdateUnix: number;
   sourceDateIso: string;
   fetchedAt: string;
-  provider: typeof RATES_PROVIDER;
+  provider: typeof RATES_PROVIDER | typeof FALLBACK_PROVIDER;
+  /** Fallback dates are daily observations, not exact publication times. */
+  dateOnly?: boolean;
   eol: number;
 }
 
@@ -40,7 +47,9 @@ function record(value: unknown): value is Record<string, unknown> {
 
 /** Reject corrupt caches, wrong bases, missing dates, EOL and non-finite quotes. */
 export function validateRatesPayload(data: unknown, now = Date.now()): RatesPayload | null {
-  if (!record(data) || data.base !== "BDT" || data.provider !== RATES_PROVIDER || !record(data.rates)) return null;
+  if (!record(data) || data.base !== "BDT" || ![RATES_PROVIDER, FALLBACK_PROVIDER].includes(String(data.provider)) || !record(data.rates)) return null;
+  const dateOnly = data.provider === FALLBACK_PROVIDER;
+  if (dateOnly && data.dateOnly !== true) return null;
   const last = data.timeLastUpdateUnix;
   const next = data.timeNextUpdateUnix;
   const eol = data.eol;
@@ -50,6 +59,7 @@ export function validateRatesPayload(data: unknown, now = Date.now()): RatesPayl
   const fetched = typeof data.fetchedAt === "string" ? Date.parse(data.fetchedAt) : NaN;
   if (!Number.isFinite(fetched) || fetched > now + 300_000 || fetched < last * 1000 - 300_000) return null;
   const sourceDateIso = new Date(last * 1000).toISOString().slice(0, 10);
+  if (dateOnly && (last * 1000 !== Date.parse(sourceDateIso) || next !== last + 86400 || eol !== 0)) return null;
   if (data.sourceDateIso !== sourceDateIso || data.rates.BDT !== 1) return null;
 
   const rates: Record<string, number> = {};
@@ -59,10 +69,10 @@ export function validateRatesPayload(data: unknown, now = Date.now()): RatesPayl
     if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) return null;
     rates[code] = value;
   }
-  if (!rates.USD) return null;
+  if (!rates.USD || (dateOnly && !DISPLAY_CODES.every(code => code in rates))) return null;
   const payload: RatesPayload = {
     base: "BDT", rates, timeLastUpdateUnix: last, timeNextUpdateUnix: next,
-    sourceDateIso, fetchedAt: new Date(fetched).toISOString(), provider: RATES_PROVIDER, eol,
+    sourceDateIso, fetchedAt: new Date(fetched).toISOString(), provider: dateOnly ? FALLBACK_PROVIDER : RATES_PROVIDER, ...(dateOnly ? { dateOnly: true } : {}), eol,
   };
   return ratesFreshness(payload, now) === "expired" ? null : payload;
 }
@@ -78,4 +88,32 @@ export function normalizeUpstreamRates(data: unknown, now = Date.now()): RatesPa
     sourceDateIso: new Date(last * 1000).toISOString().slice(0, 10),
     fetchedAt: new Date(now).toISOString(), provider: RATES_PROVIDER, eol: data.time_eol_unix,
   }, now);
+}
+
+/** Require all supported pairs. Use the oldest pair date conservatively for the
+ * entire set; never upgrade an old pair using a newer pair or retrieval date. */
+export function normalizeFallbackRates(data: unknown, now = Date.now()): RatesPayload | null {
+  if (!Array.isArray(data)) return null;
+  const rates: Record<string, number> = { BDT: 1 };
+  let oldest = Infinity;
+  for (const row of data) {
+    if (!record(row) || row.base !== "BDT" || typeof row.quote !== "string" ||
+        !DISPLAY_CODES.includes(row.quote) || row.quote === "BDT" || row.quote in rates ||
+        typeof row.date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(row.date) ||
+        typeof row.rate !== "number" || !Number.isFinite(row.rate) || row.rate <= 0) return null;
+    const date = Date.parse(row.date);
+    if (!Number.isFinite(date) || new Date(date).toISOString().slice(0, 10) !== row.date || date > now) return null;
+    oldest = Math.min(oldest, date);
+    rates[row.quote] = row.rate;
+  }
+  if (!DISPLAY_CODES.every(code => code in rates)) return null;
+  return validateRatesPayload({
+    base: "BDT", rates, provider: FALLBACK_PROVIDER, dateOnly: true, eol: 0,
+    timeLastUpdateUnix: oldest / 1000, timeNextUpdateUnix: oldest / 1000 + 86400,
+    sourceDateIso: new Date(oldest).toISOString().slice(0, 10), fetchedAt: new Date(now).toISOString(),
+  }, now);
+}
+
+export function ratesProviderUrl(payload: RatesPayload): string {
+  return payload.provider === FALLBACK_PROVIDER ? FALLBACK_PROVIDER_URL : RATES_PROVIDER_URL;
 }

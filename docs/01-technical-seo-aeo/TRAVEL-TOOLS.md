@@ -1,11 +1,28 @@
 # Travel tools — data and calculation contracts
 
-**Lifecycle: CURRENT IMPLEMENTATION REFERENCE · 7 November 2026**
+**Lifecycle: CURRENT IMPLEMENTATION REFERENCE · exchange-rate contract updated 26 November 2026**
 
 ## Exchange rates
 
 `functions/api/rates.js` fetches ExchangeRate API Open Access with BDT as the base.
-`src/utils/rateData.ts` is the shared validation contract. The rate date comes from
+If it fails, is invalid, or is stale, the function tries Frankfurter v2's default
+blended reference rates (no key or subscription). All ten foreign currencies used
+by URAL were available in the BDT response checked on 26 November 2026.
+Frankfurter's [FAQ](https://frankfurter.dev/#faq) permits commercial use and caching
+of blended rates without mandatory credit; URAL nevertheless credits the actual
+provider. This does not apply to separately queried per-provider datasets.
+
+The fallback requires all supported pairs, rejects invalid/future dates and rates,
+and conservatively uses the oldest pair date for freshness and expiry of the whole
+set. Its date-only caption says “oldest rate date”; no publication time is invented.
+The next midnight is a refresh boundary, not a claimed provider publication schedule.
+Rates more than 48 hours from that oldest date are rejected, including on weekends;
+unavailable is preferable to quietly extending stale data. A newer successful
+response must not be overwritten by older data. Fresh primary data avoids a
+fallback request. Each upstream attempt has a 4.5-second timeout; the browser allows
+12 seconds for the endpoint's two attempts.
+
+`src/utils/rateData.ts` is the shared validation contract. The primary rate date comes from
 the provider's top-level `time_last_update_unix`; `fetchedAt` is a separate retrieval
 timestamp. A missing timestamp, incorrect base, invalid rate or expired payload is
 unavailable, never today's rate by default.
@@ -17,14 +34,18 @@ unavailable, never today's rate by default.
 - Failed requests have a retry delay. Concurrent requests within an isolate and
   concurrent browser widgets are coalesced.
 - Browser session storage is optional. A blocked store does not remove attribution.
-- `RatesNotice` renders the actual source timestamp, a clickable
-  **Rates By Exchange Rate API** credit, reference-only wording and the cached-data
-  notice when applicable. Conversion helpers reject non-finite or expired values.
+- `RatesNotice` renders the source timestamp (or oldest date for the fallback),
+  the actual provider's credit/link, reference-only wording and a stale-data
+  notice when applicable. Age alone does not claim a refresh failed. Conversion helpers reject non-finite
+  or expired values.
 - `rateLine(from, to, rates, locale)` divides the target quote by the source quote.
   Provider rates are units of foreign currency per BDT, not the inverse.
 
 The endpoint supplies URAL's own display. Currency choices in flight-search links
 are provider preferences; they do not depend on a local FX conversion succeeding.
+The flight widget does not fetch local rates or render an exchange-rate notice.
+Live fares and their currency display belong to the hosted flight-search partner;
+the old unsourced local fare table remains excluded from computed results.
 
 ## Trip Cost Estimator
 

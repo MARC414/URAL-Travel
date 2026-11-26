@@ -38,9 +38,12 @@ for (const name of [
 }
 scope.IS_REACT_ACT_ENVIRONMENT = true;
 
-// The widget reads dated FX rates and provider autocomplete. Tests must not
-// touch the network; a rejected fetch exercises the widget's offline path.
-const offlineFetch = () => Promise.reject(new Error("offline test"));
+// Flight preferences must work without local FX. Autocomplete stays offline.
+const requestedUrls: string[] = [];
+const offlineFetch = (url: unknown) => {
+  requestedUrls.push(String(url));
+  return Promise.reject(new Error("offline test"));
+};
 scope.fetch = offlineFetch;
 (win as unknown as Record<string, unknown>).fetch = offlineFetch;
 
@@ -111,6 +114,21 @@ async function submitForm(host: HTMLElement) {
     form!.dispatchEvent(new win.Event("submit", { bubbles: true, cancelable: true }) as unknown as Event);
   });
 }
+
+await test("flight currency preferences need no FX endpoint or rate notice in either language", async () => {
+  for (const lang of ["en", "bn"]) {
+    requestedUrls.length = 0;
+    const { host, unmount } = await mount({ lang, defaultOrigin: null, defaultDestination: null });
+    try {
+      assert.equal(host.querySelector("[data-rates-notice]"), null);
+      const gbp = [...host.querySelectorAll("button")].find(button => button.textContent?.trim() === "£ GBP");
+      assert.ok(gbp);
+      await click(gbp!);
+      assert.equal(new URL(submitLink(host).href).searchParams.get("currency"), "GBP");
+      assert.ok(!requestedUrls.some(url => url.includes("/api/rates")));
+    } finally { await unmount(); }
+  }
+});
 
 for (const lang of ["en", "bn"] as const) {
   await test(`explicit_null_origin_destination_are_unselected (${lang})`, () => {
