@@ -1,5 +1,5 @@
 import { ratesFreshness, validateRatesPayload, type RatesPayload } from "./rateData";
-export { RATES_PROVIDER, RATES_PROVIDER_URL, ratesFreshness, type RatesPayload } from "./rateData";
+export { RATES_PROVIDER, RATES_PROVIDER_URL, ratesProviderUrl, ratesFreshness, type RatesPayload } from "./rateData";
 
 export const RATES_ENDPOINT = "/api/rates";
 const SESSION_KEY = "ural:rates:v2";
@@ -32,7 +32,7 @@ export async function loadRates(): Promise<RatesPayload | null> {
   if (pending) return pending;
   pending = (async () => {
     try {
-      const response = await fetch(RATES_ENDPOINT, { cache: "no-store", signal: AbortSignal.timeout(8000) });
+      const response = await fetch(RATES_ENDPOINT, { cache: "no-store", signal: AbortSignal.timeout(12000) });
       if (!response.ok) throw new Error("Rates unavailable");
       const payload = validateRatesPayload(await response.json());
       if (!payload) throw new Error("Invalid rate data");
@@ -77,8 +77,9 @@ export function rateLine(fromCode: string, toCode: string, rates: RatesPayload |
 export function ratesCaption(rates: RatesPayload | null, isBn: boolean): string | null {
   if (!rates || ratesFreshness(rates) === "expired") return null;
   const date = new Intl.DateTimeFormat(isBn ? "bn-BD" : "en-GB", {
-    day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "UTC",
+    day: "numeric", month: "long", year: "numeric", ...(rates.dateOnly ? {} : { hour: "2-digit" as const, minute: "2-digit" as const }), timeZone: "UTC",
   }).format(new Date(rates.timeLastUpdateUnix * 1000));
+  if (rates.dateOnly) return isBn ? `রেফারেন্স রেট · প্রাচীনতম রেটের তারিখ ${date}` : `Reference rates · oldest rate date ${date}`;
   return isBn ? `রেফারেন্স রেট · হালনাগাদ ${date} UTC` : `Reference rates · updated ${date} UTC`;
 }
 

@@ -32,14 +32,10 @@ import { AFFILIATE_LINKS, resolvePartnerUrl } from './AffiliatePartners';
 declare const SpeechRecognition: any;
 declare const webkitSpeechRecognition: any;
 import { buildFlightSearchCode, buildWhiteLabelUrl, preferredCurrencyForOrigin } from '../utils/flightSearch';
-import { useRates } from '../utils/rates-hook';
-import { quote, formatConverted } from '../utils/rates';
-import { RatesNotice } from './RatesNotice';
 
 const MARKER_ID = '675992';
 
-// Currency config is built dynamically from fetched rates (see dynamicCurrencyConfig below)
-// BDT is the unit (rateFromBdt: 1); all other rates come from ExchangeRate API
+// Partner-search currency preferences do not require local exchange rates.
 
 const currencySymbols: Record<string, string> = {
   BDT: '৳',
@@ -1097,13 +1093,6 @@ export default function TravelpayoutsWidget({
   const [currency, setCurrency] = useState<"BDT" | "USD" | "EUR" | "GBP" | "SAR" | "AED">(() =>
     preferredCurrencyForOrigin(resolvedDefaultOrigin || '')
   );
-  const { rates, status } = useRates();
-  const [ratesReady, setRatesReady] = useState(false);
-
-  useEffect(() => {
-    if (status === "ready" && rates) setRatesReady(true);
-  }, [status, rates]);
-
   // Once the visitor picks a currency, the route must stop overriding it.
   const currencyChosenRef = useRef(false);
 
@@ -1683,32 +1672,13 @@ export default function TravelpayoutsWidget({
     return buildWhiteLabelUrl({ currency, locale: lang, subId: placementSubId });
   }, [currency, lang, placementSubId]);
 
-  // Dynamic currency config built from fetched rates — never hard-coded
-  const dynamicCurrencyConfig = useMemo(() => {
-    const codes = ['BDT', 'USD', 'EUR', 'GBP', 'SAR', 'AED'];
-    const config: Record<string, { symbol: string; code: string; label: string; rateFromBdt: number | null }> = {};
-    for (const code of codes) {
-      const rate = code === 'BDT' ? 1 : (ratesReady ? quote(code, rates) : null);
-      config[code] = {
-        symbol: currencySymbols[code] || code,
-        code,
-        label: `${currencySymbols[code] || code} ${code}`,
-        rateFromBdt: rate,
-      };
-    }
-    return config;
-  }, [rates, ratesReady]);
+  // These are partner display preferences, not conversion quotes.
+  const searchCurrencies = Object.entries(currencySymbols).map(([code, symbol]) => ({
+    code, label: `${symbol} ${code}`,
+  }));
 
-
-
-  const formatMoney = (bdtAmount: number) => {
-    if (!ratesReady || !rates || currency === 'BDT') {
-      return `৳${bdtAmount.toLocaleString()} BDT`;
-    }
-    const converted = formatConverted(bdtAmount, currency, rates, isBn);
-    if (converted) return converted;
-    return `৳${bdtAmount.toLocaleString()} BDT`;
-  };
+  // Dormant legacy result markup remains BDT-only; hosted search owns live fares.
+  const formatMoney = (bdtAmount: number) => `৳${bdtAmount.toLocaleString()} BDT`;
 
   const formatSecondaryMoney = (bdtAmount, usdAmount) => {
     if (currency === 'BDT') {
@@ -1879,7 +1849,7 @@ export default function TravelpayoutsWidget({
               {isBn ? 'মুদ্রা:' : 'Currency:'}
             </span>
             <div className="inline-flex flex-wrap items-center bg-slate-100 p-1 rounded-xl border border-slate-200/70 text-xs font-semibold">
-              {Object.values(dynamicCurrencyConfig).map((curr) => (
+              {searchCurrencies.map((curr) => (
                 <button
                   key={curr.code}
                   type="button"
@@ -1898,10 +1868,6 @@ export default function TravelpayoutsWidget({
               ))}
             </div>
           </div>
-
-          {ratesReady && rates && (
-            <RatesNotice rates={rates} isBn={isBn} />
-          )}
         </div>
 
         {/* ROW 2: FULL-WIDTH ROUTE/DATE STRIP WITH PRIMARY CTA BELOW IT */}

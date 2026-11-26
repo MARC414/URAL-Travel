@@ -1,5 +1,5 @@
 import React from "react";
-import { RATES_PROVIDER, RATES_PROVIDER_URL, ratesCaption, ratesFreshness, rateLine, type RatesPayload } from "../utils/rates";
+import { ratesProviderUrl, ratesCaption, ratesFreshness, rateLine, type RatesPayload } from "../utils/rates";
 import { useRates } from "../utils/rates-hook";
 
 export function RatesNotice({ rates, isBn, fromCode, toCode = "BDT" }: {
@@ -11,10 +11,10 @@ export function RatesNotice({ rates, isBn, fromCode, toCode = "BDT" }: {
   return (
     <div data-rates-notice className="space-y-1 text-xs leading-relaxed text-slate-600">
       {line && <p className="font-mono font-semibold text-slate-800">{line}</p>}
-      <p>{caption} · <a href={RATES_PROVIDER_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-navy">{RATES_PROVIDER}</a></p>
+      <p>{caption} · <a href={ratesProviderUrl(rates)} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-navy">{rates.provider}</a></p>
       {ratesFreshness(rates) === "stale" && <p className="font-semibold text-amber-800">{isBn
-        ? "নতুন রেট পাওয়া যায়নি; উপরের তারিখের ক্যাশ করা রেট দেখানো হচ্ছে।"
-        : "Refresh unavailable; using cached rates from the date above."}</p>}
+        ? "উপরের তারিখের আগের রেট ব্যবহার করা হচ্ছে; নতুন রেটের জন্য আবার চেষ্টা করা হবে।"
+        : "Using cached rates from the date above; a newer rate will be requested."}</p>}
       <p>{isBn
         ? "শুধু পরিকল্পনার রেফারেন্স; লেনদেনের রেট নয়। আপনার ব্যাংক বা সেবাদাতার রেট ও ফি ভিন্ন হতে পারে।"
         : "For planning only, not transaction rates. Your bank or provider may apply a different rate and fees."}</p>

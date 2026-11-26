@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { normalizeUpstreamRates, validateRatesPayload, ratesFreshness, RATE_DAY_MS } from "../src/utils/rateData";
+import { normalizeUpstreamRates, normalizeFallbackRates, DISPLAY_CODES, FALLBACK_UPSTREAM, FALLBACK_PROVIDER, validateRatesPayload, ratesFreshness, RATE_DAY_MS } from "../src/utils/rateData";
 import { quote, rateLine, ratesCaption, formatConverted, loadRates } from "../src/utils/rates";
 import { RatesNotice } from "../src/components/RatesNotice";
 import { onRequestGet, onRequestOptions } from "../functions/api/rates.js";
@@ -88,9 +88,9 @@ try {
     assert.equal(stale.status, 200);
     assert.equal(payload.sourceDateIso, "2026-11-07");
     assert.equal(ratesFreshness(payload), "stale");
-    assert.match(renderToStaticMarkup(React.createElement(RatesNotice, { rates: payload, isBn: false })), /using cached rates/);
+    assert.match(renderToStaticMarkup(React.createElement(RatesNotice, { rates: payload, isBn: false })), /Using cached rates/);
     await onRequestGet({ request });
-    assert.equal(calls, 1, "a provider failure must not be retried on every request");
+    assert.equal(calls, 2, "both providers fail once; a provider failure must not be retried on every request");
     now = start + 49 * 3600_000;
     const expired = await onRequestGet({ request });
     assert.equal(expired.status, 503);
@@ -114,6 +114,84 @@ try {
     assert.equal(onRequestOptions({ request: foreign }).status, 403);
     assert.equal(onRequestOptions({ request }).status, 204);
     assert.notEqual(onRequestOptions({ request }).headers.get("Access-Control-Allow-Origin"), "*");
+  });
+  await test("fallback validates all pairs, rejects bad dates and uses the oldest date", () => {
+    now = start;
+    const rows = DISPLAY_CODES.filter(code => code !== "BDT").map(quote => ({ base: "BDT", quote, rate: 0.01, date: "2026-11-07" }));
+    const payload = normalizeFallbackRates(rows)!;
+    assert.equal(payload.provider, FALLBACK_PROVIDER);
+    assert.equal(payload.dateOnly, true);
+    assert.equal(payload.timeLastUpdateUnix, Date.parse("2026-11-07") / 1000);
+    assert.equal(normalizeFallbackRates(rows.slice(1)), null);
+    for (const patch of [{ date: "2026-11-08" }, { date: "2026-02-30" }, { base: "USD" }, { rate: 0 }, { rate: Infinity }]) {
+      assert.equal(normalizeFallbackRates([{ ...rows[0], ...patch }, ...rows.slice(1)]), null);
+    }
+    assert.equal(normalizeFallbackRates([...rows, rows[0]]), null);
+    const mixed = normalizeFallbackRates([{ ...rows[0], date: "2026-11-06" }, ...rows.slice(1)])!;
+    assert.equal(mixed.sourceDateIso, "2026-11-06");
+    assert.equal(ratesFreshness(mixed), "stale");
+    assert.equal(normalizeFallbackRates([{ ...rows[0], date: "2026-11-05" }, ...rows.slice(1)]), null);
+    for (const isBn of [false, true]) {
+      const html = renderToStaticMarkup(React.createElement(RatesNotice, { rates: payload, isBn }));
+      assert.ok(html.includes('href="https://frankfurter.dev"'));
+      assert.ok(html.includes("Frankfurter"));
+      assert.ok(!html.includes("Exchange Rate API"));
+      assert.ok(!html.includes("UTC"), "date-only data must not claim a publication time");
+      assert.ok(html.includes(isBn ? "প্রাচীনতম রেটের তারিখ" : "oldest rate date"));
+    }
+  });
+  await test("edge tries fallback on failed or stale primary and caches the real provider", async () => {
+    now = start;
+    const rows = DISPLAY_CODES.filter(code => code !== "BDT").map(quote => ({ base: "BDT", quote, rate: 0.01, date: "2026-11-07" }));
+    for (const primary of [null, { ...upstream(), time_last_update_unix: start / 1000 - 86400, time_next_update_unix: start / 1000 - 1 }]) {
+      cache.clear(); calls = 0;
+      globalThis.fetch = (async (url) => {
+        calls++;
+        return new Response(JSON.stringify(String(url) === FALLBACK_UPSTREAM ? rows : primary), { status: primary || String(url) === FALLBACK_UPSTREAM ? 200 : 503 });
+      }) as typeof fetch;
+      const response = await onRequestGet({ request });
+      assert.equal(response.status, 200);
+      assert.equal((await response.json()).provider, FALLBACK_PROVIDER);
+      await onRequestGet({ request });
+      assert.equal(calls, 2);
+    }
+    cache.clear();
+  });
+  await test("invalid fallback cannot replace stale primary; older data cannot replace a newer cache", async () => {
+    cache.clear(); now = start;
+    respond(upstream());
+    await onRequestGet({ request });
+    now = start + 25 * 3600_000;
+    calls = 0;
+    globalThis.fetch = (async (url) => {
+      calls++;
+      return new Response(JSON.stringify(String(url) === FALLBACK_UPSTREAM ? [{ base: "BDT", quote: "USD", date: "2026-11-08", rate: 0.01 }] : upstream()));
+    }) as typeof fetch;
+    const response = await onRequestGet({ request });
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).provider, good().provider);
+    assert.equal(calls, 2);
+    // The cached primary is newer than either returned (but still usable) source.
+    cache.clear(); now = start;
+    respond(upstream()); await onRequestGet({ request });
+    now = start + 25 * 3600_000;
+    respond({ ...upstream(), time_last_update_unix: start / 1000 - 2 * 3600 });
+    const older = await onRequestGet({ request });
+    assert.equal((await older.json()).timeLastUpdateUnix, upstream().time_last_update_unix);
+    cache.clear();
+  });
+  await test("concurrent edge requests coalesce the primary and fallback chain", async () => {
+    now = start; cache.clear(); calls = 0;
+    const rows = DISPLAY_CODES.filter(code => code !== "BDT").map(quote => ({ base: "BDT", quote, rate: 0.01, date: "2026-11-07" }));
+    globalThis.fetch = (async (url) => {
+      calls++;
+      await new Promise(resolve => setTimeout(resolve, 5));
+      return new Response(JSON.stringify(String(url) === FALLBACK_UPSTREAM ? rows : { result: "error" }));
+    }) as typeof fetch;
+    const responses = await Promise.all([onRequestGet({ request }), onRequestGet({ request }), onRequestGet({ request })]);
+    assert.equal(calls, 2);
+    for (const response of responses) assert.equal((await response.json()).provider, FALLBACK_PROVIDER);
+    cache.clear();
   });
   await test("concurrent browser widgets share one request even with blocked storage", async () => {
     now = start; calls = 0;
